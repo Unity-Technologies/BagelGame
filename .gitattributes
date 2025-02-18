@@ -1,0 +1,88 @@
+# UNITY-SPECIFIC FILES
+
+# Unity YAML files (text-based assets)
+# These files require merge resolution and should not use LFS.
+*.unity merge=unityyaml
+*.prefab merge=unityyaml
+*.meta merge=unityyaml
+*.mat merge=unityyaml
+*.anim merge=unityyaml
+*.controller merge=unityyaml
+*.physicMaterial merge=unityyaml
+*.asset merge=unityyaml
+*.overrideController merge=unityyaml
+
+# UNITY CONFIGURATION AND SETTINGS
+
+# Text-based configuration files
+*.txt text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+ProjectSettings/ProjectVersion.txt merge=union
+ProjectSettings/*.asset merge=union
+ProjectSettings/EditorBuildSettings.asset merge=union
+
+# CODING FILES
+
+# Script files (text-based, using LF for cross-platform compatibility)
+*.cs text eol=lf
+*.js text eol=lf
+*.boo text eol=lf
+*.cginc text eol=lf
+*.shader text eol=lf
+*.compute text eol=lf
+
+# LARGE BINARY FILES (Git LFS)
+# Track binary assets with Git LFS
+
+# Images
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.tga filter=lfs diff=lfs merge=lfs -text
+*.bmp filter=lfs diff=lfs merge=lfs -text
+*.tif filter=lfs diff=lfs merge=lfs -text
+*.tiff filter=lfs diff=lfs merge=lfs -text
+
+# 3D Models
+*.fbx filter=lfs diff=lfs merge=lfs -text
+*.obj filter=lfs diff=lfs merge=lfs -text
+*.dae filter=lfs diff=lfs merge=lfs -text
+*.3ds filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.max filter=lfs diff=lfs merge=lfs -text
+
+# Audio
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.ogg filter=lfs diff=lfs merge=lfs -text
+
+# Video
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
+
+# Fonts
+*.ttf filter=lfs diff=lfs merge=lfs -text
+*.otf filter=lfs diff=lfs merge=lfs -text
+
+# OTHER COMMON BINARY FILES
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.rar filter=lfs diff=lfs merge=lfs -text
+*.7z filter=lfs diff=lfs merge=lfs -text
+*.gz filter=lfs diff=lfs merge=lfs -text
+*.tar filter=lfs diff=lfs merge=lfs -text
+*.unity3d filter=lfs diff=lfs merge=lfs -text
+
+# SPECIAL UNITY FILES
+[Ll]ibrary/** -text
+[Tt]emp/** -text
+[Bb]uild/** -text
+[Bb]uilds/** -text
+Assets/AssetStoreTools* -text
