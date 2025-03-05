@@ -2,6 +2,6 @@
     <Style src="project://database/Assets/Bagel/UI/bagelStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#bagelStyles" />
     <ui:VisualElement name="Content" style="width: 296px; height: 100px; flex-shrink: 0;">
         <ui:Label text="Bagel Force" />
-        <ui:ProgressBar value="22" />
+        <ui:ProgressBar value="22" name="ProgressBar" />
     </ui:VisualElement>
 </ui:UXML>

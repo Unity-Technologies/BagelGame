@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af22601005cd4eeba610c8a4ed8d4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bagelRigidBody: {fileID: 0}
 --- !u!1 &579728891587814830
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +57,7 @@ GameObject:
   - component: {fileID: 2943685615154517270}
   - component: {fileID: 3303618747651075317}
   - component: {fileID: 3658612839106451525}
+  - component: {fileID: 6032373305298257347}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -141,3 +143,16 @@ UIRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6032373305298257347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579728891587814830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad9da948aa5149038b33c357ea84520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracker: {fileID: 7800882342683147540}
