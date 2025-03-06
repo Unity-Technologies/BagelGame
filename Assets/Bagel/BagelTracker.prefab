@@ -97,8 +97,8 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: a05f45500395a47d38eb80802a91e778, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 0
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
+  m_WorldSpaceWidth: 274
+  m_WorldSpaceHeight: 783.7
 --- !u!1931382933 &3658612839106451525
 UIRenderer:
   m_ObjectHideFlags: 0
