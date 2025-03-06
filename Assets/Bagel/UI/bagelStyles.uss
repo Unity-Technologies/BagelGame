@@ -16,3 +16,9 @@
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
+
+.unity-label {
+    -unity-text-generator: advanced;
+    -unity-font-definition: url("project://database/Assets/Fonts/DynaPuff-Bold.ttf?fileID=12800000&guid=18be7b2de9f75479db0c1db24e00895d&type=3#DynaPuff-Bold");
+    font-size: 20px;
+}
