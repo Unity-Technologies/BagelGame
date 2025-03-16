@@ -594,6 +594,10 @@ PrefabInstance:
       propertyPath: turnTorque
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1255819574640045139, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
+      propertyPath: tiltRecoverySpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

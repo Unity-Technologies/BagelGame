@@ -44,26 +44,19 @@ public class BagelController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Get current orientation:
-        //var currentOrientation = transform.forward.normalized;
-
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W)) {
             rb.AddTorque(transform.right * rollTorque, ForceMode.Force);
-        if (Input.GetKey(KeyCode.S))
+        }
+        if (Input.GetKey(KeyCode.S)) {
             rb.AddTorque(transform.right * -rollTorque, ForceMode.Force);
+        }
         if (Input.GetKey(KeyCode.A)) {
             rb.AddTorque(GetNonRotatedRelativeUp() * -turnTorque, ForceMode.Force);
-            //rb.transform.Rotate(transform.up, -turnSpeed * Time.deltaTime);
-            //orientationAngle -= turnSpeed * Time.deltaTime;
-
         }
         if (Input.GetKey(KeyCode.D)) {
             rb.AddTorque(GetNonRotatedRelativeUp() * turnTorque, ForceMode.Force);
-            //rb.transform.Rotate(transform.up, turnSpeed * Time.deltaTime);
-            //orientationAngle += turnSpeed * Time.deltaTime;
         }
 
-        CorrectForOrientation();
         TiltUpright();
     }
 
@@ -77,25 +70,6 @@ public class BagelController : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, GetNonRotatedRelativeUp() * 5f);
-    }
-
-    void CorrectForOrientation()
-    {
-        // Get the current orientation
-        var currentForward = GetAbsoluteForward();
-        Debug.Log("Current Forward: " + currentForward);
-        var orientationForward = Quaternion.AngleAxis(orientationAngle, Vector3.up) * Vector3.forward;
-        Debug.Log("Orientation Forward: " + orientationForward);
-
-        float angle = Vector3.SignedAngle(currentForward, orientationForward, Vector3.up);
-        Debug.Log("Angle: " + angle);
-
-        // Calculate the torque needed to correct the orientation
-        var torqueAxis = transform.up;
-        var correctiveTorque = torqueAxis * (angle * turnTorque);
-        Debug.Log("Corrective Torque: " + correctiveTorque);
-
-        //rb.AddTorque(correctiveTorque, ForceMode.Force);
     }
 
     void TiltUpright()
