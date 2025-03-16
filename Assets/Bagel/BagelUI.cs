@@ -20,7 +20,7 @@ public class BagelUI : MonoBehaviour
         progressBar.value = progressBar.highValue;
         progressBar.SetBinding("value", new DataBinding
         {
-            dataSourcePath = new PropertyPath(nameof(tracker.bagelRigidBody.transform.position.x))
+            dataSourcePath = new PropertyPath(nameof(tracker.bagelController.transform.position.x))
         });
     }
 }
