@@ -9,7 +9,10 @@ public class BagelTracker : MonoBehaviour
     {
         transform.position = bagelController.transform.position;
 
-        var forward = bagelController.GetAbsoluteForward();        
+        var forward = bagelController.GetAbsoluteForward();
         transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+        var tiltedUp = bagelController.GetNonRotatedRelativeUp();
+        transform.rotation = Quaternion.FromToRotation(transform.up, tiltedUp) * transform.rotation;
     }
 }
