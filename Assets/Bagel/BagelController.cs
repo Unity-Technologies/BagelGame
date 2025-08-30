@@ -11,8 +11,6 @@ public class BagelController : MonoBehaviour
 
     Rigidbody rb;
 
-    float orientationAngle = 0f;
-
     public Vector3 GetAbsoluteRight()
     {
         var right = transform.right;
@@ -39,7 +37,6 @@ public class BagelController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        orientationAngle = 0f;
     }
 
     void FixedUpdate()
@@ -78,7 +75,6 @@ public class BagelController : MonoBehaviour
         var globalUp = Vector3.up;
 
         float tiltAngle = Vector3.Angle(currentRight, globalUp) - 90f;
-        Debug.Log("Tilt Angle: " + tiltAngle);
 
         var tiltAxis = GetAbsoluteForward();
         var correctiveTorque = tiltAxis * (tiltAngle * tiltRecoverySpeed);
