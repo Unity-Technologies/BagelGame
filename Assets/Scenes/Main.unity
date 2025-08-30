@@ -458,14 +458,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752666702}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -543,18 +543,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1255819574640045139, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
-      propertyPath: turnSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1255819574640045139, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
-      propertyPath: turnTorque
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1255819574640045139, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
-      propertyPath: tiltRecoverySpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

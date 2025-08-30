@@ -88,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9040463455907671234
 GameObject:
@@ -137,9 +138,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BagelController
   rollTorque: 40
-  turnSpeed: 100
-  turnTorque: 5
-  tiltRecoverySpeed: 1
+  turnSpeed: 20
+  turnTorque: 1
+  tiltRecoverySpeed: 2
+  m_PlayerInputBindings: {fileID: 11400000, guid: 9adc73272f595584e84054bf04391372, type: 2}
 --- !u!54 &2603147718558657600
 Rigidbody:
   m_ObjectHideFlags: 0

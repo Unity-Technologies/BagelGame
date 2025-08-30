@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace Bagel
@@ -11,7 +10,9 @@ namespace Bagel
 
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
 
-        Rigidbody rb;
+        [SerializeField] PlayerInputBindings m_PlayerInputBindings;
+
+        Rigidbody m_RigidBody;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -38,24 +39,12 @@ namespace Bagel
 
         void Start()
         {
-            rb = GetComponent<Rigidbody>();
+            m_RigidBody = GetComponent<Rigidbody>();
         }
 
         void FixedUpdate()
         {
-            if (Input.GetKey(KeyCode.W)) {
-                rb.AddTorque(transform.right * rollTorque, ForceMode.Force);
-            }
-            if (Input.GetKey(KeyCode.S)) {
-                rb.AddTorque(transform.right * -rollTorque, ForceMode.Force);
-            }
-            if (Input.GetKey(KeyCode.A)) {
-                rb.AddTorque(GetNonRotatedRelativeUp() * -turnTorque, ForceMode.Force);
-            }
-            if (Input.GetKey(KeyCode.D)) {
-                rb.AddTorque(GetNonRotatedRelativeUp() * turnTorque, ForceMode.Force);
-            }
-
+            HandleMovement();
             TiltUpright();
         }
 
@@ -71,6 +60,13 @@ namespace Bagel
             Gizmos.DrawRay(transform.position, GetNonRotatedRelativeUp() * 5f);
         }
 
+        void HandleMovement()
+        {
+            var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
+            m_RigidBody.AddTorque(transform.right * rollTorque * inputVector.y, ForceMode.Force);
+            m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * turnTorque * inputVector.x, ForceMode.Force);
+        }
+
         void TiltUpright()
         {
             var currentRight = transform.right;
@@ -81,7 +77,7 @@ namespace Bagel
             var tiltAxis = GetAbsoluteForward();
             var correctiveTorque = tiltAxis * (tiltAngle * tiltRecoverySpeed);
 
-            rb.AddTorque(correctiveTorque, ForceMode.Force);
+            m_RigidBody.AddTorque(correctiveTorque, ForceMode.Force);
         }
     }
 }
