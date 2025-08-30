@@ -3,24 +3,27 @@ using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BagelUI : MonoBehaviour
+namespace Bagel
 {
-    public BagelTracker tracker;
-    private UIDocument uiDocument;
-
-    private void Awake()
+    public class BagelUI : MonoBehaviour
     {
-        uiDocument = GetComponent<UIDocument>();
-    }
+        public BagelTracker tracker;
+        private UIDocument uiDocument;
 
-    private void OnEnable()
-    {
-        var root = uiDocument.rootVisualElement;
-        var progressBar = root.Q<ProgressBar>();
-        progressBar.value = progressBar.highValue;
-        progressBar.SetBinding("value", new DataBinding
+        private void Awake()
         {
-            dataSourcePath = new PropertyPath(nameof(tracker.bagelController.transform.position.x))
-        });
+            uiDocument = GetComponent<UIDocument>();
+        }
+
+        private void OnEnable()
+        {
+            var root = uiDocument.rootVisualElement;
+            var progressBar = root.Q<ProgressBar>();
+            progressBar.value = progressBar.highValue;
+            progressBar.SetBinding("value", new DataBinding
+            {
+                dataSourcePath = new PropertyPath(nameof(tracker.bagelController.transform.position.x))
+            });
+        }
     }
 }

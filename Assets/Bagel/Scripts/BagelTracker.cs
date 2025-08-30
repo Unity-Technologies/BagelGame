@@ -1,18 +1,21 @@
 using System;
 using UnityEngine;
 
-public class BagelTracker : MonoBehaviour
+namespace Bagel
 {
-    public BagelController bagelController;
-
-    private void Update()
+    public class BagelTracker : MonoBehaviour
     {
-        transform.position = bagelController.transform.position;
+        public BagelController bagelController;
 
-        var forward = bagelController.GetAbsoluteForward();
-        transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+        private void Update()
+        {
+            transform.position = bagelController.transform.position;
 
-        var tiltedUp = bagelController.GetNonRotatedRelativeUp();
-        transform.rotation = Quaternion.FromToRotation(transform.up, tiltedUp) * transform.rotation;
+            var forward = bagelController.GetAbsoluteForward();
+            transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+            var tiltedUp = bagelController.GetNonRotatedRelativeUp();
+            transform.rotation = Quaternion.FromToRotation(transform.up, tiltedUp) * transform.rotation;
+        }
     }
 }
