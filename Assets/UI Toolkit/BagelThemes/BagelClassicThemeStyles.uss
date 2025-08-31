@@ -1,5 +1,5 @@
 .unity-text-element {
-    -unity-font-definition: url("project://database/Assets/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/BagelThemes/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
     -unity-text-generator: advanced;
     color: rgb(239, 239, 239);
 }
@@ -47,3 +47,5 @@
 .b-screen {
     flex-grow: 1;
 }
+
+
