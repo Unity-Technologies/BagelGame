@@ -11,6 +11,8 @@ namespace Bagel
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
 
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
+        [SerializeField] PlayManager m_PlayManager;
+        [SerializeField] LayerMask m_ToastersLayerMask;
 
         Rigidbody m_RigidBody;
 
@@ -78,6 +80,15 @@ namespace Bagel
             var correctiveTorque = tiltAxis * (tiltAngle * tiltRecoverySpeed);
 
             m_RigidBody.AddTorque(correctiveTorque, ForceMode.Force);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (((1 << other.gameObject.layer) & m_ToastersLayerMask) != 0)
+            {
+                m_PlayManager.GoToGameOver();
+                return;
+            }
         }
     }
 }

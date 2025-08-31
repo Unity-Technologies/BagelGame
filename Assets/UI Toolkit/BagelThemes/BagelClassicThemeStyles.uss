@@ -1,0 +1,49 @@
+.unity-text-element {
+    -unity-font-definition: url("project://database/Assets/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
+    -unity-text-generator: advanced;
+    color: rgb(239, 239, 239);
+}
+
+.unity-button {
+    background-color: rgb(71, 71, 71);
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+    transition-duration: 0.3s;
+    margin-top: 7px;
+}
+
+.unity-button:hover {
+    translate: 0 0 10px;
+    scale: 1.2 1.2 1.2;
+}
+
+.unity-button.b-primary {
+    background-color: rgb(98, 143, 38);
+}
+
+.b-title {
+    font-size: 38px;
+    -unity-text-align: upper-center;
+}
+
+.b-panel {
+    background-color: rgba(0, 0, 0, 0.53);
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+}
+
+.b-screen {
+    flex-grow: 1;
+}

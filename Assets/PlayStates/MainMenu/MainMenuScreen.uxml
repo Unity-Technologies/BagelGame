@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/PlayStates/MainMenu/MainMenuScreenStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuScreenStyles"/>
+    <ui:VisualElement name="panel" class="b-panel b-screen">
+        <ui:Label text="Bagel Game" name="title" class="b-title"/>
+        <ui:Button text="Play" name="play-button" class="b-primary"/>
+        <ui:Button text="Exit" name="quit-button"/>
+    </ui:VisualElement>
+</ui:UXML>

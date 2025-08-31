@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2603147718558657600}
   - component: {fileID: 7332613373610136445}
   m_Layer: 0
-  m_Name: Bagel
+  m_Name: BagelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
