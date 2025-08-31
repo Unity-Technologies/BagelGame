@@ -208,7 +208,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 947445559}
+    TrackingTarget: {fileID: 1562436898}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -239,8 +239,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24349490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.7201397, z: -5.7095666}
+  m_LocalRotation: {x: 0.4842876, y: 0, z: 0, w: 0.87490886}
+  m_LocalPosition: {x: 0, y: 11.017483, z: -83.578636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,8 +425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117335063}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.7201397, z: -5.7095666}
+  m_LocalRotation: {x: 0.4842876, y: 0, z: 0, w: 0.87490886}
+  m_LocalPosition: {x: 0, y: 11.017483, z: -83.578636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1046,10 +1046,10 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: ea563f0ac4a3a3840827b0233961e0fc, type: 3}
   m_SortingOrder: 0
   m_Position: 0
-  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceSizeMode: 0
   m_WorldSpaceWidth: 385.6
   m_WorldSpaceHeight: 446.6
-  m_PivotReferenceSize: 0
+  m_PivotReferenceSize: 1
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!114 &1049677551
@@ -1283,7 +1283,7 @@ Transform:
   m_GameObject: {fileID: 1562436897}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4842876, y: -0, z: -0, w: 0.87490886}
-  m_LocalPosition: {x: -0.03, y: 0, z: -2.8100014}
+  m_LocalPosition: {x: 0, y: 0, z: -2.8100014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 385.6
   m_WorldSpaceHeight: 446.6
-  m_PivotReferenceSize: 0
+  m_PivotReferenceSize: 1
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!114 &2030507059
@@ -1876,7 +1876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259053439273348571, guid: ca59f34543d678047ae6727323c709de, type: 3}
       propertyPath: m_Name
-      value: World
+      value: LevelTutorial
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1947,18 +1947,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagelSelectionRoom
       objectReference: {fileID: 0}
-    - target: {fileID: 7997046398624763036, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997046398624763036, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997046398624763036, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5328386210974539574, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
@@ -1971,6 +1959,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6762191352906046784, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8437414417468376487, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}

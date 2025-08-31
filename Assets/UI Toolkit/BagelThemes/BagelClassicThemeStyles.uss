@@ -1,4 +1,6 @@
-
+:root {
+    --b-standard-pane-width: 250px;
+}
 
 .unity-text-element {
     -unity-font-definition: url("project://database/Assets/UI%20Toolkit/BagelThemes/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
@@ -52,6 +54,7 @@
     border-top-right-radius: 17px;
     border-bottom-right-radius: 17px;
     border-bottom-left-radius: 17px;
+    width: var(--b-standard-pane-width);
 }
 
 .b-screen {

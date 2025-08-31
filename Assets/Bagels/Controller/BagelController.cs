@@ -14,6 +14,8 @@ namespace Bagel
         [SerializeField] LayerMask m_ToastersLayerMask;
 
         Rigidbody m_RigidBody;
+        Collider m_Collider;
+        PhysicsMaterial m_PhysicsMaterial;
         Transform m_BagelSlot;
 
         public Vector3 GetAbsoluteRight()
@@ -44,22 +46,37 @@ namespace Bagel
             if (BagelType == null || m_RigidBody == null)
                 return;
 
-            m_RigidBody.mass = BagelType.mass;
+            CopyPhysicsStats();
+
             foreach (Transform child in m_BagelSlot)
                 Destroy(child.gameObject);
 
             Instantiate(BagelType.modelPrefab, m_BagelSlot);
         }
 
+        void CopyPhysicsStats()
+        {
+            m_RigidBody.mass = BagelType.mass;
+            m_PhysicsMaterial.dynamicFriction = BagelType.dynamicFriction;
+            m_PhysicsMaterial.staticFriction = BagelType.staticFriction;
+            m_PhysicsMaterial.bounciness = BagelType.bounciness;
+        }
+
         void OnEnable()
         {
             m_RigidBody = GetComponent<Rigidbody>();
+            m_Collider = GetComponent<Collider>();
+            m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
             Init();
         }
 
         void FixedUpdate()
         {
+#if UNITY_EDITOR
+            CopyPhysicsStats();
+#endif
+
             HandleMovement();
             TiltUpright();
         }

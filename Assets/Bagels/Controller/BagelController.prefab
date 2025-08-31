@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5611aa93f38eac44ab1b7ed25f31dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BagelController
-  bagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
+  BagelType: {fileID: 0}
   tiltRecoverySpeed: 2
   m_PlayerInputBindings: {fileID: 11400000, guid: 9adc73272f595584e84054bf04391372, type: 2}
   m_PlayManager: {fileID: 0}
@@ -120,7 +120,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9040463455907671234}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e3d220e58088b5345ab47268e6f176df, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -1,8 +1,12 @@
 .b-button-bar {
-    flex-direction: row;
-    justify-content: space-around;
+    flex-grow: 1;
 }
 
 .b-button-bar > .unity-button {
-    flex-grow: 1;
+}
+
+.b-pane {
+    flex-direction: row;
+    justify-content: space-between;
+    width: var(--b-standard-pane-width);
 }

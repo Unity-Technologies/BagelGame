@@ -20,5 +20,20 @@
                 <ui:DataBinding property="value" data-source-path="mass" binding-mode="ToTarget"/>
             </Bindings>
         </ui:FloatField>
+        <ui:FloatField label="Dynamic Friction" value="42.2" readonly="true" name="dynamic-friction-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="dynamicFriction" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:FloatField>
+        <ui:FloatField label="Static Friction" value="42.2" readonly="true" name="static-friction-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="staticFriction" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:FloatField>
+        <ui:Slider label="Bounciness" value="1" high-value="1" name="bounciness-slider" fill="true">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="bounciness" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Slider>
     </ui:VisualElement>
 </ui:UXML>
