@@ -14,6 +14,7 @@ namespace Bagel
 
         // State Targets
         [SerializeField] Transform m_MainMenuTarget;
+        [SerializeField] Transform m_BagelSelectionTarget;
         [SerializeField] Transform m_BagelTarget;
         [SerializeField] Transform m_GameOverTarget;
 
@@ -66,6 +67,20 @@ namespace Bagel
             Clear();
             m_PlayManagerState.GoToMainMenu();
             m_CinemachineCamera.Target.TrackingTarget = m_MainMenuTarget;
+        }
+
+        public void GoToBagelSelection()
+        {
+            Clear();
+            m_PlayManagerState.GoToBagelSelection();
+            m_CinemachineCamera.Target.TrackingTarget = m_BagelSelectionTarget;
+        }
+
+        public void SetBagelType(BagelType bagelType)
+        {
+            m_PlayManagerState.SetBagelType(bagelType);
+            m_BagelController.BagelType = bagelType;
+            m_BagelController.Init();
         }
 
         public void GoToPlay()

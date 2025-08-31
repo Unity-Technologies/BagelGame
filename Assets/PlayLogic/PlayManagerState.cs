@@ -6,12 +6,14 @@ namespace Bagel
     {
         enum State {
             MainMenu,
+            BagelSelection,
             Playing,
             GameOver
         }
 
         State m_State;
         bool m_IsPaused;
+        BagelType m_BagelType;
 
         public event EventHandler<bool> OnPauseStateChanged;
 
@@ -27,14 +29,25 @@ namespace Bagel
 
         public void GoToMainMenu()
         {
+            Clear();
             m_State = State.MainMenu;
-            OnPauseStateChanged?.Invoke(this, false);
+        }
+
+        public void GoToBagelSelection()
+        {
+            Clear();
+            m_State = State.BagelSelection;
+        }
+
+        public void SetBagelType(BagelType bagelType)
+        {
+            m_BagelType = bagelType;
         }
 
         public void GoToPlay()
         {
+            Clear();
             m_State = State.Playing;
-            OnPauseStateChanged?.Invoke(this, false);
         }
 
         public void Pause()
@@ -45,13 +58,18 @@ namespace Bagel
 
         public void Resume()
         {
+            Clear();
             m_IsPaused = false;
-            OnPauseStateChanged?.Invoke(this, false);
         }
 
         public void GoToGameOver()
         {
+            Clear();
             m_State = State.GameOver;
+        }
+
+        void Clear()
+        {
             OnPauseStateChanged?.Invoke(this, false);
         }
     }

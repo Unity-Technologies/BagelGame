@@ -1,0 +1,31 @@
+using System;
+using UnityEngine;
+
+namespace Bagel
+{
+    public class BagelSelectionPodium : MonoBehaviour
+    {
+        public BagelType BagelType;
+
+        [SerializeField] Transform m_BagelSlot;
+        [SerializeField] BagelSelectionTypeInfoPanelDriver m_TypeInfoPanelDriver;
+
+        void OnEnable()
+        {
+            InitBagelType();
+        }
+
+        public void InitBagelType()
+        {
+            foreach (Transform child in m_BagelSlot)
+                DestroyImmediate(child.gameObject);
+
+            if (BagelType == null)
+                return;
+
+            Instantiate(BagelType.modelPrefab, m_BagelSlot);
+
+            m_TypeInfoPanelDriver.BindUI(BagelType);
+        }
+    }
+}

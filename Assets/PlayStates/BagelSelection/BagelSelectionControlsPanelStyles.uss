@@ -1,0 +1,8 @@
+.b-button-bar {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.b-button-bar > .unity-button {
+    flex-grow: 1;
+}

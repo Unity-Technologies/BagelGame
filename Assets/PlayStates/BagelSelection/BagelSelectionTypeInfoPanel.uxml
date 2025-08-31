@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="panel" data-source="project://database/Assets/Bagels/BagelTypes/BagelTypeDebug.asset?fileID=11400000&amp;guid=7e9fbe392dd334a439103c0fee7fa265&amp;type=2#BagelTypeDebug" class="b-pane">
+        <ui:Label text="Label" name="name" class="b-title">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Label>
+        <ui:FloatField label="Roll Torque" value="42.2" readonly="true" name="roll-torque-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="rollTorque" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:FloatField>
+        <ui:FloatField label="Turn Torque" value="42.2" readonly="true" name="turn-torque-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="turnTorque" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:FloatField>
+        <ui:FloatField label="Mass" value="42.2" readonly="true" name="mass-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="mass" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:FloatField>
+    </ui:VisualElement>
+</ui:UXML>

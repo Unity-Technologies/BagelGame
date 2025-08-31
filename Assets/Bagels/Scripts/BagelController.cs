@@ -4,10 +4,9 @@ namespace Bagel
 {
     public class BagelController : MonoBehaviour
     {
-        public float rollTorque = 10.0f; // Torque applied for rolling
-        public float turnSpeed = 100.0f;
-        public float turnTorque = 5.0f;
+        public BagelType BagelType;
 
+        [HideInInspector]
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
 
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
@@ -15,6 +14,7 @@ namespace Bagel
         [SerializeField] LayerMask m_ToastersLayerMask;
 
         Rigidbody m_RigidBody;
+        Transform m_BagelSlot;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -39,9 +39,23 @@ namespace Bagel
             return up;
         }
 
-        void Start()
+        public void Init()
+        {
+            if (BagelType == null || m_RigidBody == null)
+                return;
+
+            m_RigidBody.mass = BagelType.mass;
+            foreach (Transform child in m_BagelSlot)
+                Destroy(child.gameObject);
+
+            Instantiate(BagelType.modelPrefab, m_BagelSlot);
+        }
+
+        void OnEnable()
         {
             m_RigidBody = GetComponent<Rigidbody>();
+            m_BagelSlot = transform.GetChild(0);
+            Init();
         }
 
         void FixedUpdate()
@@ -65,8 +79,8 @@ namespace Bagel
         void HandleMovement()
         {
             var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
-            m_RigidBody.AddTorque(transform.right * rollTorque * inputVector.y, ForceMode.Force);
-            m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * turnTorque * inputVector.x, ForceMode.Force);
+            m_RigidBody.AddTorque(transform.right * BagelType.rollTorque * inputVector.y, ForceMode.Force);
+            m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * BagelType.turnTorque * inputVector.x, ForceMode.Force);
         }
 
         void TiltUpright()

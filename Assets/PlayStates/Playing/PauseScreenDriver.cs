@@ -27,13 +27,15 @@ namespace Bagel
             if (m_PlayManager == null)
                 return;
 
-            var resumeButton = m_Root.Q<Button>("resume-button");
-            if (resumeButton != null)
-                resumeButton.clicked += m_PlayManager.Resume;
+            Button button;
 
-            var mainMenuButton = m_Root.Q<Button>("main-menu-button");
-            if (mainMenuButton != null)
-                mainMenuButton.clicked += m_PlayManager.GoToMainMenu;
+            button = m_Root.Q<Button>("resume-button");
+            if (button != null)
+                button.clicked += m_PlayManager.Resume;
+
+            button = m_Root.Q<Button>("main-menu-button");
+            if (button != null)
+                button.clicked += m_PlayManager.GoToMainMenu;
         }
 
         void PlayerManager_OnPauseStateChanged(object sender, bool paused)

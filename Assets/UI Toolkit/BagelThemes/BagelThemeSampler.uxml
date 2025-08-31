@@ -1,13 +1,14 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" class="b-screen">
-        <ui:VisualElement name="panel-1" class="b-panel">
+        <ui:VisualElement name="panel-1" class="b-pane">
             <ui:Label text="Panel 1" name="title" class="b-title"/>
             <ui:Button text="Primary Button" name="primary-button" class="b-primary"/>
             <ui:Button text="Secondary Button" name="secondary-button" class="b-secondary"/>
         </ui:VisualElement>
-        <ui:VisualElement name="panel-2" class="b-panel">
+        <ui:VisualElement name="panel-2" class="b-pane">
             <ui:Label text="Panel 2" name="title" class="b-title"/>
             <ui:Toggle label="Toggle"/>
+            <ui:FloatField label="Float Field" value="42.2"/>
             <ui:Slider label="Slider" value="42" high-value="100"/>
         </ui:VisualElement>
     </ui:VisualElement>

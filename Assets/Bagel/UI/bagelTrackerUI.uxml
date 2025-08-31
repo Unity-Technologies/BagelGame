@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="bagelTrackerUIContent" src="project://database/Assets/Bagel/UI/bagelTrackerUIContent.uxml?fileID=9197481963319205126&amp;guid=b3f3b240513e14d9583182fb441a13eb&amp;type=3#bagelTrackerUIContent" />
-    <ui:VisualElement name="Container" style="width: 1px; height: 1px; justify-content: center; align-items: center;">
-        <ui:Instance template="bagelTrackerUIContent" name="bagelTrackerUIContent" style="flex-shrink: 0;" />
-    </ui:VisualElement>
-</ui:UXML>

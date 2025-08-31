@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf129eb6cb23434894e24b14dab93c8, type: 3}
+  m_Name: BagelTypeCollection
+  m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelTypeCollection
+  collection:
+  - {fileID: 11400000, guid: 4121a9b3513474a4badc7b2ccbe255c4, type: 2}
+  - {fileID: 11400000, guid: ac44209aa46ab824b9a69ffae700711f, type: 2}
+  - {fileID: 11400000, guid: a760eb51caf44b64ca79c06d972fe939, type: 2}

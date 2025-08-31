@@ -1,3 +1,5 @@
+
+
 .unity-text-element {
     -unity-font-definition: url("project://database/Assets/UI%20Toolkit/BagelThemes/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
     -unity-text-generator: advanced;
@@ -14,13 +16,21 @@
     margin-top: 7px;
 }
 
-.unity-button:hover {
-    translate: 0 0 10px;
+.unity-button:enabled:hover {
     scale: 1.2 1.2 1.2;
+    rotate: 2deg;
 }
 
 .unity-button.b-primary {
     background-color: rgb(98, 143, 38);
+}
+
+.unity-base-text-field__input {
+    background-color: rgba(0, 0, 0, 0.38);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .b-title {
@@ -28,7 +38,7 @@
     -unity-text-align: upper-center;
 }
 
-.b-panel {
+.b-pane {
     background-color: rgba(0, 0, 0, 0.53);
     padding-top: 5px;
     padding-right: 5px;
@@ -47,5 +57,3 @@
 .b-screen {
     flex-grow: 1;
 }
-
-

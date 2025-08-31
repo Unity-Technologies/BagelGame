@@ -11,6 +11,9 @@ namespace Bagel
         bool IsPaused();
 
         void GoToMainMenu();
+        void GoToBagelSelection();
+
+        void SetBagelType(BagelType bagelType);
         void GoToPlay();
         void Pause();
         void Resume();
