@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    public class BagelUI : MonoBehaviour
+    public class BagelTrackerDriver : MonoBehaviour
     {
         public BagelTracker tracker;
         private UIDocument uiDocument;
