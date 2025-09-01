@@ -6,17 +6,10 @@ namespace Bagel
 {
     public class PlayManager : MonoBehaviour
     {
-        [SerializeField] PlayerInputBindings m_PlayerInputBindings;
-        [SerializeField] CinemachineCamera m_CinemachineCamera;
+        [SerializeField] PlayInputBindings m_PlayerInputBindings;
         [SerializeField] BagelController m_BagelController;
         [SerializeField] BagelTracker m_BagelTracker;
         [SerializeField] Transform m_StartingPoint;
-
-        // State Targets
-        [SerializeField] Transform m_MainMenuTarget;
-        [SerializeField] Transform m_BagelSelectionTarget;
-        [SerializeField] Transform m_BagelTarget;
-        [SerializeField] Transform m_GameOverTarget;
 
         PlayManagerState m_PlayManagerState = new PlayManagerState();
 
@@ -47,19 +40,16 @@ namespace Bagel
                 case PlayManagerState.State.MainMenu:
                 {
                     Clear();
-                    m_CinemachineCamera.Target.TrackingTarget = m_MainMenuTarget;
                     break;
                 }
                 case PlayManagerState.State.BagelSelection:
                 {
                     Clear();
-                    m_CinemachineCamera.Target.TrackingTarget = m_BagelSelectionTarget;
                     break;
                 }
                 case PlayManagerState.State.Playing:
                 {
                     Clear();
-                    m_CinemachineCamera.Target.TrackingTarget = m_BagelTarget;
                     m_BagelController.gameObject.SetActive(true);
                     m_BagelTracker.gameObject.SetActive(true);
                     break;
@@ -67,7 +57,6 @@ namespace Bagel
                 case PlayManagerState.State.GameOver:
                 {
                     Clear();
-                    m_CinemachineCamera.Target.TrackingTarget = m_GameOverTarget;
                     break;
                 }
             }

@@ -11,7 +11,7 @@ namespace Bagel
         [HideInInspector]
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
 
-        [SerializeField] PlayerInputBindings m_PlayerInputBindings;
+        [SerializeField] PlayInputBindings m_PlayerInputBindings;
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
 

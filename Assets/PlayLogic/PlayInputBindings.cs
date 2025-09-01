@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Bagel
 {
-    public class PlayerInputBindings : MonoBehaviour
+    public class PlayInputBindings : MonoBehaviour
     {
         public enum Binding {
             Move_Up,
@@ -15,7 +15,7 @@ namespace Bagel
             Gamepad_Pause
         };
 
-        const string k_PlayerPrefsName = "Bagel_PlayerInputBindings";
+        const string k_PlayerPrefsName = "BagelGame_PlayInputBindings";
 
         public event EventHandler OnPauseAction;
         public event EventHandler OnBindingRebind;
