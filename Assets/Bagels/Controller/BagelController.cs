@@ -8,9 +8,6 @@ namespace Bagel
         [SerializeField] BagelType m_BagelType;
         [SerializeField] PlayManager m_PlayManager;
 
-        [HideInInspector]
-        public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
-
         [SerializeField] PlayInputBindings m_PlayerInputBindings;
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
@@ -149,7 +146,7 @@ namespace Bagel
             float tiltAngle = Vector3.Angle(currentRight, globalUp) - 90f;
 
             var tiltAxis = GetAbsoluteForward();
-            var correctiveTorque = tiltAxis * (tiltAngle * tiltRecoverySpeed);
+            var correctiveTorque = tiltAxis * (tiltAngle * m_BagelType.tiltRecoverySpeed);
 
             m_RigidBody.AddTorque(correctiveTorque, ForceMode.Force);
         }
