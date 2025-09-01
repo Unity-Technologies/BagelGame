@@ -28,7 +28,7 @@ namespace Bagel
 
             button = root.Q<Button>("select-button");
             if (button != null)
-                button.clicked += m_BagelSelectionRoom.PlayManager.State.GoToPlay;
+                button.clicked += m_BagelSelectionRoom.SelectBagelAndGoToPlay;
 
             m_LeftButton = root.Q<Button>("left-button");
             if (m_LeftButton != null)

@@ -6,7 +6,7 @@ namespace Bagel
 {
     public class BagelTrackerDriver : MonoBehaviour
     {
-        public BagelTracker tracker;
+        [SerializeField] BagelTracker m_BagelTracker;
 
         UIDocument m_UIDocument;
 
@@ -21,7 +21,7 @@ namespace Bagel
             if (root == null)
                 return;
 
-            root.dataSource = tracker.BagelTrackerData;
+            root.dataSource = m_BagelTracker.BagelTrackerData;
         }
     }
 }

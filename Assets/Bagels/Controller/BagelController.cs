@@ -11,6 +11,7 @@ namespace Bagel
         [SerializeField] PlayInputBindings m_PlayerInputBindings;
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
+        [SerializeField] Transform m_StartingLocation;
 
         Rigidbody m_RigidBody;
         Collider m_Collider;
@@ -83,7 +84,24 @@ namespace Bagel
             m_Collider = GetComponent<Collider>();
             m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
+            m_PlayManager.State.OnStateChange += State_OnStateChange;
             m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
+        }
+
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            if (state == PlayManagerState.State.Playing)
+            {
+                transform.position = m_StartingLocation.position;
+                transform.rotation = m_StartingLocation.rotation;
+                m_RigidBody.position = transform.position;
+                m_RigidBody.rotation = transform.rotation;
+                enabled = true;
+            }
+            else
+            {
+                enabled = false;
+            }
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)

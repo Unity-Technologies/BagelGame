@@ -9,12 +9,21 @@ namespace Bagel
         [SerializeField] BagelController m_BagelController;
 
         BagelTrackerData m_BagelTrackerData;
-        public BagelTrackerData BagelTrackerData => m_BagelTrackerData;
+        public BagelTrackerData BagelTrackerData
+        {
+            get
+            {
+                if (m_BagelTrackerData != null)
+                    return m_BagelTrackerData;
+
+                m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
+                m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
+                return m_BagelTrackerData;
+            }
+        }
 
         void Awake()
         {
-            m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
-            m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
             CopyConstantData();
 
             m_BagelController.OnToasterHit += BagelController_OnToasterHit;
@@ -33,7 +42,7 @@ namespace Bagel
 
         void CopyConstantData()
         {
-            m_BagelTrackerData.CopyFrom(m_BagelController.BagelControllerConstants);
+            BagelTrackerData.CopyFrom(m_BagelController.BagelControllerConstants);
         }
 
         void HandleControllerPositionTracking()
@@ -49,14 +58,14 @@ namespace Bagel
 
         void HandleControllerDataTracking()
         {
-            m_BagelTrackerData.toppingsCount = m_BagelController.CurrentToppingCount;
-            m_BagelTrackerData.speed = m_BagelController.CurrentSpeed;
-            m_BagelTrackerData.force = m_BagelController.CurrentForce;
+            BagelTrackerData.toppingsCount = m_BagelController.CurrentToppingCount;
+            BagelTrackerData.speed = m_BagelController.CurrentSpeed;
+            BagelTrackerData.force = m_BagelController.CurrentForce;
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)
         {
-            m_BagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
+            BagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
         }
 
         void BagelController_OnToasterHit(object sender, EventArgs e)

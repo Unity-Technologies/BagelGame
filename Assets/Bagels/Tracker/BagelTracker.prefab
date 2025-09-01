@@ -115,4 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad9da948aa5149038b33c357ea84520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracker: {fileID: 7800882342683147540}
+  m_BagelTracker: {fileID: 7800882342683147540}
