@@ -2,9 +2,9 @@ using System;
 
 namespace Bagel
 {
-    public class PlayManagerState : IPlayManager
+    public class PlayManagerState
     {
-        enum State {
+        public enum State {
             MainMenu,
             BagelSelection,
             Playing,
@@ -13,71 +13,88 @@ namespace Bagel
 
         State m_State;
         bool m_IsPaused;
-        BagelType m_BagelType;
-        BagelTrackerData m_LastGameOverBagelTrackerData;
+        BagelType m_LastBagelType;
+        BagelTrackerData m_LastBagelTrackerData;
 
-        public BagelType BagelType => m_BagelType;
-        public BagelTrackerData LastGameOverBagelTrackerData => m_LastGameOverBagelTrackerData;
+        public BagelType LastBagelType => m_LastBagelType;
+        public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
+        public bool IsPlaying => m_State == State.Playing;
+        public bool IsPaused => m_IsPaused;
 
+        public event EventHandler<State> OnStateChange;
         public event EventHandler<bool> OnPauseStateChanged;
-        public event EventHandler<BagelTrackerData> OnGameOver;
+        public event EventHandler<BagelType> OnSetBagelType;
+        public event EventHandler<BagelTrackerData> OnSetBagelTrackerData;
 
-        public bool IsPlaying()
+        public void SetBagelType(BagelType bagelType)
         {
-            return m_State == State.Playing;
+            m_LastBagelType = bagelType;
+            OnSetBagelType?.Invoke(this, bagelType);
         }
 
-        public bool IsPaused()
+        public void SetBagelTrackerData(BagelTrackerData bagelTrackerData)
         {
-            return m_IsPaused;
+            m_LastBagelTrackerData = bagelTrackerData;
+            OnSetBagelTrackerData?.Invoke(this, bagelTrackerData);
         }
 
         public void GoToMainMenu()
         {
-            Clear();
+            Resume();
             m_State = State.MainMenu;
+            OnStateChange?.Invoke(this, State.MainMenu);
         }
 
         public void GoToBagelSelection()
         {
-            Clear();
+            Resume();
             m_State = State.BagelSelection;
-        }
-
-        public void SetBagelType(BagelType bagelType)
-        {
-            m_BagelType = bagelType;
+            OnStateChange?.Invoke(this, State.BagelSelection);
         }
 
         public void GoToPlay()
         {
-            Clear();
             m_State = State.Playing;
+            OnStateChange?.Invoke(this, State.Playing);
+        }
+
+        public void GoToGameOver()
+        {
+            Resume();
+            m_State = State.GameOver;
+            OnStateChange?.Invoke(this, State.GameOver);
         }
 
         public void Pause()
         {
+            if (m_IsPaused)
+                return;
+
+            if (!IsPlaying)
+                return;
+
             m_IsPaused = true;
             OnPauseStateChanged?.Invoke(this, true);
         }
 
         public void Resume()
         {
-            Clear();
+            if (!m_IsPaused)
+                return;
+
+            if (!IsPlaying)
+                return;
+
             m_IsPaused = false;
-        }
-
-        public void GoToGameOver(BagelTrackerData bagelTrackerData)
-        {
-            Clear();
-            m_State = State.GameOver;
-            m_LastGameOverBagelTrackerData = bagelTrackerData;
-            OnGameOver?.Invoke(this, bagelTrackerData);
-        }
-
-        void Clear()
-        {
             OnPauseStateChanged?.Invoke(this, false);
+        }
+
+        public void TogglePause()
+        {
+            if (m_IsPaused)
+                Resume();
+            else
+                Pause();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Bagel
             OnBagelTypeCollectionChange?.Invoke(this, null);
             OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
 
-            m_PlayManager.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
 
         public void NextBagel()
@@ -41,7 +41,7 @@ namespace Bagel
             m_SelectedBagelIndex = newIndex;
             OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
 
-            m_PlayManager.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
 
         public void PreviousBagel()
@@ -53,7 +53,7 @@ namespace Bagel
             m_SelectedBagelIndex = newIndex;
             OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
 
-            m_PlayManager.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
     }
 }

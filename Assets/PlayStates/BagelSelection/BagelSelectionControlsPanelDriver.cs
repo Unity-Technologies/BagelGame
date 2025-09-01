@@ -28,7 +28,7 @@ namespace Bagel
 
             button = root.Q<Button>("select-button");
             if (button != null)
-                button.clicked += m_BagelSelectionRoom.PlayManager.GoToPlay;
+                button.clicked += m_BagelSelectionRoom.PlayManager.State.GoToPlay;
 
             m_LeftButton = root.Q<Button>("left-button");
             if (m_LeftButton != null)
@@ -39,7 +39,7 @@ namespace Bagel
 
             button = root.Q<Button>("back-button");
             if (button != null)
-                button.clicked += m_BagelSelectionRoom.PlayManager.GoToMainMenu;
+                button.clicked += m_BagelSelectionRoom.PlayManager.State.GoToMainMenu;
 
             SetDisableStates(m_BagelSelectionRoom.SelectedBagelIndex);
         }

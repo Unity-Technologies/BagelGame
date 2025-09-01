@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Bagel
 {
-    public class PlayManager : MonoBehaviour, IPlayManager
+    public class PlayManager : MonoBehaviour
     {
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
         [SerializeField] CinemachineCamera m_CinemachineCamera;
@@ -20,106 +20,74 @@ namespace Bagel
 
         PlayManagerState m_PlayManagerState = new PlayManagerState();
 
-        void OnEnable()
-        {
-            GoToMainMenu();
-        }
+        public PlayManagerState State => m_PlayManagerState;
 
-        void Start()
+        void Awake()
         {
             m_PlayerInputBindings.OnPauseAction += PlayerInputBindings_OnPauseAction;
+
+            State.OnStateChange += State_OnStateChange;
+            State.OnPauseStateChanged += State_OnPauseStateChanged;
+        }
+
+        void OnEnable()
+        {
+            State.GoToMainMenu();
         }
 
         void PlayerInputBindings_OnPauseAction(object sender, EventArgs e)
         {
-            if (!m_PlayManagerState.IsPlaying())
-                return;
+            State.TogglePause();
+        }
 
-            if (m_PlayManagerState.IsPaused())
-                Resume();
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            switch (state)
+            {
+                case PlayManagerState.State.MainMenu:
+                {
+                    Clear();
+                    m_CinemachineCamera.Target.TrackingTarget = m_MainMenuTarget;
+                    break;
+                }
+                case PlayManagerState.State.BagelSelection:
+                {
+                    Clear();
+                    m_CinemachineCamera.Target.TrackingTarget = m_BagelSelectionTarget;
+                    break;
+                }
+                case PlayManagerState.State.Playing:
+                {
+                    Clear();
+                    m_CinemachineCamera.Target.TrackingTarget = m_BagelTarget;
+                    m_BagelController.gameObject.SetActive(true);
+                    m_BagelTracker.gameObject.SetActive(true);
+                    break;
+                }
+                case PlayManagerState.State.GameOver:
+                {
+                    Clear();
+                    m_CinemachineCamera.Target.TrackingTarget = m_GameOverTarget;
+                    break;
+                }
+            }
+        }
+
+        void State_OnPauseStateChanged(object sender, bool paused)
+        {
+            if (paused)
+                Time.timeScale = 0f;
             else
-                Pause();
-        }
-
-        public event EventHandler<bool> OnPauseStateChanged
-        {
-            add { m_PlayManagerState.OnPauseStateChanged += value; }
-            remove { m_PlayManagerState.OnPauseStateChanged -= value; }
-        }
-        public event EventHandler<BagelTrackerData> OnGameOver
-        {
-            add { m_PlayManagerState.OnGameOver += value; }
-            remove { m_PlayManagerState.OnGameOver -= value; }
+                Time.timeScale = 1f;
         }
 
         void Clear()
         {
-            Time.timeScale = 1f;
-
             m_BagelController.transform.position = m_StartingPoint.position;
             m_BagelController.transform.rotation = m_StartingPoint.rotation;
 
             m_BagelTracker.gameObject.SetActive(false);
             m_BagelController.gameObject.SetActive(false);
-        }
-
-        public bool IsPlaying()
-        {
-            return m_PlayManagerState.IsPlaying();
-        }
-
-        public bool IsPaused()
-        {
-            return m_PlayManagerState.IsPaused();
-        }
-
-        public void GoToMainMenu()
-        {
-            Clear();
-            m_PlayManagerState.GoToMainMenu();
-            m_CinemachineCamera.Target.TrackingTarget = m_MainMenuTarget;
-        }
-
-        public void GoToBagelSelection()
-        {
-            Clear();
-            m_PlayManagerState.GoToBagelSelection();
-            m_CinemachineCamera.Target.TrackingTarget = m_BagelSelectionTarget;
-        }
-
-        public void SetBagelType(BagelType bagelType)
-        {
-            m_PlayManagerState.SetBagelType(bagelType);
-            m_BagelController.BagelType = bagelType;
-            m_BagelController.Init();
-        }
-
-        public void GoToPlay()
-        {
-            Clear();
-            m_PlayManagerState.GoToPlay();
-            m_CinemachineCamera.Target.TrackingTarget = m_BagelTarget;
-            m_BagelController.gameObject.SetActive(true);
-            m_BagelTracker.gameObject.SetActive(true);
-        }
-
-        public void Pause()
-        {
-            m_PlayManagerState.Pause();
-            Time.timeScale = 0f;
-        }
-
-        public void Resume()
-        {
-            m_PlayManagerState.Resume();
-            Time.timeScale = 1f;
-        }
-
-        public void GoToGameOver(BagelTrackerData bagelTrackerData)
-        {
-            Clear();
-            m_PlayManagerState.GoToGameOver(bagelTrackerData);
-            m_CinemachineCamera.Target.TrackingTarget = m_GameOverTarget;
         }
     }
 }

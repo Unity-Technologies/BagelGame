@@ -6,7 +6,7 @@ namespace Bagel
     [RequireComponent(typeof(UIDocument))]
     public class MainMenuScreenDriver : MonoBehaviour
     {
-        public PlayManager PlayManager;
+        [SerializeField] PlayManager m_PlayManager;
 
         UIDocument m_UIDocument;
 
@@ -19,7 +19,7 @@ namespace Bagel
 
             button = root.Q<Button>("play-button");
             if (button != null)
-                button.clicked += PlayManager.GoToBagelSelection;
+                button.clicked += m_PlayManager.State.GoToBagelSelection;
 
             button = root.Q<Button>("quit-button");
             if (button != null)

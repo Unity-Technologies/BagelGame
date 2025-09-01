@@ -18,6 +18,7 @@ namespace Bagel
             CopyConstantData();
 
             m_BagelController.OnToasterHit += BagelController_OnToasterHit;
+            m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
         }
 
         void Update()
@@ -32,7 +33,6 @@ namespace Bagel
 
         void CopyConstantData()
         {
-            m_BagelTrackerData.toppingsMaxCount = m_BagelController.BagelType.maxToppingCount;
             m_BagelTrackerData.CopyFrom(m_BagelController.BagelControllerConstants);
         }
 
@@ -54,6 +54,11 @@ namespace Bagel
             m_BagelTrackerData.force = m_BagelController.CurrentForce;
         }
 
+        void State_OnSetBagelType(object sender, BagelType bagelType)
+        {
+            m_BagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
+        }
+
         void BagelController_OnToasterHit(object sender, EventArgs e)
         {
             OnToasterHit();
@@ -61,7 +66,8 @@ namespace Bagel
 
         void OnToasterHit()
         {
-            m_PlayManager.GoToGameOver(m_BagelTrackerData);
+            m_PlayManager.State.SetBagelTrackerData(m_BagelTrackerData);
+            m_PlayManager.State.GoToGameOver();
         }
     }
 }

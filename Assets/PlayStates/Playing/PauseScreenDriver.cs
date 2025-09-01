@@ -15,7 +15,7 @@ namespace Bagel
 
         void Start()
         {
-            m_PlayManager.OnPauseStateChanged += PlayerManager_OnPauseStateChanged;
+            m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
         }
 
         void OnEnable()
@@ -31,14 +31,14 @@ namespace Bagel
 
             button = m_Root.Q<Button>("resume-button");
             if (button != null)
-                button.clicked += m_PlayManager.Resume;
+                button.clicked += m_PlayManager.State.Resume;
 
             button = m_Root.Q<Button>("main-menu-button");
             if (button != null)
-                button.clicked += m_PlayManager.GoToMainMenu;
+                button.clicked += m_PlayManager.State.GoToMainMenu;
         }
 
-        void PlayerManager_OnPauseStateChanged(object sender, bool paused)
+        void State_OnPauseStateChanged(object sender, bool paused)
         {
             SetPauseState(paused);
         }

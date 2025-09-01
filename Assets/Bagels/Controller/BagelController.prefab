@@ -79,10 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5611aa93f38eac44ab1b7ed25f31dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BagelController
-  BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
+  m_BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
+  m_PlayManager: {fileID: 0}
   tiltRecoverySpeed: 2
   m_PlayerInputBindings: {fileID: 11400000, guid: 9adc73272f595584e84054bf04391372, type: 2}
-  m_PlayManager: {fileID: 0}
   m_ToastersLayerMask:
     serializedVersion: 2
     m_Bits: 128

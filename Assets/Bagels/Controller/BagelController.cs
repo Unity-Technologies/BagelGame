@@ -5,7 +5,8 @@ namespace Bagel
 {
     public class BagelController : MonoBehaviour
     {
-        public BagelType BagelType;
+        [SerializeField] BagelType m_BagelType;
+        [SerializeField] PlayManager m_PlayManager;
 
         [HideInInspector]
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
@@ -23,6 +24,7 @@ namespace Bagel
         float m_CurrentSpeed;
         float m_CurrentForce;
 
+        public BagelType BagelType => m_BagelType;
         public int CurrentToppingCount => m_CurrentToppingCount;
         public float CurrentSpeed => m_CurrentSpeed;
         public float CurrentForce => m_CurrentForce;
@@ -56,37 +58,45 @@ namespace Bagel
 
         public void Init()
         {
-            if (BagelType == null || m_RigidBody == null)
-                return;
-
             CopyInitialData();
             CopyConstantData();
 
             foreach (Transform child in m_BagelSlot)
                 Destroy(child.gameObject);
 
-            Instantiate(BagelType.modelPrefab, m_BagelSlot);
+            Instantiate(m_BagelType.modelPrefab, m_BagelSlot);
         }
 
         void CopyInitialData()
         {
-            m_CurrentToppingCount = BagelType.maxToppingCount;
+            m_CurrentToppingCount = m_BagelType.maxToppingCount;
         }
 
         void CopyConstantData()
         {
-            m_RigidBody.mass = BagelType.mass;
-            m_PhysicsMaterial.dynamicFriction = BagelType.dynamicFriction;
-            m_PhysicsMaterial.staticFriction = BagelType.staticFriction;
-            m_PhysicsMaterial.bounciness = BagelType.bounciness;
+            m_RigidBody.mass = m_BagelType.mass;
+            m_PhysicsMaterial.dynamicFriction = m_BagelType.dynamicFriction;
+            m_PhysicsMaterial.staticFriction = m_BagelType.staticFriction;
+            m_PhysicsMaterial.bounciness = m_BagelType.bounciness;
         }
 
-        void OnEnable()
+        void Awake()
         {
             m_RigidBody = GetComponent<Rigidbody>();
             m_Collider = GetComponent<Collider>();
             m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
+            m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
+        }
+
+        void State_OnSetBagelType(object sender, BagelType bagelType)
+        {
+            m_BagelType = bagelType;
+            Init();
+        }
+
+        void OnEnable()
+        {
             Init();
         }
 
@@ -116,9 +126,11 @@ namespace Bagel
         void HandleMovement()
         {
             var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
+            var rollTorque = transform.right * m_BagelType.rollTorque * inputVector.y;
+            var turnTorque = GetNonRotatedRelativeUp() * m_BagelType.turnTorque * inputVector.x;
 
-            m_RigidBody.AddTorque(transform.right * BagelType.rollTorque * inputVector.y, ForceMode.Force);
-            m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * BagelType.turnTorque * inputVector.x, ForceMode.Force);
+            m_RigidBody.AddTorque(rollTorque, ForceMode.Force);
+            m_RigidBody.AddTorque(turnTorque, ForceMode.Force);
 
             m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
             m_CurrentForce = inputVector.y;

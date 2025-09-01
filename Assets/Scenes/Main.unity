@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889679fefbfcef94ba48798b949ad3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuScreenDriver
-  PlayManager: {fileID: 2115846877}
+  m_PlayManager: {fileID: 2115846877}
 --- !u!1 &1167858880
 GameObject:
   m_ObjectHideFlags: 0

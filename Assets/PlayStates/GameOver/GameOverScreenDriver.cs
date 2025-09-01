@@ -13,7 +13,7 @@ namespace Bagel
 
         void Awake()
         {
-            m_PlayManager.OnGameOver += PlayManager_OnGameOver;
+            m_PlayManager.State.OnSetBagelTrackerData += State_OnSetBagelTrackerData;
         }
 
         void OnEnable()
@@ -25,12 +25,12 @@ namespace Bagel
 
             button = root.Q<Button>("main-menu-button");
             if (button != null)
-                button.clicked += m_PlayManager.GoToMainMenu;
+                button.clicked += m_PlayManager.State.GoToMainMenu;
 
             m_Title = root.Q<Label>("title");
         }
 
-        void PlayManager_OnGameOver(object sender, BagelTrackerData bagelTrackerData)
+        void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)
         {
             if (m_Title == null)
                 return;
