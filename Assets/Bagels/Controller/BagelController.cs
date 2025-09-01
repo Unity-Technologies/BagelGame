@@ -8,7 +8,6 @@ namespace Bagel
         [SerializeField] BagelType m_BagelType;
         [SerializeField] PlayManager m_PlayManager;
 
-        [SerializeField] PlayInputBindings m_PlayerInputBindings;
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
         [SerializeField] Transform m_StartingLocation;
@@ -140,7 +139,7 @@ namespace Bagel
 
         void HandleMovement()
         {
-            var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
+            var inputVector = m_PlayManager.PlayInputBindings.GetMovementVectorNormalized();
             var rollTorque = transform.right * m_BagelType.rollTorque * inputVector.y;
             var turnTorque = GetNonRotatedRelativeUp() * m_BagelType.turnTorque * inputVector.x;
 

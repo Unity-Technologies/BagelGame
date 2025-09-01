@@ -1562,7 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df72ce7a5df66244badf32cd25d95db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayManager
-  m_PlayerInputBindings: {fileID: 1167858882}
+  m_PlayInputBindings: {fileID: 1167858882}
 --- !u!1001 &1519499053406636249
 PrefabInstance:
   m_ObjectHideFlags: 0

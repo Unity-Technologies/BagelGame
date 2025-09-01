@@ -16,6 +16,7 @@ namespace Bagel
         void Start()
         {
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
+            m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
         }
 
         void OnEnable()
@@ -43,15 +44,26 @@ namespace Bagel
             SetPauseState(paused);
         }
 
+        void PlayInputBindings_OnPauseAction(object sender, EventArgs e)
+        {
+            m_PlayManager.State.TogglePause();
+        }
+
         void SetPauseState(bool paused)
         {
             if (m_Root == null)
                 return;
 
             if (paused)
+            {
                 m_Root.style.display = DisplayStyle.Flex;
+                Time.timeScale = 0f;
+            }
             else
+            {
                 m_Root.style.display = DisplayStyle.None;
+                Time.timeScale = 1f;
+            }
         }
     }
 }
