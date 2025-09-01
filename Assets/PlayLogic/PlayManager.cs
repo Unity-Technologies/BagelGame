@@ -49,7 +49,10 @@ namespace Bagel
         void Clear()
         {
             Time.timeScale = 1f;
+
             m_BagelController.transform.position = m_StartingPoint.position;
+            m_BagelController.transform.rotation = m_StartingPoint.rotation;
+
             m_BagelTracker.gameObject.SetActive(false);
             m_BagelController.gameObject.SetActive(false);
         }
