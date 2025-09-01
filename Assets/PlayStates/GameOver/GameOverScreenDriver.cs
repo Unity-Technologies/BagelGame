@@ -9,25 +9,35 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         UIDocument m_UIDocument;
+        VisualElement m_Root;
         Label m_Title;
 
         void Awake()
         {
+            m_PlayManager.State.OnStateChange += State_OnStateChange;
             m_PlayManager.State.OnSetBagelTrackerData += State_OnSetBagelTrackerData;
         }
 
         void OnEnable()
         {
             m_UIDocument = GetComponent<UIDocument>();
-            var root = m_UIDocument.rootVisualElement;
+            m_Root = m_UIDocument.rootVisualElement;
 
             Button button;
 
-            button = root.Q<Button>("main-menu-button");
+            button = m_Root.Q<Button>("main-menu-button");
             if (button != null)
                 button.clicked += m_PlayManager.State.GoToMainMenu;
 
-            m_Title = root.Q<Label>("title");
+            m_Title = m_Root.Q<Label>("title");
+        }
+
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            if (state == PlayManagerState.State.GameOver)
+                m_Root.style.display = DisplayStyle.Flex;
+            else
+                m_Root.style.display = DisplayStyle.None;
         }
 
         void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)

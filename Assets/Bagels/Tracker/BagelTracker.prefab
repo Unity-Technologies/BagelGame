@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af22601005cd4eeba610c8a4ed8d4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bagelController: {fileID: 0}
+  m_PlayManager: {fileID: 0}
+  m_BagelController: {fileID: 0}
 --- !u!1 &579728891587814830
 GameObject:
   m_ObjectHideFlags: 0

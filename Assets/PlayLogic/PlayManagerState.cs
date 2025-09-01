@@ -20,6 +20,7 @@ namespace Bagel
         public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
         public bool IsPlaying => m_State == State.Playing;
         public bool IsPaused => m_IsPaused;
+        public bool IsGameOver => m_State == State.GameOver;
 
         public event EventHandler<State> OnStateChange;
         public event EventHandler<bool> OnPauseStateChanged;
