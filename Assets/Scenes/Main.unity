@@ -1622,7 +1622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3e1f18adfbbd6468446c3eb8309c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverScreenDriver
-  PlayManager: {fileID: 2115846877}
+  m_PlayManager: {fileID: 2115846877}
 --- !u!1 &2115846875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1814,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7800882342683147540, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
+      propertyPath: m_PlayManager
+      value: 
+      objectReference: {fileID: 2115846877}
     - target: {fileID: 7800882342683147540, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
       propertyPath: bagelRigidBody
       value: 

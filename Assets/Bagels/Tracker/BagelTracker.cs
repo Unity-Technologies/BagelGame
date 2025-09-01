@@ -5,6 +5,7 @@ namespace Bagel
 {
     public class BagelTracker : MonoBehaviour
     {
+        [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelController m_BagelController;
 
         BagelTrackerData m_BagelTrackerData;
@@ -15,6 +16,8 @@ namespace Bagel
             m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
             m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
             CopyConstantData();
+
+            m_BagelController.OnToasterHit += BagelController_OnToasterHit;
         }
 
         void Update()
@@ -49,6 +52,16 @@ namespace Bagel
             m_BagelTrackerData.toppingsCount = m_BagelController.CurrentToppingCount;
             m_BagelTrackerData.speed = m_BagelController.CurrentSpeed;
             m_BagelTrackerData.force = m_BagelController.CurrentForce;
+        }
+
+        void BagelController_OnToasterHit(object sender, EventArgs e)
+        {
+            OnToasterHit();
+        }
+
+        void OnToasterHit()
+        {
+            m_PlayManager.GoToGameOver(m_BagelTrackerData);
         }
     }
 }

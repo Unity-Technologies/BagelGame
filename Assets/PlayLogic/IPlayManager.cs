@@ -6,6 +6,7 @@ namespace Bagel
     public interface IPlayManager
     {
         event EventHandler<bool> OnPauseStateChanged;
+        event EventHandler<BagelTrackerData> OnGameOver;
 
         bool IsPlaying();
         bool IsPaused();
@@ -17,6 +18,6 @@ namespace Bagel
         void GoToPlay();
         void Pause();
         void Resume();
-        void GoToGameOver();
+        void GoToGameOver(BagelTrackerData bagelTrackerData);
     }
 }

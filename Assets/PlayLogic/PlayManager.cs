@@ -46,6 +46,11 @@ namespace Bagel
             add { m_PlayManagerState.OnPauseStateChanged += value; }
             remove { m_PlayManagerState.OnPauseStateChanged -= value; }
         }
+        public event EventHandler<BagelTrackerData> OnGameOver
+        {
+            add { m_PlayManagerState.OnGameOver += value; }
+            remove { m_PlayManagerState.OnGameOver -= value; }
+        }
 
         void Clear()
         {
@@ -110,9 +115,10 @@ namespace Bagel
             Time.timeScale = 1f;
         }
 
-        public void GoToGameOver()
+        public void GoToGameOver(BagelTrackerData bagelTrackerData)
         {
             Clear();
+            m_PlayManagerState.GoToGameOver(bagelTrackerData);
             m_CinemachineCamera.Target.TrackingTarget = m_GameOverTarget;
         }
     }

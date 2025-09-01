@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Bagel
@@ -10,7 +11,6 @@ namespace Bagel
         public float tiltRecoverySpeed = 10.0f; // Speed at which it recovers its upright tilt
 
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
-        [SerializeField] PlayManager m_PlayManager;
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
 
@@ -28,6 +28,8 @@ namespace Bagel
         public float CurrentForce => m_CurrentForce;
 
         public BagelControllerConstants BagelControllerConstants => m_BagelControllerConstants;
+
+        public event EventHandler OnToasterHit;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -144,8 +146,7 @@ namespace Bagel
         {
             if (((1 << other.gameObject.layer) & m_ToastersLayerMask) != 0)
             {
-                m_PlayManager.GoToGameOver();
-                return;
+                OnToasterHit?.Invoke(this, EventArgs.Empty);
             }
         }
     }

@@ -14,8 +14,13 @@ namespace Bagel
         State m_State;
         bool m_IsPaused;
         BagelType m_BagelType;
+        BagelTrackerData m_LastGameOverBagelTrackerData;
+
+        public BagelType BagelType => m_BagelType;
+        public BagelTrackerData LastGameOverBagelTrackerData => m_LastGameOverBagelTrackerData;
 
         public event EventHandler<bool> OnPauseStateChanged;
+        public event EventHandler<BagelTrackerData> OnGameOver;
 
         public bool IsPlaying()
         {
@@ -62,10 +67,12 @@ namespace Bagel
             m_IsPaused = false;
         }
 
-        public void GoToGameOver()
+        public void GoToGameOver(BagelTrackerData bagelTrackerData)
         {
             Clear();
             m_State = State.GameOver;
+            m_LastGameOverBagelTrackerData = bagelTrackerData;
+            OnGameOver?.Invoke(this, bagelTrackerData);
         }
 
         void Clear()
