@@ -14,28 +14,20 @@ namespace Bagel
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] BagelControllerConstants m_BagelControllerConstants;
 
-        BagelTrackerData m_BagelTrackerData;
         Rigidbody m_RigidBody;
         Collider m_Collider;
         PhysicsMaterial m_PhysicsMaterial;
         Transform m_BagelSlot;
 
         int m_CurrentToppingCount;
+        float m_CurrentSpeed;
+        float m_CurrentForce;
 
-        public BagelTrackerData BagelTrackerData
-        {
-            get
-            {
-                if (m_BagelTrackerData != null)
-                    return m_BagelTrackerData;
+        public int CurrentToppingCount => m_CurrentToppingCount;
+        public float CurrentSpeed => m_CurrentSpeed;
+        public float CurrentForce => m_CurrentForce;
 
-                m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
-                m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
-                m_BagelTrackerData.CopyFrom(m_BagelControllerConstants);
-
-                return m_BagelTrackerData;
-            }
-        }
+        public BagelControllerConstants BagelControllerConstants => m_BagelControllerConstants;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -85,10 +77,6 @@ namespace Bagel
             m_PhysicsMaterial.dynamicFriction = BagelType.dynamicFriction;
             m_PhysicsMaterial.staticFriction = BagelType.staticFriction;
             m_PhysicsMaterial.bounciness = BagelType.bounciness;
-
-            m_BagelTrackerData.toppingsMaxCount = BagelType.maxToppingCount;
-
-            m_BagelTrackerData.CopyFrom(m_BagelControllerConstants);
         }
 
         void OnEnable()
@@ -98,14 +86,6 @@ namespace Bagel
             m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
             Init();
-        }
-
-        void OnDisable()
-        {
-            if (m_BagelTrackerData == null)
-                return;
-
-            Destroy(m_BagelTrackerData);
         }
 
         void FixedUpdate()
@@ -134,27 +114,17 @@ namespace Bagel
         void HandleMovement()
         {
             var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
+
             m_RigidBody.AddTorque(transform.right * BagelType.rollTorque * inputVector.y, ForceMode.Force);
             m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * BagelType.turnTorque * inputVector.x, ForceMode.Force);
 
-            if (m_BagelTrackerData == null)
-                return;
-
-            m_BagelTrackerData.speed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
-            m_BagelTrackerData.force = inputVector.y;
+            m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
+            m_CurrentForce = inputVector.y;
         }
 
         void HandleToppingLoss()
         {
-            if (m_CurrentToppingCount == 0)
-                m_PlayManager.GoToGameOver();
-
             m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - 2);
-
-            if (m_BagelTrackerData == null)
-                return;
-
-            m_BagelTrackerData.toppingsCount = m_CurrentToppingCount;
         }
 
         void TiltUpright()

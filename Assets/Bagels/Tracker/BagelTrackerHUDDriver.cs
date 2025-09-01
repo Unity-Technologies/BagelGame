@@ -10,25 +10,18 @@ namespace Bagel
 
         UIDocument m_UIDocument;
 
-        private void Awake()
+        void Awake()
         {
             m_UIDocument = GetComponent<UIDocument>();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             var root = m_UIDocument.rootVisualElement.Q("root");
             if (root == null)
                 return;
 
-            root.dataSource = tracker.bagelController.BagelTrackerData;
-
-            //var progressBar = root.Q<ProgressBar>();
-            //progressBar.value = progressBar.highValue;
-            //progressBar.SetBinding("value", new DataBinding
-            //{
-            //    dataSourcePath = new PropertyPath(nameof(tracker.bagelController.transform.position.x))
-            //});
+            root.dataSource = tracker.BagelTrackerData;
         }
     }
 }

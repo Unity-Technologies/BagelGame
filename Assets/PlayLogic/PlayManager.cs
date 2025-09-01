@@ -41,7 +41,8 @@ namespace Bagel
                 Pause();
         }
 
-        public event EventHandler<bool> OnPauseStateChanged {
+        public event EventHandler<bool> OnPauseStateChanged
+        {
             add { m_PlayManagerState.OnPauseStateChanged += value; }
             remove { m_PlayManagerState.OnPauseStateChanged -= value; }
         }

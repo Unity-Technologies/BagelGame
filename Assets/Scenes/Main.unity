@@ -1822,6 +1822,10 @@ PrefabInstance:
       propertyPath: bagelController
       value: 
       objectReference: {fileID: 1519499053406636259}
+    - target: {fileID: 7800882342683147540, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
+      propertyPath: m_BagelController
+      value: 
+      objectReference: {fileID: 1519499053406636259}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
