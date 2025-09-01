@@ -1,19 +1,50 @@
-.unity-progress-bar__progress {
-    background-color: rgb(22, 142, 14);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+.b-pane {
+    width: 72px;
 }
 
-.unity-progress-bar__background {
-    background-color: rgb(20, 79, 16);
+.b-slider {
+    flex-grow: 1;
+    width: initial;
+    min-width: initial;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.b-slider > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker {
+    background-color: rgba(0, 0, 0, 0.73);
+}
+
+.unity-base-slider__dragger {
+    display: none;
+}
+
+.unity-base-slider__tracker {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    width: initial;
+    left: 2px;
+    right: 0;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.unity-label {
-    font-size: 20px;
+.unity-base-slider__fill {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.b-slider-positive > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker > .unity-base-slider__fill {
+    background-color: rgb(165, 226, 65);
+}
+
+.b-slider-negative > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker > .unity-base-slider__fill {
+    background-color: rgb(237, 56, 38);
 }

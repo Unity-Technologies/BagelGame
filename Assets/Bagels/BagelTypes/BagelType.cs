@@ -6,6 +6,7 @@ namespace Bagel
     public class BagelType : ScriptableObject
     {
         public string displayName = "New";
+        public int maxToppingCount = 1000;
         public float rollTorque = 40.0f;
         public float turnTorque = 1.0f;
         public float mass = 4.0f;

@@ -12,11 +12,30 @@ namespace Bagel
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] LayerMask m_ToastersLayerMask;
+        [SerializeField] BagelControllerConstants m_BagelControllerConstants;
 
+        BagelTrackerData m_BagelTrackerData;
         Rigidbody m_RigidBody;
         Collider m_Collider;
         PhysicsMaterial m_PhysicsMaterial;
         Transform m_BagelSlot;
+
+        int m_CurrentToppingCount;
+
+        public BagelTrackerData BagelTrackerData
+        {
+            get
+            {
+                if (m_BagelTrackerData != null)
+                    return m_BagelTrackerData;
+
+                m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
+                m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
+                m_BagelTrackerData.CopyFrom(m_BagelControllerConstants);
+
+                return m_BagelTrackerData;
+            }
+        }
 
         public Vector3 GetAbsoluteRight()
         {
@@ -46,7 +65,8 @@ namespace Bagel
             if (BagelType == null || m_RigidBody == null)
                 return;
 
-            CopyPhysicsStats();
+            CopyInitialData();
+            CopyConstantData();
 
             foreach (Transform child in m_BagelSlot)
                 Destroy(child.gameObject);
@@ -54,12 +74,21 @@ namespace Bagel
             Instantiate(BagelType.modelPrefab, m_BagelSlot);
         }
 
-        void CopyPhysicsStats()
+        void CopyInitialData()
+        {
+            m_CurrentToppingCount = BagelType.maxToppingCount;
+        }
+
+        void CopyConstantData()
         {
             m_RigidBody.mass = BagelType.mass;
             m_PhysicsMaterial.dynamicFriction = BagelType.dynamicFriction;
             m_PhysicsMaterial.staticFriction = BagelType.staticFriction;
             m_PhysicsMaterial.bounciness = BagelType.bounciness;
+
+            m_BagelTrackerData.toppingsMaxCount = BagelType.maxToppingCount;
+
+            m_BagelTrackerData.CopyFrom(m_BagelControllerConstants);
         }
 
         void OnEnable()
@@ -71,13 +100,22 @@ namespace Bagel
             Init();
         }
 
+        void OnDisable()
+        {
+            if (m_BagelTrackerData == null)
+                return;
+
+            Destroy(m_BagelTrackerData);
+        }
+
         void FixedUpdate()
         {
 #if UNITY_EDITOR
-            CopyPhysicsStats();
+            CopyConstantData();
 #endif
 
             HandleMovement();
+            HandleToppingLoss();
             TiltUpright();
         }
 
@@ -98,6 +136,25 @@ namespace Bagel
             var inputVector = m_PlayerInputBindings.GetMovementVectorNormalized();
             m_RigidBody.AddTorque(transform.right * BagelType.rollTorque * inputVector.y, ForceMode.Force);
             m_RigidBody.AddTorque(GetNonRotatedRelativeUp() * BagelType.turnTorque * inputVector.x, ForceMode.Force);
+
+            if (m_BagelTrackerData == null)
+                return;
+
+            m_BagelTrackerData.speed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
+            m_BagelTrackerData.force = inputVector.y;
+        }
+
+        void HandleToppingLoss()
+        {
+            if (m_CurrentToppingCount == 0)
+                m_PlayManager.GoToGameOver();
+
+            m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - 2);
+
+            if (m_BagelTrackerData == null)
+                return;
+
+            m_BagelTrackerData.toppingsCount = m_CurrentToppingCount;
         }
 
         void TiltUpright()

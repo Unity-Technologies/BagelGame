@@ -5,6 +5,11 @@
                 <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Label>
+        <ui:IntegerField label="Max Toppings" name="max-topping-field">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="maxToppingCount" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:IntegerField>
         <ui:FloatField label="Roll Torque" value="42.2" readonly="true" name="roll-torque-field">
             <Bindings>
                 <ui:DataBinding property="value" data-source-path="rollTorque" binding-mode="ToTarget"/>

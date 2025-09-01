@@ -1,7 +1,6 @@
 using System;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Bagel
 {
@@ -10,6 +9,7 @@ namespace Bagel
         [SerializeField] PlayerInputBindings m_PlayerInputBindings;
         [SerializeField] CinemachineCamera m_CinemachineCamera;
         [SerializeField] BagelController m_BagelController;
+        [SerializeField] BagelTracker m_BagelTracker;
         [SerializeField] Transform m_StartingPoint;
 
         // State Targets
@@ -48,8 +48,10 @@ namespace Bagel
 
         void Clear()
         {
+            Time.timeScale = 1f;
             m_BagelController.transform.position = m_StartingPoint.position;
-            m_BagelController.enabled = false;
+            m_BagelTracker.gameObject.SetActive(false);
+            m_BagelController.gameObject.SetActive(false);
         }
 
         public bool IsPlaying()
@@ -88,19 +90,20 @@ namespace Bagel
             Clear();
             m_PlayManagerState.GoToPlay();
             m_CinemachineCamera.Target.TrackingTarget = m_BagelTarget;
-            m_BagelController.enabled = true;
+            m_BagelController.gameObject.SetActive(true);
+            m_BagelTracker.gameObject.SetActive(true);
         }
 
         public void Pause()
         {
             m_PlayManagerState.Pause();
-            m_BagelController.enabled = false;
+            Time.timeScale = 0f;
         }
 
         public void Resume()
         {
             m_PlayManagerState.Resume();
-            m_BagelController.enabled = true;
+            Time.timeScale = 1f;
         }
 
         public void GoToGameOver()

@@ -208,7 +208,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1562436898}
+    TrackingTarget: {fileID: 947445559}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -239,8 +239,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24349490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4842876, y: 0, z: 0, w: 0.87490886}
-  m_LocalPosition: {x: 0, y: 11.017483, z: -83.578636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.7201397, z: -5.7095666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,8 +425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117335063}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4842876, y: 0, z: 0, w: 0.87490886}
-  m_LocalPosition: {x: 0, y: 11.017483, z: -83.578636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.7201397, z: -5.7095666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1109,6 +1109,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f75a3aef6ecab4cb7e3fbb81f5999a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.PlayerInputBindings
+--- !u!114 &1197460775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7800882342683147540, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
+  m_PrefabInstance: {fileID: 5191464054718349819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af22601005cd4eeba610c8a4ed8d4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1285999367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2037152543591846311, guid: 70e9a6c39b8c6424c8d5c06c44798010, type: 3}
@@ -1659,6 +1670,7 @@ MonoBehaviour:
   m_PlayerInputBindings: {fileID: 1167858882}
   m_CinemachineCamera: {fileID: 24349493}
   m_BagelController: {fileID: 1519499053406636259}
+  m_BagelTracker: {fileID: 1197460775}
   m_StartingPoint: {fileID: 138081795}
   m_MainMenuTarget: {fileID: 1562436898}
   m_BagelSelectionTarget: {fileID: 1385801810}
@@ -1680,10 +1692,6 @@ PrefabInstance:
       propertyPath: m_PlayerInputBindings
       value: 
       objectReference: {fileID: 1167858882}
-    - target: {fileID: 1255819574640045139, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
-      propertyPath: m_ToastersLayerMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1698,19 +1706,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99691737
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.078459024
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1722,7 +1730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8734128621075815115, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040463455907671234, guid: 644ef3c143c07b745b0e353125402aa6, type: 3}
       propertyPath: m_Name
@@ -1765,10 +1773,6 @@ PrefabInstance:
     - target: {fileID: 275799154478145523, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
       propertyPath: m_Name
       value: BagelTracker
-      objectReference: {fileID: 0}
-    - target: {fileID: 2943685615154517270, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 4526162018048281575, guid: 0ca69b6829b074ecf8eac45f465a270a, type: 3}
       propertyPath: m_LocalPosition.x

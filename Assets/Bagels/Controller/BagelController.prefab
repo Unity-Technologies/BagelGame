@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6555591447129242215}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: -0.012, z: 0.03}
+  m_LocalPosition: {x: -0.175, y: 0, z: 0}
   m_LocalScale: {x: 10.166, y: 10.166, z: 10.166}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -79,13 +79,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5611aa93f38eac44ab1b7ed25f31dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BagelController
-  BagelType: {fileID: 0}
+  BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
   tiltRecoverySpeed: 2
   m_PlayerInputBindings: {fileID: 11400000, guid: 9adc73272f595584e84054bf04391372, type: 2}
   m_PlayManager: {fileID: 0}
   m_ToastersLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  m_BagelControllerConstants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
 --- !u!54 &2603147718558657600
 Rigidbody:
   m_ObjectHideFlags: 0
