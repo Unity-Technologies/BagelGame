@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: BagelTypeSesame
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Sesame
-  rollTorque: 40
-  turnTorque: 1
+  maxToppingCount: 500
+  spinToppingLossFactor: 0.005
+  impactToppingLossFactor: 0.1
+  impactAmortizationRate: 0.5
+  tiltRecoverySpeed: 10
+  rollTorque: 80
+  turnTorque: 2
   mass: 4
+  dynamicFriction: 2
+  staticFriction: 2
+  bounciness: 0.203
   modelPrefab: {fileID: 2633031486731055519, guid: 5d35bd45b4574954489a727f19f1355e, type: 3}
