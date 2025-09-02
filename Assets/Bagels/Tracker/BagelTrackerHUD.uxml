@@ -1,44 +1,60 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Bagels/Tracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3"/>
-    <ui:VisualElement name="root" data-source="project://database/Assets/Bagels/Tracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" style="flex-direction: row; width: 238px; justify-content: space-between;">
-        <ui:VisualElement name="left-pane" class="b-pane" style="height: 102px; flex-direction: row;">
-            <ui:VisualElement name="speed-slider" class="b-speed-slider" style="flex-grow: 1; width: 47px;">
-                <ui:Slider high-value="100" direction="Vertical" name="speed-positive-slider" fill="true" inverted="false" class="b-slider b-slider-positive">
-                    <Bindings>
-                        <ui:DataBinding property="highValue" data-source-path="speedMax" binding-mode="ToTarget"/>
-                        <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
-                    </Bindings>
-                </ui:Slider>
-                <ui:Slider direction="Vertical" name="speed-negative-slider" fill="true" inverted="true" class="b-slider b-slider-negative">
-                    <Bindings>
-                        <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
-                        <ui:DataBinding property="highValue" data-source-path="speedMin" binding-mode="ToTarget"/>
-                    </Bindings>
-                </ui:Slider>
-            </ui:VisualElement>
-            <ui:VisualElement name="force-slider" class="b-force-slider" style="flex-grow: 1; width: 12px;">
-                <ui:Slider high-value="100" direction="Vertical" name="force-positive-slider" fill="true" inverted="false" class="b-slider b-slider-positive">
-                    <Bindings>
-                        <ui:DataBinding property="highValue" data-source-path="forceMax" binding-mode="ToTarget"/>
-                        <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
-                    </Bindings>
-                </ui:Slider>
-                <ui:Slider direction="Vertical" name="force-negative-slider" fill="true" inverted="true" class="b-slider b-slider-negative">
-                    <Bindings>
-                        <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
-                        <ui:DataBinding property="highValue" data-source-path="forceMin" binding-mode="ToTarget"/>
-                    </Bindings>
-                </ui:Slider>
+    <ui:VisualElement name="root" data-source="project://database/Assets/Bagels/Tracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" style="flex-direction: row; width: 203px; justify-content: space-between;">
+        <ui:VisualElement name="left-container" class="b-container" style="align-items: flex-end;">
+            <ui:VisualElement name="left-pane" class="b-pane" style="height: 102px; flex-direction: row; width: 36px; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                <ui:VisualElement name="speed-slider" class="b-speed-slider" style="width: 80%;">
+                    <ui:Slider high-value="100" direction="Vertical" name="speed-positive-slider" fill="true" inverted="false" class="b-slider b-slider-positive">
+                        <Bindings>
+                            <ui:DataBinding property="highValue" data-source-path="constants.speedMax" binding-mode="ToTarget"/>
+                            <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Slider>
+                    <ui:Slider direction="Vertical" name="speed-negative-slider" fill="true" inverted="true" class="b-slider b-slider-negative">
+                        <Bindings>
+                            <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
+                            <ui:DataBinding property="highValue" data-source-path="constants.speedMin" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Slider>
+                </ui:VisualElement>
+                <ui:VisualElement name="input-slider" class="b-force-slider" style="width: 20%;">
+                    <ui:Slider high-value="100" direction="Vertical" name="input-positive-slider" fill="true" inverted="false" class="b-slider b-slider-positive">
+                        <Bindings>
+                            <ui:DataBinding property="highValue" data-source-path="constants.inputMax" binding-mode="ToTarget"/>
+                            <ui:DataBinding property="value" data-source-path="input" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Slider>
+                    <ui:Slider direction="Vertical" name="input-negative-slider" fill="true" inverted="true" class="b-slider b-slider-negative">
+                        <Bindings>
+                            <ui:DataBinding property="value" data-source-path="input" binding-mode="ToTarget"/>
+                            <ui:DataBinding property="highValue" data-source-path="constants.inputMin" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Slider>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="right-pane" class="b-pane" style="flex-shrink: 0; height: 43px;">
-            <ui:ProgressBar>
-                <Bindings>
-                    <ui:DataBinding property="value" data-source-path="toppingsCount" binding-mode="ToTarget"/>
-                    <ui:DataBinding property="highValue" data-source-path="toppingsMaxCount" binding-mode="ToTarget"/>
-                    <ui:DataBinding property="title" data-source-path="toppingsCount" binding-mode="ToTarget"/>
-                </Bindings>
-            </ui:ProgressBar>
+        <ui:VisualElement name="right-container" class="b-container">
+            <ui:VisualElement name="right-pane" class="b-pane" style="flex-shrink: 0; width: auto;">
+                <ui:ProgressBar name="seeds-bar">
+                    <Bindings>
+                        <ui:DataBinding property="value" data-source-path="toppingsCount" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="highValue" data-source-path="toppingsMaxCount" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="title" data-source-path="toppingsCount" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:ProgressBar>
+                <ui:ProgressBar name="force-bar" title="Gs">
+                    <Bindings>
+                        <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="highValue" data-source-path="constants.forceMax" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:ProgressBar>
+                <ui:ProgressBar name="spin-bar" title="Spin">
+                    <Bindings>
+                        <ui:DataBinding property="value" data-source-path="spin" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="highValue" data-source-path="constants.spinMax" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:ProgressBar>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

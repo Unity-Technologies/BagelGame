@@ -7,6 +7,7 @@ namespace Bagel
     {
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelController m_BagelController;
+        [SerializeField] BagelTrackerConstants m_BagelTrackerConstants;
 
         BagelTrackerData m_BagelTrackerData;
         public BagelTrackerData BagelTrackerData
@@ -18,31 +19,21 @@ namespace Bagel
 
                 m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
                 m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
+                m_BagelTrackerData.constants = m_BagelTrackerConstants;
                 return m_BagelTrackerData;
             }
         }
 
         void Awake()
         {
-            CopyConstantData();
-
             m_BagelController.OnToasterHit += BagelController_OnToasterHit;
             m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
         }
 
         void Update()
         {
-#if UNITY_EDITOR
-            CopyConstantData();
-#endif
-
             HandleControllerPositionTracking();
             HandleControllerDataTracking();
-        }
-
-        void CopyConstantData()
-        {
-            BagelTrackerData.CopyFrom(m_BagelController.BagelControllerConstants);
         }
 
         void HandleControllerPositionTracking()
@@ -59,8 +50,10 @@ namespace Bagel
         void HandleControllerDataTracking()
         {
             BagelTrackerData.toppingsCount = m_BagelController.CurrentToppingCount;
+            BagelTrackerData.input = m_BagelController.CurrentInput;
             BagelTrackerData.speed = m_BagelController.CurrentSpeed;
-            BagelTrackerData.force = m_BagelController.CurrentForce;
+            BagelTrackerData.force = Mathf.Ceil(m_BagelController.CurrentForce);
+            BagelTrackerData.spin = Mathf.Ceil(m_BagelController.CurrentSpin);
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)

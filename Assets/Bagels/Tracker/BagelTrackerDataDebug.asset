@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f84a3396d5cf9e43afbb07dafce0667, type: 3}
   m_Name: BagelTrackerDataDebug
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelTrackerData
-  speedMin: -6
-  speedMax: 6
-  forceMin: -1
-  forceMax: 1
+  constants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
   toppingsCount: 250
   toppingsMaxCount: 1000
+  input: -0.2
   speed: 2.76
-  force: -0.4
+  force: 20
+  spin: 5

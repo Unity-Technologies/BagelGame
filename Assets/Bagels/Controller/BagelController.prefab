@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8734128621075815115}
   - component: {fileID: 1255819574640045139}
   - component: {fileID: 2603147718558657600}
-  - component: {fileID: 7332613373610136445}
+  - component: {fileID: 828173744507009318}
   m_Layer: 0
   m_Name: BagelController
   m_TagString: Untagged
@@ -81,12 +81,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BagelController
   m_BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
   m_PlayManager: {fileID: 0}
-  tiltRecoverySpeed: 2
-  m_PlayerInputBindings: {fileID: 11400000, guid: 9adc73272f595584e84054bf04391372, type: 2}
   m_ToastersLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  m_BagelControllerConstants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
+  m_StartingLocation: {fileID: 0}
 --- !u!54 &2603147718558657600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,8 +112,8 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!135 &7332613373610136445
-SphereCollider:
+--- !u!64 &828173744507009318
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,9 +130,10 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.63
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 486b9c10b73df9342b78f45b43c49eaf, type: 3}
 --- !u!1001 &4259687851263306488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7966693522318644536}
     m_Modifications:
+    - target: {fileID: 112445491688232838, guid: 82ecbbc9119be8e4ab887406cb5de5c4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5797865524984118446, guid: 82ecbbc9119be8e4ab887406cb5de5c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90

@@ -9,7 +9,6 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         [SerializeField] LayerMask m_ToastersLayerMask;
-        [SerializeField] BagelControllerConstants m_BagelControllerConstants;
         [SerializeField] Transform m_StartingLocation;
 
         Rigidbody m_RigidBody;
@@ -17,16 +16,18 @@ namespace Bagel
         PhysicsMaterial m_PhysicsMaterial;
         Transform m_BagelSlot;
 
-        int m_CurrentToppingCount;
+        float m_CurrentToppingCount;
+        float m_CurrentInput;
         float m_CurrentSpeed;
         float m_CurrentForce;
+        float m_CurrentSpin;
 
         public BagelType BagelType => m_BagelType;
-        public int CurrentToppingCount => m_CurrentToppingCount;
+        public int CurrentToppingCount => Mathf.CeilToInt(m_CurrentToppingCount);
+        public float CurrentInput => m_CurrentInput;
         public float CurrentSpeed => m_CurrentSpeed;
         public float CurrentForce => m_CurrentForce;
-
-        public BagelControllerConstants BagelControllerConstants => m_BagelControllerConstants;
+        public float CurrentSpin => m_CurrentSpin;
 
         public event EventHandler OnToasterHit;
 
@@ -85,6 +86,7 @@ namespace Bagel
             m_BagelSlot = transform.GetChild(0);
             m_PlayManager.State.OnStateChange += State_OnStateChange;
             m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
+            enabled = false;
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
@@ -146,13 +148,19 @@ namespace Bagel
             m_RigidBody.AddTorque(rollTorque, ForceMode.Force);
             m_RigidBody.AddTorque(turnTorque, ForceMode.Force);
 
+            m_CurrentInput = inputVector.y;
             m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
-            m_CurrentForce = inputVector.y;
+            m_CurrentForce = Mathf.Max(0, m_CurrentForce - m_BagelType.impactAmortizationRate);
+            m_CurrentSpin = m_RigidBody.angularVelocity.magnitude;
         }
 
         void HandleToppingLoss()
         {
-            m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - 2);
+            var impactLoss = m_CurrentForce * m_BagelType.impactToppingLossFactor;
+            var spinLoss = m_CurrentSpin * m_BagelType.spinToppingLossFactor;
+            var loss = impactLoss + spinLoss;
+
+            m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - loss);
         }
 
         void TiltUpright()
@@ -174,6 +182,30 @@ namespace Bagel
             {
                 OnToasterHit?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        void OnCollisionEnter(Collision collision) => EvaluateCollision(collision);
+
+        void OnCollisionStay(Collision collision) => EvaluateCollision(collision);
+
+        void EvaluateCollision(Collision collision)
+        {
+            var impulse = collision.impulse;
+            var dt = Time.fixedDeltaTime;
+            var averageImpulse = impulse / dt;
+
+            var contactNormal = collision.GetContact(0).normal.normalized;
+            var shockForce = Mathf.Abs(Vector3.Dot(averageImpulse, contactNormal));
+            var scrapeForce = (averageImpulse - Vector3.Project(averageImpulse, contactNormal)).magnitude;
+
+            var g = Physics.gravity.magnitude;
+            var shockGs = shockForce / (m_RigidBody.mass * g);
+            var scrapeGs = scrapeForce / (m_RigidBody.mass * g);
+
+            // Remove normal gravity.
+            shockGs = Mathf.Max(shockGs, 1.0f) - 1.0f;
+
+            m_CurrentForce = Mathf.Max(m_CurrentForce, shockGs);
         }
     }
 }

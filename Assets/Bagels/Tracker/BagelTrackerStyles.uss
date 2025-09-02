@@ -1,4 +1,4 @@
-.b-pane {
+.b-container {
     width: 72px;
 }
 
@@ -28,17 +28,9 @@
     width: initial;
     left: 2px;
     right: 0;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
 }
 
 .unity-base-slider__fill {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 
 .b-slider-positive > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker > .unity-base-slider__fill {

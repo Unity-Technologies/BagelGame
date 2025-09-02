@@ -9,6 +9,9 @@ namespace Bagel
 
         [Space]
         public int maxToppingCount = 1000;
+        public float spinToppingLossFactor = 0.005f;
+        public float impactToppingLossFactor = 0.1f;
+        public float impactAmortizationRate = 0.5f;
 
         [Space]
         public float tiltRecoverySpeed = 10.0f;
