@@ -23,5 +23,5 @@ MonoBehaviour:
   mass: 4
   dynamicFriction: 2
   staticFriction: 2
-  bounciness: 0.203
+  bounciness: 0
   modelPrefab: {fileID: 2633031486731055519, guid: 5d35bd45b4574954489a727f19f1355e, type: 3}
