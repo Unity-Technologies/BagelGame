@@ -13,14 +13,11 @@ namespace Bagel
         UIDocument m_UIDocument;
         VisualElement m_Root;
 
-        void Start()
+        void OnEnable()
         {
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
-        }
 
-        void OnEnable()
-        {
             m_UIDocument = GetComponent<UIDocument>();
             m_Root = m_UIDocument.rootVisualElement;
             SetPauseState(false);
@@ -37,6 +34,12 @@ namespace Bagel
             button = m_Root.Q<Button>("main-menu-button");
             if (button != null)
                 button.clicked += m_PlayManager.State.GoToMainMenu;
+        }
+
+        void OnDisable()
+        {
+            m_PlayManager.State.OnPauseStateChanged -= State_OnPauseStateChanged;
+            m_PlayManager.PlayInputBindings.OnPauseAction -= PlayInputBindings_OnPauseAction;
         }
 
         void State_OnPauseStateChanged(object sender, bool paused)
