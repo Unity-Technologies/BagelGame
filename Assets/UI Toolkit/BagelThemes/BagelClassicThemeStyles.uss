@@ -1,6 +1,4 @@
 :root {
-    --b-border-width: 5px;
-    --b-border-radius: 10px;
 }
 
 .unity-text-element {
@@ -13,20 +11,20 @@
     background-color: rgb(71, 71, 71);
     transition-duration: 0.3s;
     margin-top: 7px;
-    border-top-width: var(--b-border-width);
-    border-right-width: var(--b-border-width);
-    border-bottom-width: var(--b-border-width);
-    border-left-width: var(--b-border-width);
-    border-top-left-radius: var(--b-border-radius);
-    border-top-right-radius: var(--b-border-radius);
-    border-bottom-right-radius: var(--b-border-radius);
-    border-bottom-left-radius: var(--b-border-radius);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
 }
 
 .unity-button:enabled:hover {
     scale: 1.2 1.2 1.2;
     rotate: 2deg;
-    -unity-material: url("project://database/Assets/UI%20Toolkit/BagelThemes/Shaders/BagelClassicButtonShader.shadergraph?fileID=-876546973899608171&guid=9c20226e46db8f442ae113b7b654e815&type=3#BagelClassicButtonShader");
+    -unity-material: url("project://database/Assets/UI%20Toolkit/BagelThemes/Shaders/BagelClassicButtonHoverShader.shadergraph?fileID=-876546973899608171&guid=57ab294718c47bc428732fab1f71d0c8&type=3#BagelClassicButtonHoverShader");
 }
 
 .unity-button.b-primary {
@@ -41,31 +39,35 @@
     border-bottom-left-radius: 10px;
 }
 
+.unity-progress-bar {
+    height: 29px;
+}
+
 .unity-progress-bar__container {
     min-height: initial;
     max-height: initial;
 }
 
-.unity-progress-bar__progress {
-    background-color: rgb(22, 142, 14);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-}
-
 .unity-progress-bar__background {
     background-color: rgb(20, 79, 16);
-    border-top-width: var(--b-border-width);
-    border-right-width: var(--b-border-width);
-    border-bottom-width: var(--b-border-width);
-    border-left-width: var(--b-border-width);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
     min-height: initial;
     max-height: initial;
-    border-top-left-radius: var(--b-border-radius);
-    border-top-right-radius: var(--b-border-radius);
-    border-bottom-right-radius: var(--b-border-radius);
-    border-bottom-left-radius: var(--b-border-radius);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.unity-progress-bar__progress {
+    background-color: rgb(22, 142, 14);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 
 .b-title {
