@@ -123,6 +123,39 @@ namespace Bagel
             return obj;
         }
 
+        void UpdateTransform(Transform t, float px, float py, float pz, float sx, float sy)
+        {
+            if (t == null)
+                return;
+
+            var p = t.localPosition;
+            var s = t.localScale;
+            p.x = px;
+            p.y = py;
+            p.z = pz;
+            s.x = sx;
+            s.y = sy;
+            t.localPosition = p;
+            t.localScale = s;
+        }
+
+        void UpdateTransform(Transform t, float px, float py, float pz, float sx, float sy, float sz)
+        {
+            if (t == null)
+                return;
+
+            var p = t.localPosition;
+            var s = t.localScale;
+            p.x = px;
+            p.y = py;
+            p.z = pz;
+            s.x = sx;
+            s.y = sy;
+            s.z = sz;
+            t.localPosition = p;
+            t.localScale = s;
+        }
+
         void UpdateMetrics()
         {
             m_Left = -Mathf.Abs(m_WestSide);
@@ -139,119 +172,42 @@ namespace Bagel
 
         void UpdateInside()
         {
-            float halfHeight = m_Height * 0.5f;
+            float halfHeight = k_FloorY + (m_Height * 0.5f);
 
-            if (m_Floor)
-            {
-                var p = m_Floor.localPosition;
-                var s = m_Floor.localScale;
-                p.x = m_Center.x;
-                p.y = k_FloorY;
-                p.z = m_Center.y;
-                s.x = m_Width;
-                s.y = m_Depth;
-                m_Floor.localPosition = p;
-                m_Floor.localScale = s;
-            }
-
-            if (m_Ceiling)
-            {
-                var p = m_Ceiling.localPosition;
-                var s = m_Ceiling.localScale;
-                p.x = m_Center.x;
-                p.y = m_Height;
-                p.z = m_Center.y;
-                s.x = m_Width;
-                s.y = m_Depth;
-                m_Ceiling.localPosition = p;
-                m_Ceiling.localScale = s;
-            }
-
-            if (m_WestWall)
-            {
-                var p = m_WestWall.localPosition;
-                var s = m_WestWall.localScale;
-                p.x = m_Left;
-                p.y = k_FloorY + halfHeight;
-                p.z = m_Center.y;
-                s.x = m_Depth;
-                s.y = m_Height;
-                m_WestWall.localPosition = p;
-                m_WestWall.localScale = s;
-            }
-
-            if (m_SouthWall)
-            {
-                var p = m_SouthWall.localPosition;
-                var s = m_SouthWall.localScale;
-                p.x = m_Center.x;
-                p.y = k_FloorY + halfHeight;
-                p.z = m_Bottom;
-                s.x = m_Width;
-                s.y = m_Height;
-                m_SouthWall.localPosition = p;
-                m_SouthWall.localScale = s;
-            }
-
-            if (m_NorthWall)
-            {
-                var p = m_NorthWall.localPosition;
-                var s = m_NorthWall.localScale;
-                p.x = m_Center.x;
-                p.y = k_FloorY + halfHeight;
-                p.z = m_Top;
-                s.x = m_Width;
-                s.y = m_Height;
-                m_NorthWall.localPosition = p;
-                m_NorthWall.localScale = s;
-            }
+            //                           px           py          pz          sx       sy
+            UpdateTransform(m_Floor,     m_Center.x,  k_FloorY,   m_Center.y, m_Width, m_Depth);
+            UpdateTransform(m_Ceiling,   m_Center.x,  m_Height,   m_Center.y, m_Width, m_Depth);
+            UpdateTransform(m_WestWall,  m_Left,      halfHeight, m_Center.y, m_Depth, m_Height);
+            UpdateTransform(m_SouthWall, m_Center.x,  halfHeight, m_Bottom,   m_Width, m_Height);
+            UpdateTransform(m_NorthWall, m_Center.x,  halfHeight, m_Top,      m_Width, m_Height);
         }
 
         void UpdateOutside()
         {
-            if (m_Sidewalk)
-            {
-                var p = m_Sidewalk.localPosition;
-                var s = m_Sidewalk.localScale;
-                p.x = m_Right + (m_SidewalkWidth * 0.5f);
-                p.y = k_FloorY;
-                p.z = m_Center.y;
-                s.x = m_SidewalkWidth;
-                s.y = m_SidewalkLength;
-                m_Sidewalk.localPosition = p;
-                m_Sidewalk.localScale = s;
-            }
-
-            if (m_Hedge)
-            {
-                var p = m_Hedge.localPosition;
-                var s = m_Hedge.localScale;
-                p.x = m_Right + m_SidewalkWidth + (m_HedgeWidth * 0.5f);
-                p.y = k_FloorY + (m_HedgeHeight * 0.5f);
-                p.z = m_Center.y;
-                s.x = m_HedgeWidth;
-                s.y = m_HedgeHeight;
-                s.z = m_SidewalkLength;
-                m_Hedge.localPosition = p;
-                m_Hedge.localScale = s;
-            }
+            UpdateTransform(m_Sidewalk,
+                m_Right + (m_SidewalkWidth * 0.5f),
+                k_FloorY,
+                m_Center.y,
+                m_SidewalkWidth,
+                m_SidewalkLength);
+            UpdateTransform(m_Hedge,
+                m_Right + m_SidewalkWidth + (m_HedgeWidth * 0.5f),
+                k_FloorY + (m_HedgeHeight * 0.5f),
+                m_Center.y,
+                m_HedgeWidth,
+                m_HedgeHeight,
+                m_SidewalkLength);
         }
 
         void UpdateCounter()
         {
-            if (m_Counter)
-            {
-                var p = m_Counter.localPosition;
-                var s = m_Counter.localScale;
-                p.x = m_CounterRect.x;
-                p.y = k_FloorY + (m_CounterHeight * 0.5f);
-                p.z = m_CounterRect.y;
-                s.x = m_CounterRect.width;
-                s.y = m_CounterHeight;
-                s.z = m_CounterRect.height;
-                m_Counter.localPosition = p;
-                m_Counter.localScale = s;
-            }
+            UpdateTransform(m_Counter,
+                m_CounterRect.x,
+                k_FloorY + (m_CounterHeight * 0.5f),
+                m_CounterRect.y,
+                m_CounterRect.width,
+                m_CounterHeight,
+                m_CounterRect.height);
         }
 
         void UpdateDependents()
