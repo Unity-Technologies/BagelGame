@@ -3,13 +3,16 @@ using UnityEngine;
 
 namespace Bagel
 {
+    [ExecuteInEditMode]
     public class BagelSelectionRoom : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelTypeCollection m_BagelTypeCollection;
+        [SerializeField] float m_PodiumXOffset = 3.0f;
 
         public PlayManager PlayManager => m_PlayManager;
         public BagelTypeCollection BagelTypeCollection => m_BagelTypeCollection;
+        public float PodiumXOffset => m_PodiumXOffset;
         public event EventHandler OnBagelTypeCollectionChange;
         public event EventHandler<int> OnBagelTypeChange;
 

@@ -1,27 +1,40 @@
+using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Bagel
 {
+    [ExecuteInEditMode]
     public class BagelSelectionConveyor : MonoBehaviour
     {
+#if UNITY_EDITOR
         [SerializeField] BagelSelectionRoom m_BagelSelectionRoom;
-        [SerializeField] Transform m_BagelPodiumPrefab;
-        [SerializeField] float m_PodiumXOffset = 3.0f;
+        [SerializeField] GameObject m_BagelPodiumPrefab;
+
+        [Space]
+        [SerializeField] List<Transform> m_BagelPodiums;
 
         void Start()
         {
             m_BagelSelectionRoom.OnBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
-            m_BagelSelectionRoom.OnBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
         }
 
         void OnEnable()
         {
+            m_BagelSelectionRoom.OnBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
+
             CreatePodiums();
         }
 
-        void BagelSelectionRoom_OnBagelTypeChange(object sender, int index)
+        void OnDisable()
         {
-            transform.localPosition = new Vector3(-((float)index * m_PodiumXOffset), 0, 0);
+            m_BagelSelectionRoom.OnBagelTypeCollectionChange -= BagelSelectionRoom_OnBagelTypeCollectionChange;
+        }
+
+        void Update()
+        {
+            UpdatePodiums();
         }
 
         void BagelSelectionRoom_OnBagelTypeCollectionChange(object sender, System.EventArgs e)
@@ -29,25 +42,48 @@ namespace Bagel
             CreatePodiums();
         }
 
+        void Clear()
+        {
+            m_BagelPodiums.Clear();
+
+            var childrenToDestroy = new List<GameObject>();
+            foreach (Transform child in transform)
+                childrenToDestroy.Add(child.gameObject);
+
+            foreach (var child in childrenToDestroy)
+                DestroyImmediate(child);
+        }
+
         void CreatePodiums()
         {
-            transform.localPosition = Vector3.zero;
+            Clear();
 
-            foreach (Transform child in transform)
-                DestroyImmediate(child.gameObject);
-
-            float xOffset = 0.0f;
             foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
             {
-                var podiumObj = Instantiate(m_BagelPodiumPrefab, transform);
-                podiumObj.localPosition = new Vector3(xOffset, 0, 0);
+                var podiumObj = PrefabUtility.InstantiatePrefab(m_BagelPodiumPrefab, transform) as GameObject;
+                podiumObj.name = bagelType.name;
 
                 var podium = podiumObj.GetComponent<BagelSelectionPodium>();
                 podium.BagelType = bagelType;
                 podium.InitBagelType();
 
-                xOffset += m_PodiumXOffset;
+                m_BagelPodiums.Add(podiumObj.transform);
+            }
+
+            UpdatePodiums();
+        }
+
+        void UpdatePodiums()
+        {
+            float bagelTypeCount = m_BagelPodiums.Count;
+            float midpointShift = 0.5f * (bagelTypeCount - 1) * m_BagelSelectionRoom.PodiumXOffset;
+
+            for (int i = 0; i < bagelTypeCount; ++i)
+            {
+                float offset = ((float)i * m_BagelSelectionRoom.PodiumXOffset) - midpointShift;
+                m_BagelPodiums[i].localPosition = new Vector3(offset, 0, 0);
             }
         }
+#endif // UNITY_EDITOR
     }
 }

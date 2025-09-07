@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    [ExecuteInEditMode]
     [RequireComponent(typeof(UIDocument))]
     public class BagelSelectionTypeInfoPanelDriver : MonoBehaviour
     {

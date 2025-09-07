@@ -6,6 +6,7 @@ namespace Bagel
     [ExecuteInEditMode]
     public class Bakery : MonoBehaviour
     {
+#if UNITY_EDITOR
         [Header("Room Measurements")]
         [SerializeField] float m_WestSide;
         [SerializeField] float m_EastSide;
@@ -265,4 +266,5 @@ namespace Bagel
             }
         }
     }
+#endif // UNITY_EDITOR
 }
