@@ -7,20 +7,20 @@ namespace Bagel
     [RequireComponent(typeof(UIDocument))]
     public class BagelSelectionControlsPanelDriver : MonoBehaviour
     {
+        [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelSelectionRoom m_BagelSelectionRoom;
+        [SerializeField] Transform m_Camera;
+        [SerializeField] Transform m_BagelSelectionCameraTraget;
 
         UIDocument m_UIDocument;
 
         Button m_LeftButton;
         Button m_RightButton;
 
-        void Start()
-        {
-            m_BagelSelectionRoom.OnBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
-        }
-
         void OnEnable()
         {
+            m_BagelSelectionRoom.OnBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
+
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
 
@@ -44,9 +44,41 @@ namespace Bagel
             SetDisableStates(m_BagelSelectionRoom.SelectedBagelIndex);
         }
 
+        void OnDisable()
+        {
+            m_BagelSelectionRoom.OnBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
+        }
+
+        void Update()
+        {
+            if (!m_PlayManager.State.IsBagelSelection)
+                return;
+
+            var p = transform.position;
+            p.z = m_Camera.position.z;
+            transform.position = p;
+        }
+
         void BagelSelectionRoom_OnBagelTypeChange(object sender, int index)
         {
+            SetXOffset(index);
             SetDisableStates(index);
+        }
+
+        void SetXOffset(int index)
+        {
+            var offset = m_BagelSelectionRoom.GetOffsetFromIndex(index);
+
+            var p = m_BagelSelectionCameraTraget.localPosition;
+            p.x = offset;
+            m_BagelSelectionCameraTraget.localPosition = p;
+
+            if (!m_PlayManager.State.IsBagelSelection)
+            {
+                p = transform.localPosition;
+                p.x = offset;
+                transform.localPosition = p;
+            }
         }
 
         void SetDisableStates(int index)

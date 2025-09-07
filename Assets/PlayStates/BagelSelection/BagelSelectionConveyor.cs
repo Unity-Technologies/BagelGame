@@ -75,12 +75,9 @@ namespace Bagel
 
         void UpdatePodiums()
         {
-            float bagelTypeCount = m_BagelPodiums.Count;
-            float midpointShift = 0.5f * (bagelTypeCount - 1) * m_BagelSelectionRoom.PodiumXOffset;
-
-            for (int i = 0; i < bagelTypeCount; ++i)
+            for (int i = 0; i < m_BagelPodiums.Count; ++i)
             {
-                float offset = ((float)i * m_BagelSelectionRoom.PodiumXOffset) - midpointShift;
+                float offset = m_BagelSelectionRoom.GetOffsetFromIndex(i);
                 m_BagelPodiums[i].localPosition = new Vector3(offset, 0, 0);
             }
         }

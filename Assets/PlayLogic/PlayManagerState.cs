@@ -18,6 +18,7 @@ namespace Bagel
 
         public BagelType LastBagelType => m_LastBagelType;
         public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
+        public bool IsBagelSelection => m_State == State.BagelSelection;
         public bool IsPlaying => m_State == State.Playing;
         public bool IsPaused => m_IsPaused;
         public bool IsGameOver => m_State == State.GameOver;

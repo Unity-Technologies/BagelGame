@@ -13,6 +13,7 @@ namespace Bagel
         public PlayManager PlayManager => m_PlayManager;
         public BagelTypeCollection BagelTypeCollection => m_BagelTypeCollection;
         public float PodiumXOffset => m_PodiumXOffset;
+        public float PodiumXMidpointShift => 0.5f * (m_BagelTypeCollection.collection.Count - 1) * PodiumXOffset;
         public event EventHandler OnBagelTypeCollectionChange;
         public event EventHandler<int> OnBagelTypeChange;
 
@@ -23,6 +24,11 @@ namespace Bagel
         void OnEnable()
         {
             InitBagelCollection();
+        }
+
+        public float GetOffsetFromIndex(int index)
+        {
+            return ((float)index * PodiumXOffset) - PodiumXMidpointShift;
         }
 
         public void InitBagelCollection()
