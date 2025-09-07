@@ -6,6 +6,7 @@ namespace Bagel
     [ExecuteInEditMode]
     public class Bakery : MonoBehaviour
     {
+        [Header("Room Measurements")]
         [SerializeField] float m_WestSide;
         [SerializeField] float m_EastSide;
         [SerializeField] float m_SouthSide;
@@ -13,19 +14,27 @@ namespace Bagel
         [SerializeField] float m_Height;
 
         [Space]
+        [Header("Street Measurements")]
         [SerializeField] float m_SidewalkWidth;
         [SerializeField] float m_SidewalkLength;
         [SerializeField] float m_HedgeWidth;
         [SerializeField] float m_HedgeHeight;
 
         [Space]
+        [Header("Counter Measurements")]
         [SerializeField] Rect m_CounterRect;
         [SerializeField] float m_CounterHeight;
+        [SerializeField] float m_CounterTopThickness;
 
         [Space]
-        [SerializeField] Transform m_Blackboard;
+        [Header("Play States")]
+        [SerializeField] Transform m_MainMenu;
+        [SerializeField] Transform m_BagelSelection;
+        [SerializeField] Transform m_Playing;
+        [SerializeField] Transform m_GameOver;
 
         [Space]
+        [Header("Assets")]
         [SerializeField] Transform m_BoxPrefab;
         [SerializeField] Transform m_QuadPrefab;
         [SerializeField] Material m_FloorMaterial;
@@ -34,8 +43,10 @@ namespace Bagel
         [SerializeField] Material m_SidewalkMaterial;
         [SerializeField] Material m_HedgeMaterial;
         [SerializeField] Material m_CounterMaterial;
+        [SerializeField] Material m_CounterTopMaterial;
 
         [Space]
+        [Header("Generated (Do Not Edit)")]
         [SerializeField] Transform m_Floor;
         [SerializeField] Transform m_Ceiling;
         [SerializeField] Transform m_WestWall;
@@ -44,6 +55,7 @@ namespace Bagel
         [SerializeField] Transform m_Sidewalk;
         [SerializeField] Transform m_Hedge;
         [SerializeField] Transform m_Counter;
+        [SerializeField] Transform m_CounterTop;
 
         [Space]
         [SerializeField] float m_Left;
@@ -55,8 +67,10 @@ namespace Bagel
         [SerializeField] float m_Depth;
         [SerializeField] Vector2 m_Center;
 
+        [SerializeField] float m_CounterSurface;
+
         const float k_FloorY = 0.0f;
-        const float k_SurfaceOffset = 0.5f;
+        const float k_SurfaceOffset = 0.05f;
 
         void OnEnable() => Build();
         void Reset() => Build();
@@ -84,6 +98,7 @@ namespace Bagel
             m_Hedge = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Hedge), m_HedgeMaterial);
 
             m_Counter = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Counter), m_CounterMaterial);
+            m_CounterTop = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_CounterTop), m_CounterTopMaterial);
         }
 
         public void Rebuild()
@@ -168,6 +183,8 @@ namespace Bagel
             m_Center = new Vector2(
                 0.5f * (m_Left + m_Right),
                 0.5f * (m_Bottom + m_Top));
+
+            m_CounterSurface = k_FloorY + m_CounterHeight + m_CounterTopThickness;
         }
 
         void UpdateInside()
@@ -208,15 +225,43 @@ namespace Bagel
                 m_CounterRect.width,
                 m_CounterHeight,
                 m_CounterRect.height);
+            UpdateTransform(m_CounterTop,
+                m_CounterRect.x,
+                k_FloorY + m_CounterHeight + (m_CounterTopThickness * 0.5f),
+                m_CounterRect.y,
+                m_CounterRect.width,
+                -m_CounterTopThickness, // TODO: Temp hack to fix odd normal/lighting issue.
+                m_CounterRect.height);
         }
 
         void UpdateDependents()
         {
-            if (m_Blackboard)
+            if (m_MainMenu)
             {
-                var p = m_Blackboard.localPosition;
+                var p = m_MainMenu.localPosition;
                 p.x = m_Left + k_SurfaceOffset;
-                m_Blackboard.localPosition = p;
+                m_MainMenu.localPosition = p;
+            }
+
+            if (m_BagelSelection)
+            {
+                var p = m_BagelSelection.localPosition;
+                p.y = m_CounterSurface;
+                m_BagelSelection.localPosition = p;
+            }
+
+            if (m_Playing)
+            {
+                var p = m_Playing.localPosition;
+                p.y = m_CounterSurface + k_SurfaceOffset;
+                m_Playing.localPosition = p;
+            }
+
+            if (m_GameOver)
+            {
+                var p = m_GameOver.localPosition;
+                p.y = m_CounterSurface;
+                m_GameOver.localPosition = p;
             }
         }
     }
