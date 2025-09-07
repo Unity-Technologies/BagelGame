@@ -28,6 +28,13 @@ namespace Bagel
         [SerializeField] float m_CounterTopThickness;
 
         [Space]
+        [Header("Blackboard Measurements")]
+        [SerializeField] float m_BlackboardWidth;
+        [SerializeField] float m_BlackboardHeight;
+        [SerializeField] float m_BlackboardThickness;
+        [SerializeField] Vector2 m_BlackboardWallXY;
+
+        [Space]
         [Header("Play States")]
         [SerializeField] Transform m_MainMenu;
         [SerializeField] Transform m_BagelSelection;
@@ -45,6 +52,7 @@ namespace Bagel
         [SerializeField] Material m_HedgeMaterial;
         [SerializeField] Material m_CounterMaterial;
         [SerializeField] Material m_CounterTopMaterial;
+        [SerializeField] Material m_BlackboardMaterial;
 
         [Space]
         [Header("Generated (Do Not Edit)")]
@@ -57,6 +65,7 @@ namespace Bagel
         [SerializeField] Transform m_Hedge;
         [SerializeField] Transform m_Counter;
         [SerializeField] Transform m_CounterTop;
+        [SerializeField] Transform m_Blackboard;
 
         [Space]
         [SerializeField] float m_Left;
@@ -69,6 +78,7 @@ namespace Bagel
         [SerializeField] Vector2 m_Center;
 
         [SerializeField] float m_CounterSurface;
+        [SerializeField] float m_BlackboardSurface;
 
         const float k_FloorY = 0.0f;
         const float k_SurfaceOffset = 0.05f;
@@ -100,6 +110,8 @@ namespace Bagel
 
             m_Counter = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Counter), m_CounterMaterial);
             m_CounterTop = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_CounterTop), m_CounterTopMaterial);
+
+            m_Blackboard = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Blackboard), m_BlackboardMaterial);
         }
 
         public void Rebuild()
@@ -185,7 +197,8 @@ namespace Bagel
                 0.5f * (m_Left + m_Right),
                 0.5f * (m_Bottom + m_Top));
 
-            m_CounterSurface = k_FloorY + m_CounterHeight + m_CounterTopThickness;
+            m_CounterSurface = k_FloorY + m_CounterHeight + m_CounterTopThickness + k_SurfaceOffset;
+            m_BlackboardSurface = m_Left + m_BlackboardThickness + k_SurfaceOffset;
         }
 
         void UpdateInside()
@@ -198,6 +211,14 @@ namespace Bagel
             UpdateTransform(m_WestWall,  m_Left,      halfHeight, m_Center.y, m_Depth, m_Height);
             UpdateTransform(m_SouthWall, m_Center.x,  halfHeight, m_Bottom,   m_Width, m_Height);
             UpdateTransform(m_NorthWall, m_Center.x,  halfHeight, m_Top,      m_Width, m_Height);
+
+            UpdateTransform(m_Blackboard,
+                m_Left + (m_BlackboardThickness * 0.5f),
+                m_BlackboardWallXY.y,
+                m_BlackboardWallXY.x,
+                m_BlackboardThickness,
+                m_BlackboardHeight,
+                m_BlackboardWidth);
         }
 
         void UpdateOutside()
@@ -240,7 +261,7 @@ namespace Bagel
             if (m_MainMenu)
             {
                 var p = m_MainMenu.localPosition;
-                p.x = m_Left + k_SurfaceOffset;
+                p.x = m_BlackboardSurface;
                 m_MainMenu.localPosition = p;
             }
 
@@ -254,7 +275,7 @@ namespace Bagel
             if (m_Playing)
             {
                 var p = m_Playing.localPosition;
-                p.y = m_CounterSurface + k_SurfaceOffset;
+                p.y = m_CounterSurface;
                 m_Playing.localPosition = p;
             }
 
