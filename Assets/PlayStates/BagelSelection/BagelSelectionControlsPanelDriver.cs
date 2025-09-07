@@ -14,21 +14,22 @@ namespace Bagel
 
         UIDocument m_UIDocument;
 
+        Button m_SelectButton;
+        Button m_BackButton;
         Button m_LeftButton;
         Button m_RightButton;
 
         void OnEnable()
         {
+            m_PlayManager.State.OnStateChange += State_OnStateChange;
             m_BagelSelectionRoom.OnBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
 
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
 
-            Button button;
-
-            button = root.Q<Button>("select-button");
-            if (button != null)
-                button.clicked += m_BagelSelectionRoom.SelectBagelAndGoToPlay;
+            m_SelectButton = root.Q<Button>("select-button");
+            if (m_SelectButton != null)
+                m_SelectButton.clicked += m_BagelSelectionRoom.SelectBagelAndGoToPlay;
 
             m_LeftButton = root.Q<Button>("left-button");
             if (m_LeftButton != null)
@@ -37,15 +38,60 @@ namespace Bagel
             if (m_RightButton != null)
                 m_RightButton.clicked += m_BagelSelectionRoom.NextBagel;
 
-            button = root.Q<Button>("back-button");
-            if (button != null)
-                button.clicked += m_BagelSelectionRoom.PlayManager.State.GoToMainMenu;
+            m_BackButton = root.Q<Button>("back-button");
+            if (m_BackButton != null)
+                m_BackButton.clicked += m_BagelSelectionRoom.PlayManager.State.GoToMainMenu;
 
-            SetDisableStates(m_BagelSelectionRoom.SelectedBagelIndex);
+            SetValuesFromIndex(m_BagelSelectionRoom.SelectedBagelIndex);
+        }
+
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            if (state == PlayManagerState.State.BagelSelection)
+            {
+                m_SelectButton.Focus();
+
+                m_PlayManager.PlayInputBindings.OnConfirmAction += PlayInputBindings_OnConfirmAction;
+                m_PlayManager.PlayInputBindings.OnBackAction += PlayInputBindings_OnBackAction;
+                m_PlayManager.PlayInputBindings.OnLeftAction += PlayInputBindings_OnLeftAction;
+                m_PlayManager.PlayInputBindings.OnRightAction += PlayInputBindings_OnRightAction;
+            }
+            else
+            {
+                m_PlayManager.PlayInputBindings.OnConfirmAction -= PlayInputBindings_OnConfirmAction;
+                m_PlayManager.PlayInputBindings.OnBackAction -= PlayInputBindings_OnBackAction;
+                m_PlayManager.PlayInputBindings.OnLeftAction -= PlayInputBindings_OnLeftAction;
+                m_PlayManager.PlayInputBindings.OnRightAction -= PlayInputBindings_OnRightAction;
+            }
+        }
+
+        void PlayInputBindings_OnConfirmAction(object sender, EventArgs e)
+        {
+            m_BagelSelectionRoom.SelectBagelAndGoToPlay();
+            m_SelectButton.Focus();
+        }
+
+        void PlayInputBindings_OnBackAction(object sender, EventArgs e)
+        {
+            m_BagelSelectionRoom.PlayManager.State.GoToMainMenu();
+            m_BackButton.Focus();
+        }
+
+        void PlayInputBindings_OnLeftAction(object sender, EventArgs e)
+        {
+            m_BagelSelectionRoom.PreviousBagel();
+            m_LeftButton.Focus();
+        }
+
+        void PlayInputBindings_OnRightAction(object sender, EventArgs e)
+        {
+            m_BagelSelectionRoom.NextBagel();
+            m_RightButton.Focus();
         }
 
         void OnDisable()
         {
+            m_PlayManager.State.OnStateChange -= State_OnStateChange;
             m_BagelSelectionRoom.OnBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
         }
 
@@ -60,6 +106,11 @@ namespace Bagel
         }
 
         void BagelSelectionRoom_OnBagelTypeChange(object sender, int index)
+        {
+            SetValuesFromIndex(index);
+        }
+
+        void SetValuesFromIndex(int index)
         {
             SetXOffset(index);
             SetDisableStates(index);

@@ -13,6 +13,8 @@ namespace Bagel
         UIDocument m_UIDocument;
         VisualElement m_Root;
 
+        Button m_ResumeButton;
+
         void OnEnable()
         {
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
@@ -25,15 +27,13 @@ namespace Bagel
             if (m_PlayManager == null)
                 return;
 
-            Button button;
+            m_ResumeButton = m_Root.Q<Button>("resume-button");
+            if (m_ResumeButton != null)
+                m_ResumeButton.clicked += m_PlayManager.State.Resume;
 
-            button = m_Root.Q<Button>("resume-button");
-            if (button != null)
-                button.clicked += m_PlayManager.State.Resume;
-
-            button = m_Root.Q<Button>("main-menu-button");
-            if (button != null)
-                button.clicked += m_PlayManager.State.GoToMainMenu;
+            var mainMenuButton = m_Root.Q<Button>("main-menu-button");
+            if (mainMenuButton != null)
+                mainMenuButton.clicked += m_PlayManager.State.GoToMainMenu;
         }
 
         void OnDisable()
@@ -59,6 +59,7 @@ namespace Bagel
 
             if (paused)
             {
+                m_ResumeButton.Focus();
                 m_Root.style.display = DisplayStyle.Flex;
                 Time.timeScale = 0f;
             }

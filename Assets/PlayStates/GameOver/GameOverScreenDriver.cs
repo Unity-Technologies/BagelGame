@@ -11,6 +11,7 @@ namespace Bagel
         UIDocument m_UIDocument;
         VisualElement m_Root;
         Label m_Title;
+        Button m_MainMenuButton;
 
         void Awake()
         {
@@ -23,11 +24,9 @@ namespace Bagel
             m_UIDocument = GetComponent<UIDocument>();
             m_Root = m_UIDocument.rootVisualElement;
 
-            Button button;
-
-            button = m_Root.Q<Button>("main-menu-button");
-            if (button != null)
-                button.clicked += m_PlayManager.State.GoToMainMenu;
+            m_MainMenuButton = m_Root.Q<Button>("main-menu-button");
+            if (m_MainMenuButton != null)
+                m_MainMenuButton.clicked += m_PlayManager.State.GoToMainMenu;
 
             m_Title = m_Root.Q<Label>("title");
         }
@@ -35,9 +34,14 @@ namespace Bagel
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
             if (state == PlayManagerState.State.GameOver)
+            {
+                m_MainMenuButton.Focus();
                 m_Root.style.display = DisplayStyle.Flex;
+            }
             else
+            {
                 m_Root.style.display = DisplayStyle.None;
+            }
         }
 
         void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)
