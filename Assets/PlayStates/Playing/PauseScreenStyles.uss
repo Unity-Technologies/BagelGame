@@ -1,7 +1,3 @@
-.unity-button:hover {
-    translate: 0 0;
-}
-
 .b-screen {
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.53);

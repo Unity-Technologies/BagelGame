@@ -1,0 +1,9 @@
+
+
+.b-pane {
+    background-color: rgb(255, 255, 255);
+}
+
+.unity-text-element {
+    color: rgb(0, 0, 0);
+}

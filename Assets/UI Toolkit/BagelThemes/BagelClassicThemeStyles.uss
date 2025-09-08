@@ -24,7 +24,6 @@
 .unity-button:enabled:hover {
     scale: 1.2 1.2 1.2;
     rotate: 2deg;
-    -unity-material: url("project://database/Assets/UI%20Toolkit/BagelThemes/Shaders/BagelClassicButtonHoverShader.shadergraph?fileID=-876546973899608171&guid=57ab294718c47bc428732fab1f71d0c8&type=3#BagelClassicButtonHoverShader");
 }
 
 .unity-button.b-primary {
