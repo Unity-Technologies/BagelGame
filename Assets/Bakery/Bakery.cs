@@ -286,6 +286,6 @@ namespace Bagel
                 m_GameOver.localPosition = p;
             }
         }
-    }
 #endif // UNITY_EDITOR
+    }
 }
