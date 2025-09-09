@@ -1,22 +1,13 @@
 using NUnit.Framework;
+using UnityEditor.UIElements.TestFramework;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel
 {
-    public class MainMenuTest : UITestFixture
+    public class MainMenuTest : DebugUITestFixture
     {
-        VisualElement m_Root;
-        Button m_Button;
         bool m_DoneThing;
-
-        [SetUp]
-        public void SetUp()
-        {
-            m_Root = panel.visualTree;
-            m_Button = new Button(DoThing) { text = "TestButton" };
-            m_Root.Add(m_Button);
-        }
 
         void DoThing()
         {
@@ -26,9 +17,14 @@ namespace Bagel
         [Test]
         public void QuickTest()
         {
-            var button = m_Root.Q<Button>();
+            var button = new Button(DoThing) { text = "TestButton" };
+            rootVisualElement.Add(button);
+            simulate.FrameUpdate();
+
+            button = rootVisualElement.Q<Button>();
             Assert.IsNotNull(button);
             Assert.AreEqual(button.text, "TestButton");
+            Assert.Greater(button.layout.width, 0);
 
             m_DoneThing = false;
             button.SimulateClick();
