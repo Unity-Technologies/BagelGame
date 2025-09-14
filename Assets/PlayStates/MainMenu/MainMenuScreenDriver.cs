@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,35 @@ namespace Bagel
 
         UIDocument m_UIDocument;
 
-        Button m_PlayButton;
+        public struct Elements
+        {
+            public Button playButton;
+            public LongPressButton exitButton;
+        }
+
+        public struct Callbacks
+        {
+            public Action onPlay;
+            public Action onExit;
+        }
+
+        Elements m_Elements;
+
+        public static Elements BindUI(VisualElement root, Callbacks callbacks)
+        {
+            var elements = new Elements
+            {
+                playButton = root.Q<Button>("play-button"),
+                exitButton = root.Q<LongPressButton>("exit-button")
+            };
+
+            if (elements.playButton != null && callbacks.onPlay != null)
+                elements.playButton.clicked += callbacks.onPlay;
+            if (elements.exitButton != null && callbacks.onExit != null )
+                elements.exitButton.clicked += callbacks.onExit;
+
+            return elements;
+        }
 
         void OnEnable()
         {
@@ -19,17 +48,15 @@ namespace Bagel
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
 
-            m_PlayButton = root.Q<Button>("play-button");
-            if (m_PlayButton != null)
-                m_PlayButton.clicked += m_PlayManager.State.GoToBagelSelection;
-
-            var exitButton = root.Q<LongPressButton>("exit-button");
-            if (exitButton != null)
+            m_Elements = BindUI(root, new Callbacks
+            {
+                onPlay = m_PlayManager.State.GoToBagelSelection,
 #if UNITY_EDITOR
-                exitButton.clicked += () => UnityEditor.EditorApplication.isPlaying = false;
+                onExit = UnityEditor.EditorApplication.ExitPlaymode
 #else
-                exitButton.clicked += Application.Quit;
+                onExit = Application.Quit
 #endif
+            });
         }
 
         void OnDisable()
@@ -39,12 +66,12 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (m_PlayButton == null)
+            if (m_Elements.playButton == null)
                 return;
 
             if (state == PlayManagerState.State.MainMenu)
             {
-                m_PlayButton.Focus();
+                m_Elements.playButton.Focus();
                 m_PlayManager.PlayInputBindings.OnNavigateAction += PlayInputBindings_OnNavigateAction;
             }
             else
@@ -55,7 +82,7 @@ namespace Bagel
 
         void PlayInputBindings_OnNavigateAction(object sender, Vector2 vec)
         {
-            m_PlayButton.Focus();
+            m_Elements.playButton.Focus();
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel
 {
-    public class MainMenuTest : DebugUITestFixture
+    public class MainMenuTest : EditorWindowUITestFixture<BagelTestEditorWindow>
     {
         Button m_Button;
         bool m_DoneThing;
@@ -23,6 +23,17 @@ namespace Bagel
         {
             m_DoneThing = true;
         }
+
+        [Test]
+        public void MainMenu()
+        {
+            /*var elements = MainMenuScreenDriver.BindUI(window.mainMenuRoot, new MainMenuScreenDriver.Callbacks
+            {
+                onPlay = () => m_DoneThing = true,
+                onExit = () => m_DoneThing = true
+            });*/
+        }
+
 
         [Test]
         public void QuickTest()
