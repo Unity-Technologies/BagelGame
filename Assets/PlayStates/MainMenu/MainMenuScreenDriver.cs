@@ -45,15 +45,15 @@ namespace Bagel
             if (state == PlayManagerState.State.MainMenu)
             {
                 m_PlayButton.Focus();
-                m_PlayManager.PlayInputBindings.OnNavigationAction += PlayInputBindings_OnNavigationAction;
+                m_PlayManager.PlayInputBindings.OnNavigateAction += PlayInputBindings_OnNavigateAction;
             }
             else
             {
-                m_PlayManager.PlayInputBindings.OnNavigationAction -= PlayInputBindings_OnNavigationAction;
+                m_PlayManager.PlayInputBindings.OnNavigateAction -= PlayInputBindings_OnNavigateAction;
             }
         }
 
-        void PlayInputBindings_OnNavigationAction(object sender, System.EventArgs e)
+        void PlayInputBindings_OnNavigateAction(object sender, Vector2 vec)
         {
             m_PlayButton.Focus();
         }

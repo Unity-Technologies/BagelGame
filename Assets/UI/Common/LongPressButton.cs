@@ -143,7 +143,6 @@ namespace Bagel
             if (m_InputArmed || m_ConfirmAction == null || m_ConfirmAction.action == null)
                 return;
 
-            Debug.Log("ArmInput");
             var a = m_ConfirmAction.action;
             if (!a.enabled)
                 a.Enable();
@@ -158,7 +157,6 @@ namespace Bagel
             if (!m_InputArmed || m_ConfirmAction == null || m_ConfirmAction.action == null)
                 return;
 
-            Debug.Log("DisarmInput");
             var a = m_ConfirmAction.action;
             a.started -= OnActionStarted;
             a.canceled -= OnActionCanceled;
@@ -182,7 +180,6 @@ namespace Bagel
 
         void OnActionPerformed(InputAction.CallbackContext ctx)
         {
-            Debug.Log("ActionPeformed");
             if (ctx.interaction is HoldInteraction)
             {
                 CancelHold();

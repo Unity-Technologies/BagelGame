@@ -51,27 +51,27 @@ namespace Bagel
             {
                 m_SelectButton.Focus();
 
-                m_PlayManager.PlayInputBindings.OnConfirmAction += PlayInputBindings_OnConfirmAction;
-                m_PlayManager.PlayInputBindings.OnBackAction += PlayInputBindings_OnBackAction;
+                m_PlayManager.PlayInputBindings.OnSubmitAction += PlayInputBindings_OnSubmitAction;
+                m_PlayManager.PlayInputBindings.OnCancelAction += PlayInputBindings_OnCancelAction;
                 m_PlayManager.PlayInputBindings.OnLeftAction += PlayInputBindings_OnLeftAction;
                 m_PlayManager.PlayInputBindings.OnRightAction += PlayInputBindings_OnRightAction;
             }
             else
             {
-                m_PlayManager.PlayInputBindings.OnConfirmAction -= PlayInputBindings_OnConfirmAction;
-                m_PlayManager.PlayInputBindings.OnBackAction -= PlayInputBindings_OnBackAction;
+                m_PlayManager.PlayInputBindings.OnSubmitAction -= PlayInputBindings_OnSubmitAction;
+                m_PlayManager.PlayInputBindings.OnCancelAction -= PlayInputBindings_OnCancelAction;
                 m_PlayManager.PlayInputBindings.OnLeftAction -= PlayInputBindings_OnLeftAction;
                 m_PlayManager.PlayInputBindings.OnRightAction -= PlayInputBindings_OnRightAction;
             }
         }
 
-        void PlayInputBindings_OnConfirmAction(object sender, EventArgs e)
+        void PlayInputBindings_OnSubmitAction(object sender, EventArgs e)
         {
             m_BagelSelectionRoom.SelectBagelAndGoToPlay();
             m_SelectButton.Focus();
         }
 
-        void PlayInputBindings_OnBackAction(object sender, EventArgs e)
+        void PlayInputBindings_OnCancelAction(object sender, EventArgs e)
         {
             m_BagelSelectionRoom.PlayManager.State.GoToMainMenu();
             m_BackButton.Focus();
