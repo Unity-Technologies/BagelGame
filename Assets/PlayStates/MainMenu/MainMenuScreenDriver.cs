@@ -23,9 +23,13 @@ namespace Bagel
             if (m_PlayButton != null)
                 m_PlayButton.clicked += m_PlayManager.State.GoToBagelSelection;
 
-            var exitButton = root.Q<Button>("quit-button");
+            var exitButton = root.Q<LongPressButton>("exit-button");
             if (exitButton != null)
+#if UNITY_EDITOR
+                exitButton.clicked += () => UnityEditor.EditorApplication.isPlaying = false;
+#else
                 exitButton.clicked += Application.Quit;
+#endif
         }
 
         void OnDisable()

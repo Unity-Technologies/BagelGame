@@ -94,3 +94,7 @@
 .b-screen {
     flex-grow: 1;
 }
+
+.b-long-press-button__progress {
+    background-color: rgb(78, 213, 115);
+}

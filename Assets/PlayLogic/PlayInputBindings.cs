@@ -24,7 +24,7 @@ namespace Bagel
             Left,
             Gamepad_Left,
             Right,
-            Gamepad_Right,
+            Gamepad_Right
         };
 
         const string k_PlayerPrefsName = "BagelGame_PlayInputBindings";

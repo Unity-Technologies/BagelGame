@@ -4,6 +4,7 @@
             <ui:Label text="Panel 1" name="title" class="b-title"/>
             <ui:Button text="Primary Button" name="primary-button" class="b-primary"/>
             <ui:Button text="Secondary Button" name="secondary-button" class="b-secondary"/>
+            <Bagel.LongPressButton name="long-press-button"/>
             <ui:ProgressBar value="22" title="Progress Bar"/>
         </ui:VisualElement>
         <ui:VisualElement name="panel-2" class="b-pane">
