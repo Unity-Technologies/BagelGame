@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BagelSelectionPodium
   BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
   m_BagelSlot: {fileID: 5208153941644465985}
-  m_TypeInfoPanelDriver: {fileID: 3864733526687562098}
 --- !u!1 &1103688106728044341
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457efce84194ae14a8f7acdd0c15fe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BagelSelectionTypeInfoPanelDriver
+  m_BagelSelectionPodium: {fileID: 5480724809176724185}
 --- !u!1 &9179549671725709123
 GameObject:
   m_ObjectHideFlags: 0

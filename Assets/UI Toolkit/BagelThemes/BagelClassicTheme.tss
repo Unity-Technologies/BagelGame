@@ -1,5 +1,0 @@
-@import url("/Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss");
-
-@import url("BagelClassicThemeStyles.uss");
-
-VisualElement {}

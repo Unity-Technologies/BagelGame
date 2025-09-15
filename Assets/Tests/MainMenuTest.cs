@@ -1,63 +1,52 @@
 using NUnit.Framework;
 using UnityEditor.UIElements.TestFramework;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel
 {
     public class MainMenuTest : EditorWindowUITestFixture<BagelTestEditorWindow>
     {
-        Button m_Button;
-        bool m_DoneThing;
+        // TODO:
+        /*
+        - typing text
+        - long press button
+        - bindings
+        */
 
         [SetUp]
         public void SetUp()
         {
-            // m_Button = new Button() { text = "TestButton" };
-            // m_Button.RegisterCallback<ClickEvent>(e => DoThing());
-            // rootVisualElement.Add(m_Button);
-            // simulate.FrameUpdate();
-        }
-
-        void DoThing()
-        {
-            m_DoneThing = true;
+            debugMode = true;
+            simulate.FrameUpdate();
         }
 
         [Test]
-        public void MainMenu()
+        public void MainMenuButtonCallbacks()
         {
-            /*var elements = MainMenuScreenDriver.BindUI(window.mainMenuRoot, new MainMenuScreenDriver.Callbacks
+            bool playClicked = false;
+            bool exitClicked = false;
+
+            // Get the elements.
+            var elements = MainMenuScreenDriver.BindUI(window.mainMenuRoot, new MainMenuScreenDriver.Callbacks
             {
-                onPlay = () => m_DoneThing = true,
-                onExit = () => m_DoneThing = true
-            });*/
-        }
+                onPlay = () => playClicked = true,
+                onExit = () => exitClicked = true
+            });
 
-
-        [Test]
-        public void QuickTest()
-        {
-            // TODO:
-            /*
-            - typing text
-            - long press button
-            - bindings
-            */
-
-            m_Button = new Button(DoThing) { text = "TestButton" };
-            rootVisualElement.Add(m_Button);
+            // Click play button.
+            simulate.Click(elements.playButton);
             simulate.FrameUpdate();
+            Assert.IsTrue(playClicked);
 
-            var button = rootVisualElement.Q<Button>();
-            Assert.IsNotNull(button);
-            Assert.AreEqual(button.text, "TestButton");
-            Assert.Greater(button.resolvedStyle.height, 0.0f);
-
-            m_DoneThing = false;
-            simulate.Click(button);
+            // Click exit button (should not trigger yet).
+            simulate.Click(elements.exitButton);
             simulate.FrameUpdate();
-            Assert.IsTrue(m_DoneThing);
+            Assert.IsFalse(exitClicked);
+
+            // Long press exit button (should trigger).
+            simulate.MouseDown(elements.exitButton);
+            simulate.FrameUpdate(elements.exitButton.holdTime);
+            Assert.IsTrue(exitClicked);
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Bagel
         public BagelType BagelType;
 
         [SerializeField] Transform m_BagelSlot;
-        [SerializeField] BagelSelectionTypeInfoPanelDriver m_TypeInfoPanelDriver;
+
+        public event EventHandler<BagelType> OnBagelTypeChange;
 
         void OnEnable()
         {
@@ -25,7 +26,7 @@ namespace Bagel
 
             Instantiate(BagelType.modelPrefab, m_BagelSlot);
 
-            m_TypeInfoPanelDriver.BindUI(BagelType);
+            OnBagelTypeChange?.Invoke(this, BagelType);
         }
     }
 }

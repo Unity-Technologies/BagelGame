@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Bagels/Tracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3"/>
-    <ui:VisualElement name="root" data-source="project://database/Assets/Bagels/Tracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" style="flex-direction: row; width: 203px; justify-content: space-between;">
+    <Style src="project://database/Assets/UI/Runtime/5_BagelTracker/BagelTrackerHUDStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#BagelTrackerHUDStyles"/>
+    <ui:VisualElement name="root" data-source="project://database/Assets/UI/Runtime/5_BagelTracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" style="flex-direction: row; width: 203px; justify-content: space-between;">
         <ui:VisualElement name="left-container" class="b-container" style="align-items: flex-end;">
             <ui:VisualElement name="left-pane" class="b-pane" style="height: 102px; flex-direction: row; width: 36px; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
                 <ui:VisualElement name="speed-slider" class="b-speed-slider" style="width: 80%;">
@@ -35,7 +35,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="right-container" class="b-container">
             <ui:VisualElement name="right-pane" class="b-pane" style="flex-shrink: 0; width: auto;">
-                <ui:ProgressBar name="seeds-bar">
+                <ui:ProgressBar name="toppings-count-bar">
                     <Bindings>
                         <ui:DataBinding property="value" data-source-path="toppingsCount" binding-mode="ToTarget"/>
                         <ui:DataBinding property="highValue" data-source-path="toppingsMaxCount" binding-mode="ToTarget"/>

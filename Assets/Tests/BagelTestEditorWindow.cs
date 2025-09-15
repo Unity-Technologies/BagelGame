@@ -5,8 +5,10 @@ using UnityEngine.UIElements;
 public class BagelTestEditorWindow : EditorWindow
 {
     public VisualTreeAsset mainMenuUxml;
+    public VisualTreeAsset bagelTrackerUxml;
 
     public VisualElement mainMenuRoot;
+    public VisualElement bagelTrackerRoot;
 
     [MenuItem("Bagel/Test Editor Window")]
     public static void ShowExample()
@@ -21,5 +23,8 @@ public class BagelTestEditorWindow : EditorWindow
         
         mainMenuRoot = mainMenuUxml.Instantiate();
         root.Add(mainMenuRoot);
+
+        bagelTrackerRoot = bagelTrackerUxml.Instantiate();
+        root.Add(bagelTrackerRoot);
     }
 }
