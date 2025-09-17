@@ -12,7 +12,9 @@ namespace Bagel
     {
         const string k_MainSceneName = "Main";
 
-        [UnitySetUp]
+        BagelTestAssets m_BagelTestAssets;
+
+        [UnityOneTimeSetUp]
         public IEnumerator LoadScene()
         {
             var op = SceneManager.LoadSceneAsync(k_MainSceneName, LoadSceneMode.Single);
@@ -21,6 +23,8 @@ namespace Bagel
 
             // Give Awake/OnEnable/Start a frame to run.
             yield return null;
+
+            m_BagelTestAssets = ScriptableObject.CreateInstance<BagelTestAssets>();
 
             var driver = Object.FindFirstObjectByType<MainMenuScreenDriver>(FindObjectsInactive.Include);
             var uiDocument = driver.GetComponent<UIDocument>();
@@ -33,6 +37,8 @@ namespace Bagel
         {
             var playButton = rootVisualElement.Q<Button>("play-button");
             Assert.IsNotNull(playButton);
+
+            Assert.IsNotNull(m_BagelTestAssets.mainMenuUxml);
         }
     }
 }

@@ -7,7 +7,8 @@
         "Unity.UI.TestFramework.Runtime",
         "Unity.UI.TestFramework.Editor",
         "BagelGame",
-        "BagelUI"
+        "BagelUI",
+        "BagelRuntimeTests"
     ],
     "includePlatforms": [
         "Editor"
