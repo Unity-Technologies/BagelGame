@@ -1,12 +1,17 @@
-# BagelGame
+# Bagel Game
 
-Bagels were never meant to be controlled... you're toast!
+You're a bagel.
 
-# Licenses
+You need to get to the toaster before you go stale _while_ still having toppings left. A physics-based balance between speed and precision.
 
-## Assets
+Bagel Game is a full vertical game project that is specifically made to demonstrate how UI Toolkit can be used to create UI for 3D games.
 
-### Bagel Model
-(https://ambientcg.com/a/3DBread005)  
-Created using 3DBread005 from ambientCG.com,
-licensed under the Creative Commons CC0 1.0 Universal License.
+It covers:
+* World Space UI
+* Custom Shaders
+* Filters
+* Data Bindings
+* UXML/USS
+* Themes
+* Input System Integration
+* ...and more!
