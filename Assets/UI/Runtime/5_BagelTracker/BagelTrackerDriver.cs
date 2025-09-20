@@ -17,7 +17,7 @@ namespace Bagel
 
         void OnEnable()
         {
-            var root = m_UIDocument.rootVisualElement.Q("root");
+            var root = m_UIDocument.rootVisualElement.Q("pane");
             if (root == null)
                 return;
 

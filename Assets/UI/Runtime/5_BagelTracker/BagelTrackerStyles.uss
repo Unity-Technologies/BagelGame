@@ -1,0 +1,21 @@
+:root {
+    --b-bar-size: 60px;
+}
+
+.b-pane {
+    width: initial;
+    align-self: flex-start;
+}
+
+.unity-progress-bar {
+    width: var(--b-bar-size);
+}
+
+.b-toppings-bar {
+    height: var(--b-bar-size);
+    rotate: -90deg;
+}
+
+.b-toppings-bar > .unity-progress-bar__container > .unity-progress-bar__background > .unity-progress-bar__title-container {
+    rotate: 90deg;
+}

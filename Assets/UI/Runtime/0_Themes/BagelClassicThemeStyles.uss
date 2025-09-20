@@ -39,12 +39,13 @@
 }
 
 .unity-progress-bar {
-    height: 29px;
 }
 
 .unity-progress-bar__container {
     min-height: initial;
     max-height: initial;
+    height: auto;
+    flex-grow: 1;
 }
 
 .unity-progress-bar__background {
