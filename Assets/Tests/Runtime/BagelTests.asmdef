@@ -1,5 +1,5 @@
 {
-    "name": "BagelRuntimeTests",
+    "name": "BagelTests",
     "rootNamespace": "Bagel",
     "references": [
         "UnityEngine.TestRunner",
