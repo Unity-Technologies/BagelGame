@@ -5,6 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - mainMenuUxml: {fileID: 9197481963319205126, guid: ea563f0ac4a3a3840827b0233961e0fc, type: 3}
+  - bagelTrackerLeftDisplayUxml: {fileID: 9197481963319205126, guid: 0ad31c74420f69e459b372d004c0b2dc, type: 3}
+  - bagelTrackerRightDisplayUxml: {fileID: 9197481963319205126, guid: b3f3b240513e14d9583182fb441a13eb, type: 3}
   - pauseScreenUxml: {fileID: 9197481963319205126, guid: 19cec0096d1d856449401f567fd84d5d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

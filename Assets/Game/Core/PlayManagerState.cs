@@ -16,6 +16,7 @@ namespace Bagel
         BagelType m_LastBagelType;
         BagelTrackerData m_LastBagelTrackerData;
 
+        public State CurrentState => m_State;
         public BagelType LastBagelType => m_LastBagelType;
         public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
         public bool IsBagelSelection => m_State == State.BagelSelection;

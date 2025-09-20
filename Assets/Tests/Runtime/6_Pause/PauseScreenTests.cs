@@ -3,22 +3,15 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel
+namespace Bagel.T6_Pause
 {
-    public class UIUnitTests : UITestFixture
+    public class PauseScreenTests : UITestFixture
     {
         BagelTestAssetList m_BagelTestAssetList;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                m_BagelTestAssetList = ScriptableObject.CreateInstance<BagelTestAssetList>();
-                return;
-            }
-#endif
             m_BagelTestAssetList = Resources.Load<BagelTestAssetList>("BagelTestAssetList");
         }
 
@@ -28,46 +21,11 @@ namespace Bagel
             rootVisualElement.Clear();
         }
 
-        void SetUp(VisualTreeAsset uxml)
-        {
-            Assert.IsNotNull(uxml);
-            uxml.CloneTree(rootVisualElement);
-            simulate.FrameUpdate();
-        }
-
-        [Test]
-        public void MainMenu()
-        {
-            SetUp(m_BagelTestAssetList.mainMenuUxml);
-
-            bool playClicked = false;
-            bool exitClicked = false;
-
-            // Get the elements.
-            var elements = MainMenuScreenDriver.BindUI(rootVisualElement, new MainMenuScreenDriver.Callbacks
-            {
-                onPlay = () => playClicked = true,
-                onExit = () => exitClicked = true
-            });
-
-            // Play Button
-            simulate.Click(elements.playButton);
-            simulate.FrameUpdate();
-            Assert.IsTrue(playClicked);
-
-            // Exit Button
-            simulate.Click(elements.exitButton);
-            simulate.FrameUpdate();
-            Assert.IsFalse(exitClicked); // Should not trigger yet.
-            simulate.MouseDown(elements.exitButton);
-            simulate.FrameUpdate(elements.exitButton.holdTime);
-            Assert.IsTrue(exitClicked);
-        }
-
         [Test]
         public void PauseScreen()
         {
-            SetUp(m_BagelTestAssetList.pauseScreenUxml);
+            m_BagelTestAssetList.pauseScreenUxml.CloneTree(rootVisualElement);
+            simulate.FrameUpdate();
 
             bool resumeClicked = false;
             bool restartClicked = false;
