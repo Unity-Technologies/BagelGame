@@ -4,5 +4,11 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings":
+	{
+		"files.associations": {
+			"*.uss": "css",
+			"*.uxml": "xml"
+		}
+	}
 }
