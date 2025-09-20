@@ -21,7 +21,7 @@ namespace Bagel
         }
 
         [UxmlAttribute]
-        public float defaultHoldTime { get; set; } = 2f;
+        public float defaultHoldTime { get; set; } = 1f;
 
         [UxmlAttribute]
         public InputActionReference confirmAction
