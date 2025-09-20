@@ -11,29 +11,57 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         UIDocument m_UIDocument;
-        VisualElement m_Root;
 
-        Button m_ResumeButton;
+        public struct Elements
+        {
+            public VisualElement root;
+            public Button resumeButton;
+            public LongPressButton restartButton;
+            public LongPressButton mainMenuButton;
+        }
+
+        public struct Callbacks
+        {
+            public Action onResume;
+            public Action onRestart;
+            public Action onMainMenu;
+        }
+
+        Elements m_Elements;
+
+        public static Elements BindUI(VisualElement root, Callbacks callbacks)
+        {
+            var elements = new Elements
+            {
+                root = root,
+                resumeButton = root.Q<Button>("resume-button"),
+                restartButton = root.Q<LongPressButton>("restart-button"),
+                mainMenuButton = root.Q<LongPressButton>("main-menu-button" )
+            };
+
+            if (elements.resumeButton != null && callbacks.onResume != null)
+                elements.resumeButton.clicked += callbacks.onResume;
+            if (elements.restartButton != null && callbacks.onRestart != null )
+                elements.restartButton.clicked += callbacks.onRestart;
+            if (elements.mainMenuButton != null && callbacks.onMainMenu != null )
+                elements.mainMenuButton.clicked += callbacks.onMainMenu;
+
+            return elements;
+        }
 
         void OnEnable()
         {
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
 
-            m_UIDocument = GetComponent<UIDocument>();
-            m_Root = m_UIDocument.rootVisualElement;
+            m_Elements = BindUI(GetComponent<UIDocument>().rootVisualElement, new Callbacks
+            {
+                onResume = m_PlayManager.State.Resume,
+                onRestart = m_PlayManager.State.GoToPlay,
+                onMainMenu = m_PlayManager.State.GoToMainMenu
+            });
+
             SetPauseState(false);
-
-            if (m_PlayManager == null)
-                return;
-
-            m_ResumeButton = m_Root.Q<Button>("resume-button");
-            if (m_ResumeButton != null)
-                m_ResumeButton.clicked += m_PlayManager.State.Resume;
-
-            var mainMenuButton = m_Root.Q<Button>("main-menu-button");
-            if (mainMenuButton != null)
-                mainMenuButton.clicked += m_PlayManager.State.GoToMainMenu;
         }
 
         void OnDisable()
@@ -54,18 +82,15 @@ namespace Bagel
 
         void SetPauseState(bool paused)
         {
-            if (m_Root == null)
-                return;
-
             if (paused)
             {
-                m_ResumeButton.Focus();
-                m_Root.style.display = DisplayStyle.Flex;
+                m_Elements.resumeButton.Focus();
+                m_Elements.root.style.display = DisplayStyle.Flex;
                 Time.timeScale = 0f;
             }
             else
             {
-                m_Root.style.display = DisplayStyle.None;
+                m_Elements.root.style.display = DisplayStyle.None;
                 Time.timeScale = 1f;
             }
         }

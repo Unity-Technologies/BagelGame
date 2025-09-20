@@ -12,7 +12,7 @@ namespace Bagel
     {
         const string k_MainSceneName = "Main";
 
-        BagelTestAssets m_BagelTestAssets;
+        BagelTestAssetList m_BagelTestAssets;
 
         [UnityOneTimeSetUp]
         public IEnumerator LoadScene()
@@ -24,7 +24,7 @@ namespace Bagel
             // Give Awake/OnEnable/Start a frame to run.
             yield return null;
 
-            m_BagelTestAssets = ScriptableObject.CreateInstance<BagelTestAssets>();
+            m_BagelTestAssets = ScriptableObject.CreateInstance<BagelTestAssetList>();
 
             var driver = Object.FindFirstObjectByType<MainMenuScreenDriver>(FindObjectsInactive.Include);
             var uiDocument = driver.GetComponent<UIDocument>();

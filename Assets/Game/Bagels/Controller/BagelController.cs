@@ -97,6 +97,9 @@ namespace Bagel
                 transform.rotation = m_StartingLocation.rotation;
                 m_RigidBody.position = transform.position;
                 m_RigidBody.rotation = transform.rotation;
+                m_RigidBody.linearVelocity = Vector3.zero;
+                m_RigidBody.angularVelocity = Vector3.zero;
+                m_RigidBody.Sleep();
                 enabled = true;
             }
             else

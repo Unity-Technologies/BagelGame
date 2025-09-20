@@ -4,7 +4,8 @@
         <ui:VisualElement name="panel" class="b-pane">
             <ui:Label text="Paused" name="title" class="b-title"/>
             <ui:Button text="Resume" name="resume-button" class="b-primary"/>
-            <ui:Button text="Main Menu" name="main-menu-button"/>
+            <Bagel.LongPressButton name="restart-button" text="Restart"/>
+            <Bagel.LongPressButton name="main-menu-button" text="Main Menu"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

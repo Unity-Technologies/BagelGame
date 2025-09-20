@@ -8,7 +8,7 @@ using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel
 {
-    public class MainMenuEditorTest : MainMenuRuntimeTest
+    public class UIUnitTestsEditor : UIUnitTests
     {
 
     }

@@ -56,8 +56,10 @@ namespace Bagel
 
         public void GoToPlay()
         {
+            Resume();
             m_State = State.Playing;
             OnStateChange?.Invoke(this, State.Playing);
+            SetBagelType(m_LastBagelType);
         }
 
         public void GoToGameOver()
