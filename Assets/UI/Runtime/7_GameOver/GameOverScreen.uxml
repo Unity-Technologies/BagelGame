@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/PlayStates/GameOver/GameOverScreenStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverScreenStyles"/>
+    <Style src="project://database/Assets/UI/Runtime/7_GameOver/GameOverScreenStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverScreenStyles"/>
     <ui:VisualElement name="panel" class="b-pane b-screen">
         <ui:Label text="Game Over" name="title" class="b-title"/>
         <ui:Button text="Main Menu" name="main-menu-button" class="b-primary"/>
