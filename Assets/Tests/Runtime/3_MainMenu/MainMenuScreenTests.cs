@@ -45,9 +45,6 @@ namespace Bagel.T3_MainMenu
             // Exit Button
             simulate.Click(elements.exitButton);
             simulate.FrameUpdate();
-            Assert.IsFalse(exitClicked); // Should not trigger yet.
-            simulate.MouseDown(elements.exitButton);
-            simulate.FrameUpdate(elements.exitButton.holdTime);
             Assert.IsTrue(exitClicked);
         }
     }

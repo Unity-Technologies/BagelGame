@@ -14,7 +14,7 @@ namespace Bagel
         public struct Elements
         {
             public Button playButton;
-            public LongPressButton exitButton;
+            public Button exitButton;
         }
 
         public struct Callbacks
@@ -32,7 +32,7 @@ namespace Bagel
             var elements = new Elements
             {
                 playButton = root.Q<Button>("play-button"),
-                exitButton = root.Q<LongPressButton>("exit-button")
+                exitButton = root.Q<Button>("exit-button")
             };
 
             if (elements.playButton != null && callbacks.onPlay != null)

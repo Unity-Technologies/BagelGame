@@ -3,6 +3,6 @@
     <ui:VisualElement name="panel" class="b-pane b-screen">
         <ui:Label text="Bagel Game" name="title" class="b-title"/>
         <ui:Button text="Play" name="play-button" class="b-primary"/>
-        <Bagel.LongPressButton name="exit-button" text="Exit" confirm-action="project://database/Assets/Game/Core/PlayInputActions.inputactions?fileID=1304120443349368042&amp;guid=9400ff1ffd4385649ae23148ccc77fac&amp;type=3#UI/Submit"/>
+        <ui:Button text="Exit" name="exit-button"/>
     </ui:VisualElement>
 </ui:UXML>
