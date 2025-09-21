@@ -9,9 +9,8 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         UIDocument m_UIDocument;
-        VisualElement m_Root;
-        Label m_Title;
-        Button m_MainMenuButton;
+
+        GameOverScreenManager.Elements m_Elements;
 
         void Awake()
         {
@@ -22,37 +21,35 @@ namespace Bagel
         void OnEnable()
         {
             m_UIDocument = GetComponent<UIDocument>();
-            m_Root = m_UIDocument.rootVisualElement;
-
-            m_MainMenuButton = m_Root.Q<Button>("main-menu-button");
-            if (m_MainMenuButton != null)
-                m_MainMenuButton.clicked += m_PlayManager.State.GoToMainMenu;
-
-            m_Title = m_Root.Q<Label>("title");
+            m_Elements = GameOverScreenManager.BindUI(m_UIDocument.rootVisualElement, new GameOverScreenManager.Callbacks
+            {
+                onRestart = m_PlayManager.State.GoToPlay,
+                onMainMenu = m_PlayManager.State.GoToMainMenu
+            });
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
             if (state == PlayManagerState.State.GameOver)
             {
-                m_MainMenuButton.Focus();
-                m_Root.style.display = DisplayStyle.Flex;
+                m_Elements.mainMenuButton.Focus();
+                m_Elements.root.style.display = DisplayStyle.Flex;
             }
             else
             {
-                m_Root.style.display = DisplayStyle.None;
+                m_Elements.root.style.display = DisplayStyle.None;
             }
         }
 
         void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)
         {
-            if (m_Title == null)
+            if (m_Elements.title == null)
                 return;
 
             if (bagelTrackerData.toppingsCount > 0)
-                m_Title.text = "You Win!";
+                m_Elements.title.text = "You Win!";
             else
-                m_Title.text = "You Lose!";
+                m_Elements.title.text = "You Lose!";
         }
     }
 }

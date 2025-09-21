@@ -8,6 +8,7 @@ namespace Bagel
     {
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] Transform m_MainMenuTarget;
+        [SerializeField] Transform m_MainMenuSettingsTarget;
         [SerializeField] Transform m_BagelSelectionTarget;
         [SerializeField] Transform m_BagelTarget;
 
@@ -22,6 +23,7 @@ namespace Bagel
         {
             m_CinemachineCamera = GetComponent<CinemachineCamera>();
             m_PlayManager.State.OnStateChange += State_OnStateChange;
+            m_PlayManager.State.OnMainMenuPaneModeChange += State_OnMainMenuPaneModeChange;
         }
 
         void Update()
@@ -67,6 +69,14 @@ namespace Bagel
                     break;
                 }
             }
+        }
+
+        void State_OnMainMenuPaneModeChange(object sender, PlayManagerState.MainMenuPaneMode mode)
+        {
+            if (mode == PlayManagerState.MainMenuPaneMode.Primary)
+                m_CinemachineCamera.Target.TrackingTarget = m_MainMenuTarget;
+            else
+                m_CinemachineCamera.Target.TrackingTarget = m_MainMenuSettingsTarget;
         }
     }
 }

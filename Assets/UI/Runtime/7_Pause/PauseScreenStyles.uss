@@ -3,3 +3,7 @@
     background-color: rgba(0, 0, 0, 0.53);
     align-items: center;
 }
+
+.b-inactive-pane {
+    display: none;
+}

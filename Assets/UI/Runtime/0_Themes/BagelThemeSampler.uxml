@@ -3,15 +3,19 @@
         <ui:VisualElement name="panel-1" class="b-pane">
             <ui:Label text="Panel 1" name="title" class="b-title"/>
             <ui:Button text="Primary Button" name="primary-button" class="b-primary"/>
-            <ui:Button text="Secondary Button" name="secondary-button" class="b-secondary"/>
-            <Bagel.LongPressButton name="long-press-button"/>
+            <ui:VisualElement name="sub-pane" class="b-sub-pane">
+                <ui:Button text="Secondary Button" name="secondary-button" class="b-secondary"/>
+                <Bagel.LongPressButton name="long-press-button"/>
+            </ui:VisualElement>
             <ui:ProgressBar value="22" title="Progress Bar"/>
         </ui:VisualElement>
         <ui:VisualElement name="panel-2" class="b-pane">
             <ui:Label text="Panel 2" name="title" class="b-title"/>
             <ui:Toggle label="Toggle"/>
             <ui:FloatField label="Float Field" value="42.2"/>
+            <ui:DropdownField label="Dropdown" choices="One,Two,Three" index="0"/>
             <ui:Slider label="Slider" value="42" high-value="100"/>
+            <ui:TextField label="Text Field" placeholder-text="filler text"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

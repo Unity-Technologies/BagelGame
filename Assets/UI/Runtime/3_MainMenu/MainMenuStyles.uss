@@ -1,0 +1,23 @@
+:root {
+}
+
+.b-screen {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.b-pane {
+    background-color: rgba(0, 0, 0, 0);
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+
+
+.b-pane:disabled {
+    opacity: 0.08;
+}
+
+.b-background-pane {
+    position: absolute;
+}

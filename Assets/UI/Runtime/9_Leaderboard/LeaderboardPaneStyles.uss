@@ -1,0 +1,4 @@
+.unity-collection-view {
+    min-height: 147px;
+    flex-grow: 1;
+}

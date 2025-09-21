@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/9_Leaderboard/LeaderboardPaneStyles.uss?fileID=7433441132597879392&amp;guid=a89750b4a27696d4aa631f637c338db0&amp;type=3#LeaderboardPaneStyles"/>
+    <ui:Label text="Leaderboard" name="title" class="b-title"/>
+    <ui:MultiColumnListView columns="" sort-column-descriptions="" sorting-mode="Default" name="leaderboard-view">
+        <ui:Columns reorderable="false" primary-column-name="name">
+            <ui:Column name="name" title="Name" stretchable="true" sortable="false" optional="false"/>
+            <ui:Column name="toppings" title="Toppings Left" optional="false" stretchable="true"/>
+        </ui:Columns>
+        <ui:SortColumnDescriptions/>
+    </ui:MultiColumnListView>
+    <ui:Button text="Back" name="back-button"/>
+</ui:UXML>

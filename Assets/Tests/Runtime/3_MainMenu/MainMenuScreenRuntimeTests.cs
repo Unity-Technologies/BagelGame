@@ -46,7 +46,7 @@ namespace Bagel.T3_MainMenu
         {
             var currentState = m_PlayManager.State.CurrentState;
 
-            Assert.NotZero(m_Driver.UI.playButton.resolvedStyle.width);
+            Assert.NotZero(m_Driver.elements.playButton.resolvedStyle.width);
 
             /*m_PlayManager.State.OnStateChange += (sender, newState) =>
             {

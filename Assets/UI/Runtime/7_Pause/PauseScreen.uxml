@@ -1,11 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="PausePane" src="project://database/Assets/UI/Runtime/7_Pause/PausePane.uxml?fileID=9197481963319205126&amp;guid=97513a01721a1dd4d86a55debbe885e5&amp;type=3#PausePane"/>
+    <ui:Template name="SettingsPane" src="project://database/Assets/UI/Runtime/4_Settings/SettingsPane.uxml?fileID=9197481963319205126&amp;guid=099575a75b5735a419dbefecaa7d35b0&amp;type=3#SettingsPane"/>
     <Style src="project://database/Assets/UI/Runtime/7_Pause/PauseScreenStyles.uss?fileID=7433441132597879392&amp;guid=c737b2b4b88a73b488932f7d380c919c&amp;type=3#PauseScreenStyles"/>
-    <ui:VisualElement name="screen" class="b-screen">
-        <ui:VisualElement name="panel" class="b-pane">
-            <ui:Label text="Paused" name="title" class="b-title"/>
-            <ui:Button text="Resume" name="resume-button" class="b-primary"/>
-            <Bagel.LongPressButton name="restart-button" text="Restart"/>
-            <Bagel.LongPressButton name="main-menu-button" text="Main Menu"/>
-        </ui:VisualElement>
-    </ui:VisualElement>
+    <Bagel.PauseScreenManager class="b-screen">
+        <ui:Instance template="PausePane" name="pause-pane" class="b-pane"/>
+        <ui:Instance template="SettingsPane" name="settings-pane" class="b-pane b-inactive-pane"/>
+    </Bagel.PauseScreenManager>
 </ui:UXML>

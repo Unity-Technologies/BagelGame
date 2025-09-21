@@ -31,7 +31,7 @@ namespace Bagel.T3_MainMenu
             bool exitClicked = false;
 
             // Get the elements.
-            var elements = MainMenuScreenDriver.BindUI(rootVisualElement, new MainMenuScreenDriver.Callbacks
+            var elements = MainMenuScreenManager.BindUI(rootVisualElement, new MainMenuScreenManager.Callbacks
             {
                 onPlay = () => playClicked = true,
                 onExit = () => exitClicked = true

@@ -10,7 +10,6 @@
 .unity-button {
     background-color: rgb(71, 71, 71);
     transition-duration: 0.3s;
-    margin-top: 7px;
     border-top-width: 5px;
     border-right-width: 5px;
     border-bottom-width: 5px;
@@ -92,10 +91,30 @@
     width: 250px;
 }
 
+.b-sub-pane {
+    background-color: rgba(0, 0, 0, 0.52);
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+    border-bottom-right-radius: 19px;
+    border-bottom-left-radius: 19px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}
+
 .b-screen {
     flex-grow: 1;
 }
 
 .b-long-press-button__progress {
     background-color: rgb(78, 213, 115);
+}
+
+.unity-base-field {
+    flex-direction: column;
+}
+
+.unity-base-slider--horizontal > .unity-base-slider__input {
+    height: 22px;
 }

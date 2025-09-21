@@ -11,6 +11,11 @@ namespace Bagel
             GameOver
         }
 
+        public enum MainMenuPaneMode {
+            Primary,
+            Secondary
+        }
+
         State m_State;
         bool m_IsPaused;
         BagelType m_LastBagelType;
@@ -19,6 +24,7 @@ namespace Bagel
         public State CurrentState => m_State;
         public BagelType LastBagelType => m_LastBagelType;
         public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
+        public bool IsMainMenu => m_State == State.MainMenu;
         public bool IsBagelSelection => m_State == State.BagelSelection;
         public bool IsPlaying => m_State == State.Playing;
         public bool IsPaused => m_IsPaused;
@@ -28,6 +34,7 @@ namespace Bagel
         public event EventHandler<bool> OnPauseStateChanged;
         public event EventHandler<BagelType> OnSetBagelType;
         public event EventHandler<BagelTrackerData> OnSetBagelTrackerData;
+        public event EventHandler<MainMenuPaneMode> OnMainMenuPaneModeChange;
 
         public void SetBagelType(BagelType bagelType)
         {
@@ -39,6 +46,14 @@ namespace Bagel
         {
             m_LastBagelTrackerData = bagelTrackerData;
             OnSetBagelTrackerData?.Invoke(this, bagelTrackerData);
+        }
+
+        public void SetMainMenuPaneMode(MainMenuPaneMode mode)
+        {
+            if (!IsMainMenu)
+                return;
+
+            OnMainMenuPaneModeChange?.Invoke(this, mode);
         }
 
         public void GoToMainMenu()

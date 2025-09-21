@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel.T6_Pause
+namespace Bagel.T7_Pause
 {
     public class PauseScreenTests : UITestFixture
     {
@@ -32,7 +32,7 @@ namespace Bagel.T6_Pause
             bool mainMenuClicked = false;
 
             // Get the elements.
-            var elements = PauseScreenDriver.BindUI(rootVisualElement, new PauseScreenDriver.Callbacks
+            var elements = PauseScreenManager.BindUI(rootVisualElement, new PauseScreenManager.Callbacks
             {
                 onResume = () => resumeClicked = true,
                 onRestart = () => restartClicked = true,

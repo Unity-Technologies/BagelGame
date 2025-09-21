@@ -1,0 +1,14 @@
+.b-pane {
+    width: 553px;
+    flex-direction: row;
+    height: 435px;
+}
+
+.b-pane-half {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+#leaderboard > #back-button {
+    display: none;
+}

@@ -10,38 +10,9 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         UIDocument m_UIDocument;
+        MainMenuScreenManager.Elements m_Elements;
 
-        public struct Elements
-        {
-            public Button playButton;
-            public Button exitButton;
-        }
-
-        public struct Callbacks
-        {
-            public Action onPlay;
-            public Action onExit;
-        }
-
-        Elements m_Elements;
-
-        public Elements UI => m_Elements;
-
-        public static Elements BindUI(VisualElement root, Callbacks callbacks)
-        {
-            var elements = new Elements
-            {
-                playButton = root.Q<Button>("play-button"),
-                exitButton = root.Q<Button>("exit-button")
-            };
-
-            if (elements.playButton != null && callbacks.onPlay != null)
-                elements.playButton.clicked += callbacks.onPlay;
-            if (elements.exitButton != null && callbacks.onExit != null )
-                elements.exitButton.clicked += callbacks.onExit;
-
-            return elements;
-        }
+        public MainMenuScreenManager.Elements elements => m_Elements;
 
         void OnEnable()
         {
@@ -50,8 +21,9 @@ namespace Bagel
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
 
-            m_Elements = BindUI(root, new Callbacks
+            m_Elements = MainMenuScreenManager.BindUI(root, new MainMenuScreenManager.Callbacks
             {
+                playManagerState = m_PlayManager.State,
                 onPlay = m_PlayManager.State.GoToBagelSelection,
 #if UNITY_EDITOR
                 onExit = UnityEditor.EditorApplication.ExitPlaymode
