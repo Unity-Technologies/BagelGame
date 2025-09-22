@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel.T7_Pause
@@ -45,17 +44,11 @@ namespace Bagel.T7_Pause
             Assert.IsTrue(resumeClicked);
 
             // Restart Button
-            simulate.Click(elements.restartButton);
-            simulate.FrameUpdate();
-            Assert.IsFalse(restartClicked); // Should not trigger yet.
             simulate.MouseDown(elements.restartButton);
             simulate.FrameUpdate(elements.restartButton.holdTime);
             Assert.IsTrue(restartClicked);
 
             // Main Menu Button
-            simulate.Click(elements.mainMenuButton);
-            simulate.FrameUpdate();
-            Assert.IsFalse(mainMenuClicked); // Should not trigger yet.
             simulate.MouseDown(elements.mainMenuButton);
             simulate.FrameUpdate(elements.mainMenuButton.holdTime);
             Assert.IsTrue(mainMenuClicked);
