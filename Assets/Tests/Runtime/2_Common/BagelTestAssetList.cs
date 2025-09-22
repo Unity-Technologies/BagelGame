@@ -12,6 +12,9 @@ namespace Bagel
         [Header("3 - Main Menu")]
         public VisualTreeAsset mainMenuUxml;
 
+        [Header("4 - Settings")]
+        public VisualTreeAsset settingsPaneUxml;
+
         [Header("6 - Bagel Tracker")]
         public VisualTreeAsset bagelTrackerLeftDisplayUxml;
         public VisualTreeAsset bagelTrackerRightDisplayUxml;

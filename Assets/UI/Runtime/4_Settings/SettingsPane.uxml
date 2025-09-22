@@ -1,9 +1,11 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/4_Settings/SettingsPaneStyles.uss?fileID=7433441132597879392&amp;guid=8078ac1b834d2b244a237e4c2907d5d5&amp;type=3#SettingsPaneStyles"/>
-    <ui:Label text="Settings" name="title" class="b-title"/>
-    <ui:ScrollView vertical-scroller-visibility="AlwaysVisible">
-        <ui:Slider label="Field of View" value="42" high-value="100" name="fov-slider"/>
-        <ui:DropdownField label="Theme" name="theme-dropdown" choices="Classic,Dark" index="0"/>
-    </ui:ScrollView>
-    <ui:Button text="Back" name="back-button"/>
+    <Bagel.SettingsPaneManager>
+        <ui:Label text="Settings" name="title" class="b-title"/>
+        <ui:ScrollView vertical-scroller-visibility="AlwaysVisible">
+            <ui:Slider label="Field of View" value="42" high-value="100" name="fov-slider"/>
+            <ui:DropdownField label="Theme" name="theme-dropdown" choices="Classic,Dark" index="0"/>
+        </ui:ScrollView>
+        <ui:Button text="Back" name="back-button"/>
+    </Bagel.SettingsPaneManager>
 </ui:UXML>
