@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel.T4_Settings
+namespace Bagel.B04_Settings
 {
     public class SettingsTests : UITestFixture
     {

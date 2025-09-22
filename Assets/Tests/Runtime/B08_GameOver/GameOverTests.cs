@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel.T8_GameOver
+namespace Bagel.B08_GameOver
 {
     public class GameOverTests : UITestFixture
     {

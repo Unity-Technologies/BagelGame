@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel.T7_Pause
+namespace Bagel.B07_Pause
 {
     public class PauseScreenTests : UITestFixture
     {

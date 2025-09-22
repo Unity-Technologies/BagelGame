@@ -1,4 +1,4 @@
-namespace Bagel.T8_GameOver
+namespace Bagel.B08_GameOver
 {
     public class GameOverTestsEditor : GameOverTests {}
 }

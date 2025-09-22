@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine.UIElements.TestFramework;
 
-namespace Bagel.T2_Common
+namespace Bagel.B02_Common
 {
     public class LongPressButtonTests : UITestFixture
     {

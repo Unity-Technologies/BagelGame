@@ -1,4 +1,4 @@
-namespace Bagel.T7_Pause
+namespace Bagel.B07_Pause
 {
     public class PauseScreenTestsEditor : PauseScreenTests {}
 }

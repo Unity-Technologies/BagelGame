@@ -1,4 +1,4 @@
-namespace Bagel.T3_MainMenu
+namespace Bagel.B03_MainMenu
 {
     public class UIUnitTestsEditor : MainMenuScreenTests {}
 }

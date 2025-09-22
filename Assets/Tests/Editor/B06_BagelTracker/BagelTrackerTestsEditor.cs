@@ -1,4 +1,4 @@
-namespace Bagel.T6_BagelTracker
+namespace Bagel.B06_BagelTracker
 {
     public class BagelTrackerTestsEditor : BagelTrackerTests {}
 }

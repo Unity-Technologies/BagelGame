@@ -1,4 +1,4 @@
-namespace Bagel.T4_Settings
+namespace Bagel.B04_Settings
 {
     public class SettingsTestsEditor : SettingsTests {}
 }

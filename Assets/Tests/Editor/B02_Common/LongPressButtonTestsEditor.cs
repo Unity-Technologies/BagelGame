@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor.UIElements.TestFramework;
 using UnityEngine.UIElements;
 
-namespace Bagel.T2_Common
+namespace Bagel.B02_Common
 {
     public class LongPressButtonTestsEditor : LongPressButtonTests
     {

@@ -3,7 +3,7 @@ using UnityEngine.UIElements.TestFramework;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Bagel.T6_BagelTracker
+namespace Bagel.B06_BagelTracker
 {
     public class BagelTrackerTests : UITestFixture
     {
