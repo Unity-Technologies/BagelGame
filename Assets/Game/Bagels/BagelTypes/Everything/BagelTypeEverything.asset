@@ -13,7 +13,20 @@ MonoBehaviour:
   m_Name: BagelTypeEverything
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Everything
-  rollTorque: 50
+  maxToppingCount: 200
+  spinToppingLossFactor: 0.001
+  impactToppingLossFactor: 0.02
+  impactAmortizationRate: 0.7
+  tiltRecoverySpeed: 10
+  rollTorque: 70
   turnTorque: 1.5
   mass: 6
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
   modelPrefab: {fileID: 2633031486731055519, guid: dd149aba705072e4abacf11a515d630e, type: 3}
+  toppingsPercentile: 0.2
+  toppingLossPercentile: 0
+  controlPercentile: 0.9583333
+  speedPercentile: 0.875
+  gripPercentile: 0.3

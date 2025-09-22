@@ -5,7 +5,7 @@ namespace Bagel
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(UIDocument))]
-    public class BagelSelectionTypeInfoPanelDriver : MonoBehaviour
+    public class BagelSelectionTypeInfoPaneDriver : MonoBehaviour
     {
         [SerializeField] BagelSelectionPodium m_BagelSelectionPodium;
 
@@ -32,7 +32,7 @@ namespace Bagel
                 return;
 
             var root = m_UIDocument.rootVisualElement;
-            var panel = root.Q("panel");
+            var panel = root.Q("pane");
             if (panel == null)
                 return;
 

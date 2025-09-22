@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: BagelTypeDebug
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Debug
+  maxToppingCount: 1000
+  spinToppingLossFactor: 0.005
+  impactToppingLossFactor: 0.1
+  impactAmortizationRate: 0.5
+  tiltRecoverySpeed: 10
   rollTorque: 40
   turnTorque: 1
   mass: 4
@@ -20,3 +25,8 @@ MonoBehaviour:
   staticFriction: 0.6
   bounciness: 0.249
   modelPrefab: {fileID: 5797865524984118446, guid: 82ecbbc9119be8e4ab887406cb5de5c4, type: 3}
+  toppingsPercentile: 0.343
+  toppingLossPercentile: 0.309
+  controlPercentile: 0.61
+  speedPercentile: 0.326
+  gripPercentile: 0.604

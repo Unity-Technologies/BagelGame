@@ -1,0 +1,35 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPaneStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3"/>
+    <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Debug/BagelTypeDebug.asset?fileID=11400000&amp;guid=7e9fbe392dd334a439103c0fee7fa265&amp;type=2#BagelTypeDebug" class="b-pane">
+        <ui:Label text="Label" name="name" class="b-title">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Label>
+        <ui:ProgressBar title="Toppings" name="toppings-bar" high-value="1">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="toppingsPercentile" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:ProgressBar>
+        <ui:ProgressBar title="Topping Loss" name="topping-loss-bar" high-value="1">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="toppingLossPercentile" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:ProgressBar>
+        <ui:ProgressBar title="Control" name="control-bar" high-value="1">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="controlPercentile" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:ProgressBar>
+        <ui:ProgressBar title="Speed" name="speed-bar" high-value="1">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="speedPercentile" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:ProgressBar>
+        <ui:ProgressBar title="Grip" name="grip-bar" high-value="1">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="gripPercentile" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:ProgressBar>
+    </ui:VisualElement>
+</ui:UXML>

@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     [RequireComponent(typeof(UIDocument))]
-    public class BagelSelectionControlsPanelDriver : MonoBehaviour
+    public class BagelSelectionControlsPaneDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelSelectionRoom m_BagelSelectionRoom;

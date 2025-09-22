@@ -54,9 +54,40 @@ namespace Bagel
                 DestroyImmediate(child);
         }
 
+        void DeterminePercentiles()
+        {
+            float maxToppings = float.MinValue;
+            float maxToppingLoss = float.MinValue;
+            float minToppingLoss = float.MaxValue;
+            float maxControl = float.MinValue;
+            float maxSpeed = float.MinValue;
+            float maxGrip = float.MinValue;
+
+            foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
+            {
+                maxToppings = Mathf.Max(maxToppings, bagelType.Toppings);
+                maxToppingLoss = Mathf.Max(maxToppingLoss, bagelType.ToppingLoss);
+                minToppingLoss = Mathf.Min(minToppingLoss, bagelType.ToppingLoss);
+                maxControl = Mathf.Max(maxControl, bagelType.Control);
+                maxSpeed = Mathf.Max(maxSpeed, bagelType.Speed);
+                maxGrip = Mathf.Max(maxGrip, bagelType.Grip);
+            }
+
+            foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
+            {
+                bagelType.toppingsPercentile = bagelType.Toppings / maxToppings;
+                bagelType.toppingLossPercentile = ((maxToppingLoss - minToppingLoss) - (bagelType.ToppingLoss - minToppingLoss)) / (maxToppingLoss - minToppingLoss);
+                bagelType.controlPercentile = bagelType.Control / maxControl;
+                bagelType.speedPercentile = bagelType.Speed / maxSpeed;
+                bagelType.gripPercentile = bagelType.Grip / maxGrip;
+            }
+        }
+
         void CreatePodiums()
         {
             Clear();
+
+            DeterminePercentiles();
 
             foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
             {
