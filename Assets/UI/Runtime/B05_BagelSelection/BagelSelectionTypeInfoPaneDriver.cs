@@ -10,7 +10,7 @@ namespace Bagel
         [SerializeField] BagelSelectionPodium m_BagelSelectionPodium;
 
         UIDocument m_UIDocument;
-        BagelType m_BagelType;
+        [SerializeField] BagelType m_BagelType;
 
         void OnEnable()
         {

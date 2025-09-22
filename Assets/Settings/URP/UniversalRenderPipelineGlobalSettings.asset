@@ -130,8 +130,6 @@ MonoBehaviour:
         m_DefaultUnlitMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
         m_DefaultMaskMaterial: {fileID: 2100000, guid: 15d0c3709176029428a0da2f8cecf0b5, type: 2}
         m_DefaultMesh2DLitMaterial: {fileID: 2100000, guid: 9452ae1262a74094f8a68013fbcd1834, type: 2}
-        m_DefaultRenderAs2DMaterial: {fileID: 2100000, guid: b697f6a938056384e968ccf6527dac83, type: 2}
-        m_RenderAs2DFlatteningShader: {fileID: 4800000, guid: 74659692f6350ba46b88180d9c826630, type: 3}
     - rid: 6267120691244433690
       type: {class: UniversalRenderPipelineEditorShaders, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
