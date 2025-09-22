@@ -52,12 +52,13 @@ namespace Bagel
                 resumeButton = root.Q<Button>("resume-button"),
                 settingsButton = root.Q<Button>("settings-button"),
                 restartButton = root.Q<LongPressButton>("restart-button"),
-                mainMenuButton = root.Q<LongPressButton>("main-menu-button" )
+                mainMenuButton = root.Q<LongPressButton>("main-menu-button" ),
+
+                settingsBackButton = null
             };
 
-            elements.settingsBackButton = elements.settingsPane.Q<Button>("back-button");
-            if (elements.settingsBackButton != null)
-                elements.settingsBackButton.clicked += callbacks.onSettingsBack;
+            if (elements.settingsPane != null)
+                elements.settingsBackButton = elements.settingsPane.Q<Button>("back-button");
 
             if (elements.resumeButton != null && callbacks.onResume != null)
                 elements.resumeButton.clicked += callbacks.onResume;
@@ -67,6 +68,9 @@ namespace Bagel
                 elements.restartButton.clicked += callbacks.onRestart;
             if (elements.mainMenuButton != null && callbacks.onMainMenu != null )
                 elements.mainMenuButton.clicked += callbacks.onMainMenu;
+
+            if (elements.settingsBackButton != null && callbacks.onSettingsBack != null)
+                elements.settingsBackButton.clicked += callbacks.onSettingsBack;
 
             return elements;
         }
