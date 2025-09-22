@@ -7,7 +7,7 @@
                 <ui:DataBinding property="highValue" data-source-path="constants.spinMax" binding-mode="ToTarget"/>
             </Bindings>
         </ui:ProgressBar>
-        <ui:ProgressBar name="hits-bar" title="Pain">
+        <ui:ProgressBar name="pain-bar" title="Pain">
             <Bindings>
                 <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
                 <ui:DataBinding property="highValue" data-source-path="constants.forceMax" binding-mode="ToTarget"/>
