@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a55f662206b24d4c9774c51c33dcbc8, type: 3}
   m_Name: BagelTestAssetList
   m_EditorClassIdentifier: BagelRuntimeTests::Bagel.BagelTestAssetList
+  mainSceneName: Main
   mainMenuUxml: {fileID: 9197481963319205126, guid: ea563f0ac4a3a3840827b0233961e0fc, type: 3}
   bagelTrackerLeftDisplayUxml: {fileID: 9197481963319205126, guid: 0ad31c74420f69e459b372d004c0b2dc, type: 3}
   bagelTrackerRightDisplayUxml: {fileID: 9197481963319205126, guid: b3f3b240513e14d9583182fb441a13eb, type: 3}
   pauseScreenUxml: {fileID: 9197481963319205126, guid: 19cec0096d1d856449401f567fd84d5d, type: 3}
+  gameOverScreenUxml: {fileID: 9197481963319205126, guid: ad9bc3abb338ba549aef117711e184da, type: 3}

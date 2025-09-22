@@ -9,14 +9,17 @@ namespace Bagel
     {
         public string mainSceneName = "Main";
 
-        [Header("Main Menu")]
+        [Header("3 - Main Menu")]
         public VisualTreeAsset mainMenuUxml;
 
-        [Header("Bagel Tracker")]
+        [Header("6 - Bagel Tracker")]
         public VisualTreeAsset bagelTrackerLeftDisplayUxml;
         public VisualTreeAsset bagelTrackerRightDisplayUxml;
 
-        [Header("Pause Screen")]
+        [Header("7 - Pause")]
         public VisualTreeAsset pauseScreenUxml;
+
+        [Header("8 - Game Over")]
+        public VisualTreeAsset gameOverScreenUxml;
     }
 }

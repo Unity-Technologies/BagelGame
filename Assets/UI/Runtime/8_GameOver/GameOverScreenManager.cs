@@ -27,7 +27,7 @@ namespace Bagel
 
         Elements m_Elements;
 
-        public static Elements BindUI(VisualElement root, Callbacks callbacks)
+        public static Elements BindUI(VisualElement root, Callbacks callbacks = new ())
         {
             var elements = new Elements
             {
