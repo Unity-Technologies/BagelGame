@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Runtime/7_Pause/PauseScreenStyles.uss?fileID=7433441132597879392&amp;guid=c737b2b4b88a73b488932f7d380c919c&amp;type=3#PauseScreenStyles"/>
+    <Style src="project://database/Assets/UI/Runtime/B07_Pause/PauseScreenStyles.uss?fileID=7433441132597879392&amp;guid=c737b2b4b88a73b488932f7d380c919c&amp;type=3#PauseScreenStyles"/>
     <ui:Label text="Paused" name="title" class="b-title"/>
     <ui:Button text="Resume" name="resume-button" class="b-primary"/>
     <ui:Button text="Settings" name="settings-button"/>

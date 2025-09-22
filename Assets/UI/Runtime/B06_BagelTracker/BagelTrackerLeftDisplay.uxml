@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Runtime/6_BagelTracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#BagelTrackerStyles"/>
-    <ui:VisualElement name="pane" data-source="project://database/Assets/UI/Runtime/6_BagelTracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" class="b-pane">
+    <Style src="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#BagelTrackerStyles"/>
+    <ui:VisualElement name="pane" data-source="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerDataDebug.asset?fileID=11400000&amp;guid=0a1faec4a7b5d7f409ffc942358d1e2e&amp;type=2#BagelTrackerDataDebug" class="b-pane">
         <ui:ProgressBar name="spin-bar" title="Spin">
             <Bindings>
                 <ui:DataBinding property="value" data-source-path="spin" binding-mode="ToTarget"/>

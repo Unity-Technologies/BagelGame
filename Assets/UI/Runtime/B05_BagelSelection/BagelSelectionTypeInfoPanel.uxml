@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Runtime/5_BagelSelection/BagelSelectionTypeInfoPanelStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3#BagelSelectionTypeInfoPanelStyles"/>
+    <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPanelStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3#BagelSelectionTypeInfoPanelStyles"/>
     <ui:VisualElement name="panel" data-source="project://database/Assets/Game/Bagels/BagelTypes/Debug/BagelTypeDebug.asset?fileID=11400000&amp;guid=7e9fbe392dd334a439103c0fee7fa265&amp;type=2#BagelTypeDebug" class="b-pane">
         <ui:Label text="Label" name="name" class="b-title">
             <Bindings>
