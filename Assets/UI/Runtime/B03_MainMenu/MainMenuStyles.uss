@@ -12,8 +12,6 @@
     transition-duration: 0.5s;
 }
 
-
-
 .b-pane:disabled {
     opacity: 0.08;
 }
