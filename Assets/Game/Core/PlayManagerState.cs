@@ -17,11 +17,13 @@ namespace Bagel
         }
 
         State m_State;
+        MainMenuPaneMode m_MainMenuPaneMode;
         bool m_IsPaused;
         BagelType m_LastBagelType;
         BagelTrackerData m_LastBagelTrackerData;
 
         public State CurrentState => m_State;
+        public MainMenuPaneMode CurrentMainMenuPaneMode => m_MainMenuPaneMode;
         public BagelType LastBagelType => m_LastBagelType;
         public BagelTrackerData LastBagelTrackerData => m_LastBagelTrackerData;
         public bool IsMainMenu => m_State == State.MainMenu;
@@ -50,9 +52,10 @@ namespace Bagel
 
         public void SetMainMenuPaneMode(MainMenuPaneMode mode)
         {
-            if (!IsMainMenu)
+            if (!IsMainMenu || mode == m_MainMenuPaneMode)
                 return;
 
+            m_MainMenuPaneMode = mode;
             OnMainMenuPaneModeChange?.Invoke(this, mode);
         }
 
