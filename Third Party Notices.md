@@ -55,3 +55,9 @@ THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
 Bagel Model
 (https://ambientcg.com/a/3DBread005)
 Created using 3DBread005 from ambientCG.com, licensed under the Creative Commons CC0 1.0 Universal License.
+
+--------
+
+Fitness Sport Flat Icons Collection
+(https://www.svgrepo.com/collection/fitness-sport-flat-icons/)
+Public Domain

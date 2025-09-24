@@ -1,35 +1,50 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPaneStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3"/>
+    <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPaneStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3#BagelSelectionTypeInfoPaneStyles"/>
     <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Debug/BagelTypeDebug.asset?fileID=11400000&amp;guid=7e9fbe392dd334a439103c0fee7fa265&amp;type=2#BagelTypeDebug" class="b-pane">
         <ui:Label text="Label" name="name" class="b-title">
             <Bindings>
                 <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Label>
-        <ui:ProgressBar title="Toppings" name="toppings-bar" high-value="1">
-            <Bindings>
-                <ui:DataBinding property="value" data-source-path="toppingsPercentile" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:ProgressBar>
-        <ui:ProgressBar title="Topping Loss" name="topping-loss-bar" high-value="1">
-            <Bindings>
-                <ui:DataBinding property="value" data-source-path="toppingLossPercentile" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:ProgressBar>
-        <ui:ProgressBar title="Control" name="control-bar" high-value="1">
-            <Bindings>
-                <ui:DataBinding property="value" data-source-path="controlPercentile" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:ProgressBar>
-        <ui:ProgressBar title="Speed" name="speed-bar" high-value="1">
-            <Bindings>
-                <ui:DataBinding property="value" data-source-path="speedPercentile" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:ProgressBar>
-        <ui:ProgressBar title="Grip" name="grip-bar" high-value="1">
-            <Bindings>
-                <ui:DataBinding property="value" data-source-path="gripPercentile" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:ProgressBar>
+        <ui:VisualElement name="toppings-row" class="bar-row">
+            <ui:VisualElement name="toppings-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/carrot-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=839a1eea5156d674e9c65b3cb0f58b0c&amp;type=3#carrot-svgrepo-com&quot;);"/>
+            <ui:ProgressBar title="Toppings" name="toppings-bar" high-value="1">
+                <Bindings>
+                    <ui:DataBinding property="value" data-source-path="toppingsPercentile" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:ProgressBar>
+        </ui:VisualElement>
+        <ui:VisualElement name="topping-loss-row" class="bar-row">
+            <ui:VisualElement name="topping-loss-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/scales-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=c76d3904ea0d60f4190024a782a463b0&amp;type=3#scales-svgrepo-com&quot;);"/>
+            <ui:ProgressBar title="Topping Loss" name="topping-loss-bar" high-value="1">
+                <Bindings>
+                    <ui:DataBinding property="value" data-source-path="toppingLossPercentile" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:ProgressBar>
+        </ui:VisualElement>
+        <ui:VisualElement name="control-row" class="bar-row">
+            <ui:VisualElement name="control-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/jump-rope-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=0ca223ccbb3faac419602e756428b605&amp;type=3#jump-rope-svgrepo-com&quot;);"/>
+            <ui:ProgressBar title="Control" name="control-bar" high-value="1">
+                <Bindings>
+                    <ui:DataBinding property="value" data-source-path="controlPercentile" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:ProgressBar>
+        </ui:VisualElement>
+        <ui:VisualElement name="speed-row" class="bar-row">
+            <ui:VisualElement name="speed-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/roller-skates-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=cb8ce41bb3439b644b34faa96192f727&amp;type=3#roller-skates-svgrepo-com&quot;);"/>
+            <ui:ProgressBar title="Speed" name="speed-bar" high-value="1">
+                <Bindings>
+                    <ui:DataBinding property="value" data-source-path="speedPercentile" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:ProgressBar>
+        </ui:VisualElement>
+        <ui:VisualElement name="grip-row" class="bar-row">
+            <ui:VisualElement name="grip-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/sneakers-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=d66de006512b0eb4c8b146b3dd90eaf8&amp;type=3#sneakers-svgrepo-com&quot;);"/>
+            <ui:ProgressBar title="Grip" name="grip-bar" high-value="1">
+                <Bindings>
+                    <ui:DataBinding property="value" data-source-path="gripPercentile" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:ProgressBar>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
