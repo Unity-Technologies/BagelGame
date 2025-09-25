@@ -20,7 +20,8 @@ namespace Bagel.B02_Common
             // Create the button.
             var button = new LongPressButton();
             button.text = "Test Button";
-            var timerProgress = button.Q(className: LongPressButton.progressUssClassName);
+            var timerProgress = button.Q(
+                className: LongPressButton.progressUssClassName);
             rootVisualElement.Add(button);
             simulate.FrameUpdate();
 
@@ -30,7 +31,8 @@ namespace Bagel.B02_Common
                     background-color: #ff0000;
                 }}");
             simulate.FrameUpdate();
-            Assert.AreEqual(new Color(1f, 0f, 0f, 1f), timerProgress.resolvedStyle.backgroundColor);
+            Assert.AreEqual(new Color(1f, 0f, 0f, 1f),
+                timerProgress.resolvedStyle.backgroundColor);
         }
     }
 }
