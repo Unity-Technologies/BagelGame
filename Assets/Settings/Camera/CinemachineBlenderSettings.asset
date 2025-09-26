@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36baaa8bdcb9d8b49b9199833965d2c3, type: 3}
+  m_Name: CinemachineBlenderSettings
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBlenderSettings
+  CustomBlends:
+  - From: MenuSecondaryCinemaCamera
+    To: MenuPrimaryCinemaCamera
+    Blend:
+      Style: 1
+      Time: 0.33
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: MenuPrimaryCinemaCamera
+    To: MenuSecondaryCinemaCamera
+    Blend:
+      Style: 1
+      Time: 0.33
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: BagelSelectCinemaCamera
+    To: MenuPrimaryCinemaCamera
+    Blend:
+      Style: 1
+      Time: 0.66
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: MenuPrimaryCinemaCamera
+    To: BagelSelectCinemaCamera
+    Blend:
+      Style: 6
+      Time: 0.66
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: BagelSelectCinemaCamera
+    To: PlayCinemaCamera
+    Blend:
+      Style: 3
+      Time: 0.5
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: PlayCinemaCamera
+    To: GameOverCinemaCamera
+    Blend:
+      Style: 4
+      Time: 0.33
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: GameOverCinemaCamera
+    To: PlayCinemaCamera
+    Blend:
+      Style: 3
+      Time: 0.5
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4
+  - From: GameOverCinemaCamera
+    To: MenuPrimaryCinemaCamera
+    Blend:
+      Style: 1
+      Time: 0.66
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 4

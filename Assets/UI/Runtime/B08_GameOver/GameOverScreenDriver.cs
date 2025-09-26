@@ -8,6 +8,11 @@ namespace Bagel
     {
         [SerializeField] PlayManager m_PlayManager;
 
+        [Space]
+        [SerializeField] float m_GameOverOrbitSpeed = 0.02f;
+        [SerializeField] Transform m_GameOverRoot;
+        [SerializeField] Transform m_BagelTarget;
+
         UIDocument m_UIDocument;
 
         GameOverScreenManager.Elements m_Elements;
@@ -28,12 +33,30 @@ namespace Bagel
             });
         }
 
+        void Update()
+        {
+            if (!m_PlayManager.State.IsGameOver)
+                return;
+
+            m_GameOverRoot.Rotate(Vector3.up, m_GameOverOrbitSpeed);
+        }
+
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
             if (state == PlayManagerState.State.GameOver)
             {
                 m_Elements.mainMenuButton.Focus();
                 m_Elements.root.style.display = DisplayStyle.Flex;
+
+                m_GameOverRoot.rotation = Quaternion.identity;
+
+                var gameOverPosition = m_GameOverRoot.position;
+                var bagelPosition = m_BagelTarget.position;
+                m_GameOverRoot.position = new Vector3(
+                    bagelPosition.x,
+                    gameOverPosition.y,
+                    bagelPosition.z
+                );
             }
             else
             {
