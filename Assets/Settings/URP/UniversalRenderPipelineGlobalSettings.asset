@@ -64,21 +64,9 @@ MonoBehaviour:
       - rid: 6267120691244433716
       - rid: 6267120691244433717
       - rid: 6267120691244433718
+      - rid: 5440522675676512256
     m_RuntimeSettings:
-      m_List:
-      - rid: 6267120691244433693
-      - rid: 6267120691244433694
-      - rid: 6267120691244433695
-      - rid: 6267120691244433696
-      - rid: 6267120691244433697
-      - rid: 6267120691244433698
-      - rid: 6267120691244433704
-      - rid: 6267120691244433705
-      - rid: 6267120691244433707
-      - rid: 6267120691244433711
-      - rid: 6267120691244433712
-      - rid: 6267120691244433715
-      - rid: 6267120691244433718
+      m_List: []
   m_AssetVersion: 9
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
@@ -102,6 +90,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5440522675676512256
+      type: {class: OnTilePostProcessResource, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
+      data:
+        m_Version: 0
+        m_UberPostShader: {fileID: 4800000, guid: fe4f13c1004a07d4ea1e30bfd0326d9e, type: 3}
     - rid: 6267120691244433688
       type: {class: RayTracingRenderPipelineResources, ns: UnityEngine.Rendering.UnifiedRayTracing, asm: Unity.UnifiedRayTracing.Runtime}
       data:
