@@ -19,6 +19,7 @@
     border-bottom-right-radius: 11px;
     border-bottom-left-radius: 11px;
     overflow: visible;
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
 }
 
 .unity-button:enabled:hover {
