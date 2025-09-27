@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CounterMaterial
+  m_Name: BricksMaterial
   m_Shader: {fileID: -6465566751694194690, guid: d9b064efbf0dfc64ca9af0e385a31bb3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -64,16 +64,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Color_Variation: 0.2
     - _OcclusionStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.5
-    - _Stagger: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Brick_Color_A: {r: 0.3803922, g: 0.24313727, b: 0.18431373, a: 1}
-    - _Brick_Color_B: {r: 0.56078434, g: 0.38431376, b: 0.25490198, a: 1}
-    - _Tiling: {r: 0.2, g: 31.54, b: 0, a: 0}
+    - _Brick_Color_A: {r: 0.5490196, g: 0.2117647, b: 0.1803922, a: 1}
+    - _Brick_Color_B: {r: 0.5019608, g: 0.1803922, b: 0.1490196, a: 1}
+    - _Tiling: {r: 14.17, g: 31.92, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

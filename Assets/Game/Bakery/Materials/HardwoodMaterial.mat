@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CounterMaterial
+  m_Name: HardwoodMaterial
   m_Shader: {fileID: -6465566751694194690, guid: d9b064efbf0dfc64ca9af0e385a31bb3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -69,11 +69,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.5
-    - _Stagger: 0
+    - _Stagger: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Brick_Color_A: {r: 0.3803922, g: 0.24313727, b: 0.18431373, a: 1}
-    - _Brick_Color_B: {r: 0.56078434, g: 0.38431376, b: 0.25490198, a: 1}
-    - _Tiling: {r: 0.2, g: 31.54, b: 0, a: 0}
+    - _Brick_Color_A: {r: 0.9058824, g: 0.7803922, b: 0.61960787, a: 1}
+    - _Brick_Color_B: {r: 0.7803922, g: 0.6431373, b: 0.48627454, a: 1}
+    - _Tiling: {r: 2.4, g: 31.92, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

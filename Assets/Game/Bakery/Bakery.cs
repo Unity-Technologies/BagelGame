@@ -82,6 +82,7 @@ namespace Bagel
 
         const float k_FloorY = 0.0f;
         const float k_SurfaceOffset = 0.05f;
+        const float k_WallThickness = 0.2f;
 
         void OnEnable() => Build();
         void Reset() => Build();
@@ -99,11 +100,11 @@ namespace Bagel
         void Build()
         {
             m_Floor = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.up), nameof(m_Floor), m_FloorMaterial);
-            m_Ceiling = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.down), nameof(m_Ceiling), m_CeilingMaterial);
+            m_Ceiling = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.down), nameof(m_Ceiling), m_CeilingMaterial);
 
-            m_WestWall = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.right), nameof(m_WestWall), m_WallMaterial);
-            m_SouthWall = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.forward), nameof(m_SouthWall), m_WallMaterial);
-            m_NorthWall = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.back), nameof(m_NorthWall), m_WallMaterial);
+            m_WestWall = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.right), nameof(m_WestWall), m_WallMaterial);
+            m_SouthWall = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.forward), nameof(m_SouthWall), m_WallMaterial);
+            m_NorthWall = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.back), nameof(m_NorthWall), m_WallMaterial);
 
             m_Sidewalk = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.up), nameof(m_Sidewalk), m_SidewalkMaterial);
             m_Hedge = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Hedge), m_HedgeMaterial);
@@ -205,12 +206,17 @@ namespace Bagel
         {
             float halfHeight = k_FloorY + (m_Height * 0.5f);
 
-            //                           px           py          pz          sx       sy
+            float wallHeight = m_Height + (k_WallThickness * 0.5f);
+            float wallLeft = m_Left - (k_WallThickness * 0.5f);
+            float wallBottom = m_Bottom - (k_WallThickness * 0.5f);
+            float wallTop = m_Top + (k_WallThickness * 0.5f);
+
+            //                           px           py          pz          sx       sy        sz
             UpdateTransform(m_Floor,     m_Center.x,  k_FloorY,   m_Center.y, m_Width, m_Depth);
-            UpdateTransform(m_Ceiling,   m_Center.x,  m_Height,   m_Center.y, m_Width, m_Depth);
-            UpdateTransform(m_WestWall,  m_Left,      halfHeight, m_Center.y, m_Depth, m_Height);
-            UpdateTransform(m_SouthWall, m_Center.x,  halfHeight, m_Bottom,   m_Width, m_Height);
-            UpdateTransform(m_NorthWall, m_Center.x,  halfHeight, m_Top,      m_Width, m_Height);
+            UpdateTransform(m_Ceiling,   m_Center.x,  wallHeight, m_Center.y, m_Width, m_Depth,  k_WallThickness);
+            UpdateTransform(m_WestWall,  wallLeft,    halfHeight, m_Center.y, m_Depth, m_Height, k_WallThickness);
+            UpdateTransform(m_SouthWall, m_Center.x,  halfHeight, wallBottom, m_Width, m_Height, k_WallThickness);
+            UpdateTransform(m_NorthWall, m_Center.x,  halfHeight, wallTop,    m_Width, m_Height, k_WallThickness);
 
             UpdateTransform(m_Blackboard,
                 m_Left + (m_BlackboardThickness * 0.5f),
