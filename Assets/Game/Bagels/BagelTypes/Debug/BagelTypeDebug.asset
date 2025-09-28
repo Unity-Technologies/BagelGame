@@ -25,8 +25,8 @@ MonoBehaviour:
   staticFriction: 0.6
   bounciness: 0.249
   modelPrefab: {fileID: 5797865524984118446, guid: 82ecbbc9119be8e4ab887406cb5de5c4, type: 3}
-  toppingsPercentile: 0.343
-  toppingLossPercentile: 0.309
+  toppingsPercentile: 0.535
+  toppingLossPercentile: 0.313
   controlPercentile: 0.61
   speedPercentile: 0.326
   gripPercentile: 0.604

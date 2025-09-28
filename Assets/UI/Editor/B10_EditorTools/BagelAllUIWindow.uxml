@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="BagelSelectionControlsPane" src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionControlsPane.uxml?fileID=9197481963319205126&amp;guid=67cd0a7db527b5d48aa27b82a16346d0&amp;type=3#BagelSelectionControlsPane"/>
+    <ui:Template name="BagelSelectionTypeInfoPane" src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPane.uxml?fileID=9197481963319205126&amp;guid=cbeb39861170a4d4b80ceed95d1fae5f&amp;type=3#BagelSelectionTypeInfoPane"/>
+    <ui:Template name="BagelTrackerLeftDisplay" src="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerLeftDisplay.uxml?fileID=9197481963319205126&amp;guid=0ad31c74420f69e459b372d004c0b2dc&amp;type=3#BagelTrackerLeftDisplay"/>
+    <ui:Template name="BagelTrackerRightDisplay" src="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerRightDisplay.uxml?fileID=9197481963319205126&amp;guid=b3f3b240513e14d9583182fb441a13eb&amp;type=3#BagelTrackerRightDisplay"/>
+    <ui:Template name="GameOverScreen" src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverScreen.uxml?fileID=9197481963319205126&amp;guid=ad9bc3abb338ba549aef117711e184da&amp;type=3#GameOverScreen"/>
+    <ui:Template name="MainMenuScreen" src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuScreen.uxml?fileID=9197481963319205126&amp;guid=112ce240921a1b14e9ea930f3a13d91f&amp;type=3#MainMenuScreen"/>
+    <ui:Template name="PauseScreen" src="project://database/Assets/UI/Runtime/B07_Pause/PauseScreen.uxml?fileID=9197481963319205126&amp;guid=19cec0096d1d856449401f567fd84d5d&amp;type=3#PauseScreen"/>
+    <Style src="project://database/Assets/UI/Editor/B10_EditorTools/BagelAllUIWindowStyles.uss?fileID=7433441132597879392&amp;guid=c1a6b9dd4e943d04db0791c9618381dd&amp;type=3"/>
+    <ui:VisualElement name="screen" style="flex-direction: row;">
+        <ui:ScrollView name="root-scrollview" style="flex-grow: 1;">
+            <ui:Instance template="MainMenuScreen" name="main-menu" class="b-section"/>
+            <ui:VisualElement name="bagel-tracker-row" class="b-section" style="flex-direction: row; justify-content: space-between;">
+                <ui:VisualElement name="bagel-tracker-container" style="flex-direction: row; flex-shrink: 0; width: 50%;">
+                    <ui:Instance template="BagelTrackerLeftDisplay"/>
+                    <ui:Instance template="BagelTrackerRightDisplay"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="bagel-selection-type-info" class="b-section" style="flex-direction: row;">
+                <ui:Instance template="BagelSelectionTypeInfoPane" name="bagel-selection-type-info-display" style="width: 50%;"/>
+            </ui:VisualElement>
+            <ui:Instance template="BagelSelectionControlsPane" name="bagel-selection-controls" class="b-section" style="align-items: center;"/>
+            <ui:Instance template="PauseScreen" name="pause" class="b-section" style="align-items: stretch;"/>
+            <ui:Instance template="GameOverScreen" name="game-over" class="b-section"/>
+        </ui:ScrollView>
+        <ui:Scroller high-value="100" direction="Vertical" value="42" name="root-scroller"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BagelTrackerDataDebug
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelTrackerData
   constants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
-  toppingsCount: 250
+  toppingsCount: 322
   toppingsMaxCount: 1000
   input: -0.2
-  speed: 2.76
-  force: 20
-  spin: 5
+  speed: 2.61
+  force: 13.8
+  spin: 5.44

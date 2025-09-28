@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel.B10_EditorTools
 {
-    public class BagelToolsWindowTests : EditorWindowUITestFixture<BagelToolsWindow>
+    public class BagelToolsWindowTests : EditorWindowUITestFixture<BagelAllUIWindow>
     {
         [SetUp]
         public void SetUp()
