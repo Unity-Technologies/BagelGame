@@ -70,9 +70,14 @@ namespace Bagel
                 return;
 
             if (bagelTrackerData.toppingsCount > 0)
+            {
                 m_Elements.title.text = "You Win!";
+                m_Elements.toppingsField.value = bagelTrackerData.toppingsCount;
+            }
             else
+            {
                 m_Elements.title.text = "You Lose!";
+            }
         }
     }
 }

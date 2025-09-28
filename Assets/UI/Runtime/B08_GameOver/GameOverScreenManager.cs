@@ -12,8 +12,11 @@ namespace Bagel
         {
             public VisualElement root;
             public Label title;
+            public IntegerField toppingsField;
+            public VisualElement leaderboardForm;
             public TextField addToLeaderboardNameField;
             public Button addToLeaderboardButton;
+            public LeaderboardManager leaderboardManager;
             public Button restartButton;
             public Button mainMenuButton;
         }
@@ -33,8 +36,11 @@ namespace Bagel
             {
                 root = root,
                 title = root.Q<Label>("title"),
+                toppingsField = root.Q<IntegerField>("toppings-field"),
+                leaderboardForm = root.Q<VisualElement>("leaderboard-form"),
                 addToLeaderboardNameField = root.Q<TextField>("leaderboard-name-field"),
                 addToLeaderboardButton = root.Q<Button>("add-to-leaderboard-button"),
+                leaderboardManager = root.Q<LeaderboardManager>("leaderboard-manager"),
                 restartButton = root.Q<Button>("restart-button"),
                 mainMenuButton = root.Q<Button>("main-menu-button" )
             };
@@ -60,11 +66,24 @@ namespace Bagel
             {
                 onAddToLeaderboard = AddNameToLeaderboard
             });
+
+            m_Elements.leaderboardForm.SetEnabled(true);
         }
 
         void AddNameToLeaderboard()
         {
-            Debug.Log("Add to leaderboard: " + m_Elements.addToLeaderboardNameField.value);
+            var leaderboardData = m_Elements.leaderboardManager.LeaderboardData;
+            if (leaderboardData == null)
+                return;
+
+            leaderboardData.Entries.Add(
+                new LeaderboardData.LeaderboardEntry()
+                {
+                    name = m_Elements.addToLeaderboardNameField.value,
+                    toppings = m_Elements.toppingsField.value
+                } );
+
+            m_Elements.leaderboardForm.SetEnabled(false);
         }
     }
 }

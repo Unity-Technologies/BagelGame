@@ -1,7 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="screen" class="b-screen">
-        <ui:VisualElement name="panel-1" class="b-pane">
-            <ui:Label text="Panel 1" name="title" class="b-title"/>
+    <ui:Template name="LeaderboardPane" src="project://database/Assets/UI/Runtime/B09_Leaderboard/LeaderboardPane.uxml?fileID=9197481963319205126&amp;guid=0d1c6591da2016444b4b1be3f56d668a&amp;type=3#LeaderboardPane"/>
+    <ui:ScrollView name="screen" class="b-screen">
+        <ui:VisualElement name="pane-1" class="b-pane">
+            <ui:Label text="Pane 1" name="title" class="b-title"/>
             <ui:Button text="Primary Button" name="primary-button" class="b-primary"/>
             <ui:VisualElement name="sub-pane" class="b-sub-pane">
                 <ui:Button text="Secondary Button" name="secondary-button" class="b-secondary"/>
@@ -9,13 +10,16 @@
             </ui:VisualElement>
             <ui:ProgressBar value="22" title="Progress Bar"/>
         </ui:VisualElement>
-        <ui:VisualElement name="panel-2" class="b-pane">
-            <ui:Label text="Panel 2" name="title" class="b-title"/>
+        <ui:VisualElement name="pane-2" class="b-pane">
+            <ui:Label text="Pane 2" name="title" class="b-title"/>
             <ui:Toggle label="Toggle"/>
             <ui:FloatField label="Float Field" value="42.2"/>
             <ui:DropdownField label="Dropdown" choices="One,Two,Three" index="0"/>
             <ui:Slider label="Slider" value="42" high-value="100"/>
             <ui:TextField label="Text Field" placeholder-text="filler text"/>
         </ui:VisualElement>
-    </ui:VisualElement>
+        <ui:VisualElement name="pane-3" class="b-pane">
+            <ui:Instance template="LeaderboardPane"/>
+        </ui:VisualElement>
+    </ui:ScrollView>
 </ui:UXML>

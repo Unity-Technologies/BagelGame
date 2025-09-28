@@ -3,7 +3,7 @@
     <ui:Label text="Game Over" name="title" class="b-title"/>
     <ui:IntegerField label="Toppings Left" value="42" name="toppings-field" readonly="true"/>
     <ui:VisualElement name="leaderboard-form" class="b-sub-pane">
-        <ui:TextField label="Name for Leaderboard" placeholder-text="filler text" name="leaderboard-name-field"/>
+        <ui:TextField label="Name for Leaderboard" name="leaderboard-name-field"/>
         <ui:Button text="Add to Leaderboard" name="add-to-leaderboard-button"/>
     </ui:VisualElement>
     <ui:VisualElement name="bottom-container" style="flex-grow: 1; justify-content: flex-end;">

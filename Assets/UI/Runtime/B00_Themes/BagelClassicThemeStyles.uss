@@ -120,3 +120,19 @@
 .unity-base-slider--horizontal > .unity-base-slider__input {
     height: 22px;
 }
+
+.unity-collection-view {
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+}
+
+.unity-multi-column-header {
+    min-height: initial;
+}
+
+.unity-list-view__item {
+    background-color: rgba(51, 51, 51, 0.62);
+}
+
+.unity-list-view__item.unity-collection-view__item--alternative-background {
+    background-color: rgba(127, 127, 127, 0.62);
+}

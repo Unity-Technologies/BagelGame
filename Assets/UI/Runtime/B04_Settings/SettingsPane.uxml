@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneStyles.uss?fileID=7433441132597879392&amp;guid=8078ac1b834d2b244a237e4c2907d5d5&amp;type=3#SettingsPaneStyles"/>
     <Bagel.SettingsPaneManager>
         <ui:Label text="Settings" name="title" class="b-title"/>
-        <ui:ScrollView vertical-scroller-visibility="AlwaysVisible">
+        <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="settings-view" class="b-details-view">
             <ui:Slider label="Field of View" value="42" high-value="100" name="fov-slider"/>
             <ui:DropdownField label="Theme" name="theme-dropdown" choices="Classic,Dark" index="0"/>
         </ui:ScrollView>

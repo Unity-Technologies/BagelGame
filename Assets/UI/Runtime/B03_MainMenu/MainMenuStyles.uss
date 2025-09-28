@@ -10,6 +10,7 @@
     background-color: rgba(0, 0, 0, 0);
     transition-property: filter;
     transition-duration: 1s;
+    height: 277px;
 }
 
 .b-pane:disabled {
@@ -18,4 +19,46 @@
 
 .b-background-pane {
     position: absolute;
+}
+
+.b-details-view {
+    font-size: 10px;
+}
+
+.b-details-view .unity-label {
+    padding-top: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    margin-top: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    margin-left: 1px;
+}
+
+.unity-scroller--vertical {
+    width: 16px;
+}
+
+.unity-scroller__low-button {
+    width: 16px;
+    height: 16px;
+}
+
+.unity-scroller__high-button {
+    width: 16px;
+    height: 16px;
+}
+
+.unity-scroller__slider > .unity-slider__input {
+    width: 16px;
+}
+
+.unity-scroller__slider .unity-base-slider__dragger {
+    width: 10px;
+}
+
+.unity-scroller--vertical > .unity-base-slider--vertical {
+    margin-top: 16px;
+    margin-bottom: 16px;
 }

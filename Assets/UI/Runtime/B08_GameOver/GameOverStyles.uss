@@ -9,6 +9,6 @@
     flex-basis: 0;
 }
 
-#leaderboard > #back-button {
+#leaderboard > #leaderboard-manager > #back-button {
     display: none;
 }
