@@ -137,4 +137,23 @@
     background-color: rgba(127, 127, 127, 0.62);
 }
 
+.unity-popup-field {
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+}
 
+.unity-popup-field__input {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.unity-base-dropdown__container-inner {
+    background-color: rgba(0, 0, 0, 0.64);
+}
+
+
+
+.unity-base-dropdown__checkmark {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
