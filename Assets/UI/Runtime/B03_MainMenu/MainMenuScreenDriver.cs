@@ -56,7 +56,8 @@ namespace Bagel
 
         void PlayInputBindings_OnNavigateAction(object sender, Vector2 vec)
         {
-            m_Elements.playButton.Focus();
+            if (m_Elements.playButton.focusController.focusedElement == null)
+                m_Elements.playButton.Focus();
         }
     }
 }
