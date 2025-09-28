@@ -43,6 +43,7 @@ namespace Bagel
 
         [Space]
         [Header("Assets")]
+        [SerializeField] Transform m_EmbeddedMeshOwner;
         [SerializeField] Transform m_BoxPrefab;
         [SerializeField] Transform m_QuadPrefab;
         [SerializeField] Material m_FloorMaterial;
@@ -84,9 +85,6 @@ namespace Bagel
         const float k_SurfaceOffset = 0.05f;
         const float k_WallThickness = 0.2f;
 
-        void OnEnable() => Build();
-        void Reset() => Build();
-
         void Clear()
         {
             var childrenToDestroy = new List<GameObject>();
@@ -106,8 +104,8 @@ namespace Bagel
             m_SouthWall = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.forward), nameof(m_SouthWall), m_WallMaterial);
             m_NorthWall = GetOrCreate(m_BoxPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.back), nameof(m_NorthWall), m_WallMaterial);
 
-            m_Sidewalk = GetOrCreate(m_QuadPrefab, Quaternion.FromToRotation(Vector3.back, Vector3.up), nameof(m_Sidewalk), m_SidewalkMaterial);
-            m_Hedge = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Hedge), m_HedgeMaterial);
+            m_Sidewalk = GetOrCreate(m_EmbeddedMeshOwner, Quaternion.FromToRotation(Vector3.back, Vector3.up), nameof(m_Sidewalk), m_SidewalkMaterial);
+            m_Hedge = GetOrCreate(m_EmbeddedMeshOwner, Quaternion.FromToRotation(Vector3.back, Vector3.left), nameof(m_Hedge), m_HedgeMaterial);
 
             m_Counter = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_Counter), m_CounterMaterial);
             m_CounterTop = GetOrCreate(m_BoxPrefab, Quaternion.identity, nameof(m_CounterTop), m_CounterTopMaterial);
@@ -119,9 +117,10 @@ namespace Bagel
         {
             Clear();
             Build();
+            UpdateMeshes();
         }
 
-        void Update()
+        void UpdateMeshes()
         {
             UpdateMetrics();
 
@@ -229,19 +228,38 @@ namespace Bagel
 
         void UpdateOutside()
         {
-            UpdateTransform(m_Sidewalk,
-                m_Right + (m_SidewalkWidth * 0.5f),
-                k_FloorY,
-                m_Center.y,
-                m_SidewalkWidth,
-                m_SidewalkLength);
-            UpdateTransform(m_Hedge,
-                m_Right + m_SidewalkWidth + (m_HedgeWidth * 0.5f),
-                k_FloorY + (m_HedgeHeight * 0.5f),
-                m_Center.y,
-                m_HedgeWidth,
-                m_HedgeHeight,
-                m_SidewalkLength);
+            if (m_Sidewalk)
+            {
+                var mesh = ProceduralMesh.BuildQuadGrid(
+                    new Vector2(m_SidewalkWidth, m_SidewalkLength),
+                    segments: new Vector2Int(1, 5),
+                    tileMeters: 1.0f,
+                    uvOffset: Vector2.zero,
+                    plane: ProcPlane.XZ,
+                    twoSided: false,
+                    name: "Sidewalk_GeneratedMesh");
+
+                ProceduralMesh.Apply(m_Sidewalk.gameObject, mesh, m_SidewalkMaterial);
+                m_Sidewalk.localPosition = new Vector3(m_Right + (m_SidewalkWidth * 0.5f), 0f, m_Center.y);
+                m_Sidewalk.localRotation = Quaternion.identity;
+                m_Sidewalk.localScale = Vector3.one;
+            }
+
+            if (m_Hedge)
+            {
+                var mesh = ProceduralMesh.BuildQuadGrid(
+                    new Vector2(m_SidewalkLength, m_HedgeHeight),
+                    segments: new Vector2Int(5, 1),
+                    tileMeters: 1.0f,
+                    uvOffset: Vector2.zero,
+                    plane: ProcPlane.YZ,
+                    twoSided: true,
+                    name: "Hedge_GeneratedMesh");
+                ProceduralMesh.Apply(m_Hedge.gameObject, mesh, m_HedgeMaterial);
+                m_Hedge.localPosition = new Vector3(m_Right + m_SidewalkWidth, k_FloorY + (m_HedgeHeight * 0.5f), m_Center.y);
+                m_Hedge.localRotation = Quaternion.identity;
+                m_Hedge.localScale = Vector3.one;
+            }
         }
 
         void UpdateCounter()
@@ -258,7 +276,7 @@ namespace Bagel
                 k_FloorY + m_CounterHeight + (m_CounterTopThickness * 0.5f),
                 m_CounterRect.y,
                 m_CounterRect.width,
-                -m_CounterTopThickness, // TODO: Temp hack to fix odd normal/lighting issue.
+                m_CounterTopThickness,
                 m_CounterRect.height);
         }
 
