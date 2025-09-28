@@ -12,6 +12,8 @@ namespace Bagel
 
         PauseScreenManager.Elements m_Elements;
 
+        public PauseScreenManager.Elements elements => m_Elements;
+
         void OnEnable()
         {
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
