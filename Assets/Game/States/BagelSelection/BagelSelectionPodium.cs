@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Bagel
 {
+    [ExecuteInEditMode]
     public class BagelSelectionPodium : MonoBehaviour
     {
         public BagelType BagelType;

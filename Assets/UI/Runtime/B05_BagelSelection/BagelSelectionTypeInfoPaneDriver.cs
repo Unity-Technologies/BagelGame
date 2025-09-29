@@ -9,34 +9,36 @@ namespace Bagel
     {
         [SerializeField] BagelSelectionPodium m_BagelSelectionPodium;
 
-        UIDocument m_UIDocument;
         [SerializeField] BagelType m_BagelType;
+        UIDocument m_UIDocument;
+        VisualElement m_Pane;
 
         void OnEnable()
         {
             m_UIDocument = GetComponent<UIDocument>();
+            m_Pane = m_UIDocument.rootVisualElement.Q("pane");
+            m_Pane.dataSource = null;
+
             m_BagelSelectionPodium.OnBagelTypeChange += BagelSelectionPodium_OnBagelTypeChange;
-            BindUI(m_BagelType);
         }
 
         void BagelSelectionPodium_OnBagelTypeChange(object sender, BagelType bagelType)
         {
-            BindUI(bagelType);
+            m_BagelType = bagelType;
         }
 
-        public void BindUI(BagelType bagelType)
+        void Update()
         {
-            m_BagelType = bagelType;
-
-            if (m_UIDocument == null)
+            if (m_BagelType == null)
                 return;
 
-            var root = m_UIDocument.rootVisualElement;
-            var panel = root.Q("pane");
-            if (panel == null)
+            if (m_Pane == null)
                 return;
 
-            panel.dataSource = bagelType;
+            if (m_Pane.dataSource != null)
+                return;
+
+            m_Pane.dataSource = m_BagelType;
         }
     }
 }
