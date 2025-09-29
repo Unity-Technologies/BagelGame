@@ -14,6 +14,7 @@ namespace Bagel
 
         UIDocument m_UIDocument;
 
+        VisualElement m_Pane;
         Button m_SelectButton;
         Button m_BackButton;
         Button m_LeftButton;
@@ -26,6 +27,8 @@ namespace Bagel
 
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
+
+            m_Pane = root.Q<VisualElement>("pane");
 
             m_SelectButton = root.Q<Button>("select-button");
             if (m_SelectButton != null)
@@ -49,44 +52,50 @@ namespace Bagel
         {
             if (state == PlayManagerState.State.BagelSelection)
             {
-                m_SelectButton.Focus();
-
-                m_PlayManager.PlayInputBindings.OnSubmitAction += PlayInputBindings_OnSubmitAction;
-                m_PlayManager.PlayInputBindings.OnCancelAction += PlayInputBindings_OnCancelAction;
-                m_PlayManager.PlayInputBindings.OnLeftAction += PlayInputBindings_OnLeftAction;
-                m_PlayManager.PlayInputBindings.OnRightAction += PlayInputBindings_OnRightAction;
+                m_Pane.Focus();
+                RegisterEvents();
             }
             else
             {
-                m_PlayManager.PlayInputBindings.OnSubmitAction -= PlayInputBindings_OnSubmitAction;
-                m_PlayManager.PlayInputBindings.OnCancelAction -= PlayInputBindings_OnCancelAction;
-                m_PlayManager.PlayInputBindings.OnLeftAction -= PlayInputBindings_OnLeftAction;
-                m_PlayManager.PlayInputBindings.OnRightAction -= PlayInputBindings_OnRightAction;
+                UnregisterEvents();
             }
         }
 
-        void PlayInputBindings_OnSubmitAction(object sender, EventArgs e)
+        void RegisterEvents()
+        {
+            m_Pane.RegisterCallback<NavigationMoveEvent>(OnNavigationMoveEvent);
+            m_Pane.RegisterCallback<NavigationSubmitEvent>(OnNavigationSubmitEvent);
+            m_Pane.RegisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
+        }
+
+        void UnregisterEvents()
+        {
+            m_Pane.UnregisterCallback<NavigationMoveEvent>(OnNavigationMoveEvent);
+            m_Pane.UnregisterCallback<NavigationSubmitEvent>(OnNavigationSubmitEvent);
+            m_Pane.UnregisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
+        }
+
+        void OnNavigationMoveEvent(NavigationMoveEvent evt)
+        {
+            if (evt.direction == NavigationMoveEvent.Direction.Left)
+            {
+                m_BagelSelectionRoom.PreviousBagel();
+            }
+            else if (evt.direction == NavigationMoveEvent.Direction.Right)
+            {
+                m_BagelSelectionRoom.NextBagel();
+            }
+            m_Pane.Focus();
+        }
+
+        void OnNavigationSubmitEvent(NavigationSubmitEvent evt)
         {
             m_BagelSelectionRoom.SelectBagelAndGoToPlay();
-            m_SelectButton.Focus();
         }
 
-        void PlayInputBindings_OnCancelAction(object sender, EventArgs e)
+        void OnNavigationCancelEvent(NavigationCancelEvent evt)
         {
             m_BagelSelectionRoom.PlayManager.State.GoToMainMenu();
-            m_BackButton.Focus();
-        }
-
-        void PlayInputBindings_OnLeftAction(object sender, EventArgs e)
-        {
-            m_BagelSelectionRoom.PreviousBagel();
-            m_LeftButton.Focus();
-        }
-
-        void PlayInputBindings_OnRightAction(object sender, EventArgs e)
-        {
-            m_BagelSelectionRoom.NextBagel();
-            m_RightButton.Focus();
         }
 
         void OnDisable()

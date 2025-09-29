@@ -19,15 +19,6 @@ namespace Bagel
 
         public event EventHandler OnPauseAction;
 
-        public event EventHandler<Vector2> OnNavigateAction;
-        public event EventHandler OnUpAction;
-        public event EventHandler OnDownAction;
-        public event EventHandler OnLeftAction;
-        public event EventHandler OnRightAction;
-
-        public event EventHandler OnSubmitAction;
-        public event EventHandler OnCancelAction;
-
         public event EventHandler OnBindingRebind;
 
         PlayInputActions m_PlayInputActions;
@@ -40,14 +31,7 @@ namespace Bagel
                 m_PlayInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(k_PlayerPrefsName));
 
             m_PlayInputActions.Player.Enable();
-
             m_PlayInputActions.Player.Pause.performed += PausePerformed;
-
-            m_PlayInputActions.UI.Enable();
-
-            m_PlayInputActions.UI.Navigate.performed += NavigatePerformed;
-            m_PlayInputActions.UI.Submit.performed += SubmitPerformed;
-            m_PlayInputActions.UI.Cancel.performed += CancelPerformed;
         }
 
         void OnDestroy()
@@ -55,43 +39,12 @@ namespace Bagel
             m_PlayInputActions.Player.Disable();
             m_PlayInputActions.Player.Pause.performed -= PausePerformed;
 
-            m_PlayInputActions.UI.Disable();
-            m_PlayInputActions.UI.Navigate.performed -= NavigatePerformed;
-            m_PlayInputActions.UI.Submit.performed -= SubmitPerformed;
-            m_PlayInputActions.UI.Cancel.performed -= CancelPerformed;
-
             m_PlayInputActions.Dispose();
         }
 
         void PausePerformed(InputAction.CallbackContext ctx)
         {
             OnPauseAction?.Invoke(this, EventArgs.Empty);
-        }
-
-        void NavigatePerformed(InputAction.CallbackContext ctx)
-        {
-            var vec = ctx.ReadValue<Vector2>();
-            OnNavigateAction?.Invoke(this, vec);
-
-            if (vec.y > 0)
-                OnUpAction?.Invoke(this, EventArgs.Empty);
-            else if (vec.y < 0)
-                OnDownAction?.Invoke(this, EventArgs.Empty);
-
-            if (vec.x < 0 )
-                OnLeftAction?.Invoke(this, EventArgs.Empty);
-            else if (vec.x > 0)
-                OnRightAction?.Invoke(this, EventArgs.Empty);
-        }
-
-        void SubmitPerformed(InputAction.CallbackContext ctx)
-        {
-            OnSubmitAction?.Invoke(this, EventArgs.Empty);
-        }
-
-        void CancelPerformed(InputAction.CallbackContext ctx)
-        {
-            OnCancelAction?.Invoke(this, EventArgs.Empty);
         }
 
         public Vector2 GetMovementVectorNormalized()

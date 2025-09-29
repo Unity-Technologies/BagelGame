@@ -44,19 +44,6 @@ namespace Bagel
                 return;
 
             if (state == PlayManagerState.State.MainMenu)
-            {
-                m_Elements.playButton.Focus();
-                m_PlayManager.PlayInputBindings.OnNavigateAction += PlayInputBindings_OnNavigateAction;
-            }
-            else
-            {
-                m_PlayManager.PlayInputBindings.OnNavigateAction -= PlayInputBindings_OnNavigateAction;
-            }
-        }
-
-        void PlayInputBindings_OnNavigateAction(object sender, Vector2 vec)
-        {
-            if (m_Elements.playButton.focusController.focusedElement == null)
                 m_Elements.playButton.Focus();
         }
     }
