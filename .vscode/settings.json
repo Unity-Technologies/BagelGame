@@ -8,5 +8,6 @@
         "**/obj": true,
         "*.csproj": true,
         "*.sln": true
-    }
+    },
+    "dotnet.defaultSolution": "BagelGame.sln"
 }
