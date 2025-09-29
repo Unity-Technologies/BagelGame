@@ -4,7 +4,8 @@ using UnityEngine.UIElements;
 
 namespace Bagel.B10_EditorTools
 {
-    public class BagelAllUIWindowTests : EditorWindowUITestFixture<BagelAllUIWindow>
+    public class BagelAllUIWindowTests
+        : EditorWindowUITestFixture<BagelAllUIWindow>
     {
         public BagelAllUIWindowTests()
         {
@@ -16,10 +17,10 @@ namespace Bagel.B10_EditorTools
         {
             simulate.FrameUpdate();
 
-            var mainMenuDriver = rootVisualElement.Q<MainMenuScreenManager>();
-            var mainMenuPane = mainMenuDriver.Q<VisualElement>("main-menu-pane");
-            var leaderboardButton = mainMenuDriver.Q<Button>("leaderboard-button");
-            var leaderboardPane = mainMenuDriver.Q<VisualElement>("leaderboard-pane");
+            var driver = rootVisualElement.Q<MainMenuScreenManager>();
+            var mainMenuPane = driver.Q<VisualElement>("main-menu-pane");
+            var leaderboardButton = driver.Q<Button>("leaderboard-button");
+            var leaderboardPane = driver.Q<VisualElement>("leaderboard-pane");
 
             simulate.Click(leaderboardButton);
             simulate.FrameUpdate();
