@@ -92,11 +92,11 @@ inline void BrickProc(
     float edgeDist = min(dx, dy);
 
     // Stable AA in edgeDist domain
-    float w = fwidth(edgeDist) * AAScale;
-    w = min(w, MortarWidth * AAClampFrac); // avoid mortar “growth” at distance
+    //float w = fwidth(edgeDist) * AAScale;
+    //w = min(w, MortarWidth * AAClampFrac); // avoid mortar “growth” at distance
 
     // Masks
-    float mortar = 1.0 - smoothstep(MortarWidth, MortarWidth + w, edgeDist);
+    float mortar = 0.0;// 1.0 - smoothstep(MortarWidth, MortarWidth + w, edgeDist);
     float brickMask = 1.0 - mortar;
 
     // Per-brick random + color
@@ -107,12 +107,12 @@ inline void BrickProc(
     float3 brickCol = baseCol * (1.0 + variation);
 
     // Edge darkening inward from mortar
-    float inner0 = MortarWidth + w;
-    float inner1 = inner0 + EdgeFadeWidth;
-    float edgeDark01 = 1.0 - smoothstep(inner0, inner1, edgeDist); // 1 at edge, 0 inward
-    edgeDark01 = pow(saturate(edgeDark01), EdgeFadeExponent);
-    float darkFactor = 1.0 - edgeDark01 * EdgeFadeAmount;
-    brickCol *= darkFactor;
+    //float inner0 = MortarWidth + w;
+    //float inner1 = inner0 + EdgeFadeWidth;
+    //float edgeDark01 = 1.0 - smoothstep(inner0, inner1, edgeDist); // 1 at edge, 0 inward
+    //edgeDark01 = pow(saturate(edgeDark01), EdgeFadeExponent);
+    //float darkFactor = 1.0 - edgeDark01 * EdgeFadeAmount;
+    //brickCol *= darkFactor;
 
     // Outputs
     OutBaseColor = lerp(MortarColor, brickCol, brickMask);
