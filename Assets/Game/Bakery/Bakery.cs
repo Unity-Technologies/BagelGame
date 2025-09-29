@@ -132,6 +132,14 @@ namespace Bagel
             UpdateDependents();
         }
 
+        void Update()
+        {
+            UpdateMetrics();
+            UpdateInside();
+            UpdateCounter();
+            UpdateDependents();
+        }
+
         Transform GetOrCreate(Transform prefab, Quaternion rotate, string name, Material material)
         {
             if (prefab == null)
