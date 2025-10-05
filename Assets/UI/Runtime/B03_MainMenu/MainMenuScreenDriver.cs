@@ -19,8 +19,12 @@ namespace Bagel
             m_PlayManager.State.OnStateChange += State_OnStateChange;
 
             m_UIDocument = GetComponent<UIDocument>();
-            var root = m_UIDocument.rootVisualElement;
+            var mainMenuManager = m_UIDocument.rootVisualElement.Q<MainMenuScreenManager>();
+            var settingsPaneManager = mainMenuManager.Q<SettingsPaneManager>();
 
+            settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
+
+            var root = m_UIDocument.rootVisualElement;
             m_Elements = MainMenuScreenManager.BindUI(root, new MainMenuScreenManager.Callbacks
             {
                 playManagerState = m_PlayManager.State,

@@ -9,12 +9,18 @@ namespace Bagel
 
         [Header("Virtual Cameras")]
         [SerializeField] CinemachineCamera m_MainMenuCamera;
-        [SerializeField] CinemachineCamera m_MainMenuSettingsCamera;
+        [SerializeField] CinemachineCamera m_MainMenuSecondaryCamera;
         [SerializeField] CinemachineCamera m_BagelSelectionCamera;
-        [SerializeField] CinemachineCamera m_GameplayCamera;
+        [SerializeField] CinemachineCamera m_PlayCamera;
         [SerializeField] CinemachineCamera m_GameOverCamera;
 
         PlayManagerState m_State;
+
+        public float fieldOfView
+        {
+            get => m_MainMenuCamera.Lens.FieldOfView;
+            set => UpdateFieldOfView(value);
+        }
 
         void Awake()
         {
@@ -28,12 +34,19 @@ namespace Bagel
             UpdateCamera();
         }
 
+        void UpdateFieldOfView(float newFOV)
+        {
+            m_MainMenuCamera.Lens.FieldOfView = newFOV;
+            m_MainMenuSecondaryCamera.Lens.FieldOfView = newFOV;
+            m_PlayCamera.Lens.FieldOfView = newFOV;
+        }
+
         void UpdateCamera()
         {
             m_MainMenuCamera.enabled = m_State.CurrentState == PlayManagerState.State.MainMenu && m_State.CurrentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Primary;
-            m_MainMenuSettingsCamera.enabled = m_State.CurrentState == PlayManagerState.State.MainMenu && m_State.CurrentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Secondary;
+            m_MainMenuSecondaryCamera.enabled = m_State.CurrentState == PlayManagerState.State.MainMenu && m_State.CurrentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Secondary;
             m_BagelSelectionCamera.enabled = m_State.CurrentState == PlayManagerState.State.BagelSelection;
-            m_GameplayCamera.enabled = m_State.CurrentState == PlayManagerState.State.Playing;
+            m_PlayCamera.enabled = m_State.CurrentState == PlayManagerState.State.Playing;
             m_GameOverCamera.enabled = m_State.CurrentState == PlayManagerState.State.GameOver;
         }
     }

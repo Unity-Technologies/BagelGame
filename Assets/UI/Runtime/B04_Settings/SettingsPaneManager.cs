@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
@@ -6,21 +7,16 @@ namespace Bagel
     [UxmlElement]
     public partial class SettingsPaneManager : VisualElement
     {
-        public struct Elements
-        {
-            public SettingsPaneManager manager;
-            public DropdownField themeDropdown;
-        }
+        SettingsPaneManagerForGame m_SettingsPaneManagerForGame;
+        SettingsPaneManagerForUI m_SettingsPaneManagerForUI;
 
-        public static Elements BindUI(VisualElement root)
-        {
-            var elements = new Elements
-            {
-                manager = root.Q<SettingsPaneManager>(),
-                themeDropdown = root.Q<DropdownField>("theme-dropdown")
-            };
+        public SettingsPaneManagerForGame forGame => m_SettingsPaneManagerForGame ??= this.Q<SettingsPaneManagerForGame>();
+        public SettingsPaneManagerForUI forUI => m_SettingsPaneManagerForUI ??= this.Q<SettingsPaneManagerForUI>();
 
-            return elements;
+        public void BindSettingsCallbacks(GameObject playSettingsObject)
+        {
+            forGame.BindSettingsCallbacks(playSettingsObject.GetComponent<SettingsRefsForGame>());
+            forUI.BindSettingsCallbacks(playSettingsObject.GetComponent<SettingsRefsForUI>());
         }
     }
 }

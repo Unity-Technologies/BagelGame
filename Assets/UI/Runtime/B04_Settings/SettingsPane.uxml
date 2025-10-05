@@ -1,11 +1,21 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="GameSettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForGame.uxml?fileID=9197481963319205126&amp;guid=d7691f3c73ec72640bed89b7079805d7&amp;type=3#SettingsPaneForGame"/>
+    <ui:Template name="UISettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForUI.uxml?fileID=9197481963319205126&amp;guid=e1093797146b3f046962391299b2fdb9&amp;type=3#SettingsPaneForUI"/>
     <Style src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneStyles.uss?fileID=7433441132597879392&amp;guid=8078ac1b834d2b244a237e4c2907d5d5&amp;type=3#SettingsPaneStyles"/>
     <Bagel.SettingsPaneManager>
         <ui:Label text="Settings" name="title" class="b-title"/>
-        <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="settings-view" class="b-details-view">
-            <ui:Slider label="Field of View" value="42" high-value="100" name="fov-slider"/>
-            <ui:DropdownField label="Theme" name="theme-dropdown" choices="Classic,Dark" index="0"/>
-        </ui:ScrollView>
+        <ui:TabView name="settings-tab-view">
+            <ui:Tab label="Game" name="game-settings-tab">
+                <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="game-settings-view" class="b-details-view">
+                    <ui:Instance template="GameSettingsPane" name="game-settings-pane"/>
+                </ui:ScrollView>
+            </ui:Tab>
+            <ui:Tab label="UI" name="ui-settings-tab">
+                <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="ui-settings-view" class="b-details-view">
+                    <ui:Instance template="UISettingsPane" name="ui-settings-pane"/>
+                </ui:ScrollView>
+            </ui:Tab>
+        </ui:TabView>
         <ui:Button text="Back" name="back-button"/>
     </Bagel.SettingsPaneManager>
 </ui:UXML>

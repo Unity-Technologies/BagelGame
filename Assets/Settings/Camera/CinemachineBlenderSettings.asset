@@ -13,30 +13,30 @@ MonoBehaviour:
   m_Name: CinemachineBlenderSettings
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBlenderSettings
   CustomBlends:
-  - From: MenuSecondaryCinemaCamera
-    To: MenuPrimaryCinemaCamera
+  - From: MainMenuSecondaryCinemaCamera
+    To: MainMenuPrimaryCinemaCamera
     Blend:
       Style: 1
-      Time: 0.33
+      Time: 1
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 4
-  - From: MenuPrimaryCinemaCamera
-    To: MenuSecondaryCinemaCamera
+  - From: MainMenuPrimaryCinemaCamera
+    To: MainMenuSecondaryCinemaCamera
     Blend:
       Style: 1
-      Time: 0.33
+      Time: 1
       CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 4
-  - From: BagelSelectCinemaCamera
-    To: MenuPrimaryCinemaCamera
+  - From: BagelSelectionCinemaCamera
+    To: MainMenuPrimaryCinemaCamera
     Blend:
       Style: 1
       Time: 0.66
@@ -46,10 +46,10 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 4
-  - From: MenuPrimaryCinemaCamera
-    To: BagelSelectCinemaCamera
+  - From: MainMenuPrimaryCinemaCamera
+    To: BagelSelectionCinemaCamera
     Blend:
-      Style: 6
+      Style: 1
       Time: 0.66
       CustomCurve:
         serializedVersion: 2
@@ -57,10 +57,10 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 4
-  - From: BagelSelectCinemaCamera
+  - From: BagelSelectionCinemaCamera
     To: PlayCinemaCamera
     Blend:
-      Style: 3
+      Style: 1
       Time: 0.5
       CustomCurve:
         serializedVersion: 2
@@ -71,7 +71,7 @@ MonoBehaviour:
   - From: PlayCinemaCamera
     To: GameOverCinemaCamera
     Blend:
-      Style: 4
+      Style: 1
       Time: 0.33
       CustomCurve:
         serializedVersion: 2
@@ -82,7 +82,7 @@ MonoBehaviour:
   - From: GameOverCinemaCamera
     To: PlayCinemaCamera
     Blend:
-      Style: 3
+      Style: 1
       Time: 0.5
       CustomCurve:
         serializedVersion: 2
@@ -91,7 +91,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 4
   - From: GameOverCinemaCamera
-    To: MenuPrimaryCinemaCamera
+    To: MainMenuPrimaryCinemaCamera
     Blend:
       Style: 1
       Time: 0.66

@@ -23,7 +23,7 @@ namespace Bagel.B04_Settings
         public void SettingsThemeDropdown()
         {
             var root = rootVisualElement;
-            m_BagelTestAssetList.settingsPaneUxml.CloneTree(root);
+            m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(root);
             simulate.FrameUpdate();
             var dropdown = root.Q<DropdownField>("theme-dropdown");
 

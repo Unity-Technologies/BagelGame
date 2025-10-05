@@ -15,6 +15,8 @@ MonoBehaviour:
   mainSceneName: Main
   mainMenuUxml: {fileID: 9197481963319205126, guid: ea563f0ac4a3a3840827b0233961e0fc, type: 3}
   settingsPaneUxml: {fileID: 9197481963319205126, guid: 099575a75b5735a419dbefecaa7d35b0, type: 3}
+  settingsPaneForGameUxml: {fileID: 9197481963319205126, guid: d7691f3c73ec72640bed89b7079805d7, type: 3}
+  settingsPaneForUIUxml: {fileID: 9197481963319205126, guid: e1093797146b3f046962391299b2fdb9, type: 3}
   bagelTrackerLeftDisplayUxml: {fileID: 9197481963319205126, guid: 0ad31c74420f69e459b372d004c0b2dc, type: 3}
   bagelTrackerRightDisplayUxml: {fileID: 9197481963319205126, guid: b3f3b240513e14d9583182fb441a13eb, type: 3}
   pauseScreenUxml: {fileID: 9197481963319205126, guid: 19cec0096d1d856449401f567fd84d5d, type: 3}

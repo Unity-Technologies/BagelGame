@@ -31,18 +31,19 @@ namespace Bagel.B04_Settings
         public void SettingsThemeDropdown()
         {
             // Load the UXML.
-            m_BagelTestAssetList.settingsPaneUxml.CloneTree(rootVisualElement);
+            m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
 
             // Get the elements.
-            var elements = SettingsPaneManager.BindUI(rootVisualElement);
+            var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
+            var themeDropdown = manager.themeDropdown;
 
             // Check initial state.
-            Assert.AreEqual(2, elements.themeDropdown.choices.Count);
-            Assert.AreEqual("Classic", elements.themeDropdown.value);
+            Assert.AreEqual(2, themeDropdown.choices.Count);
+            Assert.AreEqual("Classic", themeDropdown.value);
 
             // Get popup field input.
-            var themePopupFieldInput = elements.themeDropdown.Q(className: "unity-popup-field__input");
+            var themePopupFieldInput = themeDropdown.Q(className: DropdownField.inputUssClassName);
 
             // Simulate changing the theme.
             simulate.Click(themePopupFieldInput);
@@ -50,7 +51,7 @@ namespace Bagel.B04_Settings
             Assert.IsTrue(m_PopupMenuSimulator.menuIsDisplayed);
             Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Dark"));
             simulate.FrameUpdate();
-            Assert.AreEqual("Dark", elements.themeDropdown.value);
+            Assert.AreEqual("Dark", themeDropdown.value);
         }
     }
 }

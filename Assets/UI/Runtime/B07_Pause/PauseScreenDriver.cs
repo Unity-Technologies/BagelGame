@@ -16,11 +16,17 @@ namespace Bagel
 
         void OnEnable()
         {
+            var uiDocument = GetComponent<UIDocument>();
+            var pauseScreenManager = uiDocument.rootVisualElement.Q<PauseScreenManager>();
+            var settingsPaneManager = pauseScreenManager.Q<SettingsPaneManager>();
+
+            settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
+
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
 
             m_Elements = PauseScreenManager.BindUI(
-                GetComponent<UIDocument>().rootVisualElement,
+                pauseScreenManager,
                 new PauseScreenManager.Callbacks
                 {
                     onResume = m_PlayManager.State.Resume,

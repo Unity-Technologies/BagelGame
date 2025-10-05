@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Bagel.SettingsPaneManagerForGame data-source="project://database/Assets/Game/States/B04_Settings/SettingsDataForGame.asset?fileID=11400000&amp;guid=b935fda1f14fe624baf0e5b557b52ed4&amp;type=2#SettingsDataForGame" name="game-settings-manager">
+        <ui:Slider label="Field of View" name="fov-slider">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="fieldOfView" binding-mode="TwoWay"/>
+                <ui:DataBinding property="lowValue" data-source-path="fieldOfViewMin" binding-mode="ToTarget"/>
+                <ui:DataBinding property="highValue" data-source-path="fieldOfViewMax" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Slider>
+    </Bagel.SettingsPaneManagerForGame>
+</ui:UXML>
