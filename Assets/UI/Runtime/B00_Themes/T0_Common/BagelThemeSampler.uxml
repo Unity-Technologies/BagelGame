@@ -17,8 +17,16 @@
             <ui:DropdownField label="Dropdown" choices="One,Two,Three" index="0"/>
             <ui:Slider label="Slider" value="42" high-value="100"/>
             <ui:TextField label="Text Field" placeholder-text="filler text"/>
+            <ui:TabView>
+                <ui:Tab label="One">
+                    <ui:Label text="One"/>
+                </ui:Tab>
+                <ui:Tab label="Two">
+                    <ui:Label text="Two"/>
+                </ui:Tab>
+            </ui:TabView>
         </ui:VisualElement>
-        <ui:VisualElement name="pane-3" class="b-pane">
+        <ui:VisualElement name="pane-3" class="b-pane" style="height: 359px;">
             <ui:Instance template="LeaderboardPane"/>
         </ui:VisualElement>
     </ui:ScrollView>
