@@ -13,23 +13,49 @@ MonoBehaviour:
   m_Name: LeaderboardData
   m_EditorClassIdentifier: BagelGame::Bagel.LeaderboardData
   Entries:
-  - name: Foo
-    toppings: 234
-  - name: Bar
+  - playerName: UIToolkitPro
+    toppings: 2345
+  - playerName: UI_Toolkid
     toppings: 2848
-  - name: GameObject123
+  - playerName: UIToolk1t
     toppings: 345
-  - name: V1sual3l3ment
+  - playerName: ToolkitMaster
     toppings: 128
-  - name: Uitoolkit
+  - playerName: MiniUITool
     toppings: 565
-  - name: UITool Kit
+  - playerName: UI_Elites
     toppings: 4566
-  - name: UIElementsKit
+  - playerName: ElementsOP
     toppings: 6749
-  - name: UI Kit
+  - playerName: UIElemCore
     toppings: 788
-  - name: uToolkit
+  - playerName: Visu4lElement
     toppings: 355
-  - name: Unity UIToolkit
+  - playerName: VElement99
     toppings: 7467
+  - playerName: VisElem_
+    toppings: 345
+  - playerName: PanelSetGo
+    toppings: 359
+  - playerName: SettingsPane
+    toppings: 235
+  - playerName: ButtonMasher
+    toppings: 6776
+  - playerName: Hold2Confirm
+    toppings: 43535
+  - playerName: BagelLord
+    toppings: 124
+  - playerName: ToastedBagel12
+    toppings: 31
+  - playerName: BagelCore
+    toppings: 456
+  - playerName: SesameSeeded
+    toppings: 3546
+  - playerName: Sesamix
+    toppings: 2454
+  - playerName: OpenSesame_
+    toppings: 3858
+  - playerName: SesameByte
+    toppings: 8395
+  - playerName: DarkToast
+    toppings: 147

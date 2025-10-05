@@ -8,3 +8,7 @@
     border-top-color: rgb(255, 255, 255);
     border-bottom-color: rgb(255, 255, 255);
 }
+
+.b-row {
+    flex-direction: row;
+}

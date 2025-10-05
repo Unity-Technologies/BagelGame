@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
@@ -7,48 +6,62 @@ namespace Bagel
     [UxmlElement]
     public partial class LeaderboardManager : VisualElement
     {
-        LeaderboardData m_LeaderboardData;
+        [UxmlAttribute]
+        public LeaderboardData leaderboardData;
 
-        public LeaderboardData LeaderboardData => m_LeaderboardData;
+        MultiColumnListView m_Leaderboard;
 
-        public struct Elements
-        {
-            public MultiColumnListView leaderboard;
-        }
-
-        public struct Callbacks
-        {
-            
-        }
-
-        Elements m_Elements;
-
-        public static Elements BindUI(VisualElement root, Callbacks callbacks)
-        {
-            var elements = new Elements
-            {
-                leaderboard = root.Q<MultiColumnListView>("leaderboard-view")
-            };
-
-            return elements;
-        }
+        public MultiColumnListView Leaderboard
+            => m_Leaderboard ??= this.Q<MultiColumnListView>("leaderboard-table");
 
         public LeaderboardManager()
         {
             RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
         }
 
-        void FirstInit(GeometryChangedEvent evt)
+        public void AddScore(string playerName, int toppings)
         {
-            m_Elements = BindUI(this, new Callbacks
-            {
-            });
-
-            m_LeaderboardData = dataSource as LeaderboardData;
-            if (m_LeaderboardData == null)
+            if (leaderboardData == null)
+                return;
+            if (Leaderboard == null)
                 return;
 
-            m_Elements.leaderboard.itemsSource = m_LeaderboardData.Entries;
+            var newEntry = new LeaderboardData.LeaderboardEntry
+            {
+                playerName = playerName,
+                toppings = toppings
+            };
+
+            var dataIndex = leaderboardData.Entries.Count;
+            leaderboardData.Entries.Add(newEntry);
+
+            Leaderboard.RefreshItems();
+
+            var viewIndex = Leaderboard.viewController.GetIndexForId(dataIndex);
+            Leaderboard.SetSelection(viewIndex);
+            Leaderboard.ScrollToItemById(dataIndex);
+            Leaderboard.Focus();
+        }
+
+        void FirstInit(GeometryChangedEvent evt)
+        {
+            if (Leaderboard == null)
+                return;
+
+            Leaderboard.columns["name"].makeCell = () => new Label();
+            Leaderboard.columns["toppings"].makeCell = () => new Label();
+
+            Leaderboard.columns["name"].bindCell = (VisualElement element, int index) =>
+                (element as Label).text = leaderboardData.Entries[index].playerName;
+            Leaderboard.columns["toppings"].bindCell = (VisualElement element, int index) =>
+                (element as Label).text = leaderboardData.Entries[index].toppings.ToString();
+
+            Leaderboard.columns["name"].comparison = (a, b) =>
+                string.Compare(leaderboardData.Entries[a].playerName, leaderboardData.Entries[b].playerName, StringComparison.Ordinal);
+            Leaderboard.columns["toppings"].comparison = (a, b) =>
+                (leaderboardData.Entries[a].toppings).CompareTo(leaderboardData.Entries[b].toppings);
+
+            Leaderboard.itemsSource = leaderboardData.Entries;
         }
     }
 }

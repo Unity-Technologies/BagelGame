@@ -9,6 +9,22 @@
     flex-basis: 0;
 }
 
+#score-row {
+    align-items: center;
+}
+
 #leaderboard > #leaderboard-manager > #back-button {
     display: none;
+}
+
+#toppings-number-field {
+    font-size: 33px;
+}
+
+#toppings-number-field > .unity-base-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
 }

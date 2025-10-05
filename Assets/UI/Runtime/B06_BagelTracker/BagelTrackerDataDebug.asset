@@ -15,7 +15,7 @@ MonoBehaviour:
   constants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
   toppingsCount: 322
   toppingsMaxCount: 1000
-  input: -0.2
+  input: 0.21
   speed: 2.61
   force: 13.4
   spin: 5.44

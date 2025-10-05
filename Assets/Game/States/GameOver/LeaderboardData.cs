@@ -10,7 +10,7 @@ namespace Bagel
         [Serializable]
         public struct LeaderboardEntry
         {
-            public string name;
+            public string playerName;
             public int toppings;
         }
 

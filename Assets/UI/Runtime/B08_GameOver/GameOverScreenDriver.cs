@@ -72,7 +72,7 @@ namespace Bagel
             if (bagelTrackerData.toppingsCount > 0)
             {
                 m_Elements.title.text = "You Win!";
-                m_Elements.toppingsField.value = bagelTrackerData.toppingsCount;
+                m_Elements.toppingsNumberField.value = bagelTrackerData.toppingsCount;
             }
             else
             {

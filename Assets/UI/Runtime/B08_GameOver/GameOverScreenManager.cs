@@ -12,7 +12,7 @@ namespace Bagel
         {
             public VisualElement root;
             public Label title;
-            public IntegerField toppingsField;
+            public IntegerField toppingsNumberField;
             public VisualElement leaderboardForm;
             public TextField addToLeaderboardNameField;
             public Button addToLeaderboardButton;
@@ -36,7 +36,7 @@ namespace Bagel
             {
                 root = root,
                 title = root.Q<Label>("title"),
-                toppingsField = root.Q<IntegerField>("toppings-field"),
+                toppingsNumberField = root.Q<IntegerField>("toppings-number-field"),
                 leaderboardForm = root.Q<VisualElement>("leaderboard-form"),
                 addToLeaderboardNameField = root.Q<TextField>("leaderboard-name-field"),
                 addToLeaderboardButton = root.Q<Button>("add-to-leaderboard-button"),
@@ -72,16 +72,13 @@ namespace Bagel
 
         void AddNameToLeaderboard()
         {
-            var leaderboardData = m_Elements.leaderboardManager.LeaderboardData;
+            var leaderboardData = m_Elements.leaderboardManager.leaderboardData;
             if (leaderboardData == null)
                 return;
 
-            leaderboardData.Entries.Add(
-                new LeaderboardData.LeaderboardEntry()
-                {
-                    name = m_Elements.addToLeaderboardNameField.value,
-                    toppings = m_Elements.toppingsField.value
-                } );
+            m_Elements.leaderboardManager.AddScore(
+                m_Elements.addToLeaderboardNameField.value,
+                m_Elements.toppingsNumberField.value);
 
             m_Elements.leaderboardForm.SetEnabled(false);
         }
