@@ -1,5 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Bagel.SettingsPaneManagerForUI name="ui-settings-manager">
-        <ui:DropdownField label="Theme" name="theme-dropdown" choices="Classic,Dark" index="0"/>
+    <Bagel.SettingsPaneManagerForUI name="ui-settings-manager" data-source="project://database/Assets/UI/Runtime/B04_Settings/SettingsDataForUIMock.asset?fileID=11400000&amp;guid=a5b98dc23cfd9cb4c9d19edc86417c98&amp;type=2#SettingsDataForUIMock" bagel-theme-collection="project://database/Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset?fileID=11400000&amp;guid=0b2cb54fd56196a438cd99033ac4d38c&amp;type=2#BagelThemeCollection" panel-settings-collection="project://database/Assets/UI/Runtime/B01_PanelSettings/PanelSettingsCollection.asset?fileID=11400000&amp;guid=b035c3d0e01944847a6335d7e1d4709a&amp;type=2#PanelSettingsCollection">
+        <ui:DropdownField label="Theme" name="theme-dropdown" index="0">
+            <Bindings>
+                <ui:DataBinding property="index" data-source-path="themeIndex" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:DropdownField>
     </Bagel.SettingsPaneManagerForUI>
 </ui:UXML>

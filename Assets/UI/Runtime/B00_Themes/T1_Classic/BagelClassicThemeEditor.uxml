@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="BagelThemeSampler" src="project://database/Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeSampler.uxml?fileID=9197481963319205126&amp;guid=25ee251aea280e0439dde13ddb37f5ee&amp;type=3#BagelThemeSampler"/>
+    <Style src="project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeStyles.uss?fileID=7433441132597879392&amp;guid=54aebfc2e2778044aba24411814f7cff&amp;type=3#BagelClassicThemeStyles"/>
+    <ui:Instance template="BagelThemeSampler" style="flex-grow: 1;"/>
+</ui:UXML>

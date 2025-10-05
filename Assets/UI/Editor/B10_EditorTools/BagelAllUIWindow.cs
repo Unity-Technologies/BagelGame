@@ -8,10 +8,12 @@ using UnityEngine.UIElements;
 
 public class BagelAllUIWindow : EditorWindow
 {
-    [SerializeField] private VisualTreeAsset m_VisualTreeAsset = default;
-    [SerializeField] private StyleSheet m_Theme = default;
-    [SerializeField] private BagelType m_BagelType = default;
-    [SerializeField] private BagelTrackerData m_BagelTrackerData = default;
+    [SerializeField] VisualTreeAsset m_VisualTreeAsset;
+    [SerializeField] ThemeStyleSheet m_DefaultTheme;
+    [SerializeField] BagelType m_BagelType;
+    [SerializeField] BagelTrackerData m_BagelTrackerData;
+
+    ThemeStyleSheet m_CurrentTheme;
 
     [MenuItem("Bagel/Bagel All UI")]
     public static void ShowExample()
@@ -29,21 +31,30 @@ public class BagelAllUIWindow : EditorWindow
         // Create UI.
         m_VisualTreeAsset.CloneTree(rootVisualElement);
 
-        // Add runtime theme to all game screens.
-        rootVisualElement.Query<TemplateContainer>().ForEach(t =>
-        {
-           t.styleSheets.Add(m_Theme);
-        });
+        m_CurrentTheme = m_DefaultTheme;
+        ApplyRuntimeTheme(m_DefaultTheme);
 
-        SetUpScroller(editorTheme);
+        SetupScroller(editorTheme);
 
-        SetUpBagelTrackerInspector(editorTheme);
-        SetUpBagelTypeInspector(editorTheme);
-        SetUpGameOverControls(editorTheme);
-        SetUpLeaderboardInspector(editorTheme);
+        BindMainMenuRow();
+        BindBagelTrackerRow(editorTheme);
+        BindBagelTypeRow(editorTheme);
+        BindPauseRow();
+        BindGameOverRow(editorTheme);
+        BindLeaderboardRow(editorTheme);
     }
 
-    void SetUpScroller(StyleSheet editorTheme)
+    void ApplyRuntimeTheme(ThemeStyleSheet theme)
+    {
+        rootVisualElement.Query<TemplateContainer>().ForEach(t =>
+        {
+            t.styleSheets.Remove(m_CurrentTheme);
+            t.styleSheets.Add(theme);
+        });
+        m_CurrentTheme = theme;
+    }
+
+    void SetupScroller(StyleSheet editorTheme)
     {
         var rootScrollView = rootVisualElement.Q<ScrollView>("root-scrollview");
         var rootScroller = rootVisualElement.Q<Scroller>("root-scroller");
@@ -57,7 +68,14 @@ public class BagelAllUIWindow : EditorWindow
         rootScroller.SetBinding("highValue", new DataBinding() { dataSourcePath = new PropertyPath("highValue") });
     }
 
-    void SetUpBagelTrackerInspector(StyleSheet editorTheme)
+    void BindMainMenuRow()
+    {
+        var manager = rootVisualElement.Q<MainMenuScreenManager>();
+        var uiSettings = manager.Q<SettingsPaneManagerForUI>();
+        uiSettings.OnThemeChange += (_, theme) => ApplyRuntimeTheme(theme);
+    }
+
+    void BindBagelTrackerRow(StyleSheet editorTheme)
     {
         var bagelTrackerDataInspector = new InspectorElement(m_BagelTrackerData);
         bagelTrackerDataInspector.styleSheets.Add(editorTheme);
@@ -65,7 +83,7 @@ public class BagelAllUIWindow : EditorWindow
         bagelTrackerDataRow.Add(bagelTrackerDataInspector);
     }
 
-    void SetUpBagelTypeInspector(StyleSheet editorTheme)
+    void BindBagelTypeRow(StyleSheet editorTheme)
     {
         var bagelTypeInfoInspector = new InspectorElement(m_BagelType);
         bagelTypeInfoInspector.styleSheets.Add(editorTheme);
@@ -73,7 +91,14 @@ public class BagelAllUIWindow : EditorWindow
         bagelTypeInfoContainer.Add(bagelTypeInfoInspector);
     }
 
-    void SetUpGameOverControls(StyleSheet editorTheme)
+    void BindPauseRow()
+    {
+        var manager = rootVisualElement.Q<PauseScreenManager>();
+        var uiSettings = manager.Q<SettingsPaneManagerForUI>();
+        uiSettings.OnThemeChange += (_, theme) => ApplyRuntimeTheme(theme);
+    }
+
+    void BindGameOverRow(StyleSheet editorTheme)
     {
         var gameOverScreen = rootVisualElement.Q<VisualElement>("game-over");
         var gameOverScreenManager = gameOverScreen.Q<GameOverScreenManager>();
@@ -93,7 +118,7 @@ public class BagelAllUIWindow : EditorWindow
         };
     }
 
-    void SetUpLeaderboardInspector(StyleSheet editorTheme)
+    void BindLeaderboardRow(StyleSheet editorTheme)
     {
         var leaderboardRow = rootVisualElement.Q<VisualElement>("leaderboard-row");
         var leaderboardManager = leaderboardRow.Q<LeaderboardManager>();

@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - m_ViewDataDictionary: {instanceID: 0}
   - m_VisualTreeAsset: {fileID: 9197481963319205126, guid: 7795a87192aceab4cb8538f6d7ba88d5, type: 3}
-  - m_Theme: {fileID: -4733365628477956816, guid: 69175a3719b8b38449aaa271dbf1486e, type: 3}
+  - m_DefaultTheme: {fileID: -4733365628477956816, guid: 69175a3719b8b38449aaa271dbf1486e, type: 3}
   - m_BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
   - m_BagelTrackerData: {fileID: 11400000, guid: 0a1faec4a7b5d7f409ffc942358d1e2e, type: 2}
   executionOrder: 0

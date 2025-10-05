@@ -1,8 +1,7 @@
-:root {
-}
+
 
 .unity-text-element {
-    -unity-font-definition: url("project://database/Assets/UI/Runtime/B00_Themes/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
+    -unity-font-definition: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
     -unity-text-generator: advanced;
     color: rgb(239, 239, 239);
 }
@@ -19,7 +18,7 @@
     border-bottom-right-radius: 11px;
     border-bottom-left-radius: 11px;
     overflow: visible;
-    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
 }
 
 .unity-button:enabled:hover {
@@ -122,7 +121,7 @@
 }
 
 .unity-collection-view {
-    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
 }
 
 .unity-multi-column-header {
@@ -138,7 +137,7 @@
 }
 
 .unity-popup-field {
-    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
 }
 
 .unity-popup-field__input {
@@ -152,8 +151,8 @@
     background-color: rgba(0, 0, 0, 0.64);
 }
 
-
-
 .unity-base-dropdown__checkmark {
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
+
+
