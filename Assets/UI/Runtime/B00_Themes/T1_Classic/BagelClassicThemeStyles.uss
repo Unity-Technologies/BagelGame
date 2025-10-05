@@ -1,4 +1,11 @@
-
+:root {
+    --b-fill-color: rgb(71, 71, 71);
+    --b-primary-color: rgb(98, 143, 38);
+    --b-primary-color-faded: rgb(20, 79, 16);
+    --b-inner-radius: 8px;
+    --b-element-radius: 11px;
+    --b-pane-radius: 18px;
+}
 
 .unity-text-element {
     -unity-font-definition: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
@@ -7,18 +14,18 @@
 }
 
 .unity-button {
-    background-color: rgb(71, 71, 71);
     transition-duration: 0.3s;
     border-top-width: 5px;
     border-right-width: 5px;
     border-bottom-width: 5px;
     border-left-width: 5px;
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
-    border-bottom-right-radius: 11px;
-    border-bottom-left-radius: 11px;
     overflow: visible;
     -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    background-color: var(--b-fill-color);
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
 }
 
 .unity-button:enabled:hover {
@@ -27,7 +34,7 @@
 }
 
 .unity-button.b-primary {
-    background-color: rgb(98, 143, 38);
+    background-color: var(--b-primary-color);
 }
 
 .unity-base-text-field__input {
@@ -49,25 +56,25 @@
 }
 
 .unity-progress-bar__background {
-    background-color: rgb(20, 79, 16);
     border-top-width: 2px;
     border-right-width: 2px;
     border-bottom-width: 2px;
     border-left-width: 2px;
     min-height: initial;
     max-height: initial;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    background-color: var(--b-primary-color-faded);
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
 }
 
 .unity-progress-bar__progress {
-    background-color: rgb(22, 142, 14);
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
+    background-color: var(--b-primary-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
 }
 
 .b-title {
@@ -85,23 +92,23 @@
     margin-right: 6px;
     margin-bottom: 6px;
     margin-left: 6px;
-    border-top-left-radius: 17px;
-    border-top-right-radius: 17px;
-    border-bottom-right-radius: 17px;
-    border-bottom-left-radius: 17px;
     width: 250px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
 }
 
 .b-sub-pane {
     background-color: rgba(0, 0, 0, 0.52);
-    border-top-left-radius: 19px;
-    border-top-right-radius: 19px;
-    border-bottom-right-radius: 19px;
-    border-bottom-left-radius: 19px;
     padding-top: 4px;
     padding-right: 4px;
     padding-bottom: 4px;
     padding-left: 4px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
 }
 
 .b-screen {
@@ -154,5 +161,3 @@
 .unity-base-dropdown__checkmark {
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
-
-
