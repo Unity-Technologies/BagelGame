@@ -20,15 +20,15 @@ namespace Bagel
 
             m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
 
-            m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
-            m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
+            m_PlayManager.state.onPauseStateChanged += State_OnPauseStateChanged;
+            m_PlayManager.playInputBindings.onPauseAction += PlayInputBindings_OnPauseAction;
 
             m_PauseScreenManager.pausePaneManager.BindUI(
                 new PausePaneManager.Callbacks
                 {
-                    onResume = m_PlayManager.State.Resume,
-                    onRestart = m_PlayManager.State.GoToPlay,
-                    onMainMenu = m_PlayManager.State.GoToMainMenu
+                    onResume = m_PlayManager.state.Resume,
+                    onRestart = m_PlayManager.state.GoToPlay,
+                    onMainMenu = m_PlayManager.state.GoToMainMenu
                 }
             );
 
@@ -37,8 +37,8 @@ namespace Bagel
 
         void OnDisable()
         {
-            m_PlayManager.State.OnPauseStateChanged -= State_OnPauseStateChanged;
-            m_PlayManager.PlayInputBindings.OnPauseAction -= PlayInputBindings_OnPauseAction;
+            m_PlayManager.state.onPauseStateChanged -= State_OnPauseStateChanged;
+            m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
         }
 
         void State_OnPauseStateChanged(object sender, bool paused)
@@ -48,7 +48,7 @@ namespace Bagel
 
         void PlayInputBindings_OnPauseAction(object sender, EventArgs e)
         {
-            m_PlayManager.State.TogglePause();
+            m_PlayManager.state.TogglePause();
         }
 
         void SetPauseState(bool paused)

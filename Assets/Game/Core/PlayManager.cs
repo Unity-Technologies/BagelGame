@@ -11,13 +11,13 @@ namespace Bagel
 
         PlayManagerState m_PlayManagerState = new PlayManagerState();
 
-        public PlayManagerState State => m_PlayManagerState;
+        public PlayManagerState state => m_PlayManagerState;
         public GameObject playSettingsObject => m_PlaySettingsObject;
-        public PlayInputBindings PlayInputBindings => m_PlayInputBindings;
+        public PlayInputBindings playInputBindings => m_PlayInputBindings;
 
         void OnEnable()
         {
-            State.GoToMainMenu();
+            state.GoToMainMenu();
         }
     }
 }

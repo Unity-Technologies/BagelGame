@@ -28,11 +28,11 @@ namespace Bagel
         public Transform modelPrefab;
 
         // Cummulative Stats
-        public float Toppings => maxToppingCount;
-        public float ToppingLoss => spinToppingLossFactor + impactToppingLossFactor + impactAmortizationRate;
-        public float Control => tiltRecoverySpeed + turnTorque;
-        public float Speed => rollTorque;
-        public float Grip => dynamicFriction + staticFriction;
+        public float toppings => maxToppingCount;
+        public float toppingLoss => spinToppingLossFactor + impactToppingLossFactor + impactAmortizationRate;
+        public float control => tiltRecoverySpeed + turnTorque;
+        public float speed => rollTorque;
+        public float grip => dynamicFriction + staticFriction;
 
         // Computed Stats
         [Space]

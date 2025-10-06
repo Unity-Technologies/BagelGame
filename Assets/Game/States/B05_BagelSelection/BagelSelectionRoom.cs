@@ -10,12 +10,12 @@ namespace Bagel
         [SerializeField] BagelTypeCollection m_BagelTypeCollection;
         [SerializeField] float m_PodiumXOffset = 3.0f;
 
-        public PlayManager PlayManager => m_PlayManager;
-        public BagelTypeCollection BagelTypeCollection => m_BagelTypeCollection;
-        public float PodiumXOffset => m_PodiumXOffset;
-        public float PodiumXMidpointShift => 0.5f * (m_BagelTypeCollection.collection.Count - 1) * PodiumXOffset;
-        public event EventHandler OnBagelTypeCollectionChange;
-        public event EventHandler<int> OnBagelTypeChange;
+        public PlayManager playManager => m_PlayManager;
+        public BagelTypeCollection bagelTypeCollection => m_BagelTypeCollection;
+        public float podiumXOffset => m_PodiumXOffset;
+        public float podiumXMidpointShift => 0.5f * (m_BagelTypeCollection.collection.Count - 1) * podiumXOffset;
+        public event EventHandler onBagelTypeCollectionChange;
+        public event EventHandler<int> onBagelTypeChange;
 
         int m_SelectedBagelIndex;
         public int BagelTypeCount => m_BagelTypeCollection.collection.Count;
@@ -28,23 +28,23 @@ namespace Bagel
 
         public float GetOffsetFromIndex(int index)
         {
-            return ((float)index * PodiumXOffset) - PodiumXMidpointShift;
+            return ((float)index * podiumXOffset) - podiumXMidpointShift;
         }
 
         public void InitBagelCollection()
         {
             m_SelectedBagelIndex = 0;
 
-            OnBagelTypeCollectionChange?.Invoke(this, null);
-            OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
+            onBagelTypeCollectionChange?.Invoke(this, null);
+            onBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
 
-            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            m_PlayManager.state.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
 
         public void SelectBagelAndGoToPlay()
         {
-            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
-            m_PlayManager.State.GoToPlay();
+            m_PlayManager.state.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            m_PlayManager.state.GoToPlay();
         }
 
         public void NextBagel()
@@ -54,8 +54,8 @@ namespace Bagel
                 return;
 
             m_SelectedBagelIndex = newIndex;
-            OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
-            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            onBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
+            m_PlayManager.state.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
 
         public void PreviousBagel()
@@ -65,8 +65,8 @@ namespace Bagel
                 return;
 
             m_SelectedBagelIndex = newIndex;
-            OnBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
-            m_PlayManager.State.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
+            onBagelTypeChange?.Invoke(this, m_SelectedBagelIndex);
+            m_PlayManager.state.SetBagelType(m_BagelTypeCollection.collection[m_SelectedBagelIndex]);
         }
     }
 }

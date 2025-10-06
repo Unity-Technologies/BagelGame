@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26a9f25b42c28244905994af8b8dd4c, type: 3}
   m_Name: LeaderboardData
   m_EditorClassIdentifier: BagelGame::Bagel.LeaderboardData
-  Entries:
+  entries:
   - playerName: UIToolkitPro
     toppings: 2345
   - playerName: UI_Toolkid
@@ -59,3 +59,5 @@ MonoBehaviour:
     toppings: 8395
   - playerName: DarkToast
     toppings: 147
+      
+

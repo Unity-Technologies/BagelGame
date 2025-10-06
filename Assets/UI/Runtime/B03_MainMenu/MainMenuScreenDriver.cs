@@ -12,7 +12,7 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_PlayManager.State.OnStateChange += State_OnStateChange;
+            m_PlayManager.state.onStateChange += State_OnStateChange;
 
             var uiDocument = GetComponent<UIDocument>();
             var mainMenuScreenManager = uiDocument.rootVisualElement.Q<MainMenuScreenManager>();
@@ -23,12 +23,12 @@ namespace Bagel
 
             mainMenuScreenManager.BindUI(new MainMenuScreenManager.Callbacks
             {
-                playManagerState = m_PlayManager.State
+                playManagerState = m_PlayManager.state
             });
 
             m_MainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
-                onPlay = m_PlayManager.State.GoToBagelSelection,
+                onPlay = m_PlayManager.state.GoToBagelSelection,
 #if UNITY_EDITOR
                 onExit = UnityEditor.EditorApplication.ExitPlaymode
 #else
@@ -39,7 +39,7 @@ namespace Bagel
 
         void OnDisable()
         {
-            m_PlayManager.State.OnStateChange -= State_OnStateChange;
+            m_PlayManager.state.onStateChange -= State_OnStateChange;
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)

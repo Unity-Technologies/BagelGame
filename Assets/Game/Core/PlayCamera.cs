@@ -24,9 +24,9 @@ namespace Bagel
 
         void Awake()
         {
-            m_State = m_PlayManager.State;
-            m_State.OnStateChange += (_, _) => UpdateCamera();
-            m_State.OnMainMenuPaneModeChange += (_, _) => UpdateCamera();
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += (_, _) => UpdateCamera();
+            m_State.onMainMenuPaneModeChange += (_, _) => UpdateCamera();
         }
 
         void OnEnable()
@@ -43,11 +43,11 @@ namespace Bagel
 
         void UpdateCamera()
         {
-            m_MainMenuCamera.enabled = m_State.CurrentState == PlayManagerState.State.MainMenu && m_State.CurrentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Primary;
-            m_MainMenuSecondaryCamera.enabled = m_State.CurrentState == PlayManagerState.State.MainMenu && m_State.CurrentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Secondary;
-            m_BagelSelectionCamera.enabled = m_State.CurrentState == PlayManagerState.State.BagelSelection;
-            m_PlayCamera.enabled = m_State.CurrentState == PlayManagerState.State.Playing;
-            m_GameOverCamera.enabled = m_State.CurrentState == PlayManagerState.State.GameOver;
+            m_MainMenuCamera.enabled = m_State.currentState == PlayManagerState.State.MainMenu && m_State.currentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Primary;
+            m_MainMenuSecondaryCamera.enabled = m_State.currentState == PlayManagerState.State.MainMenu && m_State.currentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Secondary;
+            m_BagelSelectionCamera.enabled = m_State.currentState == PlayManagerState.State.BagelSelection;
+            m_PlayCamera.enabled = m_State.currentState == PlayManagerState.State.Playing;
+            m_GameOverCamera.enabled = m_State.currentState == PlayManagerState.State.GameOver;
         }
     }
 }

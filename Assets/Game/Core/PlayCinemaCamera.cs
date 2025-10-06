@@ -22,13 +22,13 @@ namespace Bagel
         void Awake()
         {
             m_CinemachineCamera = GetComponent<CinemachineCamera>();
-            m_PlayManager.State.OnStateChange += State_OnStateChange;
-            m_PlayManager.State.OnMainMenuPaneModeChange += State_OnMainMenuPaneModeChange;
+            m_PlayManager.state.onStateChange += State_OnStateChange;
+            m_PlayManager.state.onMainMenuPaneModeChange += State_OnMainMenuPaneModeChange;
         }
 
         void Update()
         {
-            if (!m_PlayManager.State.IsGameOver)
+            if (!m_PlayManager.state.isGameOver)
                 return;
 
             m_GameOverRoot.Rotate(Vector3.up, m_GameOverOrbitSpeed);

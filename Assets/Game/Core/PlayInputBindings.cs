@@ -17,9 +17,9 @@ namespace Bagel
 
         const string k_PlayerPrefsName = "BagelGame_PlayInputBindings";
 
-        public event EventHandler OnPauseAction;
+        public event EventHandler onPauseAction;
 
-        public event EventHandler OnBindingRebind;
+        public event EventHandler onBindingRebind;
 
         PlayInputActions m_PlayInputActions;
 
@@ -44,7 +44,7 @@ namespace Bagel
 
         void PausePerformed(InputAction.CallbackContext ctx)
         {
-            OnPauseAction?.Invoke(this, EventArgs.Empty);
+            onPauseAction?.Invoke(this, EventArgs.Empty);
         }
 
         public Vector2 GetMovementVectorNormalized()
@@ -118,7 +118,7 @@ namespace Bagel
                     PlayerPrefs.SetString(k_PlayerPrefsName, inputJson);
                     PlayerPrefs.Save();
 
-                    OnBindingRebind?.Invoke( this, EventArgs.Empty );
+                    onBindingRebind?.Invoke( this, EventArgs.Empty );
                 })
                 .Start();
         }

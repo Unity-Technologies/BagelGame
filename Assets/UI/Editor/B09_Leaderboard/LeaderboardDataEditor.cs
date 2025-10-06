@@ -23,7 +23,7 @@ namespace Bagel
                     height = 300
                 }
             };
-            table.bindingPath = "Entries";
+            table.bindingPath = "entries";
 
             table.columns.Add(new Column
             {
@@ -43,7 +43,7 @@ namespace Bagel
             table.columns["name"].makeCell = () => new TextField() { bindingPath = "playerName" };
             table.columns["toppings"].makeCell = () => new IntegerField() { bindingPath = "toppings" };
 
-            table.itemsSource = (target as LeaderboardData).Entries;
+            table.itemsSource = (target as LeaderboardData).entries;
 
             row.Add(table);
             return row;

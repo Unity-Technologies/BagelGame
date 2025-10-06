@@ -10,7 +10,7 @@ namespace Bagel
         [SerializeField] BagelTrackerConstants m_BagelTrackerConstants;
 
         BagelTrackerData m_BagelTrackerData;
-        public BagelTrackerData BagelTrackerData
+        public BagelTrackerData bagelTrackerData
         {
             get
             {
@@ -26,8 +26,8 @@ namespace Bagel
 
         void Awake()
         {
-            m_BagelController.OnToasterHit += BagelController_OnToasterHit;
-            m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
+            m_BagelController.onToasterHit += BagelController_OnToasterHit;
+            m_PlayManager.state.onSetBagelType += State_OnSetBagelType;
         }
 
         void Update()
@@ -49,16 +49,16 @@ namespace Bagel
 
         void HandleControllerDataTracking()
         {
-            BagelTrackerData.toppingsCount = m_BagelController.CurrentToppingCount;
-            BagelTrackerData.input = m_BagelController.CurrentInput;
-            BagelTrackerData.speed = m_BagelController.CurrentSpeed;
-            BagelTrackerData.force = Mathf.Ceil(m_BagelController.CurrentForce);
-            BagelTrackerData.spin = Mathf.Ceil(m_BagelController.CurrentSpin);
+            bagelTrackerData.toppingsCount = m_BagelController.currentToppingCount;
+            bagelTrackerData.input = m_BagelController.currentInput;
+            bagelTrackerData.speed = m_BagelController.currentSpeed;
+            bagelTrackerData.force = Mathf.Ceil(m_BagelController.currentForce);
+            bagelTrackerData.spin = Mathf.Ceil(m_BagelController.currentSpin);
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)
         {
-            BagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
+            bagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
         }
 
         void BagelController_OnToasterHit(object sender, EventArgs e)
@@ -68,8 +68,8 @@ namespace Bagel
 
         void OnToasterHit()
         {
-            m_PlayManager.State.SetBagelTrackerData(m_BagelTrackerData);
-            m_PlayManager.State.GoToGameOver();
+            m_PlayManager.state.SetBagelTrackerData(m_BagelTrackerData);
+            m_PlayManager.state.GoToGameOver();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Bagel
 
         [SerializeField] Transform m_BagelSlot;
 
-        public event EventHandler<BagelType> OnBagelTypeChange;
+        public event EventHandler<BagelType> onBagelTypeChange;
 
         void OnEnable()
         {
@@ -27,7 +27,7 @@ namespace Bagel
 
             Instantiate(BagelType.modelPrefab, m_BagelSlot);
 
-            OnBagelTypeChange?.Invoke(this, BagelType);
+            onBagelTypeChange?.Invoke(this, BagelType);
         }
     }
 }

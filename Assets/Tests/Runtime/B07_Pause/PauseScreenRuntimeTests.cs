@@ -38,10 +38,10 @@ namespace Bagel.B07_Pause
             var settingsPane = root.Q<VisualElement>("settings-pane");
             var settingsButton = root.Q<Button>("settings-button");
 
-            m_PlayManager.State.GoToPlay();
+            m_PlayManager.state.GoToPlay();
             yield return null;
 
-            m_PlayManager.State.Pause();
+            m_PlayManager.state.Pause();
             yield return null;
 
             Assert.AreEqual(DisplayStyle.None, settingsPane.resolvedStyle.display);

@@ -22,8 +22,8 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_PlayManager.State.OnStateChange += State_OnStateChange;
-            m_BagelSelectionRoom.OnBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
+            m_PlayManager.state.onStateChange += State_OnStateChange;
+            m_BagelSelectionRoom.onBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
 
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
@@ -43,7 +43,7 @@ namespace Bagel
 
             m_BackButton = root.Q<Button>("back-button");
             if (m_BackButton != null)
-                m_BackButton.clicked += m_BagelSelectionRoom.PlayManager.State.GoToMainMenu;
+                m_BackButton.clicked += m_BagelSelectionRoom.playManager.state.GoToMainMenu;
 
             SetValuesFromIndex(m_BagelSelectionRoom.SelectedBagelIndex);
         }
@@ -95,18 +95,18 @@ namespace Bagel
 
         void OnNavigationCancelEvent(NavigationCancelEvent evt)
         {
-            m_BagelSelectionRoom.PlayManager.State.GoToMainMenu();
+            m_BagelSelectionRoom.playManager.state.GoToMainMenu();
         }
 
         void OnDisable()
         {
-            m_PlayManager.State.OnStateChange -= State_OnStateChange;
-            m_BagelSelectionRoom.OnBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
+            m_PlayManager.state.onStateChange -= State_OnStateChange;
+            m_BagelSelectionRoom.onBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
         }
 
         void Update()
         {
-            if (!m_PlayManager.State.IsBagelSelection)
+            if (!m_PlayManager.state.isBagelSelection)
                 return;
 
             var p = transform.position;
@@ -133,7 +133,7 @@ namespace Bagel
             p.x = offset;
             m_BagelSelectionCameraTraget.localPosition = p;
 
-            if (!m_PlayManager.State.IsBagelSelection)
+            if (!m_PlayManager.state.isBagelSelection)
             {
                 p = transform.localPosition;
                 p.x = offset;

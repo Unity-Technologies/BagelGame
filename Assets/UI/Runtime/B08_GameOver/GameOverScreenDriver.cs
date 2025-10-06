@@ -18,8 +18,8 @@ namespace Bagel
 
         void Awake()
         {
-            m_PlayManager.State.OnStateChange += State_OnStateChange;
-            m_PlayManager.State.OnSetBagelTrackerData += State_OnSetBagelTrackerData;
+            m_PlayManager.state.onStateChange += State_OnStateChange;
+            m_PlayManager.state.onSetBagelTrackerData += State_OnSetBagelTrackerData;
         }
 
         void OnEnable()
@@ -28,14 +28,14 @@ namespace Bagel
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
             m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
-                onRestart = m_PlayManager.State.GoToPlay,
-                onMainMenu = m_PlayManager.State.GoToMainMenu
+                onRestart = m_PlayManager.state.GoToPlay,
+                onMainMenu = m_PlayManager.state.GoToMainMenu
             });
         }
 
         void Update()
         {
-            if (!m_PlayManager.State.IsGameOver)
+            if (!m_PlayManager.state.isGameOver)
                 return;
 
             m_GameOverRoot.Rotate(Vector3.up, m_GameOverOrbitSpeed);

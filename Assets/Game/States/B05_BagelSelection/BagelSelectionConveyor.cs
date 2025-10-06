@@ -17,19 +17,19 @@ namespace Bagel
 
         void Start()
         {
-            m_BagelSelectionRoom.OnBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
+            m_BagelSelectionRoom.onBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
         }
 
         void OnEnable()
         {
-            m_BagelSelectionRoom.OnBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
+            m_BagelSelectionRoom.onBagelTypeCollectionChange += BagelSelectionRoom_OnBagelTypeCollectionChange;
 
             CreatePodiums();
         }
 
         void OnDisable()
         {
-            m_BagelSelectionRoom.OnBagelTypeCollectionChange -= BagelSelectionRoom_OnBagelTypeCollectionChange;
+            m_BagelSelectionRoom.onBagelTypeCollectionChange -= BagelSelectionRoom_OnBagelTypeCollectionChange;
         }
 
         void Update()
@@ -63,23 +63,23 @@ namespace Bagel
             float maxSpeed = float.MinValue;
             float maxGrip = float.MinValue;
 
-            foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
+            foreach (BagelType bagelType in m_BagelSelectionRoom.bagelTypeCollection.collection)
             {
-                maxToppings = Mathf.Max(maxToppings, bagelType.Toppings);
-                maxToppingLoss = Mathf.Max(maxToppingLoss, bagelType.ToppingLoss);
-                minToppingLoss = Mathf.Min(minToppingLoss, bagelType.ToppingLoss);
-                maxControl = Mathf.Max(maxControl, bagelType.Control);
-                maxSpeed = Mathf.Max(maxSpeed, bagelType.Speed);
-                maxGrip = Mathf.Max(maxGrip, bagelType.Grip);
+                maxToppings = Mathf.Max(maxToppings, bagelType.toppings);
+                maxToppingLoss = Mathf.Max(maxToppingLoss, bagelType.toppingLoss);
+                minToppingLoss = Mathf.Min(minToppingLoss, bagelType.toppingLoss);
+                maxControl = Mathf.Max(maxControl, bagelType.control);
+                maxSpeed = Mathf.Max(maxSpeed, bagelType.speed);
+                maxGrip = Mathf.Max(maxGrip, bagelType.grip);
             }
 
-            foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
+            foreach (BagelType bagelType in m_BagelSelectionRoom.bagelTypeCollection.collection)
             {
-                bagelType.toppingsPercentile = bagelType.Toppings / maxToppings;
-                bagelType.toppingLossPercentile = ((maxToppingLoss - minToppingLoss) - (bagelType.ToppingLoss - minToppingLoss)) / (maxToppingLoss - minToppingLoss);
-                bagelType.controlPercentile = bagelType.Control / maxControl;
-                bagelType.speedPercentile = bagelType.Speed / maxSpeed;
-                bagelType.gripPercentile = bagelType.Grip / maxGrip;
+                bagelType.toppingsPercentile = bagelType.toppings / maxToppings;
+                bagelType.toppingLossPercentile = ((maxToppingLoss - minToppingLoss) - (bagelType.toppingLoss - minToppingLoss)) / (maxToppingLoss - minToppingLoss);
+                bagelType.controlPercentile = bagelType.control / maxControl;
+                bagelType.speedPercentile = bagelType.speed / maxSpeed;
+                bagelType.gripPercentile = bagelType.grip / maxGrip;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Bagel
 
             DeterminePercentiles();
 
-            foreach (BagelType bagelType in m_BagelSelectionRoom.BagelTypeCollection.collection)
+            foreach (BagelType bagelType in m_BagelSelectionRoom.bagelTypeCollection.collection)
             {
                 var podiumObj = PrefabUtility.InstantiatePrefab(m_BagelPodiumPrefab, transform) as GameObject;
                 podiumObj.name = bagelType.name;

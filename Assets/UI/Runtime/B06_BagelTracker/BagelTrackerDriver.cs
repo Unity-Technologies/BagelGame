@@ -21,7 +21,7 @@ namespace Bagel
             if (root == null)
                 return;
 
-            root.dataSource = m_BagelTracker.BagelTrackerData;
+            root.dataSource = m_BagelTracker.bagelTrackerData;
         }
     }
 }

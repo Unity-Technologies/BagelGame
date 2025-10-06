@@ -19,7 +19,7 @@ namespace Bagel
             m_Pane = m_UIDocument.rootVisualElement.Q("pane");
             m_Pane.dataSource = null;
 
-            m_BagelSelectionPodium.OnBagelTypeChange += BagelSelectionPodium_OnBagelTypeChange;
+            m_BagelSelectionPodium.onBagelTypeChange += BagelSelectionPodium_OnBagelTypeChange;
         }
 
         void BagelSelectionPodium_OnBagelTypeChange(object sender, BagelType bagelType)

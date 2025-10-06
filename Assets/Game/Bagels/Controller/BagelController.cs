@@ -22,14 +22,14 @@ namespace Bagel
         float m_CurrentForce;
         float m_CurrentSpin;
 
-        public BagelType BagelType => m_BagelType;
-        public int CurrentToppingCount => Mathf.CeilToInt(m_CurrentToppingCount);
-        public float CurrentInput => m_CurrentInput;
-        public float CurrentSpeed => m_CurrentSpeed;
-        public float CurrentForce => m_CurrentForce;
-        public float CurrentSpin => m_CurrentSpin;
+        public BagelType bagelType => m_BagelType;
+        public int currentToppingCount => Mathf.CeilToInt(m_CurrentToppingCount);
+        public float currentInput => m_CurrentInput;
+        public float currentSpeed => m_CurrentSpeed;
+        public float currentForce => m_CurrentForce;
+        public float currentSpin => m_CurrentSpin;
 
-        public event EventHandler OnToasterHit;
+        public event EventHandler onToasterHit;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -84,8 +84,8 @@ namespace Bagel
             m_Collider = GetComponent<Collider>();
             m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
-            m_PlayManager.State.OnStateChange += State_OnStateChange;
-            m_PlayManager.State.OnSetBagelType += State_OnSetBagelType;
+            m_PlayManager.state.onStateChange += State_OnStateChange;
+            m_PlayManager.state.onSetBagelType += State_OnSetBagelType;
             enabled = false;
         }
 
@@ -144,7 +144,7 @@ namespace Bagel
 
         void HandleMovement()
         {
-            var inputVector = m_PlayManager.PlayInputBindings.GetMovementVectorNormalized();
+            var inputVector = m_PlayManager.playInputBindings.GetMovementVectorNormalized();
             var rollTorque = transform.right * m_BagelType.rollTorque * inputVector.y;
             var turnTorque = GetNonRotatedRelativeUp() * m_BagelType.turnTorque * inputVector.x;
 
@@ -183,7 +183,7 @@ namespace Bagel
         {
             if (((1 << other.gameObject.layer) & m_ToastersLayerMask) != 0)
             {
-                OnToasterHit?.Invoke(this, EventArgs.Empty);
+                onToasterHit?.Invoke(this, EventArgs.Empty);
             }
         }
 

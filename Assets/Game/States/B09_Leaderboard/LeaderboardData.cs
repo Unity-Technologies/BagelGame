@@ -14,6 +14,6 @@ namespace Bagel
             public int toppings;
         }
 
-        public List<LeaderboardEntry> Entries = new List<LeaderboardEntry>();
+        public List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
     }
 }
