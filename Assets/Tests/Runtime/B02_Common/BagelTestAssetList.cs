@@ -23,8 +23,10 @@ namespace Bagel
 
         [Header("7 - Pause")]
         public VisualTreeAsset pauseScreenUxml;
+        public VisualTreeAsset pausePaneUxml;
 
         [Header("8 - Game Over")]
         public VisualTreeAsset gameOverScreenUxml;
+        public VisualTreeAsset gameOverPaneUxml;
     }
 }

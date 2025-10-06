@@ -10,24 +10,21 @@ namespace Bagel
     {
         [SerializeField] PlayManager m_PlayManager;
 
-        PauseScreenManager.Elements m_Elements;
-
-        public PauseScreenManager.Elements elements => m_Elements;
+        VisualElement m_Root;
+        PauseScreenManager m_PauseScreenManager;
 
         void OnEnable()
         {
-            var uiDocument = GetComponent<UIDocument>();
-            var pauseScreenManager = uiDocument.rootVisualElement.Q<PauseScreenManager>();
-            var settingsPaneManager = pauseScreenManager.Q<SettingsPaneManager>();
+            m_Root = GetComponent<UIDocument>().rootVisualElement;
+            m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
 
-            settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
+            m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
 
             m_PlayManager.State.OnPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.PlayInputBindings.OnPauseAction += PlayInputBindings_OnPauseAction;
 
-            m_Elements = PauseScreenManager.BindUI(
-                pauseScreenManager,
-                new PauseScreenManager.Callbacks
+            m_PauseScreenManager.pausePaneManager.BindUI(
+                new PausePaneManager.Callbacks
                 {
                     onResume = m_PlayManager.State.Resume,
                     onRestart = m_PlayManager.State.GoToPlay,
@@ -58,14 +55,14 @@ namespace Bagel
         {
             if (paused)
             {
-                m_Elements.resumeButton.Focus();
-                m_Elements.manager.GoToPausePane();
-                m_Elements.root.style.display = DisplayStyle.Flex;
+                m_PauseScreenManager.pausePaneManager.resumeButton.Focus();
+                m_PauseScreenManager.GoToPausePane();
+                m_Root.style.display = DisplayStyle.Flex;
                 Time.timeScale = 0f;
             }
             else
             {
-                m_Elements.root.style.display = DisplayStyle.None;
+                m_Root.style.display = DisplayStyle.None;
                 Time.timeScale = 1f;
             }
         }

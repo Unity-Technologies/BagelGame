@@ -1,16 +1,18 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverStyles"/>
-    <ui:Label text="Game Over" name="title" class="b-title"/>
-    <ui:VisualElement name="score-row">
-        <ui:Label text="Topppings Left" name="toppings-title-label"/>
-        <ui:IntegerField value="42" name="toppings-number-field" readonly="true"/>
-    </ui:VisualElement>
-    <ui:VisualElement name="leaderboard-form" class="b-sub-pane">
-        <ui:TextField label="Name for Leaderboard" name="leaderboard-name-field"/>
-        <ui:Button text="Add to Leaderboard" name="add-to-leaderboard-button"/>
-    </ui:VisualElement>
-    <ui:VisualElement name="bottom-container" style="flex-grow: 1; justify-content: flex-end;">
-        <ui:Button text="Restart" name="restart-button"/>
-        <ui:Button text="Main Menu" name="main-menu-button" class="b-primary"/>
-    </ui:VisualElement>
+    <Bagel.GameOverPaneManager name="game-over-pane-manager">
+        <ui:Label text="Game Over" name="title" class="b-title"/>
+        <ui:VisualElement name="score-row">
+            <ui:Label text="Topppings Left" name="toppings-title-label"/>
+            <ui:IntegerField value="42" name="toppings-number-field" readonly="true"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="leaderboard-form" class="b-sub-pane">
+            <ui:TextField label="Name for Leaderboard" name="leaderboard-name-field"/>
+            <ui:Button text="Add to Leaderboard" name="add-to-leaderboard-button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="bottom-container" style="flex-grow: 1; justify-content: flex-end;">
+            <ui:Button text="Restart" name="restart-button"/>
+            <ui:Button text="Main Menu" name="main-menu-button" class="b-primary"/>
+        </ui:VisualElement>
+    </Bagel.GameOverPaneManager>
 </ui:UXML>

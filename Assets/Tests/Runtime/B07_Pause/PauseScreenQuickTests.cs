@@ -19,7 +19,7 @@ namespace Bagel.B07_Pause
         [Test]
         public void PauseScreen() {
             var root = rootVisualElement;
-            m_BagelTestAssetList.pauseScreenUxml.CloneTree(root);
+            m_BagelTestAssetList.pausePaneUxml.CloneTree(root);
             simulate.FrameUpdate();
 
             var resumeButton = root.Q<Button>("resume-button");

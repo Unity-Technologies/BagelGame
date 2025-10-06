@@ -13,9 +13,8 @@ namespace Bagel
         [SerializeField] Transform m_GameOverRoot;
         [SerializeField] Transform m_BagelTarget;
 
-        UIDocument m_UIDocument;
-
-        GameOverScreenManager.Elements m_Elements;
+        VisualElement m_Root;
+        GameOverScreenManager m_GameOverScreenManager;
 
         void Awake()
         {
@@ -25,8 +24,9 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_UIDocument = GetComponent<UIDocument>();
-            m_Elements = GameOverScreenManager.BindUI(m_UIDocument.rootVisualElement, new GameOverScreenManager.Callbacks
+            m_Root = GetComponent<UIDocument>().rootVisualElement;
+            m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
+            m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
                 onRestart = m_PlayManager.State.GoToPlay,
                 onMainMenu = m_PlayManager.State.GoToMainMenu
@@ -45,8 +45,8 @@ namespace Bagel
         {
             if (state == PlayManagerState.State.GameOver)
             {
-                m_Elements.mainMenuButton.Focus();
-                m_Elements.root.style.display = DisplayStyle.Flex;
+                m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus();
+                m_Root.style.display = DisplayStyle.Flex;
 
                 m_GameOverRoot.rotation = Quaternion.identity;
 
@@ -60,23 +60,23 @@ namespace Bagel
             }
             else
             {
-                m_Elements.root.style.display = DisplayStyle.None;
+                m_Root.style.display = DisplayStyle.None;
             }
         }
 
         void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)
         {
-            if (m_Elements.title == null)
+            if (m_GameOverScreenManager.gameOverPaneManager.title == null)
                 return;
 
             if (bagelTrackerData.toppingsCount > 0)
             {
-                m_Elements.title.text = "You Win!";
-                m_Elements.toppingsNumberField.value = bagelTrackerData.toppingsCount;
+                m_GameOverScreenManager.gameOverPaneManager.title.text = "You Win!";
+                m_GameOverScreenManager.gameOverPaneManager.toppingsNumberField.value = bagelTrackerData.toppingsCount;
             }
             else
             {
-                m_Elements.title.text = "You Lose!";
+                m_GameOverScreenManager.gameOverPaneManager.title.text = "You Lose!";
             }
         }
     }

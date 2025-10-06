@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel.B07_Pause
@@ -23,7 +24,7 @@ namespace Bagel.B07_Pause
         [Test]
         public void PauseScreen()
         {
-            m_BagelTestAssetList.pauseScreenUxml.CloneTree(rootVisualElement);
+            m_BagelTestAssetList.pausePaneUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
 
             bool resumeClicked = false;
@@ -31,7 +32,8 @@ namespace Bagel.B07_Pause
             bool mainMenuClicked = false;
 
             // Get the elements.
-            var elements = PauseScreenManager.BindUI(rootVisualElement, new PauseScreenManager.Callbacks
+            var pausePaneManager = rootVisualElement.Q<PausePaneManager>();
+            pausePaneManager.BindUI(new PausePaneManager.Callbacks
             {
                 onResume = () => resumeClicked = true,
                 onRestart = () => restartClicked = true,
@@ -39,18 +41,18 @@ namespace Bagel.B07_Pause
             } );
 
             // Resume Button
-            simulate.Click(elements.resumeButton);
+            simulate.Click(pausePaneManager.resumeButton);
             simulate.FrameUpdate();
             Assert.IsTrue(resumeClicked);
 
             // Restart Button
-            simulate.MouseDown(elements.restartButton);
-            simulate.FrameUpdate(elements.restartButton.holdTime);
+            simulate.MouseDown(pausePaneManager.restartButton);
+            simulate.FrameUpdate(pausePaneManager.restartButton.holdTime);
             Assert.IsTrue(restartClicked);
 
             // Main Menu Button
-            simulate.MouseDown(elements.mainMenuButton);
-            simulate.FrameUpdate(elements.mainMenuButton.holdTime);
+            simulate.MouseDown(pausePaneManager.mainMenuButton);
+            simulate.FrameUpdate(pausePaneManager.mainMenuButton.holdTime);
             Assert.IsTrue(mainMenuClicked);
         }
     }

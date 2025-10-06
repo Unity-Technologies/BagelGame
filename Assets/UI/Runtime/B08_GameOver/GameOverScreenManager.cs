@@ -8,52 +8,11 @@ namespace Bagel
     [UxmlElement]
     public partial class GameOverScreenManager : VisualElement
     {
-        public struct Elements
-        {
-            public VisualElement root;
-            public Label title;
-            public IntegerField toppingsNumberField;
-            public VisualElement leaderboardForm;
-            public TextField addToLeaderboardNameField;
-            public Button addToLeaderboardButton;
-            public LeaderboardManager leaderboardManager;
-            public Button restartButton;
-            public Button mainMenuButton;
-        }
+        GameOverPaneManager m_GameOverPaneManager;
+        LeaderboardManager m_LeaderboardManager;
 
-        public struct Callbacks
-        {
-            public Action onAddToLeaderboard;
-            public Action onRestart;
-            public Action onMainMenu;
-        }
-
-        Elements m_Elements;
-
-        public static Elements BindUI(VisualElement root, Callbacks callbacks = new ())
-        {
-            var elements = new Elements
-            {
-                root = root,
-                title = root.Q<Label>("title"),
-                toppingsNumberField = root.Q<IntegerField>("toppings-number-field"),
-                leaderboardForm = root.Q<VisualElement>("leaderboard-form"),
-                addToLeaderboardNameField = root.Q<TextField>("leaderboard-name-field"),
-                addToLeaderboardButton = root.Q<Button>("add-to-leaderboard-button"),
-                leaderboardManager = root.Q<LeaderboardManager>("leaderboard-manager"),
-                restartButton = root.Q<Button>("restart-button"),
-                mainMenuButton = root.Q<Button>("main-menu-button" )
-            };
-
-            if (elements.addToLeaderboardButton != null && callbacks.onAddToLeaderboard != null)
-                elements.addToLeaderboardButton.clicked += callbacks.onAddToLeaderboard;
-            if (elements.restartButton != null && callbacks.onRestart != null )
-                elements.restartButton.clicked += callbacks.onRestart;
-            if (elements.mainMenuButton != null && callbacks.onMainMenu != null )
-                elements.mainMenuButton.clicked += callbacks.onMainMenu;
-
-            return elements;
-        }
+        public GameOverPaneManager gameOverPaneManager => m_GameOverPaneManager ??= this.Q<GameOverPaneManager>();
+        public LeaderboardManager leaderboardManager => m_LeaderboardManager ??= this.Q<LeaderboardManager>();
 
         public GameOverScreenManager()
         {
@@ -62,25 +21,25 @@ namespace Bagel
 
         void FirstInit(GeometryChangedEvent evt)
         {
-            m_Elements = BindUI(this, new Callbacks
+            gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
                 onAddToLeaderboard = AddNameToLeaderboard
             });
 
-            m_Elements.leaderboardForm.SetEnabled(true);
+            gameOverPaneManager.leaderboardForm.SetEnabled(true);
         }
 
         void AddNameToLeaderboard()
         {
-            var leaderboardData = m_Elements.leaderboardManager.leaderboardData;
+            var leaderboardData = leaderboardManager.leaderboardData;
             if (leaderboardData == null)
                 return;
 
-            m_Elements.leaderboardManager.AddScore(
-                m_Elements.addToLeaderboardNameField.value,
-                m_Elements.toppingsNumberField.value);
+            leaderboardManager.AddScore(
+                gameOverPaneManager.addToLeaderboardNameField.value,
+                gameOverPaneManager.toppingsNumberField.value);
 
-            m_Elements.leaderboardForm.SetEnabled(false);
+            gameOverPaneManager.leaderboardForm.SetEnabled(false);
         }
     }
 }

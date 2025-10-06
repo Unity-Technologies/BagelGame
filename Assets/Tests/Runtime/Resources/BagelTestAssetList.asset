@@ -20,4 +20,6 @@ MonoBehaviour:
   bagelTrackerLeftDisplayUxml: {fileID: 9197481963319205126, guid: 0ad31c74420f69e459b372d004c0b2dc, type: 3}
   bagelTrackerRightDisplayUxml: {fileID: 9197481963319205126, guid: b3f3b240513e14d9583182fb441a13eb, type: 3}
   pauseScreenUxml: {fileID: 9197481963319205126, guid: 19cec0096d1d856449401f567fd84d5d, type: 3}
+  pausePaneUxml: {fileID: 9197481963319205126, guid: 97513a01721a1dd4d86a55debbe885e5, type: 3}
   gameOverScreenUxml: {fileID: 9197481963319205126, guid: ad9bc3abb338ba549aef117711e184da, type: 3}
+  gameOverPaneUxml: {fileID: 9197481963319205126, guid: b6e2fed8b425da943868813467f54513, type: 3}

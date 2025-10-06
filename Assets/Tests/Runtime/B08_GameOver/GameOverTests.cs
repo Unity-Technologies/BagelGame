@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.UIElements.TestFramework;
 
 namespace Bagel.B08_GameOver
@@ -24,23 +25,23 @@ namespace Bagel.B08_GameOver
         public void AddNameToLeaderboardField()
         {
             // Load the UXML.
-            m_BagelTestAssetList.gameOverScreenUxml.CloneTree(rootVisualElement);
+            m_BagelTestAssetList.gameOverPaneUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
 
             // Get the elements.
-            var elements = GameOverScreenManager.BindUI(rootVisualElement);
+            var gameOverPaneManager = rootVisualElement.Q<GameOverPaneManager>();
 
             // Check initial state.
-            Assert.AreEqual("", elements.addToLeaderboardNameField.value);
+            Assert.AreEqual("", gameOverPaneManager.addToLeaderboardNameField.value);
 
             // Simulate typing a name.
-            elements.addToLeaderboardNameField.Focus();
+            gameOverPaneManager.addToLeaderboardNameField.Focus();
             simulate.FrameUpdate();
             simulate.TypingText("Player1");
             simulate.FrameUpdate();
 
             // Verify the name was entered.
-            Assert.AreEqual("Player1", elements.addToLeaderboardNameField.value);
+            Assert.AreEqual("Player1", gameOverPaneManager.addToLeaderboardNameField.value);
         }
     }
 }
