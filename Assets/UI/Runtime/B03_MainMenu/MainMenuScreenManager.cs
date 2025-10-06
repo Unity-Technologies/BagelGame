@@ -8,86 +8,44 @@ namespace Bagel
     {
         public static readonly string backgroundPaneClassName = "b-background-pane";
 
-        public struct Elements
-        {
-            public MainMenuScreenManager manager;
+        public VisualElement m_MainMenuPane;
+        public MainMenuPaneManager m_MainMenuPaneManager;
+        public VisualElement m_SecondaryPanes;
+        public VisualElement m_SettingsPane;
+        public VisualElement m_LeaderboardPane;
 
-            public VisualElement mainMenuPane;
-            public VisualElement secondaryPanes;
-            public VisualElement settingsPane;
-            public VisualElement leaderboardPane;
+        public Button m_SettingsBackButton;
+        public Button m_LeaderboardBackButton;
 
-            public Button playButton;
-            public Button settingsButton;
-            public Button leaderboardButton;
-            public Button exitButton;
+        public VisualElement mainMenuPane => m_MainMenuPane ??= this.Q<VisualElement>("main-menu-pane");
+        public MainMenuPaneManager mainMenuPaneManager => m_MainMenuPaneManager ??= this.Q<MainMenuPaneManager>("main-menu-pane-manager");
+        public VisualElement secondaryPanes => m_SecondaryPanes ??= this.Q<VisualElement>("secondary-panes");
+        public VisualElement settingsPane => m_SettingsPane ??= this.Q<VisualElement>("settings-pane");
+        public VisualElement leaderboardPane => m_LeaderboardPane ??= this.Q<VisualElement>("leaderboard-pane");
 
-            public Button settingsBackButton;
-            public Button leaderboardBackButton;
-        }
+        public Button settingsBackButton => m_SettingsBackButton ??= settingsPane.Q<Button>("back-button");
+        public Button leaderboardBackButton => m_LeaderboardBackButton ??= leaderboardPane.Q<Button>("back-button");
 
         public struct Callbacks
         {
             public PlayManagerState playManagerState;
 
-            public Action onPlay;
-            public Action onSettings;
-            public Action onLeaderboard;
-            public Action onExit;
-
             public Action onSettingsBack;
             public Action onLeaderboardBack;
         }
 
-        public static Elements BindUI(VisualElement root, Callbacks callbacks)
+        public void BindUI(Callbacks callbacks)
         {
-            var elements = new Elements
-            {
-                manager = root.Q<MainMenuScreenManager>(),
-                
-                mainMenuPane = root.Q<VisualElement>("main-menu-pane"),
-                secondaryPanes = root.Q<VisualElement>("secondary-panes"),
-                settingsPane = root.Q<VisualElement>("settings-pane"),
-                leaderboardPane = root.Q<VisualElement>("leaderboard-pane"),
+            if (callbacks.playManagerState != null )
+                SetPlayManagerState(callbacks.playManagerState);
 
-                playButton = root.Q<Button>("play-button"),
-                settingsButton = root.Q<Button>("settings-button"),
-                leaderboardButton = root.Q<Button>("leaderboard-button"),
-                exitButton = root.Q<Button>("exit-button"),
-
-                settingsBackButton = null,
-                leaderboardBackButton = null
-            };
-
-            if (elements.mainMenuPane != null)
-                elements.settingsBackButton = elements.settingsPane.Q<Button>("back-button");
-            if (elements.leaderboardPane != null )
-                elements.leaderboardBackButton = elements.leaderboardPane.Q<Button>("back-button");
-
-            if (elements.manager != null && callbacks.playManagerState != null)
-                elements.manager.SetPlayManagerState(callbacks.playManagerState);
-
-            if (elements.playButton != null && callbacks.onPlay != null)
-                elements.playButton.clicked += callbacks.onPlay;
-            if (elements.settingsButton != null && callbacks.onSettings != null )
-                elements.settingsButton.clicked += callbacks.onSettings;
-            if (elements.leaderboardButton != null && callbacks.onLeaderboard != null )
-                elements.leaderboardButton.clicked += callbacks.onLeaderboard;
-            if (elements.exitButton != null && callbacks.onExit != null )
-                elements.exitButton.clicked += callbacks.onExit;
-
-            if (elements.settingsBackButton != null && callbacks.onSettingsBack != null )
-                elements.settingsBackButton.clicked += callbacks.onSettingsBack;
-            if (elements.leaderboardBackButton != null && callbacks.onLeaderboardBack != null )
-                elements.leaderboardBackButton.clicked += callbacks.onLeaderboardBack;
-
-            return elements;
+            if (settingsBackButton != null && callbacks.onSettingsBack != null )
+                settingsBackButton.clicked += callbacks.onSettingsBack;
+            if (leaderboardBackButton != null && callbacks.onLeaderboardBack != null )
+                leaderboardBackButton.clicked += callbacks.onLeaderboardBack;
         }
 
-        Elements m_Elements;
         PlayManagerState m_PlayManagerState;
-
-        public Elements UI => m_Elements;
 
         public MainMenuScreenManager()
         {
@@ -101,48 +59,52 @@ namespace Bagel
 
         void FirstInit(GeometryChangedEvent evt)
         {
-            m_Elements = BindUI(this, new Callbacks
+            BindUI(new Callbacks
+            {
+                onSettingsBack = GoToMainMenuPane,
+                onLeaderboardBack = GoToMainMenuPane
+            } );
+
+            mainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
                 onSettings = GoToSettingsPane,
                 onLeaderboard = GoToLeaderboardPane,
-                onSettingsBack = GoToMainMenuPane,
-                onLeaderboardBack = GoToMainMenuPane
             } );
         }
 
         public void GoToMainMenuPane()
         {
-            m_Elements.mainMenuPane.SetEnabled(true);
-            m_Elements.settingsPane.SetEnabled(false);
-            m_Elements.leaderboardPane.SetEnabled(false);
+            mainMenuPane.SetEnabled(true);
+            settingsPane.SetEnabled(false);
+            leaderboardPane.SetEnabled(false);
 
             m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Primary);
         }
 
         public void GoToSettingsPane()
         {
-            m_Elements.mainMenuPane.SetEnabled(false);
-            m_Elements.settingsPane.SetEnabled(true);
-            m_Elements.leaderboardPane.SetEnabled(false);
+            mainMenuPane.SetEnabled(false);
+            settingsPane.SetEnabled(true);
+            leaderboardPane.SetEnabled(false);
 
-            m_Elements.settingsPane.RemoveFromClassList(backgroundPaneClassName);
-            m_Elements.leaderboardPane.AddToClassList(backgroundPaneClassName);
+            settingsPane.RemoveFromClassList(backgroundPaneClassName);
+            leaderboardPane.AddToClassList(backgroundPaneClassName);
 
-            m_Elements.settingsPane.BringToFront();
+            settingsPane.BringToFront();
 
             m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Secondary);
         }
 
         public void GoToLeaderboardPane()
         {
-            m_Elements.mainMenuPane.SetEnabled(false);
-            m_Elements.settingsPane.SetEnabled(false);
-            m_Elements.leaderboardPane.SetEnabled(true);
+            mainMenuPane.SetEnabled(false);
+            settingsPane.SetEnabled(false);
+            leaderboardPane.SetEnabled(true);
 
-            m_Elements.settingsPane.AddToClassList(backgroundPaneClassName);
-            m_Elements.leaderboardPane.RemoveFromClassList(backgroundPaneClassName);
+            settingsPane.AddToClassList(backgroundPaneClassName);
+            leaderboardPane.RemoveFromClassList(backgroundPaneClassName);
 
-            m_Elements.leaderboardPane.BringToFront();
+            leaderboardPane.BringToFront();
 
             m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Secondary);
         }

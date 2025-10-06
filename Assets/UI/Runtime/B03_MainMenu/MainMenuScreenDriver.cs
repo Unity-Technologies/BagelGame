@@ -8,26 +8,26 @@ namespace Bagel
     public class MainMenuScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
-
-        UIDocument m_UIDocument;
-        MainMenuScreenManager.Elements m_Elements;
-
-        public MainMenuScreenManager.Elements elements => m_Elements;
+        MainMenuPaneManager m_MainMenuPaneManager;
 
         void OnEnable()
         {
             m_PlayManager.State.OnStateChange += State_OnStateChange;
 
-            m_UIDocument = GetComponent<UIDocument>();
-            var mainMenuManager = m_UIDocument.rootVisualElement.Q<MainMenuScreenManager>();
-            var settingsPaneManager = mainMenuManager.Q<SettingsPaneManager>();
+            var uiDocument = GetComponent<UIDocument>();
+            var mainMenuScreenManager = uiDocument.rootVisualElement.Q<MainMenuScreenManager>();
+            m_MainMenuPaneManager = uiDocument.rootVisualElement.Q<MainMenuPaneManager>();
+            var settingsPaneManager = mainMenuScreenManager.Q<SettingsPaneManager>();
 
             settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
 
-            var root = m_UIDocument.rootVisualElement;
-            m_Elements = MainMenuScreenManager.BindUI(root, new MainMenuScreenManager.Callbacks
+            mainMenuScreenManager.BindUI(new MainMenuScreenManager.Callbacks
             {
-                playManagerState = m_PlayManager.State,
+                playManagerState = m_PlayManager.State
+            });
+
+            m_MainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
+            {
                 onPlay = m_PlayManager.State.GoToBagelSelection,
 #if UNITY_EDITOR
                 onExit = UnityEditor.EditorApplication.ExitPlaymode
@@ -44,11 +44,11 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (m_Elements.playButton == null)
+            if (m_MainMenuPaneManager.playButton == null)
                 return;
 
             if (state == PlayManagerState.State.MainMenu)
-                m_Elements.playButton.Focus();
+                m_MainMenuPaneManager.playButton.Focus();
         }
     }
 }

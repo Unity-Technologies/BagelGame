@@ -31,19 +31,20 @@ namespace Bagel.B03_MainMenu
             bool exitClicked = false;
 
             // Get the elements.
-            var elements = MainMenuScreenManager.BindUI(rootVisualElement, new MainMenuScreenManager.Callbacks
+            var mainMenuPaneManager = rootVisualElement.Q<MainMenuPaneManager>();
+            mainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
                 onPlay = () => playClicked = true,
                 onExit = () => exitClicked = true
             });
 
             // Play Button
-            simulate.Click(elements.playButton);
+            simulate.Click(mainMenuPaneManager.playButton);
             simulate.FrameUpdate();
             Assert.IsTrue(playClicked);
 
             // Exit Button
-            simulate.Click(elements.exitButton);
+            simulate.Click(mainMenuPaneManager.exitButton);
             simulate.FrameUpdate();
             Assert.IsTrue(exitClicked);
         }

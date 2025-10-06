@@ -33,10 +33,14 @@ namespace Bagel.B04_Settings
             // Load the UXML.
             m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
+            simulate.FrameUpdate(); // Required for the way SettingsPaneManagerForUI does its init.
 
             // Get the elements.
             var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
             var themeDropdown = manager.themeDropdown;
+
+            // Prepare for testing.
+            manager.dataSource = null; // We don't need a real data source for this test.
 
             // Check initial state.
             Assert.AreEqual(2, themeDropdown.choices.Count);
@@ -49,9 +53,9 @@ namespace Bagel.B04_Settings
             simulate.Click(themePopupFieldInput);
             simulate.FrameUpdate();
             Assert.IsTrue(m_PopupMenuSimulator.menuIsDisplayed);
-            Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Dark"));
+            Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Edgy"));
             simulate.FrameUpdate();
-            Assert.AreEqual("Dark", themeDropdown.value);
+            Assert.AreEqual("Edgy", themeDropdown.value);
         }
     }
 }
