@@ -52,12 +52,16 @@ THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
 
 --------
 
-Bagel Model
-(https://ambientcg.com/a/3DBread005)
-Created using 3DBread005 from ambientCG.com, licensed under the Creative Commons CC0 1.0 Universal License.
+Component Name: Bagel Model
+License Type: Public domain
+Copyright owner not applicable
+https://ambientcg.com/a/3DBread005
+License Not Applicable
 
 --------
 
-Fitness Sport Flat Icons Collection
-(https://www.svgrepo.com/collection/fitness-sport-flat-icons/)
-Public Domain
+Component Name: Sport Flat Icons Collection
+License Type: Public domain
+Copyright owner not applicable
+https://www.svgrepo.com/collection/fitness-sport-flat-icons/
+License Not Applicable
