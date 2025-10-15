@@ -1,6 +1,6 @@
 # Bagel Game
 
-You're a bagel.
+You're a bagel...
 
 You need to get to the toaster before you go stale _while_ still having toppings left. A physics-based balance between speed and precision.
 
