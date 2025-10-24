@@ -1,5 +1,10 @@
+This project contains third-party software components governed by the license(s) indicated below:
+---------
+
 Component Name: DynaPuff
+
 License Type: SIL Open Font License 1.1
+
 Copyright © 2021 The DynaPuff Project Authors
 https://github.com/googlefonts/dynapuff
 PREAMBLE
@@ -23,10 +28,12 @@ This license becomes null and void if any of the above conditions are not met.
 DISCLAIMER
 THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
 
---------
+---------
 
 Component Name: Josefin Sans
+
 License Type: SIL Open Font License 1.1
+
 Copyright 2010 The Josefin Sans Project Authors
 https://github.com/ThomasJockin/JosefinSansFont-master
 PREAMBLE
@@ -50,18 +57,22 @@ This license becomes null and void if any of the above conditions are not met.
 DISCLAIMER
 THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
 
---------
+---------
 
 Component Name: Bagel Model
+
 License Type: Public domain
+
 Copyright owner not applicable
 https://ambientcg.com/a/3DBread005
 License Not Applicable
 
---------
+---------
 
 Component Name: Sport Flat Icons Collection
+
 License Type: Public domain
+
 Copyright owner not applicable
 https://www.svgrepo.com/collection/fitness-sport-flat-icons/
 License Not Applicable
