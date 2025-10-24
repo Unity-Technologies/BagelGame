@@ -63,8 +63,8 @@ Component Name: Bagel Model
 
 License Type: Public domain
 
-Copyright owner not applicable
-https://ambientcg.com/a/3DBread005
+Copyright owner not applicable<br>
+https://ambientcg.com/a/3DBread005<br>
 License Not Applicable
 
 ---------
@@ -73,6 +73,6 @@ Component Name: Sport Flat Icons Collection
 
 License Type: Public domain
 
-Copyright owner not applicable
-https://www.svgrepo.com/collection/fitness-sport-flat-icons/
+Copyright owner not applicable<br>
+https://www.svgrepo.com/collection/fitness-sport-flat-icons/<br>
 License Not Applicable
