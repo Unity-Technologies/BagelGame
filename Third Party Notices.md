@@ -6,8 +6,11 @@ Component Name: DynaPuff
 License Type: SIL Open Font License 1.1
 
 Copyright © 2021 The DynaPuff Project Authors
+
 https://github.com/googlefonts/dynapuff
+
 PREAMBLE
+
 The goals of the Open Font License (OFL) are to stimulate worldwide development of collaborative font projects, to support the font creation efforts of academic and linguistic communities, and to provide a free and open framework in which fonts may be shared and improved in partnership with others.
 The OFL allows the licensed fonts to be used, studied, modified and redistributed freely as long as they are not sold by themselves. The fonts, including any derivative works, can be bundled, embedded, redistributed and/or sold with any software provided that any reserved names are not used by derivative works. The fonts and derivatives, however, cannot be released under any other type of license. The requirement for fonts to remain under this license does not apply to any document created using the fonts or their derivatives.
 DEFINITIONS
@@ -35,8 +38,11 @@ Component Name: Josefin Sans
 License Type: SIL Open Font License 1.1
 
 Copyright 2010 The Josefin Sans Project Authors
+
 https://github.com/ThomasJockin/JosefinSansFont-master
+
 PREAMBLE
+
 The goals of the Open Font License (OFL) are to stimulate worldwide development of collaborative font projects, to support the font creation efforts of academic and linguistic communities, and to provide a free and open framework in which fonts may be shared and improved in partnership with others.
 The OFL allows the licensed fonts to be used, studied, modified and redistributed freely as long as they are not sold by themselves. The fonts, including any derivative works, can be bundled, embedded, redistributed and/or sold with any software provided that any reserved names are not used by derivative works. The fonts and derivatives, however, cannot be released under any other type of license. The requirement for fonts to remain under this license does not apply to any document created using the fonts or their derivatives.
 DEFINITIONS
@@ -63,8 +69,10 @@ Component Name: Bagel Model
 
 License Type: Public domain
 
-Copyright owner not applicable<br>
-https://ambientcg.com/a/3DBread005<br>
+Copyright owner not applicable
+
+https://ambientcg.com/a/3DBread005
+
 License Not Applicable
 
 ---------
@@ -73,6 +81,8 @@ Component Name: Sport Flat Icons Collection
 
 License Type: Public domain
 
-Copyright owner not applicable<br>
-https://www.svgrepo.com/collection/fitness-sport-flat-icons/<br>
+Copyright owner not applicable
+
+https://www.svgrepo.com/collection/fitness-sport-flat-icons/
+
 License Not Applicable
