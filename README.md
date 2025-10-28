@@ -15,3 +15,7 @@ It covers:
 * Themes
 * Input System Integration
 * ...and more!
+
+## Contributions
+
+At this time, we will not accept pull requests, GitHub review requests, or any other GitHub-hosted issue management requests. This might change in the future.
