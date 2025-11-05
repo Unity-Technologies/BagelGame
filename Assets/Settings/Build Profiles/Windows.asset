@@ -552,7 +552,7 @@ MonoBehaviour:
     - line: '|   locationUsageDescription: '
     - line: '|   microphoneUsageDescription: '
     - line: '|   bluetoothUsageDescription: '
-    - line: '|   macOSTargetOSVersion: 11.0'
+    - line: '|   macOSTargetOSVersion: 12.0'
     - line: '|   switchNMETAOverride: '
     - line: '|   switchNetLibKey: '
     - line: '|   switchSocketMemoryPoolSize: 6144'

@@ -113,7 +113,7 @@
       }
     },
     "com.unity.searcher": {
-      "version": "4.9.3",
+      "version": "4.9.4",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
