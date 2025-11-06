@@ -2,6 +2,7 @@
     --b-fill-color: rgb(231, 231, 231);
     --b-primary-color: rgb(62, 78, 237);
     --b-primary-color-faded: rgb(20, 66, 123);
+    --b-tiny-radius: 0;
     --b-inner-radius: 0;
     --b-element-radius: 0;
     --b-pane-radius: 0;
