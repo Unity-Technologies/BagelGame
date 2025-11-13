@@ -5,6 +5,7 @@
     --b-primary-color: rgb(98, 143, 38);
     --b-primary-color-faded: rgb(20, 79, 16);
     --b-input-color: rgba(0, 0, 0, 0.38);
+    --b-tiny-radius: 4px;
     --b-inner-radius: 8px;
     --b-element-radius: 11px;
     --b-pane-radius: 18px;
@@ -250,14 +251,16 @@
 }
 
 .unity-scroller__slider .unity-base-slider__dragger {
-    border-top-left-radius: var(--b-inner-radius);
-    border-top-right-radius: var(--b-inner-radius);
-    border-bottom-right-radius: var(--b-inner-radius);
-    border-bottom-left-radius: var(--b-inner-radius);
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
     background-color: var(--b-primary-color);
 }
 
 .unity-scroller--vertical > .unity-base-slider--vertical {
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .unity-scroller__slider > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker {
@@ -266,4 +269,49 @@
     border-right-width: -2px;
     border-bottom-width: -2px;
     border-left-width: -2px;
+}
+
+.unity-multi-column-header__column:hover:enabled {
+    background-color: var(--b-primary-color);
+}
+
+.unity-list-view__item:hover:enabled {
+    background-color: var(--b-primary-color);
+}
+
+.unity-base-slider__drag-container > .unity-base-slider__dragger {
+    background-color: var(--b-primary-color);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+}
+
+.unity-base-slider--horizontal .unity-base-slider__tracker {
+    background-color: var(--b-primary-color-faded);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.unity-base-slider--horizontal .unity-base-slider__dragger:hover:enabled {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    background-color: var(--b-primary-color);
+    scale: 1.1 1.1;
+}
+
+.unity-base-slider--horizontal .unity-base-slider__tracker:hover:enabled {
+    background-color: var(--b-primary-color-faded);
 }
