@@ -1,3 +1,5 @@
+Tested against: **Unity 6.5+ (experimental dev branch)**
+
 # Bagel Game
 
 You're a bagel.
