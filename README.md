@@ -1,3 +1,5 @@
+Tested against: **Unity 6.3 LTS**
+
 # Bagel Game
 
 You're a bagel.
