@@ -4,15 +4,13 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(PanelRenderer))]
     public class BagelSelectionControlsPaneDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
         [SerializeField] BagelSelectionRoom m_BagelSelectionRoom;
         [SerializeField] Transform m_Camera;
         [SerializeField] Transform m_BagelSelectionCameraTraget;
-
-        UIDocument m_UIDocument;
 
         VisualElement m_Pane;
         Button m_SelectButton;
@@ -25,23 +23,25 @@ namespace Bagel
             m_PlayManager.state.onStateChange += State_OnStateChange;
             m_BagelSelectionRoom.onBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
 
-            m_UIDocument = GetComponent<UIDocument>();
-            var root = m_UIDocument.rootVisualElement;
+            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        }
 
-            m_Pane = root.Q<VisualElement>("pane");
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        {
+            m_Pane = rootElement.Q<VisualElement>("pane");
 
-            m_SelectButton = root.Q<Button>("select-button");
+            m_SelectButton = rootElement.Q<Button>("select-button");
             if (m_SelectButton != null)
                 m_SelectButton.clicked += m_BagelSelectionRoom.SelectBagelAndGoToPlay;
 
-            m_LeftButton = root.Q<Button>("left-button");
+            m_LeftButton = rootElement.Q<Button>("left-button");
             if (m_LeftButton != null)
                 m_LeftButton.clicked += m_BagelSelectionRoom.PreviousBagel;
-            m_RightButton = root.Q<Button>("right-button");
+            m_RightButton = rootElement.Q<Button>("right-button");
             if (m_RightButton != null)
                 m_RightButton.clicked += m_BagelSelectionRoom.NextBagel;
 
-            m_BackButton = root.Q<Button>("back-button");
+            m_BackButton = rootElement.Q<Button>("back-button");
             if (m_BackButton != null)
                 m_BackButton.clicked += m_BagelSelectionRoom.playManager.state.GoToMainMenu;
 
@@ -102,6 +102,8 @@ namespace Bagel
         {
             m_PlayManager.state.onStateChange -= State_OnStateChange;
             m_BagelSelectionRoom.onBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
+
+            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
         void Update()
