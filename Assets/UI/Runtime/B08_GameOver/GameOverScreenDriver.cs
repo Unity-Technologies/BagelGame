@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(PanelRenderer))]
     public class GameOverScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
@@ -24,7 +24,17 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_Root = GetComponent<UIDocument>().rootVisualElement;
+            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        }
+
+        void OnDisable()
+        {
+            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+        }
+
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        {
+            m_Root = rootElement;
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
             m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
