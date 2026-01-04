@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(PanelRenderer))]
     public class MainMenuScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
@@ -14,18 +14,26 @@ namespace Bagel
         {
             m_PlayManager.state.onStateChange += State_OnStateChange;
 
-            var uiDocument = GetComponent<UIDocument>();
-            var mainMenuScreenManager = uiDocument.rootVisualElement.Q<MainMenuScreenManager>();
-            m_MainMenuPaneManager = uiDocument.rootVisualElement.Q<MainMenuPaneManager>();
+            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        }
+
+        void OnDisable()
+        {
+            m_PlayManager.state.onStateChange -= State_OnStateChange;
+
+            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+        }
+
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        {
+            var mainMenuScreenManager = rootElement.Q<MainMenuScreenManager>();
+            m_MainMenuPaneManager = rootElement.Q<MainMenuPaneManager>();
             var settingsPaneManager = mainMenuScreenManager.Q<SettingsPaneManager>();
-
             settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
-
             mainMenuScreenManager.BindUI(new MainMenuScreenManager.Callbacks
             {
                 playManagerState = m_PlayManager.state
             });
-
             m_MainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
                 onPlay = m_PlayManager.state.GoToBagelSelection,
@@ -35,11 +43,6 @@ namespace Bagel
                 onExit = Application.Quit
 #endif
             });
-        }
-
-        void OnDisable()
-        {
-            m_PlayManager.state.onStateChange -= State_OnStateChange;
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
