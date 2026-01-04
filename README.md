@@ -1,4 +1,4 @@
-Tested against: **Unity 6.5+ (experimental dev branch)**
+Tested against: **Unity 6.x (experimental dev branch)**
 
 # Bagel Game
 
