@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     [ExecuteInEditMode]
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(PanelRenderer))]
     public class PauseScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
@@ -15,14 +15,26 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_Root = GetComponent<UIDocument>().rootVisualElement;
-            m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
-
-            m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
+            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
 
             m_PlayManager.state.onPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.playInputBindings.onPauseAction += PlayInputBindings_OnPauseAction;
+        }
 
+        void OnDisable()
+        {
+            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+
+            m_PlayManager.state.onPauseStateChanged -= State_OnPauseStateChanged;
+            m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
+        }
+
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        {
+            m_Root = rootElement;
+
+            m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
+            m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
             m_PauseScreenManager.pausePaneManager.BindUI(
                 new PausePaneManager.Callbacks
                 {
@@ -33,12 +45,6 @@ namespace Bagel
             );
 
             SetPauseState(false);
-        }
-
-        void OnDisable()
-        {
-            m_PlayManager.state.onPauseStateChanged -= State_OnPauseStateChanged;
-            m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
         }
 
         void State_OnPauseStateChanged(object sender, bool paused)
