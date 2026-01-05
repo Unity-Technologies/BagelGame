@@ -1,11 +1,15 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Bagel
 {
     public class PlayCamera : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
+
+        [Header("Tracking Elements")]
+        [SerializeField] VisualElementReference<VisualElement> m_MainMenuSecondaryPane;
 
         [Header("Virtual Cameras")]
         [SerializeField] CinemachineCamera m_MainMenuCamera;
