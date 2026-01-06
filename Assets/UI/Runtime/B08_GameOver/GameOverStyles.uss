@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-#leaderboard > #leaderboard-manager > #back-button {
+#leaderboard > #leaderboard-manager > #leaderboard-page > #back-button {
     display: none;
 }
 
