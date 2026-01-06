@@ -16,7 +16,7 @@ namespace Bagel
         Button m_RestartButton;
         Button m_MainMenuButton;
 
-        public Label title => m_Title ??= this.Q<Label>("title");
+        public Label title => m_Title ??= this.Q<Label>("page-title");
         public IntegerField toppingsNumberField => m_ToppingsNumberField ??= this.Q<IntegerField>("toppings-number-field");
         public VisualElement leaderboardForm => m_LeaderboardForm ??= this.Q<VisualElement>("leaderboard-form");
         public TextField addToLeaderboardNameField => m_AddToLeaderboardNameField ??= this.Q<TextField>("leaderboard-name-field");
