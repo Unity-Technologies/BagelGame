@@ -5,7 +5,7 @@
     <Style src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuStyles"/>
     <Bagel.MainMenuScreenManager class="b-screen">
         <ui:Instance template="MainMenuPane" name="main-menu-pane" class="b-pane"/>
-        <ui:VisualElement name="secondary-panes">
+        <ui:VisualElement name="secondary-panes" authoring-id="-1667598749">
             <ui:Instance template="SettingsPane" name="settings-pane" enabled="false" class="b-inactive-pane b-background-pane b-pane"/>
             <ui:Instance template="LeaderboardPane" name="leaderboard-pane" enabled="false" class="b-inactive-pane b-pane"/>
         </ui:VisualElement>
