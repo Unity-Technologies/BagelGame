@@ -9,7 +9,7 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
 
         [Header("Tracking Elements")]
-        [SerializeField] VisualElementReference<VisualElement> m_MainMenuSecondaryPane;
+        [SerializeField] VisualElementReference m_MainMenuSecondaryPane;
 
         [Header("Virtual Cameras")]
         [SerializeField] CinemachineCamera m_MainMenuCamera;
