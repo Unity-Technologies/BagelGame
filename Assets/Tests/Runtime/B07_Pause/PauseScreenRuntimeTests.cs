@@ -25,8 +25,9 @@ namespace Bagel.B07_Pause
         {
             m_PlayManager = Object.FindFirstObjectByType<PlayManager>(FindObjectsInactive.Include);
             var driver = Object.FindFirstObjectByType<PauseScreenDriver>(FindObjectsInactive.Include);
-            var doc = driver.GetComponent<UIDocument>();
-            SetUIContent(doc);
+            var panelRenderer = driver.GetComponent<PanelRenderer>();
+
+            SetPanelRenderer(panelRenderer);
         }
 
         [UnityTest]
