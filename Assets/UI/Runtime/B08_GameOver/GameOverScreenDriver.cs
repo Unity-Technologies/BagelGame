@@ -35,6 +35,11 @@ namespace Bagel
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
             m_Root = rootElement;
+            // Uncommenting this line makes the test fail due to the flow
+            // of loading the Scene in a test context and PanelRenderer reload.
+            // Obviously setting the style.display here to None
+            // isnt a sustainable solution so this is just for illustrative purposes.
+            m_Root.style.display = DisplayStyle.None;
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
             m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
