@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.burst": {
-      "version": "1.8.27",
+      "version": "1.8.28",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -176,7 +176,7 @@
       }
     },
     "com.unity.ui.test-framework": {
-      "version": "1.0.0",
+      "version": "6.3.0",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
