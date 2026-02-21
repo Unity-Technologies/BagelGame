@@ -6,6 +6,7 @@
 	],
 	"settings":
 	{
+		"window.title": "${folderName} (${activeRepositoryBranchName})",
 		"files.associations": {
 			"*.uss": "css",
 			"*.uxml": "xml"
