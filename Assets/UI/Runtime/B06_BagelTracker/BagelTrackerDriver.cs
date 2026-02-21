@@ -4,23 +4,21 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    [RequireComponent(typeof(UIDocument))]
     public class BagelTrackerDriver : MonoBehaviour
     {
         [SerializeField] BagelTracker m_BagelTracker;
 
-        UIDocument m_UIDocument;
-
-        void Awake()
-        {
-            m_UIDocument = GetComponent<UIDocument>();
-        }
-
         void OnEnable()
         {
-            var root = m_UIDocument.rootVisualElement.Q("pane");
+            OnUIReload(GetComponent<UIDocument>().rootVisualElement);
+        }
+
+        void OnUIReload(VisualElement rootElement)
+        {
+            var root = rootElement.Q("pane");
             if (root == null)
                 return;
-
             root.dataSource = m_BagelTracker.bagelTrackerData;
         }
     }
