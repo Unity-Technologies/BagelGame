@@ -15,14 +15,24 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_Root = GetComponent<UIDocument>().rootVisualElement;
-            m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
-
-            m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
+            OnUIReload(GetComponent<UIDocument>().rootVisualElement);
 
             m_PlayManager.state.onPauseStateChanged += State_OnPauseStateChanged;
             m_PlayManager.playInputBindings.onPauseAction += PlayInputBindings_OnPauseAction;
+        }
 
+        void OnDisable()
+        {
+            m_PlayManager.state.onPauseStateChanged -= State_OnPauseStateChanged;
+            m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
+        }
+
+        void OnUIReload(VisualElement rootElement)
+        {
+            m_Root = rootElement;
+
+            m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
+            m_PauseScreenManager.settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
             m_PauseScreenManager.pausePaneManager.BindUI(
                 new PausePaneManager.Callbacks
                 {
@@ -33,12 +43,6 @@ namespace Bagel
             );
 
             SetPauseState(false);
-        }
-
-        void OnDisable()
-        {
-            m_PlayManager.state.onPauseStateChanged -= State_OnPauseStateChanged;
-            m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
         }
 
         void State_OnPauseStateChanged(object sender, bool paused)
