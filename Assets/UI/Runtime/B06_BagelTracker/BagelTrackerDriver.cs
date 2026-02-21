@@ -9,12 +9,12 @@ namespace Bagel
     {
         [SerializeField] BagelTracker m_BagelTracker;
 
-        void Awake()
+        void OnEnable()
         {
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
 
-        private void OnDestroy()
+        void OnDisable()
         {
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
