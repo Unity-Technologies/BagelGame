@@ -24,7 +24,12 @@ namespace Bagel
 
         void OnEnable()
         {
-            m_Root = GetComponent<UIDocument>().rootVisualElement;
+            OnUIReload(GetComponent<UIDocument>().rootVisualElement);
+        }
+
+        void OnUIReload(VisualElement rootElement)
+        {
+            m_Root = rootElement;
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
             m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
