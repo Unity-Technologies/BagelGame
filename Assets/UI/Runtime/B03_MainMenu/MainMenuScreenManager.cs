@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [UxmlElement]
+    [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class MainMenuScreenManager : VisualElement
     {
         public static readonly string backgroundPaneClassName = "b-background-pane";
