@@ -23,8 +23,8 @@ namespace Bagel.B07_Pause
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            m_PlayManager = Object.FindFirstObjectByType<PlayManager>(FindObjectsInactive.Include);
-            var driver = Object.FindFirstObjectByType<PauseScreenDriver>(FindObjectsInactive.Include);
+            m_PlayManager = Object.FindAnyObjectByType<PlayManager>(FindObjectsInactive.Include);
+            var driver = Object.FindAnyObjectByType<PauseScreenDriver>(FindObjectsInactive.Include);
             var doc = driver.GetComponent<UIDocument>();
             SetUIContent(doc);
         }
