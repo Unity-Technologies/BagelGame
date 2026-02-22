@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [UxmlElement]
+    [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class SettingsPaneManager : VisualElement
     {
         SettingsPaneManagerForGame m_SettingsPaneManagerForGame;

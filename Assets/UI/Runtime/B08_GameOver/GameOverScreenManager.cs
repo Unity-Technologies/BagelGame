@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [UxmlElement]
+    [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class GameOverScreenManager : VisualElement
     {
         GameOverPaneManager m_GameOverPaneManager;

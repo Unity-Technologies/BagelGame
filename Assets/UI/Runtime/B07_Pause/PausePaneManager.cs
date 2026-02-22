@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [UxmlElement]
+    [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class PausePaneManager : VisualElement
     {
         Button m_ResumeButton;

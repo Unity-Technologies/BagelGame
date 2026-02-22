@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    [UxmlElement]
+    [UxmlElement(libraryPath = "Bagel/Common")]
     public partial class LongPressButton : VisualElement
     {
         public static readonly string ussClassName = "b-long-press-button";
