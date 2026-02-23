@@ -17,6 +17,19 @@
     filter: blur(10);
 }
 
+.b-title.b-main-title {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    font-size: 45px;
+    color: rgb(244, 158, 45);
+}
+
 .b-background-pane {
     position: absolute;
 }
