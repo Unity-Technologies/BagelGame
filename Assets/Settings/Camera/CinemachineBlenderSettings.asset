@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CinemachineBlenderSettings
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBlenderSettings
   CustomBlends:
-  - From: MainMenuSecondaryCinemaCamera
-    To: MainMenuPrimaryCinemaCamera
+  - From: MainMenuPrimaryCinemaCamera
+    To: MainMenuSecondaryCinemaCamera
     Blend:
       Style: 1
       Time: 1
@@ -24,8 +24,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 4
-  - From: MainMenuPrimaryCinemaCamera
-    To: MainMenuSecondaryCinemaCamera
+  - From: MainMenuSecondaryCinemaCamera
+    To: MainMenuPrimaryCinemaCamera
     Blend:
       Style: 1
       Time: 1
