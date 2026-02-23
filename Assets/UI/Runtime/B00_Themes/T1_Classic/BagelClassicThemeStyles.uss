@@ -9,6 +9,10 @@
     --b-inner-radius: 8px;
     --b-element-radius: 11px;
     --b-pane-radius: 18px;
+    --b-field-gap: 4px;
+    --b-pane-padding: 6px;
+    --b-button-padding: 6px;
+    --b-progress-bar-padding: 8px;
 }
 
 .unity-text-element {
@@ -30,6 +34,11 @@
     border-top-right-radius: var(--b-element-radius);
     border-bottom-right-radius: var(--b-element-radius);
     border-bottom-left-radius: var(--b-element-radius);
+    padding-top: var(--b-button-padding);
+    padding-right: var(--b-button-padding);
+    padding-bottom: var(--b-button-padding);
+    padding-left: var(--b-button-padding);
+    margin-top: var(--b-field-gap);
 }
 
 .unity-button:enabled:hover {
@@ -50,6 +59,7 @@
 }
 
 .unity-progress-bar {
+    margin-top: var(--b-field-gap);
 }
 
 .unity-progress-bar__container {
@@ -73,6 +83,13 @@
     border-bottom-left-radius: var(--b-element-radius);
 }
 
+.unity-progress-bar__title {
+    padding-top: var(--b-progress-bar-padding);
+    padding-right: var(--b-progress-bar-padding);
+    padding-bottom: var(--b-progress-bar-padding);
+    padding-left: var(--b-progress-bar-padding);
+}
+
 .unity-progress-bar__progress {
     background-color: var(--b-primary-color);
     border-top-left-radius: var(--b-inner-radius);
@@ -87,10 +104,10 @@
 }
 
 .b-pane {
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
+    padding-top: var(--b-pane-padding);
+    padding-right: var(--b-pane-padding);
+    padding-bottom: var(--b-pane-padding);
+    padding-left: var(--b-pane-padding);
     margin-top: 6px;
     margin-right: 6px;
     margin-bottom: 6px;
@@ -125,6 +142,7 @@
 
 .unity-base-field {
     flex-direction: column;
+    margin-top: var(--b-field-gap);
 }
 
 .unity-base-slider--horizontal > .unity-base-slider__input {
@@ -177,10 +195,15 @@
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
+.unity-tab-view {
+    margin-top: var(--b-field-gap);
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
 .unity-tab {
     background-color: var(--b-sub-pane-color);
-    border-top-left-radius: var(--b-pane-radius);
-    border-top-right-radius: var(--b-pane-radius);
     border-bottom-right-radius: var(--b-pane-radius);
     border-bottom-left-radius: var(--b-pane-radius);
     padding-top: 7px;
@@ -192,8 +215,6 @@
 .unity-tab__header {
     border-top-left-radius: var(--b-inner-radius);
     border-top-right-radius: var(--b-inner-radius);
-    border-bottom-right-radius: var(--b-inner-radius);
-    border-bottom-left-radius: var(--b-inner-radius);
     background-color: rgba(0, 0, 0, 0);
     border-top-width: 1px;
     border-right-width: 1px;
@@ -213,8 +234,6 @@
     background-color: var(--b-primary-color);
     border-top-left-radius: var(--b-inner-radius);
     border-top-right-radius: var(--b-inner-radius);
-    border-bottom-right-radius: var(--b-inner-radius);
-    border-bottom-left-radius: var(--b-inner-radius);
 }
 
 .unity-tab__header:checked > .unity-tab__header-underline {
