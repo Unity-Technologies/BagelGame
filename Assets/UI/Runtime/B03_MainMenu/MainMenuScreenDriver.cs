@@ -50,8 +50,21 @@ namespace Bagel
             if (m_MainMenuPaneManager.playButton == null)
                 return;
 
-            if (state == PlayManagerState.State.MainMenu)
-                m_MainMenuPaneManager.playButton.Focus();
+            if (state != PlayManagerState.State.MainMenu)
+                return;
+
+            m_MainMenuPaneManager.playButton.Focus();
+            PlayIntroAnimation();
+        }
+
+        void PlayIntroAnimation()
+        {
+            var animation = GetComponent<Animation>();
+            if (animation == null)
+                return;
+
+            animation.Rewind();
+            animation.Play();
         }
     }
 }
