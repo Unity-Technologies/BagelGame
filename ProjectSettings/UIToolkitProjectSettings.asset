@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 15135, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.UIElements.UIToolkitProjectSettings
-  m_EnableAdvancedText: 1
+  m_DefaultRuntimeTheme: {fileID: 0}
+  m_DefaultEditorTheme: {fileID: 0}
+  m_DefaultRuntimeCanvasTheme: 0
+  m_DefaultEditorCanvasTheme: 0
+  m_ConsistentAttributeOrderingWhenExporting: 0
   m_EnableLowLevelDebugger: 1
+  m_EnablePanelRendererAnimation: 1
