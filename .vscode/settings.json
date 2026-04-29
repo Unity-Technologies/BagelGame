@@ -5,9 +5,7 @@
         "**/.gitmodules": false,
         "**/.hg": false,
         "**/.svn": false,
-        "**/obj": true,
-        "*.csproj": true,
-        "*.sln": true
+        "**/obj": true
     },
-    "dotnet.defaultSolution": "BagelGame.sln"
+    "dotnet.defaultSolution": "BagelGame.slnx"
 }

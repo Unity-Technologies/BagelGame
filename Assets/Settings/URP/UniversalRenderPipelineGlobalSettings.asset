@@ -19,7 +19,7 @@ MonoBehaviour:
     m_StripRuntimeDebugShaders: 1
   m_URPShaderStrippingSetting:
     m_Version: 0
-    m_StripUnusedPostProcessingVariants: 0
+    m_StripUnusedPostProcessingVariantsAndResources: 0
     m_StripUnusedVariants: 1
     m_StripScreenCoordOverrideVariants: 1
   m_ShaderVariantLogLevel: 0
@@ -69,9 +69,10 @@ MonoBehaviour:
       - rid: 588999679471517698
       - rid: 7927980626157502464
       - rid: 7927980626157502465
+      - rid: 477326146504228864
     m_RuntimeSettings:
       m_List: []
-  m_AssetVersion: 10
+  m_AssetVersion: 11
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
   - Default
@@ -94,6 +95,21 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 477326146504228864
+      type: {class: UniversalRenderPipelineFilmGrainResources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
+      data:
+        m_Textures:
+        - {fileID: 2800000, guid: 654c582f7f8a5a14dbd7d119cbde215d, type: 3}
+        - {fileID: 2800000, guid: dd77ffd079630404e879388999033049, type: 3}
+        - {fileID: 2800000, guid: 1097e90e1306e26439701489f391a6c0, type: 3}
+        - {fileID: 2800000, guid: f0b67500f7fad3b4c9f2b13e8f41ba6e, type: 3}
+        - {fileID: 2800000, guid: 9930fb4528622b34687b00bbe6883de7, type: 3}
+        - {fileID: 2800000, guid: bd9e8c758250ef449a4b4bfaad7a2133, type: 3}
+        - {fileID: 2800000, guid: 510a2f57334933e4a8dbabe4c30204e4, type: 3}
+        - {fileID: 2800000, guid: b4db8180660810945bf8d55ab44352ad, type: 3}
+        - {fileID: 2800000, guid: fd2fd78b392986e42a12df2177d3b89c, type: 3}
+        - {fileID: 2800000, guid: 5cdee82a77d13994f83b8fdabed7c301, type: 3}
+        m_Version: 0
     - rid: 588999679471517696
       type: {class: UniversalRenderPipelineRuntimeTerrainShaders, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
@@ -163,7 +179,7 @@ MonoBehaviour:
       type: {class: URPShaderStrippingSetting, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Version: 0
-        m_StripUnusedPostProcessingVariants: 0
+        m_StripUnusedPostProcessingVariantsAndResources: 0
         m_StripUnusedVariants: 1
         m_StripScreenCoordOverrideVariants: 1
     - rid: 6267120691244433692
@@ -452,4 +468,5 @@ MonoBehaviour:
       type: {class: ScreenSpaceReflectionPersistentResources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Shader: {fileID: 4800000, guid: 7b3e6785f5f6b634794df3a85a2a35da, type: 3}
+        m_BlitShader: {fileID: 4800000, guid: 815c625bb9d4fe240a4ccf42ca3899cb, type: 3}
         m_Version: 0
