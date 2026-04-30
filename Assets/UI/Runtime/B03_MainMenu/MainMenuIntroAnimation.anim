@@ -178,7 +178,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -208,7 +208,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -247,7 +247,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -277,7 +277,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -307,7 +307,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -346,7 +346,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -376,7 +376,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -406,7 +406,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -445,7 +445,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -484,7 +484,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -523,7 +523,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -562,7 +562,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -583,7 +583,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -604,7 +604,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -643,7 +643,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -703,7 +703,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -733,7 +733,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -772,7 +772,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -802,7 +802,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -832,7 +832,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -871,7 +871,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -901,7 +901,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -931,7 +931,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -970,7 +970,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1009,7 +1009,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1048,7 +1048,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1087,7 +1087,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1504,7 +1504,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1525,7 +1525,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.y'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.y'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1564,7 +1564,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.z'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#title-box/Translate.z'
     path: 
     classID: 1931382934
     script: {fileID: 0}
