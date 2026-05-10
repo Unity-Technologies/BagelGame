@@ -19,7 +19,7 @@ namespace Bagel
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             var root = rootElement.Q("pane");
             if (root == null)

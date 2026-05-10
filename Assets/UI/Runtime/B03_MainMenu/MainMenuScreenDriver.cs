@@ -24,7 +24,7 @@ namespace Bagel
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             var mainMenuScreenManager = rootElement.Q<MainMenuScreenManager>();
             m_MainMenuPaneManager = rootElement.Q<MainMenuPaneManager>();

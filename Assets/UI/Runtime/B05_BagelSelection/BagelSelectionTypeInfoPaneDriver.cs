@@ -24,7 +24,7 @@ namespace Bagel
             m_BagelSelectionPodium.onBagelTypeChange -= BagelSelectionPodium_OnBagelTypeChange;
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             m_Pane = rootElement.Q<VisualElement>("pane");
             m_Pane.dataSource = null;

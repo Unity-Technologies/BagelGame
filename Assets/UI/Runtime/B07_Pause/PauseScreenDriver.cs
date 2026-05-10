@@ -29,7 +29,7 @@ namespace Bagel
             m_PlayManager.playInputBindings.onPauseAction -= PlayInputBindings_OnPauseAction;
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             m_Root = rootElement;
 

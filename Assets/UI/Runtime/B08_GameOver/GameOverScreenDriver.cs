@@ -32,7 +32,7 @@ namespace Bagel
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             m_Root = rootElement;
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();

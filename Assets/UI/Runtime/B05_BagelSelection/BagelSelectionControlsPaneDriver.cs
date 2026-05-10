@@ -26,7 +26,7 @@ namespace Bagel
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
 
-        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             m_Pane = rootElement.Q<VisualElement>("pane");
 
