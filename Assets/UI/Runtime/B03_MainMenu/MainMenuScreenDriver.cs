@@ -10,6 +10,8 @@ namespace Bagel
         [SerializeField] PlayManager m_PlayManager;
         MainMenuPaneManager m_MainMenuPaneManager;
 
+        int m_UIVersion;
+
         void OnEnable()
         {
             m_PlayManager.state.onStateChange += State_OnStateChange;
@@ -26,6 +28,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             var mainMenuScreenManager = rootElement.Q<MainMenuScreenManager>();
             m_MainMenuPaneManager = rootElement.Q<MainMenuPaneManager>();
             var settingsPaneManager = mainMenuScreenManager.Q<SettingsPaneManager>();

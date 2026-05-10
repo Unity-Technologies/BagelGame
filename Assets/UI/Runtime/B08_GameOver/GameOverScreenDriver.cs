@@ -16,6 +16,8 @@ namespace Bagel
         VisualElement m_Root;
         GameOverScreenManager m_GameOverScreenManager;
 
+        int m_UIVersion;
+
         void Awake()
         {
             m_PlayManager.state.onStateChange += State_OnStateChange;
@@ -34,6 +36,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             m_Root = rootElement;
             m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
             m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks

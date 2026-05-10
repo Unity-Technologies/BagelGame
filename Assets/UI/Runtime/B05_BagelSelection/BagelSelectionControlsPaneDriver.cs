@@ -18,6 +18,8 @@ namespace Bagel
         Button m_LeftButton;
         Button m_RightButton;
 
+        int m_UIVersion;
+
         void OnEnable()
         {
             m_PlayManager.state.onStateChange += State_OnStateChange;
@@ -28,6 +30,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             m_Pane = rootElement.Q<VisualElement>("pane");
 
             m_SelectButton = rootElement.Q<Button>("select-button");

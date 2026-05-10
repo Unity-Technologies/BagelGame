@@ -12,6 +12,8 @@ namespace Bagel
         [SerializeField] BagelType m_BagelType;
         VisualElement m_Pane;
 
+        int m_UIVersion;
+
         void OnEnable()
         {
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
@@ -26,6 +28,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             m_Pane = rootElement.Q<VisualElement>("pane");
             m_Pane.dataSource = null;
         }

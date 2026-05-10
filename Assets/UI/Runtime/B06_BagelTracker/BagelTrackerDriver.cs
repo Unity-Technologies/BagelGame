@@ -9,6 +9,8 @@ namespace Bagel
     {
         [SerializeField] BagelTracker m_BagelTracker;
 
+        int m_UIVersion;
+
         void OnEnable()
         {
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
@@ -21,6 +23,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             var root = rootElement.Q("pane");
             if (root == null)
                 return;

@@ -13,6 +13,8 @@ namespace Bagel
         VisualElement m_Root;
         PauseScreenManager m_PauseScreenManager;
 
+        int m_UIVersion;
+
         void OnEnable()
         {
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
@@ -31,6 +33,10 @@ namespace Bagel
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
+            if (m_UIVersion == version)
+                return;
+            m_UIVersion = version;
+
             m_Root = rootElement;
 
             m_PauseScreenManager = m_Root.Q<PauseScreenManager>();
