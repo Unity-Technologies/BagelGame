@@ -1,7 +1,7 @@
 .b-screen {
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.53);
     align-items: center;
+    backdrop-filter: blur(7.98);
 }
 
 .b-inactive-pane {
