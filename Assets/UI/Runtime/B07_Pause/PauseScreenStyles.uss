@@ -1,7 +1,15 @@
 .b-screen {
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(7.98);
+}
+
+.b-pane {
+    width: 300px;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    backdrop-filter: blur(24);
 }
 
 .b-inactive-pane {
