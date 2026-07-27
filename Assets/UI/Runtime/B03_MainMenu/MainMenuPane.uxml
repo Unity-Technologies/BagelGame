@@ -1,7 +1,7 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False" authoring-id="1418258705">
     <Style src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuStyles"/>
     <Bagel.MainMenuPaneManager name="main-menu-pane-manager" style="flex-grow: 1;">
-        <ui:VisualElement name="title-box" style="rotate: -25deg;">
+        <ui:VisualElement name="title-box" class="b-title-box" style="rotate: -25deg;">
             <ui:Label text="Bagel" name="title-bagel" class="b-title b-main-title" style="translate: -36px 0; margin-bottom: -7px; margin-top: 5px;"/>
             <ui:Label text="Game" name="title-game" class="b-title b-main-title" style="translate: 42px 0; margin-top: -11px;"/>
         </ui:VisualElement>

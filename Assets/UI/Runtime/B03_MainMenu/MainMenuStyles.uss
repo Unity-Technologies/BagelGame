@@ -30,6 +30,10 @@
     color: rgb(244, 158, 45);
 }
 
+.b-title-box:hover {
+    -unity-animation-clip: url("project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuTitleAnimation.asset?fileID=3358089438549323042&guid=2c825b0b649574fa39cfb0ff1fc02eca&type=2#MainMenuTitleAnimation");
+}
+
 .b-background-pane {
     position: absolute;
 }
