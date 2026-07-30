@@ -4,6 +4,6 @@
     <Style src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverStyles"/>
     <Bagel.GameOverScreenManager class="b-pane">
         <ui:Instance template="GameOverPane" name="game-over-section" class="b-pane-half" style="margin-right: 8px;"/>
-        <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-sub-pane b-pane-half"/>
+        <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-pane-half"/>
     </Bagel.GameOverScreenManager>
 </ui:UXML>

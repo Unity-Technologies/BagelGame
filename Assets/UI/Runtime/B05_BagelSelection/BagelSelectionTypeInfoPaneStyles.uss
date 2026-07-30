@@ -1,5 +1,5 @@
 .b-pane {
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(255, 195, 162) 65.00038%, rgb(255, 28, 0) 100%);
 }
 
 .b-title {
