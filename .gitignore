@@ -76,3 +76,6 @@ crashlytics-build.properties
 
 .DS_Store
 /.idea
+
+# Local scratch notes (Unity wipes /Temp/ on every Editor start and exit)
+/.temp/
