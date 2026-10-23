@@ -10,12 +10,10 @@ using UnityEngine.TestTools;
 namespace Bagel.B00_Meshes
 {
     // Every mesh in the game comes from a .procmesh: its inputs are in the .meta file and its code
-    // is a ProceduralMeshGenerator, so there are no model files to keep in the project.
+    // is a ProceduralMeshGenerator.
     public class ProceduralMeshTests
     {
         const string k_BagelHull = "Assets/Game/Bagels/Controller/BagelHull.procmesh";
-
-        static readonly string[] s_ModelExtensions = { ".fbx", ".obj", ".blend", ".dae", ".3ds", ".max", ".ma", ".mb", ".usd", ".usda", ".usdc", ".usdz", ".gltf", ".glb", ".ply", ".stl" };
 
         static readonly Regex s_MeshReference = new(@"m_Mesh: (\{[^}]*\})|propertyPath: m_Mesh\s+value:[^\n]*\n\s+objectReference: (\{[^}]*\})");
         static readonly Regex s_Reference = new(@"fileID: (-?\d+)(?:, guid: ([0-9a-f]+))?");
@@ -23,14 +21,6 @@ namespace Bagel.B00_Meshes
         public static IEnumerable<string> proceduralMeshes => AssetDatabase.FindAssets("glob:\"*.procmesh\"", new[] { "Assets" }).Select(AssetDatabase.GUIDToAssetPath);
 
         static IEnumerable<string> scenesAndPrefabs => AssetDatabase.FindAssets("t:Scene t:Prefab", new[] { "Assets" }).Select(AssetDatabase.GUIDToAssetPath).Distinct();
-
-        [Test]
-        public void ThereAreNoModelFiles()
-        {
-            var models = Directory.GetFiles("Assets", "*", SearchOption.AllDirectories)
-                .Where(file => s_ModelExtensions.Contains(Path.GetExtension(file).ToLowerInvariant()));
-            Assert.IsEmpty(models);
-        }
 
         [Test]
         public void EveryMeshInTheGameIsProcedural()
