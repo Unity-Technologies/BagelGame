@@ -32,7 +32,7 @@ namespace Bagel.B04_Settings
             var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
             manager.dataSource = null; // We don't need a real data source for this test.
 
-            Assert.AreEqual(2, dropdown.choices.Count);
+            Assert.AreEqual(4, dropdown.choices.Count);
             Assert.AreEqual("Classic", dropdown.value);
 
             var themePopupFieldInput =

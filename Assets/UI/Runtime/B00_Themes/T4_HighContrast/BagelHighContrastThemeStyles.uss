@@ -1,0 +1,49 @@
+/* High Contrast: opaque black panes, white text and borders, a thick yellow focus ring and
+   bigger titles, for players who need the UI to stand out from the 3D world.
+   Variables, plus the one rule at the end. */
+
+:root {
+    --b-pane-color: rgb(0, 0, 0);
+    --b-board-pane-color: rgb(0, 0, 0);
+    --b-sub-pane-color: rgb(20, 20, 20);
+    --b-fill-color: rgb(0, 0, 0);
+    --b-input-color: rgb(0, 0, 0);
+    --b-row-color: rgb(0, 0, 0);
+    --b-popup-color: rgb(0, 0, 0);
+
+    --b-primary-color: rgb(0, 84, 200);
+    --b-primary-color-faded: rgb(40, 40, 40);
+    --b-progress-color: rgb(255, 214, 0);
+    --b-title-accent-color: rgb(255, 214, 0);
+    --b-accent-a: rgb(255, 255, 255);
+    --b-accent-b: rgb(255, 255, 255);
+    --b-accent-c: rgb(255, 214, 0);
+    --b-accent-d: rgb(255, 214, 0);
+
+    --b-card-color-a: rgb(0, 0, 0);
+    --b-card-color-b: rgb(0, 0, 0);
+    --b-card-color-c: rgb(0, 0, 0);
+    --b-card-text-color: rgb(255, 255, 255);
+
+    --b-text-color: rgb(255, 255, 255);
+    --b-title-size: 44px;
+    --b-main-title-size: 50px;
+    --b-details-size: 13px;
+    --b-glow-color: rgb(255, 214, 0);
+    --b-focus-color: rgb(255, 214, 0);
+    --b-focus-width: 4px;
+
+    --b-button-border-color: rgb(255, 255, 255);
+    --b-button-border-width: 3px;
+
+    --b-tiny-radius: 2px;
+    --b-inner-radius: 4px;
+    --b-element-radius: 6px;
+    --b-pane-radius: 8px;
+}
+
+/* The one rule a theme needs: -unity-material can't be set from a variable. Plain buttons, no shader. */
+.unity-button,
+.unity-popup-field {
+    -unity-material: none;
+}

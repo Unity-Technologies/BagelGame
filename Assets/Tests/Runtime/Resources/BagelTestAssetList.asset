@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: BagelRuntimeTests::Bagel.BagelTestAssetList
   mainSceneName: Main
   startState: {fileID: 11400000, guid: f0183f196e1622f4aa5ff36423fe939f, type: 2}
+  themes: {fileID: 11400000, guid: 0b2cb54fd56196a438cd99033ac4d38c, type: 2}
+  panelSettings: {fileID: 11400000, guid: b035c3d0e01944847a6335d7e1d4709a, type: 2}
   mainMenuUxml: {fileID: 9197481963319205126, guid: ea563f0ac4a3a3840827b0233961e0fc, type: 3}
   settingsPaneUxml: {fileID: 9197481963319205126, guid: 099575a75b5735a419dbefecaa7d35b0, type: 3}
   settingsPaneForGameUxml: {fileID: 9197481963319205126, guid: d7691f3c73ec72640bed89b7079805d7, type: 3}

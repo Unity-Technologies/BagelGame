@@ -7,7 +7,7 @@
 }
 
 .b-pane {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--b-board-pane-color);
     transition-property: filter;
     transition-duration: 1s;
     height: 277px;
@@ -26,8 +26,8 @@
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
-    font-size: 45px;
-    color: rgb(244, 158, 45);
+    font-size: var(--b-main-title-size);
+    color: var(--b-title-accent-color);
 }
 
 .b-title-box:hover {
@@ -39,7 +39,7 @@
 }
 
 .b-details-view {
-    font-size: 10px;
+    font-size: var(--b-details-size);
 }
 
 .b-details-view .unity-label {

@@ -18,7 +18,18 @@ namespace Bagel
         public BagelThemeCollection bagelThemeCollection { get; set; }
 
         // Set by the in-game Drivers: only the running game swaps the PanelSettings themes.
-        public bool appliesThemeToPanelSettings { get; set; }
+        public bool appliesThemeToPanelSettings
+        {
+            get => m_AppliesThemeToPanelSettings;
+            set
+            {
+                m_AppliesThemeToPanelSettings = value;
+                if (value && state != null)
+                    ChangeTheme(state.settings.themeIndex);
+            }
+        }
+
+        bool m_AppliesThemeToPanelSettings;
 
         public event EventHandler<ThemeStyleSheet> OnThemeChange;
 
@@ -43,6 +54,12 @@ namespace Bagel
                 themeDropdown.SetValueWithoutNotify(themeDropdown.choices[Mathf.Clamp(state.settings.themeIndex, 0, themes.Count - 1)]);
         }
 
+        protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
+        {
+            if (newState != null && m_AppliesThemeToPanelSettings)
+                ChangeTheme(newState.settings.themeIndex);
+        }
+
         protected override void OnStatePropertyChanged(in BindingId property)
         {
             if (property == SettingsData.themeIndexPath)
@@ -59,18 +76,8 @@ namespace Bagel
 
             OnThemeChange?.Invoke(this, theme);
 
-            if (appliesThemeToPanelSettings)
-                ChangePanelSettingsTheme(theme);
-        }
-
-        void ChangePanelSettingsTheme(ThemeStyleSheet theme)
-        {
-            var panelSettings = panelSettingsCollection?.collection;
-            if (panelSettings == null || panelSettings.Count == 0)
-                return;
-
-            foreach (var settings in panelSettings)
-                settings.themeStyleSheet = theme;
+            if (m_AppliesThemeToPanelSettings && Application.isPlaying)
+                BagelThemes.ApplyToPanelSettings(panelSettingsCollection, theme);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Bagel.B04_Settings
             manager.dataSource = null; // We don't need a real data source for this test.
 
             // Check initial state.
-            Assert.AreEqual(2, themeDropdown.choices.Count);
+            Assert.AreEqual(manager.bagelThemeCollection.collection.Count, themeDropdown.choices.Count);
             Assert.AreEqual("Classic", themeDropdown.value);
 
             // Get popup field input.

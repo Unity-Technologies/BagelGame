@@ -1,0 +1,45 @@
+/* Daylight: light paper panes with dark text, warm orange buttons and rounder shapes.
+   Variables, plus the one rule at the end. */
+
+:root {
+    --b-pane-color: rgba(255, 248, 234, 0.9);
+    --b-board-pane-color: rgba(255, 248, 234, 0.9);
+    --b-sub-pane-color: rgba(246, 228, 198, 0.9);
+    --b-fill-color: rgb(255, 255, 255);
+    --b-input-color: rgba(59, 31, 20, 0.08);
+    --b-row-color: rgba(255, 255, 255, 0.75);
+    --b-popup-color: rgba(255, 248, 234, 0.97);
+
+    --b-primary-color: rgb(245, 166, 35);
+    --b-primary-color-faded: rgb(255, 222, 170);
+    --b-progress-color: rgb(222, 72, 44);
+    --b-title-accent-color: rgb(222, 72, 44);
+    --b-accent-a: rgb(255, 196, 40);
+    --b-accent-b: rgb(255, 138, 101);
+    --b-accent-c: rgb(222, 72, 44);
+    --b-accent-d: rgb(64, 201, 132);
+
+    --b-card-color-a: rgb(255, 255, 255);
+    --b-card-color-b: rgb(255, 244, 222);
+    --b-card-color-c: rgb(246, 200, 140);
+    --b-card-text-color: rgb(59, 31, 20);
+
+    --b-text-color: rgb(59, 31, 20);
+    --b-glow-color: rgb(255, 214, 120);
+    --b-focus-color: rgb(222, 72, 44);
+    --b-focus-width: 3px;
+
+    --b-button-border-color: rgb(240, 214, 176);
+    --b-button-border-width: 3px;
+
+    --b-tiny-radius: 6px;
+    --b-inner-radius: 12px;
+    --b-element-radius: 18px;
+    --b-pane-radius: 26px;
+}
+
+/* The one rule a theme needs: -unity-material can't be set from a variable. Plain buttons, no shader. */
+.unity-button,
+.unity-popup-field {
+    -unity-material: none;
+}

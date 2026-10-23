@@ -45,10 +45,14 @@ namespace Bagel
 
             ResolveState();
             OnAttached();
+
+            if (m_ParentPane == null && !UnityEngine.Application.isPlaying)
+                BagelThemes.AddPreviewRoot(this);
         }
 
         void OnDetachFromPanel(DetachFromPanelEvent evt)
         {
+            BagelThemes.RemovePreviewRoot(this);
             OnDetached();
 
             if (m_ParentPane != null)

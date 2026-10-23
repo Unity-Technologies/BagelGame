@@ -1,0 +1,434 @@
+/* Bagel Game: the styles every theme shares. Each color, size and shape is a variable;
+   a theme only sets variables (see T1_Classic/BagelClassicThemeStyles.uss). The defaults
+   here are Classic's. */
+
+:root {
+    /* Surfaces */
+    --b-pane-color: rgba(0, 0, 0, 0.53);
+    --b-board-pane-color: rgba(0, 0, 0, 0);
+    --b-sub-pane-color: rgba(0, 0, 0, 0.52);
+    --b-fill-color: rgb(71, 71, 71);
+    --b-input-color: rgba(0, 0, 0, 0.38);
+    --b-row-color: rgba(51, 51, 51, 0.62);
+    --b-popup-color: rgba(0, 0, 0, 0.64);
+
+    /* Brand */
+    --b-primary-color: rgb(98, 143, 38);
+    --b-primary-color-faded: rgb(20, 79, 16);
+    --b-progress-color: rgb(78, 213, 115);
+    --b-title-accent-color: rgb(244, 158, 45);
+    --b-accent-a: rgb(116, 255, 0);
+    --b-accent-b: rgb(255, 140, 101);
+    --b-accent-c: rgb(66, 0, 255);
+    --b-accent-d: rgb(0, 255, 153);
+
+    /* Bagel cards on the selection podiums */
+    --b-card-color-a: rgb(255, 255, 255);
+    --b-card-color-b: rgb(255, 195, 162);
+    --b-card-color-c: rgb(255, 28, 0);
+    --b-card-text-color: rgb(0, 0, 0);
+
+    /* Text */
+    --b-text-color: rgb(239, 239, 239);
+    --b-font: url("project://database/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
+    --b-title-size: 38px;
+    --b-main-title-size: 45px;
+    --b-details-size: 10px;
+
+    /* Hover and focus */
+    --b-glow-color: rgb(255, 255, 255);
+    --b-focus-color: rgb(255, 255, 255);
+    --b-focus-width: 2px;
+
+    /* Buttons */
+    --b-button-border-color: rgb(149, 149, 149);
+    --b-button-border-width: 5px;
+
+    /* Shapes and spacing */
+    --b-tiny-radius: 4px;
+    --b-inner-radius: 8px;
+    --b-element-radius: 11px;
+    --b-pane-radius: 18px;
+    --b-field-gap: 4px;
+    --b-pane-padding: 6px;
+    --b-button-padding: 6px;
+    --b-progress-bar-padding: 8px;
+}
+
+.unity-text-element {
+    -unity-font-definition: var(--b-font);
+    -unity-text-generator: advanced;
+    color: var(--b-text-color);
+}
+
+.unity-button {
+    transition-duration: 0.3s;
+    border-top-width: var(--b-button-border-width);
+    border-right-width: var(--b-button-border-width);
+    border-bottom-width: var(--b-button-border-width);
+    border-left-width: var(--b-button-border-width);
+    border-top-color: var(--b-button-border-color);
+    border-right-color: var(--b-button-border-color);
+    border-bottom-color: var(--b-button-border-color);
+    border-left-color: var(--b-button-border-color);
+    overflow: visible;
+    /* -unity-material can't come from a variable: a theme that doesn't want the shader sets it to none. */
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    background-color: var(--b-fill-color);
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
+    padding-top: var(--b-button-padding);
+    padding-right: var(--b-button-padding);
+    padding-bottom: var(--b-button-padding);
+    padding-left: var(--b-button-padding);
+    margin-top: var(--b-field-gap);
+}
+
+.unity-button:enabled:hover {
+    filter: drop-shadow(0 0 6 var(--b-glow-color));
+}
+
+.unity-button.b-primary {
+    background-color: var(--b-primary-color);
+}
+
+.unity-base-text-field__input {
+    background-color: var(--b-input-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.unity-progress-bar {
+    margin-top: var(--b-field-gap);
+}
+
+.unity-progress-bar__container {
+    min-height: initial;
+    max-height: initial;
+    height: auto;
+    flex-grow: 1;
+}
+
+.unity-progress-bar__background {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    min-height: initial;
+    max-height: initial;
+    background-color: var(--b-primary-color-faded);
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
+}
+
+.unity-progress-bar__title {
+    padding-top: var(--b-progress-bar-padding);
+    padding-right: var(--b-progress-bar-padding);
+    padding-bottom: var(--b-progress-bar-padding);
+    padding-left: var(--b-progress-bar-padding);
+}
+
+.unity-progress-bar__progress {
+    background-color: var(--b-primary-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.b-title {
+    font-size: var(--b-title-size);
+    -unity-text-align: upper-center;
+}
+
+.b-title-underline {
+    height: 14px;
+    flex-shrink: 0;
+    background-image: linear-gradient(90deg, var(--b-accent-a) 0%, var(--b-accent-b) 25.6%, var(--b-accent-c) 56.8%, var(--b-accent-d) 82.6%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.b-pane {
+    padding-top: var(--b-pane-padding);
+    padding-right: var(--b-pane-padding);
+    padding-bottom: var(--b-pane-padding);
+    padding-left: var(--b-pane-padding);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    width: 250px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    background-color: var(--b-pane-color);
+}
+
+.b-sub-pane {
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    background-color: var(--b-sub-pane-color);
+}
+
+.b-screen {
+    flex-grow: 1;
+}
+
+.b-long-press-button__progress {
+    background-color: var(--b-progress-color);
+}
+
+.unity-base-field {
+    flex-direction: column;
+    margin-top: var(--b-field-gap);
+}
+
+.unity-base-slider--horizontal > .unity-base-slider__input {
+    height: 22px;
+}
+
+.unity-multi-column-header {
+    min-height: initial;
+}
+
+.unity-list-view__item {
+    background-color: var(--b-row-color);
+}
+
+.unity-list-view__item.unity-collection-view__item--alternative-background {
+    background-color: var(--b-primary-color-faded);
+}
+
+.unity-popup-field {
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+}
+
+.unity-popup-field__input {
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.unity-multi-column-view__header-container {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-multi-column-header__column {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 1px;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.unity-base-dropdown__container-inner {
+    background-color: var(--b-popup-color);
+}
+
+.unity-base-dropdown__checkmark {
+    -unity-background-image-tint-color: var(--b-text-color);
+}
+
+.unity-tab-view {
+    margin-top: var(--b-field-gap);
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
+.unity-tab {
+    background-color: var(--b-sub-pane-color);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+}
+
+.unity-tab__header {
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+.unity-tab__header:hover {
+    border-left-color: var(--b-glow-color);
+    border-right-color: var(--b-glow-color);
+    border-top-color: var(--b-glow-color);
+    border-bottom-color: var(--b-glow-color);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-tab__header-label {
+    color: var(--b-text-color);
+}
+
+.unity-tab__header:checked {
+    background-color: var(--b-primary-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+}
+
+.unity-tab__header:checked > .unity-tab__header-underline {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-scroller__low-button {
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.unity-scroller__high-button {
+    border-top-left-radius: var(--b-element-radius);
+    border-top-right-radius: var(--b-element-radius);
+    border-bottom-right-radius: var(--b-element-radius);
+    border-bottom-left-radius: var(--b-element-radius);
+}
+
+.unity-scroller__slider {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-scroller__slider > .unity-slider__input {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-scroller__slider .unity-base-slider__dragger {
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+    background-color: var(--b-primary-color);
+}
+
+.unity-scroller--vertical > .unity-base-slider--vertical {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.unity-scroller__slider > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: -2px;
+    border-right-width: -2px;
+    border-bottom-width: -2px;
+    border-left-width: -2px;
+}
+
+.unity-multi-column-header__column:hover:enabled {
+    background-color: var(--b-primary-color);
+}
+
+.unity-list-view__item:hover:enabled {
+    background-color: var(--b-primary-color);
+}
+
+.unity-base-slider__drag-container > .unity-base-slider__dragger {
+    background-color: var(--b-primary-color);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+}
+
+.unity-base-slider--horizontal .unity-base-slider__tracker {
+    background-color: var(--b-primary-color-faded);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.unity-base-slider--horizontal .unity-base-slider__dragger:hover:enabled {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: var(--b-glow-color);
+    border-right-color: var(--b-glow-color);
+    border-top-color: var(--b-glow-color);
+    border-bottom-color: var(--b-glow-color);
+    background-color: var(--b-primary-color);
+    scale: 1.1 1.1;
+}
+
+.unity-base-slider--horizontal .unity-base-slider__tracker:hover:enabled {
+    background-color: var(--b-primary-color-faded);
+}
+
+/* Focus: gamepad and keyboard players need to see where they are. */
+
+.unity-button:focus,
+.b-long-press-button:focus {
+    border-top-color: var(--b-focus-color);
+    border-right-color: var(--b-focus-color);
+    border-bottom-color: var(--b-focus-color);
+    border-left-color: var(--b-focus-color);
+}
+
+.unity-base-text-field:focus > .unity-base-field__input,
+.unity-base-popup-field:focus > .unity-base-field__input {
+    border-top-width: var(--b-focus-width);
+    border-right-width: var(--b-focus-width);
+    border-bottom-width: var(--b-focus-width);
+    border-left-width: var(--b-focus-width);
+    border-top-color: var(--b-focus-color);
+    border-right-color: var(--b-focus-color);
+    border-bottom-color: var(--b-focus-color);
+    border-left-color: var(--b-focus-color);
+}
+
+.unity-base-slider:focus .unity-base-slider__dragger {
+    border-top-width: var(--b-focus-width);
+    border-right-width: var(--b-focus-width);
+    border-bottom-width: var(--b-focus-width);
+    border-left-width: var(--b-focus-width);
+    border-top-color: var(--b-focus-color);
+    border-right-color: var(--b-focus-color);
+    border-bottom-color: var(--b-focus-color);
+    border-left-color: var(--b-focus-color);
+}
+
+.unity-tab__header:focus,
+.unity-collection-view:focus,
+.b-focus-frame:focus {
+    border-top-width: var(--b-focus-width);
+    border-right-width: var(--b-focus-width);
+    border-bottom-width: var(--b-focus-width);
+    border-left-width: var(--b-focus-width);
+    border-top-color: var(--b-focus-color);
+    border-right-color: var(--b-focus-color);
+    border-bottom-color: var(--b-focus-color);
+    border-left-color: var(--b-focus-color);
+}
