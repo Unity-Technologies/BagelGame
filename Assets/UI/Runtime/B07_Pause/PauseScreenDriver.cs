@@ -18,20 +18,25 @@ namespace Bagel
 
         void OnEnable()
         {
-            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
-
             // In Edit mode the screen only hides itself, so it doesn't cover the Game view.
-            if (!Application.isPlaying)
-                return;
+            if (Application.isPlaying)
+            {
+                m_State = m_PlayManager.state;
+                m_State.onPauseStateChanged += State_OnPauseStateChanged;
+                m_PlayManager.playInputBindings.onPauseAction += PlayInputBindings_OnPauseAction;
+            }
 
-            m_State = m_PlayManager.state;
-            m_State.onPauseStateChanged += State_OnPauseStateChanged;
-            m_PlayManager.playInputBindings.onPauseAction += PlayInputBindings_OnPauseAction;
+            // Registering calls OnUIReload right away when the UI is already loaded.
+            GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
 
         void OnDisable()
         {
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+
+            // Play mode can start without a domain reload, and the panel counts versions again from
+            // the start: forget the last one so the next UI is always set up.
+            m_UIVersion = 0;
 
             if (m_State == null)
                 return;

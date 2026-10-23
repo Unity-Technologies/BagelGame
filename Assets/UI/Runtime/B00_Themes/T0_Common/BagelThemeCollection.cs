@@ -12,6 +12,7 @@ namespace Bagel
         public struct ThemeEntry
         {
             public string themeName;
+            public string nameKey;
             public ThemeStyleSheet theme;
         }
 

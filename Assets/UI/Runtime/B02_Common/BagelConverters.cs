@@ -1,4 +1,3 @@
-using System.Globalization;
 using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -31,10 +30,10 @@ namespace Bagel
             ConverterGroups.RegisterConverterGroup(numberGroup);
 
             var percentGroup = new ConverterGroup(percent, "Bagel", "A 0 to 1 fraction as a percentage: 57%");
-            percentGroup.AddConverter((ref float v) => Mathf.RoundToInt(v * 100f).ToString(CultureInfo.CurrentCulture) + "%");
+            percentGroup.AddConverter((ref float v) => Mathf.RoundToInt(v * 100f).ToString(BagelLocalization.culture) + "%");
             ConverterGroups.RegisterConverterGroup(percentGroup);
         }
 
-        public static string FormatNumber(int value) => value.ToString("N0", CultureInfo.CurrentCulture);
+        public static string FormatNumber(int value) => value.ToString("N0", BagelLocalization.culture);
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BagelTypeSesame
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Sesame
+  nameKey: bagel.sesame
   maxToppingCount: 500
   spinToppingLossFactor: 0.005
   impactToppingLossFactor: 0.1

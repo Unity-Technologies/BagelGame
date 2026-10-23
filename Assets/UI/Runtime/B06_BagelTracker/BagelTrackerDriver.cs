@@ -18,6 +18,10 @@ namespace Bagel
         void OnDisable()
         {
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+
+            // Play mode can start without a domain reload, and the panel counts versions again from
+            // the start: forget the last one so the next UI is always set up.
+            m_UIVersion = 0;
         }
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)

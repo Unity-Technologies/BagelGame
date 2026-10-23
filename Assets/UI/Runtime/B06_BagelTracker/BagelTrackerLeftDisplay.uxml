@@ -1,14 +1,16 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#BagelTrackerStyles"/>
     <Bagel.BagelTrackerPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="pane" data-source-path="tracker" class="b-pane">
         <ui:ProgressBar name="spin-bar" title="Spin">
             <Bindings>
+                <loc:LocalizedString property="title" table="BagelStrings" entry="tracker.spin"/>
                 <ui:DataBinding property="value" data-source-path="spin" binding-mode="ToTarget"/>
                 <ui:DataBinding property="highValue" data-source-path="constants.spinMax" binding-mode="ToTarget"/>
             </Bindings>
         </ui:ProgressBar>
         <ui:ProgressBar name="pain-bar" title="Pain">
             <Bindings>
+                <loc:LocalizedString property="title" table="BagelStrings" entry="tracker.pain"/>
                 <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
                 <ui:DataBinding property="highValue" data-source-path="constants.forceMax" binding-mode="ToTarget"/>
             </Bindings>

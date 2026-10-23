@@ -21,6 +21,10 @@ namespace Bagel
                 return;
             m_Bound = true;
 
+            // The page title comes from the Page template, so its binding is added here.
+            BagelLocalization.Bind(this.Q<Label>("page-title"), "text", "leaderboard.title");
+            UpdateColumnTitles();
+
             leaderboardTable.columns["name"].makeCell = () => new Label();
             leaderboardTable.columns["toppings"].makeCell = () => new Label();
 
@@ -33,6 +37,18 @@ namespace Bagel
                 string.Compare(leaderboardData.entries[a].playerName, leaderboardData.entries[b].playerName, StringComparison.Ordinal);
             leaderboardTable.columns["toppings"].comparison = (a, b) =>
                 (leaderboardData.entries[a].toppings).CompareTo(leaderboardData.entries[b].toppings);
+        }
+
+        // Columns aren't elements, so their titles can't be bound: set them for each language.
+        protected override void OnLocaleChanged() => UpdateColumnTitles();
+
+        void UpdateColumnTitles()
+        {
+            if (leaderboardTable == null)
+                return;
+
+            leaderboardTable.columns["name"].title = BagelLocalization.Get("leaderboard.name", "Name");
+            leaderboardTable.columns["toppings"].title = BagelLocalization.Get("leaderboard.toppings", "Toppings Left");
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)

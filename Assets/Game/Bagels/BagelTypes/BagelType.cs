@@ -7,6 +7,7 @@ namespace Bagel
     public class BagelType : ScriptableObject, IDataSourceViewHashProvider
     {
         public string displayName = "New";
+        public string nameKey;
 
         [Space]
         public int maxToppingCount = 1000;

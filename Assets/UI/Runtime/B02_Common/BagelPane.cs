@@ -44,6 +44,7 @@ namespace Bagel
                 m_ParentPane.stateChanged += ParentPane_OnStateChanged;
 
             ResolveState();
+            BagelLocalization.localeChanged += OnLocaleChanged;
             OnAttached();
 
             if (m_ParentPane == null && !UnityEngine.Application.isPlaying)
@@ -53,6 +54,7 @@ namespace Bagel
         void OnDetachFromPanel(DetachFromPanelEvent evt)
         {
             BagelThemes.RemovePreviewRoot(this);
+            BagelLocalization.localeChanged -= OnLocaleChanged;
             OnDetached();
 
             if (m_ParentPane != null)
@@ -121,5 +123,7 @@ namespace Bagel
         protected virtual void OnDetached() {}
         protected virtual void OnStateChanged(PlayManagerState oldState, PlayManagerState newState) {}
         protected virtual void OnStatePropertyChanged(in BindingId property) {}
+        // Called after the language changes. LocalizedString bindings update by themselves.
+        protected virtual void OnLocaleChanged() {}
     }
 }

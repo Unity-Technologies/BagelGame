@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BagelTypePoppySeed
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Poppy Seed
+  nameKey: bagel.poppy-seed
   rollTorque: 35
   turnTorque: 1
   mass: 3

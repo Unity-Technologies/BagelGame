@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,13 +46,26 @@ namespace Bagel
             if (themes == null || themes.Count == 0)
                 return;
 
-            themeDropdown.choices.Clear();
+            UpdateThemeNames();
+        }
+
+        protected override void OnLocaleChanged() => UpdateThemeNames();
+
+        // Theme names are choices in a dropdown, not elements, so they're set for each language.
+        void UpdateThemeNames()
+        {
+            var themes = bagelThemeCollection?.collection;
+            if (themes == null || themes.Count == 0 || themeDropdown == null)
+                return;
+
+            var choices = new List<string>(themes.Count);
             foreach (var theme in themes)
-                themeDropdown.choices.Add(theme.themeName);
+                choices.Add(string.IsNullOrEmpty(theme.nameKey) ? theme.themeName : BagelLocalization.Get(theme.nameKey, theme.themeName));
+            themeDropdown.choices = choices;
 
             // The index is two-way bound to settings.themeIndex; show the current one right away.
-            if (state != null)
-                themeDropdown.SetValueWithoutNotify(themeDropdown.choices[Mathf.Clamp(state.settings.themeIndex, 0, themes.Count - 1)]);
+            var index = state != null ? state.settings.themeIndex : themeDropdown.index;
+            themeDropdown.SetValueWithoutNotify(choices[Mathf.Clamp(index, 0, choices.Count - 1)]);
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)

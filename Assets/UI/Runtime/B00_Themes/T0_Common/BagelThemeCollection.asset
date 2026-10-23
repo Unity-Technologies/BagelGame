@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: BagelUI::Bagel.BagelThemeCollection
   collection:
   - themeName: Classic
+    nameKey: theme.classic
     theme: {fileID: -4733365628477956816, guid: 69175a3719b8b38449aaa271dbf1486e, type: 3}
   - themeName: Edgy
+    nameKey: theme.edgy
     theme: {fileID: -4733365628477956816, guid: 0e4b227ec23df5147b94513c4affb184, type: 3}
   - themeName: Daylight
+    nameKey: theme.daylight
     theme: {fileID: -4733365628477956816, guid: e9e146b5d4b0d814d93c51c785cb23c4, type: 3}
   - themeName: High Contrast
+    nameKey: theme.high-contrast
     theme: {fileID: -4733365628477956816, guid: a87c2d71bd3954a4caf37d2c41cad8b6, type: 3}

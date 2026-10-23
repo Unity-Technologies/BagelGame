@@ -1,4 +1,4 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="GameSettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForGame.uxml?fileID=9197481963319205126&amp;guid=d7691f3c73ec72640bed89b7079805d7&amp;type=3#SettingsPaneForGame"/>
     <ui:Template name="Page" src="project://database/Assets/UI/Runtime/B02_Common/Page.uxml?fileID=9197481963319205126&amp;guid=fd2407f521d49554aaf933ac922100de&amp;type=3#Page"/>
     <ui:Template name="UISettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForUI.uxml?fileID=9197481963319205126&amp;guid=e1093797146b3f046962391299b2fdb9&amp;type=3#SettingsPaneForUI"/>
@@ -8,17 +8,27 @@
             <AttributeOverrides element-name="page-title" text="Settings"/>
             <ui:TabView name="settings-tab-view">
                 <ui:Tab label="Game" name="game-settings-tab">
+                    <Bindings>
+                        <loc:LocalizedString property="label" table="BagelStrings" entry="settings.tab-game"/>
+                    </Bindings>
                     <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="game-settings-view" class="b-details-view">
                         <ui:Instance template="GameSettingsPane" name="game-settings-pane"/>
                     </ui:ScrollView>
                 </ui:Tab>
                 <ui:Tab label="UI" name="ui-settings-tab">
+                    <Bindings>
+                        <loc:LocalizedString property="label" table="BagelStrings" entry="settings.tab-ui"/>
+                    </Bindings>
                     <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="ui-settings-view" class="b-details-view">
                         <ui:Instance template="UISettingsPane" name="ui-settings-pane"/>
                     </ui:ScrollView>
                 </ui:Tab>
             </ui:TabView>
-            <ui:Button text="Back" name="back-button"/>
+            <ui:Button text="Back" name="back-button">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="common.back"/>
+                </Bindings>
+            </ui:Button>
         </ui:Instance>
     </Bagel.SettingsPaneManager>
 </ui:UXML>

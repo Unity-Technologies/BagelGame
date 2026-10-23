@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19402, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: BagelStrings_fr
+  m_EditorClassIdentifier: UnityEngine.dll::Unity.Localization.ResourceTable
+  m_LocaleCode: fr
+  m_SharedData: {fileID: 11400000, guid: 1b88a453017970b4dae4882c819893b0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_Entries:
+  - rid: 6326339759238545569
+  - rid: 6326339759238545570
+  - rid: 6326339759238545571
+  - rid: 6326339759238545572
+  - rid: 6326339759238545573
+  - rid: 6326339759238545574
+  - rid: 6326339759238545575
+  - rid: 6326339759238545576
+  - rid: 6326339759238545577
+  - rid: 6326339759238545578
+  - rid: 6326339759238545579
+  - rid: 6326339759238545580
+  - rid: 6326339759238545581
+  - rid: 6326339759238545582
+  - rid: 6326339759238545583
+  - rid: 6326339759238545584
+  - rid: 6326339759238545585
+  - rid: 6326339759238545586
+  - rid: 6326339759238545587
+  - rid: 6326339759238545588
+  - rid: 6326339759238545589
+  - rid: 6326339759238545590
+  - rid: 6326339759238545591
+  - rid: 6326339759238545592
+  - rid: 6326339759238545593
+  - rid: 6326339759238545594
+  - rid: 6326339759238545595
+  - rid: 6326339759238545596
+  - rid: 6326339759238545597
+  - rid: 6326339759238545598
+  - rid: 6326339759238545599
+  - rid: 6326339759238545600
+  - rid: 6326339759238545601
+  - rid: 6326339759238545602
+  - rid: 6326339759238545603
+  - rid: 6326339759238545604
+  - rid: 6326339759238545605
+  - rid: 6326339759238545606
+  - rid: 6326339759238545607
+  - rid: 6326339759238545608
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339759238545569
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1406992384
+        m_Metadata:
+          m_Items: []
+        m_Value: Jouer
+    - rid: 6326339759238545570
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575296
+        m_Metadata:
+          m_Items: []
+        m_Value: "R\xE9glages"
+    - rid: 6326339759238545571
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575297
+        m_Metadata:
+          m_Items: []
+        m_Value: Classement
+    - rid: 6326339759238545572
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575298
+        m_Metadata:
+          m_Items: []
+        m_Value: Quitter
+    - rid: 6326339759238545573
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575299
+        m_Metadata:
+          m_Items: []
+        m_Value: Retour
+    - rid: 6326339759238545574
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575300
+        m_Metadata:
+          m_Items: []
+        m_Value: Recommencer
+    - rid: 6326339759238545575
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575301
+        m_Metadata:
+          m_Items: []
+        m_Value: Menu principal
+    - rid: 6326339759238545576
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575302
+        m_Metadata:
+          m_Items: []
+        m_Value: "R\xE9glages"
+    - rid: 6326339759238545577
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575303
+        m_Metadata:
+          m_Items: []
+        m_Value: Jeu
+    - rid: 6326339759238545578
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575304
+        m_Metadata:
+          m_Items: []
+        m_Value: Interface
+    - rid: 6326339759238545579
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575305
+        m_Metadata:
+          m_Items: []
+        m_Value: Champ de vision
+    - rid: 6326339759238545580
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575306
+        m_Metadata:
+          m_Items: []
+        m_Value: "Th\xE8me"
+    - rid: 6326339759238545581
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575307
+        m_Metadata:
+          m_Items: []
+        m_Value: Langue
+    - rid: 6326339759238545582
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575308
+        m_Metadata:
+          m_Items: []
+        m_Value: Classique
+    - rid: 6326339759238545583
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575309
+        m_Metadata:
+          m_Items: []
+        m_Value: Anguleux
+    - rid: 6326339759238545584
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575310
+        m_Metadata:
+          m_Items: []
+        m_Value: Plein jour
+    - rid: 6326339759238545585
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575311
+        m_Metadata:
+          m_Items: []
+        m_Value: "Contraste \xE9lev\xE9"
+    - rid: 6326339759238545586
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575312
+        m_Metadata:
+          m_Items: []
+        m_Value: Classement
+    - rid: 6326339759238545587
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575313
+        m_Metadata:
+          m_Items: []
+        m_Value: Nom
+    - rid: 6326339759238545588
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575314
+        m_Metadata:
+          m_Items: []
+        m_Value: Garnitures
+    - rid: 6326339759238545589
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575315
+        m_Metadata:
+          m_Items: []
+        m_Value: Choisir
+    - rid: 6326339759238545590
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575316
+        m_Metadata:
+          m_Items: []
+        m_Value: "S\xE9same"
+    - rid: 6326339759238545591
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575317
+        m_Metadata:
+          m_Items: []
+        m_Value: Pavot
+    - rid: 6326339759238545592
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575318
+        m_Metadata:
+          m_Items: []
+        m_Value: Tout garni
+    - rid: 6326339759238545593
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575319
+        m_Metadata:
+          m_Items: []
+        m_Value: Garnitures
+    - rid: 6326339759238545594
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575320
+        m_Metadata:
+          m_Items: []
+        m_Value: Perte de garnitures
+    - rid: 6326339759238545595
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575321
+        m_Metadata:
+          m_Items: []
+        m_Value: "Contr\xF4le"
+    - rid: 6326339759238545596
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575322
+        m_Metadata:
+          m_Items: []
+        m_Value: Vitesse
+    - rid: 6326339759238545597
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575323
+        m_Metadata:
+          m_Items: []
+        m_Value: "Adh\xE9rence"
+    - rid: 6326339759238545598
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575324
+        m_Metadata:
+          m_Items: []
+        m_Value: Rotation
+    - rid: 6326339759238545599
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575325
+        m_Metadata:
+          m_Items: []
+        m_Value: Douleur
+    - rid: 6326339759238545600
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575326
+        m_Metadata:
+          m_Items: []
+        m_Value: Pause
+    - rid: 6326339759238545601
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575327
+        m_Metadata:
+          m_Items: []
+        m_Value: Reprendre
+    - rid: 6326339759238545602
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575328
+        m_Metadata:
+          m_Items: []
+        m_Value: "Partie termin\xE9e"
+    - rid: 6326339759238545603
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575329
+        m_Metadata:
+          m_Items: []
+        m_Value: "Gagn\xE9 !"
+    - rid: 6326339759238545604
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575330
+        m_Metadata:
+          m_Items: []
+        m_Value: Perdu !
+    - rid: 6326339759238545605
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575331
+        m_Metadata:
+          m_Items: []
+        m_Value: Garnitures restantes
+    - rid: 6326339759238545606
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575332
+        m_Metadata:
+          m_Items: []
+        m_Value: Nom pour le classement
+    - rid: 6326339759238545607
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575333
+        m_Metadata:
+          m_Items: []
+        m_Value: Ajouter au classement
+    - rid: 6326339759238545608
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575334
+        m_Metadata:
+          m_Items: []
+        m_Value: "{toppings:cond:>0?Votre bagel {bagel} a gard\xE9 {toppings:plural:1 garniture|{} garnitures} !|Votre bagel {bagel} a perdu toutes ses garnitures.}"

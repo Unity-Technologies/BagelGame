@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BagelTypeEverything
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Everything
+  nameKey: bagel.everything
   maxToppingCount: 200
   spinToppingLossFactor: 0.001
   impactToppingLossFactor: 0.02

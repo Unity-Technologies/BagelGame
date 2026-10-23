@@ -44,6 +44,9 @@ namespace Bagel
                 return;
             m_Bound = true;
 
+            // The page title comes from the Page template, so its binding is added here.
+            BagelLocalization.Bind(this.Q<Label>("page-title"), "text", "pause.title");
+
             BindUI(new Callbacks
             {
                 onResume = () => state?.Resume(),

@@ -1,9 +1,15 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:locui="Unity.Localization.UI" xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Bagel.SettingsPaneManagerForUI start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="ui-settings-manager" bagel-theme-collection="project://database/Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset?fileID=11400000&amp;guid=0b2cb54fd56196a438cd99033ac4d38c&amp;type=2#BagelThemeCollection" panel-settings-collection="project://database/Assets/UI/Runtime/B01_PanelSettings/PanelSettingsCollection.asset?fileID=11400000&amp;guid=b035c3d0e01944847a6335d7e1d4709a&amp;type=2#PanelSettingsCollection">
         <ui:DropdownField label="Theme" name="theme-dropdown" index="0">
             <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.theme"/>
                 <ui:DataBinding property="index" data-source-path="settings.themeIndex" binding-mode="TwoWay"/>
             </Bindings>
         </ui:DropdownField>
+        <locui:LanguageDropdown label="Language" name="language-dropdown">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.language"/>
+            </Bindings>
+        </locui:LanguageDropdown>
     </Bagel.SettingsPaneManagerForUI>
 </ui:UXML>

@@ -155,7 +155,8 @@ namespace Bagel.B00_Core
             Assert.IsTrue(m_State.isGameOver);
             Assert.AreEqual(321, m_State.lastRun.toppings);
             Assert.IsTrue(m_State.lastRun.won);
-            Assert.AreEqual("You Win!", m_State.lastRun.title);
+            Assert.AreEqual("gameover.win", m_State.lastRun.titleKey);
+            Assert.AreEqual(m_State.selectedBagelType.nameKey, m_State.lastRun.bagelNameKey);
             Assert.AreEqual(m_State.selectedBagelType.displayName, m_State.lastRun.bagelName);
         }
 
@@ -168,7 +169,7 @@ namespace Bagel.B00_Core
             m_State.FinishRun();
 
             Assert.IsFalse(m_State.lastRun.won);
-            Assert.AreEqual("You Lose!", m_State.lastRun.title);
+            Assert.AreEqual("gameover.lose", m_State.lastRun.titleKey);
             Assert.IsFalse(m_State.lastRun.canSubmit);
         }
 

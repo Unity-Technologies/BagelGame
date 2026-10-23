@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19402, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: BagelStrings_en
+  m_EditorClassIdentifier: UnityEngine.dll::Unity.Localization.ResourceTable
+  m_LocaleCode: en
+  m_SharedData: {fileID: 11400000, guid: 1b88a453017970b4dae4882c819893b0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_Entries:
+  - rid: 6326339759238545529
+  - rid: 6326339759238545530
+  - rid: 6326339759238545531
+  - rid: 6326339759238545532
+  - rid: 6326339759238545533
+  - rid: 6326339759238545534
+  - rid: 6326339759238545535
+  - rid: 6326339759238545536
+  - rid: 6326339759238545537
+  - rid: 6326339759238545538
+  - rid: 6326339759238545539
+  - rid: 6326339759238545540
+  - rid: 6326339759238545541
+  - rid: 6326339759238545542
+  - rid: 6326339759238545543
+  - rid: 6326339759238545544
+  - rid: 6326339759238545545
+  - rid: 6326339759238545546
+  - rid: 6326339759238545547
+  - rid: 6326339759238545548
+  - rid: 6326339759238545549
+  - rid: 6326339759238545550
+  - rid: 6326339759238545551
+  - rid: 6326339759238545552
+  - rid: 6326339759238545553
+  - rid: 6326339759238545554
+  - rid: 6326339759238545555
+  - rid: 6326339759238545556
+  - rid: 6326339759238545557
+  - rid: 6326339759238545558
+  - rid: 6326339759238545559
+  - rid: 6326339759238545560
+  - rid: 6326339759238545561
+  - rid: 6326339759238545562
+  - rid: 6326339759238545563
+  - rid: 6326339759238545564
+  - rid: 6326339759238545565
+  - rid: 6326339759238545566
+  - rid: 6326339759238545567
+  - rid: 6326339759238545568
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339759238545529
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1406992384
+        m_Metadata:
+          m_Items: []
+        m_Value: Play
+    - rid: 6326339759238545530
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575296
+        m_Metadata:
+          m_Items: []
+        m_Value: Settings
+    - rid: 6326339759238545531
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575297
+        m_Metadata:
+          m_Items: []
+        m_Value: Leaderboard
+    - rid: 6326339759238545532
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575298
+        m_Metadata:
+          m_Items: []
+        m_Value: Exit
+    - rid: 6326339759238545533
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575299
+        m_Metadata:
+          m_Items: []
+        m_Value: Back
+    - rid: 6326339759238545534
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575300
+        m_Metadata:
+          m_Items: []
+        m_Value: Restart
+    - rid: 6326339759238545535
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575301
+        m_Metadata:
+          m_Items: []
+        m_Value: Main Menu
+    - rid: 6326339759238545536
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575302
+        m_Metadata:
+          m_Items: []
+        m_Value: Settings
+    - rid: 6326339759238545537
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575303
+        m_Metadata:
+          m_Items: []
+        m_Value: Game
+    - rid: 6326339759238545538
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575304
+        m_Metadata:
+          m_Items: []
+        m_Value: UI
+    - rid: 6326339759238545539
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575305
+        m_Metadata:
+          m_Items: []
+        m_Value: Field of View
+    - rid: 6326339759238545540
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575306
+        m_Metadata:
+          m_Items: []
+        m_Value: Theme
+    - rid: 6326339759238545541
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575307
+        m_Metadata:
+          m_Items: []
+        m_Value: Language
+    - rid: 6326339759238545542
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575308
+        m_Metadata:
+          m_Items: []
+        m_Value: Classic
+    - rid: 6326339759238545543
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575309
+        m_Metadata:
+          m_Items: []
+        m_Value: Edgy
+    - rid: 6326339759238545544
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575310
+        m_Metadata:
+          m_Items: []
+        m_Value: Daylight
+    - rid: 6326339759238545545
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575311
+        m_Metadata:
+          m_Items: []
+        m_Value: High Contrast
+    - rid: 6326339759238545546
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575312
+        m_Metadata:
+          m_Items: []
+        m_Value: Leaderboard
+    - rid: 6326339759238545547
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575313
+        m_Metadata:
+          m_Items: []
+        m_Value: Name
+    - rid: 6326339759238545548
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575314
+        m_Metadata:
+          m_Items: []
+        m_Value: Toppings Left
+    - rid: 6326339759238545549
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575315
+        m_Metadata:
+          m_Items: []
+        m_Value: Select
+    - rid: 6326339759238545550
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575316
+        m_Metadata:
+          m_Items: []
+        m_Value: Sesame
+    - rid: 6326339759238545551
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575317
+        m_Metadata:
+          m_Items: []
+        m_Value: Poppy Seed
+    - rid: 6326339759238545552
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575318
+        m_Metadata:
+          m_Items: []
+        m_Value: Everything
+    - rid: 6326339759238545553
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575319
+        m_Metadata:
+          m_Items: []
+        m_Value: Toppings
+    - rid: 6326339759238545554
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575320
+        m_Metadata:
+          m_Items: []
+        m_Value: Topping Loss
+    - rid: 6326339759238545555
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575321
+        m_Metadata:
+          m_Items: []
+        m_Value: Control
+    - rid: 6326339759238545556
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575322
+        m_Metadata:
+          m_Items: []
+        m_Value: Speed
+    - rid: 6326339759238545557
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575323
+        m_Metadata:
+          m_Items: []
+        m_Value: Grip
+    - rid: 6326339759238545558
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575324
+        m_Metadata:
+          m_Items: []
+        m_Value: Spin
+    - rid: 6326339759238545559
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575325
+        m_Metadata:
+          m_Items: []
+        m_Value: Pain
+    - rid: 6326339759238545560
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575326
+        m_Metadata:
+          m_Items: []
+        m_Value: Paused
+    - rid: 6326339759238545561
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575327
+        m_Metadata:
+          m_Items: []
+        m_Value: Resume
+    - rid: 6326339759238545562
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575328
+        m_Metadata:
+          m_Items: []
+        m_Value: Game Over
+    - rid: 6326339759238545563
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575329
+        m_Metadata:
+          m_Items: []
+        m_Value: You Win!
+    - rid: 6326339759238545564
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575330
+        m_Metadata:
+          m_Items: []
+        m_Value: You Lose!
+    - rid: 6326339759238545565
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575331
+        m_Metadata:
+          m_Items: []
+        m_Value: Toppings Left
+    - rid: 6326339759238545566
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575332
+        m_Metadata:
+          m_Items: []
+        m_Value: Name for Leaderboard
+    - rid: 6326339759238545567
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575333
+        m_Metadata:
+          m_Items: []
+        m_Value: Add to Leaderboard
+    - rid: 6326339759238545568
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 1419575334
+        m_Metadata:
+          m_Items: []
+        m_Value: '{toppings:cond:>0?Your {bagel} bagel kept {toppings:plural:1 topping|{} toppings}!|Your {bagel} bagel lost every topping.}'

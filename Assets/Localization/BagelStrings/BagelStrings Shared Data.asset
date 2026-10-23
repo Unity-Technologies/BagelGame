@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19403, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: BagelStrings Shared Data
+  m_EditorClassIdentifier: UnityEngine.dll::Unity.Localization.SharedTableData
+  m_TableCollectionName: BagelStrings
+  m_TableCollectionNameGuid: 97c5b3afd46697442ab860288765cd9a
+  m_KeyGenerator:
+    rid: 6326339759238545487
+  m_Entries:
+  - m_Id: 1406992384
+    m_Key: menu.play
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575296
+    m_Key: menu.settings
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575297
+    m_Key: menu.leaderboard
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575298
+    m_Key: menu.exit
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575299
+    m_Key: common.back
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575300
+    m_Key: common.restart
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575301
+    m_Key: common.main-menu
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575302
+    m_Key: settings.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575303
+    m_Key: settings.tab-game
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575304
+    m_Key: settings.tab-ui
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575305
+    m_Key: settings.field-of-view
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575306
+    m_Key: settings.theme
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575307
+    m_Key: settings.language
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575308
+    m_Key: theme.classic
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575309
+    m_Key: theme.edgy
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575310
+    m_Key: theme.daylight
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575311
+    m_Key: theme.high-contrast
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575312
+    m_Key: leaderboard.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575313
+    m_Key: leaderboard.name
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575314
+    m_Key: leaderboard.toppings
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575315
+    m_Key: selection.select
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575316
+    m_Key: bagel.sesame
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575317
+    m_Key: bagel.poppy-seed
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575318
+    m_Key: bagel.everything
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575319
+    m_Key: stat.toppings
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575320
+    m_Key: stat.topping-loss
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575321
+    m_Key: stat.control
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575322
+    m_Key: stat.speed
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575323
+    m_Key: stat.grip
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575324
+    m_Key: tracker.spin
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575325
+    m_Key: tracker.pain
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575326
+    m_Key: pause.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575327
+    m_Key: pause.resume
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575328
+    m_Key: gameover.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575329
+    m_Key: gameover.win
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575330
+    m_Key: gameover.lose
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575331
+    m_Key: gameover.toppings-left
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575332
+    m_Key: gameover.name
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575333
+    m_Key: gameover.add
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1419575334
+    m_Key: gameover.summary
+    m_Flags: 1
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339759238545487
+      type: {class: DistributedUIDGenerator, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_CustomEpoch: 1792794510684

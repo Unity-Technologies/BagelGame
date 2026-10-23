@@ -8,6 +8,7 @@ namespace Bagel
     public class RunResult
     {
         [SerializeField] string m_BagelName;
+        [SerializeField] string m_BagelNameKey;
         [SerializeField] int m_Toppings;
         [SerializeField] int m_ToppingsMax;
         [SerializeField] bool m_Submitted;
@@ -15,10 +16,11 @@ namespace Bagel
         [NonSerialized] PlayManagerState m_Owner;
 
         [CreateProperty] public string bagelName => m_BagelName;
+        [CreateProperty] public string bagelNameKey => m_BagelNameKey;
         [CreateProperty] public int toppings => m_Toppings;
         [CreateProperty] public int toppingsMax => m_ToppingsMax;
         [CreateProperty] public bool won => m_Toppings > 0;
-        [CreateProperty] public string title => won ? "You Win!" : "You Lose!";
+        [CreateProperty] public string titleKey => won ? "gameover.win" : "gameover.lose";
         [CreateProperty] public bool canSubmit => won && !m_Submitted;
 
         [CreateProperty]
@@ -36,9 +38,10 @@ namespace Bagel
 
         internal void Bind(PlayManagerState owner) => m_Owner = owner;
 
-        internal void Set(string bagelName, int toppings, int toppingsMax)
+        internal void Set(string bagelName, string bagelNameKey, int toppings, int toppingsMax)
         {
             m_BagelName = bagelName;
+            m_BagelNameKey = bagelNameKey;
             m_Toppings = Mathf.Max(0, toppings);
             m_ToppingsMax = toppingsMax;
             m_Submitted = false;

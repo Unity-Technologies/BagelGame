@@ -23,6 +23,10 @@ namespace Bagel
         void OnDisable()
         {
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+
+            // Play mode can start without a domain reload, and the panel counts versions again from
+            // the start: forget the last one so the next UI is always set up.
+            m_UIVersion = 0;
             m_BagelSelectionPodium.onBagelTypeChange -= BagelSelectionPodium_OnBagelTypeChange;
         }
 
@@ -53,6 +57,10 @@ namespace Bagel
                 return;
 
             m_Pane.dataSource = m_BagelType;
+
+            // The name comes from the string table, so it follows the language.
+            if (!string.IsNullOrEmpty(m_BagelType.nameKey))
+                BagelLocalization.Bind(m_Pane.Q<Label>("name"), "text", m_BagelType.nameKey);
         }
     }
 }

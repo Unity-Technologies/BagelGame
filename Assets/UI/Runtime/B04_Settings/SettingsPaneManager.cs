@@ -24,5 +24,17 @@ namespace Bagel
             if (backButton != null && callbacks.onSettingsBack != null)
                 backButton.clicked += callbacks.onSettingsBack;
         }
+
+        bool m_Bound;
+
+        protected override void OnAttached()
+        {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            // The page title comes from the Page template, so its binding is added here.
+            BagelLocalization.Bind(this.Q<Label>("page-title"), "text", "settings.title");
+        }
     }
 }

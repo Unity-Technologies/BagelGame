@@ -145,7 +145,8 @@ namespace Bagel
         public void FinishRun()
         {
             var bagelType = selectedBagelType;
-            m_LastRun.Set(bagelType != null ? bagelType.displayName : "", m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount);
+            m_LastRun.Set(bagelType != null ? bagelType.displayName : "", bagelType != null ? bagelType.nameKey : "",
+                m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount);
             GoToGameOver();
         }
 

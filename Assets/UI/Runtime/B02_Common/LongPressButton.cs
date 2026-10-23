@@ -1,4 +1,5 @@
 using System;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -13,7 +14,7 @@ namespace Bagel
         public static readonly string labelUssClassName = "b-long-press-button__label";
         public static readonly string progressUssClassName = "b-long-press-button__progress";
 
-        [UxmlAttribute]
+        [UxmlAttribute, CreateProperty]
         public string text
         {
             get => m_TextElement.text;

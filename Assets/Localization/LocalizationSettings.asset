@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19400, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: LocalizationSettings
+  m_EditorClassIdentifier: UnityEngine.dll::Unity.Localization.LocalizationSettings
+  m_AvailableLocales:
+  - rid: 6326339759238545480
+  - rid: 6326339759238545481
+  - rid: 6326339764369490011
+  m_ProjectLocaleCode: en
+  m_ResourceDatabase:
+    rid: 6326339759238545477
+  m_StartupSelectors:
+  - rid: 6326339759238545483
+  - rid: 6326339759238545484
+  - rid: 6326339759238545485
+  - rid: 6326339759238545486
+  m_PreferredLoading: 1
+  m_SmartStringsSettings: {fileID: 0}
+  m_PreloadBehavior: 1
+  m_PreloadTables: []
+  m_DeferInitialization: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6326339759238545477
+      type: {class: ResourceDatabase, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_AssetProvider:
+          m_Providers:
+          - rid: 6326339759238545488
+          m_Selected:
+            rid: -2
+    - rid: 6326339759238545480
+      type: {class: Locale, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_Code: en
+        m_LocaleName: English
+        m_FallbackCode: 
+        m_Enabled: 1
+    - rid: 6326339759238545481
+      type: {class: Locale, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_Code: fr
+        m_LocaleName: "Fran\xE7ais"
+        m_FallbackCode: 
+        m_Enabled: 1
+    - rid: 6326339759238545483
+      type: {class: CommandLineLocaleSelector, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_CommandLineArgument: -language=
+    - rid: 6326339759238545484
+      type: {class: PlayerPrefLocaleSelector, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_PlayerPreferenceKey: selected-locale
+    - rid: 6326339759238545485
+      type: {class: SystemLocaleSelector, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data: 
+    - rid: 6326339759238545486
+      type: {class: SpecificLocaleSelector, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_LocaleId:
+          m_Code: en
+    - rid: 6326339759238545488
+      type: {class: ReferencedAssetProvider, ns: Unity.Localization.Providers, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_ByAddress:
+        - key: BagelStrings_en
+          value: {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
+        - key: 97c5b3afd46697442ab860288765cd9a_en
+          value: {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
+        - key: BagelStrings_fr
+          value: {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
+        - key: 97c5b3afd46697442ab860288765cd9a_fr
+          value: {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
+        - key: BagelStrings_zh-Hans
+          value: {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
+        - key: 97c5b3afd46697442ab860288765cd9a_zh-Hans
+          value: {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
+        m_OwnedAddresses:
+        - BagelStrings_en
+        - 97c5b3afd46697442ab860288765cd9a_en
+        - BagelStrings_fr
+        - 97c5b3afd46697442ab860288765cd9a_fr
+        - BagelStrings_zh-Hans
+        - 97c5b3afd46697442ab860288765cd9a_zh-Hans
+    - rid: 6326339764369490011
+      type: {class: Locale, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_Code: zh-Hans
+        m_LocaleName: "\u7B80\u4F53\u4E2D\u6587"
+        m_FallbackCode: 
+        m_Enabled: 1
