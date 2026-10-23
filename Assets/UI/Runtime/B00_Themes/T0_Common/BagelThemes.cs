@@ -69,7 +69,7 @@ namespace Bagel
 
         // Screens shown outside Play mode (in the Scene view, UI Builder or an editor window) report
         // themselves, so a theme can be previewed on them without touching the PanelSettings.
-        internal static void AddPreviewRoot(VisualElement root)
+        public static void AddPreviewRoot(VisualElement root)
         {
             if (s_PreviewRoots.Contains(root))
                 return;
@@ -79,7 +79,7 @@ namespace Bagel
                 root.styleSheets.Add(s_PreviewTheme);
         }
 
-        internal static void RemovePreviewRoot(VisualElement root)
+        public static void RemovePreviewRoot(VisualElement root)
         {
             if (!s_PreviewRoots.Remove(root))
                 return;

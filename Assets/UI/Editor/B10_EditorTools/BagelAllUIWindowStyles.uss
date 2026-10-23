@@ -1,14 +1,103 @@
-.b-section {
-    flex-shrink: 0;
-    align-items: center;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
+.b-window {
+    flex-grow: 1;
+    background-color: rgb(40, 34, 30);
 }
 
-.b-row {
+.b-toolbar {
+    flex-shrink: 0;
+}
+
+.b-toolbar__group {
     flex-direction: row;
+    margin-right: 8px;
+}
+
+.b-toolbar__zoom {
+    width: 180px;
+    flex-direction: row;
+    margin-right: 6px;
+}
+
+.b-toolbar__zoom > .unity-label {
+    min-width: 40px;
+}
+
+.b-body {
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.b-stage {
+    flex-grow: 1;
+}
+
+.b-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+}
+
+.b-card {
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(78, 62, 52);
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.b-card--inactive {
+    opacity: 0.45;
+}
+
+.b-card__title {
+    -unity-font-style: bold;
+    color: rgb(255, 214, 160);
+    margin-bottom: 6px;
+}
+
+.b-card__slot {
+    overflow: hidden;
+}
+
+.b-card__content {
+    position: absolute;
+    flex-direction: row;
+    align-items: flex-start;
+    transform-origin: left top;
+}
+
+.b-card__screen {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.b-card__screen--fixed {
+    background-image: linear-gradient(135deg, rgb(110, 60, 50) 0%, rgb(60, 110, 60) 100%);
+}
+
+.b-inspector-dock {
+    width: 320px;
+    flex-shrink: 0;
+    display: none;
+    border-left-width: 1px;
+    border-left-color: rgb(25, 25, 25);
+    background-color: rgb(56, 56, 56);
+}
+
+.b-inspector-dock--shown {
+    display: flex;
 }

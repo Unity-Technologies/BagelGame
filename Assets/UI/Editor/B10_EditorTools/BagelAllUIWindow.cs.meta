@@ -3,12 +3,7 @@ guid: d8689be5d64359d4daa06bddeb09d9b1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - m_ViewDataDictionary: {instanceID: 0}
-  - m_VisualTreeAsset: {fileID: 9197481963319205126, guid: 7795a87192aceab4cb8538f6d7ba88d5, type: 3}
-  - m_DefaultTheme: {fileID: -4733365628477956816, guid: 69175a3719b8b38449aaa271dbf1486e, type: 3}
-  - m_BagelType: {fileID: 11400000, guid: 4121a9b3513474a4badc7b2ccbe255c4, type: 2}
-  - m_StartState: {fileID: 11400000, guid: f0183f196e1622f4aa5ff36423fe939f, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

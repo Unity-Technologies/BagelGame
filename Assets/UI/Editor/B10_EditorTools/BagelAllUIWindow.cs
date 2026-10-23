@@ -1,138 +1,568 @@
-using Bagel;
-using Unity.Properties;
+using System;
+using System.Collections.Generic;
+using Unity.Localization;
+using Unity.Scripting.LifecycleManagement;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BagelAllUIWindow : EditorWindow
+namespace Bagel
 {
-    [SerializeField] VisualTreeAsset m_VisualTreeAsset;
-    [SerializeField] ThemeStyleSheet m_DefaultTheme;
-    [SerializeField] BagelType m_BagelType;
-    [SerializeField] PlayManagerState m_StartState;
-
-    ThemeStyleSheet m_CurrentTheme;
-    PlayManagerState m_State;
-
-    [MenuItem("Bagel/Bagel All UI")]
-    public static void ShowExample()
+    // Every screen of the game side by side, live, all playing on one throwaway copy of the
+    // start state. Click through them, switch the game's state, theme and language, stage a
+    // setup (a win, a wrecked bagel...) or edit the state in the inspector. Nothing here
+    // changes an asset.
+    [NoAutoStaticsCleanup] // read-only tables of screens and setups
+    public class BagelAllUIWindow : EditorWindow
     {
-        var wnd = GetWindow<BagelAllUIWindow>();
-        wnd.titleContent = new GUIContent("Bagel All UI");
-    }
+        const string k_WindowUxmlPath = "Assets/UI/Editor/B10_EditorTools/BagelAllUIWindow.uxml";
+        const string k_StartStatePath = "Assets/Game/Core/PlayManagerState.asset";
+        const string k_ThemeCollectionPath = "Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset";
+        const string k_UIPath = "Assets/UI/Runtime/";
 
-    public void CreateGUI()
-    {
-        // Remove the Editor theme.
-        var editorTheme = rootVisualElement.styleSheets[0];
-        rootVisualElement.styleSheets.Clear();
-
-        // Every screen in the window shares one throwaway copy of the start state.
-        m_State = PlayManagerState.CreateRuntimeCopy(m_StartState);
-
-        // Create UI.
-        m_VisualTreeAsset.CloneTree(rootVisualElement);
-        rootVisualElement.Query<BagelPane>().ForEach(pane =>
+        // One card per screen. A screen is "active" in the states listed: the others are dimmed.
+        public struct CardSpec
         {
-            if (pane.parentPane == null)
-                pane.SetState(m_State);
-        });
+            public string title;
+            public string[] uxmlPaths;
+            public PlayManagerState.State[] activeIn;
+            public bool pausedOnly;
+            public Vector2 size;
 
-        m_CurrentTheme = m_DefaultTheme;
-        ApplyRuntimeTheme(m_DefaultTheme);
+            public bool IsActive(PlayManagerState state)
+            {
+                if (pausedOnly)
+                    return state.isPlaying && state.isPaused;
+                return Array.IndexOf(activeIn, state.currentState) >= 0 && !state.isPaused;
+            }
+        }
 
-        SetupScroller(editorTheme);
-
-        BindMainMenuRow();
-        BindBagelTrackerRow(editorTheme);
-        BindBagelTypeRow(editorTheme);
-        BindPauseRow();
-        BindGameOverRow(editorTheme);
-        BindLeaderboardRow(editorTheme);
-    }
-
-    void ApplyRuntimeTheme(ThemeStyleSheet theme)
-    {
-        rootVisualElement.Query<TemplateContainer>().ForEach(t =>
+        public static readonly CardSpec[] cardSpecs =
         {
-            t.styleSheets.Remove(m_CurrentTheme);
-            t.styleSheets.Add(theme);
-        });
-        m_CurrentTheme = theme;
-    }
-
-    void SetupScroller(StyleSheet editorTheme)
-    {
-        var rootScrollView = rootVisualElement.Q<ScrollView>("root-scrollview");
-        var rootScroller = rootVisualElement.Q<Scroller>("root-scroller");
-        rootScroller.styleSheets.Add(editorTheme);
-
-        var rootScrollViewVerticalScroller = rootScrollView.hierarchy.ElementAt(0).hierarchy.ElementAt(1) as Scroller;
-
-        rootScroller.dataSource = rootScrollViewVerticalScroller;
-        rootScroller.SetBinding("value", new DataBinding() { dataSourcePath = new PropertyPath("value"), bindingMode = BindingMode.TwoWay });
-        rootScroller.SetBinding("lowValue", new DataBinding() { dataSourcePath = new PropertyPath("lowValue") });
-        rootScroller.SetBinding("highValue", new DataBinding() { dataSourcePath = new PropertyPath("highValue") });
-    }
-
-    void BindMainMenuRow()
-    {
-        var manager = rootVisualElement.Q<MainMenuScreenManager>();
-        var uiSettings = manager.Q<SettingsPaneManagerForUI>();
-        uiSettings.OnThemeChange += (_, theme) => ApplyRuntimeTheme(theme);
-    }
-
-    void OnDisable()
-    {
-        PlayManagerState.DestroyRuntimeCopy(m_State);
-        m_State = null;
-    }
-
-    void BindBagelTrackerRow(StyleSheet editorTheme)
-    {
-        var stateInspector = new InspectorElement(m_State);
-        stateInspector.styleSheets.Add(editorTheme);
-        var bagelTrackerDataRow = rootVisualElement.Q<VisualElement>("bagel-tracker-row");
-        bagelTrackerDataRow.Add(stateInspector);
-    }
-
-    void BindBagelTypeRow(StyleSheet editorTheme)
-    {
-        var bagelTypeInfoInspector = new InspectorElement(m_BagelType);
-        bagelTypeInfoInspector.styleSheets.Add(editorTheme);
-        var bagelTypeInfoContainer = rootVisualElement.Q<VisualElement>("bagel-selection-type-info");
-        bagelTypeInfoContainer.Add(bagelTypeInfoInspector);
-    }
-
-    void BindPauseRow()
-    {
-        var manager = rootVisualElement.Q<PauseScreenManager>();
-        var uiSettings = manager.Q<SettingsPaneManagerForUI>();
-        uiSettings.OnThemeChange += (_, theme) => ApplyRuntimeTheme(theme);
-    }
-
-    void BindGameOverRow(StyleSheet editorTheme)
-    {
-        var gameOverScreen = rootVisualElement.Q<VisualElement>("game-over");
-        var gameOverScreenManager = gameOverScreen.Q<GameOverScreenManager>();
-        var leaderboardManager = gameOverScreen.Q<LeaderboardManager>();
-        var toppingsLeftField = gameOverScreen.Q<IntegerField>("toppings-number-field");
-        var leaderboardForm = gameOverScreen.Q<VisualElement>("leaderboard-form");
-
-        var gameOverControls = rootVisualElement.Q<VisualElement>("game-over-controls");
-        gameOverControls.styleSheets.Add(editorTheme);
-        var toppingsLeftResetField = gameOverControls.Q<IntegerField>("toppings-left-reset-field");
-        var gameOverResetButton = gameOverControls.Q<Button>("game-over-reset-button");
-
-        gameOverResetButton.clicked += () =>
-        {
-            m_State.tracker.toppingsCount = toppingsLeftResetField.value;
-            m_State.FinishRun();
+            new CardSpec { title = "Main Menu", uxmlPaths = new[] { "B03_MainMenu/MainMenuScreen.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
+            new CardSpec { title = "Bagel Selection", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionControlsPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
+            new CardSpec { title = "Bagel Cards", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionTypeInfoPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
+            new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
+            new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, pausedOnly = true, size = new Vector2(640f, 400f) },
+            new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" }, activeIn = new[] { PlayManagerState.State.GameOver } },
+            new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu, PlayManagerState.State.GameOver } },
+            new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
         };
-    }
 
-    void BindLeaderboardRow(StyleSheet editorTheme)
-    {
+        public class Card
+        {
+            public CardSpec spec;
+            public VisualElement root;
+            public VisualElement slot;
+            public VisualElement content;
+            public readonly List<TemplateContainer> screens = new();
+        }
+
+        [SerializeField] float m_Zoom = 1.0f;
+        [SerializeField] bool m_ShowInspector;
+
+        PlayManagerState m_State;
+        BagelThemeCollection m_Themes;
+        ThemeStyleSheet m_Theme;
+        readonly List<Card> m_Cards = new();
+        IVisualElementScheduledItem m_Roll;
+
+        // The editor theme stays on the toolbar and the inspector; the screens get the game's.
+        readonly List<StyleSheet> m_EditorSheets = new();
+        readonly List<(VisualElement owner, StyleSheet sheet)> m_BorrowedSheets = new();
+        readonly List<VisualElement> m_EditorStyledParts = new();
+
+        public PlayManagerState state => m_State;
+        public IReadOnlyList<Card> cards => m_Cards;
+        public ThemeStyleSheet currentTheme => m_Theme;
+        public float zoom => m_Zoom;
+
+        [MenuItem("Bagel/Bagel All UI")]
+        public static BagelAllUIWindow Open()
+        {
+            var window = GetWindow<BagelAllUIWindow>();
+            window.titleContent = new GUIContent("Bagel All UI");
+            window.minSize = new Vector2(720f, 480f);
+            return window;
+        }
+
+        public void CreateGUI()
+        {
+            titleContent = new GUIContent("Bagel All UI");
+
+            DestroyState();
+            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
+            m_State.propertyChanged += State_OnPropertyChanged;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.onPauseStateChanged += State_OnPauseStateChanged;
+            m_Themes = AssetDatabase.LoadAssetAtPath<BagelThemeCollection>(k_ThemeCollectionPath);
+
+            var windowTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(k_WindowUxmlPath);
+            if (windowTree == null)
+            {
+                rootVisualElement.Add(new Label($"Missing {k_WindowUxmlPath}"));
+                return;
+            }
+
+            // Take the editor theme off; it would leak editor looks into the game's screens.
+            m_EditorSheets.Clear();
+            for (int i = 0; i < rootVisualElement.styleSheets.count; i++)
+                m_EditorSheets.Add(rootVisualElement.styleSheets[i]);
+            rootVisualElement.styleSheets.Clear();
+
+            windowTree.CloneTree(rootVisualElement);
+
+            var stage = rootVisualElement.Q<ScrollView>("stage");
+            m_EditorStyledParts.Clear();
+            m_EditorStyledParts.Add(rootVisualElement.Q<Toolbar>("toolbar"));
+            m_EditorStyledParts.Add(rootVisualElement.Q("inspector-dock"));
+            m_EditorStyledParts.Add(stage.horizontalScroller);
+            m_EditorStyledParts.Add(stage.verticalScroller);
+            rootVisualElement.RegisterCallback<AttachToPanelEvent>(_ => LiftEditorTheme());
+            rootVisualElement.RegisterCallback<DetachFromPanelEvent>(_ => RestoreEditorTheme());
+            if (rootVisualElement.panel != null)
+                LiftEditorTheme();
+            else
+                ShareEditorTheme();
+
+            m_Theme = ThemeAt(m_State.settings.themeIndex);
+            BuildCards();
+            BindToolbar();
+            BindInspector();
+            UpdateStateStrip();
+        }
+
+        // Closed for good: the screens give their resources back to be reused now.
+        void OnDestroy() => rootVisualElement.Clear(VisualElementClearOptions.RecursiveReleaseResources);
+
+        void OnDisable()
+        {
+            m_Roll?.Pause();
+            RestoreEditorTheme();
+            m_Cards.Clear();
+            DestroyState();
+        }
+
+        void DestroyState()
+        {
+            if (m_State == null)
+                return;
+
+            m_State.propertyChanged -= State_OnPropertyChanged;
+            m_State.onStateChange -= State_OnStateChange;
+            m_State.onPauseStateChanged -= State_OnPauseStateChanged;
+            PlayManagerState.DestroyRuntimeCopy(m_State);
+            m_State = null;
+        }
+
+        // Newer editors keep their theme on an ancestor of the window's root: borrow it while
+        // the window is attached and give it back when it detaches (closed, docked elsewhere).
+        void LiftEditorTheme()
+        {
+            if (m_BorrowedSheets.Count == 0)
+            {
+                for (var ancestor = rootVisualElement.hierarchy.parent; ancestor != null; ancestor = ancestor.hierarchy.parent)
+                {
+                    for (int i = 0; i < ancestor.styleSheets.count; i++)
+                    {
+                        var sheet = ancestor.styleSheets[i];
+                        m_BorrowedSheets.Add((ancestor, sheet));
+                        if (!m_EditorSheets.Contains(sheet))
+                            m_EditorSheets.Add(sheet);
+                    }
+                    ancestor.styleSheets.Clear();
+                }
+            }
+            ShareEditorTheme();
+        }
+
+        void ShareEditorTheme()
+        {
+            foreach (var part in m_EditorStyledParts)
+            {
+                if (part == null)
+                    continue;
+                foreach (var sheet in m_EditorSheets)
+                {
+                    if (!part.styleSheets.Contains(sheet))
+                        part.styleSheets.Add(sheet);
+                }
+            }
+        }
+
+        void RestoreEditorTheme()
+        {
+            foreach (var (owner, sheet) in m_BorrowedSheets)
+            {
+                if (owner != null && !owner.styleSheets.Contains(sheet))
+                    owner.styleSheets.Add(sheet);
+            }
+            m_BorrowedSheets.Clear();
+        }
+
+        void BuildCards()
+        {
+            m_Cards.Clear();
+            var container = rootVisualElement.Q("cards");
+            foreach (var spec in cardSpecs)
+            {
+                var card = CreateCard(spec);
+                m_Cards.Add(card);
+
+                // Added last: by now every screen has the shared state, so attaching doesn't make a copy per screen.
+                container.Add(card.root);
+            }
+            UpdateActiveCards();
+        }
+
+        Card CreateCard(CardSpec spec)
+        {
+            var card = new Card { spec = spec };
+            card.root = new VisualElement { name = "card-" + spec.title.ToLowerInvariant().Replace(' ', '-') };
+            card.root.AddToClassList("b-card");
+            card.root.Add(new Label(spec.title) { name = "card-title" });
+            card.root[0].AddToClassList("b-card__title");
+
+            card.slot = new VisualElement { name = "card-slot" };
+            card.slot.AddToClassList("b-card__slot");
+            card.content = new VisualElement { name = "card-content" };
+            card.content.AddToClassList("b-card__content");
+            card.slot.Add(card.content);
+            card.root.Add(card.slot);
+
+            // The slot takes the zoomed size of what's in it, so cards don't overlap.
+            card.content.RegisterCallback<GeometryChangedEvent>(_ => FitSlot(card));
+            card.content.style.scale = new Scale(new Vector3(m_Zoom, m_Zoom, 1f));
+
+            foreach (var path in spec.uxmlPaths)
+            {
+                var tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(k_UIPath + path);
+                if (tree == null)
+                {
+                    card.content.Add(new Label($"Missing {path}"));
+                    continue;
+                }
+
+                // The bagel cards show every bagel; the other screens show once.
+                var count = path.Contains("TypeInfo") ? m_State.bagelTypeCount : 1;
+                for (int i = 0; i < count; i++)
+                {
+                    var screen = tree.Instantiate();
+                    screen.AddToClassList("b-card__screen");
+                    if (spec.size != Vector2.zero)
+                    {
+                        screen.AddToClassList("b-card__screen--fixed");
+                        screen.style.width = spec.size.x;
+                        screen.style.height = spec.size.y;
+                    }
+                    if (m_Theme != null)
+                        screen.styleSheets.Add(m_Theme);
+
+                    PrepareScreen(screen, path, i);
+                    card.screens.Add(screen);
+                    card.content.Add(screen);
+                }
+            }
+            return card;
+        }
+
+        void PrepareScreen(VisualElement screen, string path, int index)
+        {
+            // Every pane plays on the shared state.
+            screen.Query<BagelPane>().ForEach(pane =>
+            {
+                if (pane.GetFirstAncestorOfType<BagelPane>() == null)
+                    pane.SetState(m_State);
+            });
+
+            // The bagel cards show the bagel types, like the podiums do.
+            if (path.Contains("TypeInfo"))
+            {
+                var bagelType = m_State.bagelTypes.collection[index];
+                var pane = screen.Q("pane");
+                pane.dataSource = bagelType;
+                if (!string.IsNullOrEmpty(bagelType.nameKey))
+                    BagelLocalization.Bind(pane.Q<Label>("name"), "text", bagelType.nameKey);
+            }
+
+            // The window themes its own screens, so a toolbar preview doesn't stack on top.
+            screen.RegisterCallback<AttachToPanelEvent>(_ =>
+                screen.Query<BagelPane>().ForEach(pane => BagelThemes.RemovePreviewRoot(pane)));
+        }
+
+        void FitSlot(Card card)
+        {
+            var size = card.content.layout.size;
+            if (float.IsNaN(size.x) || float.IsNaN(size.y))
+                return;
+
+            card.slot.style.width = size.x * m_Zoom;
+            card.slot.style.height = size.y * m_Zoom;
+        }
+
+        public void SetZoom(float zoom)
+        {
+            m_Zoom = Mathf.Clamp(zoom, 0.5f, 1.5f);
+            foreach (var card in m_Cards)
+            {
+                card.content.style.scale = new Scale(new Vector3(m_Zoom, m_Zoom, 1f));
+                FitSlot(card);
+            }
+        }
+
+        // ---------------------------------------------------------------- Toolbar
+
+        void BindToolbar()
+        {
+            BindStateToggle("state-main-menu", () => m_State.GoToMainMenu());
+            BindStateToggle("state-bagel-selection", () => m_State.GoToBagelSelection());
+            BindStateToggle("state-playing", () => m_State.GoToPlay());
+            BindStateToggle("state-paused", () =>
+            {
+                if (!m_State.isPlaying)
+                    m_State.GoToPlay();
+                m_State.Pause();
+            });
+            BindStateToggle("state-game-over", () => m_State.FinishRun());
+
+            var setups = rootVisualElement.Q<ToolbarMenu>("setup-menu");
+            foreach (var setup in setupNames)
+            {
+                var name = setup;
+                setups.menu.AppendAction(name, _ => ApplySetup(name));
+            }
+
+            var roll = rootVisualElement.Q<ToolbarToggle>("roll-toggle");
+            roll.RegisterValueChangedCallback(evt => SimulateRoll(evt.newValue));
+
+            var themes = rootVisualElement.Q<ToolbarMenu>("theme-menu");
+            for (int i = 0; i < (m_Themes?.collection.Count ?? 0); i++)
+            {
+                var index = i;
+                themes.menu.AppendAction(m_Themes.collection[i].themeName, _ => m_State.settings.themeIndex = index,
+                    _ => m_State != null && m_State.settings.themeIndex == index ? DropdownMenuAction.Status.Checked : DropdownMenuAction.Status.Normal);
+            }
+
+            var languages = rootVisualElement.Q<ToolbarMenu>("language-menu");
+            if (LocalizationSettings.HasSettings)
+            {
+                foreach (var locale in LocalizationSettings.Instance.AvailableLocales)
+                {
+                    var code = locale.Code;
+                    languages.menu.AppendAction(locale.LocaleName, _ => BagelToolbar.SelectLanguage(code),
+                        _ => BagelLocalization.localeCode == code ? DropdownMenuAction.Status.Checked : DropdownMenuAction.Status.Normal);
+                }
+            }
+
+            var zoomSlider = rootVisualElement.Q<Slider>("zoom-slider");
+            zoomSlider.SetValueWithoutNotify(m_Zoom);
+            zoomSlider.RegisterValueChangedCallback(evt => SetZoom(evt.newValue));
+
+            rootVisualElement.Q<ToolbarButton>("reset-button").clicked += ResetState;
+
+            var inspectorToggle = rootVisualElement.Q<ToolbarToggle>("inspector-toggle");
+            inspectorToggle.SetValueWithoutNotify(m_ShowInspector);
+            inspectorToggle.RegisterValueChangedCallback(evt =>
+            {
+                m_ShowInspector = evt.newValue;
+                rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
+            });
+            rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
+        }
+
+        void BindStateToggle(string name, Action goToState)
+        {
+            var toggle = rootVisualElement.Q<ToolbarToggle>(name);
+            toggle.RegisterValueChangedCallback(evt =>
+            {
+                if (evt.newValue)
+                    goToState();
+                UpdateStateStrip();
+            });
+        }
+
+        void UpdateStateStrip()
+        {
+            if (m_State == null)
+                return;
+
+            rootVisualElement.Q<ToolbarToggle>("state-main-menu")?.SetValueWithoutNotify(m_State.isMainMenu);
+            rootVisualElement.Q<ToolbarToggle>("state-bagel-selection")?.SetValueWithoutNotify(m_State.isBagelSelection);
+            rootVisualElement.Q<ToolbarToggle>("state-playing")?.SetValueWithoutNotify(m_State.isPlaying && !m_State.isPaused);
+            rootVisualElement.Q<ToolbarToggle>("state-paused")?.SetValueWithoutNotify(m_State.isPaused);
+            rootVisualElement.Q<ToolbarToggle>("state-game-over")?.SetValueWithoutNotify(m_State.isGameOver);
+        }
+
+        void UpdateActiveCards()
+        {
+            foreach (var card in m_Cards)
+                card.root.EnableInClassList("b-card--inactive", !card.spec.IsActive(m_State));
+        }
+
+        // ---------------------------------------------------------------- Setups
+
+        public static readonly string[] setupNames =
+        {
+            "Main Menu/Main Pane",
+            "Main Menu/Settings",
+            "Main Menu/Leaderboard",
+            "Pause/Pause Pane",
+            "Pause/Settings",
+            "Game Over/Win",
+            "Game Over/Lose",
+            "Tracker/Full",
+            "Tracker/Halfway",
+            "Tracker/Wrecked",
+        };
+
+        public void ApplySetup(string setup)
+        {
+            var tracker = m_State.tracker;
+            switch (setup)
+            {
+                case "Main Menu/Main Pane":
+                    m_State.GoToMainMenu();
+                    break;
+                case "Main Menu/Settings":
+                    m_State.GoToMainMenu();
+                    m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
+                    break;
+                case "Main Menu/Leaderboard":
+                    m_State.GoToMainMenu();
+                    m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+                    break;
+                case "Pause/Pause Pane":
+                case "Pause/Settings":
+                    if (!m_State.isPlaying)
+                        m_State.GoToPlay();
+                    m_State.Pause();
+                    m_State.pausePane = setup == "Pause/Settings" ? PlayManagerState.PausePane.Settings : PlayManagerState.PausePane.Pause;
+                    break;
+                case "Game Over/Win":
+                case "Game Over/Lose":
+                    m_State.GoToPlay();
+                    tracker.toppingsCount = setup == "Game Over/Win" ? Mathf.RoundToInt(tracker.toppingsMaxCount * 0.42f) : 0;
+                    m_State.FinishRun();
+                    break;
+                case "Tracker/Full":
+                case "Tracker/Halfway":
+                case "Tracker/Wrecked":
+                    m_State.GoToPlay();
+                    var fraction = setup == "Tracker/Full" ? 1f : setup == "Tracker/Halfway" ? 0.5f : 0.05f;
+                    tracker.toppingsCount = Mathf.RoundToInt(tracker.toppingsMaxCount * fraction);
+                    tracker.spin = tracker.constants != null ? tracker.constants.spinMax * (1f - fraction) : 0f;
+                    tracker.force = tracker.constants != null ? tracker.constants.forceMax * (1f - fraction) : 0f;
+                    break;
+            }
+            UpdateStateStrip();
+        }
+
+        // Moves the tracker as if a bagel were rolling: spinning, bumping and shedding toppings.
+        void SimulateRoll(bool on)
+        {
+            if (!on)
+            {
+                m_Roll?.Pause();
+                return;
+            }
+
+            if (!m_State.isPlaying)
+                m_State.GoToPlay();
+
+            var time = 0f;
+            m_Roll ??= rootVisualElement.schedule.Execute(timer =>
+            {
+                time += timer.deltaTime / 1000f;
+                var tracker = m_State.tracker;
+                var constants = tracker.constants;
+                var spinMax = constants != null ? constants.spinMax : 15f;
+                var forceMax = constants != null ? constants.forceMax : 20f;
+                tracker.spin = Mathf.Ceil(spinMax * 0.5f * (1f + Mathf.Sin(time * 1.3f)));
+                tracker.force = Mathf.Ceil(forceMax * Mathf.Pow(Mathf.Max(0f, Mathf.Sin(time * 3.1f)), 8f));
+                tracker.toppingsCount = tracker.toppingsCount > 0 ? tracker.toppingsCount - 1 : tracker.toppingsMaxCount;
+            }).Every(50);
+            m_Roll.Resume();
+        }
+
+        // ---------------------------------------------------------------- State
+
+        // Back to a fresh copy of the start state (the toolbar's Reset).
+        public void ResetState()
+        {
+            m_Roll?.Pause();
+            rootVisualElement.Q<ToolbarToggle>("roll-toggle")?.SetValueWithoutNotify(false);
+            DestroyState();
+            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
+            m_State.propertyChanged += State_OnPropertyChanged;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.onPauseStateChanged += State_OnPauseStateChanged;
+
+            foreach (var card in m_Cards)
+            {
+                foreach (var screen in card.screens)
+                {
+                    screen.Query<BagelPane>().ForEach(pane =>
+                    {
+                        if (pane.parentPane == null)
+                            pane.SetState(m_State);
+                    });
+                }
+            }
+            ApplyTheme(ThemeAt(m_State.settings.themeIndex));
+            BindInspector();
+            UpdateStateStrip();
+            UpdateActiveCards();
+        }
+
+        void BindInspector()
+        {
+            var dock = rootVisualElement.Q("inspector-dock");
+            dock.Clear();
+            dock.Add(new InspectorElement(m_State));
+        }
+
+        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
+        {
+            if (args.propertyName == SettingsData.themeIndexPath)
+                ApplyTheme(ThemeAt(m_State.settings.themeIndex));
+        }
+
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            UpdateStateStrip();
+            UpdateActiveCards();
+        }
+
+        void State_OnPauseStateChanged(object sender, bool paused)
+        {
+            UpdateStateStrip();
+            UpdateActiveCards();
+        }
+
+        ThemeStyleSheet ThemeAt(int index)
+        {
+            if (m_Themes == null || m_Themes.collection.Count == 0)
+                return null;
+            return m_Themes.collection[Mathf.Clamp(index, 0, m_Themes.collection.Count - 1)].theme;
+        }
+
+        void ApplyTheme(ThemeStyleSheet theme)
+        {
+            if (theme == m_Theme)
+                return;
+
+            foreach (var card in m_Cards)
+            {
+                foreach (var screen in card.screens)
+                {
+                    if (m_Theme != null)
+                        screen.styleSheets.Remove(m_Theme);
+                    if (theme != null)
+                        screen.styleSheets.Add(theme);
+                }
+            }
+            m_Theme = theme;
+        }
     }
 }
