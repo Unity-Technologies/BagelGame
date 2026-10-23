@@ -93,6 +93,9 @@ namespace Bagel
             if (paused)
                 m_PauseScreenManager.schedule.Execute(() => m_PauseScreenManager.pausePaneManager.resumeButton.Focus());
 
+            if (Application.isPlaying && m_State != null && m_State.isPlaying)
+                BagelAccessibility.ShowScreen(paused ? m_PauseScreenManager : null);
+
             if (Application.isPlaying)
                 Time.timeScale = paused ? 0f : 1f;
         }

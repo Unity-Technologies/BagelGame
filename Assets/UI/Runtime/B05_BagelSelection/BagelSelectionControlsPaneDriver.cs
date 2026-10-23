@@ -63,12 +63,22 @@ namespace Bagel
 
             // World-space panels only get gamepad and keyboard navigation once something in them has focus.
             if (state == PlayManagerState.State.BagelSelection)
+            {
                 m_Pane.schedule.Execute(() => m_Pane.Focus());
+                BagelAccessibility.ShowScreen(m_Pane);
+            }
+            else if (state == PlayManagerState.State.Playing)
+            {
+                BagelAccessibility.ShowScreen(null);
+            }
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)
         {
             SetXOffset(m_State.selectedBagelIndex);
+
+            if (m_State.isBagelSelection && bagelType != null)
+                BagelAccessibility.Announce(BagelLocalization.Get(bagelType.nameKey, bagelType.displayName));
         }
 
         void Update()

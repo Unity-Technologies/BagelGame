@@ -85,7 +85,10 @@ namespace Bagel
             m_Root.style.display = state == PlayManagerState.State.GameOver ? DisplayStyle.Flex : DisplayStyle.None;
 
             if (state == PlayManagerState.State.GameOver)
+            {
                 m_GameOverScreenManager.schedule.Execute(() => m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus());
+                BagelAccessibility.ShowScreen(m_GameOverScreenManager);
+            }
         }
     }
 }

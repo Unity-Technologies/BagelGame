@@ -94,6 +94,9 @@ namespace Bagel
                 else
                     settingsPaneManager.backButton.Focus();
             });
+
+            if (BagelAccessibility.screen == this)
+                BagelAccessibility.ShowScreen(this);
         }
     }
 }

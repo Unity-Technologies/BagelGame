@@ -89,6 +89,8 @@ namespace Bagel
                 if (!m_State.isMainMenu)
                     return;
 
+                BagelAccessibility.ShowScreen(m_MainMenuScreenManager);
+
                 switch (m_State.mainMenuPane)
                 {
                     case PlayManagerState.MainMenuPane.Main:

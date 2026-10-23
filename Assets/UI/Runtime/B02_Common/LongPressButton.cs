@@ -108,6 +108,13 @@ namespace Bagel
             }
         }
 
+        // Completes the press at once, for screen readers, which can't hold.
+        public void Activate()
+        {
+            CancelHold();
+            clicked?.Invoke();
+        }
+
         void StartHold() => StartHold(holdTime);
 
         void StartHold(float time)
