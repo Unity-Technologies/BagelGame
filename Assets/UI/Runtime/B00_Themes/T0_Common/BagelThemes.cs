@@ -21,6 +21,7 @@ namespace Bagel
         public static IReadOnlyList<VisualElement> previewRoots => s_PreviewRoots;
 
         public static event Action<ThemeStyleSheet> previewThemeChanged;
+        public static event Action<ThemeStyleSheet> panelSettingsThemeChanged;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetStatics()
@@ -52,6 +53,8 @@ namespace Bagel
                 s_OriginalThemes.TryAdd(settings, settings.themeStyleSheet);
                 settings.themeStyleSheet = theme;
             }
+
+            panelSettingsThemeChanged?.Invoke(theme);
         }
 
         public static void RestorePanelSettings()
