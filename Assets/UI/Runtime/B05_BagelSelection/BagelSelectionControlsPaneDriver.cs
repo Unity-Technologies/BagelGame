@@ -52,10 +52,16 @@ namespace Bagel
                 m_BackButton.clicked += m_BagelSelectionRoom.playManager.state.GoToMainMenu;
 
             SetValuesFromIndex(m_BagelSelectionRoom.SelectedBagelIndex);
+
+            // On a fresh scene load the UI arrives after the first state change, so catch up here.
+            State_OnStateChange(this, m_PlayManager.state.currentState);
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
+            if (m_Pane == null)
+                return;
+
             if (state == PlayManagerState.State.BagelSelection)
             {
                 m_Pane.Focus();

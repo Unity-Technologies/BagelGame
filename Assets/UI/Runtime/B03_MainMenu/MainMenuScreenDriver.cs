@@ -49,11 +49,15 @@ namespace Bagel
                 onExit = Application.Quit
 #endif
             });
+
+            // On a fresh scene load the UI arrives after the first state change, so catch up here.
+            if (m_PlayManager.state.isMainMenu)
+                m_MainMenuPaneManager.playButton?.Focus();
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (m_MainMenuPaneManager.playButton == null)
+            if (m_MainMenuPaneManager?.playButton == null)
                 return;
 
             if (state != PlayManagerState.State.MainMenu)

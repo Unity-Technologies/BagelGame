@@ -47,6 +47,9 @@ namespace Bagel
                 onRestart = m_PlayManager.state.GoToPlay,
                 onMainMenu = m_PlayManager.state.GoToMainMenu
             });
+
+            // On a fresh scene load the UI arrives after the first state change, so catch up here.
+            m_Root.style.display = m_PlayManager.state.isGameOver ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         void Update()
@@ -59,6 +62,9 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
+            if (m_Root == null)
+                return;
+
             if (state == PlayManagerState.State.GameOver)
             {
                 m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus();
