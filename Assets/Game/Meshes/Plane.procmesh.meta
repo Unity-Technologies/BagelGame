@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: cbb332fe95b287345953a55ec79846a4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339760839721031
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339760839721031
+      type: {class: GridMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        size: {x: 10, y: 10}
+        segments: {x: 10, y: 10}
+        facing: 0
+        tileSize: 0
+        twoSided: 0

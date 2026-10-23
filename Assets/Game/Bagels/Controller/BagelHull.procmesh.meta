@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 5a66f89fa73a1b74cb79f5fef194a3d0
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339760839721035
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339760839721035
+      type: {class: BagelHullMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        radius: 0.625
+        thickness: 0.25
+        rimAngles:
+        - -60
+        - -20
+        - 20
+        - 60
+        segments: 32

@@ -97,18 +97,6 @@ THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
 
 ---------
 
-Component Name: Bagel Model
-
-License Type: Public domain
-
-Copyright owner not applicable
-
-https://ambientcg.com/a/3DBread005
-
-License Not Applicable
-
----------
-
 Component Name: Sport Flat Icons Collection
 
 License Type: Public domain

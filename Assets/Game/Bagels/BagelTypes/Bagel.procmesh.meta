@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: af03d6e3d4e4acd4eaf2954d41b111e2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339760839721036
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339760839721036
+      type: {class: BagelMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        radius: 0.64
+        holeRadius: 0.16
+        height: 0.36
+        puffiness: 2.6
+        flatBottom: 0.6
+        lumpiness: 0.08
+        seed: 1
+        segments: 48
+        sides: 24
+        toppingSpread: 0.4
+        toppings: []

@@ -1,0 +1,18 @@
+{
+    "name": "BagelGameEditor",
+    "rootNamespace": "Bagel",
+    "references": [
+        "GUID:edd8b9dc0d9f9844a915744df63623e5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
