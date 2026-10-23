@@ -227,6 +227,51 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
+  - m_Id: 4600159338496
+    m_Key: settings.tab-controls
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727104
+    m_Key: controls.move-up
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727105
+    m_Key: controls.move-down
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727106
+    m_Key: controls.move-left
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727107
+    m_Key: controls.move-right
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727108
+    m_Key: controls.pause
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727109
+    m_Key: controls.gamepad-pause
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727110
+    m_Key: controls.press-key
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4600167727111
+    m_Key: controls.reset
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

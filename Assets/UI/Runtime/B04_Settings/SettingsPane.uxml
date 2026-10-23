@@ -1,6 +1,7 @@
 <ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="GameSettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForGame.uxml?fileID=9197481963319205126&amp;guid=d7691f3c73ec72640bed89b7079805d7&amp;type=3#SettingsPaneForGame"/>
     <ui:Template name="Page" src="project://database/Assets/UI/Runtime/B02_Common/Page.uxml?fileID=9197481963319205126&amp;guid=fd2407f521d49554aaf933ac922100de&amp;type=3#Page"/>
+    <ui:Template name="ControlsSettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForControls.uxml?fileID=9197481963319205126&amp;guid=0e6997991f18fff47a6a6e1e04bcf7a9&amp;type=3#SettingsPaneForControls"/>
     <ui:Template name="UISettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneForUI.uxml?fileID=9197481963319205126&amp;guid=e1093797146b3f046962391299b2fdb9&amp;type=3#SettingsPaneForUI"/>
     <Style src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneStyles.uss?fileID=7433441132597879392&amp;guid=8078ac1b834d2b244a237e4c2907d5d5&amp;type=3#SettingsPaneStyles"/>
     <Bagel.SettingsPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState">
@@ -21,6 +22,14 @@
                     </Bindings>
                     <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="ui-settings-view" class="b-details-view">
                         <ui:Instance template="UISettingsPane" name="ui-settings-pane"/>
+                    </ui:ScrollView>
+                </ui:Tab>
+                <ui:Tab label="Controls" name="controls-settings-tab">
+                    <Bindings>
+                        <loc:LocalizedString property="label" table="BagelStrings" entry="settings.tab-controls"/>
+                    </Bindings>
+                    <ui:ScrollView vertical-scroller-visibility="AlwaysVisible" name="controls-settings-view" class="b-details-view">
+                        <ui:Instance template="ControlsSettingsPane" name="controls-settings-pane"/>
                     </ui:ScrollView>
                 </ui:Tab>
             </ui:TabView>

@@ -129,10 +129,10 @@ namespace Bagel
         void AnimateHoldProgress(TimerState timer)
         {
             m_HoldCurrentTime += timer.deltaTime / 1000.0f;
-            var progress = Mathf.Clamp01(m_HoldCurrentTime / defaultHoldTime) * 100.0f;
+            var progress = Mathf.Clamp01(m_HoldCurrentTime / m_HoldMaxTime) * 100.0f;
             m_TimerProgress.style.width = new StyleLength(Length.Percent(progress));
 
-            if (m_HoldCurrentTime < defaultHoldTime)
+            if (m_HoldCurrentTime < m_HoldMaxTime)
                 return;
 
             CancelHold();

@@ -8,10 +8,12 @@ namespace Bagel
     {
         SettingsPaneManagerForGame m_SettingsPaneManagerForGame;
         SettingsPaneManagerForUI m_SettingsPaneManagerForUI;
+        SettingsPaneManagerForControls m_SettingsPaneManagerForControls;
         Button m_BackButton;
 
         public SettingsPaneManagerForGame forGame => m_SettingsPaneManagerForGame ??= this.Q<SettingsPaneManagerForGame>();
         public SettingsPaneManagerForUI forUI => m_SettingsPaneManagerForUI ??= this.Q<SettingsPaneManagerForUI>();
+        public SettingsPaneManagerForControls forControls => m_SettingsPaneManagerForControls ??= this.Q<SettingsPaneManagerForControls>();
         public Button backButton => m_BackButton ??= this.Q<Button>("back-button");
 
         public struct Callbacks

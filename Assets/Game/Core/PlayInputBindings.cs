@@ -108,11 +108,15 @@ namespace Bagel
                     break;
             }
 
+            // While waiting for a key, the UI doesn't listen either: the key would also move the focus.
+            var uiActions = InputSystem.actions;
+            uiActions?.Disable();
+
             inputAction.PerformInteractiveRebinding(bindingIndex)
-                .OnComplete(callback =>
+                .WithCancelingThrough("<Keyboard>/escape")
+                .OnComplete(operation =>
                 {
-                    m_PlayInputActions.Player.Enable();
-                    onActionRebound();
+                    Finish(operation);
 
                     var inputJson = m_PlayInputActions.SaveBindingOverridesAsJson();
                     PlayerPrefs.SetString(k_PlayerPrefsName, inputJson);
@@ -120,7 +124,25 @@ namespace Bagel
 
                     onBindingRebind?.Invoke( this, EventArgs.Empty );
                 })
+                .OnCancel(Finish)
                 .Start();
+
+            void Finish(InputActionRebindingExtensions.RebindingOperation operation)
+            {
+                operation.Dispose();
+                m_PlayInputActions.Player.Enable();
+                uiActions?.Enable();
+                onActionRebound?.Invoke();
+            }
+        }
+
+        public void ResetBindings()
+        {
+            m_PlayInputActions.RemoveAllBindingOverrides();
+            PlayerPrefs.DeleteKey(k_PlayerPrefsName);
+            PlayerPrefs.Save();
+
+            onBindingRebind?.Invoke(this, EventArgs.Empty);
         }
 
     }

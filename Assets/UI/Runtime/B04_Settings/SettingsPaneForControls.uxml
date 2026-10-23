@@ -1,0 +1,58 @@
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPaneStyles.uss?fileID=7433441132597879392&amp;guid=8078ac1b834d2b244a237e4c2907d5d5&amp;type=3#SettingsPaneStyles"/>
+    <Bagel.SettingsPaneManagerForControls start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="controls-settings-manager">
+        <ui:VisualElement name="move-up-row" class="b-controls-row">
+            <ui:Label text="Roll Forward" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.move-up"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="W" name="move-up-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="move-down-row" class="b-controls-row">
+            <ui:Label text="Roll Back" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.move-down"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="S" name="move-down-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="move-left-row" class="b-controls-row">
+            <ui:Label text="Turn Left" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.move-left"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="A" name="move-left-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="move-right-row" class="b-controls-row">
+            <ui:Label text="Turn Right" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.move-right"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="D" name="move-right-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="pause-row" class="b-controls-row">
+            <ui:Label text="Pause" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.pause"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="Esc" name="pause-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="gamepad-pause-row" class="b-controls-row">
+            <ui:Label text="Pause (Gamepad)" class="b-controls-row__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="controls.gamepad-pause"/>
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="Start" name="gamepad-pause-button" class="b-controls-row__button"/>
+        </ui:VisualElement>
+        <ui:Button text="Reset Controls" name="reset-controls-button">
+            <Bindings>
+                <loc:LocalizedString property="text" table="BagelStrings" entry="controls.reset"/>
+            </Bindings>
+        </ui:Button>
+    </Bagel.SettingsPaneManagerForControls>
+</ui:UXML>

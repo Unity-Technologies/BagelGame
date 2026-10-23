@@ -59,6 +59,15 @@ MonoBehaviour:
   - rid: 6326339759238545568
   - rid: 6326339759238545614
   - rid: 6326339759238545615
+  - rid: 6326339759238545627
+  - rid: 6326339759238545628
+  - rid: 6326339759238545629
+  - rid: 6326339759238545630
+  - rid: 6326339759238545631
+  - rid: 6326339759238545632
+  - rid: 6326339759238545633
+  - rid: 6326339759238545634
+  - rid: 6326339759238545635
   references:
     version: 2
     RefIds:
@@ -356,3 +365,66 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Visual Effects
+    - rid: 6326339759238545627
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600159338496
+        m_Metadata:
+          m_Items: []
+        m_Value: Controls
+    - rid: 6326339759238545628
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727104
+        m_Metadata:
+          m_Items: []
+        m_Value: Roll Forward
+    - rid: 6326339759238545629
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727105
+        m_Metadata:
+          m_Items: []
+        m_Value: Roll Back
+    - rid: 6326339759238545630
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727106
+        m_Metadata:
+          m_Items: []
+        m_Value: Turn Left
+    - rid: 6326339759238545631
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727107
+        m_Metadata:
+          m_Items: []
+        m_Value: Turn Right
+    - rid: 6326339759238545632
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727108
+        m_Metadata:
+          m_Items: []
+        m_Value: Pause
+    - rid: 6326339759238545633
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727109
+        m_Metadata:
+          m_Items: []
+        m_Value: Pause (Gamepad)
+    - rid: 6326339759238545634
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727110
+        m_Metadata:
+          m_Items: []
+        m_Value: Press a key...
+    - rid: 6326339759238545635
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727111
+        m_Metadata:
+          m_Items: []
+        m_Value: Reset Controls

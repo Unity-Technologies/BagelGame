@@ -59,6 +59,15 @@ MonoBehaviour:
   - rid: 6326339759238545608
   - rid: 6326339759238545616
   - rid: 6326339759238545617
+  - rid: 6326339759238545636
+  - rid: 6326339759238545637
+  - rid: 6326339759238545638
+  - rid: 6326339759238545639
+  - rid: 6326339759238545640
+  - rid: 6326339759238545641
+  - rid: 6326339759238545642
+  - rid: 6326339759238545643
+  - rid: 6326339759238545644
   references:
     version: 2
     RefIds:
@@ -356,3 +365,66 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Effets visuels
+    - rid: 6326339759238545636
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600159338496
+        m_Metadata:
+          m_Items: []
+        m_Value: Commandes
+    - rid: 6326339759238545637
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727104
+        m_Metadata:
+          m_Items: []
+        m_Value: Rouler en avant
+    - rid: 6326339759238545638
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727105
+        m_Metadata:
+          m_Items: []
+        m_Value: "Rouler en arri\xE8re"
+    - rid: 6326339759238545639
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727106
+        m_Metadata:
+          m_Items: []
+        m_Value: "Tourner \xE0 gauche"
+    - rid: 6326339759238545640
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727107
+        m_Metadata:
+          m_Items: []
+        m_Value: "Tourner \xE0 droite"
+    - rid: 6326339759238545641
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727108
+        m_Metadata:
+          m_Items: []
+        m_Value: Pause
+    - rid: 6326339759238545642
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727109
+        m_Metadata:
+          m_Items: []
+        m_Value: Pause (manette)
+    - rid: 6326339759238545643
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727110
+        m_Metadata:
+          m_Items: []
+        m_Value: Appuyez sur une touche...
+    - rid: 6326339759238545644
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 4600167727111
+        m_Metadata:
+          m_Items: []
+        m_Value: "R\xE9initialiser"

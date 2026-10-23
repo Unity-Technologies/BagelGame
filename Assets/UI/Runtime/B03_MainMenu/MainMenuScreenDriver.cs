@@ -48,6 +48,7 @@ namespace Bagel
             m_MainMenuScreenManager = mainMenuScreenManager;
             m_MainMenuScreenManager.SetState(m_State);
             m_MainMenuScreenManager.Q<SettingsPaneManagerForUI>().appliesThemeToPanelSettings = true;
+            m_MainMenuScreenManager.Q<SettingsPaneManagerForControls>().playInputBindings = m_PlayManager.playInputBindings;
             m_MainMenuScreenManager.mainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
 #if UNITY_EDITOR

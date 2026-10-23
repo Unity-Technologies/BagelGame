@@ -35,6 +35,18 @@ namespace Bagel
 
             settingsBackButton.clicked += GoToMainMenuPane;
             leaderboardBackButton.clicked += GoToMainMenuPane;
+
+            // Escape or the gamepad's back button leaves Settings and the Leaderboard.
+            RegisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
+        }
+
+        void OnNavigationCancelEvent(NavigationCancelEvent evt)
+        {
+            if (state == null || state.mainMenuPane == PlayManagerState.MainMenuPane.Main)
+                return;
+
+            GoToMainMenuPane();
+            evt.StopPropagation();
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)

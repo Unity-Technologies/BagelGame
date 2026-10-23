@@ -63,6 +63,7 @@ namespace Bagel
             {
                 m_PauseScreenManager.SetState(m_State);
                 m_PauseScreenManager.settingsPaneManager.forUI.appliesThemeToPanelSettings = true;
+                m_PauseScreenManager.settingsPaneManager.forControls.playInputBindings = m_PlayManager.playInputBindings;
             }
 
             SetPauseState(m_State != null && m_State.isPaused);
@@ -75,7 +76,11 @@ namespace Bagel
 
         void PlayInputBindings_OnPauseAction(object sender, EventArgs e)
         {
-            m_State.TogglePause();
+            // Escape or Start: back out of Settings first, then resume.
+            if (m_State.isPaused && m_PauseScreenManager != null)
+                m_PauseScreenManager.Back();
+            else
+                m_State.TogglePause();
         }
 
         void SetPauseState(bool paused)

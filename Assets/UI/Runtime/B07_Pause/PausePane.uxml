@@ -16,12 +16,12 @@
                 </Bindings>
                 <Bagel.PressSquish/>
             </ui:Button>
-            <Bagel.LongPressButton name="restart-button" text="Restart">
+            <Bagel.LongPressButton name="restart-button" text="Restart" confirm-action="project://database/Assets/Game/Core/UIInputActions.inputactions?fileID=-3739598157177674458&amp;guid=9e46e101e98b16f48be7903220211472&amp;type=3#UI/SubmitDelayed">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="common.restart"/>
                 </Bindings>
             </Bagel.LongPressButton>
-            <Bagel.LongPressButton name="main-menu-button" text="Main Menu">
+            <Bagel.LongPressButton name="main-menu-button" text="Main Menu" confirm-action="project://database/Assets/Game/Core/UIInputActions.inputactions?fileID=-3739598157177674458&amp;guid=9e46e101e98b16f48be7903220211472&amp;type=3#UI/SubmitDelayed">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="common.main-menu"/>
                 </Bindings>

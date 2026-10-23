@@ -1,3 +1,4 @@
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace Bagel
@@ -29,6 +30,27 @@ namespace Bagel
             {
                 onSettingsBack = GoToPausePane
             });
+
+            RegisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
+        }
+
+        // The gamepad's back button leaves Settings, then resumes. Escape is also the Pause key,
+        // and the Pause action already takes care of it.
+        void OnNavigationCancelEvent(NavigationCancelEvent evt)
+        {
+            if (state == null || Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+                return;
+
+            Back();
+            evt.StopPropagation();
+        }
+
+        public void Back()
+        {
+            if (state.pausePane == PlayManagerState.PausePane.Settings)
+                GoToPausePane();
+            else
+                state.Resume();
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
@@ -61,6 +83,17 @@ namespace Bagel
 
             pausePane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Pause);
             settingsPane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Settings);
+
+            // Keep gamepad and keyboard focus on the pane that's showing, once it's shown.
+            if (state == null || !state.isPaused)
+                return;
+            schedule.Execute(() =>
+            {
+                if (pane == PlayManagerState.PausePane.Pause)
+                    pausePaneManager.resumeButton.Focus();
+                else
+                    settingsPaneManager.backButton.Focus();
+            });
         }
     }
 }

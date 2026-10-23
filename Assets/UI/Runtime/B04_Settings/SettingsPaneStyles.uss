@@ -2,4 +2,16 @@
     height: 147px;
 }
 
+.b-controls-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.b-controls-row__label {
+    flex-shrink: 1;
+}
+
+.b-controls-row__button {
+    min-width: 90px;
+}
