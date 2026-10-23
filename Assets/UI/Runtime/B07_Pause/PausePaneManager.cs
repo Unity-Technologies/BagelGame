@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class PausePaneManager : VisualElement
+    public partial class PausePaneManager : BagelPane
     {
         Button m_ResumeButton;
         Button m_SettingsButton;
@@ -34,6 +34,23 @@ namespace Bagel
                 restartButton.clicked += callbacks.onRestart;
             if (mainMenuButton != null && callbacks.onMainMenu != null )
                 mainMenuButton.clicked += callbacks.onMainMenu;
+        }
+
+        bool m_Bound;
+
+        protected override void OnAttached()
+        {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            BindUI(new Callbacks
+            {
+                onResume = () => state?.Resume(),
+                onSettings = () => { if (state != null) state.pausePane = PlayManagerState.PausePane.Settings; },
+                onRestart = () => state?.GoToPlay(),
+                onMainMenu = () => state?.GoToMainMenu()
+            });
         }
     }
 }

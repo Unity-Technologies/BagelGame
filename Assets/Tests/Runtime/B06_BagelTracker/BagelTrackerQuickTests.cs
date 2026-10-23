@@ -8,7 +8,7 @@ namespace Bagel.B06_BagelTracker
     public class BagelTrackerQuickTests : UITestFixture
     {
         BagelTestAssetList m_BagelTestAssetList;
-        BagelTrackerData m_BagelTrackerData;
+        PlayManagerState m_State;
         CleanupUtil m_CleanupUtil;
 
         [OneTimeSetUp]
@@ -16,11 +16,11 @@ namespace Bagel.B06_BagelTracker
         {
             m_BagelTestAssetList =
                 Resources.Load<BagelTestAssetList>("BagelTestAssetList");
-            m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
-            m_BagelTrackerData.toppingsCount = 42;
+            m_State = PlayManagerState.CreateRuntimeCopy(null);
+            m_State.tracker.toppingsCount = 42;
 
             m_CleanupUtil = AddTestComponent<CleanupUtil>();
-            m_CleanupUtil.AddDestructible(m_BagelTrackerData);
+            m_CleanupUtil.AddDestructible(m_State);
         }
 
         [Test]
@@ -28,15 +28,15 @@ namespace Bagel.B06_BagelTracker
         {
             var root = rootVisualElement;
             m_BagelTestAssetList.bagelTrackerRightDisplayUxml.CloneTree(root);
-            var display = root.Q("pane");
-            display.dataSource = m_BagelTrackerData;
+            var display = root.Q<BagelTrackerPaneManager>();
+            display.SetState(m_State);
             simulate.FrameUpdate();
 
-            var toppingsCountBar = display.Q<ProgressBar>("toppings-count-bar");
+            var toppingsCountBar = display.toppingsCountBar;
             Assert.IsNotNull(toppingsCountBar);
-            Assert.AreEqual(m_BagelTrackerData.toppingsCount, toppingsCountBar.value);
+            Assert.AreEqual(m_State.tracker.toppingsCount, toppingsCountBar.value);
 
-            m_BagelTrackerData.toppingsCount = 5;
+            m_State.tracker.toppingsCount = 5;
             simulate.FrameUpdate();
             Assert.AreEqual(5f, toppingsCountBar.value);
         }

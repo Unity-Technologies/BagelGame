@@ -1,21 +1,20 @@
-using System;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class MainMenuScreenManager : VisualElement
+    public partial class MainMenuScreenManager : BagelPane
     {
-        public static readonly string backgroundPaneClassName = "b-background-pane";
+        public static readonly UniqueStyleString backgroundPaneClassName = new UniqueStyleString("b-background-pane");
 
-        public VisualElement m_MainMenuPane;
-        public MainMenuPaneManager m_MainMenuPaneManager;
-        public VisualElement m_SecondaryPanes;
-        public VisualElement m_SettingsPane;
-        public VisualElement m_LeaderboardPane;
+        VisualElement m_MainMenuPane;
+        MainMenuPaneManager m_MainMenuPaneManager;
+        VisualElement m_SecondaryPanes;
+        VisualElement m_SettingsPane;
+        VisualElement m_LeaderboardPane;
 
-        public Button m_SettingsBackButton;
-        public Button m_LeaderboardBackButton;
+        Button m_SettingsBackButton;
+        Button m_LeaderboardBackButton;
 
         public VisualElement mainMenuPane => m_MainMenuPane ??= this.Q<VisualElement>("main-menu-pane");
         public MainMenuPaneManager mainMenuPaneManager => m_MainMenuPaneManager ??= this.Q<MainMenuPaneManager>("main-menu-pane-manager");
@@ -26,87 +25,54 @@ namespace Bagel
         public Button settingsBackButton => m_SettingsBackButton ??= settingsPane.Q<Button>("back-button");
         public Button leaderboardBackButton => m_LeaderboardBackButton ??= leaderboardPane.Q<Button>("back-button");
 
-        public struct Callbacks
-        {
-            public PlayManagerState playManagerState;
+        bool m_Bound;
 
-            public Action onSettingsBack;
-            public Action onLeaderboardBack;
+        protected override void OnAttached()
+        {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            settingsBackButton.clicked += GoToMainMenuPane;
+            leaderboardBackButton.clicked += GoToMainMenuPane;
         }
 
-        public void BindUI(Callbacks callbacks)
+        protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
         {
-            if (callbacks.playManagerState != null )
-                SetPlayManagerState(callbacks.playManagerState);
-
-            if (settingsBackButton != null && callbacks.onSettingsBack != null )
-                settingsBackButton.clicked += callbacks.onSettingsBack;
-            if (leaderboardBackButton != null && callbacks.onLeaderboardBack != null )
-                leaderboardBackButton.clicked += callbacks.onLeaderboardBack;
+            ShowPane(newState != null ? newState.mainMenuPane : PlayManagerState.MainMenuPane.Main);
         }
 
-        PlayManagerState m_PlayManagerState;
-
-        public MainMenuScreenManager()
+        protected override void OnStatePropertyChanged(in BindingId property)
         {
-            RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
+            if (property == PlayManagerState.mainMenuPanePath)
+                ShowPane(state.mainMenuPane);
         }
 
-        public void SetPlayManagerState(PlayManagerState playManagerState)
-        {
-            m_PlayManagerState = playManagerState;
-        }
+        public void GoToMainMenuPane() => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Main);
 
-        void FirstInit(GeometryChangedEvent evt)
+        public void GoToSettingsPane() => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
+
+        public void GoToLeaderboardPane() => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+
+        void ShowPane(PlayManagerState.MainMenuPane pane)
         {
-            BindUI(new Callbacks
+            mainMenuPane.SetEnabled(pane == PlayManagerState.MainMenuPane.Main);
+            settingsPane.SetEnabled(pane == PlayManagerState.MainMenuPane.Settings);
+            leaderboardPane.SetEnabled(pane == PlayManagerState.MainMenuPane.Leaderboard);
+
+            // The last secondary pane shown stays in front, behind the main menu.
+            if (pane == PlayManagerState.MainMenuPane.Settings)
             {
-                onSettingsBack = GoToMainMenuPane,
-                onLeaderboardBack = GoToMainMenuPane
-            } );
-
-            mainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
+                settingsPane.RemoveFromClassList(backgroundPaneClassName);
+                leaderboardPane.AddToClassList(backgroundPaneClassName);
+                settingsPane.BringToFront();
+            }
+            else if (pane == PlayManagerState.MainMenuPane.Leaderboard)
             {
-                onSettings = GoToSettingsPane,
-                onLeaderboard = GoToLeaderboardPane,
-            } );
-        }
-
-        public void GoToMainMenuPane()
-        {
-            mainMenuPane.SetEnabled(true);
-            settingsPane.SetEnabled(false);
-            leaderboardPane.SetEnabled(false);
-
-            m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Primary);
-        }
-
-        public void GoToSettingsPane()
-        {
-            mainMenuPane.SetEnabled(false);
-            settingsPane.SetEnabled(true);
-            leaderboardPane.SetEnabled(false);
-
-            settingsPane.RemoveFromClassList(backgroundPaneClassName);
-            leaderboardPane.AddToClassList(backgroundPaneClassName);
-
-            settingsPane.BringToFront();
-
-            m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Secondary);
-        }
-
-        public void GoToLeaderboardPane()
-        {
-            mainMenuPane.SetEnabled(false);
-            settingsPane.SetEnabled(false);
-            leaderboardPane.SetEnabled(true);
-
-            settingsPane.AddToClassList(backgroundPaneClassName);
-            leaderboardPane.RemoveFromClassList(backgroundPaneClassName);
-
-            leaderboardPane.BringToFront();
-
-            m_PlayManagerState?.SetMainMenuPaneMode(PlayManagerState.MainMenuPaneMode.Secondary);
+                settingsPane.AddToClassList(backgroundPaneClassName);
+                leaderboardPane.RemoveFromClassList(backgroundPaneClassName);
+                leaderboardPane.BringToFront();
+            }
         }
     }
 }

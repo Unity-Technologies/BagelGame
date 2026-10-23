@@ -9,31 +9,28 @@ namespace Bagel
         [SerializeField] BagelController m_BagelController;
         [SerializeField] BagelTrackerConstants m_BagelTrackerConstants;
 
-        BagelTrackerData m_BagelTrackerData;
-        public BagelTrackerData bagelTrackerData
-        {
-            get
-            {
-                if (m_BagelTrackerData != null)
-                    return m_BagelTrackerData;
+        PlayManagerState m_State;
 
-                m_BagelTrackerData = ScriptableObject.CreateInstance<BagelTrackerData>();
-                m_BagelTrackerData.hideFlags = HideFlags.HideAndDontSave;
-                m_BagelTrackerData.constants = m_BagelTrackerConstants;
-                return m_BagelTrackerData;
-            }
-        }
+        public PlayManagerState state => m_PlayManager.state;
 
         void Awake()
         {
+            m_State = m_PlayManager.state;
+            m_State.tracker.constants = m_BagelTrackerConstants;
             m_BagelController.onToasterHit += BagelController_OnToasterHit;
-            m_PlayManager.state.onSetBagelType += State_OnSetBagelType;
+        }
+
+        void OnDestroy()
+        {
+            m_BagelController.onToasterHit -= BagelController_OnToasterHit;
         }
 
         void Update()
         {
             HandleControllerPositionTracking();
-            HandleControllerDataTracking();
+
+            if (m_State.isPlaying)
+                HandleControllerDataTracking();
         }
 
         void HandleControllerPositionTracking()
@@ -49,27 +46,21 @@ namespace Bagel
 
         void HandleControllerDataTracking()
         {
-            bagelTrackerData.toppingsCount = m_BagelController.currentToppingCount;
-            bagelTrackerData.input = m_BagelController.currentInput;
-            bagelTrackerData.speed = m_BagelController.currentSpeed;
-            bagelTrackerData.force = Mathf.Ceil(m_BagelController.currentForce);
-            bagelTrackerData.spin = Mathf.Ceil(m_BagelController.currentSpin);
-        }
-
-        void State_OnSetBagelType(object sender, BagelType bagelType)
-        {
-            bagelTrackerData.toppingsMaxCount = bagelType.maxToppingCount;
+            var tracker = m_State.tracker;
+            tracker.toppingsCount = m_BagelController.currentToppingCount;
+            tracker.input = m_BagelController.currentInput;
+            tracker.speed = m_BagelController.currentSpeed;
+            tracker.force = Mathf.Ceil(m_BagelController.currentForce);
+            tracker.spin = Mathf.Ceil(m_BagelController.currentSpin);
         }
 
         void BagelController_OnToasterHit(object sender, EventArgs e)
         {
-            OnToasterHit();
-        }
+            if (!m_State.isPlaying)
+                return;
 
-        void OnToasterHit()
-        {
-            m_PlayManager.state.SetBagelTrackerData(m_BagelTrackerData);
-            m_PlayManager.state.GoToGameOver();
+            HandleControllerDataTracking();
+            m_State.FinishRun();
         }
     }
 }

@@ -1,12 +1,9 @@
-
-using System;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class GameOverScreenManager : VisualElement
+    public partial class GameOverScreenManager : BagelPane
     {
         GameOverPaneManager m_GameOverPaneManager;
         LeaderboardManager m_LeaderboardManager;
@@ -14,32 +11,19 @@ namespace Bagel
         public GameOverPaneManager gameOverPaneManager => m_GameOverPaneManager ??= this.Q<GameOverPaneManager>();
         public LeaderboardManager leaderboardManager => m_LeaderboardManager ??= this.Q<LeaderboardManager>();
 
-        public GameOverScreenManager()
-        {
-            RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
-        }
+        bool m_Bound;
 
-        void FirstInit(GeometryChangedEvent evt)
+        protected override void OnAttached()
         {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            // After adding a score, show it: the leaderboard selects and scrolls to the new row.
             gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
             {
-                onAddToLeaderboard = AddNameToLeaderboard
+                onAddToLeaderboard = () => leaderboardManager?.leaderboardTable?.Focus()
             });
-
-            gameOverPaneManager.leaderboardForm.SetEnabled(true);
-        }
-
-        void AddNameToLeaderboard()
-        {
-            var leaderboardData = leaderboardManager.leaderboardData;
-            if (leaderboardData == null)
-                return;
-
-            leaderboardManager.AddScore(
-                gameOverPaneManager.addToLeaderboardNameField.value,
-                gameOverPaneManager.toppingsNumberField.value);
-
-            gameOverPaneManager.leaderboardForm.SetEnabled(false);
         }
     }
 }

@@ -1,10 +1,11 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class SettingsPaneManagerForUI : VisualElement
+    public partial class SettingsPaneManagerForUI : BagelPane
     {
         DropdownField m_ThemeDropdown;
 
@@ -16,25 +17,20 @@ namespace Bagel
         [UxmlAttribute]
         public BagelThemeCollection bagelThemeCollection { get; set; }
 
+        // Set by the in-game Drivers: only the running game swaps the PanelSettings themes.
+        public bool appliesThemeToPanelSettings { get; set; }
+
         public event EventHandler<ThemeStyleSheet> OnThemeChange;
 
-        public SettingsPaneManagerForUI()
-        {
-            RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
-        }
+        bool m_Bound;
 
-        public void BindSettingsCallbacks(SettingsRefsForUI settingsRefs)
+        protected override void OnAttached()
         {
-            if (settingsRefs == null)
+            if (m_Bound)
                 return;
+            m_Bound = true;
 
-            OnThemeChange += ChangePanelSettingsTheme;
-        }
-
-        void FirstInit(GeometryChangedEvent evt)
-        {
             var themes = bagelThemeCollection?.collection;
-
             if (themes == null || themes.Count == 0)
                 return;
 
@@ -42,28 +38,32 @@ namespace Bagel
             foreach (var theme in themes)
                 themeDropdown.choices.Add(theme.themeName);
 
-            themeDropdown.RegisterValueChangedCallback(OnThemeChanged);
+            // The index is two-way bound to settings.themeIndex; show the current one right away.
+            if (state != null)
+                themeDropdown.SetValueWithoutNotify(themeDropdown.choices[Mathf.Clamp(state.settings.themeIndex, 0, themes.Count - 1)]);
         }
 
-        void OnThemeChanged(ChangeEvent<string> evt)
+        protected override void OnStatePropertyChanged(in BindingId property)
         {
-            var index = themeDropdown.index;
-            ChangeTheme(index);
+            if (property == SettingsData.themeIndexPath)
+                ChangeTheme(state.settings.themeIndex);
         }
 
         void ChangeTheme(int index)
         {
             var themes = bagelThemeCollection?.collection;
-
-            if (OnThemeChange == null || themes == null || themes.Count == 0)
+            if (themes == null || themes.Count == 0)
                 return;
 
-            var theme = themes[index].theme;
+            var theme = themes[Mathf.Clamp(index, 0, themes.Count - 1)].theme;
 
-            OnThemeChange.Invoke(this, theme);
+            OnThemeChange?.Invoke(this, theme);
+
+            if (appliesThemeToPanelSettings)
+                ChangePanelSettingsTheme(theme);
         }
 
-        void ChangePanelSettingsTheme(object sender, ThemeStyleSheet theme)
+        void ChangePanelSettingsTheme(ThemeStyleSheet theme)
         {
             var panelSettings = panelSettingsCollection?.collection;
             if (panelSettings == null || panelSettings.Count == 0)

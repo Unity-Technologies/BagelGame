@@ -3,7 +3,6 @@ using Unity.Properties;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
 public class BagelAllUIWindow : EditorWindow
@@ -11,9 +10,10 @@ public class BagelAllUIWindow : EditorWindow
     [SerializeField] VisualTreeAsset m_VisualTreeAsset;
     [SerializeField] ThemeStyleSheet m_DefaultTheme;
     [SerializeField] BagelType m_BagelType;
-    [SerializeField] BagelTrackerData m_BagelTrackerData;
+    [SerializeField] PlayManagerState m_StartState;
 
     ThemeStyleSheet m_CurrentTheme;
+    PlayManagerState m_State;
 
     [MenuItem("Bagel/Bagel All UI")]
     public static void ShowExample()
@@ -28,8 +28,16 @@ public class BagelAllUIWindow : EditorWindow
         var editorTheme = rootVisualElement.styleSheets[0];
         rootVisualElement.styleSheets.Clear();
 
+        // Every screen in the window shares one throwaway copy of the start state.
+        m_State = PlayManagerState.CreateRuntimeCopy(m_StartState);
+
         // Create UI.
         m_VisualTreeAsset.CloneTree(rootVisualElement);
+        rootVisualElement.Query<BagelPane>().ForEach(pane =>
+        {
+            if (pane.parentPane == null)
+                pane.SetState(m_State);
+        });
 
         m_CurrentTheme = m_DefaultTheme;
         ApplyRuntimeTheme(m_DefaultTheme);
@@ -75,12 +83,18 @@ public class BagelAllUIWindow : EditorWindow
         uiSettings.OnThemeChange += (_, theme) => ApplyRuntimeTheme(theme);
     }
 
+    void OnDisable()
+    {
+        PlayManagerState.DestroyRuntimeCopy(m_State);
+        m_State = null;
+    }
+
     void BindBagelTrackerRow(StyleSheet editorTheme)
     {
-        var bagelTrackerDataInspector = new InspectorElement(m_BagelTrackerData);
-        bagelTrackerDataInspector.styleSheets.Add(editorTheme);
+        var stateInspector = new InspectorElement(m_State);
+        stateInspector.styleSheets.Add(editorTheme);
         var bagelTrackerDataRow = rootVisualElement.Q<VisualElement>("bagel-tracker-row");
-        bagelTrackerDataRow.Add(bagelTrackerDataInspector);
+        bagelTrackerDataRow.Add(stateInspector);
     }
 
     void BindBagelTypeRow(StyleSheet editorTheme)
@@ -113,17 +127,12 @@ public class BagelAllUIWindow : EditorWindow
 
         gameOverResetButton.clicked += () =>
         {
-            toppingsLeftField.value = toppingsLeftResetField.value;
-            leaderboardForm.SetEnabled(true);
+            m_State.tracker.toppingsCount = toppingsLeftResetField.value;
+            m_State.FinishRun();
         };
     }
 
     void BindLeaderboardRow(StyleSheet editorTheme)
     {
-        var leaderboardRow = rootVisualElement.Q<VisualElement>("leaderboard-row");
-        var leaderboardManager = leaderboardRow.Q<LeaderboardManager>();
-        var leaderboardDataInspector = new InspectorElement(leaderboardManager.leaderboardData);
-        leaderboardDataInspector.styleSheets.Add(editorTheme);
-        leaderboardRow.Add(leaderboardDataInspector);
     }
 }

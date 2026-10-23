@@ -4,12 +4,12 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class MainMenuPaneManager : VisualElement
+    public partial class MainMenuPaneManager : BagelPane
     {
-        public Button m_PlayButton;
-        public Button m_SettingsButton;
-        public Button m_LeaderboardButton;
-        public Button m_ExitButton;
+        Button m_PlayButton;
+        Button m_SettingsButton;
+        Button m_LeaderboardButton;
+        Button m_ExitButton;
 
         public Button playButton => m_PlayButton ??= this.Q<Button>("play-button");
         public Button settingsButton => m_SettingsButton ??= this.Q<Button>("settings-button");
@@ -18,15 +18,10 @@ namespace Bagel
 
         public struct Callbacks
         {
-            public PlayManagerState playManagerState;
-
             public Action onPlay;
             public Action onSettings;
             public Action onLeaderboard;
             public Action onExit;
-
-            public Action onSettingsBack;
-            public Action onLeaderboardBack;
         }
 
         public void BindUI(Callbacks callbacks)
@@ -39,6 +34,22 @@ namespace Bagel
                 leaderboardButton.clicked += callbacks.onLeaderboard;
             if (exitButton != null && callbacks.onExit != null )
                 exitButton.clicked += callbacks.onExit;
+        }
+
+        bool m_Bound;
+
+        protected override void OnAttached()
+        {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            BindUI(new Callbacks
+            {
+                onPlay = () => state?.GoToBagelSelection(),
+                onSettings = () => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings),
+                onLeaderboard = () => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard)
+            });
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,49 +11,45 @@ namespace Bagel
         [SerializeField] Transform m_Camera;
         [SerializeField] Transform m_BagelSelectionCameraTraget;
 
-        VisualElement m_Pane;
-        Button m_SelectButton;
-        Button m_BackButton;
-        Button m_LeftButton;
-        Button m_RightButton;
+        PlayManagerState m_State;
+        BagelSelectionControlsPaneManager m_Pane;
 
         int m_UIVersion;
 
         void OnEnable()
         {
-            m_PlayManager.state.onStateChange += State_OnStateChange;
-            m_BagelSelectionRoom.onBagelTypeChange += BagelSelectionRoom_OnBagelTypeChange;
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.onSetBagelType += State_OnSetBagelType;
 
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+
+            SetXOffset(m_State.selectedBagelIndex);
+        }
+
+        void OnDisable()
+        {
+            m_State.onStateChange -= State_OnStateChange;
+            m_State.onSetBagelType -= State_OnSetBagelType;
+
+            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
         void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
         {
             if (m_UIVersion == version)
                 return;
+
+            var pane = rootElement.Q<BagelSelectionControlsPaneManager>();
+            if (pane == null)
+                return; // The UXML is still importing; the next reload brings it.
             m_UIVersion = version;
 
-            m_Pane = rootElement.Q<VisualElement>("pane");
-
-            m_SelectButton = rootElement.Q<Button>("select-button");
-            if (m_SelectButton != null)
-                m_SelectButton.clicked += m_BagelSelectionRoom.SelectBagelAndGoToPlay;
-
-            m_LeftButton = rootElement.Q<Button>("left-button");
-            if (m_LeftButton != null)
-                m_LeftButton.clicked += m_BagelSelectionRoom.PreviousBagel;
-            m_RightButton = rootElement.Q<Button>("right-button");
-            if (m_RightButton != null)
-                m_RightButton.clicked += m_BagelSelectionRoom.NextBagel;
-
-            m_BackButton = rootElement.Q<Button>("back-button");
-            if (m_BackButton != null)
-                m_BackButton.clicked += m_BagelSelectionRoom.playManager.state.GoToMainMenu;
-
-            SetValuesFromIndex(m_BagelSelectionRoom.SelectedBagelIndex);
+            m_Pane = pane;
+            m_Pane.SetState(m_State);
 
             // On a fresh scene load the UI arrives after the first state change, so catch up here.
-            State_OnStateChange(this, m_PlayManager.state.currentState);
+            State_OnStateChange(this, m_State.currentState);
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
@@ -62,81 +57,24 @@ namespace Bagel
             if (m_Pane == null)
                 return;
 
+            // World-space panels only get gamepad and keyboard navigation once something in them has focus.
             if (state == PlayManagerState.State.BagelSelection)
-            {
-                m_Pane.Focus();
-                RegisterEvents();
-            }
-            else
-            {
-                UnregisterEvents();
-            }
+                m_Pane.schedule.Execute(() => m_Pane.Focus());
         }
 
-        void RegisterEvents()
+        void State_OnSetBagelType(object sender, BagelType bagelType)
         {
-            m_Pane.RegisterCallback<NavigationMoveEvent>(OnNavigationMoveEvent);
-            m_Pane.RegisterCallback<NavigationSubmitEvent>(OnNavigationSubmitEvent);
-            m_Pane.RegisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
-        }
-
-        void UnregisterEvents()
-        {
-            m_Pane.UnregisterCallback<NavigationMoveEvent>(OnNavigationMoveEvent);
-            m_Pane.UnregisterCallback<NavigationSubmitEvent>(OnNavigationSubmitEvent);
-            m_Pane.UnregisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
-        }
-
-        void OnNavigationMoveEvent(NavigationMoveEvent evt)
-        {
-            if (evt.direction == NavigationMoveEvent.Direction.Left)
-            {
-                m_BagelSelectionRoom.PreviousBagel();
-            }
-            else if (evt.direction == NavigationMoveEvent.Direction.Right)
-            {
-                m_BagelSelectionRoom.NextBagel();
-            }
-            m_Pane.Focus();
-        }
-
-        void OnNavigationSubmitEvent(NavigationSubmitEvent evt)
-        {
-            m_BagelSelectionRoom.SelectBagelAndGoToPlay();
-        }
-
-        void OnNavigationCancelEvent(NavigationCancelEvent evt)
-        {
-            m_BagelSelectionRoom.playManager.state.GoToMainMenu();
-        }
-
-        void OnDisable()
-        {
-            m_PlayManager.state.onStateChange -= State_OnStateChange;
-            m_BagelSelectionRoom.onBagelTypeChange -= BagelSelectionRoom_OnBagelTypeChange;
-
-            GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
+            SetXOffset(m_State.selectedBagelIndex);
         }
 
         void Update()
         {
-            if (!m_PlayManager.state.isBagelSelection)
+            if (!m_State.isBagelSelection)
                 return;
 
             var p = transform.position;
             p.z = m_Camera.position.z;
             transform.position = p;
-        }
-
-        void BagelSelectionRoom_OnBagelTypeChange(object sender, int index)
-        {
-            SetValuesFromIndex(index);
-        }
-
-        void SetValuesFromIndex(int index)
-        {
-            SetXOffset(index);
-            SetDisableStates(index);
         }
 
         void SetXOffset(int index)
@@ -147,20 +85,12 @@ namespace Bagel
             p.x = offset;
             m_BagelSelectionCameraTraget.localPosition = p;
 
-            if (!m_PlayManager.state.isBagelSelection)
+            if (!m_State.isBagelSelection)
             {
                 p = transform.localPosition;
                 p.x = offset;
                 transform.localPosition = p;
             }
-        }
-
-        void SetDisableStates(int index)
-        {
-            if (m_LeftButton != null)
-                m_LeftButton.SetEnabled(index > 0);
-            if (m_RightButton != null)
-                m_RightButton.SetEnabled(index < m_BagelSelectionRoom.BagelTypeCount - 1);
         }
     }
 }

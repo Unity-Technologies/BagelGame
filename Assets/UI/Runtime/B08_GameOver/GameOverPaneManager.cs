@@ -1,12 +1,11 @@
-
 using System;
-using UnityEngine;
+using Unity.Properties;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class GameOverPaneManager : VisualElement
+    public partial class GameOverPaneManager : BagelPane
     {
         Label m_Title;
         IntegerField m_ToppingsNumberField;
@@ -39,6 +38,42 @@ namespace Bagel
                 restartButton.clicked += callbacks.onRestart;
             if (mainMenuButton != null && callbacks.onMainMenu != null )
                 mainMenuButton.clicked += callbacks.onMainMenu;
+        }
+
+        bool m_Bound;
+
+        protected override void OnAttached()
+        {
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
+            // The page title comes from the Page template, so its binding is added here.
+            title?.SetBinding("text", new DataBinding
+            {
+                dataSourcePath = new PropertyPath("lastRun.title"),
+                bindingMode = BindingMode.ToTarget
+            });
+
+            BindUI(new Callbacks
+            {
+                onAddToLeaderboard = () => state?.SubmitToLeaderboard(addToLeaderboardNameField.value),
+                onRestart = () => state?.GoToPlay(),
+                onMainMenu = () => state?.GoToMainMenu()
+            });
+        }
+
+        protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState) => UpdateLeaderboardForm();
+
+        protected override void OnStatePropertyChanged(in BindingId property)
+        {
+            if (property == PlayManagerState.lastRunPath)
+                UpdateLeaderboardForm();
+        }
+
+        void UpdateLeaderboardForm()
+        {
+            leaderboardForm?.SetEnabled(state != null && state.lastRun.canSubmit);
         }
     }
 }

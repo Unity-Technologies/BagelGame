@@ -7,8 +7,8 @@ MonoImporter:
   - m_ViewDataDictionary: {instanceID: 0}
   - m_VisualTreeAsset: {fileID: 9197481963319205126, guid: 7795a87192aceab4cb8538f6d7ba88d5, type: 3}
   - m_DefaultTheme: {fileID: -4733365628477956816, guid: 69175a3719b8b38449aaa271dbf1486e, type: 3}
-  - m_BagelType: {fileID: 11400000, guid: 7e9fbe392dd334a439103c0fee7fa265, type: 2}
-  - m_BagelTrackerData: {fileID: 11400000, guid: 0a1faec4a7b5d7f409ffc942358d1e2e, type: 2}
+  - m_BagelType: {fileID: 11400000, guid: 4121a9b3513474a4badc7b2ccbe255c4, type: 2}
+  - m_StartState: {fileID: 11400000, guid: f0183f196e1622f4aa5ff36423fe939f, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

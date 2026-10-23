@@ -1,4 +1,3 @@
-using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,12 +24,13 @@ namespace Bagel
         {
             if (m_UIVersion == version)
                 return;
+
+            var pane = rootElement.Q<BagelTrackerPaneManager>();
+            if (pane == null)
+                return; // The UXML is still importing; the next reload brings it.
             m_UIVersion = version;
 
-            var root = rootElement.Q("pane");
-            if (root == null)
-                return;
-            root.dataSource = m_BagelTracker.bagelTrackerData;
+            pane.SetState(m_BagelTracker.state);
         }
     }
 }

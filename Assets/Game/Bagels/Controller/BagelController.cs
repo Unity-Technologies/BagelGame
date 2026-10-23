@@ -11,6 +11,7 @@ namespace Bagel
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] Transform m_StartingLocation;
 
+        PlayManagerState m_State;
         Rigidbody m_RigidBody;
         Collider m_Collider;
         PhysicsMaterial m_PhysicsMaterial;
@@ -30,6 +31,7 @@ namespace Bagel
         public float currentSpin => m_CurrentSpin;
 
         public event EventHandler onToasterHit;
+        public event EventHandler<float> onImpact;
 
         public Vector3 GetAbsoluteRight()
         {
@@ -84,9 +86,18 @@ namespace Bagel
             m_Collider = GetComponent<Collider>();
             m_PhysicsMaterial = m_Collider.material;
             m_BagelSlot = transform.GetChild(0);
-            m_PlayManager.state.onStateChange += State_OnStateChange;
-            m_PlayManager.state.onSetBagelType += State_OnSetBagelType;
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.onSetBagelType += State_OnSetBagelType;
+            if (m_State.selectedBagelType != null)
+                m_BagelType = m_State.selectedBagelType;
             enabled = false;
+        }
+
+        void OnDestroy()
+        {
+            m_State.onStateChange -= State_OnStateChange;
+            m_State.onSetBagelType -= State_OnSetBagelType;
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
@@ -110,6 +121,9 @@ namespace Bagel
 
         void State_OnSetBagelType(object sender, BagelType bagelType)
         {
+            if (bagelType == null)
+                return;
+
             m_BagelType = bagelType;
             Init();
         }
@@ -159,11 +173,15 @@ namespace Bagel
 
         void HandleToppingLoss()
         {
-            var impactLoss = m_CurrentForce * m_BagelType.impactToppingLossFactor;
-            var spinLoss = m_CurrentSpin * m_BagelType.spinToppingLossFactor;
-            var loss = impactLoss + spinLoss;
+            m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - ToppingLoss(m_BagelType, m_CurrentForce, m_CurrentSpin));
+        }
 
-            m_CurrentToppingCount = Mathf.Max(0, m_CurrentToppingCount - loss);
+        // Toppings lost in one physics step, from the last impact (in g) and the current spin.
+        public static float ToppingLoss(BagelType bagelType, float force, float spin)
+        {
+            var impactLoss = force * bagelType.impactToppingLossFactor;
+            var spinLoss = spin * bagelType.spinToppingLossFactor;
+            return impactLoss + spinLoss;
         }
 
         void TiltUpright()
@@ -193,22 +211,21 @@ namespace Bagel
 
         void EvaluateCollision(Collision collision)
         {
-            var impulse = collision.impulse;
-            var dt = Time.fixedDeltaTime;
-            var averageImpulse = impulse / dt;
-
-            var contactNormal = collision.GetContact(0).normal.normalized;
-            var shockForce = Mathf.Abs(Vector3.Dot(averageImpulse, contactNormal));
-            var scrapeForce = (averageImpulse - Vector3.Project(averageImpulse, contactNormal)).magnitude;
-
-            var g = Physics.gravity.magnitude;
-            var shockGs = shockForce / (m_RigidBody.mass * g);
-            var scrapeGs = scrapeForce / (m_RigidBody.mass * g);
-
-            // Remove normal gravity.
-            shockGs = Mathf.Max(shockGs, 1.0f) - 1.0f;
+            var contactNormal = collision.GetContact(0).normal;
+            var shockGs = ShockGs(collision.impulse, contactNormal, Time.fixedDeltaTime, m_RigidBody.mass, Physics.gravity.magnitude);
 
             m_CurrentForce = Mathf.Max(m_CurrentForce, shockGs);
+            onImpact?.Invoke(this, shockGs);
+        }
+
+        // How hard a contact hit, in g, along its normal and without the 1 g of resting on the ground.
+        public static float ShockGs(Vector3 impulse, Vector3 contactNormal, float dt, float mass, float gravity)
+        {
+            var averageForce = impulse / dt;
+            var shockForce = Mathf.Abs(Vector3.Dot(averageForce, contactNormal.normalized));
+            var shockGs = shockForce / (mass * gravity);
+
+            return Mathf.Max(shockGs, 1.0f) - 1.0f;
         }
     }
 }

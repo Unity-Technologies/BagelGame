@@ -4,49 +4,22 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class LeaderboardManager : VisualElement
+    public partial class LeaderboardManager : BagelPane
     {
-        [UxmlAttribute]
-        public LeaderboardData leaderboardData;
-
         MultiColumnListView m_LeaderboardTable;
 
         public MultiColumnListView leaderboardTable
             => m_LeaderboardTable ??= this.Q<MultiColumnListView>("leaderboard-table");
 
-        public LeaderboardManager()
+        public LeaderboardData leaderboardData => state?.leaderboard;
+
+        bool m_Bound;
+
+        protected override void OnAttached()
         {
-            RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
-        }
-
-        public void AddScore(string playerName, int toppings)
-        {
-            if (leaderboardData == null)
+            if (m_Bound || leaderboardTable == null)
                 return;
-            if (leaderboardTable == null)
-                return;
-
-            var newEntry = new LeaderboardData.LeaderboardEntry
-            {
-                playerName = playerName,
-                toppings = toppings
-            };
-
-            var dataIndex = leaderboardData.entries.Count;
-            leaderboardData.entries.Add(newEntry);
-
-            leaderboardTable.RefreshItems();
-
-            var viewIndex = leaderboardTable.viewController.GetIndexForId(dataIndex);
-            leaderboardTable.SetSelection(viewIndex);
-            leaderboardTable.ScrollToItemById(dataIndex);
-            leaderboardTable.Focus();
-        }
-
-        void FirstInit(GeometryChangedEvent evt)
-        {
-            if (leaderboardTable == null)
-                return;
+            m_Bound = true;
 
             leaderboardTable.columns["name"].makeCell = () => new Label();
             leaderboardTable.columns["toppings"].makeCell = () => new Label();
@@ -60,8 +33,29 @@ namespace Bagel
                 string.Compare(leaderboardData.entries[a].playerName, leaderboardData.entries[b].playerName, StringComparison.Ordinal);
             leaderboardTable.columns["toppings"].comparison = (a, b) =>
                 (leaderboardData.entries[a].toppings).CompareTo(leaderboardData.entries[b].toppings);
+        }
 
-            leaderboardTable.itemsSource = leaderboardData.entries;
+        protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
+        {
+            if (oldState != null)
+                oldState.leaderboard.onEntryAdded -= Leaderboard_OnEntryAdded;
+            if (newState != null)
+                newState.leaderboard.onEntryAdded += Leaderboard_OnEntryAdded;
+
+            if (leaderboardTable != null)
+                leaderboardTable.itemsSource = newState?.leaderboard.entries;
+        }
+
+        void Leaderboard_OnEntryAdded(int dataIndex)
+        {
+            if (leaderboardTable == null)
+                return;
+
+            leaderboardTable.RefreshItems();
+
+            var viewIndex = leaderboardTable.viewController.GetIndexForId(dataIndex);
+            leaderboardTable.SetSelection(viewIndex);
+            leaderboardTable.ScrollToItemById(dataIndex);
         }
     }
 }

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e9e2ff673d15e49a88034c9d1874cf, type: 3}
+  m_Name: PlayManagerState
+  m_EditorClassIdentifier: BagelGame::Bagel.PlayManagerState
+  m_State: 0
+  m_MainMenuPane: 0
+  m_PausePane: 0
+  m_IsPaused: 0
+  m_BagelTypes: {fileID: 11400000, guid: f58b82c12a627284294e778219a14bf8, type: 2}
+  m_SelectedBagelIndex: 0
+  m_Tracker:
+    m_Constants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
+    m_ToppingsCount: 1000
+    m_ToppingsMaxCount: 1000
+    m_Input: 0
+    m_Speed: 0
+    m_Force: 0
+    m_Spin: 0
+  m_LastRun:
+    m_BagelName: 
+    m_Toppings: 0
+    m_ToppingsMax: 0
+    m_Submitted: 0
+  m_Settings:
+    m_FieldOfViewMin: 50
+    m_FieldOfViewMax: 80
+    m_FieldOfView: 60
+    m_ThemeIndex: 0
+  m_Leaderboard:
+    m_Entries:
+    - playerName: UIToolkitPro
+      toppings: 2345
+    - playerName: UI_Toolkid
+      toppings: 2848
+    - playerName: UIToolk1t
+      toppings: 345
+    - playerName: ToolkitMaster
+      toppings: 128
+    - playerName: MiniUITool
+      toppings: 565
+    - playerName: UI_Elites
+      toppings: 4566
+    - playerName: ElementsOP
+      toppings: 6749
+    - playerName: UIElemCore
+      toppings: 788
+    - playerName: Visu4lElement
+      toppings: 355
+    - playerName: VElement99
+      toppings: 7467
+    - playerName: VisElem_
+      toppings: 345
+    - playerName: PanelSetGo
+      toppings: 359
+    - playerName: SettingsPane
+      toppings: 235
+    - playerName: ButtonMasher
+      toppings: 6776
+    - playerName: Hold2Confirm
+      toppings: 43535
+    - playerName: BagelLord
+      toppings: 124
+    - playerName: ToastedBagel12
+      toppings: 31
+    - playerName: BagelCore
+      toppings: 456
+    - playerName: SesameSeeded
+      toppings: 3546
+    - playerName: Sesamix
+      toppings: 2454
+    - playerName: OpenSesame_
+      toppings: 3858
+    - playerName: SesameByte
+      toppings: 8395
+    - playerName: DarkToast
+      toppings: 147

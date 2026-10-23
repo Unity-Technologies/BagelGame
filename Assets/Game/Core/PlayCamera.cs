@@ -26,16 +26,32 @@ namespace Bagel
             set => UpdateFieldOfView(value);
         }
 
-        void Awake()
-        {
-            m_State = m_PlayManager.state;
-            m_State.onStateChange += (_, _) => UpdateCamera();
-            m_State.onMainMenuPaneModeChange += (_, _) => UpdateCamera();
-        }
-
         void OnEnable()
         {
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.onMainMenuPaneModeChange += State_OnMainMenuPaneModeChange;
+            m_State.propertyChanged += State_OnPropertyChanged;
+
             UpdateCamera();
+            UpdateFieldOfView(m_State.settings.fieldOfView);
+        }
+
+        void OnDisable()
+        {
+            m_State.onStateChange -= State_OnStateChange;
+            m_State.onMainMenuPaneModeChange -= State_OnMainMenuPaneModeChange;
+            m_State.propertyChanged -= State_OnPropertyChanged;
+        }
+
+        void State_OnStateChange(object sender, PlayManagerState.State state) => UpdateCamera();
+
+        void State_OnMainMenuPaneModeChange(object sender, PlayManagerState.MainMenuPaneMode mode) => UpdateCamera();
+
+        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
+        {
+            if (args.propertyName.Equals(SettingsData.fieldOfViewPath))
+                UpdateFieldOfView(m_State.settings.fieldOfView);
         }
 
         void UpdateFieldOfView(float newFOV)

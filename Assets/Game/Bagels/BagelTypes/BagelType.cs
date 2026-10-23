@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [CreateAssetMenu(fileName = "BagelType", menuName = "Bagel/Bagel Type")]
-    public class BagelType : ScriptableObject
+    public class BagelType : ScriptableObject, IDataSourceViewHashProvider
     {
         public string displayName = "New";
 
@@ -41,5 +42,12 @@ namespace Bagel
         [Range(0.0f, 1.0f)] public float controlPercentile;
         [Range(0.0f, 1.0f)] public float speedPercentile;
         [Range(0.0f, 1.0f)] public float gripPercentile;
+
+        // A bagel type only changes when it's edited, so its bindings only update then.
+        long m_Version;
+
+        public long GetViewHashCode() => m_Version;
+
+        void OnValidate() => m_Version++;
     }
 }

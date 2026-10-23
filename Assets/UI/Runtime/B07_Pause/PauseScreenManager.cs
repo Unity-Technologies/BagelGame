@@ -1,12 +1,11 @@
-using System;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class PauseScreenManager : VisualElement
+    public partial class PauseScreenManager : BagelPane
     {
-        public static readonly string inactivePaneClassName = "b-inactive-pane";
+        public static readonly UniqueStyleString inactivePaneClassName = new UniqueStyleString("b-inactive-pane");
 
         VisualElement m_PausePane;
         VisualElement m_SettingsPane;
@@ -18,36 +17,50 @@ namespace Bagel
         public PausePaneManager pausePaneManager => m_PausePaneManager ??= this.Q<PausePaneManager>();
         public SettingsPaneManager settingsPaneManager => m_SettingsPaneManager ??= this.Q<SettingsPaneManager>();
 
-        public PauseScreenManager()
-        {
-            RegisterCallbackOnce<GeometryChangedEvent>(FirstInit);
-        }
+        bool m_Bound;
 
-        void FirstInit(GeometryChangedEvent evt)
+        protected override void OnAttached()
         {
-            pausePaneManager.BindUI(new PausePaneManager.Callbacks
-            {
-                onSettings = GoToSettingsPane
-            });
+            if (m_Bound)
+                return;
+            m_Bound = true;
+
             settingsPaneManager.BindUI(new SettingsPaneManager.Callbacks
             {
                 onSettingsBack = GoToPausePane
             });
         }
 
+        protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
+        {
+            ShowPane(newState != null ? newState.pausePane : PlayManagerState.PausePane.Pause);
+        }
+
+        protected override void OnStatePropertyChanged(in BindingId property)
+        {
+            if (property == PlayManagerState.pausePanePath)
+                ShowPane(state.pausePane);
+        }
+
         public void GoToPausePane()
         {
-            if (pausePane == null)
-                return;
-
-            pausePane.RemoveFromClassList(inactivePaneClassName);
-            settingsPane.AddToClassList(inactivePaneClassName);
+            if (state != null)
+                state.pausePane = PlayManagerState.PausePane.Pause;
         }
 
         public void GoToSettingsPane()
         {
-            pausePane.AddToClassList(inactivePaneClassName);
-            settingsPane.RemoveFromClassList(inactivePaneClassName);
+            if (state != null)
+                state.pausePane = PlayManagerState.PausePane.Settings;
+        }
+
+        void ShowPane(PlayManagerState.PausePane pane)
+        {
+            if (pausePane == null)
+                return;
+
+            pausePane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Pause);
+            settingsPane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Settings);
         }
     }
 }

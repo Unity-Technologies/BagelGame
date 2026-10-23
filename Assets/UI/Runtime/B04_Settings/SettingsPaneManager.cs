@@ -1,11 +1,10 @@
 using System;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
     [UxmlElement(libraryPath = "Bagel/Managers")]
-    public partial class SettingsPaneManager : VisualElement
+    public partial class SettingsPaneManager : BagelPane
     {
         SettingsPaneManagerForGame m_SettingsPaneManagerForGame;
         SettingsPaneManagerForUI m_SettingsPaneManagerForUI;
@@ -24,12 +23,6 @@ namespace Bagel
         {
             if (backButton != null && callbacks.onSettingsBack != null)
                 backButton.clicked += callbacks.onSettingsBack;
-        }
-
-        public void BindSettingsCallbacks(GameObject playSettingsObject)
-        {
-            forGame.BindSettingsCallbacks(playSettingsObject.GetComponent<SettingsRefsForGame>());
-            forUI.BindSettingsCallbacks(playSettingsObject.GetComponent<SettingsRefsForUI>());
         }
     }
 }

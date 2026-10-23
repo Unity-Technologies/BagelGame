@@ -8,20 +8,25 @@ namespace Bagel
     public class MainMenuScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
-        MainMenuPaneManager m_MainMenuPaneManager;
+
+        PlayManagerState m_State;
+        MainMenuScreenManager m_MainMenuScreenManager;
 
         int m_UIVersion;
 
         void OnEnable()
         {
-            m_PlayManager.state.onStateChange += State_OnStateChange;
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += State_OnStateChange;
+            m_State.propertyChanged += State_OnPropertyChanged;
 
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
 
         void OnDisable()
         {
-            m_PlayManager.state.onStateChange -= State_OnStateChange;
+            m_State.onStateChange -= State_OnStateChange;
+            m_State.propertyChanged -= State_OnPropertyChanged;
 
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
@@ -30,19 +35,17 @@ namespace Bagel
         {
             if (m_UIVersion == version)
                 return;
-            m_UIVersion = version;
 
             var mainMenuScreenManager = rootElement.Q<MainMenuScreenManager>();
-            m_MainMenuPaneManager = rootElement.Q<MainMenuPaneManager>();
-            var settingsPaneManager = mainMenuScreenManager.Q<SettingsPaneManager>();
-            settingsPaneManager.BindSettingsCallbacks(m_PlayManager.playSettingsObject);
-            mainMenuScreenManager.BindUI(new MainMenuScreenManager.Callbacks
+            if (mainMenuScreenManager == null)
+                return; // The UXML is still importing; the next reload brings it.
+            m_UIVersion = version;
+
+            m_MainMenuScreenManager = mainMenuScreenManager;
+            m_MainMenuScreenManager.SetState(m_State);
+            m_MainMenuScreenManager.Q<SettingsPaneManagerForUI>().appliesThemeToPanelSettings = true;
+            m_MainMenuScreenManager.mainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
             {
-                playManagerState = m_PlayManager.state
-            });
-            m_MainMenuPaneManager.BindUI(new MainMenuPaneManager.Callbacks
-            {
-                onPlay = m_PlayManager.state.GoToBagelSelection,
 #if UNITY_EDITOR
                 onExit = UnityEditor.EditorApplication.ExitPlaymode
 #else
@@ -51,20 +54,49 @@ namespace Bagel
             });
 
             // On a fresh scene load the UI arrives after the first state change, so catch up here.
-            if (m_PlayManager.state.isMainMenu)
-                m_MainMenuPaneManager.playButton?.Focus();
+            FocusCurrentPane();
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (m_MainMenuPaneManager?.playButton == null)
-                return;
-
             if (state != PlayManagerState.State.MainMenu)
                 return;
 
-            m_MainMenuPaneManager.playButton.Focus();
+            FocusCurrentPane();
             PlayIntroAnimation();
+        }
+
+        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
+        {
+            if (args.propertyName == PlayManagerState.mainMenuPanePath)
+                FocusCurrentPane();
+        }
+
+        // World-space panels only get gamepad and keyboard navigation once something in them has focus.
+        void FocusCurrentPane()
+        {
+            if (m_MainMenuScreenManager == null)
+                return;
+
+            // Wait for the pane to be shown: disabled elements can't take focus.
+            m_MainMenuScreenManager.schedule.Execute(() =>
+            {
+                if (!m_State.isMainMenu)
+                    return;
+
+                switch (m_State.mainMenuPane)
+                {
+                    case PlayManagerState.MainMenuPane.Main:
+                        m_MainMenuScreenManager.mainMenuPaneManager.playButton?.Focus();
+                        break;
+                    case PlayManagerState.MainMenuPane.Settings:
+                        m_MainMenuScreenManager.settingsBackButton?.Focus();
+                        break;
+                    case PlayManagerState.MainMenuPane.Leaderboard:
+                        m_MainMenuScreenManager.leaderboardBackButton?.Focus();
+                        break;
+                }
+            });
         }
 
         void PlayIntroAnimation()

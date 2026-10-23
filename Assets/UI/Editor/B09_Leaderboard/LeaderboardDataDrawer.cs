@@ -4,12 +4,14 @@ using UnityEditor.UIElements;
 
 namespace Bagel
 {
-    [CustomEditor(typeof(LeaderboardData))]
-    public class LeaderboardDataEditor : Editor
+    [CustomPropertyDrawer(typeof(LeaderboardData))]
+    public class LeaderboardDataDrawer : PropertyDrawer
     {
-        public override VisualElement CreateInspectorGUI()
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
             var row = new VisualElement();
+            row.Add(new Label(property.displayName));
+
             var table = new MultiColumnListView
             {
                 name = "leaderboard-table",
@@ -23,7 +25,7 @@ namespace Bagel
                     height = 300
                 }
             };
-            table.bindingPath = "entries";
+            table.bindingPath = "m_Entries";
 
             table.columns.Add(new Column
             {
@@ -43,7 +45,7 @@ namespace Bagel
             table.columns["name"].makeCell = () => new TextField() { bindingPath = "playerName" };
             table.columns["toppings"].makeCell = () => new IntegerField() { bindingPath = "toppings" };
 
-            table.itemsSource = (target as LeaderboardData).entries;
+            table.BindProperty(property.FindPropertyRelative("m_Entries"));
 
             row.Add(table);
             return row;

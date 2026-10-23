@@ -22,6 +22,11 @@ namespace Bagel.B08_GameOver
         {
             var root = rootVisualElement;
             m_BagelTestAssetList.gameOverScreenUxml.CloneTree(root);
+
+            // Finish a winning run, so there's a score to add.
+            var state = root.Q<GameOverScreenManager>().state;
+            state.tracker.toppingsCount = 42;
+            state.FinishRun();
             simulate.FrameUpdate();
 
             var field = root.Q<TextField>("leaderboard-name-field");

@@ -1,12 +1,16 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Page" src="project://database/Assets/UI/Runtime/B02_Common/Page.uxml?fileID=9197481963319205126&amp;guid=fd2407f521d49554aaf933ac922100de&amp;type=3#Page"/>
     <Style src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverStyles"/>
-    <Bagel.GameOverPaneManager name="game-over-pane-manager">
+    <Bagel.GameOverPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="game-over-pane-manager">
         <ui:Instance template="Page" name="game-over-page">
             <AttributeOverrides element-name="page-title" text="Game Over"/>
             <ui:VisualElement name="score-row">
-                <ui:Label text="Topppings Left" name="toppings-title-label"/>
-                <ui:IntegerField value="42" name="toppings-number-field" readonly="true"/>
+                <ui:Label text="Toppings Left" name="toppings-title-label"/>
+                <ui:IntegerField value="42" name="toppings-number-field" readonly="true">
+                    <Bindings>
+                        <ui:DataBinding property="value" data-source-path="lastRun.toppings" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:IntegerField>
             </ui:VisualElement>
             <ui:VisualElement name="leaderboard-form" class="b-sub-pane">
                 <ui:TextField label="Name for Leaderboard" name="leaderboard-name-field"/>

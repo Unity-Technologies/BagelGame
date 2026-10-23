@@ -2620,7 +2620,6 @@ GameObject:
   - component: {fileID: 1049677549}
   - component: {fileID: 1049677553}
   - component: {fileID: 1049677551}
-  - component: {fileID: 1049677552}
   - component: {fileID: 1049677554}
   m_Layer: 0
   m_Name: MainMenuScreenUI
@@ -2659,19 +2658,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuScreenDriver
   m_PlayManager: {fileID: 2115846877}
---- !u!114 &1049677552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049677548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec7f1489c27be34a802e658c7f1e1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: BagelGame::Bagel.GameSettingsDriver
-  playCamera: {fileID: 0}
 --- !u!1931382934 &1049677553
 PanelRenderer:
   m_ObjectHideFlags: 0
@@ -3769,64 +3755,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572615984}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1645471771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1645471772}
-  - component: {fileID: 1645471774}
-  - component: {fileID: 1645471773}
-  m_Layer: 0
-  m_Name: PlaySettings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1645471772
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645471771}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1656336467}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1645471773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645471771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b6ab569e61936468695cd2fd65352a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: BagelUI::Bagel.SettingsRefsForUI
---- !u!114 &1645471774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645471771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec7f1489c27be34a802e658c7f1e1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: BagelGame::Bagel.SettingsRefsForGame
-  playCamera: {fileID: 1980887079}
 --- !u!1001 &1648725714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3931,7 +3859,6 @@ Transform:
   - {fileID: 117335066}
   - {fileID: 752666704}
   - {fileID: 1980887078}
-  - {fileID: 1645471772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1738847856
@@ -5170,7 +5097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df72ce7a5df66244badf32cd25d95db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayManager
-  m_PlaySettingsObject: {fileID: 1645471771}
+  m_StartState: {fileID: 11400000, guid: f0183f196e1622f4aa5ff36423fe939f, type: 2}
   m_PlayInputBindings: {fileID: 1167858882}
 --- !u!114 &3269559752380836
 MonoBehaviour:

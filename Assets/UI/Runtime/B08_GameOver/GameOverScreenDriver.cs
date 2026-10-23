@@ -13,24 +13,24 @@ namespace Bagel
         [SerializeField] Transform m_GameOverRoot;
         [SerializeField] Transform m_BagelTarget;
 
+        PlayManagerState m_State;
         VisualElement m_Root;
         GameOverScreenManager m_GameOverScreenManager;
 
         int m_UIVersion;
 
-        void Awake()
-        {
-            m_PlayManager.state.onStateChange += State_OnStateChange;
-            m_PlayManager.state.onSetBagelTrackerData += State_OnSetBagelTrackerData;
-        }
-
         void OnEnable()
         {
+            m_State = m_PlayManager.state;
+            m_State.onStateChange += State_OnStateChange;
+
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
 
         void OnDisable()
         {
+            m_State.onStateChange -= State_OnStateChange;
+
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         }
 
@@ -38,23 +38,23 @@ namespace Bagel
         {
             if (m_UIVersion == version)
                 return;
+
+            var gameOverScreenManager = rootElement.Q<GameOverScreenManager>();
+            if (gameOverScreenManager == null)
+                return; // The UXML is still importing; the next reload brings it.
             m_UIVersion = version;
 
             m_Root = rootElement;
-            m_GameOverScreenManager = m_Root.Q<GameOverScreenManager>();
-            m_GameOverScreenManager.gameOverPaneManager.BindUI(new GameOverPaneManager.Callbacks
-            {
-                onRestart = m_PlayManager.state.GoToPlay,
-                onMainMenu = m_PlayManager.state.GoToMainMenu
-            });
+            m_GameOverScreenManager = gameOverScreenManager;
+            m_GameOverScreenManager.SetState(m_State);
 
             // On a fresh scene load the UI arrives after the first state change, so catch up here.
-            m_Root.style.display = m_PlayManager.state.isGameOver ? DisplayStyle.Flex : DisplayStyle.None;
+            m_Root.style.display = m_State.isGameOver ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         void Update()
         {
-            if (!m_PlayManager.state.isGameOver)
+            if (!m_State.isGameOver)
                 return;
 
             m_GameOverRoot.Rotate(Vector3.up, m_GameOverOrbitSpeed);
@@ -62,14 +62,8 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (m_Root == null)
-                return;
-
             if (state == PlayManagerState.State.GameOver)
             {
-                m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus();
-                m_Root.style.display = DisplayStyle.Flex;
-
                 m_GameOverRoot.rotation = Quaternion.identity;
 
                 var gameOverPosition = m_GameOverRoot.position;
@@ -80,26 +74,14 @@ namespace Bagel
                     bagelPosition.z
                 );
             }
-            else
-            {
-                m_Root.style.display = DisplayStyle.None;
-            }
-        }
 
-        void State_OnSetBagelTrackerData(object sender, BagelTrackerData bagelTrackerData)
-        {
-            if (m_GameOverScreenManager.gameOverPaneManager.title == null)
+            if (m_Root == null)
                 return;
 
-            if (bagelTrackerData.toppingsCount > 0)
-            {
-                m_GameOverScreenManager.gameOverPaneManager.title.text = "You Win!";
-                m_GameOverScreenManager.gameOverPaneManager.toppingsNumberField.value = bagelTrackerData.toppingsCount;
-            }
-            else
-            {
-                m_GameOverScreenManager.gameOverPaneManager.title.text = "You Lose!";
-            }
+            m_Root.style.display = state == PlayManagerState.State.GameOver ? DisplayStyle.Flex : DisplayStyle.None;
+
+            if (state == PlayManagerState.State.GameOver)
+                m_GameOverScreenManager.schedule.Execute(() => m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus());
         }
     }
 }

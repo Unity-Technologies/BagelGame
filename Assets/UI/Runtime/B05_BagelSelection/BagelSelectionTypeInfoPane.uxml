@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPaneStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3#BagelSelectionTypeInfoPaneStyles"/>
-    <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Debug/BagelTypeDebug.asset?fileID=11400000&amp;guid=7e9fbe392dd334a439103c0fee7fa265&amp;type=2#BagelTypeDebug" class="b-pane">
+    <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Sesame/BagelTypeSesame.asset?fileID=11400000&amp;guid=4121a9b3513474a4badc7b2ccbe255c4&amp;type=2#BagelTypeSesame" class="b-pane">
         <ui:Label text="Label" name="name" class="b-title">
             <Bindings>
                 <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>

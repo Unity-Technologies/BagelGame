@@ -1,23 +1,41 @@
-using System;
-using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Bagel
 {
+    [ExecuteInEditMode]
     public class PlayManager : MonoBehaviour
     {
-        [SerializeField] GameObject m_PlaySettingsObject;
+        [SerializeField] PlayManagerState m_StartState;
         [SerializeField] PlayInputBindings m_PlayInputBindings;
 
-        PlayManagerState m_PlayManagerState = new PlayManagerState();
+        PlayManagerState m_State;
 
-        public PlayManagerState state => m_PlayManagerState;
-        public GameObject playSettingsObject => m_PlaySettingsObject;
+        // Everyone shares this runtime copy of the start state, so playing never changes the asset.
+        public PlayManagerState state
+        {
+            get
+            {
+                if (m_State == null)
+                    m_State = PlayManagerState.CreateRuntimeCopy(m_StartState);
+                return m_State;
+            }
+        }
+
+        public PlayManagerState startState => m_StartState;
         public PlayInputBindings playInputBindings => m_PlayInputBindings;
 
         void OnEnable()
         {
+            if (!Application.isPlaying)
+                return;
+
             state.GoToMainMenu();
+        }
+
+        void OnDisable()
+        {
+            PlayManagerState.DestroyRuntimeCopy(m_State);
+            m_State = null;
         }
     }
 }
