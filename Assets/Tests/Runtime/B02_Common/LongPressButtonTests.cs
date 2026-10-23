@@ -27,5 +27,24 @@ namespace Bagel.B02_Common
             simulate.FrameUpdate(button.holdTime);
             Assert.IsTrue(actioned);
         }
+
+        [Test]
+        public void LettingGoEarlyCancels()
+        {
+            bool actioned = false;
+
+            var button = new LongPressButton();
+            button.text = "Test Button";
+            button.clicked += () => actioned = true;
+            rootVisualElement.Add(button);
+            simulate.FrameUpdate();
+
+            // Let go halfway: nothing happens, even once the time is up.
+            simulate.MouseDown(button);
+            simulate.FrameUpdate(button.holdTime * 0.5f);
+            simulate.MouseUp(button);
+            simulate.FrameUpdate(button.holdTime);
+            Assert.IsFalse(actioned);
+        }
     }
 }

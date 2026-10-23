@@ -32,10 +32,10 @@
     --b-button-border-color: rgb(240, 214, 176);
     --b-button-border-width: 3px;
 
-    --b-tiny-radius: 6px;
-    --b-inner-radius: 12px;
-    --b-element-radius: 18px;
-    --b-pane-radius: 26px;
+    --b-tiny-radius: 4px;
+    --b-inner-radius: 10px;
+    --b-element-radius: 12px;
+    --b-pane-radius: 24px;
 }
 
 /* The one rule a theme needs: -unity-material can't be set from a variable. Plain buttons, no shader. */

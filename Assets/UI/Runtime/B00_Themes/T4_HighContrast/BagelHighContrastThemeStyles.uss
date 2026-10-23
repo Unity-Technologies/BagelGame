@@ -1,5 +1,5 @@
 /* High Contrast: opaque black panes, white text and borders, a thick yellow focus ring and
-   bigger titles, for players who need the UI to stand out from the 3D world.
+   bigger text, for players who need the UI to stand out from the 3D world.
    Variables, plus the one rule at the end. */
 
 :root {
@@ -26,7 +26,6 @@
     --b-card-text-color: rgb(255, 255, 255);
 
     --b-text-color: rgb(255, 255, 255);
-    --b-title-size: 44px;
     --b-main-title-size: 50px;
     --b-details-size: 13px;
     --b-glow-color: rgb(255, 214, 0);

@@ -31,7 +31,7 @@
     /* Text */
     --b-text-color: rgb(239, 239, 239);
     --b-font: url("project://database/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
-    --b-title-size: 38px;
+    --b-title-size: 34px;
     --b-main-title-size: 45px;
     --b-details-size: 10px;
 

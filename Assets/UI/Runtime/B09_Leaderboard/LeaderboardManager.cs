@@ -14,6 +14,7 @@ namespace Bagel
         public LeaderboardData leaderboardData => state?.leaderboard;
 
         bool m_Bound;
+        bool m_ColumnsReady;
 
         protected override void OnAttached()
         {
@@ -24,6 +25,15 @@ namespace Bagel
             // The page title comes from the Page template, so its binding is added here.
             BagelLocalization.Bind(this.Q<Label>("page-title"), "text", "leaderboard.title");
             UpdateColumnTitles();
+            SetUpColumns();
+        }
+
+        // Before the list gets its entries: it sorts them with the columns' comparisons.
+        void SetUpColumns()
+        {
+            if (m_ColumnsReady || leaderboardTable == null)
+                return;
+            m_ColumnsReady = true;
 
             leaderboardTable.columns["name"].makeCell = () => new Label();
             leaderboardTable.columns["toppings"].makeCell = () => new Label();
@@ -58,8 +68,11 @@ namespace Bagel
             if (newState != null)
                 newState.leaderboard.onEntryAdded += Leaderboard_OnEntryAdded;
 
-            if (leaderboardTable != null)
-                leaderboardTable.itemsSource = newState?.leaderboard.entries;
+            if (leaderboardTable == null)
+                return;
+
+            SetUpColumns();
+            leaderboardTable.itemsSource = newState?.leaderboard.entries;
         }
 
         void Leaderboard_OnEntryAdded(int dataIndex)

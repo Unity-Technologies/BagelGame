@@ -24,6 +24,10 @@ namespace Bagel
         public VisualTreeAsset settingsPaneForUIUxml;
         public VisualTreeAsset settingsPaneForControlsUxml;
 
+        [Header("5 - Bagel Selection")]
+        public VisualTreeAsset bagelSelectionControlsUxml;
+        public VisualTreeAsset bagelSelectionTypeInfoUxml;
+
         [Header("6 - Bagel Tracker")]
         public VisualTreeAsset bagelTrackerLeftDisplayUxml;
         public VisualTreeAsset bagelTrackerRightDisplayUxml;
@@ -35,5 +39,8 @@ namespace Bagel
         [Header("8 - Game Over")]
         public VisualTreeAsset gameOverScreenUxml;
         public VisualTreeAsset gameOverPaneUxml;
+
+        [Header("9 - Leaderboard")]
+        public VisualTreeAsset leaderboardPaneUxml;
     }
 }

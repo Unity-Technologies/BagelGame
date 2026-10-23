@@ -60,11 +60,19 @@
 .unity-scroller__low-button {
     width: 16px;
     height: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .unity-scroller__high-button {
     width: 16px;
     height: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .unity-scroller__slider > .unity-slider__input {
@@ -78,4 +86,10 @@
 .unity-scroller--vertical > .unity-base-slider--vertical {
     margin-top: 16px;
     margin-bottom: 16px;
+}
+
+/* Two buttons share a row: less padding, so "Leaderboard" fits. */
+#secondary-buttons-row > .unity-button {
+    padding-left: 2px;
+    padding-right: 2px;
 }
