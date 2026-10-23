@@ -5,7 +5,7 @@
             <Bindings>
                 <ui:DataBinding property="value" data-source-path="toppingsCount" binding-mode="ToTarget"/>
                 <ui:DataBinding property="highValue" data-source-path="toppingsMaxCount" binding-mode="ToTarget"/>
-                <ui:DataBinding property="title" data-source-path="toppingsCount" binding-mode="ToTarget"/>
+                <ui:DataBinding property="title" data-source-path="toppingsCount" binding-mode="ToTarget" source-to-ui-converters="b-number"/>
             </Bindings>
         </ui:ProgressBar>
     </Bagel.BagelTrackerPaneManager>

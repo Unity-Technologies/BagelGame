@@ -27,7 +27,7 @@ namespace Bagel
             leaderboardTable.columns["name"].bindCell = (VisualElement element, int index) =>
                 (element as Label).text = leaderboardData.entries[index].playerName;
             leaderboardTable.columns["toppings"].bindCell = (VisualElement element, int index) =>
-                (element as Label).text = leaderboardData.entries[index].toppings.ToString();
+                (element as Label).text = BagelConverters.FormatNumber(leaderboardData.entries[index].toppings);
 
             leaderboardTable.columns["name"].comparison = (a, b) =>
                 string.Compare(leaderboardData.entries[a].playerName, leaderboardData.entries[b].playerName, StringComparison.Ordinal);

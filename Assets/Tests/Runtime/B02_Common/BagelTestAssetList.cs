@@ -8,6 +8,7 @@ namespace Bagel
     public class BagelTestAssetList : ScriptableObject
     {
         public string mainSceneName = "Main";
+        public PlayManagerState startState;
 
         [Header("3 - Main Menu")]
         public VisualTreeAsset mainMenuUxml;

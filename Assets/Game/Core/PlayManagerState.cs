@@ -242,6 +242,37 @@ namespace Bagel
             onStateChange?.Invoke(this, state);
         }
 
+        // What a save keeps of the state, for JsonUtility.
+        [Serializable]
+        public class Saved
+        {
+            public int version = 1;
+            public float fieldOfView;
+            public int themeIndex;
+            public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
+        }
+
+        public Saved ToSaved()
+        {
+            var saved = new Saved
+            {
+                fieldOfView = m_Settings.fieldOfView,
+                themeIndex = m_Settings.themeIndex
+            };
+            saved.leaderboard.AddRange(m_Leaderboard.entries);
+            return saved;
+        }
+
+        public void Load(Saved saved)
+        {
+            if (saved == null)
+                return;
+
+            m_Settings.fieldOfView = saved.fieldOfView;
+            m_Settings.themeIndex = saved.themeIndex;
+            m_Leaderboard.Load(saved.leaderboard);
+        }
+
         // Clone a template (the start state, or a preview state) into a throwaway runtime instance.
         public static PlayManagerState CreateRuntimeCopy(PlayManagerState template)
         {
