@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.UIElements.UIToolkitProjectSettings
   m_DefaultRuntimeTheme: {fileID: 0}
   m_DefaultEditorTheme: {fileID: 0}
+  m_StyleSheetEditingPreviewDocument: {fileID: 0}
   m_DefaultRuntimeCanvasTheme: 0
   m_DefaultEditorCanvasTheme: 0
   m_ConsistentAttributeOrderingWhenExporting: 0
+  m_EnableLegacyThemePriority: 0
+  m_ThemePriorityNoticeVersion: 1
   m_EnableLowLevelDebugger: 1
-  m_EnablePanelRendererAnimation: 1
+  m_EnableUIComponents: 0
+  m_EnableGridLayout: 0

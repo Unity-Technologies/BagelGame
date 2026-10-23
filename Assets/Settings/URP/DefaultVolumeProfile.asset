@@ -22,6 +22,12 @@ MonoBehaviour:
   acesPreset:
     m_OverrideState: 1
     m_Value: 3
+  agxContrast:
+    m_OverrideState: 0
+    m_Value: 1.193
+  agxMidGrey:
+    m_OverrideState: 0
+    m_Value: 0.18
   hueShiftAmount:
     m_OverrideState: 1
     m_Value: 0
@@ -173,7 +179,7 @@ MonoBehaviour:
   resolution:
     m_OverrideState: 1
     m_Value: 4
-  chromaticAbberationIntensity:
+  chromaticAberrationIntensity:
     m_OverrideState: 1
     m_Value: 0.5
 --- !u!114 &-5033486976938412211
@@ -230,6 +236,85 @@ MonoBehaviour:
   contribution:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-2712367054640713149
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5182da28fcdc1ac41a47126f0d404cf8, type: 3}
+  m_Name: ScreenSpaceAmbientOcclusionVolumeOverride
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ScreenSpaceAmbientOcclusionVolumeOverride
+  active: 1
+  m_Mode:
+    m_OverrideState: 1
+    m_Value: 0
+  m_Quality:
+    m_OverrideState: 1
+    m_Value: 3
+  m_Intensity:
+    m_OverrideState: 1
+    m_Value: 1.05
+  m_Radius:
+    m_OverrideState: 1
+    m_Value: 0.24
+  m_DirectLightingStrength:
+    m_OverrideState: 1
+    m_Value: 0.312
+  m_FalloffDistance:
+    m_OverrideState: 1
+    m_Value: 100
+  m_SampleCount:
+    m_OverrideState: 1
+    m_Value: 1
+  m_Downsample:
+    m_OverrideState: 1
+    m_Value: 0
+  m_AfterOpaque:
+    m_OverrideState: 1
+    m_Value: 0
+  m_BlurQuality:
+    m_OverrideState: 1
+    m_Value: 2
+  m_Method:
+    m_OverrideState: 1
+    m_Value: 1
+  m_DepthSource:
+    m_OverrideState: 1
+    m_Value: 1
+  m_NormalQuality:
+    m_OverrideState: 1
+    m_Value: 1
+  m_MinimumRadiusInPixels:
+    m_OverrideState: 1
+    m_Value: 40
+  m_UseComputeShader:
+    m_OverrideState: 1
+    m_Value: 0
+  m_SpatialFilter:
+    m_OverrideState: 1
+    m_Value: 0
+  m_DepthSampling:
+    m_OverrideState: 1
+    m_Value: 0
+  m_TemporalFilter:
+    m_OverrideState: 1
+    m_Value: 0
+  m_GhostingMitigation:
+    m_OverrideState: 1
+    m_Value: 0.5
+  m_HistoryLength:
+    m_OverrideState: 1
+    m_Value: 0.9
+  m_DirectionCount:
+    m_OverrideState: 1
+    m_Value: 2
+  m_StepCount:
+    m_OverrideState: 1
+    m_Value: 4
 --- !u!114 &-2500249398163123027
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -377,6 +462,7 @@ MonoBehaviour:
   - {fileID: -8349154361395876042}
   - {fileID: -5084685127220739635}
   - {fileID: 6326349430387282224}
+  - {fileID: -2712367054640713149}
 --- !u!114 &184055029249326055
 MonoBehaviour:
   m_ObjectHideFlags: 3

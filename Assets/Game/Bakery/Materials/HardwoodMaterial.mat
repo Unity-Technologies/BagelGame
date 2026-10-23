@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
-  version: 10
+  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -26,7 +26,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 10
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -65,15 +65,19 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Color_Variation: 0.2
+    - _Mortar_Width: 0
     - _OcclusionStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ScreenSpaceReflections: 1
+    - _ScreenSpaceReflectionsContributeTransparent: 1
     - _Smoothness: 0.5
     - _Stagger: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Brick_Color_A: {r: 0.9058824, g: 0.7803922, b: 0.61960787, a: 1}
     - _Brick_Color_B: {r: 0.7803922, g: 0.6431373, b: 0.48627454, a: 1}
+    - _Mortar_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Tiling: {r: 2.4, g: 31.92, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
