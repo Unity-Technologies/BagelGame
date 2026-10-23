@@ -250,6 +250,8 @@ namespace Bagel
             public int version = 1;
             public float fieldOfView;
             public int themeIndex;
+            public bool reduceMotion;
+            public bool visualEffects = true;
             public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
         }
 
@@ -258,7 +260,9 @@ namespace Bagel
             var saved = new Saved
             {
                 fieldOfView = m_Settings.fieldOfView,
-                themeIndex = m_Settings.themeIndex
+                themeIndex = m_Settings.themeIndex,
+                reduceMotion = m_Settings.reduceMotion,
+                visualEffects = m_Settings.visualEffects
             };
             saved.leaderboard.AddRange(m_Leaderboard.entries);
             return saved;
@@ -271,6 +275,8 @@ namespace Bagel
 
             m_Settings.fieldOfView = saved.fieldOfView;
             m_Settings.themeIndex = saved.themeIndex;
+            m_Settings.reduceMotion = saved.reduceMotion;
+            m_Settings.visualEffects = saved.visualEffects;
             m_Leaderboard.Load(saved.leaderboard);
         }
 

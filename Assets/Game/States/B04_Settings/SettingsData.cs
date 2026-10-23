@@ -10,6 +10,8 @@ namespace Bagel
     {
         public static readonly BindingId fieldOfViewPath = Path(nameof(fieldOfView));
         public static readonly BindingId themeIndexPath = Path(nameof(themeIndex));
+        public static readonly BindingId reduceMotionPath = Path(nameof(reduceMotion));
+        public static readonly BindingId visualEffectsPath = Path(nameof(visualEffects));
 
         static BindingId Path(string property) => new BindingId(nameof(PlayManagerState.settings) + "." + property);
 
@@ -17,6 +19,8 @@ namespace Bagel
         [SerializeField] float m_FieldOfViewMax = 80.0f;
         [SerializeField] float m_FieldOfView = 60.0f;
         [SerializeField] int m_ThemeIndex;
+        [SerializeField] bool m_ReduceMotion;
+        [SerializeField] bool m_VisualEffects = true;
 
         [NonSerialized] PlayManagerState m_Owner;
 
@@ -48,6 +52,34 @@ namespace Bagel
                     return;
                 m_ThemeIndex = value;
                 Notify(themeIndexPath);
+            }
+        }
+
+        // Turns off transitions and UI animations.
+        [CreateProperty]
+        public bool reduceMotion
+        {
+            get => m_ReduceMotion;
+            set
+            {
+                if (m_ReduceMotion == value)
+                    return;
+                m_ReduceMotion = value;
+                Notify(reduceMotionPath);
+            }
+        }
+
+        // Blurs and drop shadows: the most expensive things the UI draws.
+        [CreateProperty]
+        public bool visualEffects
+        {
+            get => m_VisualEffects;
+            set
+            {
+                if (m_VisualEffects == value)
+                    return;
+                m_VisualEffects = value;
+                Notify(visualEffectsPath);
             }
         }
 

@@ -9,23 +9,27 @@
             <Bindings>
                 <loc:LocalizedString property="text" table="BagelStrings" entry="menu.play"/>
             </Bindings>
+            <Bagel.PressSquish/>
         </ui:Button>
         <ui:VisualElement name="secondary-buttons-row" style="flex-direction: row;">
             <ui:Button text="Settings" name="settings-button" style="flex-grow: 1; flex-basis: 0;">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="menu.settings"/>
                 </Bindings>
+                <Bagel.PressSquish/>
             </ui:Button>
             <ui:Button text="Leaderboard" name="leaderboard-button" style="flex-grow: 1; flex-basis: 0;">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="menu.leaderboard"/>
                 </Bindings>
+                <Bagel.PressSquish/>
             </ui:Button>
         </ui:VisualElement>
         <ui:Button text="Exit" name="exit-button">
             <Bindings>
                 <loc:LocalizedString property="text" table="BagelStrings" entry="menu.exit"/>
             </Bindings>
+            <Bagel.PressSquish/>
         </ui:Button>
     </Bagel.MainMenuPaneManager>
 </ui:UXML>

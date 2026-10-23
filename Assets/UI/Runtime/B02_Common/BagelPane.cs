@@ -10,6 +10,10 @@ namespace Bagel
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class BagelPane : VisualElement
     {
+        // Set on the top pane from the settings; the common styles turn things off under them.
+        public static readonly UniqueStyleString reduceMotionUssClassName = new UniqueStyleString("b-reduce-motion");
+        public static readonly UniqueStyleString noVisualEffectsUssClassName = new UniqueStyleString("b-no-visual-effects");
+
         PlayManagerState m_State;
         PlayManagerState m_GivenState;
         PlayManagerState m_OwnedState;
@@ -103,6 +107,7 @@ namespace Bagel
             if (m_ParentPane == null && (dataSource == null || dataSource is PlayManagerState))
                 dataSource = m_State;
 
+            ApplyDisplaySettings();
             OnStateChanged(oldState, m_State);
             stateChanged?.Invoke(m_State);
         }
@@ -116,7 +121,21 @@ namespace Bagel
             m_OwnedState = null;
         }
 
-        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args) => OnStatePropertyChanged(args.propertyName);
+        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
+        {
+            var property = args.propertyName;
+            if (property == SettingsData.reduceMotionPath || property == SettingsData.visualEffectsPath)
+                ApplyDisplaySettings();
+
+            OnStatePropertyChanged(property);
+        }
+
+        void ApplyDisplaySettings()
+        {
+            var isTopPane = m_ParentPane == null && m_State != null;
+            EnableInClassList(reduceMotionUssClassName, isTopPane && m_State.settings.reduceMotion);
+            EnableInClassList(noVisualEffectsUssClassName, isTopPane && !m_State.settings.visualEffects);
+        }
 
         // Called after the pane is attached and has a state.
         protected virtual void OnAttached() {}

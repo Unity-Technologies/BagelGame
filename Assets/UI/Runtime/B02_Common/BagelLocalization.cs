@@ -15,9 +15,19 @@ namespace Bagel
     {
         public const string table = "BagelStrings";
 
-        static bool s_Subscribed;
+        static Action s_LocaleChanged;
 
-        public static event Action localeChanged;
+        // Play mode and the localization module clear the module's events, so every new listener
+        // subscribes again (it's the same static handler, so it's never there twice).
+        public static event Action localeChanged
+        {
+            add
+            {
+                s_LocaleChanged += value;
+                Subscribe();
+            }
+            remove => s_LocaleChanged -= value;
+        }
 
         public static string localeCode => LocalizationSettings.SelectedLocale?.Code ?? "en";
 
@@ -70,36 +80,24 @@ namespace Bagel
                 LocalizationSettings.SelectedLocale = locale;
         }
 
-        // Play mode clears the localization events, so subscribe again for every session.
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void ResetStatics()
-        {
-            s_Subscribed = false;
-            Subscribe();
-        }
+        static void ResetStatics() => Subscribe();
 
 #if UNITY_EDITOR
         [UnityEditor.InitializeOnLoadMethod]
         static void SubscribeInEditMode()
         {
             Subscribe();
-            UnityEditor.EditorApplication.playModeStateChanged += change =>
-            {
-                if (change != UnityEditor.PlayModeStateChange.EnteredEditMode)
-                    return;
-                s_Subscribed = false;
-                Subscribe();
-            };
+            UnityEditor.EditorApplication.playModeStateChanged += _ => Subscribe();
         }
 #endif
 
         static void Subscribe()
         {
-            if (s_Subscribed)
-                return;
-            s_Subscribed = true;
-
-            LocalizationSettings.SelectedLocaleChanged += _ => localeChanged?.Invoke();
+            LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_OnSelectedLocaleChanged;
+            LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_OnSelectedLocaleChanged;
         }
+
+        static void LocalizationSettings_OnSelectedLocaleChanged(Locale locale) => s_LocaleChanged?.Invoke();
     }
 }

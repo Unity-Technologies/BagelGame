@@ -21,5 +21,5 @@ MonoBehaviour:
   m_EnableLegacyThemePriority: 0
   m_ThemePriorityNoticeVersion: 1
   m_EnableLowLevelDebugger: 1
-  m_EnableUIComponents: 0
+  m_EnableUIComponents: 1
   m_EnableGridLayout: 0

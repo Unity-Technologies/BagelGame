@@ -387,6 +387,34 @@
     background-color: var(--b-primary-color-faded);
 }
 
+.unity-toggle {
+    flex-direction: row;
+    align-items: center;
+}
+
+.unity-toggle__checkmark {
+    width: 22px;
+    height: 22px;
+    background-color: var(--b-input-color);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-color: var(--b-button-border-color);
+    border-right-color: var(--b-button-border-color);
+    border-bottom-color: var(--b-button-border-color);
+    border-left-color: var(--b-button-border-color);
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+    -unity-background-image-tint-color: var(--b-text-color);
+}
+
+.unity-toggle:checked .unity-toggle__checkmark {
+    background-color: var(--b-primary-color);
+}
+
 /* Focus: gamepad and keyboard players need to see where they are. */
 
 .unity-button:focus,
@@ -420,6 +448,7 @@
     border-left-color: var(--b-focus-color);
 }
 
+.unity-toggle:focus .unity-toggle__checkmark,
 .unity-tab__header:focus,
 .unity-collection-view:focus,
 .b-focus-frame:focus {
@@ -431,4 +460,26 @@
     border-right-color: var(--b-focus-color);
     border-bottom-color: var(--b-focus-color);
     border-left-color: var(--b-focus-color);
+}
+
+/* Settings > Reduce Motion and Visual Effects set these classes on each screen's root.
+   Blurs and drop shadows are the most expensive things the UI draws. */
+
+.b-reduce-motion .unity-button,
+.b-reduce-motion .b-pane,
+.b-reduce-motion .unity-base-slider__dragger {
+    transition-duration: 0s;
+}
+
+.b-reduce-motion .b-title-box:hover {
+    -unity-animation-clip: none;
+}
+
+.b-no-visual-effects .unity-button:enabled:hover,
+.b-no-visual-effects .b-pane:disabled {
+    filter: none;
+}
+
+.b-no-visual-effects .b-pane {
+    backdrop-filter: none;
 }

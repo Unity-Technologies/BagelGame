@@ -8,11 +8,13 @@
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="pause.resume"/>
                 </Bindings>
+                <Bagel.PressSquish/>
             </ui:Button>
             <ui:Button text="Settings" name="settings-button">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="menu.settings"/>
                 </Bindings>
+                <Bagel.PressSquish/>
             </ui:Button>
             <Bagel.LongPressButton name="restart-button" text="Restart">
                 <Bindings>

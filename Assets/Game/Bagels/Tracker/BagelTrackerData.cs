@@ -9,7 +9,7 @@ namespace Bagel
     public class BagelTrackerData
     {
         static readonly BindingId k_ConstantsPath = Path(nameof(constants));
-        static readonly BindingId k_ToppingsCountPath = Path(nameof(toppingsCount));
+        public static readonly BindingId toppingsCountPath = Path(nameof(toppingsCount));
         static readonly BindingId k_ToppingsMaxCountPath = Path(nameof(toppingsMaxCount));
         static readonly BindingId k_InputPath = Path(nameof(input));
         static readonly BindingId k_SpeedPath = Path(nameof(speed));
@@ -39,7 +39,7 @@ namespace Bagel
         public int toppingsCount
         {
             get => m_ToppingsCount;
-            set { if (m_ToppingsCount == value) return; m_ToppingsCount = value; Notify(k_ToppingsCountPath); }
+            set { if (m_ToppingsCount == value) return; m_ToppingsCount = value; Notify(toppingsCountPath); }
         }
 
         [CreateProperty]

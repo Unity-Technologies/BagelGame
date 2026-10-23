@@ -38,6 +38,9 @@ namespace Bagel
 
             m_Pane = rootElement.Q<VisualElement>("pane");
             m_Pane.dataSource = null;
+
+            // Nothing on the card is interactive: never pick it, which saves raycasts against world-space panels.
+            rootElement.Query().ForEach(element => element.pickingMode = PickingMode.Ignore);
         }
             
         void BagelSelectionPodium_OnBagelTypeChange(object sender, BagelType bagelType)

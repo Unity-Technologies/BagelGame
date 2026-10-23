@@ -57,6 +57,8 @@ MonoBehaviour:
   - rid: 6326339759238545606
   - rid: 6326339759238545607
   - rid: 6326339759238545608
+  - rid: 6326339759238545616
+  - rid: 6326339759238545617
   references:
     version: 2
     RefIds:
@@ -340,3 +342,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "{toppings:cond:>0?Votre bagel {bagel} a gard\xE9 {toppings:plural:1 garniture|{} garnitures} !|Votre bagel {bagel} a perdu toutes ses garnitures.}"
+    - rid: 6326339759238545616
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106672541696
+        m_Metadata:
+          m_Items: []
+        m_Value: "R\xE9duire les animations"
+    - rid: 6326339759238545617
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106676736000
+        m_Metadata:
+          m_Items: []
+        m_Value: Effets visuels

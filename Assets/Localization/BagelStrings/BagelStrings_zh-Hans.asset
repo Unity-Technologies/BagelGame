@@ -57,6 +57,8 @@ MonoBehaviour:
   - rid: 6326339764369490050
   - rid: 6326339764369490051
   - rid: 6326339764369490052
+  - rid: 6326339764369490053
+  - rid: 6326339764369490054
   references:
     version: 2
     RefIds:
@@ -340,3 +342,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "{toppings:cond:>0?\u4F60\u7684{bagel}\u8D1D\u679C\u4FDD\u4F4F\u4E86{toppings}\u4EFD\u914D\u6599\uFF01|\u4F60\u7684{bagel}\u8D1D\u679C\u7684\u914D\u6599\u5168\u6389\u5149\u4E86\u3002}"
+    - rid: 6326339764369490053
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106672541696
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u51CF\u5C11\u52A8\u6001\u6548\u679C"
+    - rid: 6326339764369490054
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106676736000
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u89C6\u89C9\u6548\u679C"

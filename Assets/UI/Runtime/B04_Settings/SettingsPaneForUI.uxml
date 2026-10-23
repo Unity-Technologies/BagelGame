@@ -11,5 +11,17 @@
                 <loc:LocalizedString property="label" table="BagelStrings" entry="settings.language"/>
             </Bindings>
         </locui:LanguageDropdown>
+        <ui:Toggle label="Reduce Motion" name="reduce-motion-toggle">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.reduce-motion"/>
+                <ui:DataBinding property="value" data-source-path="settings.reduceMotion" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:Toggle>
+        <ui:Toggle label="Visual Effects" name="visual-effects-toggle">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.visual-effects"/>
+                <ui:DataBinding property="value" data-source-path="settings.visualEffects" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:Toggle>
     </Bagel.SettingsPaneManagerForUI>
 </ui:UXML>

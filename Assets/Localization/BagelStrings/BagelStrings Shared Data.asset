@@ -217,6 +217,16 @@ MonoBehaviour:
     m_Flags: 1
     m_Metadata:
       m_Items: []
+  - m_Id: 3106672541696
+    m_Key: settings.reduce-motion
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3106676736000
+    m_Key: settings.visual-effects
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

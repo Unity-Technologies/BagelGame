@@ -76,17 +76,17 @@ MonoBehaviour:
       type: {class: ReferencedAssetProvider, ns: Unity.Localization.Providers, asm: UnityEngine.LocalizationRuntimeModule}
       data:
         m_ByAddress:
-        - key: BagelStrings_en
-          value: {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
         - key: 97c5b3afd46697442ab860288765cd9a_en
           value: {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
-        - key: BagelStrings_fr
-          value: {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
+        - key: BagelStrings_en
+          value: {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
         - key: 97c5b3afd46697442ab860288765cd9a_fr
           value: {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
-        - key: BagelStrings_zh-Hans
-          value: {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
+        - key: BagelStrings_fr
+          value: {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
         - key: 97c5b3afd46697442ab860288765cd9a_zh-Hans
+          value: {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
+        - key: BagelStrings_zh-Hans
           value: {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
         m_OwnedAddresses:
         - BagelStrings_en

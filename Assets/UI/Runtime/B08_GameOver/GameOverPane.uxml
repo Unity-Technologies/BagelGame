@@ -27,6 +27,7 @@
                     <Bindings>
                         <loc:LocalizedString property="text" table="BagelStrings" entry="gameover.add"/>
                     </Bindings>
+                    <Bagel.PressSquish/>
                 </ui:Button>
             </ui:VisualElement>
             <ui:VisualElement name="bottom-container" style="flex-grow: 1; justify-content: flex-end;">
@@ -34,11 +35,13 @@
                     <Bindings>
                         <loc:LocalizedString property="text" table="BagelStrings" entry="common.restart"/>
                     </Bindings>
+                    <Bagel.PressSquish/>
                 </ui:Button>
                 <ui:Button text="Main Menu" name="main-menu-button" class="b-primary">
                     <Bindings>
                         <loc:LocalizedString property="text" table="BagelStrings" entry="common.main-menu"/>
                     </Bindings>
+                    <Bagel.PressSquish/>
                 </ui:Button>
             </ui:VisualElement>
         </ui:Instance>

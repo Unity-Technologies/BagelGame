@@ -57,6 +57,8 @@ MonoBehaviour:
   - rid: 6326339759238545566
   - rid: 6326339759238545567
   - rid: 6326339759238545568
+  - rid: 6326339759238545614
+  - rid: 6326339759238545615
   references:
     version: 2
     RefIds:
@@ -340,3 +342,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: '{toppings:cond:>0?Your {bagel} bagel kept {toppings:plural:1 topping|{} toppings}!|Your {bagel} bagel lost every topping.}'
+    - rid: 6326339759238545614
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106672541696
+        m_Metadata:
+          m_Items: []
+        m_Value: Reduce Motion
+    - rid: 6326339759238545615
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 3106676736000
+        m_Metadata:
+          m_Items: []
+        m_Value: Visual Effects

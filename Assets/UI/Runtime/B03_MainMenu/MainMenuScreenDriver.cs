@@ -106,7 +106,7 @@ namespace Bagel
         void PlayIntroAnimation()
         {
             var animation = GetComponent<Animation>();
-            if (animation == null)
+            if (animation == null || m_State.settings.reduceMotion)
                 return;
 
             animation.Rewind();
