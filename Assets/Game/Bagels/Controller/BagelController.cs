@@ -10,6 +10,7 @@ namespace Bagel
 
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] Transform m_StartingLocation;
+        [SerializeField] float m_FallLimit = 10.0f;
 
         PlayManagerState m_State;
         Rigidbody m_RigidBody;
@@ -31,6 +32,7 @@ namespace Bagel
         public float currentSpin => m_CurrentSpin;
 
         public event EventHandler onToasterHit;
+        public event EventHandler onFellOff;
         public event EventHandler<float> onImpact;
 
         public Vector3 GetAbsoluteRight()
@@ -142,6 +144,17 @@ namespace Bagel
             HandleMovement();
             HandleToppingLoss();
             TiltUpright();
+            HandleFalling();
+        }
+
+        // Off the edge of the level: the run is over, toppings and all.
+        void HandleFalling()
+        {
+            if (transform.position.y > m_StartingLocation.position.y - m_FallLimit)
+                return;
+
+            m_CurrentToppingCount = 0;
+            onFellOff?.Invoke(this, EventArgs.Empty);
         }
 
         void OnDrawGizmos()

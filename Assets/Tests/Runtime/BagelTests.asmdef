@@ -4,6 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "Unity.UI.TestFramework.Runtime",
+        "Unity.InputSystem",
         "BagelGame",
         "BagelUI"
     ],

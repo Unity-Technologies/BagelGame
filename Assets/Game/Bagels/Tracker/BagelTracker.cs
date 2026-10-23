@@ -17,12 +17,14 @@ namespace Bagel
         {
             m_State = m_PlayManager.state;
             m_State.tracker.constants = m_BagelTrackerConstants;
-            m_BagelController.onToasterHit += BagelController_OnToasterHit;
+            m_BagelController.onToasterHit += BagelController_OnRunEnded;
+            m_BagelController.onFellOff += BagelController_OnRunEnded;
         }
 
         void OnDestroy()
         {
-            m_BagelController.onToasterHit -= BagelController_OnToasterHit;
+            m_BagelController.onToasterHit -= BagelController_OnRunEnded;
+            m_BagelController.onFellOff -= BagelController_OnRunEnded;
         }
 
         void Update()
@@ -54,7 +56,8 @@ namespace Bagel
             tracker.spin = Mathf.Ceil(m_BagelController.currentSpin);
         }
 
-        void BagelController_OnToasterHit(object sender, EventArgs e)
+        // Either way the run ends: at the toaster, or off the edge with no toppings left.
+        void BagelController_OnRunEnded(object sender, EventArgs e)
         {
             if (!m_State.isPlaying)
                 return;

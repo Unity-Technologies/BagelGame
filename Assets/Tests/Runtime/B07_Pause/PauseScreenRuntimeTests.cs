@@ -30,6 +30,14 @@ namespace Bagel.B07_Pause
             SetPanelRenderer(panelRenderer);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            // Leave the game running for the next test.
+            m_PlayManager.state.GoToMainMenu();
+            Time.timeScale = 1f;
+        }
+
         [UnityTest]
         public IEnumerator GoToSettingsInPauseMenu()
         {
