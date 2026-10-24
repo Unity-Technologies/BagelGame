@@ -8,5 +8,18 @@
                 <ui:DataBinding property="value" data-source-path="settings.fieldOfView" binding-mode="TwoWay"/>
             </Bindings>
         </ui:Slider>
+        <ui:Toggle label="Sound" name="sound-toggle">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.sound"/>
+                <ui:DataBinding property="value" data-source-path="settings.sound" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:Toggle>
+        <ui:Slider label="Volume" name="volume-slider" low-value="0" high-value="1" value="0.8">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.volume"/>
+                <ui:DataBinding property="value" data-source-path="settings.soundVolume" binding-mode="TwoWay"/>
+                <ui:DataBinding property="enabledSelf" data-source-path="settings.sound" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Slider>
     </Bagel.SettingsPaneManagerForGame>
 </ui:UXML>

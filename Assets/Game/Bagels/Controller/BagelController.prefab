@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1255819574640045139}
   - component: {fileID: 2603147718558657600}
   - component: {fileID: 828173744507009318}
+  - component: {fileID: 2538649936032641758}
   m_Layer: 0
   m_Name: BagelController
   m_TagString: Untagged
@@ -172,3 +173,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5797865524984118446, guid: 82ecbbc9119be8e4ab887406cb5de5c4, type: 3}
   m_PrefabInstance: {fileID: 4259687851263306488}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2538649936032641758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9040463455907671234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f122273a8e7ed3043b183317a008c7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelSounds
+  m_QuietRollSpeed: 0.3
+  m_FullRollSpeed: 12
+  m_ImpactThreshold: 1.5
+  m_FullImpact: 8
+  m_ImpactInterval: 0.12
+  m_SprinkleToppings: 3
+  m_SprinkleInterval: 0.2

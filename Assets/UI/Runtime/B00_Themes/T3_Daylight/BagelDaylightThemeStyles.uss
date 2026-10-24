@@ -2,6 +2,8 @@
    Variables, plus the one rule at the end. */
 
 :root {
+    --b-sound-tone: bell;
+
     --b-pane-color: rgba(255, 248, 234, 0.9);
     --b-board-pane-color: rgba(255, 248, 234, 0.9);
     --b-sub-pane-color: rgba(246, 228, 198, 0.9);

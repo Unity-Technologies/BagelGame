@@ -252,6 +252,8 @@ namespace Bagel
             public int themeIndex;
             public bool reduceMotion;
             public bool visualEffects = true;
+            public bool sound = true;
+            public float soundVolume = 0.8f;
             public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
         }
 
@@ -262,7 +264,9 @@ namespace Bagel
                 fieldOfView = m_Settings.fieldOfView,
                 themeIndex = m_Settings.themeIndex,
                 reduceMotion = m_Settings.reduceMotion,
-                visualEffects = m_Settings.visualEffects
+                visualEffects = m_Settings.visualEffects,
+                sound = m_Settings.sound,
+                soundVolume = m_Settings.soundVolume
             };
             saved.leaderboard.AddRange(m_Leaderboard.entries);
             return saved;
@@ -277,6 +281,8 @@ namespace Bagel
             m_Settings.themeIndex = saved.themeIndex;
             m_Settings.reduceMotion = saved.reduceMotion;
             m_Settings.visualEffects = saved.visualEffects;
+            m_Settings.sound = saved.sound;
+            m_Settings.soundVolume = saved.soundVolume;
             m_Leaderboard.Load(saved.leaderboard);
         }
 

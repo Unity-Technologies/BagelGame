@@ -109,9 +109,12 @@ namespace Bagel
         }
 
         // Completes the press at once, for screen readers, which can't hold.
-        public void Activate()
+        public void Activate() => Complete();
+
+        void Complete()
         {
             CancelHold();
+            BagelSound.Play(this, "confirm");
             clicked?.Invoke();
         }
 
@@ -142,8 +145,7 @@ namespace Bagel
             if (m_HoldCurrentTime < m_HoldMaxTime)
                 return;
 
-            CancelHold();
-            clicked?.Invoke();
+            Complete();
         }
 
         void ArmInput()
@@ -189,10 +191,7 @@ namespace Bagel
         void OnActionPerformed(InputAction.CallbackContext ctx)
         {
             if (ctx.interaction is HoldInteraction)
-            {
-                CancelHold();
-                clicked?.Invoke();
-            }
+                Complete();
         }
     }
 }

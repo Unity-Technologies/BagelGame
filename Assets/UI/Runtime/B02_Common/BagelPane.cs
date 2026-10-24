@@ -53,6 +53,10 @@ namespace Bagel
 
             if (m_ParentPane == null && !UnityEngine.Application.isPlaying)
                 BagelThemes.AddPreviewRoot(this);
+
+            // A screen's top pane plays what's pressed in it.
+            if (m_ParentPane == null)
+                BagelSound.Listen(this);
         }
 
         void OnDetachFromPanel(DetachFromPanelEvent evt)

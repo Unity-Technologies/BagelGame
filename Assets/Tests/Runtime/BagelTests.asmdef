@@ -6,6 +6,7 @@
         "Unity.UI.TestFramework.Runtime",
         "Unity.InputSystem",
         "BagelGame",
+        "BagelAudio",
         "BagelUI"
     ],
     "includePlatforms": [],

@@ -12,6 +12,8 @@ namespace Bagel
         public static readonly BindingId themeIndexPath = Path(nameof(themeIndex));
         public static readonly BindingId reduceMotionPath = Path(nameof(reduceMotion));
         public static readonly BindingId visualEffectsPath = Path(nameof(visualEffects));
+        public static readonly BindingId soundPath = Path(nameof(sound));
+        public static readonly BindingId soundVolumePath = Path(nameof(soundVolume));
 
         static BindingId Path(string property) => new BindingId(nameof(PlayManagerState.settings) + "." + property);
 
@@ -21,6 +23,8 @@ namespace Bagel
         [SerializeField] int m_ThemeIndex;
         [SerializeField] bool m_ReduceMotion;
         [SerializeField] bool m_VisualEffects = true;
+        [SerializeField] bool m_Sound = true;
+        [SerializeField, Range(0f, 1f)] float m_SoundVolume = 0.8f;
 
         [NonSerialized] PlayManagerState m_Owner;
 
@@ -80,6 +84,33 @@ namespace Bagel
                     return;
                 m_VisualEffects = value;
                 Notify(visualEffectsPath);
+            }
+        }
+
+        [CreateProperty]
+        public bool sound
+        {
+            get => m_Sound;
+            set
+            {
+                if (m_Sound == value)
+                    return;
+                m_Sound = value;
+                Notify(soundPath);
+            }
+        }
+
+        [CreateProperty]
+        public float soundVolume
+        {
+            get => m_SoundVolume;
+            set
+            {
+                value = Mathf.Clamp01(value);
+                if (m_SoundVolume == value)
+                    return;
+                m_SoundVolume = value;
+                Notify(soundVolumePath);
             }
         }
 

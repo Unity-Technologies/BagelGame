@@ -23,6 +23,10 @@ namespace Bagel
         float m_CurrentSpeed;
         float m_CurrentForce;
         float m_CurrentSpin;
+        float m_LastTouchTime = float.NegativeInfinity;
+
+        // A rolling bagel hops off the ground for a moment now and then: it's still rolling.
+        const float k_GroundedGrace = 0.1f;
 
         public BagelType bagelType => m_BagelType;
         public int currentToppingCount => Mathf.CeilToInt(m_CurrentToppingCount);
@@ -30,6 +34,11 @@ namespace Bagel
         public float currentSpeed => m_CurrentSpeed;
         public float currentForce => m_CurrentForce;
         public float currentSpin => m_CurrentSpin;
+
+        // Whether it's touching something, and how rough that is: 0 for ice, 1 for ground with the bagel's
+        // own grip.
+        public bool isGrounded => Time.fixedTime - m_LastTouchTime <= k_GroundedGrace;
+        public float groundRoughness { get; private set; }
 
         public event EventHandler onToasterHit;
         public event EventHandler onFellOff;
@@ -229,6 +238,10 @@ namespace Bagel
 
             m_CurrentForce = Mathf.Max(m_CurrentForce, shockGs);
             onImpact?.Invoke(this, shockGs);
+
+            var ground = collision.collider.sharedMaterial;
+            m_LastTouchTime = Time.fixedTime;
+            groundRoughness = ground != null ? Mathf.InverseLerp(0.05f, m_PhysicsMaterial.dynamicFriction, ground.dynamicFriction) : 1f;
         }
 
         // How hard a contact hit, in g, along its normal and without the 1 g of resting on the ground.

@@ -2,6 +2,7 @@
     "name": "BagelUI",
     "rootNamespace": "Bagel",
     "references": [
+        "GUID:824517e3c15647dd83262aa98bb519c5",
         "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:edd8b9dc0d9f9844a915744df63623e5"
     ],

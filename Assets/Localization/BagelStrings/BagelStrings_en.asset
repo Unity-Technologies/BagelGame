@@ -68,6 +68,8 @@ MonoBehaviour:
   - rid: 6326339759238545633
   - rid: 6326339759238545634
   - rid: 6326339759238545635
+  - rid: 6326339760839721046
+  - rid: 6326339760839721047
   references:
     version: 2
     RefIds:
@@ -428,3 +430,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Reset Controls
+    - rid: 6326339760839721046
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 25731939500032
+        m_Metadata:
+          m_Items: []
+        m_Value: Sound
+    - rid: 6326339760839721047
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 25731947888640
+        m_Metadata:
+          m_Items: []
+        m_Value: Volume

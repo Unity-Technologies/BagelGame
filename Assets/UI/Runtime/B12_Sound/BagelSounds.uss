@@ -1,0 +1,56 @@
+/* Bagel Game: what everything sounds like.
+
+   The code only says what happened to an element: it was pressed, a long press went all the way, the
+   focus moved onto it. These custom properties say what that sounds like, so every sound can be changed
+   here, live, without code:
+     --b-sound: pop;              pressing the element (none: silent)
+     --b-sound-<cue>: confirm;    an event (confirm, focus, disabled)
+     --b-sound-pitch: 4;          semitones up
+     --b-sound-tone: wood;        the melodic sounds' instrument: wood, pluck, glass or bell (each theme sets one)
+   The names are patches in Assets/Audio/BagelSoundLibrary.cs, synthesized live by BagelSynth: there are
+   no audio files. The game's own sounds (rolling, impacts, the toaster) are in GameSounds and BagelSounds.
+   Custom properties aren't inherited, so BagelSound walks up from the element: :root holds the defaults. */
+
+:root {
+    --b-sound-tone: wood;
+    --b-sound-focus: tick;            /* a gamepad or keyboard moving the focus */
+    --b-sound-disabled: nope;         /* pressing something disabled */
+    --b-sound-confirm: confirm;       /* a long press that went all the way */
+}
+
+/* Variables reach every element, custom properties only the ones they're declared on: this hands the
+   theme's tone to each screen, which tells the game (BagelSound.screenUssClassName). */
+.b-sound-screen {
+    --b-sound-screen-tone: var(--b-sound-tone);
+}
+
+/* ------------------------------------------------------------------ Presses */
+
+.unity-button {
+    --b-sound: pop;
+}
+
+.unity-toggle,
+.unity-base-popup-field,
+.unity-tab__header {
+    --b-sound: click;
+}
+
+#back-button,
+#exit-button {
+    --b-sound: back;
+}
+
+/* The selection arrows play a step apart. */
+#left-button { --b-sound-pitch: -2; }
+#right-button { --b-sound-pitch: 2; }
+
+/* Their action makes its own sound: pausing, resuming, the leaderboard's register, and long presses
+   (confirm, once they go all the way). */
+#pause-button,
+#gamepad-pause-button,
+#resume-button,
+#add-to-leaderboard-button,
+.b-long-press-button {
+    --b-sound: none;
+}

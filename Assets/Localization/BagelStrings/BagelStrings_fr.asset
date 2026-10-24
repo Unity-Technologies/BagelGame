@@ -68,6 +68,8 @@ MonoBehaviour:
   - rid: 6326339759238545642
   - rid: 6326339759238545643
   - rid: 6326339759238545644
+  - rid: 6326339760839721048
+  - rid: 6326339760839721049
   references:
     version: 2
     RefIds:
@@ -428,3 +430,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "R\xE9initialiser"
+    - rid: 6326339760839721048
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 25731939500032
+        m_Metadata:
+          m_Items: []
+        m_Value: Son
+    - rid: 6326339760839721049
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 25731947888640
+        m_Metadata:
+          m_Items: []
+        m_Value: Volume

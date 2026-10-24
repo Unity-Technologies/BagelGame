@@ -3,6 +3,8 @@
    Variables, plus the one rule at the end. */
 
 :root {
+    --b-sound-tone: glass;
+
     --b-pane-color: rgb(0, 0, 0);
     --b-board-pane-color: rgb(0, 0, 0);
     --b-sub-pane-color: rgb(20, 20, 20);

@@ -229,6 +229,8 @@ namespace Bagel.B00_Core
         {
             m_State.settings.fieldOfView = 70f;
             m_State.settings.themeIndex = 1;
+            m_State.settings.sound = false;
+            m_State.settings.soundVolume = 0.25f;
             m_State.leaderboard.Add("Saved", 77);
             var json = JsonUtility.ToJson(m_State.ToSaved());
 
@@ -239,6 +241,8 @@ namespace Bagel.B00_Core
 
                 Assert.AreEqual(70f, loaded.settings.fieldOfView);
                 Assert.AreEqual(1, loaded.settings.themeIndex);
+                Assert.IsFalse(loaded.settings.sound);
+                Assert.AreEqual(0.25f, loaded.settings.soundVolume);
                 Assert.AreEqual(m_State.leaderboard.count, loaded.leaderboard.count);
                 Assert.AreEqual("Saved", loaded.leaderboard.entries[loaded.leaderboard.count - 1].playerName);
             }
@@ -246,6 +250,18 @@ namespace Bagel.B00_Core
             {
                 PlayManagerState.DestroyRuntimeCopy(loaded);
             }
+        }
+
+        // A save from before the sound settings existed keeps the sound on.
+        [Test]
+        public void AnOlderSaveKeepsTheSoundOn()
+        {
+            var saved = JsonUtility.FromJson<PlayManagerState.Saved>("{\"version\":1,\"fieldOfView\":65.0,\"themeIndex\":2}");
+            m_State.Load(saved);
+
+            Assert.IsTrue(m_State.settings.sound);
+            Assert.AreEqual(0.8f, m_State.settings.soundVolume);
+            Assert.AreEqual(2, m_State.settings.themeIndex);
         }
     }
 }

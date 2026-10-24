@@ -2,6 +2,8 @@
    every rule is in T0_Common/BagelCommonStyles.uss. */
 
 :root {
+    --b-sound-tone: wood;
+
     --b-pane-color: rgba(0, 0, 0, 0.53);
     --b-sub-pane-color: rgba(0, 0, 0, 0.52);
     --b-fill-color: rgb(71, 71, 71);

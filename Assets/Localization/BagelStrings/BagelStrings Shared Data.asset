@@ -272,6 +272,16 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
+  - m_Id: 25731939500032
+    m_Key: settings.sound
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25731947888640
+    m_Key: settings.volume
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:
