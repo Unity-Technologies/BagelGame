@@ -50,6 +50,8 @@ namespace Bagel
 
         public float leftFold => m_Left.fold;
         public float rightFold => m_Right.fold;
+        public Transform leftWing => m_LeftWing;
+        public Transform rightWing => m_RightWing;
 
         void Awake()
         {
@@ -93,9 +95,10 @@ namespace Bagel
             if (side == Vector3.zero)
                 side = transform.right;
 
-            // The left wing swings forward around its right edge, the right one around its left edge.
-            Move(ref m_Left, Target(-side), 1f, deltaTime, m_LeftElement);
-            Move(ref m_Right, Target(side), -1f, deltaTime, m_RightElement);
+            // Each wing swings back around its inner edge, towards the camera behind, like a car's mirror: the
+            // left one around its right edge, the right one around its left edge.
+            Move(ref m_Left, Target(-side), -1f, deltaTime, m_LeftElement);
+            Move(ref m_Right, Target(side), 1f, deltaTime, m_RightElement);
         }
 
         // How far a wing should fold: none with no wall within reach, all the way at the closest.

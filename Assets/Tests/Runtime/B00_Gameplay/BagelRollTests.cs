@@ -175,5 +175,33 @@ namespace Bagel.B00_Gameplay
 
             Assert.IsTrue(state.isPaused);
         }
+
+        // Close to a wall, the wing on that side folds back towards the camera, like a car's mirror: its outer edge
+        // comes back, and the other wing stays open.
+        [UnityTest]
+        public IEnumerator AWingFoldsBackNearAWall()
+        {
+            var hud = Object.FindAnyObjectByType<BagelHud>();
+            var camera = Camera.main.transform;
+            var side = Vector3.ProjectOnPlane(hud.transform.right, Vector3.up).normalized;
+            float Back(Transform wing) => Vector3.Dot(wing.TransformDirection(Vector3.left), -camera.forward);
+            var openBack = Back(hud.leftWing);
+
+            var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            try
+            {
+                wall.transform.SetPositionAndRotation(hud.transform.position - side * 1f, Quaternion.LookRotation(side));
+                wall.transform.localScale = new Vector3(3f, 3f, 0.2f);
+                yield return Frames(90);
+
+                Assert.Greater(hud.leftFold, 10f, "the left wing folds");
+                Assert.Less(hud.rightFold, 1f, "the right wing stays open");
+                Assert.Greater(Back(hud.leftWing), openBack + 0.1f, "its outer edge comes back towards the camera");
+            }
+            finally
+            {
+                Object.Destroy(wall);
+            }
+        }
     }
 }
