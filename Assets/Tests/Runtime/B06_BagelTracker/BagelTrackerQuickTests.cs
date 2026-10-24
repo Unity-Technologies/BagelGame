@@ -16,7 +16,8 @@ namespace Bagel.B06_BagelTracker
         {
             m_BagelTestAssetList =
                 Resources.Load<BagelTestAssetList>("BagelTestAssetList");
-            m_State = PlayManagerState.CreateRuntimeCopy(null);
+            // The start state has the tracker's constants: the spin and pain bars bind to them.
+            m_State = PlayManagerState.CreateRuntimeCopy(m_BagelTestAssetList.startState);
             m_State.tracker.toppingsCount = 42;
 
             m_CleanupUtil = AddTestComponent<CleanupUtil>();
