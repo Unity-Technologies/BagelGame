@@ -2,6 +2,22 @@
     height: 147px;
 }
 
+/* The theme's icon beside its dropdown. */
+.b-theme-row {
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.b-theme-row__icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 6px 2px 0;
+}
+
+.b-theme-row__dropdown {
+    flex-grow: 1;
+}
+
 .b-controls-row {
     flex-direction: row;
     align-items: center;

@@ -9,8 +9,10 @@ namespace Bagel
     public partial class SettingsPaneManagerForUI : BagelPane
     {
         DropdownField m_ThemeDropdown;
+        VisualElement m_ThemeIcon;
 
         public DropdownField themeDropdown => m_ThemeDropdown ??= this.Q<DropdownField>("theme-dropdown");
+        public VisualElement themeIcon => m_ThemeIcon ??= this.Q<VisualElement>("theme-icon");
 
         [UxmlAttribute]
         public PanelSettingsCollection panelSettingsCollection { get; set; }
@@ -47,9 +49,22 @@ namespace Bagel
                 return;
 
             UpdateThemeNames();
+            UpdateThemeIcon();
         }
 
         protected override void OnLocaleChanged() => UpdateThemeNames();
+
+        // The chosen theme's own icon (an SVG, from the theme collection) beside its name.
+        void UpdateThemeIcon()
+        {
+            var themes = bagelThemeCollection?.collection;
+            if (themes == null || themes.Count == 0 || themeIcon == null)
+                return;
+
+            var index = state != null ? state.settings.themeIndex : 0;
+            var icon = themes[Mathf.Clamp(index, 0, themes.Count - 1)].icon;
+            themeIcon.style.backgroundImage = icon != null ? Background.FromVectorImage(icon) : StyleKeyword.Null;
+        }
 
         // Theme names are choices in a dropdown, not elements, so they're set for each language.
         void UpdateThemeNames()
@@ -70,6 +85,7 @@ namespace Bagel
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)
         {
+            UpdateThemeIcon();
             if (newState != null && m_AppliesThemeToPanelSettings)
                 ChangeTheme(newState.settings.themeIndex);
         }
@@ -77,7 +93,10 @@ namespace Bagel
         protected override void OnStatePropertyChanged(in BindingId property)
         {
             if (property == SettingsData.themeIndexPath)
+            {
+                UpdateThemeIcon();
                 ChangeTheme(state.settings.themeIndex);
+            }
         }
 
         void ChangeTheme(int index)
