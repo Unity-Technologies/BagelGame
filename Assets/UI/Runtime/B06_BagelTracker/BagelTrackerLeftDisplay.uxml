@@ -1,30 +1,16 @@
-<ui:UXML xmlns:loc="Unity.Localization" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/B06_BagelTracker/BagelTrackerStyles.uss?fileID=7433441132597879392&amp;guid=f44a3d6467ce34ac08c12a3a0311ca4b&amp;type=3#BagelTrackerStyles"/>
     <Bagel.BagelTrackerPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="pane" data-source-path="tracker" class="b-pane b-gauge b-hud b-hud--left" authoring-id="1730612001">
-        <ui:VisualElement name="freshness" class="b-hud__dial">
-            <Bagel.BagelGauge kind="Timer" name="freshness-gauge" class="b-hud__gauge">
-                <Bindings>
-                    <ui:DataBinding property="value" data-source-path="freshness" binding-mode="ToTarget"/>
-                </Bindings>
-            </Bagel.BagelGauge>
-            <ui:Label text="Fresh" name="freshness-label" class="b-hud__caption">
-                <Bindings>
-                    <loc:LocalizedString property="text" table="BagelStrings" entry="tracker.fresh"/>
-                </Bindings>
-            </ui:Label>
-        </ui:VisualElement>
-        <ui:VisualElement name="speed" class="b-hud__dial">
-            <Bagel.BagelGauge kind="Speedometer" name="speed-gauge" class="b-hud__gauge">
-                <Bindings>
-                    <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
-                    <ui:DataBinding property="maxValue" data-source-path="constants.speedMax" binding-mode="ToTarget"/>
-                </Bindings>
-            </Bagel.BagelGauge>
-            <ui:Label text="Speed" name="speed-label" class="b-hud__caption">
-                <Bindings>
-                    <loc:LocalizedString property="text" table="BagelStrings" entry="tracker.speed"/>
-                </Bindings>
-            </ui:Label>
-        </ui:VisualElement>
+        <Bagel.BagelGauge kind="Timer" name="freshness-gauge" class="b-hud__gauge">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="freshness" binding-mode="ToTarget"/>
+            </Bindings>
+        </Bagel.BagelGauge>
+        <Bagel.BagelGauge kind="Speedometer" name="speed-gauge" class="b-hud__gauge">
+            <Bindings>
+                <ui:DataBinding property="value" data-source-path="speed" binding-mode="ToTarget"/>
+                <ui:DataBinding property="maxValue" data-source-path="constants.speedMax" binding-mode="ToTarget"/>
+            </Bindings>
+        </Bagel.BagelGauge>
     </Bagel.BagelTrackerPaneManager>
 </ui:UXML>

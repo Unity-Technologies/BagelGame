@@ -162,16 +162,6 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
-  - m_Id: 1419575324
-    m_Key: tracker.spin
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1419575325
-    m_Key: tracker.pain
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
   - m_Id: 1419575326
     m_Key: pause.title
     m_Flags: 0
@@ -279,16 +269,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25731947888640
     m_Key: settings.volume
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 63707918696448
-    m_Key: tracker.fresh
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 63707960639488
-    m_Key: tracker.speed
     m_Flags: 0
     m_Metadata:
       m_Items: []

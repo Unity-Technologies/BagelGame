@@ -80,14 +80,24 @@ namespace Bagel.B06_BagelTracker
         [Test]
         public void SpinAndPainBindings()
         {
-            Assert.AreEqual(15f, m_RightDisplay.spinBar.highValue);
-            Assert.AreEqual(20f, m_RightDisplay.painBar.highValue);
+            Assert.AreEqual(BagelGauge.Kind.Spin, m_RightDisplay.spinGauge.kind);
+            Assert.AreEqual(BagelGauge.Kind.Pain, m_RightDisplay.painGauge.kind);
+            Assert.AreEqual(15f, m_RightDisplay.spinGauge.maxValue);
+            Assert.AreEqual(20f, m_RightDisplay.painGauge.maxValue);
 
             m_State.tracker.spin = 7;
-            m_State.tracker.force = 3;
+            m_State.tracker.force = 5;
             simulate.FrameUpdate();
-            Assert.AreEqual(7f, m_RightDisplay.spinBar.value);
-            Assert.AreEqual(3f, m_RightDisplay.painBar.value);
+            Assert.AreEqual(7f, m_RightDisplay.spinGauge.value);
+            Assert.AreEqual(0.25f, m_RightDisplay.painGauge.fraction, 1e-5f);
+        }
+
+        // No words on the gauges: their faces say what they show.
+        [Test]
+        public void TheGaugesHaveNoCaptions()
+        {
+            Assert.IsEmpty(m_LeftDisplay.Query<Label>().ToList());
+            CollectionAssert.AreEqual(new[] { "toppings-count" }, m_RightDisplay.Query<Label>().ToList().ConvertAll(label => label.name));
         }
 
         [Test]

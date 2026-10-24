@@ -46,8 +46,6 @@ MonoBehaviour:
   - rid: 6326339759238545555
   - rid: 6326339759238545556
   - rid: 6326339759238545557
-  - rid: 6326339759238545558
-  - rid: 6326339759238545559
   - rid: 6326339759238545560
   - rid: 6326339759238545561
   - rid: 6326339759238545562
@@ -70,8 +68,6 @@ MonoBehaviour:
   - rid: 6326339759238545635
   - rid: 6326339760839721046
   - rid: 6326339760839721047
-  - rid: 6326339763072663657
-  - rid: 6326339763072663658
   - rid: 6326339763072663659
   - rid: 6326339763072663660
   - rid: 6326339763072663661
@@ -294,20 +290,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Grip
-    - rid: 6326339759238545558
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575324
-        m_Metadata:
-          m_Items: []
-        m_Value: Spin
-    - rid: 6326339759238545559
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575325
-        m_Metadata:
-          m_Items: []
-        m_Value: Pain
     - rid: 6326339759238545560
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -462,20 +444,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Volume
-    - rid: 6326339763072663657
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707918696448
-        m_Metadata:
-          m_Items: []
-        m_Value: Fresh
-    - rid: 6326339763072663658
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639488
-        m_Metadata:
-          m_Items: []
-        m_Value: Speed
     - rid: 6326339763072663659
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

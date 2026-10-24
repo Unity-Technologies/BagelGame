@@ -46,8 +46,6 @@ MonoBehaviour:
   - rid: 6326339759238545595
   - rid: 6326339759238545596
   - rid: 6326339759238545597
-  - rid: 6326339759238545598
-  - rid: 6326339759238545599
   - rid: 6326339759238545600
   - rid: 6326339759238545601
   - rid: 6326339759238545602
@@ -70,8 +68,6 @@ MonoBehaviour:
   - rid: 6326339759238545644
   - rid: 6326339760839721048
   - rid: 6326339760839721049
-  - rid: 6326339763072663671
-  - rid: 6326339763072663672
   - rid: 6326339763072663673
   - rid: 6326339763072663674
   - rid: 6326339763072663675
@@ -294,20 +290,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "Adh\xE9rence"
-    - rid: 6326339759238545598
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575324
-        m_Metadata:
-          m_Items: []
-        m_Value: Rotation
-    - rid: 6326339759238545599
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575325
-        m_Metadata:
-          m_Items: []
-        m_Value: Douleur
     - rid: 6326339759238545600
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -462,20 +444,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Volume
-    - rid: 6326339763072663671
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707918696448
-        m_Metadata:
-          m_Items: []
-        m_Value: "Fra\xEEcheur"
-    - rid: 6326339763072663672
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639488
-        m_Metadata:
-          m_Items: []
-        m_Value: Vitesse
     - rid: 6326339763072663673
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

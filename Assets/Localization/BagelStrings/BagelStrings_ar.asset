@@ -46,8 +46,6 @@ MonoBehaviour:
   - rid: 6326339764369490110
   - rid: 6326339764369490111
   - rid: 6326339764369490112
-  - rid: 6326339764369490113
-  - rid: 6326339764369490114
   - rid: 6326339764369490115
   - rid: 6326339764369490116
   - rid: 6326339764369490117
@@ -70,8 +68,6 @@ MonoBehaviour:
   - rid: 6326339764369490134
   - rid: 6326339764369490135
   - rid: 6326339764369490136
-  - rid: 6326339764369490137
-  - rid: 6326339764369490138
   - rid: 6326339764369490139
   - rid: 6326339764369490140
   - rid: 6326339764369490141
@@ -294,20 +290,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u0627\u0644\u062B\u0628\u0627\u062A"
-    - rid: 6326339764369490113
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575324
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u0627\u0644\u062F\u0648\u0631\u0627\u0646"
-    - rid: 6326339764369490114
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575325
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u0627\u0644\u0623\u0644\u0645"
     - rid: 6326339764369490115
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -462,20 +444,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u0645\u0633\u062A\u0648\u0649 \u0627\u0644\u0635\u0648\u062A"
-    - rid: 6326339764369490137
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707918696448
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u0627\u0644\u0637\u0632\u0627\u062C\u0629"
-    - rid: 6326339764369490138
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639488
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u0627\u0644\u0633\u0631\u0639\u0629"
     - rid: 6326339764369490139
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

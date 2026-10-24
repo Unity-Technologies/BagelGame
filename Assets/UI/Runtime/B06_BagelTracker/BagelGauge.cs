@@ -5,11 +5,16 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     // A kitchen gauge riding along with the bagel, drawn with Painter2D on a face styled in USS (its
-    // enamel, rim and sheen are the element's background, border and gradient):
-    // - Timer: a kitchen timer, its colored wedge running out from green to red: how fresh the bagel is.
+    // enamel, rim and sheen are the element's background, border and gradient). Each says what it shows
+    // without a word:
+    // - Timer: a kitchen timer, its colored wedge running out from green to red, around a bagel that
+    //   steams while it's fresh and goes grey-green as it goes stale.
     // - Speedometer: ticks and a red zone, and a needle that's its own element, turned with a style
     //   rotation: the needle moves every frame without drawing the gauge again.
     // - Seeds: a ring of seeds, one going out for every few toppings lost; the count in the middle.
+    // - Spin: a circling arrow that goes further round the faster the bagel spins, around a little bagel
+    //   that spins along (its own element, turned with a style rotation like the needle).
+    // - Pain: a comic "pow" burst that grows bigger, spikier and redder the harder the last knock was.
     // value and maxValue bind (<DataBinding property="value" data-source-path="speed"/>). Its colors are
     // USS custom properties: --b-gauge-line, --b-gauge-accent, --b-gauge-good, --b-gauge-warn, --b-gauge-seed.
     [UxmlElement(libraryPath = "Bagel/Tracker")]
@@ -19,12 +24,15 @@ namespace Bagel
         {
             Timer,
             Speedometer,
-            Seeds
+            Seeds,
+            Spin,
+            Pain
         }
 
         public static readonly string ussClassName = "b-gauge-dial";
         public static readonly string needleUssClassName = ussClassName + "__needle";
         public static readonly string hubUssClassName = ussClassName + "__hub";
+        public static readonly string spinnerUssClassName = ussClassName + "__spinner";
 
         static readonly CustomStyleProperty<Color> s_LineProperty = new("--b-gauge-line");
         static readonly CustomStyleProperty<Color> s_AccentProperty = new("--b-gauge-accent");
@@ -34,6 +42,9 @@ namespace Bagel
 
         const int k_SeedCount = 32;
         const float k_SweepDegrees = 270f;
+        const float k_SpinSweepDegrees = 300f;
+        // How fast the little bagel turns when the spin is at its most.
+        const float k_SpinnerDegreesPerSecond = 720f;
 
         Kind m_Kind;
         float m_Value;
@@ -48,6 +59,8 @@ namespace Bagel
 
         readonly VisualElement m_Needle;
         readonly VisualElement m_Hub;
+        readonly VisualElement m_Spinner;
+        float m_SpinnerAngle;
 
         [UxmlAttribute]
         public Kind kind
@@ -57,7 +70,8 @@ namespace Bagel
             {
                 m_Kind = value;
                 m_Needle.style.display = value == Kind.Speedometer ? DisplayStyle.Flex : DisplayStyle.None;
-                m_Hub.style.display = value == Kind.Seeds ? DisplayStyle.None : DisplayStyle.Flex;
+                m_Hub.style.display = value == Kind.Speedometer ? DisplayStyle.Flex : DisplayStyle.None;
+                m_Spinner.style.display = value == Kind.Spin ? DisplayStyle.Flex : DisplayStyle.None;
                 Refresh(force: true);
             }
         }
@@ -103,9 +117,23 @@ namespace Bagel
             m_Hub = new VisualElement { name = "hub", pickingMode = PickingMode.Ignore };
             m_Hub.AddToClassList(hubUssClassName);
             Add(m_Hub);
+            m_Spinner = new VisualElement { name = "spinner", pickingMode = PickingMode.Ignore };
+            m_Spinner.AddToClassList(spinnerUssClassName);
+            m_Spinner.generateVisualContent += DrawSpinner;
+            Add(m_Spinner);
             kind = Kind.Timer;
 
             RegisterCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved);
+            schedule.Execute(TurnSpinner).Every(0);
+        }
+
+        // The little bagel of the spin gauge turns as fast as the bagel spins: a rotation, nothing drawn again.
+        void TurnSpinner(TimerState timer)
+        {
+            if (m_Kind != Kind.Spin || panel == null)
+                return;
+            m_SpinnerAngle = Mathf.Repeat(m_SpinnerAngle + fraction * k_SpinnerDegreesPerSecond * timer.deltaTime / 1000f, 360f);
+            m_Spinner.style.rotate = new Rotate(m_SpinnerAngle);
         }
 
         void OnCustomStyleResolved(CustomStyleResolvedEvent evt)
@@ -122,6 +150,7 @@ namespace Bagel
             if (style.TryGetValue(s_SeedProperty, out var seed))
                 m_Seed = seed;
             Refresh(force: true);
+            m_Spinner.MarkDirtyRepaint();
         }
 
         // The needle turns; the drawing is only made again when it would look different: the timer in
@@ -136,6 +165,8 @@ namespace Bagel
             {
                 Kind.Timer => Mathf.CeilToInt(f * 100f),
                 Kind.Seeds => Mathf.CeilToInt(f * k_SeedCount),
+                Kind.Spin => Mathf.CeilToInt(f * 60f),
+                Kind.Pain => Mathf.CeilToInt(f * 30f),
                 _ => 0
             };
             if (force || step != m_DrawnStep)
@@ -164,6 +195,12 @@ namespace Bagel
                     break;
                 case Kind.Seeds:
                     DrawSeeds(painter, center, radius);
+                    break;
+                case Kind.Spin:
+                    DrawSpin(painter, center, radius);
+                    break;
+                case Kind.Pain:
+                    DrawPain(painter, center, radius);
                     break;
             }
         }
@@ -208,6 +245,44 @@ namespace Bagel
             }
 
             Ticks(painter, center, radius * 0.94f, radius * 0.78f, 0f, 330f, 12, Mathf.Max(1.2f, radius * 0.05f));
+
+            // The bagel itself, golden while fresh and grey-green when stale, steaming while there's time left.
+            var crust = Color.Lerp(new Color(0.55f, 0.6f, 0.45f), new Color(0.86f, 0.6f, 0.27f), f);
+            var bagel = center + new Vector2(0f, radius * 0.08f);
+            Bagel(painter, bagel, radius * 0.3f, crust);
+            if (f > 0.4f)
+            {
+                var alpha = Mathf.InverseLerp(0.4f, 1f, f);
+                painter.strokeColor = new Color(m_Seed.r, m_Seed.g, m_Seed.b, alpha);
+                painter.lineWidth = Mathf.Max(1f, radius * 0.06f);
+                painter.lineCap = LineCap.Round;
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    var x = bagel.x + i * radius * 0.1f;
+                    var bottom = bagel.y - radius * 0.3f;
+                    painter.BeginPath();
+                    painter.MoveTo(new Vector2(x, bottom));
+                    painter.BezierCurveTo(new Vector2(x - radius * 0.1f, bottom - radius * 0.12f), new Vector2(x + radius * 0.1f, bottom - radius * 0.2f), new Vector2(x, bottom - radius * 0.32f));
+                    painter.Stroke();
+                }
+            }
+        }
+
+        // A bagel seen from above: a ring of crust around its hole, the gauge's face showing through the hole.
+        void Bagel(Painter2D painter, Vector2 center, float radius, Color crust)
+        {
+            painter.strokeColor = crust;
+            painter.lineWidth = radius * 0.62f;
+            painter.BeginPath();
+            painter.Arc(center, radius * 0.69f, 0f, 360f);
+            painter.ClosePath();
+            painter.Stroke();
+            painter.strokeColor = new Color(m_Line.r, m_Line.g, m_Line.b, 0.6f);
+            painter.lineWidth = Mathf.Max(0.8f, radius * 0.08f);
+            painter.BeginPath();
+            painter.Arc(center, radius, 0f, 360f);
+            painter.ClosePath();
+            painter.Stroke();
         }
 
         void DrawSpeedometer(Painter2D painter, Vector2 center, float radius)
@@ -223,6 +298,103 @@ namespace Bagel
             painter.Stroke();
 
             Ticks(painter, center, radius * 0.92f, radius * 0.72f, from, k_SweepDegrees, 11, Mathf.Max(1.2f, radius * 0.05f));
+        }
+
+        void DrawSpin(Painter2D painter, Vector2 center, float radius)
+        {
+            var ring = radius * 0.78f;
+            var width = radius * 0.13f;
+
+            // The way round, faint, then the arrow as far round as the spin goes.
+            painter.strokeColor = new Color(m_Line.r, m_Line.g, m_Line.b, 0.15f);
+            painter.lineWidth = width;
+            painter.lineCap = LineCap.Round;
+            painter.BeginPath();
+            painter.Arc(center, ring, -90f, -90f + k_SpinSweepDegrees);
+            painter.Stroke();
+
+            var sweep = Mathf.Max(24f, k_SpinSweepDegrees * fraction);
+            painter.strokeColor = Color.Lerp(m_Line, m_Accent, fraction);
+            painter.BeginPath();
+            painter.Arc(center, ring, -90f, -90f + sweep);
+            painter.Stroke();
+
+            // Its head, pointing on round.
+            var tip = Polar(center, ring, sweep + 14f);
+            var back = Polar(center, ring, sweep - 6f);
+            var across = Polar(center, ring + width * 1.4f, sweep - 6f) - back;
+            painter.fillColor = painter.strokeColor;
+            painter.BeginPath();
+            painter.MoveTo(tip);
+            painter.LineTo(back + across);
+            painter.LineTo(back - across);
+            painter.ClosePath();
+            painter.Fill();
+        }
+
+        // The spin gauge's little bagel, a few seeds on its crust so its turning shows.
+        void DrawSpinner(MeshGenerationContext context)
+        {
+            var rect = m_Spinner.contentRect;
+            if (!(rect.width > 2f))
+                return;
+            var painter = context.painter2D;
+            var radius = Mathf.Min(rect.width, rect.height) * 0.5f;
+            Bagel(painter, rect.center, radius * 0.95f, new Color(0.86f, 0.6f, 0.27f));
+            painter.fillColor = m_Seed;
+            for (int i = 0; i < 3; i++)
+            {
+                painter.BeginPath();
+                painter.Arc(Polar(rect.center, radius * 0.66f, i * 120f), radius * 0.13f, 0f, 360f);
+                painter.Fill();
+            }
+        }
+
+        void DrawPain(Painter2D painter, Vector2 center, float radius)
+        {
+            var f = fraction;
+
+            // A burst with more points the harder the knock, a little one even at rest.
+            var points = 8 + Mathf.RoundToInt(f * 6f);
+            var outer = radius * Mathf.Lerp(0.38f, 0.86f, f);
+            var inner = outer * Mathf.Lerp(0.72f, 0.45f, f);
+            var turn = 360f / points;
+            painter.fillColor = f > 0f ? Color.Lerp(m_Warn, m_Accent, f) : new Color(m_Line.r, m_Line.g, m_Line.b, 0.15f);
+            painter.strokeColor = m_Line;
+            painter.lineWidth = Mathf.Max(1f, radius * 0.05f);
+            painter.lineJoin = LineJoin.Round;
+            painter.BeginPath();
+            for (int i = 0; i < points; i++)
+            {
+                // Uneven points, like an inked pow, the same unevenness every time.
+                var wobble = 1f + 0.12f * Mathf.Sin(i * 2.7f);
+                var spike = Polar(center, outer * wobble, i * turn);
+                var notch = Polar(center, inner, i * turn + turn * 0.5f);
+                if (i == 0)
+                    painter.MoveTo(spike);
+                else
+                    painter.LineTo(spike);
+                painter.LineTo(notch);
+            }
+            painter.ClosePath();
+            painter.Fill();
+            painter.Stroke();
+
+            // Hard knocks crack it: lines from the middle out.
+            if (f > 0.5f)
+            {
+                painter.lineWidth = Mathf.Max(1f, radius * 0.06f);
+                painter.lineCap = LineCap.Round;
+                painter.BeginPath();
+                for (int i = 0; i < 3; i++)
+                {
+                    var angle = 40f + i * 120f;
+                    painter.MoveTo(Polar(center, inner * 0.15f, angle));
+                    painter.LineTo(Polar(center, inner * 0.6f, angle + 12f));
+                    painter.LineTo(Polar(center, inner * 0.85f, angle - 6f));
+                }
+                painter.Stroke();
+            }
         }
 
         void DrawSeeds(Painter2D painter, Vector2 center, float radius)

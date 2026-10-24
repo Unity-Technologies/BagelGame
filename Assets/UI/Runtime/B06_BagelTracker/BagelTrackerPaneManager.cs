@@ -13,15 +13,15 @@ namespace Bagel
         BagelGauge m_FreshnessGauge;
         BagelGauge m_SpeedGauge;
         Label m_ToppingsCount;
-        ProgressBar m_SpinBar;
-        ProgressBar m_PainBar;
+        BagelGauge m_SpinGauge;
+        BagelGauge m_PainGauge;
 
         public BagelGauge toppingsGauge => m_ToppingsGauge ??= this.Q<BagelGauge>("toppings-gauge");
         public BagelGauge freshnessGauge => m_FreshnessGauge ??= this.Q<BagelGauge>("freshness-gauge");
         public BagelGauge speedGauge => m_SpeedGauge ??= this.Q<BagelGauge>("speed-gauge");
         public Label toppingsCount => m_ToppingsCount ??= this.Q<Label>("toppings-count");
-        public ProgressBar spinBar => m_SpinBar ??= this.Q<ProgressBar>("spin-bar");
-        public ProgressBar painBar => m_PainBar ??= this.Q<ProgressBar>("pain-bar");
+        public BagelGauge spinGauge => m_SpinGauge ??= this.Q<BagelGauge>("spin-gauge");
+        public BagelGauge painGauge => m_PainGauge ??= this.Q<BagelGauge>("pain-gauge");
 
         bool m_Bound;
 

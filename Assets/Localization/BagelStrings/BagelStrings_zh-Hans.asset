@@ -46,8 +46,6 @@ MonoBehaviour:
   - rid: 6326339764369490039
   - rid: 6326339764369490040
   - rid: 6326339764369490041
-  - rid: 6326339764369490042
-  - rid: 6326339764369490043
   - rid: 6326339764369490044
   - rid: 6326339764369490045
   - rid: 6326339764369490046
@@ -70,8 +68,6 @@ MonoBehaviour:
   - rid: 6326339764369490063
   - rid: 6326339764369490064
   - rid: 6326339764369490065
-  - rid: 6326339764369490066
-  - rid: 6326339764369490067
   - rid: 6326339764369490068
   - rid: 6326339764369490069
   - rid: 6326339764369490070
@@ -294,20 +290,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u6293\u5730\u529B"
-    - rid: 6326339764369490042
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575324
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u65CB\u8F6C"
-    - rid: 6326339764369490043
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575325
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u75BC\u75DB"
     - rid: 6326339764369490044
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -462,20 +444,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u97F3\u91CF"
-    - rid: 6326339764369490066
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707918696448
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u65B0\u9C9C\u5EA6"
-    - rid: 6326339764369490067
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639488
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u901F\u5EA6"
     - rid: 6326339764369490068
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
