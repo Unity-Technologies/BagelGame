@@ -1,0 +1,12 @@
+/* Steam rising off the coffee: a column of puffs that a UI Shader Graph moves up (SteamPuffs). */
+
+.b-steam {
+    width: 120px;
+    height: 260px;
+    color: rgba(255, 252, 245, 0.7);
+}
+
+/* The material that moves the puffs, only on a panel with the vertex channels it reads. */
+.b-steam--gpu {
+    -unity-material: url("Steam.mat");
+}

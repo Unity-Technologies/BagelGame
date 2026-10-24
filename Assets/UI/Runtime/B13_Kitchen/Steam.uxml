@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/B13_Kitchen/SteamStyles.uss?fileID=7433441132597879392&amp;guid=b39ab168e19846b5ac83080674175d58&amp;type=3#SteamStyles"/>
+    <Bagel.SteamPuffs name="steam" count="12" seed="2"/>
+</ui:UXML>

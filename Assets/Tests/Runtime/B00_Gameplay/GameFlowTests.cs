@@ -93,6 +93,21 @@ namespace Bagel.B00_Gameplay
             Assert.IsTrue(state.isMainMenu);
         }
 
+        // Over the coffee, the steam's panel draws with the vertex channels its material reads: the shader moves it.
+        [UnityTest]
+        public IEnumerator WhilePlayingTheSteamRisesOnTheGpu()
+        {
+            state.GoToBagelSelection();
+            state.GoToPlay();
+            SetPanelRenderer(Renderer<FaceTheCamera>());
+            yield return null;
+            yield return null;
+
+            var steam = rootVisualElement.Q<SteamPuffs>();
+            Assert.IsTrue(steam.movesOnTheGpu);
+            Assert.AreEqual("Steam", steam.resolvedStyle.unityMaterial.material.name);
+        }
+
         [UnityTest]
         public IEnumerator TheLeaderboardOpensFromTheMainMenu()
         {

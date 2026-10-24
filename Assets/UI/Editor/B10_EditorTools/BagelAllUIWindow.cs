@@ -49,7 +49,8 @@ namespace Bagel
             new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" }, activeIn = new[] { PlayManagerState.State.GameOver } },
             new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu, PlayManagerState.State.GameOver } },
             new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
-            new CardSpec { title = "Jam Label (World Space)", uxmlPaths = new[] { "B13_Labels/JamLabel.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
+            new CardSpec { title = "Jam Label (World Space)", uxmlPaths = new[] { "B13_Kitchen/JamLabel.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
+            new CardSpec { title = "Steam (World Space)", uxmlPaths = new[] { "B13_Kitchen/Steam.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
         };
 
         public class Card
@@ -139,6 +140,9 @@ namespace Bagel
             else
                 ShareEditorTheme();
 
+            rootVisualElement.RegisterCallback<AttachToPanelEvent>(e => AddSteamChannels(e.destinationPanel));
+            AddSteamChannels(rootVisualElement.panel);
+
             m_Theme = ThemeAt(m_State.settings.themeIndex);
             BuildCards();
             BindToolbar();
@@ -170,6 +174,13 @@ namespace Bagel
             m_State.onPauseStateChanged -= State_OnPauseStateChanged;
             PlayManagerState.DestroyRuntimeCopy(m_State);
             m_State = null;
+        }
+
+        // The steam's material moves its puffs with extra vertex channels: the window's panel draws them.
+        static void AddSteamChannels(IPanel panel)
+        {
+            if (panel != null)
+                panel.extraVertexChannels |= SteamPuffs.vertexChannels;
         }
 
         // Newer editors keep their theme on an ancestor of the window's root: borrow it while

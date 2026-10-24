@@ -42,5 +42,8 @@ namespace Bagel
 
         [Header("9 - Leaderboard")]
         public VisualTreeAsset leaderboardPaneUxml;
+
+        [Header("13 - Kitchen")]
+        public VisualTreeAsset steamUxml;
     }
 }

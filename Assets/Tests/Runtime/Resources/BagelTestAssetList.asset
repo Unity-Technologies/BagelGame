@@ -31,3 +31,4 @@ MonoBehaviour:
   gameOverScreenUxml: {fileID: 9197481963319205126, guid: ad9bc3abb338ba549aef117711e184da, type: 3}
   gameOverPaneUxml: {fileID: 9197481963319205126, guid: b6e2fed8b425da943868813467f54513, type: 3}
   leaderboardPaneUxml: {fileID: 9197481963319205126, guid: 0d1c6591da2016444b4b1be3f56d668a, type: 3}
+  steamUxml: {fileID: 9197481963319205126, guid: 4554792f4702ba0409ff5c6735b3d6bc, type: 3}

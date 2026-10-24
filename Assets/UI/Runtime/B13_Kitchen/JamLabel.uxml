@@ -1,5 +1,5 @@
 <ui:UXML xmlns:loc="Unity.Localization" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Runtime/B13_Labels/JamLabelStyles.uss?fileID=7433441132597879392&amp;guid=647c253e91fb4d1aaa9eb1821671a14e&amp;type=3#JamLabelStyles"/>
+    <Style src="project://database/Assets/UI/Runtime/B13_Kitchen/JamLabelStyles.uss?fileID=7433441132597879392&amp;guid=647c253e91fb4d1aaa9eb1821671a14e&amp;type=3#JamLabelStyles"/>
     <ui:VisualElement name="jam-label" picking-mode="Ignore" class="b-paper b-jam-label">
         <ui:Label text="Strawberry Jam" name="jam-name" picking-mode="Ignore" class="b-jam-label__name">
             <Bindings>
