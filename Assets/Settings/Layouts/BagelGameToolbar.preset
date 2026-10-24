@@ -1,0 +1,284 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13988, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: BagelGameToolbar
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.Overlays.OverlayPreset
+  m_RawWindowType: UnityEditor.MainToolbarWindow, UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_SaveData:
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Services/Account
+    index: 0
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Editor Controls/Store
+    index: 1
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Unsupported User Elements
+    index: 2
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Package Management/Package Manager
+    index: 3
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Services/Collab
+    index: 4
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Services/AI
+    index: 5
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Services/Toolbar Help
+    index: 0
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Editor Utility/Quality
+    index: 1
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Editor Controls/Layout
+    index: 2
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Editor Controls/Search
+    index: 3
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Editor Controls/Modes
+    index: 6
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Editor Controls/Undo
+    index: 7
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Multiplayer/Multiplayer Role
+    index: 8
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Services/Cloud
+    index: 9
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 2
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Play Mode Controls
+    index: 0
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Editor Controls/Selection History
+    index: 10
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 0
+    containerId: overlay-toolbar__top
+    displayed: 0
+    id: Localization/Language
+    index: 6
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Bagel/Theme
+    index: 5
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  - dockPosition: 1
+    containerId: overlay-toolbar__top
+    displayed: 1
+    id: Bagel/Language
+    index: 4
+    contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+    floating: 0
+    collapsed: 0
+    snapOffset: {x: 0, y: 0}
+    snapOffsetDelta: {x: 0, y: 0}
+    snapCorner: 0
+    layout: 4
+    size: {x: 0, y: 0}
+    sizeOverridden: 0
+  m_DynamicPanelContainerData: []
+  m_MenuItemPaths: []

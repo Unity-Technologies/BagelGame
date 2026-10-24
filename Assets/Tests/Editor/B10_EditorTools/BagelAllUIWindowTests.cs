@@ -132,6 +132,27 @@ namespace Bagel.B10_EditorTools
         }
 
         [Test]
+        public void TheDemoResetPutsTheWindowBack()
+        {
+            window.SetZoom(0.7f);
+            simulate.Click(rootVisualElement.Q("inspector-toggle"));
+            window.ApplySetup("Tracker/Wrecked");
+            BagelToolbar.SelectTheme(2);
+            simulate.FrameUpdate();
+            Assert.IsTrue(rootVisualElement.Q("inspector-dock").ClassListContains("b-inspector-dock--shown"));
+
+            DemoReset.ResetProjectStates();
+            simulate.FrameUpdate();
+
+            Assert.AreEqual(1f, window.zoom);
+            Assert.IsTrue(window.state.isMainMenu);
+            Assert.IsFalse(rootVisualElement.Q("inspector-dock").ClassListContains("b-inspector-dock--shown"));
+            Assert.IsFalse(BagelOptionStrip.IsOn(rootVisualElement.Q("inspector-toggle")));
+            Assert.IsNull(BagelThemes.previewTheme);
+            Assert.AreEqual("en", BagelLocalization.localeCode);
+        }
+
+        [Test]
         public void EveryCardPlaysOnTheSameState()
         {
             simulate.FrameUpdate();

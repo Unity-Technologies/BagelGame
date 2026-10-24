@@ -72,6 +72,7 @@ namespace Bagel
         BagelOptionStrip m_ThemeStrip;
         BagelOptionStrip m_LanguageStrip;
         VisualElement m_RollToggle;
+        VisualElement m_InspectorToggle;
         Label m_ZoomLabel;
         readonly List<string> m_LocaleCodes = new();
 
@@ -88,7 +89,7 @@ namespace Bagel
         public BagelOptionStrip themeStrip => m_ThemeStrip;
         public BagelOptionStrip languageStrip => m_LanguageStrip;
 
-        [MenuItem("Bagel/Bagel All UI")]
+        [MenuItem("Bagel/Bagel All UI", priority = 10, editorModes = new[] { BagelMenu.defaultMode, BagelMenu.uiToolkitAuthoringMode })]
         public static BagelAllUIWindow Open()
         {
             var window = GetWindow<BagelAllUIWindow>();
@@ -334,7 +335,7 @@ namespace Bagel
 
         void BindToolbar()
         {
-            rootVisualElement.Q<BagelOptionStrip>("reset-strip").AddAction(BagelEditorIcons.Reset(), "Reset", ResetState, "reset-button");
+            rootVisualElement.Q<BagelOptionStrip>("reset-strip").AddAction(BagelEditorIcons.Reset(), "Reset", ResetWindow, "reset-button");
 
             m_StateStrip = rootVisualElement.Q<BagelOptionStrip>("state-strip");
             for (int i = 0; i < stateNames.Length; i++)
@@ -376,12 +377,16 @@ namespace Bagel
             m_LanguageStrip.chosen += index => BagelToolbar.SelectLanguage(m_LocaleCodes[index]);
             UpdateLanguageStrip();
 
-            rootVisualElement.Q<BagelOptionStrip>("inspector-strip").AddToggle(BagelEditorIcons.Inspector(), "State Inspector", m_ShowInspector, show =>
-            {
-                m_ShowInspector = show;
-                rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
-            }, "inspector-toggle");
-            rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
+            m_InspectorToggle = rootVisualElement.Q<BagelOptionStrip>("inspector-strip").AddToggle(BagelEditorIcons.Inspector(), "State Inspector",
+                m_ShowInspector, ShowInspector, "inspector-toggle");
+            ShowInspector(m_ShowInspector);
+        }
+
+        void ShowInspector(bool show)
+        {
+            m_ShowInspector = show;
+            BagelOptionStrip.SetOnWithoutNotify(m_InspectorToggle, show);
+            rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", show);
         }
 
         // The state strip's options, by index: Main Menu, Bagel Selection, Playing, Paused, Game Over.
@@ -533,7 +538,23 @@ namespace Bagel
 
         // ---------------------------------------------------------------- State
 
-        // Back to a fresh copy of the start state (the toolbar's Reset).
+        // The toolbar's Reset, and the demo's (Bagel > Demo > Reset Bagel Project States): a fresh state,
+        // the cards at 100% from the top, no Inspector.
+        public void ResetWindow()
+        {
+            // A tab that was never shown has no UI yet: it starts fresh when it's built.
+            if (rootVisualElement.Q("window") == null)
+                return;
+
+            ResetState();
+            SetZoom(1f);
+            rootVisualElement.Q<Slider>("zoom-slider")?.SetValueWithoutNotify(1f);
+            ShowInspector(false);
+            if (rootVisualElement.Q<ScrollView>("stage") is { } stage)
+                stage.scrollOffset = Vector2.zero;
+        }
+
+        // Back to a fresh copy of the start state.
         public void ResetState()
         {
             m_Roll?.Pause();

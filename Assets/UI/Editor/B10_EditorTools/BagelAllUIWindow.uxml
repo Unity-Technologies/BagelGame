@@ -7,7 +7,7 @@
                 <ui:Label text="Bagel Game" picking-mode="Ignore" class="b-brand__name"/>
                 <ui:Label text="All UI" picking-mode="Ignore" class="b-brand__sub"/>
             </ui:VisualElement>
-            <Bagel.BagelOptionStrip name="reset-strip" tooltip="Start again: a fresh copy of the start state, its theme, no simulated roll" class="b-toolbar__strip b-toolbar__strip--reset"/>
+            <Bagel.BagelOptionStrip name="reset-strip" tooltip="Start again: a fresh copy of the start state and its theme, no simulated roll, the cards at 100% from the top, no Inspector" class="b-toolbar__strip b-toolbar__strip--reset"/>
             <Bagel.BagelOptionStrip name="state-strip" tooltip="The game's state: the screens that show in it are lit, the others dimmed" class="b-toolbar__strip"/>
             <Bagel.BagelOptionStrip name="setup-strip" class="b-toolbar__strip"/>
             <Bagel.BagelOptionStrip name="roll-strip" tooltip="The tracker moves as if a bagel were rolling: spinning, bumping and losing toppings" class="b-toolbar__strip"/>
