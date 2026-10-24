@@ -39,9 +39,6 @@ namespace Bagel.B04_Settings
             var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
             var themeDropdown = manager.themeDropdown;
 
-            // Prepare for testing.
-            manager.dataSource = null; // We don't need a real data source for this test.
-
             // Check initial state.
             Assert.AreEqual(manager.bagelThemeCollection.collection.Count, themeDropdown.choices.Count);
             Assert.AreEqual("Classic", themeDropdown.value);
@@ -56,6 +53,9 @@ namespace Bagel.B04_Settings
             Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Edgy"));
             simulate.FrameUpdate();
             Assert.AreEqual("Edgy", themeDropdown.value);
+
+            // The pane's own copy of the game state follows the dropdown.
+            Assert.AreEqual(1, manager.state.settings.themeIndex);
         }
     }
 }
