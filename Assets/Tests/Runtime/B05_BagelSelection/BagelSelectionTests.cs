@@ -100,9 +100,12 @@ namespace Bagel.B05_BagelSelection
             simulate.FrameUpdate();
 
             Assert.AreEqual(bagelType.displayName, card.Q<Label>("name").text);
-            Assert.AreEqual(bagelType.toppingsPercentile, card.Q<ProgressBar>("toppings-bar").value, 1e-4f);
-            Assert.AreEqual(bagelType.speedPercentile, card.Q<ProgressBar>("speed-bar").value, 1e-4f);
-            Assert.AreEqual(bagelType.gripPercentile, card.Q<ProgressBar>("grip-bar").value, 1e-4f);
+            Assert.AreEqual(bagelType.toppingsPercentile, card.Q<StatMeter>("toppings-meter").value, 1e-4f);
+            Assert.AreEqual(bagelType.toppingLossPercentile, card.Q<StatMeter>("topping-loss-meter").value, 1e-4f);
+            Assert.AreEqual(bagelType.controlPercentile, card.Q<StatMeter>("control-meter").value, 1e-4f);
+            Assert.AreEqual(bagelType.speedPercentile, card.Q<StatMeter>("speed-meter").value, 1e-4f);
+            Assert.AreEqual(bagelType.gripPercentile, card.Q<StatMeter>("grip-meter").value, 1e-4f);
+            Assert.IsNotNull(card.Q(className: "b-icon--stat-grip"), "each stat has its icon");
         }
     }
 }

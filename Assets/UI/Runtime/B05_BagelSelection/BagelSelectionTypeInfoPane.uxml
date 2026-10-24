@@ -1,55 +1,69 @@
 <ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Runtime/B05_BagelSelection/BagelSelectionTypeInfoPaneStyles.uss?fileID=7433441132597879392&amp;guid=6802b1bf3971d394e8349ddd1bc51260&amp;type=3#BagelSelectionTypeInfoPaneStyles"/>
-    <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Sesame/BagelTypeSesame.asset?fileID=11400000&amp;guid=4121a9b3513474a4badc7b2ccbe255c4&amp;type=2#BagelTypeSesame" class="b-pane">
-        <ui:Label text="Label" name="name" class="b-title">
-            <Bindings>
-                <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
-            </Bindings>
-        </ui:Label>
-        <ui:VisualElement name="toppings-row" class="bar-row">
-            <ui:VisualElement name="toppings-icon" class="bar-icon b-icon b-icon--stat-toppings"/>
-            <ui:ProgressBar title="Toppings" name="toppings-bar" high-value="1">
+    <ui:VisualElement name="pane" data-source="project://database/Assets/Game/Bagels/BagelTypes/Sesame/BagelTypeSesame.asset?fileID=11400000&amp;guid=4121a9b3513474a4badc7b2ccbe255c4&amp;type=2#BagelTypeSesame" class="b-pane b-paper b-tag">
+        <ui:VisualElement name="header" class="b-tag__header">
+            <ui:Label text="Label" name="name" class="b-title b-tag__name">
                 <Bindings>
-                    <loc:LocalizedString property="title" table="BagelStrings" entry="stat.toppings"/>
+                    <ui:DataBinding property="text" data-source-path="displayName" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement name="stats" class="b-tag__stats">
+            <ui:VisualElement name="toppings-icon" class="b-icon b-icon--stat-toppings b-tag__icon"/>
+            <ui:Label text="Toppings" name="toppings-label" class="b-tag__label">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="stat.toppings"/>
+                </Bindings>
+            </ui:Label>
+            <Bagel.StatMeter name="toppings-meter" class="b-tag__meter">
+                <Bindings>
                     <ui:DataBinding property="value" data-source-path="toppingsPercentile" binding-mode="ToTarget"/>
                 </Bindings>
-            </ui:ProgressBar>
-        </ui:VisualElement>
-        <ui:VisualElement name="topping-loss-row" class="bar-row">
-            <ui:VisualElement name="topping-loss-icon" class="bar-icon b-icon b-icon--stat-topping-loss"/>
-            <ui:ProgressBar title="Topping Loss" name="topping-loss-bar" high-value="1">
+            </Bagel.StatMeter>
+            <ui:VisualElement name="topping-loss-icon" class="b-icon b-icon--stat-topping-loss b-tag__icon"/>
+            <ui:Label text="Topping Loss" name="topping-loss-label" class="b-tag__label">
                 <Bindings>
-                    <loc:LocalizedString property="title" table="BagelStrings" entry="stat.topping-loss"/>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="stat.topping-loss"/>
+                </Bindings>
+            </ui:Label>
+            <Bagel.StatMeter name="topping-loss-meter" class="b-tag__meter">
+                <Bindings>
                     <ui:DataBinding property="value" data-source-path="toppingLossPercentile" binding-mode="ToTarget"/>
                 </Bindings>
-            </ui:ProgressBar>
-        </ui:VisualElement>
-        <ui:VisualElement name="control-row" class="bar-row">
-            <ui:VisualElement name="control-icon" class="bar-icon b-icon b-icon--stat-control"/>
-            <ui:ProgressBar title="Control" name="control-bar" high-value="1">
+            </Bagel.StatMeter>
+            <ui:VisualElement name="control-icon" class="b-icon b-icon--stat-control b-tag__icon"/>
+            <ui:Label text="Control" name="control-label" class="b-tag__label">
                 <Bindings>
-                    <loc:LocalizedString property="title" table="BagelStrings" entry="stat.control"/>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="stat.control"/>
+                </Bindings>
+            </ui:Label>
+            <Bagel.StatMeter name="control-meter" class="b-tag__meter">
+                <Bindings>
                     <ui:DataBinding property="value" data-source-path="controlPercentile" binding-mode="ToTarget"/>
                 </Bindings>
-            </ui:ProgressBar>
-        </ui:VisualElement>
-        <ui:VisualElement name="speed-row" class="bar-row">
-            <ui:VisualElement name="speed-icon" class="bar-icon b-icon b-icon--stat-speed"/>
-            <ui:ProgressBar title="Speed" name="speed-bar" high-value="1">
+            </Bagel.StatMeter>
+            <ui:VisualElement name="speed-icon" class="b-icon b-icon--stat-speed b-tag__icon"/>
+            <ui:Label text="Speed" name="speed-label" class="b-tag__label">
                 <Bindings>
-                    <loc:LocalizedString property="title" table="BagelStrings" entry="stat.speed"/>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="stat.speed"/>
+                </Bindings>
+            </ui:Label>
+            <Bagel.StatMeter name="speed-meter" class="b-tag__meter">
+                <Bindings>
                     <ui:DataBinding property="value" data-source-path="speedPercentile" binding-mode="ToTarget"/>
                 </Bindings>
-            </ui:ProgressBar>
-        </ui:VisualElement>
-        <ui:VisualElement name="grip-row" class="bar-row">
-            <ui:VisualElement name="grip-icon" class="bar-icon b-icon b-icon--stat-grip"/>
-            <ui:ProgressBar title="Grip" name="grip-bar" high-value="1">
+            </Bagel.StatMeter>
+            <ui:VisualElement name="grip-icon" class="b-icon b-icon--stat-grip b-tag__icon"/>
+            <ui:Label text="Grip" name="grip-label" class="b-tag__label">
                 <Bindings>
-                    <loc:LocalizedString property="title" table="BagelStrings" entry="stat.grip"/>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="stat.grip"/>
+                </Bindings>
+            </ui:Label>
+            <Bagel.StatMeter name="grip-meter" class="b-tag__meter">
+                <Bindings>
                     <ui:DataBinding property="value" data-source-path="gripPercentile" binding-mode="ToTarget"/>
                 </Bindings>
-            </ui:ProgressBar>
+            </Bagel.StatMeter>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

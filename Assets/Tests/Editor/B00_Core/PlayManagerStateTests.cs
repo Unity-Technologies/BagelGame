@@ -144,6 +144,35 @@ namespace Bagel.B00_Core
         }
 
         [Test]
+        public void ABagelGoesStaleWithTimeAndTheRunIsLost()
+        {
+            m_State.GoToPlay();
+            var tracker = m_State.tracker;
+            var freshTime = tracker.constants.freshTime;
+            Assert.Greater(freshTime, 10f);
+            Assert.AreEqual(1f, tracker.freshness);
+
+            tracker.Age(freshTime * 0.5f);
+            Assert.AreEqual(0.5f, tracker.freshness, 1e-4f);
+            Assert.IsFalse(tracker.isStale);
+
+            tracker.Age(freshTime);
+            Assert.AreEqual(0f, tracker.freshness);
+            Assert.IsTrue(tracker.isStale);
+
+            m_State.FinishRun();
+            Assert.IsTrue(m_State.lastRun.stale);
+            Assert.IsFalse(m_State.lastRun.won, "toppings left, but stale");
+            Assert.AreEqual("gameover.stale", m_State.lastRun.titleKey);
+            Assert.AreEqual(freshTime * 1.5f, m_State.lastRun.time, 1e-3f);
+
+            // A new run starts fresh.
+            m_State.GoToPlay();
+            Assert.AreEqual(1f, m_State.tracker.freshness);
+            Assert.AreEqual(0f, m_State.tracker.elapsed);
+        }
+
+        [Test]
         public void FinishRunKeepsASnapshot()
         {
             m_State.GoToPlay();

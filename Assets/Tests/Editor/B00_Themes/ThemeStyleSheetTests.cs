@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEditor;
@@ -40,8 +41,9 @@ namespace Bagel.B00_Themes
                     }
 
                     // The one exception: -unity-material can't be set from a variable.
-                    Assert.AreEqual("-unity-material: none", body.Trim().TrimEnd(';'),
-                        $"{entry.themeName}: '{selector}' does more than turn off the button shader");
+                    var declarations = body.Split(';').Select(declaration => declaration.Trim()).Where(declaration => declaration.Length > 0).ToArray();
+                    Assert.AreEqual(1, declarations.Length, $"{entry.themeName}: '{selector}' does more than pick the buttons' shader");
+                    StringAssert.StartsWith("-unity-material:", declarations[0], $"{entry.themeName}: '{selector}' does more than pick the buttons' shader");
                 }
             }
         }

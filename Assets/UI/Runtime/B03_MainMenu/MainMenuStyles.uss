@@ -1,37 +1,69 @@
-:root {
-}
+/* The main menu, Settings and the Leaderboard: chalk on the shop's blackboard. The main pane is on the
+   left and the one it opens on the right; the camera moves over to it, and the other one smudges. */
 
 .b-screen {
     flex-direction: row;
     flex-grow: 1;
 }
 
+/* The chalk's grain over everything on the board (a custom filter; none in themes without chalk). */
+.b-chalk {
+    filter: var(--b-board-filter);
+}
+
 .b-pane {
-    background-color: var(--b-board-pane-color);
-    transition-property: filter;
+    background-color: var(--b-surface-color);
+    transition-property: filter, opacity;
     transition-duration: 1s;
     height: 277px;
 }
 
+/* The pane not in use, smudged like chalk wiped with a sleeve. */
 .b-pane:disabled {
-    filter: blur(10);
+    filter: blur(6);
+    opacity: 0.5;
 }
 
 .b-title.b-main-title {
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
+    padding: 0;
+    margin: 0;
     font-size: var(--b-main-title-size);
-    color: var(--b-title-accent-color);
+    color: var(--b-title-color);
 }
 
 .b-title-box:hover {
     -unity-animation-clip: url("project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuTitleAnimation.asset?fileID=3358089438549323042&guid=2c825b0b649574fa39cfb0ff1fc02eca&type=2#MainMenuTitleAnimation");
+}
+
+/* Doodles around the title, drawn in the board's colors. */
+.b-title-doodle {
+    position: absolute;
+    color: var(--b-text-color);
+    --b-doodle-width: 2.5;
+}
+
+.b-title-doodle--bagel {
+    width: 54px;
+    height: 38px;
+    right: -44px;
+    bottom: 0;
+    color: var(--b-accent-b);
+}
+
+.b-title-doodle--steam {
+    width: 30px;
+    height: 26px;
+    right: -32px;
+    bottom: 32px;
+    opacity: 0.8;
+}
+
+.b-title-doodle--sparkle {
+    width: 20px;
+    height: 20px;
+    left: 10px;
+    top: 6px;
+    color: var(--b-accent-a);
 }
 
 .b-background-pane {
@@ -43,36 +75,19 @@
 }
 
 .b-details-view .unity-label {
-    padding-top: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    padding-left: 1px;
-    margin-top: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    margin-left: 1px;
+    padding: 1px;
+    margin: 1px;
 }
 
 .unity-scroller--vertical {
     width: 16px;
 }
 
-.unity-scroller__low-button {
-    width: 16px;
-    height: 16px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
+.unity-scroller__low-button,
 .unity-scroller__high-button {
     width: 16px;
     height: 16px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-radius: 8px;
 }
 
 .unity-scroller__slider > .unity-slider__input {
@@ -80,7 +95,8 @@
 }
 
 .unity-scroller__slider .unity-base-slider__dragger {
-    width: 10px;
+    width: 6px;
+    margin-left: 5px;
 }
 
 .unity-scroller--vertical > .unity-base-slider--vertical {

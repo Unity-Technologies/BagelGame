@@ -1,14 +1,23 @@
 using System;
 using Unity.Localization;
 using Unity.SmartStrings.PersistentVariables;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    // The run's receipt: the result, what the bagel kept, its time and freshness, the leaderboard form, and
+    // the result stamped across it (a UIAnimationClip slams the stamp down each time it shows).
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class GameOverPaneManager : BagelPane
     {
+        public static readonly UniqueStyleString stampLostUssClassName = new("b-stamp--lost");
+        public static readonly UniqueStyleString stampSlamUssClassName = new("b-stamp--slam");
+
         Label m_Title;
+        Label m_TimeLabel;
+        Label m_FreshnessLabel;
+        Label m_Stamp;
         Label m_Summary;
         IntegerField m_ToppingsNumberField;
         VisualElement m_LeaderboardForm;
@@ -19,6 +28,9 @@ namespace Bagel
 
         public Label title => m_Title ??= this.Q<Label>("page-title");
         public Label summary => m_Summary ??= this.Q<Label>("summary-label");
+        public Label timeLabel => m_TimeLabel ??= this.Q<Label>("time-label");
+        public Label freshnessLabel => m_FreshnessLabel ??= this.Q<Label>("freshness-label");
+        public Label stamp => m_Stamp ??= this.Q<Label>("stamp");
         public IntegerField toppingsNumberField => m_ToppingsNumberField ??= this.Q<IntegerField>("toppings-number-field");
         public VisualElement leaderboardForm => m_LeaderboardForm ??= this.Q<VisualElement>("leaderboard-form");
         public TextField addToLeaderboardNameField => m_AddToLeaderboardNameField ??= this.Q<TextField>("leaderboard-name-field");
@@ -48,6 +60,7 @@ namespace Bagel
         readonly LocalizedString m_SummaryString = BagelLocalization.String("gameover.summary");
         readonly LocalizedString m_BagelName = BagelLocalization.String("bagel.sesame");
         readonly IntVariable m_Toppings = new IntVariable();
+        readonly LocalizedString m_StampString = BagelLocalization.String("stamp.win");
 
         bool m_Bound;
 
@@ -63,6 +76,7 @@ namespace Bagel
             // The page title comes from the Page template, so its binding is added here.
             title?.SetBinding("text", m_TitleString);
             summary?.SetBinding("text", m_SummaryString);
+            stamp?.SetBinding("text", m_StampString);
 
             BindUI(new Callbacks
             {
@@ -95,6 +109,36 @@ namespace Bagel
 
             // Changing a variable doesn't re-render the strings that use it.
             m_SummaryString.RefreshString();
+
+            UpdateReceipt();
+            SlamStamp();
+        }
+
+        protected override void OnLocaleChanged() => UpdateReceipt();
+
+        void UpdateReceipt()
+        {
+            if (state == null)
+                return;
+
+            var lastRun = state.lastRun;
+            var culture = BagelLocalization.culture;
+            var minutes = Mathf.FloorToInt(lastRun.time / 60f);
+            timeLabel?.SetText(string.Format(culture, "{0}:{1:00.0}", minutes, lastRun.time - minutes * 60f));
+            freshnessLabel?.SetText(string.Format(culture, "{0:0}%", lastRun.freshness * 100f));
+
+            m_StampString.SetReference(BagelLocalization.table, lastRun.stale ? "stamp.stale" : lastRun.won ? "stamp.win" : "stamp.lose");
+            stamp?.EnableInClassList(stampLostUssClassName, !lastRun.won);
+        }
+
+        // A one-shot clip plays when its class is added: take it off, and put it back a frame later.
+        void SlamStamp()
+        {
+            if (stamp == null || state == null || !state.isGameOver)
+                return;
+
+            stamp.RemoveFromClassList(stampSlamUssClassName);
+            stamp.schedule.Execute(() => stamp.AddToClassList(stampSlamUssClassName)).ExecuteLater(16);
         }
 
         void UpdateLeaderboardForm()

@@ -13,5 +13,8 @@ namespace Bagel
 
         public float forceMax;
         public float spinMax;
+
+        [Tooltip("Seconds out of the bag before a bagel goes stale and the run is lost.")]
+        public float freshTime = 45f;
     }
 }

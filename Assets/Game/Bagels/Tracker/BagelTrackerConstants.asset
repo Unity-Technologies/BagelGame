@@ -18,3 +18,4 @@ MonoBehaviour:
   speedMax: 6
   forceMax: 20
   spinMax: 15
+  freshTime: 45

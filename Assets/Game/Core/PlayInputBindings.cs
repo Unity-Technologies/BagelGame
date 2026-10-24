@@ -23,23 +23,37 @@ namespace Bagel
 
         PlayInputActions m_PlayInputActions;
 
-        void Awake()
+        // Made on first use: a screen can ask for the bindings' names before this Awake runs.
+        PlayInputActions actions
         {
-            m_PlayInputActions = new PlayInputActions();
+            get
+            {
+                if (m_PlayInputActions != null)
+                    return m_PlayInputActions;
 
-            if (PlayerPrefs.HasKey(k_PlayerPrefsName) )
-                m_PlayInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(k_PlayerPrefsName));
+                m_PlayInputActions = new PlayInputActions();
 
-            m_PlayInputActions.Player.Enable();
-            m_PlayInputActions.Player.Pause.performed += PausePerformed;
+                if (PlayerPrefs.HasKey(k_PlayerPrefsName) )
+                    m_PlayInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(k_PlayerPrefsName));
+
+                m_PlayInputActions.Player.Enable();
+                m_PlayInputActions.Player.Pause.performed += PausePerformed;
+                return m_PlayInputActions;
+            }
         }
+
+        void Awake() => _ = actions;
 
         void OnDestroy()
         {
+            if (m_PlayInputActions == null)
+                return;
+
             m_PlayInputActions.Player.Disable();
             m_PlayInputActions.Player.Pause.performed -= PausePerformed;
 
             m_PlayInputActions.Dispose();
+            m_PlayInputActions = null;
         }
 
         void PausePerformed(InputAction.CallbackContext ctx)
@@ -49,7 +63,7 @@ namespace Bagel
 
         public Vector2 GetMovementVectorNormalized()
         {
-            return m_PlayInputActions.Player.Move.ReadValue<Vector2>();
+            return actions.Player.Move.ReadValue<Vector2>();
         }
 
         public string GetBindingText(Binding binding)
@@ -58,23 +72,23 @@ namespace Bagel
             {
                 default:
                 case Binding.Move_Up:
-                    return m_PlayInputActions.Player.Move.bindings[ 1 ].ToDisplayString();
+                    return actions.Player.Move.bindings[ 1 ].ToDisplayString();
                 case Binding.Move_Down:
-                    return m_PlayInputActions.Player.Move.bindings[ 2 ].ToDisplayString();
+                    return actions.Player.Move.bindings[ 2 ].ToDisplayString();
                 case Binding.Move_Left:
-                    return m_PlayInputActions.Player.Move.bindings[ 3 ].ToDisplayString();
+                    return actions.Player.Move.bindings[ 3 ].ToDisplayString();
                 case Binding.Move_Right:
-                    return m_PlayInputActions.Player.Move.bindings[ 4 ].ToDisplayString();
+                    return actions.Player.Move.bindings[ 4 ].ToDisplayString();
                 case Binding.Pause:
-                    return m_PlayInputActions.Player.Pause.bindings[ 0 ].ToDisplayString();
+                    return actions.Player.Pause.bindings[ 0 ].ToDisplayString();
                 case Binding.Gamepad_Pause:
-                    return m_PlayInputActions.Player.Pause.bindings[ 1 ].ToDisplayString();
+                    return actions.Player.Pause.bindings[ 1 ].ToDisplayString();
             }
         }
 
         public void RebindBinding(Binding binding, Action onActionRebound)
         {
-            m_PlayInputActions.Player.Disable();
+            actions.Player.Disable();
 
             InputAction inputAction;
             int bindingIndex;
@@ -83,27 +97,27 @@ namespace Bagel
             {
                 default:
                 case Binding.Move_Up:
-                    inputAction = m_PlayInputActions.Player.Move;
+                    inputAction = actions.Player.Move;
                     bindingIndex = 1;
                     break;
                 case Binding.Move_Down:
-                    inputAction = m_PlayInputActions.Player.Move;
+                    inputAction = actions.Player.Move;
                     bindingIndex = 2;
                     break;
                 case Binding.Move_Left:
-                    inputAction = m_PlayInputActions.Player.Move;
+                    inputAction = actions.Player.Move;
                     bindingIndex = 3;
                     break;
                 case Binding.Move_Right:
-                    inputAction = m_PlayInputActions.Player.Move;
+                    inputAction = actions.Player.Move;
                     bindingIndex = 4;
                     break;
                 case Binding.Pause:
-                    inputAction = m_PlayInputActions.Player.Pause;
+                    inputAction = actions.Player.Pause;
                     bindingIndex = 0;
                     break;
                 case Binding.Gamepad_Pause:
-                    inputAction = m_PlayInputActions.Player.Pause;
+                    inputAction = actions.Player.Pause;
                     bindingIndex = 1;
                     break;
             }
@@ -118,7 +132,7 @@ namespace Bagel
                 {
                     Finish(operation);
 
-                    var inputJson = m_PlayInputActions.SaveBindingOverridesAsJson();
+                    var inputJson = actions.SaveBindingOverridesAsJson();
                     PlayerPrefs.SetString(k_PlayerPrefsName, inputJson);
                     PlayerPrefs.Save();
 
@@ -130,7 +144,7 @@ namespace Bagel
             void Finish(InputActionRebindingExtensions.RebindingOperation operation)
             {
                 operation.Dispose();
-                m_PlayInputActions.Player.Enable();
+                actions.Player.Enable();
                 uiActions?.Enable();
                 onActionRebound?.Invoke();
             }
@@ -138,7 +152,7 @@ namespace Bagel
 
         public void ResetBindings()
         {
-            m_PlayInputActions.RemoveAllBindingOverrides();
+            actions.RemoveAllBindingOverrides();
             PlayerPrefs.DeleteKey(k_PlayerPrefsName);
             PlayerPrefs.Save();
 

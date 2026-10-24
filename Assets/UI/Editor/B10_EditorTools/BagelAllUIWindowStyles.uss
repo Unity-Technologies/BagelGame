@@ -155,6 +155,8 @@
 .b-card__screen {
     flex-grow: 0;
     flex-shrink: 0;
+    /* The shop's blackboard behind the screens: Classic's chalk is drawn to show on it. */
+    background-color: rgb(36, 47, 42);
 }
 
 .b-card__screen--fixed {

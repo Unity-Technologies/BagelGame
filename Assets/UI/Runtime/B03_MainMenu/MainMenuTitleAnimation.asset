@@ -16,7 +16,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: MainMenuTitleAnimation
   serializedVersion: 8
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -323,64 +323,64 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 3981762299
+      attribute: 1320831060
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 87
     - serializedVersion: 2
       path: 0
-      attribute: 2589191789
+      attribute: 1320831060
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 343
     - serializedVersion: 2
       path: 0
-      attribute: 4075349702
+      attribute: 2089838608
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 87
     - serializedVersion: 2
       path: 0
-      attribute: 2247087696
+      attribute: 2089838608
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 343
     - serializedVersion: 2
       path: 0
-      attribute: 56278999
+      attribute: 1320831060
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 599
     - serializedVersion: 2
       path: 0
-      attribute: 484870122
+      attribute: 2089838608
       script: {fileID: 0}
       typeID: 392092235
-      customType: 0
+      customType: 42
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
+      metaData: 599
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2

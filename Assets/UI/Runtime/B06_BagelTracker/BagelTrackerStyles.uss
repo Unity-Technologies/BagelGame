@@ -1,21 +1,121 @@
-:root {
-    --b-bar-size: 60px;
-}
+/* The kitchen gauges riding along with the bagel, on two wings: freshness and speed on the left, the
+   toppings and the knocks on the right. Each wing bends around the bagel (Curved UI: it only shows on
+   world-space panels) and folds in when the bagel gets close to a wall (BagelHud). */
 
-.b-pane {
+.b-hud {
     width: initial;
     align-self: flex-start;
+    align-items: center;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0);
+    transition-property: opacity;
+    transition-duration: 0.25s;
 }
 
-.unity-progress-bar {
-    width: var(--b-bar-size);
+.b-hud--left {
+    -unity-curvature: 0deg -24deg;
 }
 
-.b-toppings-bar {
-    height: var(--b-bar-size);
-    rotate: -90deg;
+.b-hud--right {
+    -unity-curvature: 0deg 24deg;
 }
 
-.b-toppings-bar > .unity-progress-bar__container > .unity-progress-bar__background > .unity-progress-bar__title-container {
-    rotate: 90deg;
+/* Folded against a wall: the details step back. */
+.b-hud--folded {
+    opacity: 0.55;
+}
+
+.b-hud__dial {
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+/* An enamel face in a steel rim, a little sheen at its top. */
+.b-hud__gauge {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    border-width: 4px;
+    border-color: var(--b-gauge-rim);
+    background-color: var(--b-gauge-surface);
+    background-image: radial-gradient(ellipse farthest-side at 50% 25%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
+    align-items: center;
+    justify-content: center;
+}
+
+.b-hud__dial--big > .b-hud__gauge {
+    width: 84px;
+    height: 84px;
+    border-radius: 42px;
+}
+
+.b-gauge-dial__needle {
+    position: absolute;
+    width: 4px;
+    height: 42%;
+    left: 50%;
+    bottom: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+    background-color: var(--b-gauge-accent);
+    transform-origin: 50% 100%;
+}
+
+.b-gauge-dial__hub {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 50%;
+    top: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
+    border-radius: 6px;
+    background-color: var(--b-gauge-line);
+}
+
+.b-hud__count {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: var(--b-gauge-text);
+    padding: 0;
+    margin: 0;
+}
+
+.b-hud__caption {
+    font-size: 13px;
+    padding: 1px 6px;
+    margin-top: 2px;
+    border-radius: 7px;
+    color: var(--b-gauge-text);
+    background-color: var(--b-gauge-surface);
+}
+
+.b-hud__bars {
+    width: 90px;
+}
+
+.b-hud__bar .unity-progress-bar__background {
+    background-color: var(--b-gauge-surface);
+    border-color: var(--b-gauge-rim);
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+}
+
+.b-hud__bar .unity-progress-bar__progress {
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+}
+
+.b-hud__bar .unity-progress-bar__progress {
+    background-color: var(--b-gauge-accent);
+}
+
+.b-hud__bar .unity-progress-bar__title {
+    font-size: 11px;
+    padding: 2px;
+    color: var(--b-gauge-text);
 }

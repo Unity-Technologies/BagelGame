@@ -1,15 +1,34 @@
+/* Paused: the game freezes behind the shop window. The pane is frosted glass (backdrop-filter, which
+   only screen-space panels have) lettered in gold leaf, like a bakery's window sign. */
+
 .b-screen {
     justify-content: center;
     align-items: center;
+    /* The game dims a little behind the window. */
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(20, 12, 6, 0) 30%, rgba(20, 12, 6, 0.55) 100%);
 }
 
 .b-pane {
-    width: 300px;
-    padding-top: 25px;
-    padding-right: 25px;
-    padding-bottom: 25px;
-    padding-left: 25px;
-    backdrop-filter: blur(24);
+    width: 320px;
+    padding: 22px 26px 26px 26px;
+    border-width: 2px;
+    border-color: var(--b-line-color);
+    border-radius: 26px;
+    backdrop-filter: blur(18);
+}
+
+.b-glass .b-title {
+    letter-spacing: 3px;
+    text-shadow: 0 2px 0 rgba(40, 24, 14, 0.6);
+}
+
+/* Gold leaf: a fine gold rule rather than the chalk's colors. */
+.b-glass .b-title-underline {
+    background-image: none;
+    background-color: var(--b-accent-color);
+    height: 2px;
+    border-radius: 0;
+    margin: 0 30px 10px 30px;
 }
 
 .b-inactive-pane {

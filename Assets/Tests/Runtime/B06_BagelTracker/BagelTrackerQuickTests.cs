@@ -32,13 +32,13 @@ namespace Bagel.B06_BagelTracker
             display.SetState(m_State);
             simulate.FrameUpdate();
 
-            var toppingsCountBar = display.toppingsCountBar;
-            Assert.IsNotNull(toppingsCountBar);
-            Assert.AreEqual(m_State.tracker.toppingsCount, toppingsCountBar.value);
+            var toppingsGauge = display.toppingsGauge;
+            Assert.IsNotNull(toppingsGauge);
+            Assert.AreEqual(m_State.tracker.toppingsCount, toppingsGauge.value);
 
             m_State.tracker.toppingsCount = 5;
             simulate.FrameUpdate();
-            Assert.AreEqual(5f, toppingsCountBar.value);
+            Assert.AreEqual(5f, toppingsGauge.value);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Bagel.B06_BagelTracker
             m_BagelTrackerConstants.hideFlags = HideFlags.HideAndDontSave;
             m_BagelTrackerConstants.spinMax = 15;
             m_BagelTrackerConstants.forceMax = 20;
+            m_BagelTrackerConstants.speedMax = 6;
 
         }
 
@@ -63,29 +64,46 @@ namespace Bagel.B06_BagelTracker
         [Test]
         public void ToppingsCountBinding()
         {
-            var toppingsCountBar = m_RightDisplay.toppingsCountBar;
-            Assert.IsNotNull(toppingsCountBar);
-            Assert.AreEqual(m_State.tracker.toppingsCount, toppingsCountBar.value);
-            Assert.AreEqual(1000f, toppingsCountBar.highValue);
-            Assert.AreEqual("42", toppingsCountBar.title);
+            var toppingsGauge = m_RightDisplay.toppingsGauge;
+            Assert.IsNotNull(toppingsGauge);
+            Assert.AreEqual(m_State.tracker.toppingsCount, toppingsGauge.value);
+            Assert.AreEqual(1000f, toppingsGauge.maxValue);
+            Assert.AreEqual(0.042f, toppingsGauge.fraction, 1e-5f);
+            Assert.AreEqual("42", m_RightDisplay.toppingsCount.text);
 
             m_State.tracker.toppingsCount = 5;
             simulate.FrameUpdate();
-            Assert.AreEqual(5f, toppingsCountBar.value);
-            Assert.AreEqual("5", toppingsCountBar.title);
+            Assert.AreEqual(5f, toppingsGauge.value);
+            Assert.AreEqual("5", m_RightDisplay.toppingsCount.text);
         }
 
         [Test]
         public void SpinAndPainBindings()
         {
-            Assert.AreEqual(15f, m_LeftDisplay.spinBar.highValue);
-            Assert.AreEqual(20f, m_LeftDisplay.painBar.highValue);
+            Assert.AreEqual(15f, m_RightDisplay.spinBar.highValue);
+            Assert.AreEqual(20f, m_RightDisplay.painBar.highValue);
 
             m_State.tracker.spin = 7;
             m_State.tracker.force = 3;
             simulate.FrameUpdate();
-            Assert.AreEqual(7f, m_LeftDisplay.spinBar.value);
-            Assert.AreEqual(3f, m_LeftDisplay.painBar.value);
+            Assert.AreEqual(7f, m_RightDisplay.spinBar.value);
+            Assert.AreEqual(3f, m_RightDisplay.painBar.value);
+        }
+
+        [Test]
+        public void TheGaugesShowFreshnessAndSpeed()
+        {
+            Assert.AreEqual(1f, m_LeftDisplay.freshnessGauge.fraction);
+
+            m_State.tracker.freshness = 0.25f;
+            m_State.tracker.speed = -3f;
+            simulate.FrameUpdate();
+
+            Assert.AreEqual(0.25f, m_LeftDisplay.freshnessGauge.fraction, 1e-5f);
+            // Backwards is as fast as forwards: half of speedMax (6).
+            Assert.AreEqual(0.5f, m_LeftDisplay.speedGauge.fraction, 1e-5f);
+            var needle = m_LeftDisplay.speedGauge.Q(className: BagelGauge.needleUssClassName);
+            Assert.AreEqual(0f, needle.resolvedStyle.rotate.angle.ToDegrees(), 1e-3f, "half way up: straight up");
         }
     }
 }

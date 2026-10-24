@@ -1,13 +1,70 @@
-/* Edgy: Classic with square corners and blue buttons. Only variables. */
+/* Edgy: the diner's neon sign. Dark glass lit in cyan and hot pink, square corners everywhere, and the
+   buttons glow through a UI Shader Graph. Variables, plus the one rule at the end. */
 
 :root {
     --b-sound-tone: pluck;
 
-    --b-fill-color: rgb(231, 231, 231);
-    --b-primary-color: rgb(62, 78, 237);
-    --b-primary-color-faded: rgb(20, 66, 123);
+    --b-board-surface: rgba(10, 14, 36, 0.92);
+    --b-board-text: rgb(150, 245, 255);
+    --b-board-title: rgb(255, 92, 196);
+    --b-board-line: rgb(80, 230, 255);
+    --b-board-fill: rgba(80, 230, 255, 0.08);
+    --b-board-hover: rgba(80, 230, 255, 0.22);
+    --b-board-track: rgba(80, 230, 255, 0.25);
+    --b-board-accent: rgb(255, 92, 196);
+    --b-board-accent-fill: rgba(255, 92, 196, 0.3);
+    --b-board-accent-text: rgb(255, 214, 240);
+    --b-board-glow: rgb(80, 230, 255);
+    --b-board-row: rgba(80, 230, 255, 0.07);
+    --b-board-popup: rgb(16, 20, 48);
+    --b-board-sign: rgba(10, 14, 36, 0.95);
+    --b-frame-color: rgb(80, 230, 255);
+
+    --b-paper-surface: rgb(242, 244, 255);
+    --b-paper-text: rgb(14, 16, 40);
+    --b-paper-title: rgb(62, 78, 237);
+    --b-paper-line: rgb(14, 16, 40);
+    --b-paper-fill: rgb(255, 255, 255);
+    --b-paper-hover: rgb(214, 220, 255);
+    --b-paper-accent: rgb(62, 78, 237);
+    --b-paper-accent-fill: rgb(62, 78, 237);
+    --b-paper-accent-text: rgb(255, 255, 255);
+    --b-paper-glow: rgba(62, 78, 237, 0.6);
+
+    --b-glass-surface: rgba(10, 14, 36, 0.55);
+    --b-glass-text: rgb(150, 245, 255);
+    --b-glass-title: rgb(255, 92, 196);
+    --b-glass-line: rgb(80, 230, 255);
+    --b-glass-fill: rgba(80, 230, 255, 0.08);
+    --b-glass-hover: rgba(80, 230, 255, 0.22);
+    --b-glass-accent: rgb(255, 92, 196);
+    --b-glass-accent-fill: rgba(255, 92, 196, 0.35);
+    --b-glass-accent-text: rgb(255, 214, 240);
+    --b-glass-glow: rgb(80, 230, 255);
+    --b-glass-popup: rgb(16, 20, 48);
+
+    --b-gauge-surface: rgb(14, 18, 44);
+    --b-gauge-rim: rgb(80, 230, 255);
+    --b-gauge-text: rgb(150, 245, 255);
+    --b-gauge-line: rgb(150, 245, 255);
+    --b-gauge-accent: rgb(255, 92, 196);
+
+    --b-accent-a: rgb(80, 230, 255);
+    --b-accent-b: rgb(62, 78, 237);
+    --b-accent-c: rgb(160, 80, 255);
+    --b-accent-d: rgb(255, 92, 196);
+
+    --b-focus-color: rgb(255, 92, 196);
+    --b-board-filter: none;
+
     --b-tiny-radius: 0;
     --b-inner-radius: 0;
     --b-element-radius: 0;
     --b-pane-radius: 0;
+}
+
+/* The one rule a theme needs: -unity-material can't be set from a variable. Neon buttons, through a
+   UI Shader Graph that bends their colors across them. */
+.unity-button {
+    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T2_Edgy/BagelEdgyThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelEdgyThemeButtonShader");
 }

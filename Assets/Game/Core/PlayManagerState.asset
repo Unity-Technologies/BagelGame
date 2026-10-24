@@ -26,6 +26,8 @@ MonoBehaviour:
     m_Speed: 0
     m_Force: 0
     m_Spin: 0
+    m_Elapsed: 0
+    m_Freshness: 1
   m_LastRun:
     m_BagelName: 
     m_Toppings: 0

@@ -1,19 +1,7 @@
-/* Classic: dark glass panes, green buttons and the wobbly button shader. Only variables:
-   every rule is in T0_Common/BagelCommonStyles.uss. */
+/* Classic: the bagel shop. Chalk on the blackboard, ink on paper tags and receipts, gold leaf on the
+   shop window, cream enamel gauges. Every default in T0_Common/BagelCommonStyles.uss is Classic's, so
+   this theme only picks its instrument. */
 
 :root {
     --b-sound-tone: wood;
-
-    --b-pane-color: rgba(0, 0, 0, 0.53);
-    --b-sub-pane-color: rgba(0, 0, 0, 0.52);
-    --b-fill-color: rgb(71, 71, 71);
-    --b-primary-color: rgb(98, 143, 38);
-    --b-primary-color-faded: rgb(20, 79, 16);
-    --b-input-color: rgba(0, 0, 0, 0.38);
-    --b-text-color: rgb(239, 239, 239);
-    --b-title-accent-color: rgb(244, 158, 45);
-    --b-tiny-radius: 4px;
-    --b-inner-radius: 8px;
-    --b-element-radius: 11px;
-    --b-pane-radius: 18px;
 }

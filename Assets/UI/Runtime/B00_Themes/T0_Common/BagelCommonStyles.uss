@@ -1,53 +1,124 @@
-/* Bagel Game: the styles every theme shares. Each color, size and shape is a variable;
-   a theme only sets variables (see T1_Classic/BagelClassicThemeStyles.uss). The defaults
-   here are Classic's. */
+/* Bagel Game: the styles every theme shares. Each color, size and shape is a variable; a theme only
+   sets variables (see T1_Classic/BagelClassicThemeStyles.uss). The defaults here are Classic's: the
+   bagel shop.
+
+   The UI is made of four surfaces, like the shop is: chalk on the blackboard (.b-board: the main menu,
+   settings and leaderboards), paper (.b-paper: the bagels' price tags, the receipt), the shop window's
+   glass (.b-glass: the pause screen) and the kitchen gauges riding along with the bagel (.b-gauge). A
+   surface sets the colors the controls inside it read (--b-text-color, --b-line-color...), so a button
+   is chalk on the board and ink on paper with the same rules. */
 
 :root {
-    /* Surfaces */
-    --b-pane-color: rgba(0, 0, 0, 0.53);
-    --b-board-pane-color: rgba(0, 0, 0, 0);
-    --b-sub-pane-color: rgba(0, 0, 0, 0.52);
-    --b-fill-color: rgb(71, 71, 71);
-    --b-input-color: rgba(0, 0, 0, 0.38);
-    --b-row-color: rgba(51, 51, 51, 0.62);
-    --b-popup-color: rgba(0, 0, 0, 0.64);
+    /* The shop's palette */
+    --b-ink: rgb(59, 31, 20);
+    --b-paper: rgb(251, 243, 226);
+    --b-kraft: rgb(214, 182, 140);
+    --b-chalk: rgb(244, 241, 230);
+    --b-crust: rgb(214, 140, 69);
+    --b-red: rgb(222, 72, 44);
+    --b-chalk-yellow: rgb(247, 213, 110);
+    --b-slate: rgb(36, 47, 42);
 
-    /* Brand */
-    --b-primary-color: rgb(98, 143, 38);
-    --b-primary-color-faded: rgb(20, 79, 16);
-    --b-progress-color: rgb(78, 213, 115);
-    --b-title-accent-color: rgb(244, 158, 45);
-    --b-accent-a: rgb(116, 255, 0);
-    --b-accent-b: rgb(255, 140, 101);
-    --b-accent-c: rgb(66, 0, 255);
-    --b-accent-d: rgb(0, 255, 153);
+    /* The blackboard: chalk on the board in the scene, which shows through. */
+    --b-board-surface: rgba(0, 0, 0, 0);
+    --b-board-text: rgb(244, 241, 230);
+    --b-board-title: rgb(247, 213, 110);
+    --b-board-line: rgba(244, 241, 230, 0.8);
+    --b-board-fill: rgba(244, 241, 230, 0.06);
+    --b-board-hover: rgba(244, 241, 230, 0.18);
+    --b-board-track: rgba(244, 241, 230, 0.22);
+    --b-board-accent: rgb(247, 213, 110);
+    --b-board-accent-fill: rgba(247, 213, 110, 0.22);
+    --b-board-accent-text: rgb(247, 213, 110);
+    --b-board-glow: rgba(244, 241, 230, 0.75);
+    --b-board-row: rgba(244, 241, 230, 0.07);
+    --b-board-popup: rgb(43, 56, 50);
+    /* A free-standing chalkboard sign (no board in the scene behind it), in its wooden frame. */
+    --b-board-sign: rgb(40, 52, 46);
+    --b-frame-color: rgb(140, 90, 60);
 
-    /* Bagel cards on the selection podiums */
-    --b-card-color-a: rgb(255, 255, 255);
-    --b-card-color-b: rgb(255, 195, 162);
-    --b-card-color-c: rgb(255, 28, 0);
-    --b-card-text-color: rgb(0, 0, 0);
+    /* Paper: ink on cream, red for what stands out. */
+    --b-paper-surface: rgb(251, 243, 226);
+    --b-paper-text: rgb(59, 31, 20);
+    --b-paper-title: rgb(59, 31, 20);
+    --b-paper-line: rgb(59, 31, 20);
+    --b-paper-fill: rgb(255, 250, 240);
+    --b-paper-hover: rgb(246, 228, 198);
+    --b-paper-track: rgba(59, 31, 20, 0.14);
+    --b-paper-accent: rgb(222, 72, 44);
+    --b-paper-accent-fill: rgb(222, 72, 44);
+    --b-paper-accent-text: rgb(255, 248, 234);
+    --b-paper-glow: rgba(222, 72, 44, 0.6);
+    --b-paper-row: rgba(59, 31, 20, 0.06);
+    --b-paper-popup: rgb(255, 248, 234);
+
+    /* The shop window: frosted glass, gold-leaf lettering. */
+    --b-glass-surface: rgba(255, 244, 222, 0.18);
+    --b-glass-text: rgb(255, 238, 205);
+    --b-glass-title: rgb(246, 200, 110);
+    --b-glass-line: rgba(246, 200, 110, 0.9);
+    --b-glass-fill: rgba(40, 24, 14, 0.35);
+    --b-glass-hover: rgba(246, 200, 110, 0.25);
+    --b-glass-track: rgba(255, 238, 205, 0.25);
+    --b-glass-accent: rgb(246, 200, 110);
+    --b-glass-accent-fill: rgba(246, 200, 110, 0.85);
+    --b-glass-accent-text: rgb(59, 31, 20);
+    --b-glass-glow: rgba(246, 200, 110, 0.8);
+    --b-glass-row: rgba(255, 238, 205, 0.08);
+    --b-glass-popup: rgb(58, 40, 28);
+
+    /* The kitchen gauges: cream enamel faces, ink ticks, a red needle. */
+    --b-gauge-surface: rgb(250, 241, 222);
+    --b-gauge-rim: rgb(196, 202, 206);
+    --b-gauge-text: rgb(59, 31, 20);
+    --b-gauge-line: rgb(59, 31, 20);
+    --b-gauge-accent: rgb(222, 72, 44);
+    --b-gauge-good: rgb(108, 168, 84);
+    --b-gauge-warn: rgb(232, 168, 56);
+    --b-gauge-seed: rgb(251, 243, 226);
+
+    /* What the controls read: the board's, until a surface says otherwise (popups open at the panel's
+       root, outside any surface). */
+    --b-surface-color: var(--b-board-surface);
+    --b-text-color: var(--b-board-text);
+    --b-title-color: var(--b-board-title);
+    --b-line-color: var(--b-board-line);
+    --b-fill-color: var(--b-board-fill);
+    --b-hover-color: var(--b-board-hover);
+    --b-track-color: var(--b-board-track);
+    --b-accent-color: var(--b-board-accent);
+    --b-accent-fill: var(--b-board-accent-fill);
+    --b-accent-text-color: var(--b-board-accent-text);
+    --b-glow-color: var(--b-board-glow);
+    --b-row-color: var(--b-board-row);
+    --b-popup-color: var(--b-board-popup);
+
+    /* The title's underline: a stroke of colored chalk. */
+    --b-accent-a: rgb(247, 213, 110);
+    --b-accent-b: rgb(244, 160, 160);
+    --b-accent-c: rgb(150, 196, 236);
+    --b-accent-d: rgb(160, 214, 150);
 
     /* Text */
-    --b-text-color: rgb(239, 239, 239);
     --b-font: url("project://database/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
     --b-title-size: 34px;
     --b-main-title-size: 45px;
     --b-details-size: 10px;
 
-    /* Hover and focus */
-    --b-glow-color: rgb(255, 255, 255);
-    --b-focus-color: rgb(255, 255, 255);
+    /* Focus */
+    --b-focus-color: rgb(247, 213, 110);
     --b-focus-width: 2px;
 
     /* Buttons */
-    --b-button-border-color: rgb(149, 149, 149);
-    --b-button-border-width: 5px;
+    --b-button-border-width: 3px;
+
+    /* The custom filters: the chalk's grain on the board. A theme without chalk sets it to none. */
+    --b-board-filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/Chalk.asset" 0.55 1.6);
 
     /* Shapes and spacing */
     --b-tiny-radius: 4px;
     --b-inner-radius: 8px;
-    --b-element-radius: 11px;
+    --b-element-radius: 12px;
     --b-pane-radius: 18px;
     --b-field-gap: 4px;
     --b-pane-padding: 6px;
@@ -55,26 +126,142 @@
     --b-progress-bar-padding: 8px;
 }
 
+/* ------------------------------------------------------------------ Surfaces */
+
+.b-board {
+    --b-surface-color: var(--b-board-surface);
+    --b-text-color: var(--b-board-text);
+    --b-title-color: var(--b-board-title);
+    --b-line-color: var(--b-board-line);
+    --b-fill-color: var(--b-board-fill);
+    --b-hover-color: var(--b-board-hover);
+    --b-track-color: var(--b-board-track);
+    --b-accent-color: var(--b-board-accent);
+    --b-accent-fill: var(--b-board-accent-fill);
+    --b-accent-text-color: var(--b-board-accent-text);
+    --b-glow-color: var(--b-board-glow);
+    --b-row-color: var(--b-board-row);
+    --b-popup-color: var(--b-board-popup);
+}
+
+.b-paper {
+    --b-surface-color: var(--b-paper-surface);
+    --b-text-color: var(--b-paper-text);
+    --b-title-color: var(--b-paper-title);
+    --b-line-color: var(--b-paper-line);
+    --b-fill-color: var(--b-paper-fill);
+    --b-hover-color: var(--b-paper-hover);
+    --b-track-color: var(--b-paper-track);
+    --b-accent-color: var(--b-paper-accent);
+    --b-accent-fill: var(--b-paper-accent-fill);
+    --b-accent-text-color: var(--b-paper-accent-text);
+    --b-glow-color: var(--b-paper-glow);
+    --b-row-color: var(--b-paper-row);
+    --b-popup-color: var(--b-paper-popup);
+    --b-focus-color: var(--b-paper-accent);
+}
+
+.b-glass {
+    --b-surface-color: var(--b-glass-surface);
+    --b-text-color: var(--b-glass-text);
+    --b-title-color: var(--b-glass-title);
+    --b-line-color: var(--b-glass-line);
+    --b-fill-color: var(--b-glass-fill);
+    --b-hover-color: var(--b-glass-hover);
+    --b-track-color: var(--b-glass-track);
+    --b-accent-color: var(--b-glass-accent);
+    --b-accent-fill: var(--b-glass-accent-fill);
+    --b-accent-text-color: var(--b-glass-accent-text);
+    --b-glow-color: var(--b-glass-glow);
+    --b-row-color: var(--b-glass-row);
+    --b-popup-color: var(--b-glass-popup);
+}
+
+.b-gauge {
+    --b-text-color: var(--b-gauge-text);
+    --b-line-color: var(--b-gauge-line);
+    --b-accent-color: var(--b-gauge-accent);
+}
+
+/* ------------------------------------------------------------------ Text */
+
 .unity-text-element {
     -unity-font-definition: var(--b-font);
     -unity-text-generator: advanced;
     color: var(--b-text-color);
 }
 
+.b-title {
+    font-size: var(--b-title-size);
+    -unity-text-align: upper-center;
+    color: var(--b-title-color);
+}
+
+/* A stroke of colored chalk under a page's title, fading at both ends. */
+.b-title-underline {
+    height: 6px;
+    flex-shrink: 0;
+    margin: 0 12px 4px 12px;
+    background-image: linear-gradient(90deg, var(--b-accent-a) 0%, var(--b-accent-b) 35%, var(--b-accent-c) 65%, var(--b-accent-d) 100%);
+    border-radius: 3px;
+    opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ Panes */
+
+.b-pane {
+    padding-top: var(--b-pane-padding);
+    padding-right: var(--b-pane-padding);
+    padding-bottom: var(--b-pane-padding);
+    padding-left: var(--b-pane-padding);
+    margin: 6px;
+    width: 250px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    background-color: var(--b-surface-color);
+}
+
+/* A little chalkboard sign of its own, framed in wood: the leaderboard beside the receipt. */
+.b-sign {
+    background-color: var(--b-board-sign);
+    border-width: 6px;
+    border-color: var(--b-frame-color);
+    border-radius: var(--b-pane-radius);
+}
+
+.b-sub-pane {
+    padding: 4px;
+    border-top-left-radius: var(--b-pane-radius);
+    border-top-right-radius: var(--b-pane-radius);
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    background-color: var(--b-row-color);
+}
+
+.b-screen {
+    flex-grow: 1;
+}
+
+/* ------------------------------------------------------------------ Buttons */
+
 .unity-button {
-    transition-duration: 0.3s;
+    transition-property: background-color, border-color, filter;
+    transition-duration: 0.2s;
     border-top-width: var(--b-button-border-width);
     border-right-width: var(--b-button-border-width);
     border-bottom-width: var(--b-button-border-width);
     border-left-width: var(--b-button-border-width);
-    border-top-color: var(--b-button-border-color);
-    border-right-color: var(--b-button-border-color);
-    border-bottom-color: var(--b-button-border-color);
-    border-left-color: var(--b-button-border-color);
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
     overflow: visible;
-    /* -unity-material can't come from a variable: a theme that doesn't want the shader sets it to none. */
-    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+    /* -unity-material can't come from a variable: a theme that wants a shader sets it (see T2_Edgy). */
+    -unity-material: none;
     background-color: var(--b-fill-color);
+    color: var(--b-text-color);
     border-top-left-radius: var(--b-element-radius);
     border-top-right-radius: var(--b-element-radius);
     border-bottom-right-radius: var(--b-element-radius);
@@ -87,20 +274,97 @@
 }
 
 .unity-button:enabled:hover {
+    background-color: var(--b-hover-color);
     filter: drop-shadow(0 0 6 var(--b-glow-color));
 }
 
 .unity-button.b-primary {
-    background-color: var(--b-primary-color);
+    background-color: var(--b-accent-fill);
+    border-top-color: var(--b-accent-color);
+    border-right-color: var(--b-accent-color);
+    border-bottom-color: var(--b-accent-color);
+    border-left-color: var(--b-accent-color);
+    color: var(--b-accent-text-color);
+}
+
+.unity-button:disabled {
+    opacity: 0.45;
+}
+
+.b-long-press-button__progress {
+    background-color: var(--b-accent-fill);
+}
+
+/* ------------------------------------------------------------------ Fields */
+
+.unity-base-field {
+    flex-direction: column;
+    margin-top: var(--b-field-gap);
+}
+
+.unity-base-field__label {
+    color: var(--b-text-color);
 }
 
 .unity-base-text-field__input {
-    background-color: var(--b-input-color);
+    background-color: var(--b-fill-color);
+    color: var(--b-text-color);
+    border-width: 2px;
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
     border-top-left-radius: var(--b-inner-radius);
     border-top-right-radius: var(--b-inner-radius);
     border-bottom-right-radius: var(--b-inner-radius);
     border-bottom-left-radius: var(--b-inner-radius);
 }
+
+.unity-popup-field__input {
+    background-color: var(--b-fill-color);
+    color: var(--b-text-color);
+    border-width: 2px;
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.unity-base-popup-field__arrow {
+    -unity-background-image-tint-color: var(--b-text-color);
+}
+
+/* Dropdown menus open at the panel's root: the board's colors, opaque. */
+.unity-base-dropdown__container-inner {
+    background-color: var(--b-popup-color);
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.unity-base-dropdown__item:hover,
+.unity-base-dropdown__item:focus {
+    background-color: var(--b-hover-color);
+}
+
+.unity-base-dropdown__label {
+    color: var(--b-text-color);
+}
+
+.unity-base-dropdown__checkmark {
+    -unity-background-image-tint-color: var(--b-accent-color);
+}
+
+/* ------------------------------------------------------------------ Progress bars */
 
 .unity-progress-bar {
     margin-top: var(--b-field-gap);
@@ -114,13 +378,14 @@
 }
 
 .unity-progress-bar__background {
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
+    border-width: 2px;
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
     min-height: initial;
     max-height: initial;
-    background-color: var(--b-primary-color-faded);
+    background-color: var(--b-track-color);
     border-top-left-radius: var(--b-element-radius);
     border-top-right-radius: var(--b-element-radius);
     border-bottom-right-radius: var(--b-element-radius);
@@ -132,119 +397,86 @@
     padding-right: var(--b-progress-bar-padding);
     padding-bottom: var(--b-progress-bar-padding);
     padding-left: var(--b-progress-bar-padding);
+    color: var(--b-text-color);
 }
 
 .unity-progress-bar__progress {
-    background-color: var(--b-primary-color);
+    background-color: var(--b-accent-fill);
     border-top-left-radius: var(--b-inner-radius);
     border-top-right-radius: var(--b-inner-radius);
     border-bottom-right-radius: var(--b-inner-radius);
     border-bottom-left-radius: var(--b-inner-radius);
 }
 
-.b-title {
-    font-size: var(--b-title-size);
-    -unity-text-align: upper-center;
-}
-
-.b-title-underline {
-    height: 14px;
-    flex-shrink: 0;
-    background-image: linear-gradient(90deg, var(--b-accent-a) 0%, var(--b-accent-b) 25.6%, var(--b-accent-c) 56.8%, var(--b-accent-d) 82.6%);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.b-pane {
-    padding-top: var(--b-pane-padding);
-    padding-right: var(--b-pane-padding);
-    padding-bottom: var(--b-pane-padding);
-    padding-left: var(--b-pane-padding);
-    margin-top: 6px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-    margin-left: 6px;
-    width: 250px;
-    border-top-left-radius: var(--b-pane-radius);
-    border-top-right-radius: var(--b-pane-radius);
-    border-bottom-right-radius: var(--b-pane-radius);
-    border-bottom-left-radius: var(--b-pane-radius);
-    background-color: var(--b-pane-color);
-}
-
-.b-sub-pane {
-    padding-top: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-    padding-left: 4px;
-    border-top-left-radius: var(--b-pane-radius);
-    border-top-right-radius: var(--b-pane-radius);
-    border-bottom-right-radius: var(--b-pane-radius);
-    border-bottom-left-radius: var(--b-pane-radius);
-    background-color: var(--b-sub-pane-color);
-}
-
-.b-screen {
-    flex-grow: 1;
-}
-
-.b-long-press-button__progress {
-    background-color: var(--b-progress-color);
-}
-
-.unity-base-field {
-    flex-direction: column;
-    margin-top: var(--b-field-gap);
-}
+/* ------------------------------------------------------------------ Sliders */
 
 .unity-base-slider--horizontal > .unity-base-slider__input {
     height: 22px;
 }
 
-.unity-multi-column-header {
-    min-height: initial;
+.unity-base-slider--horizontal .unity-base-slider__tracker {
+    background-color: var(--b-track-color);
+    border-width: 0;
+    height: 4px;
+    margin-top: -2px;
+    border-radius: 2px;
 }
 
-.unity-list-view__item {
-    background-color: var(--b-row-color);
+.unity-base-slider--horizontal .unity-base-slider__tracker:hover:enabled {
+    background-color: var(--b-track-color);
 }
 
-.unity-list-view__item.unity-collection-view__item--alternative-background {
-    background-color: var(--b-primary-color-faded);
+.unity-base-slider__drag-container > .unity-base-slider__dragger {
+    background-color: var(--b-accent-color);
+    border-width: 0;
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
 }
 
-.unity-popup-field {
-    -unity-material: url("project://database/Assets/UI/Runtime/B00_Themes/T1_Classic/BagelClassicThemeButtonShader.shadergraph?fileID=-876546973899608171&guid=2c703e02510718642b28899db56f7d81&type=3#BagelClassicThemeButtonShader");
+.unity-base-slider--horizontal .unity-base-slider__dragger:hover:enabled {
+    border-width: 1px;
+    border-top-color: var(--b-glow-color);
+    border-right-color: var(--b-glow-color);
+    border-bottom-color: var(--b-glow-color);
+    border-left-color: var(--b-glow-color);
+    background-color: var(--b-accent-color);
+    scale: 1.1 1.1;
 }
 
-.unity-popup-field__input {
-    border-top-left-radius: var(--b-inner-radius);
-    border-top-right-radius: var(--b-inner-radius);
-    border-bottom-right-radius: var(--b-inner-radius);
-    border-bottom-left-radius: var(--b-inner-radius);
+/* ------------------------------------------------------------------ Toggles */
+
+.unity-toggle {
+    flex-direction: row;
+    align-items: center;
 }
 
-.unity-multi-column-view__header-container {
-    background-color: rgba(0, 0, 0, 0);
+.unity-toggle__checkmark {
+    width: 22px;
+    height: 22px;
+    background-color: var(--b-fill-color);
+    border-width: 2px;
+    border-top-color: var(--b-line-color);
+    border-right-color: var(--b-line-color);
+    border-bottom-color: var(--b-line-color);
+    border-left-color: var(--b-line-color);
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+    -unity-background-image-tint-color: var(--b-accent-text-color);
 }
 
-.unity-multi-column-header__column {
-    background-color: rgba(0, 0, 0, 0);
-    border-top-width: 0;
-    border-right-width: 1px;
-    border-bottom-width: 0;
-    border-left-width: 0;
+.unity-toggle:checked .unity-toggle__checkmark {
+    background-color: var(--b-accent-fill);
+    border-top-color: var(--b-accent-color);
+    border-right-color: var(--b-accent-color);
+    border-bottom-color: var(--b-accent-color);
+    border-left-color: var(--b-accent-color);
 }
 
-.unity-base-dropdown__container-inner {
-    background-color: var(--b-popup-color);
-}
-
-.unity-base-dropdown__checkmark {
-    -unity-background-image-tint-color: var(--b-text-color);
-}
+/* ------------------------------------------------------------------ Tabs */
 
 .unity-tab-view {
     margin-top: var(--b-field-gap);
@@ -263,85 +495,117 @@
     flex-shrink: 1;
     flex-basis: 0;
     min-width: 0;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding: 0 2px;
     align-items: center;
-}
-
-.unity-tab {
-    background-color: var(--b-sub-pane-color);
-    border-bottom-right-radius: var(--b-pane-radius);
-    border-bottom-left-radius: var(--b-pane-radius);
-    padding-top: 7px;
-    padding-right: 7px;
-    padding-bottom: 7px;
-    padding-left: 7px;
-}
-
-.unity-tab__header {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
     border-top-left-radius: var(--b-inner-radius);
     border-top-right-radius: var(--b-inner-radius);
-    background-color: rgba(0, 0, 0, 0);
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .unity-tab__header:hover {
-    border-left-color: var(--b-glow-color);
-    border-right-color: var(--b-glow-color);
-    border-top-color: var(--b-glow-color);
-    border-bottom-color: var(--b-glow-color);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--b-hover-color);
 }
 
 .unity-tab__header-label {
     color: var(--b-text-color);
+    opacity: 0.6;
 }
 
-.unity-tab__header:checked {
-    background-color: var(--b-primary-color);
-    border-top-left-radius: var(--b-inner-radius);
-    border-top-right-radius: var(--b-inner-radius);
+.unity-tab__header:checked > .unity-tab__header-label {
+    opacity: 1;
+    color: var(--b-accent-color);
+}
+
+/* The chosen tab is underlined, like the title. */
+.unity-tab__header-underline {
+    height: 3px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .unity-tab__header:checked > .unity-tab__header-underline {
+    background-color: var(--b-accent-color);
+}
+
+.unity-tab {
+    background-color: var(--b-row-color);
+    border-top-width: 1px;
+    border-top-color: var(--b-track-color);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: var(--b-pane-radius);
+    border-bottom-left-radius: var(--b-pane-radius);
+    padding: 7px;
+}
+
+/* ------------------------------------------------------------------ Lists */
+
+.unity-multi-column-header {
+    min-height: initial;
+}
+
+.unity-multi-column-view__header-container {
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom-width: 2px;
+    border-bottom-color: var(--b-line-color);
+}
+
+.unity-multi-column-header__column {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0 1px 0 0;
+    border-top-color: var(--b-track-color);
+    border-right-color: var(--b-track-color);
+    border-bottom-color: var(--b-track-color);
+    border-left-color: var(--b-track-color);
+}
+
+.unity-multi-column-header__column:hover:enabled {
+    background-color: var(--b-hover-color);
+}
+
+.unity-multi-column-header__column__title {
+    color: var(--b-accent-color);
+}
+
+.unity-list-view__item {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.unity-scroller__low-button {
-    border-top-left-radius: var(--b-element-radius);
-    border-top-right-radius: var(--b-element-radius);
-    border-bottom-right-radius: var(--b-element-radius);
-    border-bottom-left-radius: var(--b-element-radius);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
+.unity-list-view__item.unity-collection-view__item--alternative-background {
+    background-color: var(--b-row-color);
 }
 
+.unity-list-view__item:hover:enabled {
+    background-color: var(--b-hover-color);
+}
+
+/* ------------------------------------------------------------------ Scroll bars: thin strokes */
+
+.unity-scroller__low-button,
 .unity-scroller__high-button {
-    border-top-left-radius: var(--b-element-radius);
-    border-top-right-radius: var(--b-element-radius);
-    border-bottom-right-radius: var(--b-element-radius);
-    border-bottom-left-radius: var(--b-element-radius);
+    border-width: 0;
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+    background-color: var(--b-fill-color);
+    -unity-background-image-tint-color: var(--b-text-color);
 }
 
-.unity-scroller__slider {
-    background-color: rgba(0, 0, 0, 0);
-}
-
+.unity-scroller__slider,
 .unity-scroller__slider > .unity-slider__input {
     background-color: rgba(0, 0, 0, 0);
 }
 
 .unity-scroller__slider .unity-base-slider__dragger {
-    border-top-left-radius: var(--b-tiny-radius);
-    border-top-right-radius: var(--b-tiny-radius);
-    border-bottom-right-radius: var(--b-tiny-radius);
-    border-bottom-left-radius: var(--b-tiny-radius);
-    background-color: var(--b-primary-color);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: var(--b-line-color);
 }
 
 .unity-scroller--vertical > .unity-base-slider--vertical {
@@ -350,87 +614,14 @@
 }
 
 .unity-scroller__slider > .unity-slider__input > .unity-base-slider__drag-container > .unity-base-slider__tracker {
-    background-color: rgba(0, 0, 0, 0);
-    border-top-width: -2px;
-    border-right-width: -2px;
-    border-bottom-width: -2px;
-    border-left-width: -2px;
+    background-color: var(--b-track-color);
+    border-width: 0;
+    width: 2px;
+    left: 50%;
+    margin-left: -1px;
 }
 
-.unity-multi-column-header__column:hover:enabled {
-    background-color: var(--b-primary-color);
-}
-
-.unity-list-view__item:hover:enabled {
-    background-color: var(--b-primary-color);
-}
-
-.unity-base-slider__drag-container > .unity-base-slider__dragger {
-    background-color: var(--b-primary-color);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    border-top-left-radius: var(--b-tiny-radius);
-    border-top-right-radius: var(--b-tiny-radius);
-    border-bottom-right-radius: var(--b-tiny-radius);
-    border-bottom-left-radius: var(--b-tiny-radius);
-}
-
-.unity-base-slider--horizontal .unity-base-slider__tracker {
-    background-color: var(--b-primary-color-faded);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-}
-
-.unity-base-slider--horizontal .unity-base-slider__dragger:hover:enabled {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-left-color: var(--b-glow-color);
-    border-right-color: var(--b-glow-color);
-    border-top-color: var(--b-glow-color);
-    border-bottom-color: var(--b-glow-color);
-    background-color: var(--b-primary-color);
-    scale: 1.1 1.1;
-}
-
-.unity-base-slider--horizontal .unity-base-slider__tracker:hover:enabled {
-    background-color: var(--b-primary-color-faded);
-}
-
-.unity-toggle {
-    flex-direction: row;
-    align-items: center;
-}
-
-.unity-toggle__checkmark {
-    width: 22px;
-    height: 22px;
-    background-color: var(--b-input-color);
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    border-top-color: var(--b-button-border-color);
-    border-right-color: var(--b-button-border-color);
-    border-bottom-color: var(--b-button-border-color);
-    border-left-color: var(--b-button-border-color);
-    border-top-left-radius: var(--b-tiny-radius);
-    border-top-right-radius: var(--b-tiny-radius);
-    border-bottom-right-radius: var(--b-tiny-radius);
-    border-bottom-left-radius: var(--b-tiny-radius);
-    -unity-background-image-tint-color: var(--b-text-color);
-}
-
-.unity-toggle:checked .unity-toggle__checkmark {
-    background-color: var(--b-primary-color);
-}
-
-/* Focus: gamepad and keyboard players need to see where they are. */
+/* ------------------------------------------------------------------ Focus: gamepad and keyboard players need to see where they are */
 
 .unity-button:focus,
 .b-long-press-button:focus {
@@ -441,28 +632,8 @@
 }
 
 .unity-base-text-field:focus > .unity-base-field__input,
-.unity-base-popup-field:focus > .unity-base-field__input {
-    border-top-width: var(--b-focus-width);
-    border-right-width: var(--b-focus-width);
-    border-bottom-width: var(--b-focus-width);
-    border-left-width: var(--b-focus-width);
-    border-top-color: var(--b-focus-color);
-    border-right-color: var(--b-focus-color);
-    border-bottom-color: var(--b-focus-color);
-    border-left-color: var(--b-focus-color);
-}
-
-.unity-base-slider:focus .unity-base-slider__dragger {
-    border-top-width: var(--b-focus-width);
-    border-right-width: var(--b-focus-width);
-    border-bottom-width: var(--b-focus-width);
-    border-left-width: var(--b-focus-width);
-    border-top-color: var(--b-focus-color);
-    border-right-color: var(--b-focus-color);
-    border-bottom-color: var(--b-focus-color);
-    border-left-color: var(--b-focus-color);
-}
-
+.unity-base-popup-field:focus > .unity-base-field__input,
+.unity-base-slider:focus .unity-base-slider__dragger,
 .unity-toggle:focus .unity-toggle__checkmark,
 .unity-tab__header:focus,
 .unity-collection-view:focus,
@@ -477,8 +648,9 @@
     border-left-color: var(--b-focus-color);
 }
 
-/* Settings > Reduce Motion and Visual Effects set these classes on each screen's root.
-   Blurs and drop shadows are the most expensive things the UI draws. */
+/* ------------------------------------------------------------------ Settings > Reduce Motion and Visual Effects
+   set these classes on each screen's root. Filters (blur, shadows, the chalk) are the most expensive
+   things the UI draws. */
 
 .b-reduce-motion .unity-button,
 .b-reduce-motion .b-pane,
@@ -491,7 +663,8 @@
 }
 
 .b-no-visual-effects .unity-button:enabled:hover,
-.b-no-visual-effects .b-pane:disabled {
+.b-no-visual-effects .b-pane:disabled,
+.b-no-visual-effects .b-chalk {
     filter: none;
 }
 

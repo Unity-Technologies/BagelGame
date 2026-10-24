@@ -1,12 +1,25 @@
-.b-button-bar {
-    flex-grow: 1;
-}
+/* The order ticket on the counter in front of the bagels: < and > to look along them, Select to take
+   one, Back to the menu. Paper, like the bagels' tags. */
 
-.b-button-bar > .unity-button {
-}
-
-.b-pane {
+.b-ticket {
     flex-direction: row;
     justify-content: space-between;
-    width: var(--b-standard-pane-width);
+    border-width: 2px;
+    border-color: var(--b-line-color);
+    /* A little shine across the paper. */
+    background-image: linear-gradient(170deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%);
+}
+
+/* The narrow < and > buttons: rounded no more than half their width. */
+#left-button,
+#right-button {
+    border-top-left-radius: var(--b-inner-radius);
+    border-top-right-radius: var(--b-inner-radius);
+    border-bottom-right-radius: var(--b-inner-radius);
+    border-bottom-left-radius: var(--b-inner-radius);
+}
+
+.b-button-bar {
+    flex-grow: 1;
+    margin: 0 6px;
 }

@@ -70,6 +70,22 @@ MonoBehaviour:
   - rid: 6326339759238545635
   - rid: 6326339760839721046
   - rid: 6326339760839721047
+  - rid: 6326339763072663657
+  - rid: 6326339763072663658
+  - rid: 6326339763072663659
+  - rid: 6326339763072663660
+  - rid: 6326339763072663661
+  - rid: 6326339763072663662
+  - rid: 6326339763072663663
+  - rid: 6326339763072663664
+  - rid: 6326339763072663665
+  - rid: 6326339763072663666
+  - rid: 6326339763072663667
+  - rid: 6326339763072663668
+  - rid: 6326339763072663669
+  - rid: 6326339763072663670
+  - rid: 6326339763072663693
+  - rid: 6326339763072663694
   references:
     version: 2
     RefIds:
@@ -444,3 +460,115 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Volume
+    - rid: 6326339763072663657
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707918696448
+        m_Metadata:
+          m_Items: []
+        m_Value: Fresh
+    - rid: 6326339763072663658
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639488
+        m_Metadata:
+          m_Items: []
+        m_Value: Speed
+    - rid: 6326339763072663659
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639489
+        m_Metadata:
+          m_Items: []
+        m_Value: Gone Stale!
+    - rid: 6326339763072663660
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639490
+        m_Metadata:
+          m_Items: []
+        m_Value: Bagel Game Bakery
+    - rid: 6326339763072663661
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639491
+        m_Metadata:
+          m_Items: []
+        m_Value: Bagel
+    - rid: 6326339763072663662
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639492
+        m_Metadata:
+          m_Items: []
+        m_Value: Toppings kept
+    - rid: 6326339763072663663
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639493
+        m_Metadata:
+          m_Items: []
+        m_Value: Time
+    - rid: 6326339763072663664
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639494
+        m_Metadata:
+          m_Items: []
+        m_Value: Freshness
+    - rid: 6326339763072663665
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639495
+        m_Metadata:
+          m_Items: []
+        m_Value: Thank you, come again!
+    - rid: 6326339763072663666
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639496
+        m_Metadata:
+          m_Items: []
+        m_Value: Toasted!
+    - rid: 6326339763072663667
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639497
+        m_Metadata:
+          m_Items: []
+        m_Value: Crumbled
+    - rid: 6326339763072663668
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639498
+        m_Metadata:
+          m_Items: []
+        m_Value: Stale
+    - rid: 6326339763072663669
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639499
+        m_Metadata:
+          m_Items: []
+        m_Value: "Ready\u2026"
+    - rid: 6326339763072663670
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 63707960639500
+        m_Metadata:
+          m_Items: []
+        m_Value: Go!
+    - rid: 6326339763072663693
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 65810481348608
+        m_Metadata:
+          m_Items: []
+        m_Value: Going stale!
+    - rid: 6326339763072663694
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 65810481348609
+        m_Metadata:
+          m_Items: []
+        m_Value: '{0} toppings!'

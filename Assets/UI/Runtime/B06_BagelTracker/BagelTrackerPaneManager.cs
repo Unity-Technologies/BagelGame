@@ -3,17 +3,23 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // Root of the tracker displays that ride along with the bagel. Everything inside binds to tracker.*,
-    // except the toppings count: it changes every frame while toppings fall off, so it's written
-    // with SetText from a stack buffer instead of allocating a new string each time.
+    // Root of the gauges that ride along with the bagel. Everything inside binds to tracker.*, except
+    // the toppings count: it changes every frame while toppings fall off, so it's written with SetText
+    // from a stack buffer instead of allocating a new string each time.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class BagelTrackerPaneManager : BagelPane
     {
-        ProgressBar m_ToppingsCountBar;
+        BagelGauge m_ToppingsGauge;
+        BagelGauge m_FreshnessGauge;
+        BagelGauge m_SpeedGauge;
+        Label m_ToppingsCount;
         ProgressBar m_SpinBar;
         ProgressBar m_PainBar;
 
-        public ProgressBar toppingsCountBar => m_ToppingsCountBar ??= this.Q<ProgressBar>("toppings-count-bar");
+        public BagelGauge toppingsGauge => m_ToppingsGauge ??= this.Q<BagelGauge>("toppings-gauge");
+        public BagelGauge freshnessGauge => m_FreshnessGauge ??= this.Q<BagelGauge>("freshness-gauge");
+        public BagelGauge speedGauge => m_SpeedGauge ??= this.Q<BagelGauge>("speed-gauge");
+        public Label toppingsCount => m_ToppingsCount ??= this.Q<Label>("toppings-count");
         public ProgressBar spinBar => m_SpinBar ??= this.Q<ProgressBar>("spin-bar");
         public ProgressBar painBar => m_PainBar ??= this.Q<ProgressBar>("pain-bar");
 
@@ -41,13 +47,13 @@ namespace Bagel
 
         void UpdateToppingsCount()
         {
-            var title = toppingsCountBar?.Q<Label>(className: AbstractProgressBar.titleUssClassName);
-            if (title == null || state == null || title.panel == null)
+            var label = toppingsCount;
+            if (label == null || state == null || label.panel == null)
                 return;
 
             Span<char> buffer = stackalloc char[16];
             if (state.tracker.toppingsCount.TryFormat(buffer, out var length, "N0", BagelLocalization.culture))
-                title.SetText(buffer.Slice(0, length));
+                label.SetText(buffer.Slice(0, length));
         }
     }
 }

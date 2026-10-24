@@ -44,6 +44,7 @@ namespace Bagel
             new CardSpec { title = "Bagel Selection", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionControlsPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
             new CardSpec { title = "Bagel Cards", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionTypeInfoPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
             new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
+            new CardSpec { title = "Callout (Screen Space)", uxmlPaths = new[] { "B06_BagelTracker/BagelCallout.uxml" }, activeIn = new[] { PlayManagerState.State.Playing }, size = new Vector2(220f, 90f) },
             new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, pausedOnly = true, size = new Vector2(640f, 400f) },
             new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" }, activeIn = new[] { PlayManagerState.State.GameOver } },
             new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu, PlayManagerState.State.GameOver } },
@@ -298,6 +299,15 @@ namespace Bagel
                 pane.dataSource = bagelType;
                 if (!string.IsNullOrEmpty(bagelType.nameKey))
                     BagelLocalization.Bind(pane.Q<Label>("name"), "text", bagelType.nameKey);
+            }
+
+            // The callout says something and keeps saying it, in the middle of its card.
+            if (screen.Q<BagelCalloutManager>() is { } callout)
+            {
+                callout.stays = true;
+                callout.style.left = 110f;
+                callout.style.top = 70f;
+                callout.RegisterCallback<AttachToPanelEvent>(_ => callout.Show(BagelLocalization.Get("toast.go", "Go!"), false));
             }
 
             // The window themes its own screens, so a toolbar preview doesn't stack on top.

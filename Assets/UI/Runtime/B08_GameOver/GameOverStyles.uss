@@ -1,7 +1,12 @@
-.b-pane {
-    width: 553px;
+/* Game over, floating over the counter: the run's receipt, torn off the till, with the result stamped
+   on it, and the leaderboard on a little chalkboard sign beside it. */
+
+.b-game-over {
+    width: 600px;
+    height: 500px;
     flex-direction: row;
-    height: 480px;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
 }
 
 .b-pane-half {
@@ -9,28 +14,156 @@
     flex-basis: 0;
 }
 
-#score-row {
-    align-items: center;
+/* The receipt lies a little crooked over the sign's edge: z-index puts it on top, though the sign
+   comes after it. */
+.b-pane-half--receipt {
+    margin-right: -10px;
+    rotate: -2deg;
+    z-index: 1;
 }
 
-#leaderboard > #leaderboard-manager > #leaderboard-page > #back-button {
-    display: none;
+/* ------------------------------------------------------------------ The receipt */
+
+.b-receipt-holder {
+    flex-grow: 1;
 }
 
-#toppings-number-field {
-    font-size: 33px;
+.b-receipt {
+    flex-grow: 1;
+    padding: 10px 14px 4px 14px;
+    background-color: var(--b-surface-color);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-#toppings-number-field > .unity-base-field__input {
+.b-receipt__edge {
+    height: 10px;
+    flex-shrink: 0;
+    color: var(--b-paper-surface);
+}
+
+.b-receipt__shop {
+    -unity-text-align: middle-center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: 0.75;
+    padding: 0;
+    margin: 0 0 2px 0;
+}
+
+.b-receipt .b-title {
+    font-size: 26px;
+}
+
+/* On paper the title's underline is a ruled line, not chalk. */
+.b-receipt .b-title-underline {
+    background-image: none;
+    background-color: var(--b-line-color);
+    height: 2px;
+    border-radius: 0;
+    opacity: 0.5;
+    margin: 0 0 6px 0;
+}
+
+/* Grid layout: what was bought on the left, its price on the right. */
+.b-receipt__lines {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    row-gap: 2px;
+    column-gap: 8px;
+    padding: 4px 0;
+    margin: 4px 0 6px 0;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-color: var(--b-track-color);
+}
+
+.b-receipt__item,
+.b-receipt__price {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+}
+
+.b-receipt__price {
+    -unity-text-align: middle-right;
+    -unity-font-style: bold;
+}
+
+.b-receipt__price > .unity-base-field__input {
     background-color: rgba(0, 0, 0, 0);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
+    border-width: 0;
+    border-radius: 0;
+    padding: 0;
+    -unity-text-align: middle-right;
+}
+
+.b-receipt__price > .unity-base-field__input > .unity-text-element {
+    -unity-text-align: middle-right;
+}
+
+.b-receipt__form {
+    padding: 2px 6px 6px 6px;
+}
+
+.b-receipt__buttons {
+    flex-direction: row;
+    column-gap: 6px;
+    margin-top: 2px;
+}
+
+.b-receipt__buttons > .unity-button {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.b-receipt__thanks {
+    -unity-text-align: middle-center;
+    font-size: 11px;
+    opacity: 0.7;
+    margin: 4px 0 0 0;
+    padding: 0;
 }
 
 .b-summary {
     white-space: normal;
     -unity-text-align: middle-center;
-    font-size: 14px;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* The result, stamped in red ink across the receipt. */
+.b-stamp {
+    align-self: center;
+    rotate: -8deg;
+    margin: 2px 0 4px 0;
+    padding: 0 10px;
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--b-paper-accent);
+    border-width: 3px;
+    border-color: var(--b-paper-accent);
+    border-radius: 6px;
+    opacity: 0.85;
+}
+
+/* Lost (crumbled or stale): stamped in plain ink. */
+.b-stamp--lost {
+    color: var(--b-paper-text);
+    border-color: var(--b-paper-text);
+}
+
+/* Restarted from code to slam the stamp down each time the screen shows. */
+.b-stamp--slam {
+    -unity-animation-clip: url("/Assets/UI/Runtime/B08_GameOver/GameOverStampAnimation.asset");
+}
+
+/* ------------------------------------------------------------------ The leaderboard's sign */
+
+#leaderboard > #leaderboard-manager > #leaderboard-page > #back-button {
+    display: none;
+}
+
+.b-sign {
+    padding: 8px;
 }

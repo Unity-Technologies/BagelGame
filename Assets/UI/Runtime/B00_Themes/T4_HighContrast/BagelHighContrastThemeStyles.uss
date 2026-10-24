@@ -1,50 +1,72 @@
-/* High Contrast: opaque black panes, white text and borders, a thick yellow focus ring and
-   bigger text, for players who need the UI to stand out from the 3D world.
-   Variables, plus the one rule at the end. */
+/* High Contrast: opaque black, white text and lines, yellow for what matters and a thick yellow focus
+   ring, bigger text and no textures, for players who need the UI to stand out from the 3D world.
+   Only variables. */
 
 :root {
     --b-sound-tone: glass;
 
-    --b-pane-color: rgb(0, 0, 0);
-    --b-board-pane-color: rgb(0, 0, 0);
-    --b-sub-pane-color: rgb(20, 20, 20);
-    --b-fill-color: rgb(0, 0, 0);
-    --b-input-color: rgb(0, 0, 0);
-    --b-row-color: rgb(0, 0, 0);
-    --b-popup-color: rgb(0, 0, 0);
+    --b-board-surface: rgb(0, 0, 0);
+    --b-board-text: rgb(255, 255, 255);
+    --b-board-title: rgb(255, 214, 0);
+    --b-board-line: rgb(255, 255, 255);
+    --b-board-fill: rgb(0, 0, 0);
+    --b-board-hover: rgb(60, 60, 60);
+    --b-board-track: rgb(110, 110, 110);
+    --b-board-accent: rgb(255, 214, 0);
+    --b-board-accent-fill: rgb(255, 214, 0);
+    --b-board-accent-text: rgb(0, 0, 0);
+    --b-board-glow: rgb(255, 214, 0);
+    --b-board-row: rgb(30, 30, 30);
+    --b-board-popup: rgb(0, 0, 0);
+    --b-board-sign: rgb(0, 0, 0);
+    --b-frame-color: rgb(255, 255, 255);
 
-    --b-primary-color: rgb(0, 84, 200);
-    --b-primary-color-faded: rgb(40, 40, 40);
-    --b-progress-color: rgb(255, 214, 0);
-    --b-title-accent-color: rgb(255, 214, 0);
+    --b-paper-surface: rgb(255, 255, 255);
+    --b-paper-text: rgb(0, 0, 0);
+    --b-paper-title: rgb(0, 0, 0);
+    --b-paper-line: rgb(0, 0, 0);
+    --b-paper-fill: rgb(255, 255, 255);
+    --b-paper-hover: rgb(220, 220, 220);
+    --b-paper-track: rgb(200, 200, 200);
+    --b-paper-accent: rgb(0, 0, 0);
+    --b-paper-accent-fill: rgb(0, 0, 0);
+    --b-paper-accent-text: rgb(255, 214, 0);
+    --b-paper-glow: rgb(0, 0, 0);
+
+    --b-glass-surface: rgb(0, 0, 0);
+    --b-glass-text: rgb(255, 255, 255);
+    --b-glass-title: rgb(255, 214, 0);
+    --b-glass-line: rgb(255, 255, 255);
+    --b-glass-fill: rgb(0, 0, 0);
+    --b-glass-hover: rgb(60, 60, 60);
+    --b-glass-track: rgb(110, 110, 110);
+    --b-glass-accent: rgb(255, 214, 0);
+    --b-glass-accent-fill: rgb(255, 214, 0);
+    --b-glass-accent-text: rgb(0, 0, 0);
+    --b-glass-glow: rgb(255, 214, 0);
+    --b-glass-popup: rgb(0, 0, 0);
+
+    --b-gauge-surface: rgb(0, 0, 0);
+    --b-gauge-rim: rgb(255, 255, 255);
+    --b-gauge-text: rgb(255, 255, 255);
+    --b-gauge-line: rgb(255, 255, 255);
+    --b-gauge-accent: rgb(255, 214, 0);
+    --b-gauge-good: rgb(255, 255, 255);
+    --b-gauge-warn: rgb(255, 214, 0);
+
     --b-accent-a: rgb(255, 255, 255);
     --b-accent-b: rgb(255, 255, 255);
     --b-accent-c: rgb(255, 214, 0);
     --b-accent-d: rgb(255, 214, 0);
 
-    --b-card-color-a: rgb(0, 0, 0);
-    --b-card-color-b: rgb(0, 0, 0);
-    --b-card-color-c: rgb(0, 0, 0);
-    --b-card-text-color: rgb(255, 255, 255);
-
-    --b-text-color: rgb(255, 255, 255);
     --b-main-title-size: 50px;
     --b-details-size: 13px;
-    --b-glow-color: rgb(255, 214, 0);
     --b-focus-color: rgb(255, 214, 0);
     --b-focus-width: 4px;
-
-    --b-button-border-color: rgb(255, 255, 255);
-    --b-button-border-width: 3px;
+    --b-board-filter: none;
 
     --b-tiny-radius: 2px;
     --b-inner-radius: 4px;
     --b-element-radius: 6px;
     --b-pane-radius: 8px;
-}
-
-/* The one rule a theme needs: -unity-material can't be set from a variable. Plain buttons, no shader. */
-.unity-button,
-.unity-popup-field {
-    -unity-material: none;
 }
