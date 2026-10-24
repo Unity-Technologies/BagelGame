@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 078f9f44ec24fc54ab0ae986a9a2a55c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339763072663710
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339763072663710
+      type: {class: TentCardMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        width: 1.6
+        faceHeight: 1.9
+        lean: 16
+        thickness: 0.012
