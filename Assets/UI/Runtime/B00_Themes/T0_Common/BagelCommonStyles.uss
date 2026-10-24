@@ -34,7 +34,6 @@
     --b-board-row: rgba(244, 241, 230, 0.07);
     --b-board-popup: rgb(43, 56, 50);
     /* A free-standing chalkboard sign (no board in the scene behind it), in its wooden frame. */
-    --b-board-sign: rgb(40, 52, 46);
     --b-frame-color: rgb(140, 90, 60);
 
     /* Paper: ink on cream, red for what stands out. */
@@ -223,14 +222,6 @@
     border-bottom-right-radius: var(--b-pane-radius);
     border-bottom-left-radius: var(--b-pane-radius);
     background-color: var(--b-surface-color);
-}
-
-/* A little chalkboard sign of its own, framed in wood: the leaderboard beside the receipt. */
-.b-sign {
-    background-color: var(--b-board-sign);
-    border-width: 6px;
-    border-color: var(--b-frame-color);
-    border-radius: var(--b-pane-radius);
 }
 
 .b-sub-pane {

@@ -3,7 +3,7 @@
     <ui:Template name="LeaderboardPane" src="project://database/Assets/UI/Runtime/B09_Leaderboard/LeaderboardPane.uxml?fileID=9197481963319205126&amp;guid=0d1c6591da2016444b4b1be3f56d668a&amp;type=3#LeaderboardPane"/>
     <Style src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverStyles"/>
     <Bagel.GameOverScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" class="b-pane b-game-over">
-        <ui:Instance template="GameOverPane" name="game-over-section" class="b-pane-half b-pane-half--receipt"/>
-        <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-pane-half b-board b-chalk b-sign"/>
+        <ui:Instance template="GameOverPane" name="game-over-section" class="b-pane-half b-paper b-menu-page"/>
+        <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-pane-half b-paper b-menu-page"/>
     </Bagel.GameOverScreenManager>
 </ui:UXML>

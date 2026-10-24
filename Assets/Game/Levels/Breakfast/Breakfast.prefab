@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 6203215400531202479}
   - component: {fileID: 1373136836403827726}
   - component: {fileID: 1645819170597244108}
+  - component: {fileID: 4786792580341179209}
+  - component: {fileID: 8870609880684559959}
   m_Layer: 0
   m_Name: BaguetteShort
   m_TagString: Untagged
@@ -149,6 +151,46 @@ CapsuleCollider:
   m_Height: 6.6
   m_Direction: 1
   m_Center: {x: 0, y: 3.3, z: 0}
+--- !u!54 &4786792580341179209
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983114232309003275}
+  serializedVersion: 5
+  m_Mass: 0.6
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8870609880684559959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983114232309003275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &1408884445015372551
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +204,7 @@ GameObject:
   - component: {fileID: 8184136734628986748}
   - component: {fileID: 1525220108959507969}
   - component: {fileID: 4614741802394398362}
+  - component: {fileID: 250497639372446214}
   m_Layer: 0
   m_Name: Sugar1
   m_TagString: Untagged
@@ -289,6 +332,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &250497639372446214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408884445015372551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &2296431266351257682
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +358,7 @@ GameObject:
   - component: {fileID: 3231506897357181616}
   - component: {fileID: 7910375688196969177}
   - component: {fileID: 7934876121064177195}
+  - component: {fileID: 7874190719020024676}
   m_Layer: 0
   m_Name: Sugar4
   m_TagString: Untagged
@@ -429,6 +486,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7874190719020024676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296431266351257682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &2301311954532362476
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +599,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3846220742776717488}
   - component: {fileID: 4817675019002151623}
+  - component: {fileID: 439754883353171896}
+  - component: {fileID: 6032712478476125628}
   m_Layer: 0
   m_Name: JamJar
   m_TagString: Untagged
@@ -576,6 +648,46 @@ CapsuleCollider:
   m_Height: 1.17
   m_Direction: 1
   m_Center: {x: 0, y: 0.585, z: 0}
+--- !u!54 &439754883353171896
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367138421637443930}
+  serializedVersion: 5
+  m_Mass: 1.2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6032712478476125628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367138421637443930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &2855078638604526886
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +791,7 @@ GameObject:
   - component: {fileID: 966393341745227969}
   - component: {fileID: 6903699031332558028}
   - component: {fileID: 5290420197202915375}
+  - component: {fileID: 115038158164317895}
   m_Layer: 0
   m_Name: Sugar3
   m_TagString: Untagged
@@ -806,6 +919,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &115038158164317895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3244174763141037637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &3634626081911161230
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +944,8 @@ GameObject:
   - component: {fileID: 1025313647052994092}
   - component: {fileID: 2128916416855491881}
   - component: {fileID: 4963041133206132859}
+  - component: {fileID: 3299645596638605483}
+  - component: {fileID: 3891866737578432508}
   m_Layer: 0
   m_Name: BaguetteLong
   m_TagString: Untagged
@@ -920,6 +1048,46 @@ CapsuleCollider:
   m_Height: 9
   m_Direction: 1
   m_Center: {x: 0, y: 4.5, z: 0}
+--- !u!54 &3299645596638605483
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634626081911161230}
+  serializedVersion: 5
+  m_Mass: 0.8
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3891866737578432508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634626081911161230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &4107135490822683571
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +1097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6378677043971183043}
+  - component: {fileID: 5581724323813320434}
   m_Layer: 0
   m_Name: Breakfast
   m_TagString: Untagged
@@ -960,6 +1129,24 @@ Transform:
   - {fileID: 5624886121426682005}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5581724323813320434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107135490822683571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9fe5ef93b31d1489b1a75c71d09bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableClearing
+  m_Away: {x: -1, y: 0, z: 0}
+  m_SweepSpeed: 14
+  m_SweepLift: 4
+  m_FlyTime: 1.6
+  m_RiseDepth: 1.4
+  m_RiseTime: 2.4
 --- !u!1 &4263586001404385474
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +1159,8 @@ GameObject:
   - component: {fileID: 7062715491482944923}
   - component: {fileID: 7800830460269774055}
   - component: {fileID: 7304962691629101175}
+  - component: {fileID: 1681097757711839558}
+  - component: {fileID: 1533903676045187331}
   m_Layer: 0
   m_Name: Mug
   m_TagString: Untagged
@@ -1075,6 +1264,46 @@ CapsuleCollider:
   m_Height: 1.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!54 &1681097757711839558
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263586001404385474}
+  serializedVersion: 5
+  m_Mass: 0.8
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1533903676045187331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263586001404385474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &4673404294829724493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1314,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4874588976725239895}
   - component: {fileID: 7303742408309455579}
+  - component: {fileID: 9126032472129392505}
+  - component: {fileID: 6832975700618972579}
   m_Layer: 0
   m_Name: ButterDish
   m_TagString: Untagged
@@ -1130,6 +1361,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.68, y: 1.85, z: 5.14}
   m_Center: {x: 0, y: 0.925, z: 0}
+--- !u!54 &9126032472129392505
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673404294829724493}
+  serializedVersion: 5
+  m_Mass: 1.5
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6832975700618972579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673404294829724493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &4878727708870697141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1414,7 @@ GameObject:
   - component: {fileID: 3410759552232040436}
   - component: {fileID: 2297678447162333100}
   - component: {fileID: 5143916647220438000}
+  - component: {fileID: 1735493432979882558}
   m_Layer: 0
   m_Name: Sugar5
   m_TagString: Untagged
@@ -1270,6 +1542,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1735493432979882558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4878727708870697141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &5480838016095680525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1838,7 @@ GameObject:
   - component: {fileID: 707616298687231738}
   - component: {fileID: 5746456977138762593}
   - component: {fileID: 3573161067655068513}
+  - component: {fileID: 6206494704538077519}
   m_Layer: 0
   m_Name: Sugar6
   m_TagString: Untagged
@@ -1680,6 +1966,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6206494704538077519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328382455400534257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &6909330968985210911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +2262,7 @@ GameObject:
   - component: {fileID: 1610997851582298845}
   - component: {fileID: 7279716989648031887}
   - component: {fileID: 2026245845872023184}
+  - component: {fileID: 896561283891954347}
   m_Layer: 0
   m_Name: Sugar2
   m_TagString: Untagged
@@ -2090,6 +2390,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &896561283891954347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344016158903151899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &7539335404634641496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,6 +2829,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1336887529050022171}
   - component: {fileID: 1699246019679855224}
+  - component: {fileID: 4421842809052861006}
+  - component: {fileID: 2053105629791004296}
   m_Layer: 0
   m_Name: Cookbooks
   m_TagString: Untagged
@@ -2561,6 +2876,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.1, y: 1.6, z: 5.1}
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!54 &4421842809052861006
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529824238585668328}
+  serializedVersion: 5
+  m_Mass: 2
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2053105629791004296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529824238585668328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.TableItem
+  m_ComesBack: 1
 --- !u!1 &8890131573782410056
 GameObject:
   m_ObjectHideFlags: 0

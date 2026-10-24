@@ -66,6 +66,5 @@
                 </ui:Label>
             </ui:Instance>
         </ui:VisualElement>
-        <Bagel.ReceiptEdge name="receipt-edge" class="b-receipt__edge"/>
     </Bagel.GameOverPaneManager>
 </ui:UXML>

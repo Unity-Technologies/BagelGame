@@ -18,7 +18,6 @@
     --b-board-glow: rgb(255, 214, 0);
     --b-board-row: rgb(30, 30, 30);
     --b-board-popup: rgb(0, 0, 0);
-    --b-board-sign: rgb(0, 0, 0);
     --b-frame-color: rgb(255, 255, 255);
 
     --b-paper-surface: rgb(255, 255, 255);

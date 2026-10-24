@@ -1,9 +1,10 @@
-/* Game over, floating over the counter: the run's receipt, torn off the till, with the result stamped
-   on it, and the leaderboard on a little chalkboard sign beside it. */
+/* Game over: a restaurant's menu fallen open on the table by the toaster (GameOverMenu). Its left page
+   is the bill, the result stamped on it; its right page the leaderboard. The panel lies on the menu's
+   pages, as big as they are. */
 
 .b-game-over {
-    width: 600px;
-    height: 500px;
+    width: 790px;
+    height: 550px;
     flex-direction: row;
     background-color: rgba(0, 0, 0, 0);
     padding: 0;
@@ -14,12 +15,14 @@
     flex-basis: 0;
 }
 
-/* The receipt lies a little crooked over the sign's edge: z-index puts it on top, though the sign
-   comes after it. */
-.b-pane-half--receipt {
-    margin-right: -10px;
-    rotate: -2deg;
-    z-index: 1;
+/* A page of the menu: paper, ruled in red ink all round like an old menu's border. */
+.b-menu-page {
+    margin: 5px;
+    padding: 6px 12px;
+    background-color: var(--b-paper-surface);
+    border-width: 2px;
+    border-color: var(--b-paper-accent);
+    border-radius: 3px;
 }
 
 /* ------------------------------------------------------------------ The receipt */
@@ -30,16 +33,7 @@
 
 .b-receipt {
     flex-grow: 1;
-    padding: 10px 14px 4px 14px;
-    background-color: var(--b-surface-color);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-.b-receipt__edge {
-    height: 10px;
-    flex-shrink: 0;
-    color: var(--b-paper-surface);
+    padding: 4px 2px 0 2px;
 }
 
 .b-receipt__shop {
@@ -168,12 +162,8 @@
     -unity-animation-clip: url("/Assets/UI/Runtime/B08_GameOver/GameOverStampAnimation.asset");
 }
 
-/* ------------------------------------------------------------------ The leaderboard's sign */
+/* ------------------------------------------------------------------ The leaderboard's page */
 
 #leaderboard > #leaderboard-manager > #leaderboard-page > #back-button {
     display: none;
-}
-
-.b-sign {
-    padding: 8px;
 }

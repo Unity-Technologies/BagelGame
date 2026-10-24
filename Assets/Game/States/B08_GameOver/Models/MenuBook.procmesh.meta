@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: 2e240b1aee07eb5428a8e5bba560a701
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339779984097358
+  preBakeTriangleCollision: 0
+  preBakeConvexCollision: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339779984097358
+      type: {class: MenuBookMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        pageSize: {x: 3.9, y: 5.5}
+        coverMargin: 0.2
+        coverThickness: 0.06
+        pagesThickness: 0.08
+        gutter: 0.1
+        ribbonWidth: 0.18
+        ribbonOverhang: 0.7

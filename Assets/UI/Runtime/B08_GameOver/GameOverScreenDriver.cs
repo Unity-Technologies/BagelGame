@@ -3,21 +3,42 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    // Shows the game over screen on the menu that falls onto the table when a run ends (GameOverMenu): the
+    // panel lies on the menu's pages, wherever the menu is.
     [RequireComponent(typeof(PanelRenderer))]
     public class GameOverScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
 
         [Space]
-        [SerializeField] float m_GameOverOrbitSpeed = 0.02f;
         [SerializeField] Transform m_GameOverRoot;
-        [SerializeField] Transform m_BagelTarget;
+        [SerializeField] GameOverMenu m_MenuPrefab;
+        [Tooltip("Where the menu lands, from the game over root: on the table, in front of the toaster.")]
+        [SerializeField] Vector3 m_MenuRest = new(0f, 0f, 21.8f);
 
         PlayManagerState m_State;
         VisualElement m_Root;
         GameOverScreenManager m_GameOverScreenManager;
+        GameOverMenu m_Menu;
 
         int m_UIVersion;
+
+        public GameOverMenu menu => m_Menu;
+
+        void Awake()
+        {
+            if (m_MenuPrefab == null)
+                return;
+            m_Menu = Instantiate(m_MenuPrefab, m_GameOverRoot);
+            m_Menu.name = m_MenuPrefab.name;
+            m_Menu.gameObject.SetActive(false);
+        }
+
+        void OnDestroy()
+        {
+            if (m_Menu != null)
+                Destroy(m_Menu.gameObject);
+        }
 
         void OnEnable()
         {
@@ -56,27 +77,19 @@ namespace Bagel
             m_Root.style.display = m_State.isGameOver ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
-        void Update()
+        // After the menu has moved this frame (falling, or swept off the table): the screen stays on its pages.
+        void LateUpdate()
         {
-            if (!m_State.isGameOver)
-                return;
-
-            m_GameOverRoot.Rotate(Vector3.up, m_GameOverOrbitSpeed);
+            if (m_Menu != null && m_Menu.gameObject.activeInHierarchy)
+                transform.SetPositionAndRotation(m_Menu.pages.position, m_Menu.pages.rotation);
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (state == PlayManagerState.State.GameOver)
+            if (state == PlayManagerState.State.GameOver && m_Menu != null)
             {
-                m_GameOverRoot.rotation = Quaternion.identity;
-
-                var gameOverPosition = m_GameOverRoot.position;
-                var bagelPosition = m_BagelTarget.position;
-                m_GameOverRoot.position = new Vector3(
-                    bagelPosition.x,
-                    gameOverPosition.y,
-                    bagelPosition.z
-                );
+                m_Menu.Drop(m_GameOverRoot.TransformPoint(m_MenuRest), m_GameOverRoot.rotation);
+                LateUpdate();
             }
 
             if (m_Root == null)

@@ -143,13 +143,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15063647}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5233683, y: -0, z: -0, w: 0.85210663}
-  m_LocalPosition: {x: 0, y: 7.38, z: 0.55}
+  m_LocalRotation: {x: 0.5372996, y: 0, z: 0, w: 0.8433914}
+  m_LocalPosition: {x: 0, y: 2.43, z: 18.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
-  m_LocalEulerAnglesHint: {x: 63.117, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!1 &24349490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,7 +1741,7 @@ MonoBehaviour:
     Damping: 0.5
     SmoothingTime: 0
   TerrainResolution:
-    Enabled: 1
+    Enabled: 0
     TerrainLayers:
       serializedVersion: 2
       m_Bits: 1
@@ -4310,13 +4310,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030507056}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.68106437, y: -0, z: -0, w: 0.7322236}
-  m_LocalPosition: {x: 0, y: 8.01, z: 2.09}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.144, z: 21.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
-  m_LocalEulerAnglesHint: {x: 85.854, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &2030507059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,9 +4330,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverScreenDriver
   m_PlayManager: {fileID: 2115846877}
-  m_GameOverOrbitSpeed: 0.02
   m_GameOverRoot: {fileID: 625167483}
-  m_BagelTarget: {fileID: 947445559}
+  m_MenuPrefab: {fileID: 8055877851443297898, guid: 8eccf9dfded242348b781d541ae0c57b, type: 3}
+  m_MenuRest: {x: 0, y: 0, z: 21.8}
 --- !u!1931382934 &2030507060
 PanelRenderer:
   m_ObjectHideFlags: 0
