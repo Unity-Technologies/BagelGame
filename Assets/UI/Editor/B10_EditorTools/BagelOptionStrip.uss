@@ -1,0 +1,76 @@
+/* BagelOptionStrip: icon buttons in a group, like the main toolbar's (5 px outline, 20 px buttons 2 px apart). */
+
+.b-strip {
+    flex-direction: row;
+    flex-shrink: 0;
+    align-self: center;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgba(80, 80, 80, 0.7);
+    column-gap: 2px;
+}
+
+.b-strip--light-skin {
+    border-color: rgba(160, 160, 160, 0.7);
+}
+
+/* The group's outline and its buttons' corners are concentric: 5 px outside, 1 px of border, 4 px inside. */
+.b-strip__option {
+    width: 24px;
+    height: 20px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.b-strip__option:hover {
+    background-color: var(--unity-theme-background-color-202);
+}
+
+/* The chosen one: the Editor's checked color (the main toolbar's toggles), its icon at full strength. */
+.b-strip__option--selected,
+.b-strip__option--selected:hover,
+.b-strip__option:active {
+    background-color: var(--unity-colors-button-background-pressed);
+}
+
+.b-strip__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.5;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.b-strip__option:hover > .b-strip__icon {
+    opacity: 0.8;
+}
+
+.b-strip__option--selected > .b-strip__icon {
+    opacity: 1;
+}
+
+/* An action (Reset) is never chosen: its icon at full strength. */
+.b-strip__option--action > .b-strip__icon,
+.b-strip__option--action:hover > .b-strip__icon {
+    opacity: 1;
+}
+
+/* Words (Setups), an icon before them if any: as wide as they need. */
+.b-strip__option--text {
+    flex-direction: row;
+    width: auto;
+    padding: 0 8px;
+}
+
+.b-strip__option--text > .b-strip__icon {
+    margin-right: 4px;
+}
+
+.b-strip__label {
+    padding: 0;
+    margin: 0;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}

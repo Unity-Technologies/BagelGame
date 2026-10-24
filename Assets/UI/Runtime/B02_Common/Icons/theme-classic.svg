@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Classic: the bagel shop's chalkboard, with a bagel drawn on it in chalk -->
+  <path d="M5 7 H59 a3 3 0 0 1 3 3 V47 a3 3 0 0 1 -3 3 H5 a3 3 0 0 1 -3 -3 V10 a3 3 0 0 1 3 -3 Z" fill="#9A6440" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M8 13 H56 V44 H8 Z" fill="#2F3D36"/>
+  <path d="M15 28.5 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0 Z M21 28.5 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0 Z" fill="none" stroke="#F4F1E6" stroke-width="2.5"/>
+  <path d="M18 24 l1.5 1 M27 22.5 l1.5 -0.5 M30 30 l1 1.5 M20 33 l1.5 0.5" fill="none" stroke="#F4F1E6" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M39 23 H50 M39 29 H48 M39 35 H51" fill="none" stroke="#F4F1E6" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M6 52 H58 V57 H6 Z" fill="#9A6440" stroke="#3B1F14" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M40 52.5 H50" fill="none" stroke="#F4F1E6" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Paused: two bars on a round button -->
+  <path d="M5 32 a27 27 0 1 0 54 0 a27 27 0 1 0 -54 0 Z" fill="#7C8A99" stroke="#3B1F14" stroke-width="4"/>
+  <path d="M14 26 a19 19 0 0 1 12 -12" fill="none" stroke="#B9C4CF" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M22 19 H29 V45 H22 Z M35 19 H42 V45 H35 Z" fill="#FFF4DE" stroke="#3B1F14" stroke-width="3.5" stroke-linejoin="round"/>
+</svg>

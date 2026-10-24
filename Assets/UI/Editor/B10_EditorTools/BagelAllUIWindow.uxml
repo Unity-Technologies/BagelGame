@@ -1,23 +1,24 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/UI/Editor/B10_EditorTools/BagelAllUIWindowStyles.uss?fileID=7433441132597879392&amp;guid=c1a6b9dd4e943d04db0791c9618381dd&amp;type=3"/>
     <ui:VisualElement name="window" class="b-window">
-        <uie:Toolbar name="toolbar" class="b-toolbar">
-            <ui:VisualElement name="state-strip" class="b-toolbar__group">
-                <uie:ToolbarToggle text="Main Menu" name="state-main-menu"/>
-                <uie:ToolbarToggle text="Selection" name="state-bagel-selection"/>
-                <uie:ToolbarToggle text="Playing" name="state-playing"/>
-                <uie:ToolbarToggle text="Paused" name="state-paused"/>
-                <uie:ToolbarToggle text="Game Over" name="state-game-over"/>
+        <ui:VisualElement name="toolbar" class="b-toolbar">
+            <ui:VisualElement name="brand" picking-mode="Ignore" class="b-brand">
+                <ui:VisualElement picking-mode="Ignore" class="b-brand__bagel"/>
+                <ui:Label text="Bagel Game" picking-mode="Ignore" class="b-brand__name"/>
+                <ui:Label text="All UI" picking-mode="Ignore" class="b-brand__sub"/>
             </ui:VisualElement>
-            <uie:ToolbarMenu text="Setups" name="setup-menu"/>
-            <uie:ToolbarToggle text="Simulate Roll" name="roll-toggle"/>
-            <uie:ToolbarMenu text="Theme" name="theme-menu"/>
-            <uie:ToolbarMenu text="Language" name="language-menu"/>
-            <uie:ToolbarSpacer style="flex-grow: 1;"/>
-            <ui:Slider label="Zoom" low-value="0.5" high-value="1.5" value="1" name="zoom-slider" class="b-toolbar__zoom"/>
-            <uie:ToolbarButton text="Reset" name="reset-button"/>
-            <uie:ToolbarToggle text="State Inspector" name="inspector-toggle"/>
-        </uie:Toolbar>
+            <Bagel.BagelOptionStrip name="reset-strip" tooltip="Start again: a fresh copy of the start state, its theme, no simulated roll" class="b-toolbar__strip b-toolbar__strip--reset"/>
+            <Bagel.BagelOptionStrip name="state-strip" tooltip="The game's state: the screens that show in it are lit, the others dimmed" class="b-toolbar__strip"/>
+            <Bagel.BagelOptionStrip name="setup-strip" class="b-toolbar__strip"/>
+            <Bagel.BagelOptionStrip name="roll-strip" tooltip="The tracker moves as if a bagel were rolling: spinning, bumping and losing toppings" class="b-toolbar__strip"/>
+            <ui:VisualElement name="toolbar-end" class="b-toolbar__end">
+                <ui:Slider label="Zoom" low-value="0.5" high-value="1.5" value="1" name="zoom-slider" tooltip="The cards' scale" class="b-toolbar__zoom"/>
+                <ui:Label text="100%" name="zoom-label" class="b-toolbar__zoom-label"/>
+                <Bagel.BagelOptionStrip name="theme-strip" tooltip="Every card in this theme (the shared state's settings, as the in-game Settings pick it)" class="b-toolbar__strip"/>
+                <Bagel.BagelOptionStrip name="language-strip" tooltip="Every card in this language (sets the locale)" class="b-toolbar__strip"/>
+                <Bagel.BagelOptionStrip name="inspector-strip" tooltip="The shared PlayManagerState's Inspector, next to the cards: edit a value and every card follows" class="b-toolbar__strip"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="body" class="b-body">
             <ui:ScrollView mode="VerticalAndHorizontal" name="stage" class="b-stage">
                 <ui:VisualElement name="cards" class="b-cards"/>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Simulate Roll: a bagel with an arrow turning around it -->
+  <path d="M17 32 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z M27 32 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 Z" fill="#D68C45" fill-rule="evenodd" stroke="#3B1F14" stroke-width="3.5"/>
+  <path d="M10 26 A23 23 0 0 1 50 16" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round"/>
+  <path d="M44 10 L52 16 L43 20" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M54 38 A23 23 0 0 1 14 48" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round"/>
+  <path d="M20 54 L12 48 L21 44" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

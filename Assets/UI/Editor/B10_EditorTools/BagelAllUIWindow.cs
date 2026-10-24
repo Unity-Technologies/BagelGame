@@ -68,6 +68,13 @@ namespace Bagel
         readonly List<Card> m_Cards = new();
         IVisualElementScheduledItem m_Roll;
 
+        BagelOptionStrip m_StateStrip;
+        BagelOptionStrip m_ThemeStrip;
+        BagelOptionStrip m_LanguageStrip;
+        VisualElement m_RollToggle;
+        Label m_ZoomLabel;
+        readonly List<string> m_LocaleCodes = new();
+
         // The editor theme stays on the toolbar and the inspector; the screens get the game's.
         readonly List<StyleSheet> m_EditorSheets = new();
         readonly List<(VisualElement owner, StyleSheet sheet)> m_BorrowedSheets = new();
@@ -77,6 +84,9 @@ namespace Bagel
         public IReadOnlyList<Card> cards => m_Cards;
         public ThemeStyleSheet currentTheme => m_Theme;
         public float zoom => m_Zoom;
+        public BagelOptionStrip stateStrip => m_StateStrip;
+        public BagelOptionStrip themeStrip => m_ThemeStrip;
+        public BagelOptionStrip languageStrip => m_LanguageStrip;
 
         [MenuItem("Bagel/Bagel All UI")]
         public static BagelAllUIWindow Open()
@@ -115,7 +125,7 @@ namespace Bagel
 
             var stage = rootVisualElement.Q<ScrollView>("stage");
             m_EditorStyledParts.Clear();
-            m_EditorStyledParts.Add(rootVisualElement.Q<Toolbar>("toolbar"));
+            m_EditorStyledParts.Add(rootVisualElement.Q("toolbar"));
             m_EditorStyledParts.Add(rootVisualElement.Q("inspector-dock"));
             m_EditorStyledParts.Add(stage.horizontalScroller);
             m_EditorStyledParts.Add(stage.verticalScroller);
@@ -136,8 +146,11 @@ namespace Bagel
         // Closed for good: the screens give their resources back to be reused now.
         void OnDestroy() => rootVisualElement.Clear(VisualElementClearOptions.RecursiveReleaseResources);
 
+        void OnEnable() => BagelLocalization.localeChanged += UpdateLanguageStrip;
+
         void OnDisable()
         {
+            BagelLocalization.localeChanged -= UpdateLanguageStrip;
             m_Roll?.Pause();
             RestoreEditorTheme();
             m_Cards.Clear();
@@ -304,6 +317,8 @@ namespace Bagel
         public void SetZoom(float zoom)
         {
             m_Zoom = Mathf.Clamp(zoom, 0.5f, 1.5f);
+            if (m_ZoomLabel != null)
+                m_ZoomLabel.text = $"{Mathf.RoundToInt(m_Zoom * 100f)}%";
             foreach (var card in m_Cards)
             {
                 card.content.style.scale = new Scale(new Vector3(m_Zoom, m_Zoom, 1f));
@@ -313,86 +328,117 @@ namespace Bagel
 
         // ---------------------------------------------------------------- Toolbar
 
+        // The game states of the state strip, in its order.
+        public static readonly string[] stateNames = { "state-main-menu", "state-bagel-selection", "state-playing", "state-paused", "state-game-over" };
+        static readonly string[] s_StateTitles = { "Main Menu", "Bagel Selection", "Playing", "Paused", "Game Over" };
+
         void BindToolbar()
         {
-            BindStateToggle("state-main-menu", () => m_State.GoToMainMenu());
-            BindStateToggle("state-bagel-selection", () => m_State.GoToBagelSelection());
-            BindStateToggle("state-playing", () => m_State.GoToPlay());
-            BindStateToggle("state-paused", () =>
-            {
-                if (!m_State.isPlaying)
-                    m_State.GoToPlay();
-                m_State.Pause();
-            });
-            BindStateToggle("state-game-over", () => m_State.FinishRun());
+            rootVisualElement.Q<BagelOptionStrip>("reset-strip").AddAction(BagelEditorIcons.Reset(), "Reset", ResetState, "reset-button");
 
-            var setups = rootVisualElement.Q<ToolbarMenu>("setup-menu");
-            foreach (var setup in setupNames)
-            {
-                var name = setup;
-                setups.menu.AppendAction(name, _ => ApplySetup(name));
-            }
+            m_StateStrip = rootVisualElement.Q<BagelOptionStrip>("state-strip");
+            for (int i = 0; i < stateNames.Length; i++)
+                m_StateStrip.AddOption(BagelEditorIcons.Window(stateNames[i]), s_StateTitles[i], stateNames[i]);
+            m_StateStrip.chosen += GoToState;
 
-            var roll = rootVisualElement.Q<ToolbarToggle>("roll-toggle");
-            roll.RegisterValueChangedCallback(evt => SimulateRoll(evt.newValue));
+            VisualElement setups = null;
+            setups = rootVisualElement.Q<BagelOptionStrip>("setup-strip").AddTextAction("Setups \u25BE",
+                "Stage a moment of the game: a pane, a win or a loss, a tracker full or wrecked", () => ShowSetupMenu(setups), elementName: "setup-menu");
 
-            var themes = rootVisualElement.Q<ToolbarMenu>("theme-menu");
+            m_RollToggle = rootVisualElement.Q<BagelOptionStrip>("roll-strip").AddToggle(BagelEditorIcons.Window("tool-simulate-roll"),
+                "Simulate Roll", false, SimulateRoll, "roll-toggle");
+
+            var zoomSlider = rootVisualElement.Q<Slider>("zoom-slider");
+            m_ZoomLabel = rootVisualElement.Q<Label>("zoom-label");
+            zoomSlider.SetValueWithoutNotify(m_Zoom);
+            zoomSlider.RegisterValueChangedCallback(evt => SetZoom(evt.newValue));
+            SetZoom(m_Zoom);
+
+            m_ThemeStrip = rootVisualElement.Q<BagelOptionStrip>("theme-strip");
             for (int i = 0; i < (m_Themes?.collection.Count ?? 0); i++)
             {
-                var index = i;
-                themes.menu.AppendAction(m_Themes.collection[i].themeName, _ => m_State.settings.themeIndex = index,
-                    _ => m_State != null && m_State.settings.themeIndex == index ? DropdownMenuAction.Status.Checked : DropdownMenuAction.Status.Normal);
+                var entry = m_Themes.collection[i];
+                m_ThemeStrip.AddOption(BagelEditorIcons.Theme(entry), entry.themeName, "theme-" + entry.nameKey.Replace("theme.", ""));
             }
+            m_ThemeStrip.chosen += index => m_State.settings.themeIndex = index;
+            UpdateThemeStrip();
 
-            var languages = rootVisualElement.Q<ToolbarMenu>("language-menu");
+            m_LanguageStrip = rootVisualElement.Q<BagelOptionStrip>("language-strip");
+            m_LocaleCodes.Clear();
             if (LocalizationSettings.HasSettings)
             {
                 foreach (var locale in LocalizationSettings.Instance.AvailableLocales)
                 {
-                    var code = locale.Code;
-                    languages.menu.AppendAction(locale.LocaleName, _ => BagelToolbar.SelectLanguage(code),
-                        _ => BagelLocalization.localeCode == code ? DropdownMenuAction.Status.Checked : DropdownMenuAction.Status.Normal);
+                    m_LocaleCodes.Add(locale.Code);
+                    m_LanguageStrip.AddOption(BagelEditorIcons.Language(locale.Code), locale.LocaleName, "language-" + locale.Code);
                 }
             }
+            m_LanguageStrip.chosen += index => BagelToolbar.SelectLanguage(m_LocaleCodes[index]);
+            UpdateLanguageStrip();
 
-            var zoomSlider = rootVisualElement.Q<Slider>("zoom-slider");
-            zoomSlider.SetValueWithoutNotify(m_Zoom);
-            zoomSlider.RegisterValueChangedCallback(evt => SetZoom(evt.newValue));
-
-            rootVisualElement.Q<ToolbarButton>("reset-button").clicked += ResetState;
-
-            var inspectorToggle = rootVisualElement.Q<ToolbarToggle>("inspector-toggle");
-            inspectorToggle.SetValueWithoutNotify(m_ShowInspector);
-            inspectorToggle.RegisterValueChangedCallback(evt =>
+            rootVisualElement.Q<BagelOptionStrip>("inspector-strip").AddToggle(BagelEditorIcons.Inspector(), "State Inspector", m_ShowInspector, show =>
             {
-                m_ShowInspector = evt.newValue;
+                m_ShowInspector = show;
                 rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
-            });
+            }, "inspector-toggle");
             rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", m_ShowInspector);
         }
 
-        void BindStateToggle(string name, Action goToState)
+        // The state strip's options, by index: Main Menu, Bagel Selection, Playing, Paused, Game Over.
+        public void GoToState(int index)
         {
-            var toggle = rootVisualElement.Q<ToolbarToggle>(name);
-            toggle.RegisterValueChangedCallback(evt =>
+            switch (index)
             {
-                if (evt.newValue)
-                    goToState();
-                UpdateStateStrip();
-            });
+                case 0:
+                    m_State.GoToMainMenu();
+                    break;
+                case 1:
+                    m_State.GoToBagelSelection();
+                    break;
+                case 2:
+                    if (m_State.isPlaying)
+                        m_State.Resume();
+                    else
+                        m_State.GoToPlay();
+                    break;
+                case 3:
+                    if (!m_State.isPlaying)
+                        m_State.GoToPlay();
+                    m_State.Pause();
+                    break;
+                case 4:
+                    m_State.FinishRun();
+                    break;
+            }
+            UpdateStateStrip();
+        }
+
+        void ShowSetupMenu(VisualElement button)
+        {
+            var menu = new GenericMenu();
+            foreach (var setup in setupNames)
+            {
+                var name = setup;
+                menu.AddItem(new GUIContent(name), false, () => ApplySetup(name));
+            }
+            menu.DropDown(button.worldBound);
         }
 
         void UpdateStateStrip()
         {
-            if (m_State == null)
+            if (m_State == null || m_StateStrip == null)
                 return;
 
-            rootVisualElement.Q<ToolbarToggle>("state-main-menu")?.SetValueWithoutNotify(m_State.isMainMenu);
-            rootVisualElement.Q<ToolbarToggle>("state-bagel-selection")?.SetValueWithoutNotify(m_State.isBagelSelection);
-            rootVisualElement.Q<ToolbarToggle>("state-playing")?.SetValueWithoutNotify(m_State.isPlaying && !m_State.isPaused);
-            rootVisualElement.Q<ToolbarToggle>("state-paused")?.SetValueWithoutNotify(m_State.isPaused);
-            rootVisualElement.Q<ToolbarToggle>("state-game-over")?.SetValueWithoutNotify(m_State.isGameOver);
+            var index = m_State.isMainMenu ? 0
+                : m_State.isBagelSelection ? 1
+                : m_State.isPlaying ? (m_State.isPaused ? 3 : 2)
+                : 4;
+            m_StateStrip.SetSelectedWithoutNotify(index);
         }
+
+        void UpdateThemeStrip() => m_ThemeStrip?.SetSelectedWithoutNotify(m_State != null ? m_State.settings.themeIndex : -1);
+
+        void UpdateLanguageStrip() => m_LanguageStrip?.SetSelectedWithoutNotify(m_LocaleCodes.IndexOf(BagelLocalization.localeCode));
 
         void UpdateActiveCards()
         {
@@ -491,7 +537,7 @@ namespace Bagel
         public void ResetState()
         {
             m_Roll?.Pause();
-            rootVisualElement.Q<ToolbarToggle>("roll-toggle")?.SetValueWithoutNotify(false);
+            BagelOptionStrip.SetOnWithoutNotify(m_RollToggle, false);
             DestroyState();
             m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
             m_State.propertyChanged += State_OnPropertyChanged;
@@ -512,6 +558,7 @@ namespace Bagel
             ApplyTheme(ThemeAt(m_State.settings.themeIndex));
             BindInspector();
             UpdateStateStrip();
+            UpdateThemeStrip();
             UpdateActiveCards();
         }
 
@@ -525,7 +572,10 @@ namespace Bagel
         void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
         {
             if (args.propertyName == SettingsData.themeIndexPath)
+            {
                 ApplyTheme(ThemeAt(m_State.settings.themeIndex));
+                UpdateThemeStrip();
+            }
         }
 
         void State_OnStateChange(object sender, PlayManagerState.State state)

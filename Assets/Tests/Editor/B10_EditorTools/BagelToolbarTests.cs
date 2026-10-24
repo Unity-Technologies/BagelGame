@@ -51,6 +51,35 @@ namespace Bagel.B10_EditorTools
         }
 
         [Test]
+        public void AStripLightsTheChosenOptionAndTellsOnlyOfChanges()
+        {
+            var strip = new BagelOptionStrip { tooltip = "Theme" };
+            rootVisualElement.Add(strip);
+            var themes = m_BagelTestAssetList.themes.collection;
+            foreach (var entry in themes)
+                strip.AddOption(BagelEditorIcons.Theme(entry), entry.themeName);
+            var reset = strip.AddAction(BagelEditorIcons.Reset(), "Reset", () => { });
+            simulate.FrameUpdate();
+
+            var chosen = new List<int>();
+            strip.chosen += chosen.Add;
+            strip.SetSelectedWithoutNotify(0);
+
+            simulate.Click(strip[0]);
+            simulate.Click(strip[3]);
+            Assert.AreEqual(new[] { 3 }, chosen);
+            Assert.AreEqual(3, strip.selectedIndex);
+            Assert.IsTrue(strip[3].ClassListContains(BagelOptionStrip.selectedOptionUssClassName));
+            Assert.IsFalse(strip[0].ClassListContains(BagelOptionStrip.selectedOptionUssClassName));
+            Assert.AreEqual("High Contrast\nTheme", strip[3].tooltip);
+            Assert.IsTrue(reset.ClassListContains(BagelOptionStrip.actionOptionUssClassName));
+
+            // Every theme has an icon of its own.
+            foreach (var entry in themes)
+                Assert.IsNotNull(entry.icon, entry.themeName);
+        }
+
+        [Test]
         public void LanguageChangesOpenScreens()
         {
             m_BagelTestAssetList.pausePaneUxml.CloneTree(rootVisualElement);

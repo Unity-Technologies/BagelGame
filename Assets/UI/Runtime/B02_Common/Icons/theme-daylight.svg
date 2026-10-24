@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Daylight: a warm morning sun -->
+  <path d="M51 32 L59 32 M48.89 41.75 L53.22 44.25 M41.5 48.45 L45.5 55.38 M32 51.5 L32 56.5 M22.5 48.45 L18.5 55.38 M15.11 41.75 L10.78 44.25 M13 32 L5 32 M15.11 22.25 L10.78 19.75 M22.5 15.55 L18.5 8.62 M32 12.5 L32 7.5 M41.5 15.55 L45.5 8.62 M48.89 22.25 L53.22 19.75" fill="none" stroke="#3B1F14" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M51 32 L59 32 M48.89 41.75 L53.22 44.25 M41.5 48.45 L45.5 55.38 M32 51.5 L32 56.5 M22.5 48.45 L18.5 55.38 M15.11 41.75 L10.78 44.25 M13 32 L5 32 M15.11 22.25 L10.78 19.75 M22.5 15.55 L18.5 8.62 M32 12.5 L32 7.5 M41.5 15.55 L45.5 8.62 M48.89 22.25 L53.22 19.75" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M18 32 a14 14 0 1 0 28 0 a14 14 0 1 0 -28 0 Z" fill="#FFC93C" stroke="#3B1F14" stroke-width="4"/>
+  <path d="M23.5 29 a9 9 0 0 1 6 -6" fill="none" stroke="#FFF1B8" stroke-width="3" stroke-linecap="round"/>
+</svg>

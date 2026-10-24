@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Edgy: a square badge with a lightning bolt, all sharp corners -->
+  <path d="M6 6 H58 V58 H6 Z" fill="#3E4EED" stroke="#3B1F14" stroke-width="4" stroke-linejoin="miter"/>
+  <path d="M11 11 H53 V18" fill="none" stroke="#8D98FF" stroke-width="3"/>
+  <path d="M36 10 L18 36 H30 L25 55 L46 26 H34 Z" fill="#FFE14D" stroke="#3B1F14" stroke-width="3.5" stroke-linejoin="miter"/>
+</svg>

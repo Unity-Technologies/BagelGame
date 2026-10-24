@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- High Contrast: a circle half black and half white, ringed in yellow -->
+  <path d="M5 32 a27 27 0 1 0 54 0 a27 27 0 1 0 -54 0 Z" fill="#FFD600" stroke="#000000" stroke-width="3"/>
+  <path d="M32 12 a20 20 0 0 0 0 40 Z" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 12 a20 20 0 0 1 0 40 Z" fill="#000000" stroke="#000000" stroke-width="3" stroke-linejoin="round"/>
+</svg>

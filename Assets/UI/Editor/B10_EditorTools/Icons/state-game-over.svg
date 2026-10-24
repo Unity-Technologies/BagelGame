@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Game Over: the toaster at the end of the run, its toast popped up -->
+  <path d="M18 6 H32 a4 4 0 0 1 4 4 V24 H14 V10 a4 4 0 0 1 4 -4 Z" fill="#E9B872" stroke="#3B1F14" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M18 10 H32" fill="none" stroke="#B57A3C" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M10 20 H54 a6 6 0 0 1 6 6 V48 a6 6 0 0 1 -6 6 H10 a6 6 0 0 1 -6 -6 V26 a6 6 0 0 1 6 -6 Z" fill="#DE482C" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M12 21 H38 M42 21 H52" fill="none" stroke="#3B1F14" stroke-width="5" stroke-linecap="round"/>
+  <path d="M10 28 a4 4 0 0 1 4 -4 H22" fill="none" stroke="#FF8A65" stroke-width="3" stroke-linecap="round"/>
+  <path d="M50 32 V44" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round"/>
+  <path d="M46 32 H54" fill="none" stroke="#3B1F14" stroke-width="5" stroke-linecap="round"/>
+  <path d="M12 58 H20 M44 58 H52" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -3,23 +3,95 @@
     background-color: rgb(40, 34, 30);
 }
 
+/* The toolbar, in the Editor's theme: the brand, Reset, the game states, the setups and the simulated
+   roll, then on the right the zoom and the theme, language and Inspector strips (BagelOptionStrip). It
+   wraps onto more rows when the window is narrow. */
 .b-toolbar {
+    flex-direction: row;
+    flex-wrap: wrap;
     flex-shrink: 0;
+    align-items: center;
+    row-gap: 4px;
+    min-height: 32px;
+    padding: 5px 4px 5px 8px;
+    background-color: var(--unity-colors-toolbar-background);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-toolbar-border);
+    /* Above the cards, which scroll under it: a card's list header would take its clicks. */
+    z-index: 1;
 }
 
-.b-toolbar__group {
+.b-brand {
     flex-direction: row;
-    margin-right: 8px;
+    flex-shrink: 0;
+    align-items: center;
+    padding-right: 6px;
+}
+
+/* A bagel: a golden ring around a dark hole. */
+.b-brand__bagel {
+    width: 16px;
+    height: 16px;
+    margin-right: 7px;
+    border-radius: 8px;
+    border-width: 4px;
+    border-color: rgb(214, 140, 69);
+    background-color: rgb(59, 31, 20);
+}
+
+.b-brand__name {
+    -unity-font-definition: url("/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-SemiBold.ttf");
+    font-size: 15px;
+    color: rgb(255, 196, 120);
+    padding: 0;
+    margin: 0 6px 0 0;
+}
+
+.b-brand__sub {
+    font-size: 11px;
+    color: rgb(196, 160, 132);
+    padding: 0;
+    margin: 0;
+}
+
+.b-toolbar__strip {
+    margin: 0 6px 0 0;
+}
+
+/* Reset, right after the brand. */
+.b-toolbar__strip--reset {
+    margin-left: 4px;
+}
+
+/* The zoom and the strips on the right: the rest of the row, or a row of their own when the window is
+   too narrow, on the right either way. */
+.b-toolbar__end {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .b-toolbar__zoom {
-    width: 180px;
+    width: 170px;
     flex-direction: row;
-    margin-right: 6px;
+    margin: 0 4px 0 0;
 }
 
 .b-toolbar__zoom > .unity-label {
-    min-width: 40px;
+    min-width: 0;
+    width: auto;
+    padding-right: 6px;
+    -unity-font-style: bold;
+}
+
+.b-toolbar__zoom-label {
+    width: 38px;
+    -unity-text-align: middle-right;
+    padding: 0;
+    margin: 0 8px 0 0;
+    color: rgb(196, 160, 132);
 }
 
 .b-body {

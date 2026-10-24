@@ -14,6 +14,9 @@ namespace Bagel
             public string themeName;
             public string nameKey;
             public ThemeStyleSheet theme;
+
+            // Shown next to its name: in Settings, and in the Editor's theme pickers.
+            public VectorImage icon;
         }
 
         public List<ThemeEntry> collection;

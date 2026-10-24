@@ -26,3 +26,33 @@
 .b-icon--stat-grip {
     background-image: url("stat-grip.svg");
 }
+
+/* The themes, in Settings and the Editor's theme pickers. */
+.b-icon--theme-classic {
+    background-image: url("theme-classic.svg");
+}
+
+.b-icon--theme-edgy {
+    background-image: url("theme-edgy.svg");
+}
+
+.b-icon--theme-daylight {
+    background-image: url("theme-daylight.svg");
+}
+
+.b-icon--theme-high-contrast {
+    background-image: url("theme-high-contrast.svg");
+}
+
+/* The languages: a speech bubble with the language's letters drawn in it. */
+.b-icon--language-en {
+    background-image: url("language-en.svg");
+}
+
+.b-icon--language-fr {
+    background-image: url("language-fr.svg");
+}
+
+.b-icon--language-zh-Hans {
+    background-image: url("language-zh-Hans.svg");
+}

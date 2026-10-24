@@ -65,18 +65,70 @@ namespace Bagel.B10_EditorTools
         public void TheStateStripSwitchesTheGameState()
         {
             Assert.IsTrue(window.state.isMainMenu);
+            Assert.AreEqual(0, window.stateStrip.selectedIndex);
             Assert.IsFalse(Card("Main Menu").root.ClassListContains("b-card--inactive"));
 
-            var gameOverToggle = rootVisualElement.Q<ToolbarToggle>("state-game-over");
-            Assert.IsFalse(gameOverToggle.value);
-            gameOverToggle.value = true;
+            simulate.Click(rootVisualElement.Q("state-game-over"));
             simulate.FrameUpdate();
 
             Assert.IsTrue(window.state.isGameOver);
             Assert.IsTrue(Card("Main Menu").root.ClassListContains("b-card--inactive"));
             Assert.IsFalse(Card("Game Over").root.ClassListContains("b-card--inactive"));
-            Assert.IsTrue(rootVisualElement.Q<ToolbarToggle>("state-game-over").value);
-            Assert.IsFalse(rootVisualElement.Q<ToolbarToggle>("state-main-menu").value);
+            Assert.AreEqual(4, window.stateStrip.selectedIndex);
+
+            simulate.Click(rootVisualElement.Q("state-paused"));
+            simulate.FrameUpdate();
+            Assert.IsTrue(window.state.isPaused);
+            Assert.IsFalse(Card("Pause (Screen Space)").root.ClassListContains("b-card--inactive"));
+
+            // A setup moves the strip along.
+            window.ApplySetup("Main Menu/Settings");
+            Assert.AreEqual(0, window.stateStrip.selectedIndex);
+        }
+
+        [Test]
+        public void TheThemeAndLanguageStripsRestyleEveryCard()
+        {
+            var themes = AssetDatabase.LoadAssetAtPath<BagelThemeCollection>("Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset");
+            Assert.AreEqual(themes.collection.Count, window.themeStrip.childCount);
+
+            simulate.Click(rootVisualElement.Q("theme-daylight"));
+            simulate.FrameUpdate();
+            Assert.AreEqual(2, window.state.settings.themeIndex);
+            Assert.AreEqual(themes.collection[2].theme, window.currentTheme);
+            Assert.AreEqual(2, window.themeStrip.selectedIndex);
+
+            try
+            {
+                simulate.Click(rootVisualElement.Q("language-fr"));
+                simulate.FrameUpdate();
+                Assert.AreEqual("fr", BagelLocalization.localeCode);
+                Assert.AreEqual(window.languageStrip.IndexOf(rootVisualElement.Q("language-fr")), window.languageStrip.selectedIndex);
+                Assert.AreEqual("Jouer", Card("Main Menu").root.Q<Button>("play-button").text);
+            }
+            finally
+            {
+                BagelToolbar.SelectLanguage("en");
+            }
+            Assert.AreEqual(window.languageStrip.IndexOf(rootVisualElement.Q("language-en")), window.languageStrip.selectedIndex);
+        }
+
+        [Test]
+        public void ResetStartsAgainFromTheStartState()
+        {
+            window.ApplySetup("Game Over/Lose");
+            window.state.settings.themeIndex = 3;
+            simulate.Click(rootVisualElement.Q("roll-toggle"));
+            simulate.FrameUpdate();
+            Assert.IsTrue(BagelOptionStrip.IsOn(rootVisualElement.Q("roll-toggle")));
+
+            simulate.Click(rootVisualElement.Q("reset-button"));
+            simulate.FrameUpdate();
+
+            Assert.IsTrue(window.state.isMainMenu);
+            Assert.AreEqual(0, window.state.settings.themeIndex);
+            Assert.AreEqual(0, window.themeStrip.selectedIndex);
+            Assert.IsFalse(BagelOptionStrip.IsOn(rootVisualElement.Q("roll-toggle")));
         }
 
         [Test]
