@@ -10,8 +10,8 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     // Every screen of the game side by side, live, all playing on one throwaway copy of the
-    // start state. Click through them, switch the game's state, theme and language, stage a
-    // setup (a win, a wrecked bagel...) or edit the state in the inspector. Nothing here
+    // start state. Click through them, switch the theme and language, stage a setup (a win, a
+    // wrecked bagel, the Settings pane...) or edit the state in the inspector. Nothing here
     // changes an asset.
     [NoAutoStaticsCleanup] // read-only tables of screens and setups
     public class BagelAllUIWindow : EditorWindow
@@ -21,36 +21,27 @@ namespace Bagel
         const string k_ThemeCollectionPath = "Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset";
         const string k_UIPath = "Assets/UI/Runtime/";
 
-        // One card per screen. A screen is "active" in the states listed: the others are dimmed.
+        // One card per screen, all of them shown at once.
         public struct CardSpec
         {
             public string title;
             public string[] uxmlPaths;
-            public PlayManagerState.State[] activeIn;
-            public bool pausedOnly;
             public Vector2 size;
-
-            public bool IsActive(PlayManagerState state)
-            {
-                if (pausedOnly)
-                    return state.isPlaying && state.isPaused;
-                return Array.IndexOf(activeIn, state.currentState) >= 0 && !state.isPaused;
-            }
         }
 
         public static readonly CardSpec[] cardSpecs =
         {
-            new CardSpec { title = "Main Menu", uxmlPaths = new[] { "B03_MainMenu/MainMenuScreen.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
-            new CardSpec { title = "Bagel Selection", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionControlsPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
-            new CardSpec { title = "Bagel Cards", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionTypeInfoPane.uxml" }, activeIn = new[] { PlayManagerState.State.BagelSelection } },
-            new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
-            new CardSpec { title = "Callout (Screen Space)", uxmlPaths = new[] { "B06_BagelTracker/BagelCallout.uxml" }, activeIn = new[] { PlayManagerState.State.Playing }, size = new Vector2(220f, 90f) },
-            new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, pausedOnly = true, size = new Vector2(640f, 400f) },
-            new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" }, activeIn = new[] { PlayManagerState.State.GameOver } },
-            new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu, PlayManagerState.State.GameOver } },
-            new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
-            new CardSpec { title = "Jam Label (World Space)", uxmlPaths = new[] { "B13_Kitchen/JamLabel.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
-            new CardSpec { title = "Steam (World Space)", uxmlPaths = new[] { "B13_Kitchen/Steam.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
+            new CardSpec { title = "Main Menu", uxmlPaths = new[] { "B03_MainMenu/MainMenuScreen.uxml" } },
+            new CardSpec { title = "Bagel Selection", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionControlsPane.uxml" } },
+            new CardSpec { title = "Bagel Cards", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionTypeInfoPane.uxml" } },
+            new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" } },
+            new CardSpec { title = "Callout (Screen Space)", uxmlPaths = new[] { "B06_BagelTracker/BagelCallout.uxml" }, size = new Vector2(220f, 90f) },
+            new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, size = new Vector2(640f, 400f) },
+            new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" } },
+            new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" } },
+            new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" } },
+            new CardSpec { title = "Jam Label (World Space)", uxmlPaths = new[] { "B13_Kitchen/JamLabel.uxml" } },
+            new CardSpec { title = "Steam (World Space)", uxmlPaths = new[] { "B13_Kitchen/Steam.uxml" } },
         };
 
         public class Card
@@ -71,7 +62,6 @@ namespace Bagel
         readonly List<Card> m_Cards = new();
         IVisualElementScheduledItem m_Roll;
 
-        BagelOptionStrip m_StateStrip;
         BagelOptionStrip m_ThemeStrip;
         BagelOptionStrip m_LanguageStrip;
         VisualElement m_RollToggle;
@@ -88,7 +78,6 @@ namespace Bagel
         public IReadOnlyList<Card> cards => m_Cards;
         public ThemeStyleSheet currentTheme => m_Theme;
         public float zoom => m_Zoom;
-        public BagelOptionStrip stateStrip => m_StateStrip;
         public BagelOptionStrip themeStrip => m_ThemeStrip;
         public BagelOptionStrip languageStrip => m_LanguageStrip;
 
@@ -108,8 +97,6 @@ namespace Bagel
             DestroyState();
             m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
             m_State.propertyChanged += State_OnPropertyChanged;
-            m_State.onStateChange += State_OnStateChange;
-            m_State.onPauseStateChanged += State_OnPauseStateChanged;
             m_Themes = AssetDatabase.LoadAssetAtPath<BagelThemeCollection>(k_ThemeCollectionPath);
 
             var windowTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(k_WindowUxmlPath);
@@ -147,7 +134,6 @@ namespace Bagel
             BuildCards();
             BindToolbar();
             BindInspector();
-            UpdateStateStrip();
         }
 
         // Closed for good: the screens give their resources back to be reused now.
@@ -170,8 +156,6 @@ namespace Bagel
                 return;
 
             m_State.propertyChanged -= State_OnPropertyChanged;
-            m_State.onStateChange -= State_OnStateChange;
-            m_State.onPauseStateChanged -= State_OnPauseStateChanged;
             PlayManagerState.DestroyRuntimeCopy(m_State);
             m_State = null;
         }
@@ -240,7 +224,6 @@ namespace Bagel
                 // Added last: by now every screen has the shared state, so attaching doesn't make a copy per screen.
                 container.Add(card.root);
             }
-            UpdateActiveCards();
         }
 
         Card CreateCard(CardSpec spec)
@@ -351,18 +334,9 @@ namespace Bagel
 
         // ---------------------------------------------------------------- Toolbar
 
-        // The game states of the state strip, in its order.
-        public static readonly string[] stateNames = { "state-main-menu", "state-bagel-selection", "state-playing", "state-paused", "state-game-over" };
-        static readonly string[] s_StateTitles = { "Main Menu", "Bagel Selection", "Playing", "Paused", "Game Over" };
-
         void BindToolbar()
         {
             rootVisualElement.Q<BagelOptionStrip>("reset-strip").AddAction(BagelEditorIcons.Reset(), "Reset", ResetWindow, "reset-button");
-
-            m_StateStrip = rootVisualElement.Q<BagelOptionStrip>("state-strip");
-            for (int i = 0; i < stateNames.Length; i++)
-                m_StateStrip.AddOption(BagelEditorIcons.Window(stateNames[i]), s_StateTitles[i], stateNames[i]);
-            m_StateStrip.chosen += GoToState;
 
             VisualElement setups = null;
             setups = rootVisualElement.Q<BagelOptionStrip>("setup-strip").AddTextAction("Setups \u25BE",
@@ -411,35 +385,6 @@ namespace Bagel
             rootVisualElement.Q("inspector-dock").EnableInClassList("b-inspector-dock--shown", show);
         }
 
-        // The state strip's options, by index: Main Menu, Bagel Selection, Playing, Paused, Game Over.
-        public void GoToState(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    m_State.GoToMainMenu();
-                    break;
-                case 1:
-                    m_State.GoToBagelSelection();
-                    break;
-                case 2:
-                    if (m_State.isPlaying)
-                        m_State.Resume();
-                    else
-                        m_State.GoToPlay();
-                    break;
-                case 3:
-                    if (!m_State.isPlaying)
-                        m_State.GoToPlay();
-                    m_State.Pause();
-                    break;
-                case 4:
-                    m_State.FinishRun();
-                    break;
-            }
-            UpdateStateStrip();
-        }
-
         void ShowSetupMenu(VisualElement button)
         {
             var menu = new GenericMenu();
@@ -451,27 +396,9 @@ namespace Bagel
             menu.DropDown(button.worldBound);
         }
 
-        void UpdateStateStrip()
-        {
-            if (m_State == null || m_StateStrip == null)
-                return;
-
-            var index = m_State.isMainMenu ? 0
-                : m_State.isBagelSelection ? 1
-                : m_State.isPlaying ? (m_State.isPaused ? 3 : 2)
-                : 4;
-            m_StateStrip.SetSelectedWithoutNotify(index);
-        }
-
         void UpdateThemeStrip() => m_ThemeStrip?.SetSelectedWithoutNotify(m_State != null ? m_State.settings.themeIndex : -1);
 
         void UpdateLanguageStrip() => m_LanguageStrip?.SetSelectedWithoutNotify(m_LocaleCodes.IndexOf(BagelLocalization.localeCode));
-
-        void UpdateActiveCards()
-        {
-            foreach (var card in m_Cards)
-                card.root.EnableInClassList("b-card--inactive", !card.spec.IsActive(m_State));
-        }
 
         // ---------------------------------------------------------------- Setups
 
@@ -528,7 +455,6 @@ namespace Bagel
                     tracker.force = tracker.constants != null ? tracker.constants.forceMax * (1f - fraction) : 0f;
                     break;
             }
-            UpdateStateStrip();
         }
 
         // Moves the tracker as if a bagel were rolling: spinning, bumping and shedding toppings.
@@ -584,8 +510,6 @@ namespace Bagel
             DestroyState();
             m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
             m_State.propertyChanged += State_OnPropertyChanged;
-            m_State.onStateChange += State_OnStateChange;
-            m_State.onPauseStateChanged += State_OnPauseStateChanged;
 
             foreach (var card in m_Cards)
             {
@@ -600,9 +524,7 @@ namespace Bagel
             }
             ApplyTheme(ThemeAt(m_State.settings.themeIndex));
             BindInspector();
-            UpdateStateStrip();
             UpdateThemeStrip();
-            UpdateActiveCards();
         }
 
         void BindInspector()
@@ -619,18 +541,6 @@ namespace Bagel
                 ApplyTheme(ThemeAt(m_State.settings.themeIndex));
                 UpdateThemeStrip();
             }
-        }
-
-        void State_OnStateChange(object sender, PlayManagerState.State state)
-        {
-            UpdateStateStrip();
-            UpdateActiveCards();
-        }
-
-        void State_OnPauseStateChanged(object sender, bool paused)
-        {
-            UpdateStateStrip();
-            UpdateActiveCards();
         }
 
         ThemeStyleSheet ThemeAt(int index)

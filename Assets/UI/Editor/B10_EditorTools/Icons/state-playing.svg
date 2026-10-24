@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <!-- Playing: a bagel rolling along the counter, fast -->
-  <path d="M4 54 H60" fill="none" stroke="#3B1F14" stroke-width="4" stroke-linecap="round"/>
-  <path d="M19 32 a19 19 0 1 0 38 0 a19 19 0 1 0 -38 0 Z M32 32 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0 Z" fill="#D68C45" fill-rule="evenodd" stroke="#3B1F14" stroke-width="4"/>
-  <path d="M25 27 a14 14 0 0 1 9 -9" fill="none" stroke="#F2B66E" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M32.5 22 l1.5 1 M45 21 l1.5 -0.5 M49 34 l1 1.5 M30 42 l1.5 0.5 M41 45 l1.5 -1" fill="none" stroke="#FFF4DE" stroke-width="2" stroke-linecap="round"/>
-  <path d="M4 24 H14 M2 33 H14 M6 42 H15" fill="none" stroke="#3B1F14" stroke-width="3.5" stroke-linecap="round"/>
-</svg>

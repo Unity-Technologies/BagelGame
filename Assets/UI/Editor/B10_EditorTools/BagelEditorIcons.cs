@@ -30,7 +30,7 @@ namespace Bagel
             return label;
         }
 
-        // A game state of the Bagel All UI window, or one of its tools: state-main-menu, tool-simulate-roll...
+        // One of the Bagel All UI window's tools: tool-simulate-roll...
         public static VisualElement Window(string iconName) =>
             Vector(AssetDatabase.LoadAssetAtPath<VectorImage>($"{k_EditorIcons}{iconName}.svg"));
 

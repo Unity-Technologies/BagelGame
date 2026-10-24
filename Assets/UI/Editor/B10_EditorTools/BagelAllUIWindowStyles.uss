@@ -3,8 +3,7 @@
     background-color: rgb(40, 34, 30);
 }
 
-/* The toolbar, in the Editor's theme: the brand, Reset, the game states, the setups and the simulated
-   roll, then on the right the zoom and the theme, language and Inspector strips (BagelOptionStrip). It
+/* The toolbar, in the Editor's theme: the brand, Reset, the setups and the simulated roll, then on the right the zoom and the theme, language and Inspector strips (BagelOptionStrip). It
    wraps onto more rows when the window is narrow. */
 .b-toolbar {
     flex-direction: row;
@@ -127,12 +126,6 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     background-color: rgb(78, 62, 52);
-    transition-property: opacity;
-    transition-duration: 0.2s;
-}
-
-.b-card--inactive {
-    opacity: 0.45;
 }
 
 .b-card__title {

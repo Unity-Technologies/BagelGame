@@ -61,29 +61,22 @@ namespace Bagel.B10_EditorTools
             }
         }
 
+        // Every screen shows at once, none dimmed: a setup stages a moment of the game instead.
         [Test]
-        public void TheStateStripSwitchesTheGameState()
+        public void SetupsStageTheGameAndEveryCardShows()
         {
             Assert.IsTrue(window.state.isMainMenu);
-            Assert.AreEqual(0, window.stateStrip.selectedIndex);
-            Assert.IsFalse(Card("Main Menu").root.ClassListContains("b-card--inactive"));
+            Assert.IsNull(rootVisualElement.Q("state-strip"));
 
-            simulate.Click(rootVisualElement.Q("state-game-over"));
+            window.ApplySetup("Game Over/Win");
             simulate.FrameUpdate();
-
             Assert.IsTrue(window.state.isGameOver);
-            Assert.IsTrue(Card("Main Menu").root.ClassListContains("b-card--inactive"));
-            Assert.IsFalse(Card("Game Over").root.ClassListContains("b-card--inactive"));
-            Assert.AreEqual(4, window.stateStrip.selectedIndex);
+            foreach (var card in window.cards)
+                Assert.AreEqual(1f, card.root.resolvedStyle.opacity, card.spec.title);
 
-            simulate.Click(rootVisualElement.Q("state-paused"));
-            simulate.FrameUpdate();
+            window.ApplySetup("Pause/Settings");
             Assert.IsTrue(window.state.isPaused);
-            Assert.IsFalse(Card("Pause (Screen Space)").root.ClassListContains("b-card--inactive"));
-
-            // A setup moves the strip along.
-            window.ApplySetup("Main Menu/Settings");
-            Assert.AreEqual(0, window.stateStrip.selectedIndex);
+            Assert.AreEqual(PlayManagerState.PausePane.Settings, window.state.pausePane);
         }
 
         [Test]
