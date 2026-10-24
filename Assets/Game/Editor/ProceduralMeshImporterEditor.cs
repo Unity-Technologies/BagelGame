@@ -42,6 +42,13 @@ namespace Bagel
             root.Add(m_Inputs);
             ShowInputs();
 
+            // For a Mesh Collider: cooking its collision at build time.
+            var collision = new Foldout { text = "Mesh Collider", value = false };
+            collision.Add(new PropertyField(serializedObject.FindProperty("m_PreBakeTriangleCollision"), "Pre-Bake Triangle Collision"));
+            collision.Add(new PropertyField(serializedObject.FindProperty("m_PreBakeConvexCollision"), "Pre-Bake Convex Collision"));
+            collision.Bind(serializedObject);
+            root.Add(collision);
+
             var stats = new HelpBox(Stats(), HelpBoxMessageType.None);
             stats.style.marginTop = 6;
             root.Add(stats);

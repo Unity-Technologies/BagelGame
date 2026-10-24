@@ -160,6 +160,23 @@ namespace Bagel.B00_Meshes
             Assert.IsEmpty(problems, string.Join("\n", problems));
         }
 
+        // A Mesh Collider's collision is cooked when the game is built: the .procmesh says so in its inputs.
+        [Test]
+        public void EveryMeshColliderMeshIsPreBaked()
+        {
+            var problems = new List<string>();
+            foreach (var path in scenesAndPrefabs.Where(path => path.EndsWith(".prefab")))
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                foreach (var collider in prefab.GetComponentsInChildren<MeshCollider>(true))
+                {
+                    if (collider.sharedMesh != null && !collider.sharedMesh.HasPreBakeCollisionMesh(collider.convex))
+                        problems.Add($"{path}: {collider.name}'s {collider.sharedMesh.name} isn't pre-baked for {(collider.convex ? "convex" : "triangle")} collision");
+                }
+            }
+            Assert.IsEmpty(problems, string.Join("\n", problems));
+        }
+
         [Test]
         public void TheSameInputsAlwaysBuildTheSameBagel()
         {
