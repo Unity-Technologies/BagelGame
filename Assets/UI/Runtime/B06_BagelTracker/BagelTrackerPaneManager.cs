@@ -53,7 +53,10 @@ namespace Bagel
 
             Span<char> buffer = stackalloc char[16];
             if (state.tracker.toppingsCount.TryFormat(buffer, out var length, "N0", BagelLocalization.culture))
+            {
+                BagelLocalization.LocalizeDigits(buffer.Slice(0, length));
                 label.SetText(buffer.Slice(0, length));
+            }
         }
     }
 }

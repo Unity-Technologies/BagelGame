@@ -59,7 +59,7 @@ namespace Bagel.B08_GameOver
             var gameOverPaneManager = ShowGameOver(42);
 
             Assert.AreEqual("You Win!", gameOverPaneManager.title.text);
-            Assert.AreEqual(42, gameOverPaneManager.toppingsNumberField.value);
+            Assert.AreEqual("42", gameOverPaneManager.toppingsKeptLabel.text);
             Assert.IsTrue(gameOverPaneManager.leaderboardForm.enabledInHierarchy);
         }
 
@@ -69,7 +69,7 @@ namespace Bagel.B08_GameOver
             var gameOverPaneManager = ShowGameOver(0);
 
             Assert.AreEqual("You Lose!", gameOverPaneManager.title.text);
-            Assert.AreEqual(0, gameOverPaneManager.toppingsNumberField.value);
+            Assert.AreEqual("0", gameOverPaneManager.toppingsKeptLabel.text);
             Assert.IsFalse(gameOverPaneManager.leaderboardForm.enabledInHierarchy);
         }
 

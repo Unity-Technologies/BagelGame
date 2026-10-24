@@ -56,3 +56,7 @@
 .b-icon--language-zh-Hans {
     background-image: url("language-zh-Hans.svg");
 }
+
+.b-icon--language-ar {
+    background-image: url("language-ar.svg");
+}

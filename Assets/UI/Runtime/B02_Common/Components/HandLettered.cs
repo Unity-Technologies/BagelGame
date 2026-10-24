@@ -42,6 +42,10 @@ namespace Bagel
 
         static void Letter(MeshModificationContext context)
         {
+            // Arabic letters join up: turned one by one, they would come apart. Right-to-left text stays as written.
+            if (IsRightToLeft(context.element))
+                return;
+
             // The closest element with the component has the values: this one, or an ancestor.
             var settings = CreateDefault();
             for (var element = context.element; element != null; element = element.hierarchy.parent)
@@ -92,6 +96,16 @@ namespace Bagel
                 center.y + offset.x * sin + offset.y * cos + lift,
                 vertex.position.z);
             return vertex;
+        }
+
+        static bool IsRightToLeft(VisualElement element)
+        {
+            for (; element != null; element = element.hierarchy.parent)
+            {
+                if (element.languageDirection != LanguageDirection.Inherit)
+                    return element.languageDirection == LanguageDirection.RTL;
+            }
+            return false;
         }
 
         static float Hash(int seed)

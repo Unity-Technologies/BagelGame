@@ -44,7 +44,8 @@ namespace Bagel.B00_Themes
                 var playButton = screen.Q<Button>("play-button");
                 var style = playButton.resolvedStyle;
 
-                Assert.IsNotNull(style.unityFontDefinition.font, $"{entry.themeName}: the font comes from --b-font");
+                // A font asset: its weights and fallbacks (Arabic, Chinese) come with it.
+                Assert.AreEqual("DynaPuff-Medium SDF", style.unityFontDefinition.fontAsset?.name, $"{entry.themeName}: the font comes from --b-font");
                 Assert.Greater(style.borderTopWidth, 0f, $"{entry.themeName}: buttons have a border");
                 Assert.AreNotEqual(style.backgroundColor, style.color, $"{entry.themeName}: text and background differ");
             }

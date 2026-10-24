@@ -19,7 +19,7 @@ namespace Bagel
         Label m_FreshnessLabel;
         Label m_Stamp;
         Label m_Summary;
-        IntegerField m_ToppingsNumberField;
+        Label m_ToppingsKeptLabel;
         VisualElement m_LeaderboardForm;
         TextField m_AddToLeaderboardNameField;
         Button m_AddToLeaderboardButton;
@@ -31,7 +31,7 @@ namespace Bagel
         public Label timeLabel => m_TimeLabel ??= this.Q<Label>("time-label");
         public Label freshnessLabel => m_FreshnessLabel ??= this.Q<Label>("freshness-label");
         public Label stamp => m_Stamp ??= this.Q<Label>("stamp");
-        public IntegerField toppingsNumberField => m_ToppingsNumberField ??= this.Q<IntegerField>("toppings-number-field");
+        public Label toppingsKeptLabel => m_ToppingsKeptLabel ??= this.Q<Label>("toppings-kept-label");
         public VisualElement leaderboardForm => m_LeaderboardForm ??= this.Q<VisualElement>("leaderboard-form");
         public TextField addToLeaderboardNameField => m_AddToLeaderboardNameField ??= this.Q<TextField>("leaderboard-name-field");
         public Button addToLeaderboardButton => m_AddToLeaderboardButton ??= this.Q<Button>("add-to-leaderboard-button");
@@ -60,6 +60,8 @@ namespace Bagel
         readonly LocalizedString m_SummaryString = BagelLocalization.String("gameover.summary");
         readonly LocalizedString m_BagelName = BagelLocalization.String("bagel.sesame");
         readonly IntVariable m_Toppings = new IntVariable();
+        // The count as the language writes it: Arabic picks its plural with {toppings} and shows {count}.
+        readonly StringVariable m_Count = new StringVariable();
         readonly LocalizedString m_StampString = BagelLocalization.String("stamp.win");
 
         bool m_Bound;
@@ -72,6 +74,7 @@ namespace Bagel
 
             m_SummaryString.LocalVariables.Add(m_BagelName, "bagel");
             m_SummaryString.LocalVariables.Add(m_Toppings, "toppings");
+            m_SummaryString.LocalVariables.Add(m_Count, "count");
 
             // The page title comes from the Page template, so its binding is added here.
             title?.SetBinding("text", m_TitleString);
@@ -107,9 +110,6 @@ namespace Bagel
                 m_BagelName.SetReference(BagelLocalization.table, lastRun.bagelNameKey);
             m_Toppings.Value = lastRun.toppings;
 
-            // Changing a variable doesn't re-render the strings that use it.
-            m_SummaryString.RefreshString();
-
             UpdateReceipt();
             SlamStamp();
         }
@@ -124,8 +124,13 @@ namespace Bagel
             var lastRun = state.lastRun;
             var culture = BagelLocalization.culture;
             var minutes = Mathf.FloorToInt(lastRun.time / 60f);
-            timeLabel?.SetText(string.Format(culture, "{0}:{1:00.0}", minutes, lastRun.time - minutes * 60f));
-            freshnessLabel?.SetText(string.Format(culture, "{0:0}%", lastRun.freshness * 100f));
+            toppingsKeptLabel?.SetText(BagelConverters.FormatNumber(lastRun.toppings));
+            timeLabel?.SetText(BagelLocalization.LocalizeDigits(string.Format(culture, "{0}:{1:00.0}", minutes, lastRun.time - minutes * 60f)));
+            freshnessLabel?.SetText(BagelLocalization.LocalizeDigits(string.Format(culture, "{0:0}%", lastRun.freshness * 100f)));
+
+            // Changing a variable doesn't re-render the strings that use it.
+            m_Count.Value = BagelConverters.FormatNumber(lastRun.toppings);
+            m_SummaryString.RefreshString();
 
             m_StampString.SetReference(BagelLocalization.table, lastRun.stale ? "stamp.stale" : lastRun.won ? "stamp.win" : "stamp.lose");
             stamp?.EnableInClassList(stampLostUssClassName, !lastRun.won);

@@ -90,18 +90,6 @@
     -unity-font-style: bold;
 }
 
-.b-receipt__price > .unity-base-field__input {
-    background-color: rgba(0, 0, 0, 0);
-    border-width: 0;
-    border-radius: 0;
-    padding: 0;
-    -unity-text-align: middle-right;
-}
-
-.b-receipt__price > .unity-base-field__input > .unity-text-element {
-    -unity-text-align: middle-right;
-}
-
 .b-receipt__form {
     padding: 2px 6px 6px 6px;
 }
@@ -115,6 +103,28 @@
 .b-receipt__buttons > .unity-button {
     flex-grow: 1;
     flex-basis: 0;
+}
+
+/* Right to left: what was bought on the right, its price on the left. */
+.b-rtl .b-receipt__lines {
+    grid-template-columns: auto 1fr;
+    grid-auto-flow: row-dense;
+}
+
+.b-rtl .b-receipt__item {
+    grid-column-start: 2;
+}
+
+.b-rtl .b-receipt__price {
+    grid-column-start: 1;
+}
+
+.b-rtl .b-receipt__price {
+    -unity-text-align: middle-left;
+}
+
+.b-rtl .b-receipt__buttons {
+    flex-direction: row-reverse;
 }
 
 .b-receipt__thanks {

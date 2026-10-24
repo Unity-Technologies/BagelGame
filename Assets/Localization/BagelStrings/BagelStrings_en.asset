@@ -370,7 +370,7 @@ MonoBehaviour:
         m_KeyId: 1419575334
         m_Metadata:
           m_Items: []
-        m_Value: '{toppings:cond:>0?Your {bagel} bagel kept {toppings:plural:1 topping|{} toppings}!|Your {bagel} bagel lost every topping.}'
+        m_Value: '{toppings:cond:>0?Your {bagel} bagel kept {toppings:plural(en):1 topping|{} toppings}!|Your {bagel} bagel lost every topping.}'
     - rid: 6326339759238545614
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

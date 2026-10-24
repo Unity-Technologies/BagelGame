@@ -48,7 +48,7 @@ namespace Bagel
                 m_ParentPane.stateChanged += ParentPane_OnStateChanged;
 
             ResolveState();
-            BagelLocalization.localeChanged += OnLocaleChanged;
+            BagelLocalization.localeChanged += BagelLocalization_OnLocaleChanged;
             OnAttached();
 
             if (m_ParentPane == null && !UnityEngine.Application.isPlaying)
@@ -62,7 +62,7 @@ namespace Bagel
         void OnDetachFromPanel(DetachFromPanelEvent evt)
         {
             BagelThemes.RemovePreviewRoot(this);
-            BagelLocalization.localeChanged -= OnLocaleChanged;
+            BagelLocalization.localeChanged -= BagelLocalization_OnLocaleChanged;
             OnDetached();
 
             if (m_ParentPane != null)
@@ -134,11 +134,26 @@ namespace Bagel
             OnStatePropertyChanged(property);
         }
 
+        void BagelLocalization_OnLocaleChanged()
+        {
+            ApplyDisplaySettings();
+            OnLocaleChanged();
+        }
+
         void ApplyDisplaySettings()
         {
             var isTopPane = m_ParentPane == null && m_State != null;
             EnableInClassList(reduceMotionUssClassName, isTopPane && m_State.settings.reduceMotion);
             EnableInClassList(noVisualEffectsUssClassName, isTopPane && !m_State.settings.visualEffects);
+
+            // The screen reads in the language's direction; the panes inside follow it.
+            if (isTopPane)
+                FollowsLanguage.Apply(this, BagelLocalization.isRightToLeft);
+            else
+            {
+                languageDirection = LanguageDirection.Inherit;
+                RemoveFromClassList(FollowsLanguage.rtlUssClassName);
+            }
         }
 
         // Called after the pane is attached and has a state.

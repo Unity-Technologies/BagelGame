@@ -113,8 +113,16 @@
     margin-bottom: 16px;
 }
 
+#secondary-buttons-row {
+    flex-direction: row;
+}
+
 /* Two buttons share a row: less padding, so "Leaderboard" fits. */
 #secondary-buttons-row > .unity-button {
     padding-left: 2px;
     padding-right: 2px;
+}
+
+.b-rtl #secondary-buttons-row {
+    flex-direction: row-reverse;
 }

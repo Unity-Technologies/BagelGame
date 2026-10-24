@@ -100,10 +100,12 @@
     --b-accent-d: rgb(160, 214, 150);
 
     /* Text */
-    --b-font: url("project://database/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-Medium.ttf?fileID=12800000&guid=dbc18cac5528444409d3ba25e6ad1b74&type=3#DynaPuff-Medium");
+    --b-font: url("Fonts/DynaPuff-Medium SDF.asset");
     --b-title-size: 34px;
     --b-main-title-size: 45px;
     --b-details-size: 10px;
+    /* The default runtime theme's text size: as big as text that shrinks to fit grows. */
+    --b-text-size: 14px;
 
     /* Focus */
     --b-focus-color: rgb(247, 213, 110);
@@ -490,6 +492,16 @@
     flex-grow: 1;
 }
 
+/* So there's nothing to scroll: the tab view still makes its scroll buttons, shown until it lays itself out. It
+   shows them itself if headers ever don't fit. */
+.unity-tab-view__next-button,
+.unity-tab-view__previous-button {
+    display: none;
+    background-color: var(--b-surface-color);
+    color: var(--b-text-color);
+    border-width: 0;
+}
+
 .unity-tab__header {
     flex-grow: 1;
     flex-shrink: 1;
@@ -509,9 +521,11 @@
     background-color: var(--b-hover-color);
 }
 
+/* A long name shrinks to fit its tab (the Advanced Text Generator's best fit). */
 .unity-tab__header-label {
     color: var(--b-text-color);
     opacity: 0.6;
+    -unity-text-auto-size: best-fit 9px var(--b-text-size);
 }
 
 .unity-tab__header:checked > .unity-tab__header-label {
@@ -670,4 +684,37 @@
 
 .b-no-visual-effects .b-pane {
     backdrop-filter: none;
+}
+
+/* ------------------------------------------------------------------ Right to left */
+
+/* b-rtl is on screens in a language written right to left (FollowsLanguage), whose text the Advanced Text
+   Generator lays out right to left. UI Toolkit's rows and text alignment don't turn around by themselves: text
+   that starts at the left starts at the right, and rows that read in order run from the right. What's about
+   places stays put: the arrows that move along the bagels, the two sides of the HUD. */
+.b-rtl {
+    -unity-text-align: upper-right;
+}
+
+.b-rtl .unity-toggle,
+.b-rtl .unity-tab-view__header-container,
+.b-rtl .unity-scroll-view__content-and-vertical-scroll-container {
+    flex-direction: row-reverse;
+}
+
+/* A slider grows the way the line runs. */
+.b-rtl .unity-base-slider--horizontal > .unity-base-slider__input {
+    scale: -1 1;
+}
+
+/* A table's first column is on the right, its titles start at the right, and the lines between the columns are
+   on their left. */
+.b-rtl .unity-multi-column-header__column-container,
+.b-rtl .unity-multi-column-view__row-container,
+.b-rtl .unity-multi-column-header__column__content {
+    flex-direction: row-reverse;
+}
+
+.b-rtl .unity-multi-column-header__column {
+    border-width: 0 0 0 1px;
 }

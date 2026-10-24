@@ -31,6 +31,61 @@ namespace Bagel
 
         public static string localeCode => LocalizationSettings.SelectedLocale?.Code ?? "en";
 
+        // The selected language, without its script or region: "zh" for "zh-Hans".
+        public static string language
+        {
+            get
+            {
+                var code = localeCode;
+                var dash = code.IndexOf('-');
+                return dash < 0 ? code : code.Substring(0, dash);
+            }
+        }
+
+        // Whether the selected language is written right to left (Arabic). The language code decides when the
+        // platform has no data for the culture.
+        public static bool isRightToLeft => Array.IndexOf(s_RightToLeftLanguages, language) >= 0 || culture.TextInfo.IsRightToLeft;
+
+        static readonly string[] s_RightToLeftLanguages = { "ar", "fa", "he", "ur" };
+
+        // Arabic writes its numbers with Arabic-Indic digits and separators (١٢٬٣٤٥ ٪٥٧ ٣٫٥); the platform's culture
+        // data has Western ones. The text generator lays them out among the words, in either direction.
+        public static bool usesArabicDigits => language == "ar";
+
+        // A number formatted with the culture, in the language's digits.
+        public static string LocalizeDigits(string number)
+        {
+            if (string.IsNullOrEmpty(number) || !usesArabicDigits)
+                return number;
+            return string.Create(number.Length, number, (digits, source) =>
+            {
+                source.AsSpan().CopyTo(digits);
+                ToArabicDigits(digits);
+            });
+        }
+
+        public static void LocalizeDigits(Span<char> number)
+        {
+            if (usesArabicDigits)
+                ToArabicDigits(number);
+        }
+
+        static void ToArabicDigits(Span<char> number)
+        {
+            for (int i = 0; i < number.Length; i++)
+            {
+                var c = number[i];
+                if (c >= '0' && c <= '9')
+                    number[i] = (char)('\u0660' + (c - '0'));
+                else if (c == ',')
+                    number[i] = '\u066C'; // thousands separator
+                else if (c == '.')
+                    number[i] = '\u066B'; // decimal separator
+                else if (c == '%')
+                    number[i] = '\u066A';
+            }
+        }
+
         // The selected language's number formats, for counts shown in the UI.
         public static CultureInfo culture
         {

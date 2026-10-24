@@ -370,7 +370,7 @@ MonoBehaviour:
         m_KeyId: 1419575334
         m_Metadata:
           m_Items: []
-        m_Value: "{toppings:cond:>0?Votre bagel {bagel} a gard\xE9 {toppings:plural:1 garniture|{} garnitures} !|Votre bagel {bagel} a perdu toutes ses garnitures.}"
+        m_Value: "{toppings:cond:>0?Votre bagel {bagel} a gard\xE9 {toppings:plural(fr):1 garniture|{} garnitures} !|Votre bagel {bagel} a perdu toutes ses garnitures.}"
     - rid: 6326339759238545616
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

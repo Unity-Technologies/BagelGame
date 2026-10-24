@@ -49,8 +49,13 @@ namespace Bagel
                 (leaderboardData.entries[a].toppings).CompareTo(leaderboardData.entries[b].toppings);
         }
 
-        // Columns aren't elements, so their titles can't be bound: set them for each language.
-        protected override void OnLocaleChanged() => UpdateColumnTitles();
+        // Columns aren't elements, so their titles can't be bound: set them for each language. The counts are
+        // written in the language's digits: the rows are bound again.
+        protected override void OnLocaleChanged()
+        {
+            UpdateColumnTitles();
+            leaderboardTable?.RefreshItems();
+        }
 
         void UpdateColumnTitles()
         {

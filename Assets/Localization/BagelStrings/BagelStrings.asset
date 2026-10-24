@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8cef6b337fea6940a8e3dbe00b2a422, type: 2}
   - {fileID: 11400000, guid: bc00070ee4e59ef4f9a4f196e9cb6e5f, type: 2}
   - {fileID: 11400000, guid: 1e9e351a93b42f342955084cf1adf8c5, type: 2}
+  - {fileID: 11400000, guid: f5204185ca0d5764fb54bf69fa4d6df0, type: 2}
   m_ProviderId: Unity.Localization.Providers.ReferencedAssetProvider
   m_Extensions: []
   references:

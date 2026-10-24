@@ -4,6 +4,7 @@ using Unity.Localization;
 using Unity.Localization.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 using UnityEngine.TextCore.Text;
 
 namespace Bagel.B00_Localization
@@ -12,7 +13,7 @@ namespace Bagel.B00_Localization
     public class StringTableTests
     {
         const string k_CollectionPath = "Assets/Localization/BagelStrings/BagelStrings.asset";
-        const string k_ChineseFontPath = "Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/NotoSansSC-Regular SDF.asset";
+        const string k_FontsPath = "Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/";
 
         ResourceTableCollection m_Collection;
 
@@ -25,7 +26,7 @@ namespace Bagel.B00_Localization
         [Test]
         public void EveryKeyIsInEveryLanguage()
         {
-            Assert.AreEqual(3, m_Collection.Tables.Count, "English, French and Chinese");
+            Assert.AreEqual(4, m_Collection.Tables.Count, "English, French, Chinese and Arabic");
 
             foreach (var key in m_Collection.SharedData.Entries)
             {
@@ -37,20 +38,67 @@ namespace Bagel.B00_Localization
             }
         }
 
-        [Test]
-        public void ChineseTextHasGlyphs()
+        // Every letter of every language is in the game's font, DynaPuff, or in a font it falls back to: Noto Kufi
+        // Arabic and Noto Sans SC, in the regular and the bold weight. Read from the font files, so the font assets'
+        // atlases don't change.
+        [TestCase("DynaPuff-Medium SDF.asset")]
+        [TestCase("DynaPuff-Bold SDF.asset")]
+        public void EveryLanguageHasGlyphs(string fontAsset)
         {
-            var font = AssetDatabase.LoadAssetAtPath<FontAsset>(k_ChineseFontPath);
-            var chinese = m_Collection.GetTable(new LocaleIdentifier("zh-Hans"));
+            var font = AssetDatabase.LoadAssetAtPath<FontAsset>(k_FontsPath + fontAsset);
+            var fonts = new List<Font> { font.sourceFontFile };
+            foreach (var fallback in font.fallbackFontAssetTable)
+                fonts.Add(fallback.sourceFontFile);
 
-            foreach (var entry in chinese.Entries)
+            foreach (var table in m_Collection.Tables)
             {
-                var text = (entry as StringEntry)?.Value;
-                if (string.IsNullOrEmpty(text))
-                    continue;
+                var missing = new HashSet<char>();
+                foreach (var entry in table.Entries)
+                {
+                    foreach (var c in (entry as StringEntry)?.Value ?? "")
+                    {
+                        if (!char.IsWhiteSpace(c))
+                            missing.Add(c);
+                    }
+                }
 
-                // The font asset is dynamic: this adds the glyphs it can find in the font file.
-                Assert.IsTrue(font.TryAddCharacters(text, out string missing), $"Missing from Noto Sans SC: {missing}");
+                foreach (var file in fonts)
+                {
+                    Assert.AreEqual(FontEngineError.Success, FontEngine.LoadFontFace(file), file.name);
+                    missing.RemoveWhere(c => FontEngine.TryGetGlyphIndex(c, out var index) && index != 0);
+                }
+                Assert.IsEmpty(missing, $"{fontAsset} can't draw these {table.LocaleIdentifier.Code} characters: {string.Join(" ", missing)}");
+            }
+        }
+
+        // Bold text gets bold faces rather than thickened ones, in Arabic too.
+        [Test]
+        public void BoldTextHasBoldFaces()
+        {
+            var game = AssetDatabase.LoadAssetAtPath<FontAsset>(k_FontsPath + "DynaPuff-Medium SDF.asset");
+            var arabic = AssetDatabase.LoadAssetAtPath<FontAsset>(k_FontsPath + "NotoKufiArabic-Medium SDF.asset");
+            Assert.AreEqual("DynaPuff-Bold SDF", game.fontWeightTable[7].regularTypeface?.name);
+            Assert.AreEqual("NotoKufiArabic-Bold SDF", arabic.fontWeightTable[7].regularTypeface?.name);
+            CollectionAssert.Contains(game.fallbackFontAssetTable, arabic);
+        }
+
+        // Smart strings are formatted with the system's culture, not the selected language's: a plural names its
+        // language's rule ({toppings:plural(ar):...}), or Arabic would be counted with the system's two forms
+        // instead of its six.
+        [Test]
+        public void PluralsNameTheirLanguage()
+        {
+            foreach (var table in m_Collection.Tables)
+            {
+                var code = table.LocaleIdentifier.Code;
+                var language = code.Split('-')[0];
+                foreach (var entry in table.Entries)
+                {
+                    var text = (entry as StringEntry)?.Value ?? "";
+                    var plurals = text.Split(":plural").Length - 1;
+                    var named = text.Split($":plural({language}):").Length - 1;
+                    Assert.AreEqual(plurals, named, $"{code}: {text}");
+                }
             }
         }
 

@@ -2,3 +2,12 @@
     min-height: 147px;
     flex-grow: 1;
 }
+
+/* A long name, or a long column title, shrinks to fit its column (the Advanced Text Generator's best fit), in
+   whichever direction it reads. */
+.unity-multi-column-view__cell > .unity-label,
+.unity-multi-column-header__column__title {
+    flex-shrink: 1;
+    min-width: 0;
+    -unity-text-auto-size: best-fit 8px var(--b-text-size);
+}

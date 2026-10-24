@@ -53,3 +53,23 @@
     color: var(--b-line-color);
     --b-meter-color: var(--b-accent-color);
 }
+
+/* Right to left: the columns turn around (dense, so each row fills from its first cell), and the pips fill from
+   the right. */
+.b-rtl .b-tag__stats {
+    grid-template-columns: 64px 1fr 30px;
+    grid-auto-flow: row-dense;
+}
+
+.b-rtl .b-tag__icon {
+    grid-column-start: 3;
+}
+
+.b-rtl .b-tag__label {
+    grid-column-start: 2;
+}
+
+.b-rtl .b-tag__meter {
+    grid-column-start: 1;
+    scale: -1 1;
+}

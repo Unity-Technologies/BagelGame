@@ -9,7 +9,7 @@ namespace Bagel.B00_Layout
     // Every screen, in every theme and every language, against the design rules (BagelLayoutAudit).
     public class LayoutAuditTests : UITestFixture
     {
-        static readonly string[] s_Locales = { "en", "fr", "zh-Hans" };
+        static readonly string[] s_Locales = { "en", "fr", "zh-Hans", "ar" };
 
         BagelTestAssetList m_BagelTestAssetList;
 

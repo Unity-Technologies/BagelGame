@@ -111,7 +111,7 @@ namespace Bagel
 
                 var lost = m_KnockStart - toppings;
                 if (lost >= k_BigLoss)
-                    Show(string.Format(BagelLocalization.culture, BagelLocalization.Get("toast.lost", "{0} toppings!"), "−" + lost.ToString("N0", BagelLocalization.culture)), true);
+                    Show(string.Format(BagelLocalization.culture, BagelLocalization.Get("toast.lost", "{0} toppings!"), "−" + BagelConverters.FormatNumber(lost)), true);
             }
             m_LastToppings = toppings;
         }

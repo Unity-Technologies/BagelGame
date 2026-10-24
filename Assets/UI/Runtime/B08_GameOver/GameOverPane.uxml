@@ -18,11 +18,7 @@
                             <loc:LocalizedString property="text" table="BagelStrings" entry="receipt.toppings"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:IntegerField value="42" name="toppings-number-field" readonly="true" class="b-receipt__price">
-                        <Bindings>
-                            <ui:DataBinding property="value" data-source-path="lastRun.toppings" binding-mode="ToTarget"/>
-                        </Bindings>
-                    </ui:IntegerField>
+                    <ui:Label text="42" name="toppings-kept-label" class="b-receipt__price"/>
                     <ui:Label text="Time" name="time-title-label" class="b-receipt__item">
                         <Bindings>
                             <loc:LocalizedString property="text" table="BagelStrings" entry="receipt.time"/>

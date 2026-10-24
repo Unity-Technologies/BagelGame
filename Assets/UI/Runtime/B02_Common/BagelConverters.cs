@@ -30,10 +30,10 @@ namespace Bagel
             ConverterGroups.RegisterConverterGroup(numberGroup);
 
             var percentGroup = new ConverterGroup(percent, "Bagel", "A 0 to 1 fraction as a percentage: 57%");
-            percentGroup.AddConverter((ref float v) => Mathf.RoundToInt(v * 100f).ToString(BagelLocalization.culture) + "%");
+            percentGroup.AddConverter((ref float v) => BagelLocalization.LocalizeDigits(Mathf.RoundToInt(v * 100f).ToString(BagelLocalization.culture) + "%"));
             ConverterGroups.RegisterConverterGroup(percentGroup);
         }
 
-        public static string FormatNumber(int value) => value.ToString("N0", BagelLocalization.culture);
+        public static string FormatNumber(int value) => BagelLocalization.LocalizeDigits(value.ToString("N0", BagelLocalization.culture));
     }
 }

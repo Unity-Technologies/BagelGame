@@ -23,6 +23,9 @@ namespace Bagel.B00_Gameplay
             yield return SceneManager.LoadSceneAsync(assets.mainSceneName, LoadSceneMode.Single);
             yield return null;
             m_PlayManager = Object.FindAnyObjectByType<PlayManager>();
+
+            // The game starts in the player's last language: these tests read English.
+            BagelLocalization.SetLocale("en");
         }
 
         [TearDown]

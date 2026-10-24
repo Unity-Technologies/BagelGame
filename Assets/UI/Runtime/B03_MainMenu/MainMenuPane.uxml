@@ -14,7 +14,7 @@
             </Bindings>
             <Bagel.PressSquish/>
         </ui:Button>
-        <ui:VisualElement name="secondary-buttons-row" style="flex-direction: row;">
+        <ui:VisualElement name="secondary-buttons-row">
             <ui:Button text="Settings" name="settings-button" style="flex-grow: 1; flex-basis: 0;">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="menu.settings"/>
