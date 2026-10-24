@@ -11,6 +11,15 @@
     filter: var(--b-board-filter);
 }
 
+/* The board reaches past its panes, far enough for the title (bouncing too) and the blur of the pane not in
+   use, and clips there: the chalk filter's texture then always starts at the same corner, and its grain stays
+   put however the title moves. The margins take back what the padding adds, so the panel keeps its size. */
+#main-menu-screen {
+    overflow: hidden;
+    margin: -80px -20px -20px -64px;
+    padding: 80px 20px 20px 64px;
+}
+
 .b-pane {
     background-color: var(--b-surface-color);
     transition-property: filter, opacity;

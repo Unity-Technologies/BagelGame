@@ -73,7 +73,9 @@ Shader "UI Toolkit/Filters/Chalk"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Pixels from the element's corner, so the grain sticks to the element wherever its texture is.
+                // Pixels from the corner of the element's texture, so the grain sticks to the element wherever it
+                // is drawn. The texture covers the element's bounding box, children included: an element whose
+                // children move past its edges clips them (overflow: hidden), or the grain slides as they move.
                 float4 uvRect = GetFilterUVRect(i.rectIndex);
                 float2 px = (i.uv - uvRect.xy) * _MainTex_TexelSize.zw;
                 float2 p = px / max(_Grain, 0.5);

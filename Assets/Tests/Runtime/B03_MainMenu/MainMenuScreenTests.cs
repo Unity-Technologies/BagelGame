@@ -48,5 +48,33 @@ namespace Bagel.B03_MainMenu
             simulate.FrameUpdate();
             Assert.IsTrue(exitClicked);
         }
+
+        // The chalk filter's grain starts at the corner of the board's texture, which the board pins to its own corner
+        // by clipping: the title, at its biggest in the hover bounce too, has to fit on the board, in every theme.
+        [Test]
+        public void TheTitleFitsOnTheBoard()
+        {
+            panelSize = new Vector2(1200f, 900f);
+            foreach (var theme in m_BagelTestAssetList.themes.collection)
+            {
+                rootVisualElement.Clear();
+                var screen = m_BagelTestAssetList.mainMenuScreenUxml.Instantiate();
+                screen.styleSheets.Add(theme.theme);
+                rootVisualElement.Add(screen);
+                var board = screen.Q("main-menu-screen");
+                foreach (var name in new[] { "title-bagel", "title-game" })
+                    board.Q(name).style.scale = new Scale(new Vector2(1.2f, 1.2f));
+                simulate.FrameUpdate();
+
+                Assert.AreEqual(Overflow.Hidden, board.resolvedStyle.overflow, theme.themeName);
+                var edges = board.worldBound;
+                foreach (var part in board.Q("title-box").Query().ToList())
+                {
+                    var bounds = part.worldBound;
+                    Assert.IsTrue(bounds.xMin >= edges.xMin && bounds.yMin >= edges.yMin && bounds.xMax <= edges.xMax && bounds.yMax <= edges.yMax,
+                        $"[{theme.themeName}] {part.name} {bounds} is off the board {edges}");
+                }
+            }
+        }
     }
 }

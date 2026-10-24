@@ -45,6 +45,11 @@ namespace Bagel.B11_Accessibility
             yield return null;
             yield return null;
 
+            // The intro draws the buttons in: they're read once they're there.
+            var end = Time.realtimeSinceStartup + 3f;
+            while ((BagelAccessibility.hierarchy == null || Find(BagelAccessibility.hierarchy, "Play") == null) && Time.realtimeSinceStartup < end)
+                yield return null;
+
             var hierarchy = BagelAccessibility.hierarchy;
             Assert.IsNotNull(hierarchy);
             Assert.AreEqual(hierarchy, AssistiveSupport.activeHierarchy, "the Editor always shows it, for the Hierarchy Viewer");

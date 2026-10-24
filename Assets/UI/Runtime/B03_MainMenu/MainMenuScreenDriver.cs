@@ -90,6 +90,7 @@ namespace Bagel
                     return;
 
                 BagelAccessibility.ShowScreen(m_MainMenuScreenManager);
+                ReadTheScreenAfterTheIntro();
 
                 switch (m_State.mainMenuPane)
                 {
@@ -104,6 +105,26 @@ namespace Bagel
                         break;
                 }
             });
+        }
+
+        // The intro draws the buttons in from nothing, and screen readers only get what's shown: read the screen
+        // again once the intro is done.
+        void ReadTheScreenAfterTheIntro()
+        {
+            var animation = GetComponent<Animation>();
+            if (animation == null || animation.clip == null || !animation.isPlaying)
+                return;
+
+            var intro = animation[animation.clip.name];
+            var left = intro.length - intro.time;
+            if (left <= 0f)
+                return;
+
+            m_MainMenuScreenManager.schedule.Execute(() =>
+            {
+                if (m_State.isMainMenu)
+                    BagelAccessibility.ShowScreen(m_MainMenuScreenManager);
+            }).StartingIn((long)(left * 1000f) + 1);
         }
 
         void PlayIntroAnimation()
