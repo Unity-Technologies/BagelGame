@@ -1,0 +1,32 @@
+/* The jam jar's paper label, wrapped around the jar: Curved UI (-unity-curvature) bends the flat panel
+   around the jar's side. It only shows in world space, where the panel is in the 3D scene. */
+
+.b-jam-label {
+    width: 220px;
+    height: 80px;
+    padding: 6px 10px;
+    align-items: center;
+    justify-content: center;
+    border-top-width: 6px;
+    border-bottom-width: 6px;
+    border-color: var(--b-paper-accent);
+    background-color: var(--b-paper-surface);
+    /* 220 px at the panel's scale is about 81 degrees of the jar's side. */
+    -unity-curvature: 0deg -81deg;
+}
+
+.b-jam-label__name {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--b-paper-accent);
+    padding: 0;
+    margin: 0;
+}
+
+.b-jam-label__note {
+    font-size: 13px;
+    color: var(--b-paper-text);
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+}

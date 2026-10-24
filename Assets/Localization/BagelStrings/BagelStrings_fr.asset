@@ -86,6 +86,8 @@ MonoBehaviour:
   - rid: 6326339763072663684
   - rid: 6326339763072663695
   - rid: 6326339763072663696
+  - rid: 6326339763072663754
+  - rid: 6326339763072663755
   references:
     version: 2
     RefIds:
@@ -572,3 +574,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: '{0} garnitures !'
+    - rid: 6326339763072663754
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 72400747954176
+        m_Metadata:
+          m_Items: []
+        m_Value: Confiture de fraises
+    - rid: 6326339763072663755
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 72400752148480
+        m_Metadata:
+          m_Items: []
+        m_Value: Fait maison

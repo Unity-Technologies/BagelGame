@@ -1,6 +1,7 @@
 /* The kitchen gauges riding along with the bagel, on two wings: freshness and speed on the left, the
-   toppings and the knocks on the right. Each wing bends around the bagel (Curved UI: it only shows on
-   world-space panels) and folds in when the bagel gets close to a wall (BagelHud). */
+   toppings and the knocks on the right. Each wing curves towards the camera like a cockpit's screen
+   (Curved UI: it only shows on world-space panels) and folds in when the bagel gets close to a wall
+   (BagelHud). */
 
 .b-hud {
     width: initial;
@@ -12,10 +13,7 @@
     transition-duration: 0.25s;
 }
 
-.b-hud--left {
-    -unity-curvature: 0deg -24deg;
-}
-
+.b-hud--left,
 .b-hud--right {
     -unity-curvature: 0deg 24deg;
 }

@@ -86,6 +86,8 @@ MonoBehaviour:
   - rid: 6326339763072663670
   - rid: 6326339763072663693
   - rid: 6326339763072663694
+  - rid: 6326339763072663752
+  - rid: 6326339763072663753
   references:
     version: 2
     RefIds:
@@ -572,3 +574,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: '{0} toppings!'
+    - rid: 6326339763072663752
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 72400747954176
+        m_Metadata:
+          m_Items: []
+        m_Value: Strawberry Jam
+    - rid: 6326339763072663753
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 72400752148480
+        m_Metadata:
+          m_Items: []
+        m_Value: Homemade

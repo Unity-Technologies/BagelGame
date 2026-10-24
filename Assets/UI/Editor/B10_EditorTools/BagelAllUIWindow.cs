@@ -49,6 +49,7 @@ namespace Bagel
             new CardSpec { title = "Game Over", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" }, activeIn = new[] { PlayManagerState.State.GameOver } },
             new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu, PlayManagerState.State.GameOver } },
             new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" }, activeIn = new[] { PlayManagerState.State.MainMenu } },
+            new CardSpec { title = "Jam Label (World Space)", uxmlPaths = new[] { "B13_Labels/JamLabel.uxml" }, activeIn = new[] { PlayManagerState.State.Playing } },
         };
 
         public class Card
