@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3f5c7f76d59287a449784f8552c57355
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339763072663732
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339763072663732
+      type: {class: RoundedBoxMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        size: {x: 3.3, y: 1.6, z: 4.7}
+        radius: 0.7
+        roundingSegments: 6

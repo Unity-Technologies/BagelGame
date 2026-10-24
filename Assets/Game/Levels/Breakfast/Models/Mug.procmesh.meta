@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: bcd88557dce021443bdb68edb91a297f
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339763072663736
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339763072663736
+      type: {class: MugMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        radius: 0.45
+        height: 1.1
+        wall: 0.06
+        coffee: 0.8
+        segments: 40
+        handleRadius: 0.3
+        handleThickness: 0.08

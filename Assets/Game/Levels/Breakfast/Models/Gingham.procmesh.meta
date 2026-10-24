@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 837cd42007af3574d82e164b56e37c59
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339763072663728
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339763072663728
+      type: {class: GinghamMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        size: {x: 10, y: 10}
+        checks: {x: 22, y: 76}
