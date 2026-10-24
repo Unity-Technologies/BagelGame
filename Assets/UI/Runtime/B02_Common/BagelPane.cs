@@ -137,6 +137,8 @@ namespace Bagel
         void BagelLocalization_OnLocaleChanged()
         {
             ApplyDisplaySettings();
+            if (m_ParentPane == null)
+                BagelLocalization.RefreshBindings(this);
             OnLocaleChanged();
         }
 

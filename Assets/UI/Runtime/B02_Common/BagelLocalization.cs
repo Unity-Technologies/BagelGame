@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Unity.Localization;
 using Unity.Scripting.LifecycleManagement;
@@ -125,14 +126,64 @@ namespace Bagel
             return string.IsNullOrEmpty(value) ? fallback ?? key : value;
         }
 
+        // Shows the selected language in every localized binding inside the element. A binding hears the language
+        // change by itself, unless it was made before Play mode started or stopped: the localization module drops
+        // its listeners then (an Editor window's screens, for one).
+        public static void RefreshBindings(VisualElement root)
+        {
+            // Found first, refreshed after: new text can change what's in the tree.
+            var strings = new List<LocalizedString>();
+            var bindingInfos = new List<BindingInfo>();
+            root.Query<VisualElement>().ForEach(element =>
+            {
+                bindingInfos.Clear();
+                element.GetBindingInfos(bindingInfos);
+                foreach (var info in bindingInfos)
+                {
+                    if (info.binding is LocalizedString localizedString)
+                        strings.Add(localizedString);
+                }
+            });
+            foreach (var localizedString in strings)
+                localizedString.RefreshString();
+        }
+
         public static void SetLocale(string code)
         {
             if (!LocalizationSettings.HasSettings)
                 return;
 
-            var locale = LocalizationSettings.Instance.GetLocale(new LocaleIdentifier(code));
-            if (locale != null)
-                LocalizationSettings.SelectedLocale = locale;
+            // The module may have dropped its listeners since (Play mode started or stopped): listen again first.
+            Subscribe();
+
+            // Starting up, the module picks its startup language over this one: let it start first (it usually can
+            // right away), and when it can't, pick this one again once it's ready.
+            var settings = LocalizationSettings.Instance;
+            if (!settings.IsInitialized)
+                _ = LocalizationSettings.InitializeAsync();
+
+            var locale = settings.GetLocale(new LocaleIdentifier(code));
+            if (locale == null)
+                return;
+            LocalizationSettings.SelectedLocale = locale;
+
+            if (!settings.IsInitialized)
+            {
+                s_PendingLocaleCode = code;
+                LocalizationSettings.InitializationCompleted -= LocalizationSettings_OnInitializationCompleted;
+                LocalizationSettings.InitializationCompleted += LocalizationSettings_OnInitializationCompleted;
+            }
+        }
+
+        static string s_PendingLocaleCode;
+
+        static void LocalizationSettings_OnInitializationCompleted()
+        {
+            LocalizationSettings.InitializationCompleted -= LocalizationSettings_OnInitializationCompleted;
+            var code = s_PendingLocaleCode;
+            s_PendingLocaleCode = null;
+            if (code != null)
+                SetLocale(code);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -143,7 +194,8 @@ namespace Bagel
         static void SubscribeInEditMode()
         {
             Subscribe();
-            UnityEditor.EditorApplication.playModeStateChanged += _ => Subscribe();
+            // Once Play mode has started or stopped: the module clears its events during the change.
+            UnityEditor.EditorApplication.playModeStateChanged += _ => UnityEditor.EditorApplication.delayCall += Subscribe;
         }
 #endif
 

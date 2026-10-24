@@ -47,8 +47,12 @@ namespace Bagel
         static void ApplyToFollowers()
         {
             var rightToLeft = BagelLocalization.isRightToLeft;
-            foreach (var follower in s_Followers)
+            // A copy: new text can attach or detach followers.
+            foreach (var follower in new List<VisualElement>(s_Followers))
+            {
                 Apply(follower, rightToLeft);
+                BagelLocalization.RefreshBindings(follower);
+            }
         }
 
         // Sets the element's direction: right to left, or left to right.

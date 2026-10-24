@@ -89,24 +89,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: Noto Kufi Arabic
     m_StyleName: Bold
-    m_PointSize: 90
+    m_PointSize: 64
     m_Scale: 1
     m_UnitsPerEM: 1000
-    m_LineHeight: 136.79999
-    m_AscentLine: 94.49999
+    m_LineHeight: 97.28
+    m_AscentLine: 67.2
     m_CapLine: 0
     m_MeanLine: 0
     m_Baseline: 0
-    m_DescentLine: -42.3
-    m_SuperscriptOffset: 115.380005
+    m_DescentLine: -30.08
+    m_SuperscriptOffset: 82.048
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -55.350002
+    m_SubscriptOffset: -39.36
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -11.25
-    m_UnderlineThickness: 4.5
+    m_UnderlineOffset: -8
+    m_UnderlineThickness: 3.2
     m_StrikethroughOffset: 0
-    m_StrikethroughThickness: 4.5
-    m_TabWidth: 31
+    m_StrikethroughThickness: 3.2
+    m_TabWidth: 22
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
@@ -116,16 +116,16 @@ MonoBehaviour:
   m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 1
   m_DynamicDataPersistence: 1
-  m_AtlasWidth: 1024
-  m_AtlasHeight: 1024
-  m_AtlasPadding: 9
+  m_AtlasWidth: 2048
+  m_AtlasHeight: 2048
+  m_AtlasPadding: 6
   m_AtlasRenderMode: 4165
   m_UsedGlyphRects: []
   m_FreeGlyphRects:
   - m_X: 0
     m_Y: 0
-    m_Width: 1023
-    m_Height: 1023
+    m_Width: 2047
+    m_Height: 2047
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords: []
@@ -191,7 +191,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FaceDilate: 0
-    - _GradientScale: 10
+    - _GradientScale: 7
     - _OutlineSoftness: 0
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
@@ -202,8 +202,8 @@ Material:
     - _ScaleY: 1
     - _ShaderFlags: 0
     - _Sharpness: 0
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
+    - _TextureHeight: 2048
+    - _TextureWidth: 2048
     - _UnderlayDilate: 0
     - _UnderlayOffsetX: 0
     - _UnderlayOffsetY: 0

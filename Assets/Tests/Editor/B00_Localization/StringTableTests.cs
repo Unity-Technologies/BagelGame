@@ -71,6 +71,36 @@ namespace Bagel.B00_Localization
             }
         }
 
+        // Every font draws all the game's text from one atlas page, with room to spare: a font that needs a second
+        // page has the text generator fail to draw text (and a language change then shows nothing new). A glyph
+        // takes about its point size plus the padding each way; an Arabic letter has up to four joined forms.
+        [TestCase("DynaPuff-Medium SDF.asset")]
+        [TestCase("NotoKufiArabic-Medium SDF.asset")]
+        [TestCase("NotoSansSC-Regular SDF.asset")]
+        public void EveryFontFitsOnOnePage(string fontAsset)
+        {
+            var font = AssetDatabase.LoadAssetAtPath<FontAsset>(k_FontsPath + fontAsset);
+            Assert.AreEqual(FontEngineError.Success, FontEngine.LoadFontFace(font.sourceFontFile));
+
+            var drawn = new HashSet<char>();
+            foreach (var table in m_Collection.Tables)
+            {
+                foreach (var entry in table.Entries)
+                {
+                    foreach (var c in (entry as StringEntry)?.Value ?? "")
+                    {
+                        if (!char.IsWhiteSpace(c) && FontEngine.TryGetGlyphIndex(c, out var index) && index != 0)
+                            drawn.Add(c);
+                    }
+                }
+            }
+
+            var glyphSize = font.faceInfo.pointSize * 1.2f + 2 * font.atlasPadding;
+            var perPage = Mathf.FloorToInt(font.atlasWidth / glyphSize) * Mathf.FloorToInt(font.atlasHeight / glyphSize);
+            var forms = fontAsset.StartsWith("NotoKufiArabic") ? 4 : 1;
+            Assert.LessOrEqual(drawn.Count * forms * 2, perPage, $"{fontAsset}: {drawn.Count} characters, {perPage} glyphs a page");
+        }
+
         // Bold text gets bold faces rather than thickened ones, in Arabic too.
         [Test]
         public void BoldTextHasBoldFaces()
