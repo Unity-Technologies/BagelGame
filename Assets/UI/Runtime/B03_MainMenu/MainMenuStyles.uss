@@ -27,6 +27,30 @@
     height: 277px;
 }
 
+/* Settings and the Leaderboard take the rest of the board, wider than the menu and set smaller, so more of
+   them shows at once; the camera comes close for them. */
+#secondary-panes > .b-pane {
+    width: 400px;
+    --b-text-size: 12px;
+}
+
+#secondary-panes .b-title {
+    font-size: 24px;
+}
+
+#secondary-panes .unity-tab__header-label,
+#secondary-panes .unity-button {
+    font-size: 12px;
+}
+
+#secondary-panes .unity-button {
+    min-height: 26px;
+}
+
+#secondary-panes .unity-scroll-view {
+    height: 168px;
+}
+
 /* The pane not in use, smudged like chalk wiped with a sleeve. */
 .b-pane:disabled {
     filter: blur(6);

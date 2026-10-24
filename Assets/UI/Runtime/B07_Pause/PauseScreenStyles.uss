@@ -34,3 +34,26 @@
 .b-inactive-pane {
     display: none;
 }
+
+/* Settings: wider than the pause buttons, its text smaller, so more of it shows at once. */
+#settings-pane {
+    width: 480px;
+    --b-text-size: 13px;
+}
+
+#settings-pane .b-title {
+    font-size: 28px;
+}
+
+#settings-pane .b-details-view {
+    font-size: 12px;
+}
+
+#settings-pane .unity-tab__header-label,
+#settings-pane .unity-button {
+    font-size: 13px;
+}
+
+#settings-pane .unity-scroll-view {
+    height: 230px;
+}
