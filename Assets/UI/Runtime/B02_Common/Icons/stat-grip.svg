@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Grip: a bagel in a treaded tire, holding on to the counter -->
+  <path d="M4 50 H60 V58 a2 2 0 0 1 -2 2 H6 a2 2 0 0 1 -2 -2 Z" fill="#8C5A3C" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M9 54 l4 3 l4 -3 l4 3 l4 -3 l4 3 l4 -3 l4 3 l4 -3 l4 3 l4 -3 l4 3" fill="none" stroke="#D9A57E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 28 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M15.5 28 a16.5 16.5 0 1 0 33 0 a16.5 16.5 0 1 0 -33 0 Z" fill="#4B4642" fill-rule="evenodd" stroke="#3B1F14" stroke-width="3.5"/>
+  <path d="M49.16 31.41 L52.6 32.1 M46.55 37.72 L49.46 39.67 M41.72 42.55 L43.67 45.46 M35.41 45.16 L36.1 48.6 M28.59 45.16 L27.9 48.6 M22.28 42.55 L20.33 45.46 M17.45 37.72 L14.54 39.67 M14.84 31.41 L11.4 32.1 M14.84 24.59 L11.4 23.9 M17.45 18.28 L14.54 16.33 M22.28 13.45 L20.33 10.54 M28.59 10.84 L27.9 7.4 M35.41 10.84 L36.1 7.4 M41.72 13.45 L43.67 10.54 M46.55 18.28 L49.46 16.33 M49.16 24.59 L52.6 23.9" fill="none" stroke="#8F8780" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M15.5 28 a16.5 16.5 0 1 0 33 0 a16.5 16.5 0 1 0 -33 0 Z M25.5 28 a6.5 6.5 0 1 0 13 0 a6.5 6.5 0 1 0 -13 0 Z" fill="#D68C45" fill-rule="evenodd" stroke="#3B1F14" stroke-width="3"/>
+  <path d="M21 25 a11.5 11.5 0 0 1 8 -8" fill="none" stroke="#F2B66E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M15 46 l-5 3 M49 46 l5 3" fill="none" stroke="#3B1F14" stroke-width="3" stroke-linecap="round"/>
+</svg>

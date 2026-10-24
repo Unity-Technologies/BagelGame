@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Topping loss: a bagel at an angle, its seeds sliding off the edge and falling -->
+  <path d="M5 27 v8 a23 11 0 0 0 46 0 v-8 Z" fill="#B8692E" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M5 27 a23 11 0 1 0 46 0 a23 11 0 1 0 -46 0 Z M21 26.5 a7 3.2 0 1 0 14 0 a7 3.2 0 1 0 -14 0 Z" fill="#D68C45" fill-rule="evenodd" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M11 24 c3 -4 9 -6 15 -6.5" fill="none" stroke="#F2B66E" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="14" cy="28" rx="2.6" ry="1.3" transform="rotate(10 14 28)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="20" cy="33" rx="2.6" ry="1.3" transform="rotate(-5 20 33)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="31" cy="34.5" rx="2.6" ry="1.3" transform="rotate(4 31 34.5)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="41" cy="31" rx="2.6" ry="1.3" transform="rotate(-14 41 31)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="39" cy="20.5" rx="2.6" ry="1.3" transform="rotate(8 39 20.5)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="27" cy="19.5" rx="2.6" ry="1.3" transform="rotate(-6 27 19.5)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="44.5" cy="25" r="1.4" fill="#3B1F14"/>
+  <circle cx="25" cy="32.5" r="1.4" fill="#3B1F14"/>
+  <circle cx="16" cy="23" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="51.5" cy="29" rx="2.6" ry="1.3" transform="rotate(55 51.5 29)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="55" cy="44" rx="2.6" ry="1.3" transform="rotate(70 55 44)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="46" cy="52" rx="2.6" ry="1.3" transform="rotate(20 46 52)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="57.5" cy="57" rx="2.6" ry="1.3" transform="rotate(-35 57.5 57)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="37" cy="58" rx="2.6" ry="1.3" transform="rotate(40 37 58)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <path d="M55 35 v4.5 M46 43 v4.5 M57.5 48 v4.5 M37 49 v4.5" fill="none" stroke="#3B1F14" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

@@ -7,7 +7,7 @@
             </Bindings>
         </ui:Label>
         <ui:VisualElement name="toppings-row" class="bar-row">
-            <ui:VisualElement name="toppings-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/carrot-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=839a1eea5156d674e9c65b3cb0f58b0c&amp;type=3#carrot-svgrepo-com&quot;);"/>
+            <ui:VisualElement name="toppings-icon" class="bar-icon b-icon b-icon--stat-toppings"/>
             <ui:ProgressBar title="Toppings" name="toppings-bar" high-value="1">
                 <Bindings>
                     <loc:LocalizedString property="title" table="BagelStrings" entry="stat.toppings"/>
@@ -16,7 +16,7 @@
             </ui:ProgressBar>
         </ui:VisualElement>
         <ui:VisualElement name="topping-loss-row" class="bar-row">
-            <ui:VisualElement name="topping-loss-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/scales-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=c76d3904ea0d60f4190024a782a463b0&amp;type=3#scales-svgrepo-com&quot;);"/>
+            <ui:VisualElement name="topping-loss-icon" class="bar-icon b-icon b-icon--stat-topping-loss"/>
             <ui:ProgressBar title="Topping Loss" name="topping-loss-bar" high-value="1">
                 <Bindings>
                     <loc:LocalizedString property="title" table="BagelStrings" entry="stat.topping-loss"/>
@@ -25,7 +25,7 @@
             </ui:ProgressBar>
         </ui:VisualElement>
         <ui:VisualElement name="control-row" class="bar-row">
-            <ui:VisualElement name="control-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/jump-rope-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=0ca223ccbb3faac419602e756428b605&amp;type=3#jump-rope-svgrepo-com&quot;);"/>
+            <ui:VisualElement name="control-icon" class="bar-icon b-icon b-icon--stat-control"/>
             <ui:ProgressBar title="Control" name="control-bar" high-value="1">
                 <Bindings>
                     <loc:LocalizedString property="title" table="BagelStrings" entry="stat.control"/>
@@ -34,7 +34,7 @@
             </ui:ProgressBar>
         </ui:VisualElement>
         <ui:VisualElement name="speed-row" class="bar-row">
-            <ui:VisualElement name="speed-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/roller-skates-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=cb8ce41bb3439b644b34faa96192f727&amp;type=3#roller-skates-svgrepo-com&quot;);"/>
+            <ui:VisualElement name="speed-icon" class="bar-icon b-icon b-icon--stat-speed"/>
             <ui:ProgressBar title="Speed" name="speed-bar" high-value="1">
                 <Bindings>
                     <loc:LocalizedString property="title" table="BagelStrings" entry="stat.speed"/>
@@ -43,7 +43,7 @@
             </ui:ProgressBar>
         </ui:VisualElement>
         <ui:VisualElement name="grip-row" class="bar-row">
-            <ui:VisualElement name="grip-icon" class="bar-icon" style="background-image: url(&quot;project://database/Assets/UI/Runtime/B05_BagelSelection/SVGs/sneakers-svgrepo-com.svg?fileID=7388822144124034973&amp;guid=d66de006512b0eb4c8b146b3dd90eaf8&amp;type=3#sneakers-svgrepo-com&quot;);"/>
+            <ui:VisualElement name="grip-icon" class="bar-icon b-icon b-icon--stat-grip"/>
             <ui:ProgressBar title="Grip" name="grip-bar" high-value="1">
                 <Bindings>
                     <loc:LocalizedString property="title" table="BagelStrings" entry="stat.grip"/>

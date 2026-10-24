@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Control: a tilted joystick and the way it steers -->
+  <path d="M10 52 c0 -5 10 -8 22 -8 c12 0 22 3 22 8 c0 5 -10 8 -22 8 c-12 0 -22 -3 -22 -8 Z" fill="#7C8A99" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M24 50 c0 -2 4 -3 8 -3 c4 0 8 1 8 3" fill="none" stroke="#B9C4CF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 50 L40 23" fill="none" stroke="#3B1F14" stroke-width="7" stroke-linecap="round"/>
+  <path d="M32 50 L40 23" fill="none" stroke="#B9C4CF" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M32.5 18 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0 Z" fill="#DE482C" stroke="#3B1F14" stroke-width="4"/>
+  <path d="M37 15 a5 5 0 0 1 5 -3.5" fill="none" stroke="#FF9A7A" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M27 12 a14 14 0 0 1 4 -6 M25 21 a14 14 0 0 1 1 -4" fill="none" stroke="#3B1F14" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+</svg>

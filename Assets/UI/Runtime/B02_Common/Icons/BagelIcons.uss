@@ -1,0 +1,28 @@
+/* The game's icons: SVGs drawn for Bagel Game, one class each, so any element can show one:
+   <ui:VisualElement class="b-icon b-icon--stat-speed"/>. Every theme imports this sheet. */
+
+.b-icon {
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+/* The bagel stats, on the price tags and the HUD. */
+.b-icon--stat-toppings {
+    background-image: url("stat-toppings.svg");
+}
+
+.b-icon--stat-topping-loss {
+    background-image: url("stat-topping-loss.svg");
+}
+
+.b-icon--stat-control {
+    background-image: url("stat-control.svg");
+}
+
+.b-icon--stat-speed {
+    background-image: url("stat-speed.svg");
+}
+
+.b-icon--stat-grip {
+    background-image: url("stat-grip.svg");
+}

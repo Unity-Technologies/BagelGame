@@ -2,6 +2,7 @@
 
 @import url("/Assets/UI/Runtime/B00_Themes/T0_Common/BagelCommonStyles.uss");
 @import url("/Assets/UI/Runtime/B12_Sound/BagelSounds.uss");
+@import url("/Assets/UI/Runtime/B02_Common/Icons/BagelIcons.uss");
 @import url("BagelEdgyThemeStyles.uss");
 
 VisualElement {}

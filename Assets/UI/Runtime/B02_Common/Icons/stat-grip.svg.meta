@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c76d3904ea0d60f4190024a782a463b0
+guid: d66de006512b0eb4c8b146b3dd90eaf8
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -15,7 +15,7 @@ ScriptedImporter:
   alignment: 0
   customPivot: {x: 0, y: 0}
   generatePhysicsShape: 0
-  viewportOptions: 0
+  viewportOptions: 1
   preserveViewport: 0
   advancedMode: 0
   tessellationMode: 1

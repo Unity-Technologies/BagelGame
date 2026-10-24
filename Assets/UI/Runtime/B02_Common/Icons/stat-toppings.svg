@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Toppings: a bagel from above, covered in sesame and poppy seeds -->
+  <path d="M6 32 a26 26 0 1 0 52 0 a26 26 0 1 0 -52 0 Z M23.5 32 a8.5 8.5 0 1 0 17 0 a8.5 8.5 0 1 0 -17 0 Z" fill="#D68C45" fill-rule="evenodd" stroke="#3B1F14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M13 25 a20 20 0 0 1 24 -12.5" fill="none" stroke="#F2B66E" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="45.09" cy="33.35" rx="2.6" ry="1.3" transform="rotate(107.96 45.09 33.35)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="42.32" cy="41.58" rx="2.6" ry="1.3" transform="rotate(122.12 42.32 41.58)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="33.78" cy="45.9" rx="2.6" ry="1.3" transform="rotate(135.7 33.78 45.9)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="24.16" cy="42.33" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="18.78" cy="36.02" rx="2.6" ry="1.3" transform="rotate(279.24 18.78 36.02)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="19.77" cy="26.69" rx="2.6" ry="1.3" transform="rotate(303.68 19.77 26.69)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="27.94" cy="18.41" rx="2.6" ry="1.3" transform="rotate(335.11 27.94 18.41)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="37.19" cy="20.18" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="43.95" cy="25.73" rx="2.6" ry="1.3" transform="rotate(393.84 43.95 25.73)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="52.01" cy="30.89" rx="2.6" ry="1.3" transform="rotate(112.11 52.01 30.89)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="50.75" cy="40.76" rx="2.6" ry="1.3" transform="rotate(126.15 50.75 40.76)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="44.02" cy="48.75" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="35.56" cy="51.11" rx="2.6" ry="1.3" transform="rotate(145.92 35.56 51.11)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="24.3" cy="50.81" rx="2.6" ry="1.3" transform="rotate(187.4 24.3 50.81)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="16.57" cy="45.33" rx="2.6" ry="1.3" transform="rotate(213.15 16.57 45.33)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="11.44" cy="36.15" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="11.75" cy="27.8" rx="2.6" ry="1.3" transform="rotate(283.74 11.75 27.8)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="17.03" cy="17.2" rx="2.6" ry="1.3" transform="rotate(297.69 17.03 17.2)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="26.35" cy="13.25" rx="2.6" ry="1.3" transform="rotate(336.67 26.35 13.25)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <circle cx="35.1" cy="12.58" r="1.4" fill="#3B1F14"/>
+  <ellipse cx="42.99" cy="16.02" rx="2.6" ry="1.3" transform="rotate(407.98 42.99 16.02)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+  <ellipse cx="50.66" cy="23.1" rx="2.6" ry="1.3" transform="rotate(454.54 50.66 23.1)" fill="#FFF4DE" stroke="#3B1F14" stroke-width="1"/>
+</svg>
