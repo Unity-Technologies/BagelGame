@@ -143,8 +143,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15063647}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0373961, y: -0.0525737, z: -0.0019702, w: 0.9979147}
-  m_LocalPosition: {x: 2.9898, y: 3.7, z: 21.4889}
+  m_LocalRotation: {x: -0.0312479, y: -0.0549032, z: -0.001719, w: 0.9980011}
+  m_LocalPosition: {x: 2.7806, y: 4.71, z: 18.9879}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1695,6 +1695,7 @@ GameObject:
   - component: {fileID: 817671262}
   - component: {fileID: 817671261}
   - component: {fileID: 817671260}
+  - component: {fileID: 817671264}
   m_Layer: 0
   m_Name: GameOverCinemaCamera
   m_TagString: Untagged
@@ -1710,8 +1711,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817671258}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0373961, y: -0.0525737, z: -0.0019702, w: 0.9979147}
-  m_LocalPosition: {x: 3.2, y: 3.7, z: 19.5}
+  m_LocalRotation: {x: -0.0312479, y: -0.0549032, z: -0.001719, w: 0.9980011}
+  m_LocalPosition: {x: 3, y: 4.71, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1852,7 +1853,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 52
+    FieldOfView: 56
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1871,6 +1872,23 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &817671264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817671258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineVolumeSettings
+  Weight: 1
+  FocusTracking: 3
+  FocusTarget: {fileID: 2030507057}
+  FocusOffset: 0
+  Profile: {fileID: 11400000, guid: 905e1ddd288905c458a79afd8d2a5345, type: 2}
 --- !u!1001 &839152104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4311,8 +4329,8 @@ Transform:
   m_GameObject: {fileID: 2030507056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 9.3, z: 46.05}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0.55, y: 8.91, z: 38.8}
+  m_LocalScale: {x: 2.7333, y: 2.7333, z: 2.7333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
