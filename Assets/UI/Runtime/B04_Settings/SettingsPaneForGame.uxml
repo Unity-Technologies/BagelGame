@@ -1,6 +1,6 @@
 <ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Bagel.SettingsPaneManagerForGame start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="game-settings-manager">
-        <ui:Slider label="Field of View" name="fov-slider" low-value="50" high-value="80" value="60">
+    <Bagel.SettingsPaneManagerForGame start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="game-settings-manager" class="b-settings__rows">
+        <ui:Slider label="Field of View" name="fov-slider" low-value="50" high-value="80" value="60" class="b-settings__row">
             <Bindings>
                 <loc:LocalizedString property="label" table="BagelStrings" entry="settings.field-of-view"/>
                 <ui:DataBinding property="lowValue" data-source-path="settings.fieldOfViewMin" binding-mode="ToTarget"/>
@@ -8,18 +8,35 @@
                 <ui:DataBinding property="value" data-source-path="settings.fieldOfView" binding-mode="TwoWay"/>
             </Bindings>
         </ui:Slider>
-        <ui:Toggle label="Sound" name="sound-toggle">
+        <ui:Toggle label="Sound" name="sound-toggle" class="b-settings__row">
             <Bindings>
                 <loc:LocalizedString property="label" table="BagelStrings" entry="settings.sound"/>
                 <ui:DataBinding property="value" data-source-path="settings.sound" binding-mode="TwoWay"/>
             </Bindings>
         </ui:Toggle>
-        <ui:Slider label="Volume" name="volume-slider" low-value="0" high-value="1" value="0.8">
+        <ui:Slider label="Volume" name="volume-slider" low-value="0" high-value="1" value="0.8" class="b-settings__row">
             <Bindings>
                 <loc:LocalizedString property="label" table="BagelStrings" entry="settings.volume"/>
                 <ui:DataBinding property="value" data-source-path="settings.soundVolume" binding-mode="TwoWay"/>
                 <ui:DataBinding property="enabledSelf" data-source-path="settings.sound" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Slider>
+        <ui:ToggleButtonGroup label="Language" name="language-choice" allow-empty-selection="false" class="b-settings__row b-settings__choice">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.language"/>
+            </Bindings>
+        </ui:ToggleButtonGroup>
+        <ui:VisualElement name="data-row" class="b-settings__row b-settings__actions">
+            <Bagel.LongPressButton text="Clear Leaderboard" name="clear-leaderboard-button" confirm-action="project://database/Assets/Game/Core/UIInputActions.inputactions?fileID=-3739598157177674458&amp;guid=9e46e101e98b16f48be7903220211472&amp;type=3#UI/SubmitDelayed">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="settings.clear-leaderboard"/>
+                </Bindings>
+            </Bagel.LongPressButton>
+            <Bagel.LongPressButton text="Reset Settings" name="reset-settings-button" confirm-action="project://database/Assets/Game/Core/UIInputActions.inputactions?fileID=-3739598157177674458&amp;guid=9e46e101e98b16f48be7903220211472&amp;type=3#UI/SubmitDelayed">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="settings.reset-settings"/>
+                </Bindings>
+            </Bagel.LongPressButton>
+        </ui:VisualElement>
     </Bagel.SettingsPaneManagerForGame>
 </ui:UXML>

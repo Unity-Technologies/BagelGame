@@ -1,0 +1,48 @@
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Bagel.SettingsPaneManagerForGraphics start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="graphics-settings-manager" class="b-settings__rows">
+        <ui:Toggle label="Post-processing" name="post-processing-toggle" class="b-settings__row">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.post-processing"/>
+                <ui:DataBinding property="value" data-source-path="settings.postProcessing" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:Toggle>
+        <ui:ToggleButtonGroup label="Anti-aliasing" name="anti-aliasing-choice" allow-empty-selection="false" class="b-settings__row b-settings__choice">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.anti-aliasing"/>
+            </Bindings>
+            <ui:Button text="Off" name="anti-aliasing-off">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="settings.off"/>
+                </Bindings>
+            </ui:Button>
+            <ui:Button text="FXAA" name="anti-aliasing-fxaa"/>
+            <ui:Button text="SMAA" name="anti-aliasing-smaa"/>
+        </ui:ToggleButtonGroup>
+        <ui:Toggle label="Depth of Field" name="depth-of-field-toggle" class="b-settings__row">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.depth-of-field"/>
+                <ui:DataBinding property="value" data-source-path="settings.depthOfField" binding-mode="TwoWay"/>
+                <ui:DataBinding property="enabledSelf" data-source-path="settings.postProcessing" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Toggle>
+        <ui:Toggle label="Shadows" name="shadows-toggle" class="b-settings__row">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.shadows"/>
+                <ui:DataBinding property="value" data-source-path="settings.shadows" binding-mode="TwoWay"/>
+            </Bindings>
+        </ui:Toggle>
+        <ui:ToggleButtonGroup label="Frame Rate" name="frame-rate-choice" allow-empty-selection="false" class="b-settings__row b-settings__choice">
+            <Bindings>
+                <loc:LocalizedString property="label" table="BagelStrings" entry="settings.frame-rate"/>
+            </Bindings>
+            <ui:Button text="30" name="frame-rate-30"/>
+            <ui:Button text="60" name="frame-rate-60"/>
+            <ui:Button text="120" name="frame-rate-120"/>
+            <ui:Button text="Max" name="frame-rate-max">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="settings.frame-rate-max"/>
+                </Bindings>
+            </ui:Button>
+        </ui:ToggleButtonGroup>
+    </Bagel.SettingsPaneManagerForGraphics>
+</ui:UXML>

@@ -1,7 +1,9 @@
-/* The main menu, chalked on the shop's blackboard, and Settings in marker on the whiteboard beside it.
-   The panel lies across both boards (the blackboard 20 wide, a gap, the whiteboard 26 wide, at 0.056 a
-   pixel); the camera moves from one to the other, and the board not in use fades: chalk smudges, marker
-   ghosts. The leaderboard is on the television. */
+/* The shop's blackboard, the whole west wall: the main menu on its left and, on its right, today's bagels or
+   Settings. The panel lies across the board at 0.034 a pixel (1424 x 476 pixels for its 48.4 x 16.2 meters), so
+   Settings, at the sizes it has over the paused game, are about as big on the screen there as here. Everything is
+   chalk: straight strokes, no boxes that glow. A word pointed at, or with the focus, gets a straight line drawn
+   under it from its start, and taken back when the pointer leaves. What the board shows on its right changes with
+   an eraser and fresh chalk (ChalkWipe). */
 
 .b-screen {
     flex-direction: row;
@@ -10,25 +12,128 @@
 
 #main-menu-screen {
     flex-grow: 0;
-    width: 864px;
-    height: 289px;
+    width: 1424px;
+    height: 476px;
+    --b-chalk-line: 4px;
 }
 
-/* The chalk's grain over everything on the blackboard (a custom filter; none in themes without chalk). */
+/* The chalk's grain on what's written (a custom filter; none in themes without chalk). */
 .b-chalk {
     filter: var(--b-board-filter);
 }
 
 .b-pane {
-    transition-property: filter, opacity;
-    transition-duration: 1s;
+    transition-property: opacity;
+    transition-duration: 0.4s;
 }
 
-/* ------------------------------------------------------------------ The blackboard */
+/* ------------------------------------------------------------------ Writing and wiping */
+
+/* Written in, a line at a time from the top: the board's way of putting anything up (ChalkWipe). */
+.b-wipe {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 1 0 0);
+    transition-property: filter;
+    transition-duration: 0.35s;
+    transition-timing-function: linear;
+}
+
+/* Wiped off by the eraser. */
+.b-wipe--erasing {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 1 1 0);
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-sine;
+}
+
+/* Nothing written yet: what's written next starts from here, at once. */
+.b-wipe--blank {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 0 0 0);
+    transition-duration: 0s;
+}
+
+/* Right to left, the lines are written from the right. */
+.b-rtl .b-wipe {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 1 0 1);
+}
+
+.b-rtl .b-wipe--erasing {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 1 1 1);
+}
+
+.b-rtl .b-wipe--blank {
+    filter: filter("/Assets/UI/Runtime/B00_Themes/T0_Common/Filters/ChalkWipe.asset" 0 0 1);
+}
+
+/* A tab wiped off stays on top of the new one while the eraser crosses it. */
+.unity-tab-view .unity-tab.b-wipe--erasing {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ------------------------------------------------------------------ Straight chalk lines under words */
+
+/* The line under a word: drawn from the word's start while it's pointed at or has the focus, and taken back the way
+   it came when it's left. */
+.b-chalk-item__line,
+#main-menu-screen .unity-tab__header-underline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: var(--b-chalk-line);
+    border-radius: 0;
+    background-color: var(--b-text-color);
+    scale: 0 1;
+    transform-origin: left;
+    transition-property: scale;
+    transition-duration: 0.14s;
+    transition-timing-function: ease-in-cubic;
+}
+
+.b-chalk-item:hover > .b-chalk-item__line,
+.b-chalk-item--focus > .b-chalk-item__line,
+.b-settings__back:hover > .b-chalk-item__line,
+.b-settings__back.b-chalk-item--focus > .b-chalk-item__line,
+#main-menu-screen .unity-tab__header:hover > .unity-tab__header-underline,
+#main-menu-screen .unity-tab__header:focus > .unity-tab__header-underline,
+#main-menu-screen .unity-tab__header:checked > .unity-tab__header-underline {
+    scale: 1 1;
+    transition-duration: 0.24s;
+    transition-timing-function: ease-out-cubic;
+}
+
+/* The chosen tab stays underlined, in yellow. */
+#main-menu-screen .unity-tab__header:checked > .unity-tab__header-underline {
+    background-color: var(--b-accent-color);
+}
+
+.b-rtl .b-chalk-item__line,
+.b-rtl#main-menu-screen .unity-tab__header-underline {
+    transform-origin: right;
+}
+
+/* Words, not boxes, and no glow: chalk on the board. */
+.b-chalk-menu .unity-button,
+.b-chalk-menu .unity-button:enabled:hover,
+#settings-pane .b-settings__back-button,
+#settings-pane .b-settings__back-button:enabled:hover,
+#main-menu-screen .unity-tab__header,
+#main-menu-screen .unity-tab__header:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    filter: none;
+}
+
+/* ------------------------------------------------------------------ The menu */
 
 #main-menu-pane {
-    width: 357px;
-    height: 282px;
+    width: 588px;
+    height: 465px;
     margin: 0;
     padding: 0;
     flex-shrink: 0;
@@ -39,13 +144,12 @@
 .b-chalk-menu {
     flex-grow: 1;
     overflow: hidden;
-    padding: 8px 18px 6px 18px;
+    padding: 13px 30px 10px 30px;
 }
 
-/* The board not in use, smudged like chalk wiped with a sleeve. */
+/* The menu while Settings or the television are in use: the chalk, faint. */
 #main-menu-pane:disabled {
-    filter: blur(6);
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .b-title.b-main-title {
@@ -58,8 +162,8 @@
 
 .b-title-box {
     align-self: flex-start;
-    width: 238px;
-    margin: 30px 0 18px 34px;
+    width: 392px;
+    margin: 50px 0 34px 56px;
 }
 
 .b-title-box:hover {
@@ -70,36 +174,34 @@
 .b-title-doodle {
     position: absolute;
     color: var(--b-text-color);
-    --b-doodle-width: 2.5;
+    --b-doodle-width: 4;
 }
 
 .b-title-doodle--bagel {
-    width: 54px;
-    height: 38px;
-    right: -44px;
+    width: 89px;
+    height: 63px;
+    right: -72px;
     bottom: 0;
     color: var(--b-accent-b);
 }
 
 .b-title-doodle--steam {
-    width: 30px;
-    height: 26px;
-    right: -32px;
-    bottom: 32px;
+    width: 49px;
+    height: 43px;
+    right: -53px;
+    bottom: 53px;
     opacity: 0.8;
 }
 
 .b-title-doodle--sparkle {
-    width: 20px;
-    height: 20px;
-    left: 10px;
-    top: 6px;
+    width: 33px;
+    height: 33px;
+    left: 16px;
+    top: 10px;
     color: var(--b-accent-a);
 }
 
-/* The menu: big words in chalk, each underlined. Pointing at one, or moving the focus to it
-   (.b-chalk-item--focus), chalks an arrow beside it and underlines it again, brighter; pressing it squishes it.
-   No boxes, no glow. */
+/* The words, in a column. */
 #secondary-buttons-row {
     flex-direction: column;
     align-items: flex-start;
@@ -107,101 +209,36 @@
 
 .b-chalk-item {
     align-self: flex-start;
-    margin: 0 0 2px 64px;
+    margin: 0 0 6px 105px;
 }
 
 .b-chalk-item--primary {
-    margin-bottom: 6px;
+    margin-bottom: 14px;
 }
 
 .b-chalk-item__button,
 .b-chalk-item__button.b-primary {
     margin: 0;
-    padding: 0 6px 7px 6px;
-    border-width: 0;
-    border-radius: 0;
-    background-color: rgba(0, 0, 0, 0);
+    padding: 0 4px 10px 4px;
     color: var(--b-text-color);
-    font-size: 22px;
+    font-size: 36px;
     -unity-text-align: middle-left;
-    transition-property: color;
-    transition-duration: 0.2s;
 }
 
 .b-chalk-item__button.b-primary {
-    font-size: 34px;
+    font-size: 58px;
     color: var(--b-title-color);
 }
 
-.b-chalk-item__button:enabled:hover,
-.b-chalk-item__button.b-primary:enabled:hover {
-    background-color: rgba(0, 0, 0, 0);
-    filter: none;
+.b-chalk-item--primary > .b-chalk-item__line {
+    height: 6px;
+    background-color: var(--b-title-color);
 }
 
-.b-chalk-item__button:focus {
-    border-width: 0;
-}
-
-.b-chalk-item__underline {
-    position: absolute;
-    left: 2px;
-    right: 0;
-    bottom: 0;
-    height: 9px;
-    opacity: 0.4;
-    color: var(--b-text-color);
-    --b-doodle-width: 2.5;
-}
-
-.b-chalk-item--primary > .b-chalk-item__underline {
-    color: var(--b-title-color);
-    --b-doodle-width: 3.5;
-}
-
-/* Underlined again: drawn in from the start of the word. */
-.b-chalk-item__underline--again,
-.b-chalk-item--primary > .b-chalk-item__underline--again {
-    opacity: 0;
-    scale: 0 1;
-    transform-origin: left;
-    color: var(--b-focus-color);
-    transition-property: scale, opacity;
-    transition-duration: 0.25s, 0.1s;
-    transition-timing-function: ease-out-cubic, linear;
-}
-
-.b-chalk-item__arrow {
-    position: absolute;
-    left: -40px;
-    top: 50%;
-    width: 34px;
-    height: 22px;
-    margin-top: -14px;
-    opacity: 0;
-    translate: -8px 0;
-    color: var(--b-focus-color);
-    --b-doodle-width: 3;
-    transition-property: opacity, translate;
-    transition-duration: 0.2s;
-}
-
-.b-chalk-item:hover > .b-chalk-item__underline--again,
-.b-chalk-item--focus > .b-chalk-item__underline--again {
-    opacity: 1;
-    scale: 1 1;
-}
-
-.b-chalk-item:hover > .b-chalk-item__arrow,
-.b-chalk-item--focus > .b-chalk-item__arrow {
-    opacity: 1;
-    translate: 0 0;
-}
-
-/* Right to left: the words line up on the right, the arrow points in from the right. */
+/* Right to left: the words line up on the right, and their lines start there. */
 .b-rtl .b-title-box {
     align-self: flex-end;
-    margin: 30px 34px 18px 0;
+    margin: 50px 56px 34px 0;
 }
 
 .b-rtl #secondary-buttons-row {
@@ -211,117 +248,310 @@
 .b-rtl .b-chalk-item {
     align-self: flex-end;
     margin-left: 0;
-    margin-right: 64px;
+    margin-right: 105px;
 }
 
 .b-rtl .b-chalk-item__button {
     -unity-text-align: middle-right;
 }
 
-.b-rtl .b-chalk-item__underline--again {
-    transform-origin: right;
-}
-
-.b-rtl .b-chalk-item__arrow {
-    left: auto;
-    right: -40px;
-    scale: -1 1;
-}
-
-/* ------------------------------------------------------------------ The whiteboard */
+/* ------------------------------------------------------------------ The board's right side */
 
 #secondary-panes {
     flex-shrink: 0;
-    width: 464px;
-    height: 289px;
-    margin-left: 43px;
-    padding: 8px 14px;
+    width: 776px;
+    height: 476px;
+    margin-left: 60px;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Settings fill the whiteboard, set smaller than elsewhere so more of them show at once. */
-#secondary-panes > .b-pane {
-    flex-grow: 1;
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 4px 6px;
-    --b-text-size: 11px;
+/* Today's bagels, while the menu is in use. */
+.b-specials {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
 }
 
-/* The board not in use: the marker's ghost, still sharp, as on a whiteboard wiped a little too quickly. */
-#secondary-panes > .b-pane:disabled {
-    filter: none;
-    opacity: 0.25;
+.b-specials__chalk {
+    align-items: center;
+    padding: 20px 60px;
 }
 
-#secondary-panes .b-title {
-    font-size: 24px;
-}
-
-#secondary-panes .unity-tab__header-label,
-#secondary-panes .unity-button {
-    font-size: 11px;
-}
-
-#secondary-panes .unity-tab-view {
-    flex-grow: 1;
-}
-
-#secondary-panes .unity-tab-view__content-container,
-#secondary-panes .unity-tab {
-    flex-grow: 1;
-}
-
-#secondary-panes .unity-scroll-view {
-    flex-grow: 1;
-    height: auto;
-}
-
-/* Marker on a whiteboard: crisp lines, no glow. */
-#secondary-panes .unity-button {
-    min-height: 22px;
-    border-top-left-radius: var(--b-tiny-radius);
-    border-top-right-radius: var(--b-tiny-radius);
-    border-bottom-right-radius: var(--b-tiny-radius);
-    border-bottom-left-radius: var(--b-tiny-radius);
-    --b-button-border-width: 2px;
-}
-
-#secondary-panes .unity-button:enabled:hover {
-    filter: none;
-}
-
-#secondary-panes .unity-tab__header:checked > .unity-tab__header-label {
+.b-specials__title {
+    font-size: 66px;
     color: var(--b-title-color);
+    rotate: -3deg;
+    margin: 0;
+    padding: 0;
 }
 
-#secondary-panes .unity-tab__header:checked > .unity-tab__header-underline {
+.b-specials__rule {
+    width: 360px;
+    height: 4px;
+    margin: 6px 0 22px 0;
+    background-color: var(--b-text-color);
+    opacity: 0.8;
+}
+
+.b-specials__list {
+    align-items: flex-start;
+}
+
+.b-specials__item {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.b-specials__doodle {
+    width: 64px;
+    height: 46px;
+    margin-right: 22px;
+    color: var(--b-accent-b);
+    --b-doodle-width: 3.5;
+}
+
+.b-specials__doodle--poppy {
+    color: var(--b-text-color);
+}
+
+.b-specials__doodle--everything {
+    color: var(--b-accent-a);
+}
+
+.b-specials__name {
+    font-size: 42px;
+    color: var(--b-text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.b-specials__note {
+    font-size: 28px;
+    color: var(--b-accent-c);
+    rotate: 2deg;
+    margin: 18px 0 0 0;
+}
+
+.b-specials__steam {
+    position: absolute;
+    width: 50px;
+    height: 56px;
+    right: 18px;
+    top: 4px;
+    color: var(--b-text-color);
+    opacity: 0.7;
+    --b-doodle-width: 3;
+}
+
+.b-rtl .b-specials__item {
+    flex-direction: row-reverse;
+}
+
+.b-rtl .b-specials__doodle {
+    margin: 0 0 0 22px;
+}
+
+.b-rtl .b-specials__list {
+    align-items: flex-end;
+}
+
+/* ------------------------------------------------------------------ Settings, in chalk */
+
+#settings-pane {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    background-color: rgba(0, 0, 0, 0);
+    --b-text-size: 16px;
+}
+
+#settings-pane > .b-settings {
+    filter: var(--b-board-filter);
+}
+
+#settings-pane .b-settings__title {
+    font-size: 38px;
+}
+
+#settings-pane .b-title-underline {
+    background-image: none;
     background-color: var(--b-title-color);
+    opacity: 0.85;
+    height: var(--b-chalk-line);
 }
 
-/* ------------------------------------------------------------------ Scroll bars */
-
-.unity-scroller--vertical {
-    width: 14px;
+/* The page's edge: a straight chalk line down between the tabs and the settings. */
+#settings-pane .b-settings__tabs > .unity-tab-view__content-container {
+    border-left-color: var(--b-line-color);
+    opacity: 1;
 }
 
-.unity-scroller__low-button,
-.unity-scroller__high-button {
+#settings-pane .unity-tab__header-label {
+    font-size: 21px;
+    color: var(--b-text-color);
+}
+
+#settings-pane .unity-tab__header:checked > .unity-tab__header-label {
+    color: var(--b-accent-color);
+}
+
+/* The tab's own underline: the line under the word does its job. */
+#settings-pane .unity-tab__header-underline {
+    display: none;
+}
+
+#settings-pane .b-settings__back {
+    --b-chalk-line: 3px;
+}
+
+#settings-pane .b-settings__back-button {
+    font-size: 21px;
+    margin: 0;
+    padding: 0 2px 6px 2px;
+}
+
+#settings-pane .unity-base-field__label {
+    color: var(--b-text-color);
+    font-size: 16px;
+}
+
+/* Choices: words, the chosen one in yellow and underlined, another one underlined while it's pointed at. */
+#settings-pane .unity-button-group__button {
+    font-size: 16px;
+    margin: 0 14px 0 0;
+    padding: 2px 1px 3px 1px;
+    color: var(--b-text-color);
+    opacity: 0.75;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0 0 3px 0;
+    border-radius: 0;
+    border-color: rgba(0, 0, 0, 0);
+    filter: none;
+    transition-property: border-color, color, opacity;
+    transition-duration: 0.2s;
+}
+
+#settings-pane .unity-button-group__button:enabled:hover,
+#settings-pane .unity-button-group__button:focus {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0 0 3px 0;
+    border-color: var(--b-text-color);
+    opacity: 1;
+    filter: none;
+}
+
+#settings-pane .unity-button-group__button:checked,
+#settings-pane .unity-button-group__button:checked:enabled:hover {
+    color: var(--b-accent-color);
+    border-color: var(--b-accent-color);
+    opacity: 1;
+}
+
+/* Boxes for ticking, keys and buttons that are held: drawn in straight chalk. */
+#settings-pane .unity-toggle__checkmark {
+    background-color: rgba(0, 0, 0, 0);
+    border-color: var(--b-line-color);
+    border-radius: 0;
+    -unity-background-image-tint-color: var(--b-accent-color);
+}
+
+#settings-pane .unity-toggle:checked .unity-toggle__checkmark {
+    background-color: rgba(0, 0, 0, 0);
+    border-color: var(--b-accent-color);
+}
+
+#settings-pane .unity-base-slider--horizontal .unity-base-slider__tracker {
+    height: 3px;
+    margin-top: -1px;
+    border-radius: 0;
+    background-color: var(--b-line-color);
+    opacity: 0.6;
+}
+
+#settings-pane .unity-base-slider__drag-container > .unity-base-slider__dragger {
     width: 14px;
     height: 14px;
+    margin-top: -7px;
     border-radius: 7px;
+    border-width: 3px;
+    border-color: var(--b-accent-color);
+    background-color: var(--b-board-popup);
 }
 
-.unity-scroller__slider > .unity-slider__input {
-    width: 14px;
+#settings-pane .b-controls-row__button,
+#settings-pane .b-long-press-button,
+#settings-pane .b-settings__wide-button,
+#settings-pane .b-theme-card {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 2px;
+    border-color: var(--b-line-color);
+    border-radius: 0;
+    filter: none;
+    font-size: 15px;
 }
 
-.unity-scroller__slider .unity-base-slider__dragger {
-    width: 6px;
-    margin-left: 4px;
+#settings-pane .b-controls-row__button:enabled:hover,
+#settings-pane .b-long-press-button:hover,
+#settings-pane .b-settings__wide-button:enabled:hover,
+#settings-pane .b-theme-card:enabled:hover,
+#settings-pane .b-controls-row__button:focus,
+#settings-pane .b-long-press-button:focus,
+#settings-pane .b-settings__wide-button:focus,
+#settings-pane .b-theme-card:focus {
+    background-color: var(--b-board-fill);
+    border-width: 2px;
+    border-color: var(--b-text-color);
+    filter: none;
 }
 
-.unity-scroller--vertical > .unity-base-slider--vertical {
-    margin-top: 14px;
-    margin-bottom: 14px;
+#settings-pane .b-long-press-button__progress {
+    background-color: var(--b-board-accent-fill);
+}
+
+/* The theme cards: the chosen one framed in yellow. */
+#settings-pane .b-theme-card:checked,
+#settings-pane .b-theme-card:checked:enabled:hover {
+    border-width: 3px;
+    border-color: var(--b-accent-color);
+}
+
+/* Focus, for the gamepad and the keyboard: the chalk goes yellow. */
+#settings-pane .unity-tab__header:focus > .unity-tab__header-label,
+#settings-pane .unity-button-group__button:focus,
+#settings-pane .b-settings__back-button:focus {
+    color: var(--b-focus-color);
+}
+
+.b-rtl #settings-pane .b-settings__tabs > .unity-tab-view__content-container {
+    border-left-width: 0;
+    border-right-width: 2px;
+    border-right-color: var(--b-line-color);
+}
+
+/* ------------------------------------------------------------------ Reduced, and without the effects */
+
+.b-reduce-motion .b-wipe,
+.b-reduce-motion .b-wipe--erasing,
+.b-reduce-motion .b-chalk-item__line,
+.b-reduce-motion#main-menu-screen .unity-tab__header-underline,
+.b-reduce-motion #settings-pane .unity-button-group__button {
+    transition-duration: 0s;
+}
+
+.b-no-visual-effects .b-wipe,
+.b-no-visual-effects .b-wipe--erasing,
+.b-no-visual-effects #settings-pane > .b-settings {
+    filter: none;
+}
+
+/* Without the filter there's no blank chalk: what isn't shown is hidden. */
+.b-no-visual-effects .b-wipe--blank {
+    filter: none;
+    visibility: hidden;
 }

@@ -198,6 +198,9 @@ namespace Bagel
                     case DropdownField dropdown:
                         AddDropdown(dropdown, dropdown.label, dropdown.value, parent);
                         return;
+                    case ToggleButtonGroup group:
+                        AddChoice(group, parent);
+                        return;
                     case TextField textField:
                         AddTextField(textField, parent);
                         return;
@@ -222,13 +225,6 @@ namespace Bagel
                 // Panes shown in the background are disabled (the main menu's other pages): skip them.
                 if (!element.enabledSelf)
                     return;
-
-                // A popup field that isn't a DropdownField (the language dropdown).
-                if (element is BaseField<Unity.Localization.Locale> popup)
-                {
-                    AddDropdown(popup, popup.label, popup.value?.LocaleName, parent);
-                    return;
-                }
 
                 foreach (var child in element.hierarchy.Children())
                     Walk(child, parent);
@@ -302,15 +298,39 @@ namespace Bagel
                             dropdown.index = (dropdown.index + direction + dropdown.choices.Count) % dropdown.choices.Count;
                             node.value = dropdown.value;
                             break;
-                        case PopupField<Unity.Localization.Locale> popup when popup.choices.Count > 0:
-                            var index = (popup.choices.IndexOf(popup.value) + direction + popup.choices.Count) % popup.choices.Count;
-                            popup.value = popup.choices[index];
-                            node.value = popup.value?.LocaleName;
-                            break;
                     }
                 }
                 SetActions(node, () => { Cycle(1); return true; }, () => Cycle(1), () => Cycle(-1));
                 node.focusChanged += (_, focused) => { if (focused) field.Focus(); };
+            }
+
+            // A row of buttons that picks one (the theme, the language): read as a dropdown, its value the chosen
+            // button's text, and adjusting picks the next or the one before.
+            void AddChoice(ToggleButtonGroup group, AccessibilityNode parent)
+            {
+                var node = AddNode(group, group.label, AccessibilityRole.Dropdown, parent);
+                var buttons = group.Query<Button>().ToList();
+                string Chosen()
+                {
+                    var index = Choice.Selected(group.value);
+                    return index >= 0 && index < buttons.Count ? buttons[index].text : null;
+                }
+                node.value = Chosen();
+                void Cycle(int direction)
+                {
+                    if (buttons.Count == 0)
+                        return;
+                    var index = (Math.Max(0, Choice.Selected(group.value)) + direction + buttons.Count) % buttons.Count;
+                    group.value = Choice.One(index, buttons.Count);
+                    node.value = Chosen();
+                }
+                SetActions(node, () => { Cycle(1); return true; }, () => Cycle(1), () => Cycle(-1));
+                node.focusChanged += (_, focused) =>
+                {
+                    var index = Choice.Selected(group.value);
+                    if (focused && index >= 0 && index < buttons.Count)
+                        buttons[index].Focus();
+                };
             }
 
             void AddTextField(TextField textField, AccessibilityNode parent)

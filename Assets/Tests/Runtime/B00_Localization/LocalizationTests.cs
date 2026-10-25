@@ -134,14 +134,13 @@ namespace Bagel.B00_Localization
         {
             m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
-            var themeDropdown = rootVisualElement.Q<SettingsPaneManagerForUI>().themeDropdown;
-            Assert.AreEqual("Classic", themeDropdown.choices[0]);
+            var classic = rootVisualElement.Q<SettingsPaneManagerForUI>().GetThemeCard(0);
+            Assert.AreEqual("Classic", classic.text);
 
             BagelLocalization.SetLocale("fr");
             simulate.FrameUpdate();
 
-            Assert.AreEqual("Classique", themeDropdown.choices[0]);
-            Assert.AreEqual("Classique", themeDropdown.value);
+            Assert.AreEqual("Classique", classic.text);
         }
     }
 }

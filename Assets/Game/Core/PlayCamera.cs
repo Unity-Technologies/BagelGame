@@ -20,8 +20,8 @@ namespace Bagel
         [SerializeField] CinemachineCamera m_GameOverCamera;
 
         [Header("Framing")]
-        [Tooltip("What the Settings camera keeps in view, whatever the screen's shape and the field of view: the whiteboard and a margin around it (meters, across and up). It orbits its target on the board at that distance.")]
-        [SerializeField] Vector2 m_SettingsFrame = new(36f, 22f);
+        [Tooltip("What the Settings camera keeps in view, whatever the screen's shape and the field of view: the Settings on the blackboard and a margin around them (meters, across and up). It orbits its target on the board at that distance.")]
+        [SerializeField] Vector2 m_SettingsFrame = new(32f, 19f);
 
         PlayManagerState m_State;
         CinemachineOrbitalFollow m_SettingsOrbit;
@@ -64,7 +64,7 @@ namespace Bagel
                 UpdateCamera();
         }
 
-        // The whiteboard fits on screen with its margin: as far back as the narrower of its width and height needs.
+        // Settings fit on screen with their margin: as far back as the narrower of their width and height needs.
         void LateUpdate()
         {
             if (m_SettingsOrbit == null)

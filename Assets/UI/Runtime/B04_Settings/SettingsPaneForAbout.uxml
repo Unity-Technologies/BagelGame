@@ -1,0 +1,3 @@
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Bagel.AboutBox name="about" build-info="project://database/Assets/UI/Runtime/B04_Settings/BagelBuildInfo.asset?fileID=11400000&amp;guid=e60d5f44be0948dc922c183ae11c1fdb&amp;type=2#BagelBuildInfo" class="b-settings__rows"/>
+</ui:UXML>

@@ -81,6 +81,34 @@ MonoBehaviour:
   - rid: 6326339763072663755
   - rid: 6326339789369114850
   - rid: 6326339789369114851
+  - rid: 6326339789369114964
+  - rid: 6326339789369114965
+  - rid: 6326339789369114966
+  - rid: 6326339789369114967
+  - rid: 6326339789369114968
+  - rid: 6326339789369114969
+  - rid: 6326339789369114970
+  - rid: 6326339789369114971
+  - rid: 6326339789369114972
+  - rid: 6326339789369114973
+  - rid: 6326339789369114974
+  - rid: 6326339789369114975
+  - rid: 6326339789369114976
+  - rid: 6326339789369114977
+  - rid: 6326339789369114978
+  - rid: 6326339789369114979
+  - rid: 6326339789369114980
+  - rid: 6326339789369114981
+  - rid: 6326339789369114982
+  - rid: 6326339789369114983
+  - rid: 6326339789369114984
+  - rid: 6326339789369114985
+  - rid: 6326339789369114986
+  - rid: 6326339789369114987
+  - rid: 6326339789369114988
+  - rid: 6326339789369114989
+  - rid: 6326339789369114990
+  - rid: 6326339789369114991
   references:
     version: 2
     RefIds:
@@ -153,7 +181,7 @@ MonoBehaviour:
         m_KeyId: 1419575304
         m_Metadata:
           m_Items: []
-        m_Value: Interface
+        m_Value: Style
     - rid: 6326339759238545579
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -532,3 +560,199 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "Aucun bagel grill\xE9 pour l'instant. \xC0 vous de jouer !"
+    - rid: 6326339789369114964
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817056169984
+        m_Metadata:
+          m_Items: []
+        m_Value: Graphismes
+    - rid: 6326339789369114965
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364288
+        m_Metadata:
+          m_Items: []
+        m_Value: "\xC0 propos"
+    - rid: 6326339789369114966
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364289
+        m_Metadata:
+          m_Items: []
+        m_Value: Post-traitement
+    - rid: 6326339789369114967
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364290
+        m_Metadata:
+          m_Items: []
+        m_Value: "Anticr\xE9nelage"
+    - rid: 6326339789369114968
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364291
+        m_Metadata:
+          m_Items: []
+        m_Value: Non
+    - rid: 6326339789369114969
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364292
+        m_Metadata:
+          m_Items: []
+        m_Value: Profondeur de champ
+    - rid: 6326339789369114970
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364293
+        m_Metadata:
+          m_Items: []
+        m_Value: Ombres
+    - rid: 6326339789369114971
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364294
+        m_Metadata:
+          m_Items: []
+        m_Value: Images par seconde
+    - rid: 6326339789369114972
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558592
+        m_Metadata:
+          m_Items: []
+        m_Value: Max
+    - rid: 6326339789369114973
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558593
+        m_Metadata:
+          m_Items: []
+        m_Value: Effacer le classement
+    - rid: 6326339789369114974
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558594
+        m_Metadata:
+          m_Items: []
+        m_Value: "Tout r\xE9initialiser"
+    - rid: 6326339789369114975
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558595
+        m_Metadata:
+          m_Items: []
+        m_Value: Version
+    - rid: 6326339789369114976
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558596
+        m_Metadata:
+          m_Items: []
+        m_Value: Unity
+    - rid: 6326339789369114977
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558597
+        m_Metadata:
+          m_Items: []
+        m_Value: Compilation
+    - rid: 6326339789369114978
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558598
+        m_Metadata:
+          m_Items: []
+        m_Value: "Compil\xE9 le"
+    - rid: 6326339789369114979
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558599
+        m_Metadata:
+          m_Items: []
+        m_Value: Taille
+    - rid: 6326339789369114980
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558600
+        m_Metadata:
+          m_Items: []
+        m_Value: Appareil
+    - rid: 6326339789369114981
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558601
+        m_Metadata:
+          m_Items: []
+        m_Value: "Syst\xE8me"
+    - rid: 6326339789369114982
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558602
+        m_Metadata:
+          m_Items: []
+        m_Value: Processeur
+    - rid: 6326339789369114983
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558603
+        m_Metadata:
+          m_Items: []
+        m_Value: Carte graphique
+    - rid: 6326339789369114984
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558604
+        m_Metadata:
+          m_Items: []
+        m_Value: "M\xE9moire"
+    - rid: 6326339789369114985
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558605
+        m_Metadata:
+          m_Items: []
+        m_Value: "\xC9cran"
+    - rid: 6326339789369114986
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558606
+        m_Metadata:
+          m_Items: []
+        m_Value: API graphique
+    - rid: 6326339789369114987
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558607
+        m_Metadata:
+          m_Items: []
+        m_Value: "D\xE9veloppement"
+    - rid: 6326339789369114988
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558608
+        m_Metadata:
+          m_Items: []
+        m_Value: Version finale
+    - rid: 6326339789369114989
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558609
+        m_Metadata:
+          m_Items: []
+        m_Value: "Dans l\u2019\xE9diteur"
+    - rid: 6326339789369114990
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558610
+        m_Metadata:
+          m_Items: []
+        m_Value: Frais du jour
+    - rid: 6326339789369114991
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558611
+        m_Metadata:
+          m_Items: []
+        m_Value: Tout chaud du grille-pain

@@ -16,6 +16,12 @@ namespace Bagel
     {
         public const string table = "BagelStrings";
 
+        // The game's languages, each named in itself, in the order Settings offers them.
+        public static readonly IReadOnlyList<(string code, string name)> languages = new[]
+        {
+            ("en", "English"), ("fr", "Français"), ("zh-Hans", "中文"), ("ar", "العربية")
+        };
+
         static Action s_LocaleChanged;
 
         // Play mode and the localization module clear the module's events, so every new listener

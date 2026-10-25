@@ -81,6 +81,34 @@ MonoBehaviour:
   - rid: 6326339763072663753
   - rid: 6326339789369114846
   - rid: 6326339789369114847
+  - rid: 6326339789369114908
+  - rid: 6326339789369114909
+  - rid: 6326339789369114910
+  - rid: 6326339789369114911
+  - rid: 6326339789369114912
+  - rid: 6326339789369114913
+  - rid: 6326339789369114914
+  - rid: 6326339789369114915
+  - rid: 6326339789369114916
+  - rid: 6326339789369114917
+  - rid: 6326339789369114918
+  - rid: 6326339789369114919
+  - rid: 6326339789369114920
+  - rid: 6326339789369114921
+  - rid: 6326339789369114922
+  - rid: 6326339789369114923
+  - rid: 6326339789369114924
+  - rid: 6326339789369114925
+  - rid: 6326339789369114926
+  - rid: 6326339789369114927
+  - rid: 6326339789369114928
+  - rid: 6326339789369114929
+  - rid: 6326339789369114930
+  - rid: 6326339789369114931
+  - rid: 6326339789369114932
+  - rid: 6326339789369114933
+  - rid: 6326339789369114934
+  - rid: 6326339789369114935
   references:
     version: 2
     RefIds:
@@ -153,7 +181,7 @@ MonoBehaviour:
         m_KeyId: 1419575304
         m_Metadata:
           m_Items: []
-        m_Value: UI
+        m_Value: Look
     - rid: 6326339759238545539
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -532,3 +560,199 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: No bagel toasted yet. Play a game!
+    - rid: 6326339789369114908
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817056169984
+        m_Metadata:
+          m_Items: []
+        m_Value: Graphics
+    - rid: 6326339789369114909
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364288
+        m_Metadata:
+          m_Items: []
+        m_Value: About
+    - rid: 6326339789369114910
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364289
+        m_Metadata:
+          m_Items: []
+        m_Value: Post-processing
+    - rid: 6326339789369114911
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364290
+        m_Metadata:
+          m_Items: []
+        m_Value: Anti-aliasing
+    - rid: 6326339789369114912
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364291
+        m_Metadata:
+          m_Items: []
+        m_Value: Off
+    - rid: 6326339789369114913
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364292
+        m_Metadata:
+          m_Items: []
+        m_Value: Depth of Field
+    - rid: 6326339789369114914
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364293
+        m_Metadata:
+          m_Items: []
+        m_Value: Shadows
+    - rid: 6326339789369114915
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817060364294
+        m_Metadata:
+          m_Items: []
+        m_Value: Frame Rate
+    - rid: 6326339789369114916
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558592
+        m_Metadata:
+          m_Items: []
+        m_Value: Max
+    - rid: 6326339789369114917
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558593
+        m_Metadata:
+          m_Items: []
+        m_Value: Clear Leaderboard
+    - rid: 6326339789369114918
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558594
+        m_Metadata:
+          m_Items: []
+        m_Value: Reset Settings
+    - rid: 6326339789369114919
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558595
+        m_Metadata:
+          m_Items: []
+        m_Value: Version
+    - rid: 6326339789369114920
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558596
+        m_Metadata:
+          m_Items: []
+        m_Value: Unity
+    - rid: 6326339789369114921
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558597
+        m_Metadata:
+          m_Items: []
+        m_Value: Build
+    - rid: 6326339789369114922
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558598
+        m_Metadata:
+          m_Items: []
+        m_Value: Built
+    - rid: 6326339789369114923
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558599
+        m_Metadata:
+          m_Items: []
+        m_Value: Size
+    - rid: 6326339789369114924
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558600
+        m_Metadata:
+          m_Items: []
+        m_Value: Device
+    - rid: 6326339789369114925
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558601
+        m_Metadata:
+          m_Items: []
+        m_Value: System
+    - rid: 6326339789369114926
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558602
+        m_Metadata:
+          m_Items: []
+        m_Value: Processor
+    - rid: 6326339789369114927
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558603
+        m_Metadata:
+          m_Items: []
+        m_Value: Graphics Card
+    - rid: 6326339789369114928
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558604
+        m_Metadata:
+          m_Items: []
+        m_Value: Memory
+    - rid: 6326339789369114929
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558605
+        m_Metadata:
+          m_Items: []
+        m_Value: Screen
+    - rid: 6326339789369114930
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558606
+        m_Metadata:
+          m_Items: []
+        m_Value: Graphics API
+    - rid: 6326339789369114931
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558607
+        m_Metadata:
+          m_Items: []
+        m_Value: Development
+    - rid: 6326339789369114932
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558608
+        m_Metadata:
+          m_Items: []
+        m_Value: Release
+    - rid: 6326339789369114933
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558609
+        m_Metadata:
+          m_Items: []
+        m_Value: In the Editor
+    - rid: 6326339789369114934
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558610
+        m_Metadata:
+          m_Items: []
+        m_Value: Fresh Today
+    - rid: 6326339789369114935
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 532817064558611
+        m_Metadata:
+          m_Items: []
+        m_Value: Hot from the toaster

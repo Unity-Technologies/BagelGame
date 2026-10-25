@@ -42,6 +42,9 @@ namespace Bagel
             return m_LastAddedIndex;
         }
 
+        // Settings › Game: a clean slate.
+        public void Clear() => Load(null);
+
         public void Load(List<LeaderboardEntry> entries)
         {
             m_Entries.Clear();

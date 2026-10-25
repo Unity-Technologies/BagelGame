@@ -8,42 +8,30 @@ namespace Bagel.B04_Settings
     public class SettingsQuickTests : UITestFixture
     {
         BagelTestAssetList m_BagelTestAssetList;
-        PopupMenuSimulator m_PopupMenuSimulator;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             m_BagelTestAssetList =
                 Resources.Load<BagelTestAssetList>("BagelTestAssetList");
-
-            m_PopupMenuSimulator = AddTestComponent<PopupMenuSimulator>();
         }
 
         [Test]
-        public void SettingsThemeDropdown()
+        public void SettingsThemeCards()
         {
             var root = rootVisualElement;
             m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(root);
             simulate.FrameUpdate();
-            simulate.FrameUpdate(); // Required for the way SettingsPaneManagerForUI does its init.
-            var dropdown = root.Q<DropdownField>("theme-dropdown");
-
+            simulate.FrameUpdate();
             var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
 
-            Assert.AreEqual(4, dropdown.choices.Count);
-            Assert.AreEqual("Classic", dropdown.value);
+            Assert.AreEqual(4, manager.themeChoice.Query<Button>().ToList().Count);
+            Assert.AreEqual("Classic", manager.GetThemeCard(0).text);
 
-            var themePopupFieldInput =
-                dropdown.Q(className: DropdownField.inputUssClassName);
-
-            simulate.Click(themePopupFieldInput);
+            simulate.Click(manager.GetThemeCard(1));
             simulate.FrameUpdate();
-            Assert.IsTrue(m_PopupMenuSimulator.menuIsDisplayed);
-            Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Edgy"));
-            simulate.FrameUpdate();
-            Assert.AreEqual("Edgy", dropdown.value);
 
-            // The pane's own copy of the game state follows the dropdown.
+            // The pane's own copy of the game state follows the cards.
             Assert.AreEqual(1, manager.state.settings.themeIndex);
         }
     }

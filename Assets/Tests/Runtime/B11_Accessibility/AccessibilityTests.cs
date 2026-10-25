@@ -101,7 +101,7 @@ namespace Bagel.B11_Accessibility
 
             var hierarchy = BagelAccessibility.Build(pane, null);
             var tabs = AllNodes(hierarchy).FindAll(node => node.role == AccessibilityRole.TabButton);
-            Assert.AreEqual(3, tabs.Count);
+            Assert.AreEqual(5, tabs.Count);
 
             var fieldOfView = Find(hierarchy, "Field of View");
             Assert.AreEqual(AccessibilityRole.Slider, fieldOfView.role);
@@ -109,7 +109,7 @@ namespace Bagel.B11_Accessibility
             simulate.FrameUpdate();
             Assert.AreEqual(63f, settings.fieldOfView, 0.01f);
 
-            // Open the UI tab, the way a screen reader user would.
+            // Open the Look tab, the way a screen reader user would. The theme cards read as a dropdown.
             InvokeNode(tabs[1]);
             simulate.FrameUpdate();
             hierarchy = BagelAccessibility.Build(pane, null);

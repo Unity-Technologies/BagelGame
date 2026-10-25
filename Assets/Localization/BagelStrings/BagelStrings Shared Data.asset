@@ -337,6 +337,146 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
+  - m_Id: 532817056169984
+    m_Key: settings.tab-graphics
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364288
+    m_Key: settings.tab-about
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364289
+    m_Key: settings.post-processing
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364290
+    m_Key: settings.anti-aliasing
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364291
+    m_Key: settings.off
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364292
+    m_Key: settings.depth-of-field
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364293
+    m_Key: settings.shadows
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817060364294
+    m_Key: settings.frame-rate
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558592
+    m_Key: settings.frame-rate-max
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558593
+    m_Key: settings.clear-leaderboard
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558594
+    m_Key: settings.reset-settings
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558595
+    m_Key: about.version
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558596
+    m_Key: about.unity
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558597
+    m_Key: about.build
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558598
+    m_Key: about.built
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558599
+    m_Key: about.size
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558600
+    m_Key: about.device
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558601
+    m_Key: about.os
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558602
+    m_Key: about.cpu
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558603
+    m_Key: about.gpu
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558604
+    m_Key: about.memory
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558605
+    m_Key: about.screen
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558606
+    m_Key: about.graphics-api
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558607
+    m_Key: about.development
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558608
+    m_Key: about.release
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558609
+    m_Key: about.editor
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558610
+    m_Key: specials.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 532817064558611
+    m_Key: specials.note
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

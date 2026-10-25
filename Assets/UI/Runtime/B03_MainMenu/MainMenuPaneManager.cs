@@ -3,8 +3,8 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // The main menu, chalked on the blackboard: each button is a word in a chalk item (with its underlines and
-    // arrow), which shows the focus for it when the gamepad or keyboard moves there.
+    // The main menu, chalked on the blackboard: each button is a word in a chalk item, with the straight line drawn
+    // under it while it's pointed at or (b-chalk-item--focus, set here) the gamepad or keyboard is on it.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class MainMenuPaneManager : BagelPane
     {
@@ -59,7 +59,8 @@ namespace Bagel
                 ShowFocusOnItem(button);
         }
 
-        static void ShowFocusOnItem(Button button)
+        // The item around a button shows the focus for it (b-chalk-item--focus): its line is drawn while it's there.
+        public static void ShowFocusOnItem(Button button)
         {
             if (button?.parent == null)
                 return;

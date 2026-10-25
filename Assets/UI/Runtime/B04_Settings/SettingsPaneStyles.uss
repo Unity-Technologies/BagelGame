@@ -1,42 +1,351 @@
-.unity-scroll-view {
-    height: 147px;
+/* Settings: one window of tabs, wherever it opens (on the blackboard, over the paused game). The title is across
+   its top; under it, the tabs are a column on the left, with Back at the bottom, and the chosen tab's settings are
+   on the right, a row each, the name on the left and the control on the right. Every tab fits the window: nothing
+   scrolls. The sizes are here; the surface it's on (MainMenuStyles, PauseScreenStyles) gives it its look. */
+
+.b-settings {
+    width: 600px;
+    height: 350px;
+    flex-shrink: 0;
+    padding: 0;
 }
 
-/* The theme's icon beside its dropdown. */
-.b-theme-row {
+/* The tabs: a column of words on the left, under the title and over Back, and the page on the right. */
+.b-settings__tabs {
+    flex-grow: 1;
     flex-direction: row;
-    align-items: flex-end;
+    margin: 60px 0 0 0;
 }
 
-.b-theme-row__icon {
-    width: 30px;
-    height: 30px;
-    margin: 0 6px 2px 0;
+.b-settings__tabs > .unity-tab-view__content-viewport {
+    width: 150px;
+    flex-shrink: 0;
+    padding: 6px 0 48px 0;
+    overflow: visible;
 }
 
-.b-rtl .b-theme-row,
-.b-rtl .b-controls-row {
-    flex-direction: row-reverse;
+.b-settings .b-settings__tabs .unity-tab-view__header-container {
+    flex-direction: column;
+    flex-grow: 0;
+    align-items: flex-start;
 }
 
-.b-rtl .b-theme-row__icon {
-    margin: 0 0 2px 6px;
+.b-settings .unity-tab__header {
+    flex-grow: 0;
+    flex-basis: auto;
+    flex-shrink: 0;
+    align-self: flex-start;
+    align-items: flex-start;
+    padding: 2px 1px 6px 1px;
+    margin-bottom: 6px;
 }
 
-.b-theme-row__dropdown {
+.b-settings .unity-tab__header-label {
+    margin: 0;
+    -unity-text-auto-size: none;
+    font-size: 17px;
+}
+
+.b-settings__tabs > .unity-tab-view__content-container {
+    flex-grow: 1;
+    padding-left: 22px;
+    border-left-width: 2px;
+    border-left-color: var(--b-track-color);
+}
+
+.b-settings .unity-tab {
+    flex-grow: 1;
+    padding: 4px 0 0 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-radius: 0;
+}
+
+.b-settings__page {
     flex-grow: 1;
 }
 
-.b-controls-row {
+/* The title and its line across the top; Back under the tabs. */
+.b-settings__title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    -unity-text-align: upper-left;
+    font-size: 32px;
+    white-space: nowrap;
+}
+
+.b-settings__underline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 46px;
+    width: auto;
+    height: 3px;
+    margin: 0;
+    border-radius: 0;
+}
+
+.b-settings__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------ Rows: the name, then the control */
+
+.b-settings__rows {
+    flex-grow: 1;
+}
+
+.b-settings__row {
     flex-direction: row;
     align-items: center;
+    min-height: 34px;
+    margin: 0 0 8px 0;
+}
+
+.b-settings__row > .unity-base-field__label {
+    width: 34%;
+    min-width: 0;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0 8px 0 0;
+    -unity-text-align: middle-left;
+    white-space: normal;
+}
+
+.b-settings__row > .unity-base-field__input {
+    flex-grow: 1;
+}
+
+.b-settings__choice .unity-toggle-button-group__container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.b-settings__choice .unity-button-group__button {
+    flex-shrink: 0;
+    margin: 0 8px 0 0;
+    padding: 2px 8px;
+    min-width: 0;
+}
+
+/* Two buttons side by side, filling the row. */
+.b-settings__actions {
+    margin-top: 6px;
+}
+
+.b-settings__actions > .b-long-press-button {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 0 4px;
+    min-height: 32px;
+    justify-content: center;
+}
+
+/* The themes: a card each, side by side under their name. */
+.b-settings__themes {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.b-settings__themes > .unity-base-field__label {
+    width: auto;
+    margin: 0 0 6px 0;
+}
+
+.b-settings__themes .unity-toggle-button-group__container {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* The card's name is its own text, in the middle; its icon over it and its colors under it. A long name wraps. */
+.b-theme-card {
+    width: 96px;
+    height: 92px;
+    margin: 0;
+    padding: 34px 4px 20px 4px;
+    font-size: 13px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.b-theme-card__icon {
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+}
+
+/* A few of the theme's own colors (its style sheet is on the swatch). */
+.b-theme-card__swatch {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.b-theme-card__dot {
+    width: 12px;
+    height: 12px;
+    margin: 0 2px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.b-theme-card__dot--board {
+    background-color: var(--b-board-title);
+}
+
+.b-theme-card__dot--paper {
+    background-color: var(--b-paper-accent);
+}
+
+.b-theme-card__dot--glass {
+    background-color: var(--b-glass-title);
+}
+
+.b-theme-card__dot--gauge {
+    background-color: var(--b-gauge-accent);
+}
+
+/* The controls: two columns of keys, and the button that puts them all back. */
+.b-settings__controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.b-controls-row {
+    width: 48%;
     justify-content: space-between;
 }
 
 .b-controls-row__label {
     flex-shrink: 1;
+    margin: 0;
+    padding: 0;
+    -unity-text-align: middle-left;
 }
 
 .b-controls-row__button {
-    min-width: 90px;
+    min-width: 76px;
+    margin: 0;
+}
+
+.b-settings__wide-button {
+    width: 100%;
+    min-height: 32px;
+    margin-top: 6px;
+}
+
+/* About: two columns of short rows, the name small over its value. */
+.b-about {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.b-about__row {
+    width: 50%;
+    margin-bottom: 8px;
+    padding-right: 10px;
+}
+
+.b-about__label {
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    opacity: 0.7;
+    -unity-text-align: upper-left;
+}
+
+.b-about__value {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    -unity-text-align: upper-left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------------------------ Right to left: the window mirrors */
+
+.b-rtl .b-settings__tabs {
+    flex-direction: row-reverse;
+}
+
+.b-rtl .b-settings .b-settings__tabs .unity-tab-view__header-container {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.b-rtl .b-settings .unity-tab__header {
+    align-self: flex-end;
+}
+
+.b-rtl .b-settings__tabs > .unity-tab-view__content-container {
+    padding-left: 0;
+    padding-right: 22px;
+    border-left-width: 0;
+    border-right-width: 2px;
+    border-right-color: var(--b-track-color);
+}
+
+.b-rtl .b-settings__title,
+.b-rtl .b-settings__back {
+    left: auto;
+    right: 0;
+}
+
+.b-rtl .b-settings__title {
+    -unity-text-align: upper-right;
+}
+
+.b-rtl .b-settings__row,
+.b-rtl .b-settings__controls,
+.b-rtl .b-settings__actions,
+.b-rtl .b-about {
+    flex-direction: row-reverse;
+}
+
+/* A box to tick sits by its name, on the right. */
+.b-rtl .b-settings__row > .unity-toggle__input {
+    justify-content: flex-end;
+}
+
+.b-rtl .b-settings__row > .unity-base-field__label {
+    margin: 0 0 0 8px;
+    -unity-text-align: middle-right;
+}
+
+.b-rtl .b-settings__themes {
+    flex-direction: column;
+}
+
+.b-rtl .b-settings__choice .unity-toggle-button-group__container,
+.b-rtl .b-settings__themes .unity-toggle-button-group__container {
+    flex-direction: row-reverse;
+}
+
+.b-rtl .b-about__row {
+    padding: 0 0 0 10px;
+}
+
+.b-rtl .b-about__label,
+.b-rtl .b-about__value,
+.b-rtl .b-controls-row__label {
+    -unity-text-align: upper-right;
 }

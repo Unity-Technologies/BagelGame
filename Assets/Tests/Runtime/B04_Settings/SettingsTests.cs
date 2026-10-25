@@ -8,12 +8,6 @@ namespace Bagel.B04_Settings
     public class SettingsTests : UITestFixture
     {
         BagelTestAssetList m_BagelTestAssetList;
-        PopupMenuSimulator m_PopupMenuSimulator;
-
-        public SettingsTests()
-        {
-            m_PopupMenuSimulator = AddTestComponent<PopupMenuSimulator>();
-        }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -27,34 +21,33 @@ namespace Bagel.B04_Settings
             rootVisualElement.Clear();
         }
 
+        // A card for each theme, in its own colors: picking one picks the theme.
         [Test]
-        public void SettingsThemeDropdown()
+        public void SettingsThemeCards()
         {
-            // Load the UXML.
-            m_BagelTestAssetList.settingsPaneForUIUxml.CloneTree(rootVisualElement);
+            // The whole window: the cards' looks are in its styles.
+            panelSize = new Vector2(800f, 500f);
+            m_BagelTestAssetList.settingsPaneUxml.CloneTree(rootVisualElement);
+            rootVisualElement.Q<TabView>().activeTab = rootVisualElement.Q<Tab>("ui-settings-tab");
             simulate.FrameUpdate();
-            simulate.FrameUpdate(); // Required for the way SettingsPaneManagerForUI does its init.
+            simulate.FrameUpdate();
 
-            // Get the elements.
             var manager = rootVisualElement.Q<SettingsPaneManagerForUI>();
-            var themeDropdown = manager.themeDropdown;
+            var themes = manager.bagelThemeCollection.collection;
+            Assert.AreEqual(themes.Count, manager.themeChoice.Query<Button>(className: SettingsPaneManagerForUI.themeCardUssClassName).ToList().Count);
+            Assert.AreEqual(0, Choice.Selected(manager.themeChoice.value));
+            Assert.AreEqual("Classic", manager.GetThemeCard(0).text);
 
-            // Check initial state.
-            Assert.AreEqual(manager.bagelThemeCollection.collection.Count, themeDropdown.choices.Count);
-            Assert.AreEqual("Classic", themeDropdown.value);
+            // Each card's swatch has its own theme on it, so it shows that theme's colors whichever one is on.
+            var classicDot = manager.GetThemeCard(0).Q(className: SettingsPaneManagerForUI.themeCardDotUssClassName + "--board");
+            var edgyDot = manager.GetThemeCard(1).Q(className: SettingsPaneManagerForUI.themeCardDotUssClassName + "--board");
+            Assert.AreNotEqual(classicDot.resolvedStyle.backgroundColor, edgyDot.resolvedStyle.backgroundColor);
 
-            // Get popup field input.
-            var themePopupFieldInput = themeDropdown.Q(className: DropdownField.inputUssClassName);
-
-            // Simulate changing the theme.
-            simulate.Click(themePopupFieldInput);
+            simulate.Click(manager.GetThemeCard(1));
             simulate.FrameUpdate();
-            Assert.IsTrue(m_PopupMenuSimulator.menuIsDisplayed);
-            Assert.IsTrue(m_PopupMenuSimulator.SimulateMenuSelection("Edgy"));
-            simulate.FrameUpdate();
-            Assert.AreEqual("Edgy", themeDropdown.value);
+            Assert.AreEqual(1, Choice.Selected(manager.themeChoice.value));
 
-            // The pane's own copy of the game state follows the dropdown.
+            // The pane's own copy of the game state follows the cards.
             Assert.AreEqual(1, manager.state.settings.themeIndex);
         }
     }

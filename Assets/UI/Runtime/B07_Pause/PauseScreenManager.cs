@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,9 @@ namespace Bagel
     public partial class PauseScreenManager : BagelPane
     {
         public static readonly UniqueStyleString inactivePaneClassName = new UniqueStyleString("b-inactive-pane");
+
+        // The margin Settings keep from the screen's edges, in pixels.
+        const float k_FitMargin = 24f;
 
         VisualElement m_PausePane;
         VisualElement m_SettingsPane;
@@ -32,6 +36,21 @@ namespace Bagel
             });
 
             RegisterCallback<NavigationCancelEvent>(OnNavigationCancelEvent);
+
+            RegisterCallback<GeometryChangedEvent>(_ => FitSettings());
+            settingsPane?.RegisterCallback<GeometryChangedEvent>(_ => FitSettings());
+        }
+
+        // Settings are the blackboard's window of tabs, at the pause buttons' size: on a screen too small for it,
+        // the whole window shrinks to fit (a scale, which leaves its layout alone), so nothing ever scrolls.
+        void FitSettings()
+        {
+            var pane = settingsPane;
+            if (pane == null || !(pane.layout.width > 0f) || !(pane.layout.height > 0f))
+                return;
+            var fit = Mathf.Min(1f, (layout.width - k_FitMargin * 2f) / pane.layout.width, (layout.height - k_FitMargin * 2f) / pane.layout.height);
+            fit = Mathf.Max(0.1f, fit);
+            pane.style.scale = new Scale(new Vector3(fit, fit, 1f));
         }
 
         // The gamepad's back button leaves Settings, then resumes. Escape is also the Pause key,

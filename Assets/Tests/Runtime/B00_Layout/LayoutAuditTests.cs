@@ -29,8 +29,9 @@ namespace Bagel.B00_Layout
         // The screens as the game shows them, so every pane has its real width.
         public static readonly string[] screens =
         {
-            "Main Menu", "Main Menu: Settings: Game", "Main Menu: Settings: UI", "Main Menu: Settings: Controls",
-            "Bagel Selection", "Bagel Card", "Tracker", "Pause", "Pause: Settings: UI",
+            "Main Menu", "Main Menu: Settings: Game", "Main Menu: Settings: Look", "Main Menu: Settings: Graphics",
+            "Main Menu: Settings: Controls", "Main Menu: Settings: About", "Bagel Selection", "Bagel Card", "Tracker",
+            "Pause", "Pause: Settings: Game", "Pause: Settings: Look",
             "Television", "Television: Leaderboard", "Television: Game Over"
         };
 
@@ -76,7 +77,14 @@ namespace Bagel.B00_Layout
             var tabView = screen.Q<TabView>();
             if (tabView != null)
             {
-                var tabName = screenName.EndsWith("UI") ? "ui-settings-tab" : screenName.EndsWith("Controls") ? "controls-settings-tab" : "game-settings-tab";
+                var tabName = screenName.Substring(screenName.LastIndexOf(':') + 1).Trim() switch
+                {
+                    "Look" => "ui-settings-tab",
+                    "Graphics" => "graphics-settings-tab",
+                    "Controls" => "controls-settings-tab",
+                    "About" => "about-settings-tab",
+                    _ => "game-settings-tab"
+                };
                 tabView.activeTab = screen.Q<Tab>(tabName);
             }
 
@@ -88,7 +96,7 @@ namespace Bagel.B00_Layout
         [Test]
         public void EveryScreenFollowsTheDesignRules([ValueSource(nameof(screens))] string screenName)
         {
-            panelSize = new Vector2(1200f, 900f);
+            panelSize = new Vector2(1500f, 900f);
             var problems = new List<string>();
 
             foreach (var locale in s_Locales)

@@ -20,25 +20,6 @@
     --b-board-popup: rgb(0, 0, 0);
     --b-frame-color: rgb(255, 255, 255);
 
-    --b-whiteboard-surface: rgb(0, 0, 0);
-    --b-whiteboard-text: rgb(255, 255, 255);
-    --b-whiteboard-title: rgb(255, 214, 0);
-    --b-whiteboard-line: rgb(255, 255, 255);
-    --b-whiteboard-fill: rgb(0, 0, 0);
-    --b-whiteboard-hover: rgb(60, 60, 60);
-    --b-whiteboard-track: rgb(110, 110, 110);
-    --b-whiteboard-accent: rgb(255, 214, 0);
-    --b-whiteboard-accent-fill: rgb(255, 214, 0);
-    --b-whiteboard-accent-text: rgb(0, 0, 0);
-    --b-whiteboard-glow: rgb(255, 214, 0);
-    --b-whiteboard-row: rgb(30, 30, 30);
-    --b-whiteboard-popup: rgb(0, 0, 0);
-    --b-whiteboard-focus: rgb(255, 214, 0);
-    --b-marker-a: rgb(255, 255, 255);
-    --b-marker-b: rgb(255, 255, 255);
-    --b-marker-c: rgb(255, 214, 0);
-    --b-marker-d: rgb(255, 214, 0);
-
     --b-paper-surface: rgb(255, 255, 255);
     --b-paper-text: rgb(0, 0, 0);
     --b-paper-title: rgb(0, 0, 0);
@@ -80,7 +61,7 @@
     --b-accent-c: rgb(255, 214, 0);
     --b-accent-d: rgb(255, 214, 0);
 
-    --b-main-title-size: 50px;
+    --b-main-title-size: 82px;
     --b-details-size: 13px;
     --b-focus-color: rgb(255, 214, 0);
     --b-focus-width: 4px;

@@ -35,25 +35,75 @@
     display: none;
 }
 
-/* Settings: wider than the pause buttons, its text smaller, so more of it shows at once. */
+/* Settings: the blackboard's window of tabs, on the glass, at the pause buttons' size. The chosen tab is a pane of
+   darker glass with a gold rule under it; choices are gold-leaf pills. */
 #settings-pane {
-    width: 480px;
-    --b-text-size: 13px;
+    width: auto;
+    flex-shrink: 0;
+    --b-text-size: 14px;
 }
 
-#settings-pane .b-title {
-    font-size: 28px;
+#settings-pane .b-settings__title {
+    font-size: 30px;
 }
 
-#settings-pane .b-details-view {
+#settings-pane .b-title-underline {
+    margin: 0;
+}
+
+#settings-pane .unity-tab__header {
+    padding: 4px 12px 6px 12px;
+    margin-left: -12px;
+    border-radius: 10px;
+}
+
+#settings-pane .unity-tab__header:checked {
+    background-color: var(--b-fill-color);
+}
+
+#settings-pane .unity-tab__header-label {
+    font-size: 16px;
+}
+
+#settings-pane .unity-tab__header-underline {
+    left: 12px;
+    right: 12px;
+    width: auto;
+}
+
+#settings-pane .unity-button {
+    font-size: 14px;
+}
+
+#settings-pane .unity-button-group__button {
+    border-radius: 14px;
+    border-width: 2px;
+    padding: 2px 7px;
+    margin-right: 5px;
     font-size: 12px;
 }
 
-#settings-pane .unity-tab__header-label,
-#settings-pane .unity-button {
-    font-size: 13px;
+#settings-pane .unity-button-group__button:checked {
+    background-color: var(--b-accent-fill);
+    border-color: var(--b-accent-color);
+    color: var(--b-accent-text-color);
 }
 
-#settings-pane .unity-scroll-view {
-    height: 230px;
+#settings-pane .b-theme-card {
+    border-radius: 14px;
+}
+
+/* Back is a glass button here: no chalk line under it. */
+#settings-pane .b-chalk-item__line {
+    display: none;
+}
+
+#settings-pane .b-settings__back-button {
+    margin: 0;
+    min-width: 110px;
+}
+
+#settings-pane .b-theme-card:checked {
+    background-color: var(--b-fill-color);
+    border-color: var(--b-accent-color);
 }

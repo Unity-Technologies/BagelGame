@@ -1,13 +1,54 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False" authoring-id="-899228095">
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False" authoring-id="-899228095">
     <ui:Template name="MainMenuPane" src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuPane.uxml?fileID=9197481963319205126&amp;guid=ea563f0ac4a3a3840827b0233961e0fc&amp;type=3#MainMenuPane"/>
     <ui:Template name="SettingsPane" src="project://database/Assets/UI/Runtime/B04_Settings/SettingsPane.uxml?fileID=9197481963319205126&amp;guid=099575a75b5735a419dbefecaa7d35b0&amp;type=3#SettingsPane"/>
     <Style src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuStyles"/>
-    <Bagel.MainMenuScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="main-menu-screen" class="b-screen">
+    <Bagel.MainMenuScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="main-menu-screen" class="b-screen b-board">
         <Bagel.HandLettered/>
-        <ui:Instance template="MainMenuPane" name="main-menu-pane" class="b-pane b-board"/>
-        <ui:VisualElement name="secondary-panes" authoring-id="-1667598749" class="b-whiteboard">
-            <Bagel.HandLettered lean="2" bounce="0.03"/>
-            <ui:Instance template="SettingsPane" name="settings-pane" enabled="false" class="b-inactive-pane b-pane"/>
+        <ui:Instance template="MainMenuPane" name="main-menu-pane" class="b-pane"/>
+        <ui:VisualElement name="secondary-panes" authoring-id="-1667598749" class="b-board-side">
+            <ui:VisualElement name="board-specials" picking-mode="Ignore" class="b-specials b-wipe">
+                <ui:VisualElement picking-mode="Ignore" class="b-specials__chalk b-chalk">
+                    <ui:Label text="Fresh Today" name="specials-title" picking-mode="Ignore" class="b-specials__title">
+                        <Bindings>
+                            <loc:LocalizedString property="text" table="BagelStrings" entry="specials.title"/>
+                        </Bindings>
+                    </ui:Label>
+                    <ui:VisualElement picking-mode="Ignore" class="b-specials__rule"/>
+                    <ui:VisualElement name="specials-list" picking-mode="Ignore" class="b-specials__list">
+                        <ui:VisualElement picking-mode="Ignore" class="b-specials__item">
+                            <Bagel.ChalkDoodle kind="Bagel" seed="11" picking-mode="Ignore" class="b-specials__doodle"/>
+                            <ui:Label text="Sesame" picking-mode="Ignore" class="b-specials__name">
+                                <Bindings>
+                                    <loc:LocalizedString property="text" table="BagelStrings" entry="bagel.sesame"/>
+                                </Bindings>
+                            </ui:Label>
+                        </ui:VisualElement>
+                        <ui:VisualElement picking-mode="Ignore" class="b-specials__item">
+                            <Bagel.ChalkDoodle kind="Bagel" seed="12" picking-mode="Ignore" class="b-specials__doodle b-specials__doodle--poppy"/>
+                            <ui:Label text="Poppy Seed" picking-mode="Ignore" class="b-specials__name">
+                                <Bindings>
+                                    <loc:LocalizedString property="text" table="BagelStrings" entry="bagel.poppy-seed"/>
+                                </Bindings>
+                            </ui:Label>
+                        </ui:VisualElement>
+                        <ui:VisualElement picking-mode="Ignore" class="b-specials__item">
+                            <Bagel.ChalkDoodle kind="Bagel" seed="13" picking-mode="Ignore" class="b-specials__doodle b-specials__doodle--everything"/>
+                            <ui:Label text="Everything" picking-mode="Ignore" class="b-specials__name">
+                                <Bindings>
+                                    <loc:LocalizedString property="text" table="BagelStrings" entry="bagel.everything"/>
+                                </Bindings>
+                            </ui:Label>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Label text="Hot from the toaster" name="specials-note" picking-mode="Ignore" class="b-specials__note">
+                        <Bindings>
+                            <loc:LocalizedString property="text" table="BagelStrings" entry="specials.note"/>
+                        </Bindings>
+                    </ui:Label>
+                    <Bagel.ChalkDoodle kind="Steam" seed="9" picking-mode="Ignore" class="b-specials__steam"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Instance template="SettingsPane" name="settings-pane" enabled="false" class="b-pane b-wipe b-wipe--blank"/>
         </ui:VisualElement>
     </Bagel.MainMenuScreenManager>
 </ui:UXML>

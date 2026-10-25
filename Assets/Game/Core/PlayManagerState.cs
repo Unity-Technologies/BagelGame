@@ -254,6 +254,11 @@ namespace Bagel
             public bool visualEffects = true;
             public bool sound = true;
             public float soundVolume = 0.8f;
+            public bool postProcessing = true;
+            public int antiAliasing;
+            public bool depthOfField = true;
+            public bool shadows = true;
+            public int frameRate;
             public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
             public RunResult lastRun = new();
         }
@@ -267,7 +272,12 @@ namespace Bagel
                 reduceMotion = m_Settings.reduceMotion,
                 visualEffects = m_Settings.visualEffects,
                 sound = m_Settings.sound,
-                soundVolume = m_Settings.soundVolume
+                soundVolume = m_Settings.soundVolume,
+                postProcessing = m_Settings.postProcessing,
+                antiAliasing = m_Settings.antiAliasing,
+                depthOfField = m_Settings.depthOfField,
+                shadows = m_Settings.shadows,
+                frameRate = m_Settings.frameRate
             };
             saved.leaderboard.AddRange(m_Leaderboard.entries);
             saved.lastRun = m_LastRun;
@@ -285,6 +295,11 @@ namespace Bagel
             m_Settings.visualEffects = saved.visualEffects;
             m_Settings.sound = saved.sound;
             m_Settings.soundVolume = saved.soundVolume;
+            m_Settings.postProcessing = saved.postProcessing;
+            m_Settings.antiAliasing = saved.antiAliasing;
+            m_Settings.depthOfField = saved.depthOfField;
+            m_Settings.shadows = saved.shadows;
+            m_Settings.frameRate = saved.frameRate;
             m_Leaderboard.Load(saved.leaderboard);
             m_LastRun.Load(saved.lastRun);
         }

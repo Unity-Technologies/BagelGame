@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuStyles"/>
     <Bagel.MainMenuPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="main-menu-pane-manager" class="b-chalk-menu b-chalk">
         <ui:VisualElement name="title-box" class="b-title-box" style="rotate: -15deg;">
-            <ui:Label text="Bagel" name="title-bagel" class="b-title b-main-title" style="translate: -36px 0; margin-bottom: -7px; margin-top: 5px;"/>
-            <ui:Label text="Game" name="title-game" class="b-title b-main-title" style="translate: 42px 0; margin-top: -11px;"/>
+            <ui:Label text="Bagel" name="title-bagel" class="b-title b-main-title" style="translate: -59px 0; margin-bottom: -12px; margin-top: 8px;"/>
+            <ui:Label text="Game" name="title-game" class="b-title b-main-title" style="translate: 69px 0; margin-top: -18px;"/>
             <Bagel.ChalkDoodle kind="Bagel" seed="3" name="title-bagel-doodle" class="b-title-doodle b-title-doodle--bagel"/>
             <Bagel.ChalkDoodle kind="Steam" seed="5" name="title-steam-doodle" class="b-title-doodle b-title-doodle--steam"/>
             <Bagel.ChalkDoodle kind="Sparkle" seed="2" name="title-sparkle-doodle" class="b-title-doodle b-title-doodle--sparkle"/>
@@ -15,9 +15,7 @@
                 </Bindings>
                 <Bagel.PressSquish/>
             </ui:Button>
-            <Bagel.ChalkDoodle kind="Underline" seed="7" picking-mode="Ignore" class="b-chalk-item__underline"/>
-            <Bagel.ChalkDoodle kind="Underline" seed="8" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
-            <Bagel.ChalkDoodle kind="Arrow" seed="4" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+            <ui:VisualElement picking-mode="Ignore" class="b-chalk-item__line"/>
         </ui:VisualElement>
         <ui:VisualElement name="secondary-buttons-row">
             <ui:VisualElement name="settings-item" class="b-chalk-item">
@@ -27,9 +25,7 @@
                     </Bindings>
                     <Bagel.PressSquish/>
                 </ui:Button>
-                <Bagel.ChalkDoodle kind="Underline" seed="11" picking-mode="Ignore" class="b-chalk-item__underline"/>
-                <Bagel.ChalkDoodle kind="Underline" seed="12" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
-                <Bagel.ChalkDoodle kind="Arrow" seed="9" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+                <ui:VisualElement picking-mode="Ignore" class="b-chalk-item__line"/>
             </ui:VisualElement>
             <ui:VisualElement name="leaderboard-item" class="b-chalk-item">
                 <ui:Button text="Leaderboard" name="leaderboard-button" class="b-chalk-item__button">
@@ -38,9 +34,7 @@
                     </Bindings>
                     <Bagel.PressSquish/>
                 </ui:Button>
-                <Bagel.ChalkDoodle kind="Underline" seed="13" picking-mode="Ignore" class="b-chalk-item__underline"/>
-                <Bagel.ChalkDoodle kind="Underline" seed="14" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
-                <Bagel.ChalkDoodle kind="Arrow" seed="10" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+                <ui:VisualElement picking-mode="Ignore" class="b-chalk-item__line"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="exit-item" class="b-chalk-item">
@@ -50,9 +44,7 @@
                 </Bindings>
                 <Bagel.PressSquish/>
             </ui:Button>
-            <Bagel.ChalkDoodle kind="Underline" seed="15" picking-mode="Ignore" class="b-chalk-item__underline"/>
-            <Bagel.ChalkDoodle kind="Underline" seed="16" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
-            <Bagel.ChalkDoodle kind="Arrow" seed="6" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+            <ui:VisualElement picking-mode="Ignore" class="b-chalk-item__line"/>
         </ui:VisualElement>
     </Bagel.MainMenuPaneManager>
 </ui:UXML>
