@@ -143,8 +143,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15063647}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0312479, y: -0.0549032, z: -0.001719, w: 0.9980011}
-  m_LocalPosition: {x: 2.7806, y: 4.71, z: 18.9879}
+  m_LocalRotation: {x: -0.039863978, y: -0.046684153, z: -0.0018645361, w: 0.9981122}
+  m_LocalPosition: {x: 2.813913, y: 4.2695036, z: 19.584927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -777,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 387971005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.3, y: 0, z: 10.150001}
+  m_LocalPosition: {x: 24.3, y: 0, z: 7.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -897,7 +897,7 @@ MonoBehaviour:
   m_WestSide: 15.5
   m_EastSide: 16.6
   m_SouthSide: 26.6
-  m_NorthSide: 46.9
+  m_NorthSide: 41
   m_Height: 36
   m_CounterRect:
     serializedVersion: 2
@@ -941,10 +941,10 @@ MonoBehaviour:
   m_Left: -15.5
   m_Right: 16.6
   m_Bottom: -26.6
-  m_Top: 46.9
+  m_Top: 41
   m_Width: 32.1
-  m_Depth: 73.5
-  m_Center: {x: 0.5500002, y: 10.150001}
+  m_Depth: 67.6
+  m_Center: {x: 0.5500002, y: 7.2}
   m_CounterSurface: 15.29
   m_BlackboardSurface: -15.18
 --- !u!1001 &512240952
@@ -1074,7 +1074,7 @@ Transform:
   m_GameObject: {fileID: 618467959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32, y: 13.55, z: 10.150001}
+  m_LocalPosition: {x: 32, y: 13.55, z: 7.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1290,8 +1290,8 @@ Transform:
   m_GameObject: {fileID: 698328291}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5500002, y: 36.1, z: 10.150001}
-  m_LocalScale: {x: 32.1, y: 73.5, z: 0.2}
+  m_LocalPosition: {x: 0.5500002, y: 36.1, z: 7.2}
+  m_LocalScale: {x: 32.1, y: 67.6, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 471466935}
@@ -1615,8 +1615,8 @@ Transform:
   m_GameObject: {fileID: 815674806}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -15.6, y: 18, z: 10.150001}
-  m_LocalScale: {x: 73.5, y: 36, z: 0.2}
+  m_LocalPosition: {x: -15.6, y: 18, z: 7.2}
+  m_LocalScale: {x: 67.6, y: 36, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 471466935}
@@ -1728,8 +1728,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817671258}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0312479, y: -0.0549032, z: -0.001719, w: 0.9980011}
-  m_LocalPosition: {x: 3, y: 4.71, z: 17}
+  m_LocalRotation: {x: -0.039863978, y: -0.046684153, z: -0.0018645361, w: 0.9981122}
+  m_LocalPosition: {x: 3, y: 4.1099997, z: 17.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3451,7 +3451,7 @@ Transform:
   m_GameObject: {fileID: 1738847856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5500002, y: 18, z: 47}
+  m_LocalPosition: {x: 0.5500002, y: 18, z: 41.1}
   m_LocalScale: {x: 32.1, y: 36, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3934,8 +3934,8 @@ Transform:
   m_GameObject: {fileID: 1808437398}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5500002, y: 0, z: 10.150001}
-  m_LocalScale: {x: 32.1, y: 73.5, z: 1}
+  m_LocalPosition: {x: 0.5500002, y: 0, z: 7.2}
+  m_LocalScale: {x: 32.1, y: 67.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 471466935}
@@ -4346,7 +4346,7 @@ Transform:
   m_GameObject: {fileID: 2030507056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 8.91, z: 38.8}
+  m_LocalPosition: {x: 0.55, y: 7.0600004, z: 40.23}
   m_LocalScale: {x: 2.7333, y: 2.7333, z: 2.7333}
   m_ConstrainProportionsScale: 0
   m_Children: []
