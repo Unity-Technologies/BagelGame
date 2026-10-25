@@ -1,38 +1,58 @@
 <ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False" authoring-id="1418258705">
     <Style src="project://database/Assets/UI/Runtime/B03_MainMenu/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=a182ccb84c0dd044a8df49d76f575b05&amp;type=3#MainMenuStyles"/>
-    <Bagel.MainMenuPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="main-menu-pane-manager" style="flex-grow: 1;">
-        <ui:VisualElement name="title-box" class="b-title-box" style="rotate: -25deg;">
+    <Bagel.MainMenuPaneManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="main-menu-pane-manager" class="b-chalk-menu b-chalk">
+        <ui:VisualElement name="title-box" class="b-title-box" style="rotate: -15deg;">
             <ui:Label text="Bagel" name="title-bagel" class="b-title b-main-title" style="translate: -36px 0; margin-bottom: -7px; margin-top: 5px;"/>
             <ui:Label text="Game" name="title-game" class="b-title b-main-title" style="translate: 42px 0; margin-top: -11px;"/>
             <Bagel.ChalkDoodle kind="Bagel" seed="3" name="title-bagel-doodle" class="b-title-doodle b-title-doodle--bagel"/>
             <Bagel.ChalkDoodle kind="Steam" seed="5" name="title-steam-doodle" class="b-title-doodle b-title-doodle--steam"/>
             <Bagel.ChalkDoodle kind="Sparkle" seed="2" name="title-sparkle-doodle" class="b-title-doodle b-title-doodle--sparkle"/>
         </ui:VisualElement>
-        <ui:Button text="Play" name="play-button" class="b-primary" style="flex-grow: 1;">
-            <Bindings>
-                <loc:LocalizedString property="text" table="BagelStrings" entry="menu.play"/>
-            </Bindings>
-            <Bagel.PressSquish/>
-        </ui:Button>
-        <ui:VisualElement name="secondary-buttons-row">
-            <ui:Button text="Settings" name="settings-button" style="flex-grow: 1; flex-basis: 0;">
+        <ui:VisualElement name="play-item" class="b-chalk-item b-chalk-item--primary">
+            <ui:Button text="Play" name="play-button" class="b-chalk-item__button b-primary">
                 <Bindings>
-                    <loc:LocalizedString property="text" table="BagelStrings" entry="menu.settings"/>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="menu.play"/>
                 </Bindings>
                 <Bagel.PressSquish/>
             </ui:Button>
-            <ui:Button text="Leaderboard" name="leaderboard-button" style="flex-grow: 1; flex-basis: 0;">
-                <Bindings>
-                    <loc:LocalizedString property="text" table="BagelStrings" entry="menu.leaderboard"/>
-                </Bindings>
-                <Bagel.PressSquish/>
-            </ui:Button>
+            <Bagel.ChalkDoodle kind="Underline" seed="7" picking-mode="Ignore" class="b-chalk-item__underline"/>
+            <Bagel.ChalkDoodle kind="Underline" seed="8" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
+            <Bagel.ChalkDoodle kind="Arrow" seed="4" picking-mode="Ignore" class="b-chalk-item__arrow"/>
         </ui:VisualElement>
-        <ui:Button text="Exit" name="exit-button">
-            <Bindings>
-                <loc:LocalizedString property="text" table="BagelStrings" entry="menu.exit"/>
-            </Bindings>
-            <Bagel.PressSquish/>
-        </ui:Button>
+        <ui:VisualElement name="secondary-buttons-row">
+            <ui:VisualElement name="settings-item" class="b-chalk-item">
+                <ui:Button text="Settings" name="settings-button" class="b-chalk-item__button">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="menu.settings"/>
+                    </Bindings>
+                    <Bagel.PressSquish/>
+                </ui:Button>
+                <Bagel.ChalkDoodle kind="Underline" seed="11" picking-mode="Ignore" class="b-chalk-item__underline"/>
+                <Bagel.ChalkDoodle kind="Underline" seed="12" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
+                <Bagel.ChalkDoodle kind="Arrow" seed="9" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="leaderboard-item" class="b-chalk-item">
+                <ui:Button text="Leaderboard" name="leaderboard-button" class="b-chalk-item__button">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="menu.leaderboard"/>
+                    </Bindings>
+                    <Bagel.PressSquish/>
+                </ui:Button>
+                <Bagel.ChalkDoodle kind="Underline" seed="13" picking-mode="Ignore" class="b-chalk-item__underline"/>
+                <Bagel.ChalkDoodle kind="Underline" seed="14" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
+                <Bagel.ChalkDoodle kind="Arrow" seed="10" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="exit-item" class="b-chalk-item">
+            <ui:Button text="Exit" name="exit-button" class="b-chalk-item__button">
+                <Bindings>
+                    <loc:LocalizedString property="text" table="BagelStrings" entry="menu.exit"/>
+                </Bindings>
+                <Bagel.PressSquish/>
+            </ui:Button>
+            <Bagel.ChalkDoodle kind="Underline" seed="15" picking-mode="Ignore" class="b-chalk-item__underline"/>
+            <Bagel.ChalkDoodle kind="Underline" seed="16" picking-mode="Ignore" class="b-chalk-item__underline b-chalk-item__underline--again"/>
+            <Bagel.ChalkDoodle kind="Arrow" seed="6" picking-mode="Ignore" class="b-chalk-item__arrow"/>
+        </ui:VisualElement>
     </Bagel.MainMenuPaneManager>
 </ui:UXML>

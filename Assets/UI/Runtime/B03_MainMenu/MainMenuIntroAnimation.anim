@@ -88,7 +88,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -2.76, y: 1.07, z: 0}
+        value: {x: -3.1, y: 1.15, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -97,7 +97,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.6
-        value: {x: -2.76, y: 1.07, z: -0.5}
+        value: {x: -3.1, y: 1.15, z: -0.5}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -106,7 +106,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.1666666
-        value: {x: -2.76, y: 1.07, z: 0}
+        value: {x: -3.1, y: 1.15, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -122,7 +122,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -1.27, y: 0.56, z: 0}
+        value: {x: -1.25, y: 0.25, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -131,7 +131,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.6
-        value: {x: -1.27, y: 0.56, z: -0.5}
+        value: {x: -1.25, y: 0.25, z: -0.5}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -140,7 +140,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.1666666
-        value: {x: -1.27, y: 0.56, z: 0}
+        value: {x: -1.25, y: 0.25, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -198,7 +198,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -31
+        value: -21
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -207,7 +207,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.3
-        value: -24
+        value: -14
         inSlope: 9.166666
         outSlope: 9.166666
         tangentMode: 0
@@ -216,7 +216,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: -25
+        value: -15
         inSlope: -2.5000002
         outSlope: -2.5000002
         tangentMode: 0
@@ -225,7 +225,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: -25
+        value: -15
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -379,7 +379,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -427,7 +427,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -475,7 +475,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -523,7 +523,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -571,7 +571,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -619,7 +619,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -667,7 +667,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -715,7 +715,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -763,7 +763,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -811,7 +811,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -859,7 +859,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -907,7 +907,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -948,7 +948,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -2.76
+        value: -3.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -957,7 +957,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: -2.76
+        value: -3.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -978,7 +978,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.07
+        value: 1.15
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -987,7 +987,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: 1.07
+        value: 1.15
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1047,7 +1047,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -1.27
+        value: -1.25
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1056,7 +1056,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: -1.27
+        value: -1.25
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1077,7 +1077,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.56
+        value: 0.25
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1086,7 +1086,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: 0.56
+        value: 0.25
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1383,7 +1383,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -31
+        value: -21
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1392,7 +1392,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.3
-        value: -24
+        value: -14
         inSlope: 9.166666
         outSlope: 9.166666
         tangentMode: 0
@@ -1401,7 +1401,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: -25
+        value: -15
         inSlope: -2.5000002
         outSlope: -2.5000002
         tangentMode: 0
@@ -1410,7 +1410,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: -25
+        value: -15
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1564,7 +1564,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1612,7 +1612,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1660,7 +1660,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#play-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1708,7 +1708,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1756,7 +1756,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1804,7 +1804,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#settings-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1852,7 +1852,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1900,7 +1900,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1948,7 +1948,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#secondary-buttons-row/#leaderboard-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -1996,7 +1996,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Opacity'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Opacity'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -2044,7 +2044,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Translate.x'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Translate.x'
     path: 
     classID: 1931382934
     script: {fileID: 0}
@@ -2092,7 +2092,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-button/Rotate'
+    attribute: '#main-menu-screen/#main-menu-pane/#main-menu-pane-manager/#exit-item/Rotate'
     path: 
     classID: 1931382934
     script: {fileID: 0}

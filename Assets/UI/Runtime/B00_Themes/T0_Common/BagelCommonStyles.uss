@@ -2,11 +2,12 @@
    sets variables (see T1_Classic/BagelClassicThemeStyles.uss). The defaults here are Classic's: the
    bagel shop.
 
-   The UI is made of four surfaces, like the shop is: chalk on the blackboard (.b-board: the main menu and
-   settings), paper (.b-paper: the bagels' price tags, the receipt and the leaderboard on the television),
-   the shop window's glass (.b-glass: the pause screen) and the kitchen gauges riding along with the bagel
-   (.b-gauge). A surface sets the colors the controls inside it read (--b-text-color, --b-line-color...),
-   so a button is chalk on the board and ink on paper with the same rules. */
+   The UI is made of five surfaces, like the shop is: chalk on the blackboard (.b-board: the main menu),
+   marker on the whiteboard beside it (.b-whiteboard: settings), paper (.b-paper: the bagels' price tags,
+   the receipt and the leaderboard on the television), the shop window's glass (.b-glass: the pause
+   screen) and the kitchen gauges riding along with the bagel (.b-gauge). A surface sets the colors the
+   controls inside it read (--b-text-color, --b-line-color...), so a button is chalk on the board and ink
+   on paper with the same rules. */
 
 :root {
     /* The shop's palette */
@@ -35,6 +36,27 @@
     --b-board-popup: rgb(43, 56, 50);
     /* A free-standing chalkboard sign (no board in the scene behind it), in its wooden frame. */
     --b-frame-color: rgb(140, 90, 60);
+
+    /* The whiteboard: sharp, bright marker on the white board in the scene, which shows through. */
+    --b-whiteboard-surface: rgba(0, 0, 0, 0);
+    --b-whiteboard-text: rgb(24, 36, 72);
+    --b-whiteboard-title: rgb(214, 46, 46);
+    --b-whiteboard-line: rgb(34, 84, 186);
+    --b-whiteboard-fill: rgba(34, 84, 186, 0.06);
+    --b-whiteboard-hover: rgba(34, 84, 186, 0.14);
+    --b-whiteboard-track: rgba(24, 36, 72, 0.22);
+    --b-whiteboard-accent: rgb(26, 150, 78);
+    --b-whiteboard-accent-fill: rgba(26, 150, 78, 0.16);
+    --b-whiteboard-accent-text: rgb(18, 116, 58);
+    --b-whiteboard-glow: rgba(34, 84, 186, 0.45);
+    --b-whiteboard-row: rgba(24, 36, 72, 0.05);
+    --b-whiteboard-popup: rgb(250, 251, 253);
+    --b-whiteboard-focus: rgb(214, 46, 46);
+    /* The title's underline: the four markers in the tray, side by side. */
+    --b-marker-a: rgb(214, 46, 46);
+    --b-marker-b: rgb(240, 140, 30);
+    --b-marker-c: rgb(34, 84, 186);
+    --b-marker-d: rgb(26, 150, 78);
 
     /* Paper: ink on cream, red for what stands out. */
     --b-paper-surface: rgb(251, 243, 226);
@@ -148,6 +170,27 @@
     --b-glow-color: var(--b-board-glow);
     --b-row-color: var(--b-board-row);
     --b-popup-color: var(--b-board-popup);
+}
+
+.b-whiteboard {
+    --b-surface-color: var(--b-whiteboard-surface);
+    --b-text-color: var(--b-whiteboard-text);
+    --b-title-color: var(--b-whiteboard-title);
+    --b-line-color: var(--b-whiteboard-line);
+    --b-fill-color: var(--b-whiteboard-fill);
+    --b-hover-color: var(--b-whiteboard-hover);
+    --b-track-color: var(--b-whiteboard-track);
+    --b-accent-color: var(--b-whiteboard-accent);
+    --b-accent-fill: var(--b-whiteboard-accent-fill);
+    --b-accent-text-color: var(--b-whiteboard-accent-text);
+    --b-glow-color: var(--b-whiteboard-glow);
+    --b-row-color: var(--b-whiteboard-row);
+    --b-popup-color: var(--b-whiteboard-popup);
+    --b-focus-color: var(--b-whiteboard-focus);
+    --b-accent-a: var(--b-marker-a);
+    --b-accent-b: var(--b-marker-b);
+    --b-accent-c: var(--b-marker-c);
+    --b-accent-d: var(--b-marker-d);
 }
 
 .b-paper {

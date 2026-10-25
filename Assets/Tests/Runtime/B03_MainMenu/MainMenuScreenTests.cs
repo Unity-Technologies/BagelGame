@@ -49,8 +49,8 @@ namespace Bagel.B03_MainMenu
             Assert.IsTrue(exitClicked);
         }
 
-        // The chalk filter's grain starts at the corner of the board's texture, which the board pins to its own corner
-        // by clipping: the title, at its biggest in the hover bounce too, has to fit on the board, in every theme.
+        // The chalk filter's grain starts at the corner of the menu's texture, which the menu pins to its own corner by
+        // clipping: the title, at its biggest in the hover bounce too, has to fit on the blackboard, in every theme.
         [Test]
         public void TheTitleFitsOnTheBoard()
         {
@@ -61,7 +61,7 @@ namespace Bagel.B03_MainMenu
                 var screen = m_BagelTestAssetList.mainMenuScreenUxml.Instantiate();
                 screen.styleSheets.Add(theme.theme);
                 rootVisualElement.Add(screen);
-                var board = screen.Q("main-menu-screen");
+                var board = screen.Q("main-menu-pane-manager");
                 foreach (var name in new[] { "title-bagel", "title-game" })
                     board.Q(name).style.scale = new Scale(new Vector2(1.2f, 1.2f));
                 simulate.FrameUpdate();

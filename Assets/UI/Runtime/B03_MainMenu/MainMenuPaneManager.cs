@@ -3,9 +3,13 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    // The main menu, chalked on the blackboard: each button is a word in a chalk item (with its underlines and
+    // arrow), which shows the focus for it when the gamepad or keyboard moves there.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class MainMenuPaneManager : BagelPane
     {
+        public static readonly UniqueStyleString itemFocusUssClassName = new("b-chalk-item--focus");
+
         Button m_PlayButton;
         Button m_SettingsButton;
         Button m_LeaderboardButton;
@@ -50,6 +54,18 @@ namespace Bagel
                 onSettings = () => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings),
                 onLeaderboard = () => state?.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard)
             });
+
+            foreach (var button in new[] { playButton, settingsButton, leaderboardButton, exitButton })
+                ShowFocusOnItem(button);
+        }
+
+        static void ShowFocusOnItem(Button button)
+        {
+            if (button?.parent == null)
+                return;
+            var item = button.parent;
+            button.RegisterCallback<FocusInEvent>(_ => item.AddToClassList(itemFocusUssClassName));
+            button.RegisterCallback<FocusOutEvent>(_ => item.RemoveFromClassList(itemFocusUssClassName));
         }
     }
 }

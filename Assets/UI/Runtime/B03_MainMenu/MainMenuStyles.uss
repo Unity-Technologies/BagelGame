@@ -1,67 +1,65 @@
-/* The main menu and Settings: chalk on the shop's blackboard. The main pane is on the left and Settings on
-   the right; the camera moves over to it, and the other one smudges. The leaderboard is on the television. */
+/* The main menu, chalked on the shop's blackboard, and Settings in marker on the whiteboard beside it.
+   The panel lies across both boards (the blackboard 20 wide, a gap, the whiteboard 26 wide, at 0.056 a
+   pixel); the camera moves from one to the other, and the board not in use fades: chalk smudges, marker
+   ghosts. The leaderboard is on the television. */
 
 .b-screen {
     flex-direction: row;
-    flex-grow: 1;
+    align-items: center;
 }
 
-/* The chalk's grain over everything on the board (a custom filter; none in themes without chalk). */
+#main-menu-screen {
+    flex-grow: 0;
+    width: 864px;
+    height: 289px;
+}
+
+/* The chalk's grain over everything on the blackboard (a custom filter; none in themes without chalk). */
 .b-chalk {
     filter: var(--b-board-filter);
 }
 
-/* The board reaches past its panes, far enough for the title (bouncing too) and the blur of the pane not in
-   use, and clips there: the chalk filter's texture then always starts at the same corner, and its grain stays
-   put however the title moves. The margins take back what the padding adds, so the panel keeps its size. */
-#main-menu-screen {
-    overflow: hidden;
-    margin: -80px -20px -20px -64px;
-    padding: 80px 20px 20px 64px;
-}
-
 .b-pane {
-    background-color: var(--b-surface-color);
     transition-property: filter, opacity;
     transition-duration: 1s;
-    height: 277px;
 }
 
-/* Settings and the Leaderboard take the rest of the board, wider than the menu and set smaller, so more of
-   them shows at once; the camera comes close for them. */
-#secondary-panes > .b-pane {
-    width: 400px;
-    --b-text-size: 12px;
+/* ------------------------------------------------------------------ The blackboard */
+
+#main-menu-pane {
+    width: 357px;
+    height: 282px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
 }
 
-#secondary-panes .b-title {
-    font-size: 24px;
+/* The menu clips at the board's edges: the chalk filter's texture then always starts at the same corner, and
+   its grain stays put however the title moves. */
+.b-chalk-menu {
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 8px 18px 6px 18px;
 }
 
-#secondary-panes .unity-tab__header-label,
-#secondary-panes .unity-button {
-    font-size: 12px;
-}
-
-#secondary-panes .unity-button {
-    min-height: 26px;
-}
-
-#secondary-panes .unity-scroll-view {
-    height: 168px;
-}
-
-/* The pane not in use, smudged like chalk wiped with a sleeve. */
-.b-pane:disabled {
+/* The board not in use, smudged like chalk wiped with a sleeve. */
+#main-menu-pane:disabled {
     filter: blur(6);
     opacity: 0.5;
 }
 
 .b-title.b-main-title {
+    align-self: center;
     padding: 0;
     margin: 0;
     font-size: var(--b-main-title-size);
     color: var(--b-title-color);
+}
+
+.b-title-box {
+    align-self: flex-start;
+    width: 238px;
+    margin: 30px 0 18px 34px;
 }
 
 .b-title-box:hover {
@@ -99,50 +97,231 @@
     color: var(--b-accent-a);
 }
 
-.b-details-view {
-    font-size: var(--b-details-size);
+/* The menu: big words in chalk, each underlined. Pointing at one, or moving the focus to it
+   (.b-chalk-item--focus), chalks an arrow beside it and underlines it again, brighter; pressing it squishes it.
+   No boxes, no glow. */
+#secondary-buttons-row {
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.b-details-view .unity-label {
-    padding: 1px;
-    margin: 1px;
+.b-chalk-item {
+    align-self: flex-start;
+    margin: 0 0 2px 64px;
 }
+
+.b-chalk-item--primary {
+    margin-bottom: 6px;
+}
+
+.b-chalk-item__button,
+.b-chalk-item__button.b-primary {
+    margin: 0;
+    padding: 0 6px 7px 6px;
+    border-width: 0;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--b-text-color);
+    font-size: 22px;
+    -unity-text-align: middle-left;
+    transition-property: color;
+    transition-duration: 0.2s;
+}
+
+.b-chalk-item__button.b-primary {
+    font-size: 34px;
+    color: var(--b-title-color);
+}
+
+.b-chalk-item__button:enabled:hover,
+.b-chalk-item__button.b-primary:enabled:hover {
+    background-color: rgba(0, 0, 0, 0);
+    filter: none;
+}
+
+.b-chalk-item__button:focus {
+    border-width: 0;
+}
+
+.b-chalk-item__underline {
+    position: absolute;
+    left: 2px;
+    right: 0;
+    bottom: 0;
+    height: 9px;
+    opacity: 0.4;
+    color: var(--b-text-color);
+    --b-doodle-width: 2.5;
+}
+
+.b-chalk-item--primary > .b-chalk-item__underline {
+    color: var(--b-title-color);
+    --b-doodle-width: 3.5;
+}
+
+/* Underlined again: drawn in from the start of the word. */
+.b-chalk-item__underline--again,
+.b-chalk-item--primary > .b-chalk-item__underline--again {
+    opacity: 0;
+    scale: 0 1;
+    transform-origin: left;
+    color: var(--b-focus-color);
+    transition-property: scale, opacity;
+    transition-duration: 0.25s, 0.1s;
+    transition-timing-function: ease-out-cubic, linear;
+}
+
+.b-chalk-item__arrow {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    width: 34px;
+    height: 22px;
+    margin-top: -14px;
+    opacity: 0;
+    translate: -8px 0;
+    color: var(--b-focus-color);
+    --b-doodle-width: 3;
+    transition-property: opacity, translate;
+    transition-duration: 0.2s;
+}
+
+.b-chalk-item:hover > .b-chalk-item__underline--again,
+.b-chalk-item--focus > .b-chalk-item__underline--again {
+    opacity: 1;
+    scale: 1 1;
+}
+
+.b-chalk-item:hover > .b-chalk-item__arrow,
+.b-chalk-item--focus > .b-chalk-item__arrow {
+    opacity: 1;
+    translate: 0 0;
+}
+
+/* Right to left: the words line up on the right, the arrow points in from the right. */
+.b-rtl .b-title-box {
+    align-self: flex-end;
+    margin: 30px 34px 18px 0;
+}
+
+.b-rtl #secondary-buttons-row {
+    align-items: flex-end;
+}
+
+.b-rtl .b-chalk-item {
+    align-self: flex-end;
+    margin-left: 0;
+    margin-right: 64px;
+}
+
+.b-rtl .b-chalk-item__button {
+    -unity-text-align: middle-right;
+}
+
+.b-rtl .b-chalk-item__underline--again {
+    transform-origin: right;
+}
+
+.b-rtl .b-chalk-item__arrow {
+    left: auto;
+    right: -40px;
+    scale: -1 1;
+}
+
+/* ------------------------------------------------------------------ The whiteboard */
+
+#secondary-panes {
+    flex-shrink: 0;
+    width: 464px;
+    height: 289px;
+    margin-left: 43px;
+    padding: 8px 14px;
+}
+
+/* Settings fill the whiteboard, set smaller than elsewhere so more of them show at once. */
+#secondary-panes > .b-pane {
+    flex-grow: 1;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 4px 6px;
+    --b-text-size: 11px;
+}
+
+/* The board not in use: the marker's ghost, still sharp, as on a whiteboard wiped a little too quickly. */
+#secondary-panes > .b-pane:disabled {
+    filter: none;
+    opacity: 0.25;
+}
+
+#secondary-panes .b-title {
+    font-size: 24px;
+}
+
+#secondary-panes .unity-tab__header-label,
+#secondary-panes .unity-button {
+    font-size: 11px;
+}
+
+#secondary-panes .unity-tab-view {
+    flex-grow: 1;
+}
+
+#secondary-panes .unity-tab-view__content-container,
+#secondary-panes .unity-tab {
+    flex-grow: 1;
+}
+
+#secondary-panes .unity-scroll-view {
+    flex-grow: 1;
+    height: auto;
+}
+
+/* Marker on a whiteboard: crisp lines, no glow. */
+#secondary-panes .unity-button {
+    min-height: 22px;
+    border-top-left-radius: var(--b-tiny-radius);
+    border-top-right-radius: var(--b-tiny-radius);
+    border-bottom-right-radius: var(--b-tiny-radius);
+    border-bottom-left-radius: var(--b-tiny-radius);
+    --b-button-border-width: 2px;
+}
+
+#secondary-panes .unity-button:enabled:hover {
+    filter: none;
+}
+
+#secondary-panes .unity-tab__header:checked > .unity-tab__header-label {
+    color: var(--b-title-color);
+}
+
+#secondary-panes .unity-tab__header:checked > .unity-tab__header-underline {
+    background-color: var(--b-title-color);
+}
+
+/* ------------------------------------------------------------------ Scroll bars */
 
 .unity-scroller--vertical {
-    width: 16px;
+    width: 14px;
 }
 
 .unity-scroller__low-button,
 .unity-scroller__high-button {
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
 }
 
 .unity-scroller__slider > .unity-slider__input {
-    width: 16px;
+    width: 14px;
 }
 
 .unity-scroller__slider .unity-base-slider__dragger {
     width: 6px;
-    margin-left: 5px;
+    margin-left: 4px;
 }
 
 .unity-scroller--vertical > .unity-base-slider--vertical {
-    margin-top: 16px;
-    margin-bottom: 16px;
-}
-
-#secondary-buttons-row {
-    flex-direction: row;
-}
-
-/* Two buttons share a row: less padding, so "Leaderboard" fits. */
-#secondary-buttons-row > .unity-button {
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-.b-rtl #secondary-buttons-row {
-    flex-direction: row-reverse;
+    margin-top: 14px;
+    margin-bottom: 14px;
 }

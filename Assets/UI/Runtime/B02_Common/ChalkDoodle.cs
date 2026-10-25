@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     // A little drawing on the board, drawn in code with Painter2D: a bagel, its steam, a sparkle, an
-    // arrow. Every stroke wobbles like a hand drew it, the same way every time (the seed picks the
+    // arrow, a word's underline. Every stroke wobbles like a hand drew it, the same way every time (the seed picks the
     // hand). It's drawn in the element's color, so chalk on the blackboard and ink on paper alike, and
     // its strokes are --b-doodle-width pixels wide (a USS number: --b-doodle-width: 3).
     [UxmlElement(libraryPath = "Bagel/Common")]
@@ -16,7 +16,8 @@ namespace Bagel
             Bagel,
             Steam,
             Sparkle,
-            Arrow
+            Arrow,
+            Underline
         }
 
         public static readonly string ussClassName = "b-doodle";
@@ -135,6 +136,16 @@ namespace Bagel
                     var back = (m_Points[m_Points.Count - 3] - tip).normalized * size * 0.35f;
                     Line(painter, random, tip, tip + Rotate(back, 35f), size * 0.02f);
                     Line(painter, random, tip, tip + Rotate(back, -35f), size * 0.02f);
+                    break;
+                case Kind.Underline:
+                    // A quick stroke the width of the element, a little uphill and not quite straight.
+                    m_Points.Clear();
+                    for (int step = 0; step <= 20; step++)
+                    {
+                        var t = step / 20f;
+                        m_Points.Add(new Vector2(rect.xMin + t * rect.width, center.y + rect.height * (0.2f - 0.4f * t) + Mathf.Sin(t * Mathf.PI * 1.5f) * rect.height * 0.15f));
+                    }
+                    Stroke(painter, random, m_Points, Mathf.Min(rect.height * 0.08f, 1f));
                     break;
             }
         }

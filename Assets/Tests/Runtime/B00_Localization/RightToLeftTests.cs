@@ -75,7 +75,7 @@ namespace Bagel.B00_Localization
             Assert.AreEqual(LanguageDirection.LTR, rootVisualElement.Q<Button>("right-button").languageDirection);
         }
 
-        // Rows that read in order run from the right; the table's first column is on the right.
+        // Rows that read in order run from the right; the main menu's words line up on the right.
         [Test]
         public void RowsRunFromTheRight()
         {
@@ -89,7 +89,8 @@ namespace Bagel.B00_Localization
 
             var settings = rootVisualElement.Q<Button>("settings-button");
             var leaderboard = rootVisualElement.Q<Button>("leaderboard-button");
-            Assert.Greater(settings.worldBound.x, leaderboard.worldBound.x, "Settings, the first of the two, is on the right");
+            Assert.Less(settings.worldBound.y, leaderboard.worldBound.y, "Settings comes first, above the Leaderboard");
+            Assert.AreEqual(settings.worldBound.xMax, leaderboard.worldBound.xMax, 0.5f, "the words line up on the right");
             Assert.AreEqual(TextAnchor.UpperRight, rootVisualElement.Q<MainMenuScreenManager>().resolvedStyle.unityTextAlign);
         }
     }

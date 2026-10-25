@@ -46,8 +46,11 @@ namespace Bagel.B00_Themes
 
                 // A font asset: its weights and fallbacks (Arabic, Chinese) come with it.
                 Assert.AreEqual("DynaPuff-Medium SDF", style.unityFontDefinition.fontAsset?.name, $"{entry.themeName}: the font comes from --b-font");
-                Assert.Greater(style.borderTopWidth, 0f, $"{entry.themeName}: buttons have a border");
                 Assert.AreNotEqual(style.backgroundColor, style.color, $"{entry.themeName}: text and background differ");
+
+                // The main menu's words are chalked on the board, no boxes; buttons elsewhere have a border.
+                screen = ShowWithTheme(m_BagelTestAssetList.pausePaneUxml, entry.theme);
+                Assert.Greater(screen.Q<Button>("resume-button").resolvedStyle.borderTopWidth, 0f, $"{entry.themeName}: buttons have a border");
             }
 
             LogAssert.NoUnexpectedReceived();

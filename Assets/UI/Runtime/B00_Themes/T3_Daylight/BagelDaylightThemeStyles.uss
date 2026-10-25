@@ -19,6 +19,25 @@
     --b-board-popup: rgb(255, 248, 234);
     --b-frame-color: rgb(214, 160, 110);
 
+    --b-whiteboard-surface: rgba(255, 255, 255, 0.94);
+    --b-whiteboard-text: rgb(59, 31, 20);
+    --b-whiteboard-title: rgb(222, 72, 44);
+    --b-whiteboard-line: rgb(214, 160, 110);
+    --b-whiteboard-fill: rgb(255, 255, 255);
+    --b-whiteboard-hover: rgb(255, 232, 196);
+    --b-whiteboard-track: rgba(59, 31, 20, 0.14);
+    --b-whiteboard-accent: rgb(245, 140, 35);
+    --b-whiteboard-accent-fill: rgb(245, 166, 35);
+    --b-whiteboard-accent-text: rgb(59, 31, 20);
+    --b-whiteboard-glow: rgb(255, 214, 120);
+    --b-whiteboard-row: rgba(245, 166, 35, 0.12);
+    --b-whiteboard-popup: rgb(255, 248, 234);
+    --b-whiteboard-focus: rgb(222, 72, 44);
+    --b-marker-a: rgb(255, 196, 40);
+    --b-marker-b: rgb(255, 138, 101);
+    --b-marker-c: rgb(222, 72, 44);
+    --b-marker-d: rgb(64, 201, 132);
+
     --b-paper-surface: rgb(255, 255, 255);
     --b-paper-accent: rgb(245, 140, 35);
     --b-paper-accent-fill: rgb(245, 166, 35);

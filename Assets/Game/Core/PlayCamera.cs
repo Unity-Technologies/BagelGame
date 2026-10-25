@@ -19,7 +19,13 @@ namespace Bagel
         [Tooltip("Looks past the toaster at the television: at game over, and for the main menu's leaderboard.")]
         [SerializeField] CinemachineCamera m_GameOverCamera;
 
+        [Header("Framing")]
+        [Tooltip("What the Settings camera keeps in view, whatever the screen's shape and the field of view: the whiteboard and a margin around it (meters, across and up). It orbits its target on the board at that distance.")]
+        [SerializeField] Vector2 m_SettingsFrame = new(36f, 22f);
+
         PlayManagerState m_State;
+        CinemachineOrbitalFollow m_SettingsOrbit;
+        Camera m_OutputCamera;
 
         public float fieldOfView
         {
@@ -29,6 +35,7 @@ namespace Bagel
 
         void OnEnable()
         {
+            m_SettingsOrbit = m_MainMenuSecondaryCamera.GetComponent<CinemachineOrbitalFollow>();
             m_State = m_PlayManager.state;
             m_State.onStateChange += State_OnStateChange;
             m_State.onMainMenuPaneModeChange += State_OnMainMenuPaneModeChange;
@@ -55,6 +62,18 @@ namespace Bagel
                 UpdateFieldOfView(m_State.settings.fieldOfView);
             else if (args.propertyName.Equals(PlayManagerState.mainMenuPanePath))
                 UpdateCamera();
+        }
+
+        // The whiteboard fits on screen with its margin: as far back as the narrower of its width and height needs.
+        void LateUpdate()
+        {
+            if (m_SettingsOrbit == null)
+                return;
+            if (m_OutputCamera == null)
+                m_OutputCamera = Camera.main;
+            var aspect = m_OutputCamera != null ? m_OutputCamera.aspect : 16f / 9f;
+            var tan = Mathf.Tan(m_MainMenuSecondaryCamera.Lens.FieldOfView * 0.5f * Mathf.Deg2Rad);
+            m_SettingsOrbit.Radius = Mathf.Max(m_SettingsFrame.y * 0.5f / tan, m_SettingsFrame.x * 0.5f / (tan * aspect));
         }
 
         void UpdateFieldOfView(float newFOV)

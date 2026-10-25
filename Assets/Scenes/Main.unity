@@ -890,10 +890,10 @@ MonoBehaviour:
     height: 49.8
   m_CounterHeight: 13.7
   m_CounterTopThickness: 1.54
-  m_BlackboardWidth: 38.65
+  m_BlackboardWidth: 20
   m_BlackboardHeight: 15.8
   m_BlackboardThickness: 0.27
-  m_BlackboardWallXY: {x: 7.18, y: 25.8}
+  m_BlackboardWallXY: {x: -3, y: 25.8}
   m_MainMenu: {fileID: 194385110}
   m_BagelSelection: {fileID: 526201412}
   m_Playing: {fileID: 141716458}
@@ -1564,7 +1564,7 @@ Transform:
   m_GameObject: {fileID: 782261187}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 17.01, y: 12.19362, z: -1.22943}
+  m_LocalPosition: {x: 24.89, y: -0.12, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1897,11 +1897,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: 5d35bd45b4574954489a727f19f1355e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.27
+      value: -1.25
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: 5d35bd45b4574954489a727f19f1355e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.56
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: 5d35bd45b4574954489a727f19f1355e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1968,8 +1968,8 @@ Transform:
   m_GameObject: {fileID: 841853674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.365, y: 25.8, z: 7.18}
-  m_LocalScale: {x: 0.27, y: 15.8, z: 38.65}
+  m_LocalPosition: {x: -15.365, y: 25.8, z: -3}
+  m_LocalScale: {x: 0.27, y: 15.8, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 471466935}
@@ -2303,7 +2303,7 @@ Transform:
   m_GameObject: {fileID: 1049677548}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 9.67, y: 0, z: 0}
+  m_LocalPosition: {x: 13.68, y: 0, z: 0}
   m_LocalScale: {x: 5.6, y: 5.6, z: 5.6}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2764,11 +2764,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: dd149aba705072e4abacf11a515d630e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.76
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: dd149aba705072e4abacf11a515d630e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.07
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 2633031486731055519, guid: dd149aba705072e4abacf11a515d630e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4066,13 +4066,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981675134}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7077414, y: 0.07408145, z: 0.07314125, w: 0.6987593}
-  m_LocalPosition: {x: 11.055102, y: 23.268208, z: -0.83205986}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 24.89, y: 19.68, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 194385110}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1981675136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4141,7 +4141,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 5}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 4
+  Radius: 2
   Orbits:
     Top:
       Radius: 2
@@ -4165,7 +4165,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.9
+    Value: 0
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
