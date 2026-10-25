@@ -167,12 +167,19 @@
 /* The card's name is its own text, in the middle; its icon over it and its colors under it. A long name wraps. */
 .b-theme-card {
     width: 96px;
-    height: 92px;
+    height: 100px;
     margin: 0;
-    padding: 34px 4px 20px 4px;
+    padding: 38px 4px 20px 4px;
     font-size: 13px;
     -unity-text-align: middle-center;
     white-space: normal;
+}
+
+/* Not the card's material (a theme can give buttons one): the icon and the colors are shown as they are. */
+.b-theme-card__icon,
+.b-theme-card__swatch,
+.b-theme-card__dot {
+    -unity-material: none;
 }
 
 .b-theme-card__icon {

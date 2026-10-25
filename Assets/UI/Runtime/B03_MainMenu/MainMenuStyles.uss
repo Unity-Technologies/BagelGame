@@ -1,5 +1,5 @@
 /* The shop's blackboard, the whole west wall: the main menu on its left and, on its right, today's bagels or
-   Settings. The panel lies across the board at 0.034 a pixel (1424 x 476 pixels for its 48.4 x 16.2 meters), so
+   Settings. The panel lies across the board at 0.034 a pixel (1424 x 465 pixels for its 48.4 x 15.8 meters), so
    Settings, at the sizes it has over the paused game, are about as big on the screen there as here. Everything is
    chalk: straight strokes, no boxes that glow. A word pointed at, or with the focus, gets a straight line drawn
    under it from its start, and taken back when the pointer leaves. What the board shows on its right changes with
@@ -10,11 +10,18 @@
     align-items: center;
 }
 
+/* The board's own surface (none where the board in the scene shows through) is the whole board's, not a pane's. */
 #main-menu-screen {
     flex-grow: 0;
     width: 1424px;
-    height: 476px;
+    height: 465px;
+    background-color: var(--b-surface-color);
     --b-chalk-line: 4px;
+}
+
+#main-menu-pane,
+#settings-pane {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 /* The chalk's grain on what's written (a custom filter; none in themes without chalk). */
@@ -260,7 +267,7 @@
 #secondary-panes {
     flex-shrink: 0;
     width: 776px;
-    height: 476px;
+    height: 465px;
     margin-left: 60px;
     align-items: center;
     justify-content: center;
@@ -367,7 +374,6 @@
     margin: 0;
     padding: 0;
     width: auto;
-    background-color: rgba(0, 0, 0, 0);
     --b-text-size: 16px;
 }
 
