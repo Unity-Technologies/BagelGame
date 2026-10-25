@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6995766025029058090}
   - component: {fileID: 6384122179683173329}
   - component: {fileID: 922986415325859804}
-  - component: {fileID: 2845301519092701248}
   m_Layer: 0
   m_Name: Scenery
   m_TagString: Untagged
