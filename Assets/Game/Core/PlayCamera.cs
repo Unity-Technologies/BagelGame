@@ -16,6 +16,7 @@ namespace Bagel
         [SerializeField] CinemachineCamera m_MainMenuSecondaryCamera;
         [SerializeField] CinemachineCamera m_BagelSelectionCamera;
         [SerializeField] CinemachineCamera m_PlayCamera;
+        [Tooltip("Looks past the toaster at the television: at game over, and for the main menu's leaderboard.")]
         [SerializeField] CinemachineCamera m_GameOverCamera;
 
         PlayManagerState m_State;
@@ -52,6 +53,8 @@ namespace Bagel
         {
             if (args.propertyName.Equals(SettingsData.fieldOfViewPath))
                 UpdateFieldOfView(m_State.settings.fieldOfView);
+            else if (args.propertyName.Equals(PlayManagerState.mainMenuPanePath))
+                UpdateCamera();
         }
 
         void UpdateFieldOfView(float newFOV)
@@ -63,11 +66,13 @@ namespace Bagel
 
         void UpdateCamera()
         {
-            m_MainMenuCamera.enabled = m_State.currentState == PlayManagerState.State.MainMenu && m_State.currentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Primary;
-            m_MainMenuSecondaryCamera.enabled = m_State.currentState == PlayManagerState.State.MainMenu && m_State.currentMainMenuPaneMode == PlayManagerState.MainMenuPaneMode.Secondary;
+            var mainMenu = m_State.currentState == PlayManagerState.State.MainMenu;
+            m_MainMenuCamera.enabled = mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Main;
+            m_MainMenuSecondaryCamera.enabled = mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Settings;
             m_BagelSelectionCamera.enabled = m_State.currentState == PlayManagerState.State.BagelSelection;
             m_PlayCamera.enabled = m_State.currentState == PlayManagerState.State.Playing;
-            m_GameOverCamera.enabled = m_State.currentState == PlayManagerState.State.GameOver;
+            m_GameOverCamera.enabled = m_State.currentState == PlayManagerState.State.GameOver ||
+                (mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Leaderboard);
         }
     }
 }

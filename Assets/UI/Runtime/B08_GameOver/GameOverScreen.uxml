@@ -2,8 +2,14 @@
     <ui:Template name="GameOverPane" src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverPane.uxml?fileID=9197481963319205126&amp;guid=b6e2fed8b425da943868813467f54513&amp;type=3#GameOverPane"/>
     <ui:Template name="LeaderboardPane" src="project://database/Assets/UI/Runtime/B09_Leaderboard/LeaderboardPane.uxml?fileID=9197481963319205126&amp;guid=0d1c6591da2016444b4b1be3f56d668a&amp;type=3#LeaderboardPane"/>
     <Style src="project://database/Assets/UI/Runtime/B08_GameOver/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=c43ec4f477b5206419e80814c13a81c4&amp;type=3#GameOverStyles"/>
-    <Bagel.GameOverScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" class="b-pane b-game-over">
-        <ui:Instance template="GameOverPane" name="game-over-section" class="b-pane-half b-paper b-menu-page"/>
-        <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-pane-half b-paper b-menu-page"/>
+    <Bagel.GameOverScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="tv-screen" class="b-pane b-game-over">
+        <ui:VisualElement name="tv-bug" picking-mode="Ignore" class="b-tv__bug">
+            <Bagel.ChalkDoodle kind="Bagel" seed="3" class="b-tv__bug-icon"/>
+            <ui:Label text="Bagel Game" name="tv-bug-label" picking-mode="Ignore" class="b-tv__bug-label"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="tv-picture" class="b-tv__picture">
+            <ui:Instance template="GameOverPane" name="game-over-section" class="b-pane-half b-paper b-tv__card"/>
+            <ui:Instance template="LeaderboardPane" name="leaderboard" class="b-pane-half b-paper b-tv__card"/>
+        </ui:VisualElement>
     </Bagel.GameOverScreenManager>
 </ui:UXML>

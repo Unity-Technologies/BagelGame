@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 698623be95c8d42498d773effd06dad6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339789369114813
+  preBakeTriangleCollision: 0
+  preBakeConvexCollision: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339789369114813
+      type: {class: BagelMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        radius: 0.64
+        holeRadius: 0.16
+        height: 0.36
+        puffiness: 2.6
+        flatBottom: 0.6
+        lumpiness: 0.08
+        seed: 2
+        segments: 48
+        sides: 24
+        toppingSpread: 0.4
+        toppings:
+        - count: 900
+          size: {x: 0.014, y: 0.01, z: 0.012}
+          sides: 4
+          submesh: 1
+        slice: 2

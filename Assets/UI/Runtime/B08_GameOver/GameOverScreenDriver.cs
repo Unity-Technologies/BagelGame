@@ -3,47 +3,24 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // Shows the game over screen on the menu that falls onto the table when a run ends (GameOverMenu): the
-    // panel lies on the menu's pages, wherever the menu is.
+    // Shows the game over screen on the television on the bakery's far wall, all the time: the last run and the
+    // leaderboard. At game over it takes the focus for its buttons, and from the main menu's Leaderboard button
+    // for its Back button; the camera looks at it then (PlayCamera).
     [RequireComponent(typeof(PanelRenderer))]
     public class GameOverScreenDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
 
-        [Space]
-        [SerializeField] Transform m_GameOverRoot;
-        [SerializeField] GameOverMenu m_MenuPrefab;
-        [Tooltip("Where the menu lands, from the game over root: on the table, in front of the toaster.")]
-        [SerializeField] Vector3 m_MenuRest = new(0f, 0f, 21.8f);
-
         PlayManagerState m_State;
-        VisualElement m_Root;
         GameOverScreenManager m_GameOverScreenManager;
-        GameOverMenu m_Menu;
 
         int m_UIVersion;
-
-        public GameOverMenu menu => m_Menu;
-
-        void Awake()
-        {
-            if (m_MenuPrefab == null)
-                return;
-            m_Menu = Instantiate(m_MenuPrefab, m_GameOverRoot);
-            m_Menu.name = m_MenuPrefab.name;
-            m_Menu.gameObject.SetActive(false);
-        }
-
-        void OnDestroy()
-        {
-            if (m_Menu != null)
-                Destroy(m_Menu.gameObject);
-        }
 
         void OnEnable()
         {
             m_State = m_PlayManager.state;
             m_State.onStateChange += State_OnStateChange;
+            m_State.propertyChanged += State_OnPropertyChanged;
 
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
         }
@@ -51,6 +28,7 @@ namespace Bagel
         void OnDisable()
         {
             m_State.onStateChange -= State_OnStateChange;
+            m_State.propertyChanged -= State_OnPropertyChanged;
 
             GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
 
@@ -69,39 +47,38 @@ namespace Bagel
                 return; // The UXML is still importing; the next reload brings it.
             m_UIVersion = version;
 
-            m_Root = rootElement;
             m_GameOverScreenManager = gameOverScreenManager;
             m_GameOverScreenManager.SetState(m_State);
 
             // On a fresh scene load the UI arrives after the first state change, so catch up here.
-            m_Root.style.display = m_State.isGameOver ? DisplayStyle.Flex : DisplayStyle.None;
+            FocusIfInUse();
         }
 
-        // After the menu has moved this frame (falling, or swept off the table): the screen stays on its pages.
-        void LateUpdate()
+        void State_OnStateChange(object sender, PlayManagerState.State state) => FocusIfInUse();
+
+        void State_OnPropertyChanged(object sender, BindablePropertyChangedEventArgs args)
         {
-            if (m_Menu != null && m_Menu.gameObject.activeInHierarchy)
-                transform.SetPositionAndRotation(m_Menu.pages.position, m_Menu.pages.rotation);
+            if (args.propertyName == PlayManagerState.mainMenuPanePath)
+                FocusIfInUse();
         }
 
-        void State_OnStateChange(object sender, PlayManagerState.State state)
+        // World-space panels only get gamepad and keyboard navigation once something in them has focus.
+        void FocusIfInUse()
         {
-            if (state == PlayManagerState.State.GameOver && m_Menu != null)
-            {
-                m_Menu.Drop(m_GameOverRoot.TransformPoint(m_MenuRest), m_GameOverRoot.rotation);
-                LateUpdate();
-            }
-
-            if (m_Root == null)
+            if (m_GameOverScreenManager == null)
                 return;
 
-            m_Root.style.display = state == PlayManagerState.State.GameOver ? DisplayStyle.Flex : DisplayStyle.None;
+            Focusable focus = null;
+            if (m_State.isGameOver)
+                focus = m_GameOverScreenManager.gameOverPaneManager.mainMenuButton;
+            else if (m_GameOverScreenManager.isLeaderboardOpen)
+                focus = m_GameOverScreenManager.backButton;
+            if (focus == null)
+                return;
 
-            if (state == PlayManagerState.State.GameOver)
-            {
-                m_GameOverScreenManager.schedule.Execute(() => m_GameOverScreenManager.gameOverPaneManager.mainMenuButton.Focus());
-                BagelAccessibility.ShowScreen(m_GameOverScreenManager);
-            }
+            // Wait for the buttons to show: hidden elements can't take focus.
+            m_GameOverScreenManager.schedule.Execute(() => focus.Focus());
+            BagelAccessibility.ShowScreen(m_GameOverScreenManager);
         }
     }
 }

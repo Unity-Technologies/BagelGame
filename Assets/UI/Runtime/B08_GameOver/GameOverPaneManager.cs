@@ -6,14 +6,17 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // The run's receipt: the result, what the bagel kept, its time and freshness, the leaderboard form, and
-    // the result stamped across it (a UIAnimationClip slams the stamp down each time it shows).
+    // The last run's receipt: the result, what the bagel kept, its time and freshness, the leaderboard form, and
+    // the result stamped across it (a UIAnimationClip slams the stamp down each time it shows). Before the
+    // first run it only says there's been none yet.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class GameOverPaneManager : BagelPane
     {
         public static readonly UniqueStyleString stampLostUssClassName = new("b-stamp--lost");
         public static readonly UniqueStyleString stampSlamUssClassName = new("b-stamp--slam");
+        public static readonly UniqueStyleString emptyUssClassName = new("b-receipt--empty");
 
+        VisualElement m_Receipt;
         Label m_Title;
         Label m_TimeLabel;
         Label m_FreshnessLabel;
@@ -26,6 +29,7 @@ namespace Bagel
         Button m_RestartButton;
         Button m_MainMenuButton;
 
+        public VisualElement receipt => m_Receipt ??= this.Q<VisualElement>("receipt");
         public Label title => m_Title ??= this.Q<Label>("page-title");
         public Label summary => m_Summary ??= this.Q<Label>("summary-label");
         public Label timeLabel => m_TimeLabel ??= this.Q<Label>("time-label");
@@ -58,6 +62,7 @@ namespace Bagel
         // "You Win!" or "You Lose!", and a Smart String summary: "Your Sesame bagel kept 123 toppings!"
         readonly LocalizedString m_TitleString = BagelLocalization.String("gameover.win");
         readonly LocalizedString m_SummaryString = BagelLocalization.String("gameover.summary");
+        readonly LocalizedString m_NoRunString = BagelLocalization.String("tv.no-run");
         readonly LocalizedString m_BagelName = BagelLocalization.String("bagel.sesame");
         readonly IntVariable m_Toppings = new IntVariable();
         // The count as the language writes it: Arabic picks its plural with {toppings} and shows {count}.
@@ -76,9 +81,9 @@ namespace Bagel
             m_SummaryString.LocalVariables.Add(m_Toppings, "toppings");
             m_SummaryString.LocalVariables.Add(m_Count, "count");
 
-            // The page title comes from the Page template, so its binding is added here.
+            // The page title comes from the Page template, so its binding is added here. The summary's comes with
+            // the result: it's the run's, or the receipt saying there's been none.
             title?.SetBinding("text", m_TitleString);
-            summary?.SetBinding("text", m_SummaryString);
             stamp?.SetBinding("text", m_StampString);
 
             BindUI(new Callbacks
@@ -87,6 +92,7 @@ namespace Bagel
                 onRestart = () => state?.GoToPlay(),
                 onMainMenu = () => state?.GoToMainMenu()
             });
+            UpdateResult();
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState) => UpdateResult();
@@ -105,7 +111,10 @@ namespace Bagel
                 return;
 
             var lastRun = state.lastRun;
-            m_TitleString.SetReference(BagelLocalization.table, lastRun.titleKey);
+            receipt?.EnableInClassList(emptyUssClassName, !lastRun.hasRun);
+            if (m_Bound)
+                summary?.SetBinding("text", lastRun.hasRun ? m_SummaryString : m_NoRunString);
+            m_TitleString.SetReference(BagelLocalization.table, lastRun.hasRun ? lastRun.titleKey : "tv.last-run");
             if (!string.IsNullOrEmpty(lastRun.bagelNameKey))
                 m_BagelName.SetReference(BagelLocalization.table, lastRun.bagelNameKey);
             m_Toppings.Value = lastRun.toppings;
@@ -139,7 +148,7 @@ namespace Bagel
         // A one-shot clip plays when its class is added: take it off, and put it back a frame later.
         void SlamStamp()
         {
-            if (stamp == null || state == null || !state.isGameOver)
+            if (stamp == null || state == null || !state.isGameOver || !state.lastRun.hasRun)
                 return;
 
             stamp.RemoveFromClassList(stampSlamUssClassName);

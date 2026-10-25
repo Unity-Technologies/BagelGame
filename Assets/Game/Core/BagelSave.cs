@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Bagel
 {
-    // Remembers the settings and the leaderboard on the device, as JSON in PlayerPrefs. In the
+    // Remembers the settings, the leaderboard and the last run on the device, as JSON in PlayerPrefs. In the
     // Editor every Play session starts from the start state, so what you test is reproducible.
     [NoAutoStaticsCleanup] // ResetStatics starts every Play session clean
     public static class BagelSave

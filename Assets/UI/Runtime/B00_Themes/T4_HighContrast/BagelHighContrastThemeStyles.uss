@@ -53,6 +53,10 @@
     --b-gauge-good: rgb(255, 255, 255);
     --b-gauge-warn: rgb(255, 214, 0);
 
+    --b-tv-screen-top: rgb(0, 0, 0);
+    --b-tv-screen-bottom: rgb(0, 0, 0);
+    --b-tv-bug-color: rgb(255, 255, 255);
+
     --b-accent-a: rgb(255, 255, 255);
     --b-accent-b: rgb(255, 255, 255);
     --b-accent-c: rgb(255, 214, 0);

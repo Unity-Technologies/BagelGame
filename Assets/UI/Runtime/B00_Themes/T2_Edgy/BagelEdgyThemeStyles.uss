@@ -48,6 +48,10 @@
     --b-gauge-line: rgb(150, 245, 255);
     --b-gauge-accent: rgb(255, 92, 196);
 
+    --b-tv-screen-top: rgb(26, 12, 60);
+    --b-tv-screen-bottom: rgb(6, 4, 22);
+    --b-tv-bug-color: rgb(80, 230, 255);
+
     --b-accent-a: rgb(80, 230, 255);
     --b-accent-b: rgb(62, 78, 237);
     --b-accent-c: rgb(160, 80, 255);

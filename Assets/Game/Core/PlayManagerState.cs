@@ -255,6 +255,7 @@ namespace Bagel
             public bool sound = true;
             public float soundVolume = 0.8f;
             public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
+            public RunResult lastRun = new();
         }
 
         public Saved ToSaved()
@@ -269,6 +270,7 @@ namespace Bagel
                 soundVolume = m_Settings.soundVolume
             };
             saved.leaderboard.AddRange(m_Leaderboard.entries);
+            saved.lastRun = m_LastRun;
             return saved;
         }
 
@@ -284,6 +286,7 @@ namespace Bagel
             m_Settings.sound = saved.sound;
             m_Settings.soundVolume = saved.soundVolume;
             m_Leaderboard.Load(saved.leaderboard);
+            m_LastRun.Load(saved.lastRun);
         }
 
         // Clone a template (the start state, or a preview state) into a throwaway runtime instance.

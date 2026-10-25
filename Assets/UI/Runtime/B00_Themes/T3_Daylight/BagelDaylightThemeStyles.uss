@@ -37,6 +37,10 @@
     --b-glass-glow: rgb(255, 214, 120);
     --b-glass-popup: rgb(255, 248, 234);
 
+    --b-tv-screen-top: rgb(132, 200, 232);
+    --b-tv-screen-bottom: rgb(78, 150, 204);
+    --b-tv-bug-color: rgb(255, 255, 255);
+
     --b-accent-a: rgb(255, 196, 40);
     --b-accent-b: rgb(255, 138, 101);
     --b-accent-c: rgb(222, 72, 44);

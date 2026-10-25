@@ -30,8 +30,8 @@ namespace Bagel.B00_Layout
         public static readonly string[] screens =
         {
             "Main Menu", "Main Menu: Settings: Game", "Main Menu: Settings: UI", "Main Menu: Settings: Controls",
-            "Main Menu: Leaderboard", "Bagel Selection", "Bagel Card", "Tracker", "Pause", "Pause: Settings: UI",
-            "Game Over"
+            "Bagel Selection", "Bagel Card", "Tracker", "Pause", "Pause: Settings: UI",
+            "Television", "Television: Leaderboard", "Television: Game Over"
         };
 
         VisualElement Show(string screenName, ThemeStyleSheet theme)
@@ -53,10 +53,11 @@ namespace Bagel.B00_Layout
             rootVisualElement.Add(screen);
             var state = screen.Q<BagelPane>()?.state;
 
-            // Put each screen in the state it's audited in: a settings tab, a pause pane, a won game.
+            // Put each screen in the state it's audited in: a settings tab, a pause pane, the leaderboard opened from
+            // the main menu, a won game.
             if (screenName.StartsWith("Main Menu: Settings"))
                 state.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
-            else if (screenName == "Main Menu: Leaderboard")
+            else if (screenName == "Television: Leaderboard")
                 state.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
             else if (screenName.StartsWith("Pause"))
             {
@@ -65,7 +66,7 @@ namespace Bagel.B00_Layout
                 if (screenName.Contains("Settings"))
                     state.pausePane = PlayManagerState.PausePane.Settings;
             }
-            else if (screenName == "Game Over")
+            else if (screenName == "Television: Game Over")
             {
                 state.GoToPlay();
                 state.tracker.toppingsCount = 345;

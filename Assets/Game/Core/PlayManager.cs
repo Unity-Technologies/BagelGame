@@ -70,7 +70,8 @@ namespace Bagel
         {
             var path = args.propertyName.ToString();
             if (path.StartsWith(nameof(PlayManagerState.settings), StringComparison.Ordinal) ||
-                path.StartsWith(nameof(PlayManagerState.leaderboard), StringComparison.Ordinal))
+                path.StartsWith(nameof(PlayManagerState.leaderboard), StringComparison.Ordinal) ||
+                path.StartsWith(nameof(PlayManagerState.lastRun), StringComparison.Ordinal))
                 m_SaveTime = Time.unscaledTime + m_SaveDelay;
         }
     }

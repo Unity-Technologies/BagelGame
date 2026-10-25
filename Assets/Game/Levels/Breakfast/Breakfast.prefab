@@ -190,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &1408884445015372551
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &2296431266351257682
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &2301311954532362476
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &2855078638604526886
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &3634626081911161230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,7 +1082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &4107135490822683571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &4673404294829724493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &4878727708870697141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &5480838016095680525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &6909330968985210911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,7 +2392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &7539335404634641496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2915,7 +2904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc2a60a792c254eb724132f140f511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableItem
-  m_ComesBack: 1
 --- !u!1 &8890131573782410056
 GameObject:
   m_ObjectHideFlags: 0

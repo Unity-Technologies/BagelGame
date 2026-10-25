@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6026745101591912503}
   - component: {fileID: 3518337162412089411}
   - component: {fileID: 8846132216021740132}
+  - component: {fileID: 5115888786294807162}
   m_Layer: 0
   m_Name: Toaster
   m_TagString: Untagged
@@ -92,3 +93,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5115888786294807162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6406542069959391885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ad6d463baae06429dd509181fa2f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BagelGame::Bagel.Toaster
+  m_SlotTop: 1.81
+  m_SlotSpacing: 0.75
+  m_SlotDepth: 1
+  m_CrumbMaterial: {fileID: 2100000, guid: e67f3a06ae6378d4683ea627496180b1, type: 2}
+  m_Delay: 0.5
+  m_FlyTime: 0.7
+  m_SliceHeight: 2.4
+  m_SliceTime: 0.7
+  m_DropTime: 0.3

@@ -84,6 +84,8 @@ MonoBehaviour:
   - rid: 6326339763072663696
   - rid: 6326339763072663754
   - rid: 6326339763072663755
+  - rid: 6326339789369114850
+  - rid: 6326339789369114851
   references:
     version: 2
     RefIds:
@@ -556,3 +558,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Fait maison
+    - rid: 6326339789369114850
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 497626984022016
+        m_Metadata:
+          m_Items: []
+        m_Value: "Derni\xE8re partie"
+    - rid: 6326339789369114851
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 497626996604928
+        m_Metadata:
+          m_Items: []
+        m_Value: "Aucun bagel grill\xE9 pour l'instant. \xC0 vous de jouer !"

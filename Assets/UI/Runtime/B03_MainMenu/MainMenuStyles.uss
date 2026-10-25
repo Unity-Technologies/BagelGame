@@ -1,5 +1,5 @@
-/* The main menu, Settings and the Leaderboard: chalk on the shop's blackboard. The main pane is on the
-   left and the one it opens on the right; the camera moves over to it, and the other one smudges. */
+/* The main menu and Settings: chalk on the shop's blackboard. The main pane is on the left and Settings on
+   the right; the camera moves over to it, and the other one smudges. The leaderboard is on the television. */
 
 .b-screen {
     flex-direction: row;
@@ -97,10 +97,6 @@
     left: 10px;
     top: 6px;
     color: var(--b-accent-a);
-}
-
-.b-background-pane {
-    position: absolute;
 }
 
 .b-details-view {

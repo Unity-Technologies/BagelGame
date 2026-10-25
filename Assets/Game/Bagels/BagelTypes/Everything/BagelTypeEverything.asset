@@ -26,6 +26,8 @@ MonoBehaviour:
   staticFriction: 0.6
   bounciness: 0
   modelPrefab: {fileID: 2633031486731055519, guid: dd149aba705072e4abacf11a515d630e, type: 3}
+  topHalfMesh: {fileID: -8670151273213183110, guid: b0e6fafd29d61e24fb8a954dfbb6f2f8, type: 3}
+  bottomHalfMesh: {fileID: -8670151273213183110, guid: 3376e0609f0122346919e109d399d738, type: 3}
   toppingsPercentile: 0.2
   toppingLossPercentile: 0
   controlPercentile: 0.9583333

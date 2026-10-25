@@ -21,17 +21,16 @@ namespace Bagel.B03_MainMenu
             rootVisualElement.Clear();
         }
 
-        [TestCase(PlayManagerState.MainMenuPane.Settings)]
-        [TestCase(PlayManagerState.MainMenuPane.Leaderboard)]
-        public void CancelGoesBackToTheMainPane(PlayManagerState.MainMenuPane pane)
+        [Test]
+        public void CancelGoesBackToTheMainPane()
         {
             m_BagelTestAssetList.mainMenuScreenUxml.CloneTree(rootVisualElement);
             var screen = rootVisualElement.Q<MainMenuScreenManager>();
-            screen.state.SetMainMenuPane(pane);
+            screen.state.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
             simulate.FrameUpdate();
             Assert.IsFalse(screen.mainMenuPane.enabledSelf);
 
-            var backButton = pane == PlayManagerState.MainMenuPane.Settings ? screen.settingsBackButton : screen.leaderboardBackButton;
+            var backButton = screen.settingsBackButton;
             using (var evt = NavigationCancelEvent.GetPooled())
             {
                 evt.target = backButton;

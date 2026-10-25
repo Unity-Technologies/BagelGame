@@ -83,10 +83,11 @@ namespace Bagel
             if (m_MainMenuScreenManager == null)
                 return;
 
-            // Wait for the pane to be shown: disabled elements can't take focus.
+            // Wait for the pane to be shown: disabled elements can't take focus. The leaderboard is on the
+            // television, which takes the focus itself.
             m_MainMenuScreenManager.schedule.Execute(() =>
             {
-                if (!m_State.isMainMenu)
+                if (!m_State.isMainMenu || m_State.mainMenuPane == PlayManagerState.MainMenuPane.Leaderboard)
                     return;
 
                 BagelAccessibility.ShowScreen(m_MainMenuScreenManager);
@@ -99,9 +100,6 @@ namespace Bagel
                         break;
                     case PlayManagerState.MainMenuPane.Settings:
                         m_MainMenuScreenManager.settingsBackButton?.Focus();
-                        break;
-                    case PlayManagerState.MainMenuPane.Leaderboard:
-                        m_MainMenuScreenManager.leaderboardBackButton?.Focus();
                         break;
                 }
             });

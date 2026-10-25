@@ -143,13 +143,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15063647}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5372996, y: 0, z: 0, w: 0.8433914}
-  m_LocalPosition: {x: 0, y: 2.43, z: 18.97}
+  m_LocalRotation: {x: -0.0373961, y: -0.0525737, z: -0.0019702, w: 0.9979147}
+  m_LocalPosition: {x: 2.9898, y: 3.7, z: 21.4889}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.292, y: -6.032, z: 0}
 --- !u!1 &24349490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,13 +1710,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817671258}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.52336836, y: -0, z: -0, w: 0.8521066}
-  m_LocalPosition: {x: 0, y: 12.516219, z: -0.26194197}
+  m_LocalRotation: {x: -0.0373961, y: -0.0525737, z: -0.0019702, w: 0.9979147}
+  m_LocalPosition: {x: 3.2, y: 3.7, z: 19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.292, y: -6.032, z: 0}
 --- !u!114 &817671260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,7 +1785,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 5}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 5.2
+  Radius: 2
   Orbits:
     Top:
       Radius: 2
@@ -1809,7 +1809,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.9
+    Value: 0
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -1852,7 +1852,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 52
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -4310,13 +4310,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030507056}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.144, z: 21.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.55, y: 9.3, z: 46.05}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 625167483}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2030507059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,9 +4330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverScreenDriver
   m_PlayManager: {fileID: 2115846877}
-  m_GameOverRoot: {fileID: 625167483}
-  m_MenuPrefab: {fileID: 8055877851443297898, guid: 8eccf9dfded242348b781d541ae0c57b, type: 3}
-  m_MenuRest: {x: 0, y: 0, z: 21.8}
 --- !u!1931382934 &2030507060
 PanelRenderer:
   m_ObjectHideFlags: 0
@@ -4382,7 +4379,7 @@ PanelRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   serializedVersion: 1
-  m_PanelSettings: {fileID: 11400000, guid: cb7e0a2de97b685469bc02164bf9b00c, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: 81054df9cd312704ea65b49e0d68ca4b, type: 2}
   sourceAsset: {fileID: 9197481963319205126, guid: ad9bc3abb338ba549aef117711e184da, type: 3}
   m_ParentUI: {fileID: 0}
   m_WorldSpaceSizeMode: 0

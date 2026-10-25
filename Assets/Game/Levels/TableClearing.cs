@@ -1,11 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bagel
 {
-    // Clears the table for a new game after a game over: everything on it (TableItem) is swept off towards
-    // the blackboard's wall, then what belongs on it comes back up out of the table, as good as new. The menu
-    // that fell on it at game over goes with the rest, and stays gone.
+    // Sets the table again for a new game: whatever the last run pushed out of place (TableItem), and whatever's
+    // loose with it, is swept off towards the blackboard's wall, then comes back up out of the table where it
+    // belongs, as good as new. What stayed put stays put.
     public class TableClearing : MonoBehaviour
     {
         [Tooltip("Which way things fly off: towards the wall with the blackboard.")]
@@ -39,18 +40,29 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            if (state == PlayManagerState.State.Playing && TableItem.disturbed && m_Clearing == null)
-                m_Clearing = StartCoroutine(Clear());
+            if (state != PlayManagerState.State.Playing || m_Clearing != null)
+                return;
+
+            // What's out of place goes, and so does whatever's loose: sweeping one sugar cube knocks the others.
+            var anyOutOfPlace = false;
+            foreach (var item in TableItem.items)
+                anyOutOfPlace |= item.outOfPlace;
+            if (!anyOutOfPlace)
+                return;
+
+            var items = new List<TableItem>();
+            foreach (var item in TableItem.items)
+            {
+                if (item.outOfPlace || item.loose)
+                    items.Add(item);
+            }
+            m_Clearing = StartCoroutine(Clear(items));
         }
 
-        IEnumerator Clear()
+        IEnumerator Clear(List<TableItem> items)
         {
             var away = m_Away.normalized;
-            var items = new TableItem[TableItem.items.Count];
-            for (int i = 0; i < items.Length; i++)
-                items[i] = TableItem.items[i];
-
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 // A little different for each, the same every time.
                 var wobble = Mathf.Sin(i * 12.9898f) * 0.5f + 0.5f;
@@ -64,12 +76,8 @@ namespace Bagel
 
             foreach (var item in items)
             {
-                if (item == null)
-                    continue;
-                if (item.comesBack)
+                if (item != null)
                     item.Restock(m_RiseDepth, m_RiseTime);
-                else
-                    item.gameObject.SetActive(false);
             }
             TableItem.MarkSet();
             yield return new WaitForSeconds(m_RiseTime);

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d23e36a7aa1e8f94483553f001f6e5e4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339789369114840
+  preBakeTriangleCollision: 0
+  preBakeConvexCollision: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339789369114840
+      type: {class: BoxMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        size: {x: 19.2, y: 10.8, z: 0.04}

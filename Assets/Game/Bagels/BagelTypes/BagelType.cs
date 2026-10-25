@@ -28,6 +28,9 @@ namespace Bagel
 
         [Space]
         public Transform modelPrefab;
+        [Tooltip("The bagel sliced in two, as it goes in the toaster at game over: the top half has the model's materials and then the crumb, the bottom half the crust and then the crumb.")]
+        public Mesh topHalfMesh;
+        public Mesh bottomHalfMesh;
 
         // Cummulative Stats
         public float toppings => maxToppingCount;

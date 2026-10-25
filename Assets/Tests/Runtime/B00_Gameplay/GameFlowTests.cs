@@ -46,15 +46,18 @@ namespace Bagel.B00_Gameplay
                 yield return null;
         }
 
+        // The television on the far wall shows the last run all the time: before the first one, that there's none.
         [UnityTest]
-        public IEnumerator AFreshGameShowsOnlyTheMainMenu()
+        public IEnumerator AFreshGameShowsTheMainMenuAndAnEmptyReceipt()
         {
             yield return null;
             Assert.IsTrue(state.isMainMenu);
 
             SetPanelRenderer(Renderer<GameOverScreenDriver>());
             yield return null;
-            Assert.AreEqual(DisplayStyle.None, rootVisualElement.resolvedStyle.display);
+            Assert.AreEqual(DisplayStyle.Flex, rootVisualElement.resolvedStyle.display);
+            Assert.AreEqual("Last Run", rootVisualElement.Q<Label>("page-title").text);
+            Assert.AreEqual(DisplayStyle.None, rootVisualElement.Q("bottom-container").resolvedStyle.display);
 
             SetPanelRenderer(Renderer<PauseScreenDriver>());
             yield return null;
@@ -111,8 +114,9 @@ namespace Bagel.B00_Gameplay
             Assert.AreEqual("Steam", steam.resolvedStyle.unityMaterial.material.name);
         }
 
+        // The main menu's Leaderboard button sends the camera to the television, whose Back sends it back.
         [UnityTest]
-        public IEnumerator TheLeaderboardOpensFromTheMainMenu()
+        public IEnumerator TheLeaderboardOpensOnTheTelevision()
         {
             SetPanelRenderer(Renderer<MainMenuScreenDriver>());
             yield return WaitForTheCamera();
@@ -121,8 +125,11 @@ namespace Bagel.B00_Gameplay
             yield return null;
             Assert.AreEqual(PlayManagerState.MainMenuPane.Leaderboard, state.mainMenuPane);
 
+            SetPanelRenderer(Renderer<GameOverScreenDriver>());
             yield return WaitForTheCamera();
-            simulate.Click(rootVisualElement.Q("leaderboard-pane").Q<Button>("back-button"));
+            var back = rootVisualElement.Q("leaderboard").Q<Button>("back-button");
+            Assert.AreEqual(DisplayStyle.Flex, back.resolvedStyle.display);
+            simulate.Click(back);
             yield return null;
             Assert.AreEqual(PlayManagerState.MainMenuPane.Main, state.mainMenuPane);
         }

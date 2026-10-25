@@ -6,9 +6,18 @@ namespace Bagel
 {
     // A bagel lying flat with its base on the origin: a lumpy, puffy ring of dough with a flatter
     // bottom, sprinkled with toppings. Submesh 0 is the dough; each topping picks its own submesh.
+    // Sliced, it's one half of the bagel cut through the middle, its cut face the last submesh: the top
+    // half keeps the toppings and lies on its cut face, the bottom half has none and lies on its base.
     [Serializable]
     public class BagelMeshGenerator : ProceduralMeshGenerator
     {
+        public enum Slice
+        {
+            Whole,
+            TopHalf,
+            BottomHalf
+        }
+
         [Serializable]
         public struct Topping
         {
@@ -40,14 +49,27 @@ namespace Bagel
         [Range(0f, 1f)] public float toppingSpread = 0.4f;
         public List<Topping> toppings = new();
 
+        [Header("Sliced")]
+        public Slice slice = Slice.Whole;
+
         const float k_Epsilon = 0.0005f;
 
         public override void Build(MeshBuilder builder)
         {
+            // The middle of the tube's height is where the knife goes: around the tube, the top half is
+            // from facing out (0) over the top to facing in (pi), the bottom half the rest of the way.
+            int rows = slice == Slice.Whole ? sides : Mathf.Max(1, sides / 2);
+            float firstPhi = slice == Slice.BottomHalf ? Mathf.PI : 0f;
+            float phiRange = slice == Slice.Whole ? 2f * Mathf.PI : Mathf.PI;
+
+            var placed = builder.transform;
+            if (slice == Slice.TopHalf)
+                builder.transform = placed * Matrix4x4.Translate(Vector3.down * (height * 0.5f));
+
             int first = builder.vertexCount;
-            for (int row = 0; row <= sides; ++row)
+            for (int row = 0; row <= rows; ++row)
             {
-                float phi = 2f * Mathf.PI * row / sides;
+                float phi = firstPhi + phiRange * row / rows;
                 for (int column = 0; column <= segments; ++column)
                 {
                     float theta = 2f * Mathf.PI * column / segments;
@@ -56,10 +78,58 @@ namespace Bagel
             }
 
             // Around the ring goes right and around the tube goes up, as seen from outside.
-            builder.AddGrid(first, segments, sides);
+            builder.AddGrid(first, segments, rows);
 
-            for (int i = 0; i < toppings.Count; ++i)
-                AddTopping(builder, toppings[i], i);
+            int lastSubmesh = 0;
+            if (slice != Slice.BottomHalf)
+            {
+                for (int i = 0; i < toppings.Count; ++i)
+                {
+                    AddTopping(builder, toppings[i], i);
+                    lastSubmesh = Mathf.Max(lastSubmesh, toppings[i].submesh);
+                }
+            }
+
+            if (slice != Slice.Whole)
+            {
+                builder.submesh = lastSubmesh + 1;
+                AddCutFace(builder, slice == Slice.TopHalf);
+                builder.submesh = 0;
+            }
+            builder.transform = placed;
+        }
+
+        // The flat ring where the knife went through, from the tube's outer edge (phi 0) to its inner edge (pi),
+        // following the lumps: the top half's faces down, the bottom half's up.
+        void AddCutFace(MeshBuilder builder, bool facesDown)
+        {
+            var normal = facesDown ? Vector3.down : Vector3.up;
+            int first = builder.vertexCount;
+            for (int edge = 0; edge <= 1; ++edge)
+            {
+                for (int column = 0; column <= segments; ++column)
+                {
+                    float theta = 2f * Mathf.PI * column / segments;
+                    var position = Surface(theta, edge == 0 ? Mathf.PI : 0f);
+                    builder.AddVertex(position, normal, new Vector2(position.x / radius * 0.5f + 0.5f, position.z / radius * 0.5f + 0.5f));
+                }
+            }
+
+            // The rows go out from the hole and the columns around it, counter-clockwise seen from above: a
+            // grid the right way round from below, turned over for a face seen from above.
+            if (facesDown)
+            {
+                builder.AddGrid(first, segments, 1);
+            }
+            else
+            {
+                int stride = segments + 1;
+                for (int column = 0; column < segments; ++column)
+                {
+                    int i = first + column;
+                    builder.AddQuad(i, i + 1, i + stride + 1, i + stride);
+                }
+            }
         }
 
         // theta goes around the hole, phi around the tube: 0 faces out, pi / 2 faces up.

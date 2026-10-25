@@ -1,13 +1,56 @@
-/* Game over: a restaurant's menu fallen open on the table by the toaster (GameOverMenu). Its left page
-   is the bill, the result stamped on it; its right page the leaderboard. The panel lies on the menu's
-   pages, as big as they are. */
+/* The television on the bakery's far wall: it always shows the last run's receipt on the left and the
+   leaderboard on the right, big enough to read across the room. At game over the receipt has the
+   leaderboard's form and its buttons (.b-tv--game-over); opened from the main menu, the leaderboard has
+   its Back button (.b-tv--leaderboard). The panel lies on the screen's glass, as big as it is (16:9). */
 
 .b-game-over {
-    width: 790px;
-    height: 550px;
+    width: 960px;
+    height: 540px;
+    flex-direction: column;
+    margin: 0;
+    padding: 10px 22px 22px 22px;
+    border-radius: 0;
+    background-color: var(--b-tv-screen-bottom);
+    background-image: linear-gradient(180deg, var(--b-tv-screen-top) 0%, var(--b-tv-screen-bottom) 100%);
+    --b-text-size: 18px;
+}
+
+/* The channel's bug in the corner, as on any broadcast. */
+.b-tv__bug {
     flex-direction: row;
-    background-color: rgba(0, 0, 0, 0);
-    padding: 0;
+    align-items: center;
+    height: 26px;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+    opacity: 0.8;
+}
+
+.b-tv__bug-icon {
+    width: 36px;
+    height: 26px;
+    color: var(--b-tv-bug-color);
+    --b-doodle-width: 2.5;
+}
+
+.b-tv__bug-label {
+    color: var(--b-tv-bug-color);
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 0 0 0 8px;
+    margin: 0;
+}
+
+.b-rtl .b-tv__bug {
+    flex-direction: row-reverse;
+}
+
+.b-tv__picture {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.b-rtl .b-tv__picture {
+    flex-direction: row-reverse;
 }
 
 .b-pane-half {
@@ -15,14 +58,27 @@
     flex-basis: 0;
 }
 
-/* A page of the menu: paper, ruled in red ink all round like an old menu's border. */
-.b-menu-page {
-    margin: 5px;
-    padding: 6px 12px;
+/* A card on the screen: paper, edged in the accent's ink. */
+.b-tv__card {
+    margin: 0 9px;
+    padding: 8px 16px;
     background-color: var(--b-paper-surface);
-    border-width: 2px;
+    border-width: 3px;
     border-color: var(--b-paper-accent);
-    border-radius: 3px;
+    border-radius: 10px;
+}
+
+/* Only at game over: the leaderboard's form and the buttons. Only from the main menu: the leaderboard's Back. */
+.b-game-over #leaderboard-form,
+.b-game-over #bottom-container,
+#leaderboard #back-button {
+    display: none;
+}
+
+.b-tv--game-over #leaderboard-form,
+.b-tv--game-over #bottom-container,
+.b-tv--leaderboard #leaderboard #back-button {
+    display: flex;
 }
 
 /* ------------------------------------------------------------------ The receipt */
@@ -38,7 +94,7 @@
 
 .b-receipt__shop {
     -unity-text-align: middle-center;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 2px;
     opacity: 0.75;
     padding: 0;
@@ -46,7 +102,7 @@
 }
 
 .b-receipt .b-title {
-    font-size: 26px;
+    font-size: 30px;
 }
 
 /* On paper the title's underline is a ruled line, not chalk. */
@@ -74,7 +130,7 @@
 
 .b-receipt__item,
 .b-receipt__price {
-    font-size: 13px;
+    font-size: 16px;
     padding: 0;
     margin: 0;
 }
@@ -84,14 +140,32 @@
     -unity-font-style: bold;
 }
 
+/* The name and its button side by side, to leave the receipt room for the rest. */
 .b-receipt__form {
-    padding: 2px 6px 6px 6px;
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: 8px;
+    padding: 2px 8px 8px 8px;
+}
+
+.b-receipt__form > .unity-text-field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.b-receipt__form > .unity-button {
+    flex-shrink: 0;
+}
+
+.b-rtl .b-receipt__form {
+    flex-direction: row-reverse;
 }
 
 .b-receipt__buttons {
     flex-direction: row;
-    column-gap: 6px;
-    margin-top: 2px;
+    column-gap: 8px;
+    margin-top: 4px;
 }
 
 .b-receipt__buttons > .unity-button {
@@ -123,7 +197,7 @@
 
 .b-receipt__thanks {
     -unity-text-align: middle-center;
-    font-size: 11px;
+    font-size: 14px;
     opacity: 0.7;
     margin: 4px 0 0 0;
     padding: 0;
@@ -132,8 +206,19 @@
 .b-summary {
     white-space: normal;
     -unity-text-align: middle-center;
-    font-size: 13px;
+    font-size: 16px;
     margin: 0;
+}
+
+/* No run yet: the receipt only says so. */
+.b-receipt--empty #stamp,
+.b-receipt--empty #receipt-lines {
+    display: none;
+}
+
+.b-receipt--empty .b-summary {
+    margin: 40px 0;
+    font-size: 22px;
 }
 
 /* The result, stamped in red ink across the receipt. */
@@ -141,8 +226,8 @@
     align-self: center;
     rotate: -8deg;
     margin: 2px 0 4px 0;
-    padding: 0 10px;
-    font-size: 22px;
+    padding: 0 12px;
+    font-size: 26px;
     -unity-font-style: bold;
     color: var(--b-paper-accent);
     border-width: 3px;
@@ -162,8 +247,13 @@
     -unity-animation-clip: url("/Assets/UI/Runtime/B08_GameOver/GameOverStampAnimation.asset");
 }
 
-/* ------------------------------------------------------------------ The leaderboard's page */
+/* ------------------------------------------------------------------ The leaderboard */
 
-#leaderboard > #leaderboard-manager > #leaderboard-page > #back-button {
-    display: none;
+.b-game-over .unity-multi-column-header__column__title {
+    font-size: 17px;
+}
+
+.b-game-over .unity-multi-column-view__row-container .unity-label {
+    font-size: 19px;
+    padding: 2px 4px;
 }

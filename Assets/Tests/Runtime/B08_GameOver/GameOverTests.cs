@@ -74,6 +74,80 @@ namespace Bagel.B08_GameOver
         }
 
         [Test]
+        public void BeforeTheFirstRunTheReceiptSaysThereIsNone()
+        {
+            m_BagelTestAssetList.gameOverPaneUxml.CloneTree(rootVisualElement);
+            var gameOverPaneManager = rootVisualElement.Q<GameOverPaneManager>();
+            simulate.FrameUpdate();
+
+            Assert.IsFalse(gameOverPaneManager.state.lastRun.hasRun);
+            Assert.AreEqual("Last Run", gameOverPaneManager.title.text);
+            Assert.AreEqual("No bagel toasted yet. Play a game!", gameOverPaneManager.summary.text);
+            Assert.AreEqual(DisplayStyle.None, gameOverPaneManager.stamp.resolvedStyle.display);
+
+            gameOverPaneManager.state.tracker.Reset(1000);
+            gameOverPaneManager.state.tracker.toppingsCount = 42;
+            gameOverPaneManager.state.FinishRun();
+            simulate.FrameUpdate();
+            Assert.AreEqual("You Win!", gameOverPaneManager.title.text);
+            Assert.AreEqual(DisplayStyle.Flex, gameOverPaneManager.stamp.resolvedStyle.display);
+        }
+
+        // The television always shows the last run and the leaderboard; its buttons are only there at game over,
+        // and the leaderboard's Back only when the main menu opened it.
+        [Test]
+        public void TheTelevisionsButtonsShowOnlyWhenItsInUse()
+        {
+            m_BagelTestAssetList.gameOverScreenUxml.CloneTree(rootVisualElement);
+            var screen = rootVisualElement.Q<GameOverScreenManager>();
+            var state = screen.state;
+            var buttons = screen.Q("bottom-container");
+            state.GoToMainMenu();
+            simulate.FrameUpdate();
+            Assert.AreEqual(DisplayStyle.None, buttons.resolvedStyle.display);
+            Assert.AreEqual(DisplayStyle.None, screen.backButton.resolvedStyle.display);
+
+            state.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+            simulate.FrameUpdate();
+            Assert.IsTrue(screen.isLeaderboardOpen);
+            Assert.AreEqual(DisplayStyle.None, buttons.resolvedStyle.display);
+            Assert.AreEqual(DisplayStyle.Flex, screen.backButton.resolvedStyle.display);
+
+            state.GoToBagelSelection();
+            state.GoToPlay();
+            state.FinishRun();
+            simulate.FrameUpdate();
+            Assert.AreEqual(DisplayStyle.Flex, buttons.resolvedStyle.display);
+            Assert.AreEqual(DisplayStyle.None, screen.backButton.resolvedStyle.display);
+        }
+
+        [Test]
+        public void BackOrCancelLeavesTheLeaderboardForTheMainMenu()
+        {
+            panelSize = new Vector2(1200f, 800f);
+            m_BagelTestAssetList.gameOverScreenUxml.CloneTree(rootVisualElement);
+            var screen = rootVisualElement.Q<GameOverScreenManager>();
+            var state = screen.state;
+            state.GoToMainMenu();
+            state.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+            simulate.FrameUpdate();
+
+            simulate.Click(screen.backButton);
+            simulate.FrameUpdate();
+            Assert.AreEqual(PlayManagerState.MainMenuPane.Main, state.mainMenuPane);
+
+            state.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+            simulate.FrameUpdate();
+            using (var evt = NavigationCancelEvent.GetPooled())
+            {
+                evt.target = screen.backButton;
+                screen.backButton.SendEvent(evt);
+            }
+            simulate.FrameUpdate();
+            Assert.AreEqual(PlayManagerState.MainMenuPane.Main, state.mainMenuPane);
+        }
+
+        [Test]
         public void AddToLeaderboardAddsOneEntry()
         {
             var gameOverPaneManager = ShowGameOver(42);

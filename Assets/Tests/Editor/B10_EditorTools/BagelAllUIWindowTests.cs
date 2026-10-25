@@ -33,12 +33,16 @@ namespace Bagel.B10_EditorTools
             var driver = rootVisualElement.Q<MainMenuScreenManager>();
             var mainMenuPane = driver.Q<VisualElement>("main-menu-pane");
             var leaderboardButton = driver.Q<Button>("leaderboard-button");
-            var leaderboardPane = driver.Q<VisualElement>("leaderboard-pane");
+            var television = Card("Television").root.Q<GameOverScreenManager>();
 
+            // The leaderboard is on the television: its card gets its Back button.
+            rootVisualElement.Q<ScrollView>("stage").ScrollTo(leaderboardButton);
+            simulate.FrameUpdate();
             simulate.Click(leaderboardButton);
             simulate.FrameUpdate();
-            Assert.IsTrue(leaderboardPane.enabledSelf);
             Assert.IsFalse(mainMenuPane.enabledSelf);
+            Assert.IsTrue(television.isLeaderboardOpen);
+            Assert.AreEqual(DisplayStyle.Flex, television.backButton.resolvedStyle.display);
         }
 
         [Test]
@@ -152,7 +156,7 @@ namespace Bagel.B10_EditorTools
             window.ApplySetup("Game Over/Win");
             simulate.FrameUpdate();
 
-            var gameOver = Card("Game Over").root.Q<GameOverPaneManager>();
+            var gameOver = Card("Television").root.Q<GameOverPaneManager>();
             var leaderboard = Card("Leaderboard").root.Q<LeaderboardManager>();
             Assert.AreEqual(window.state, gameOver.state);
             Assert.AreEqual(window.state, leaderboard.state);

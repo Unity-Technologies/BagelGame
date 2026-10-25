@@ -2,11 +2,11 @@
    sets variables (see T1_Classic/BagelClassicThemeStyles.uss). The defaults here are Classic's: the
    bagel shop.
 
-   The UI is made of four surfaces, like the shop is: chalk on the blackboard (.b-board: the main menu,
-   settings and leaderboards), paper (.b-paper: the bagels' price tags, the receipt), the shop window's
-   glass (.b-glass: the pause screen) and the kitchen gauges riding along with the bagel (.b-gauge). A
-   surface sets the colors the controls inside it read (--b-text-color, --b-line-color...), so a button
-   is chalk on the board and ink on paper with the same rules. */
+   The UI is made of four surfaces, like the shop is: chalk on the blackboard (.b-board: the main menu and
+   settings), paper (.b-paper: the bagels' price tags, the receipt and the leaderboard on the television),
+   the shop window's glass (.b-glass: the pause screen) and the kitchen gauges riding along with the bagel
+   (.b-gauge). A surface sets the colors the controls inside it read (--b-text-color, --b-line-color...),
+   so a button is chalk on the board and ink on paper with the same rules. */
 
 :root {
     /* The shop's palette */
@@ -75,6 +75,11 @@
     --b-gauge-good: rgb(108, 168, 84);
     --b-gauge-warn: rgb(232, 168, 56);
     --b-gauge-seed: rgb(251, 243, 226);
+
+    /* The television on the far wall: a broadcast's deep blue behind its paper cards, and the channel's bug. */
+    --b-tv-screen-top: rgb(30, 78, 104);
+    --b-tv-screen-bottom: rgb(12, 32, 48);
+    --b-tv-bug-color: rgb(255, 255, 255);
 
     /* What the controls read: the board's, until a surface says otherwise (popups open at the panel's
        root, outside any surface). */

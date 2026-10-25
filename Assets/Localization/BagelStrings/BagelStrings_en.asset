@@ -84,6 +84,8 @@ MonoBehaviour:
   - rid: 6326339763072663694
   - rid: 6326339763072663752
   - rid: 6326339763072663753
+  - rid: 6326339789369114846
+  - rid: 6326339789369114847
   references:
     version: 2
     RefIds:
@@ -556,3 +558,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Homemade
+    - rid: 6326339789369114846
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 497626984022016
+        m_Metadata:
+          m_Items: []
+        m_Value: Last Run
+    - rid: 6326339789369114847
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 497626996604928
+        m_Metadata:
+          m_Items: []
+        m_Value: No bagel toasted yet. Play a game!
