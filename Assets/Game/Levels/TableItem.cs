@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Bagel
 {
-    // Something on the table that can be pushed out of place, like the sugar cubes the bagel rolls into, and
-    // swept off for a new game (TableClearing). It remembers where it belongs, and comes back up out of the
-    // table to it. Held still while the bagel rolls (a kinematic body), unless it starts loose.
+    // Something on the table that the bagel can knock about, like the sugar cubes and the jam, or roll into, like
+    // the cookbooks, and that's swept off for a new game (TableClearing). It remembers where it belongs, and comes
+    // back up out of the table to it. Held still while the bagel rolls (a kinematic body), unless it starts loose.
     [RequireComponent(typeof(Rigidbody))]
     [NoAutoStaticsCleanup] // the items leave the list as they're destroyed
     public class TableItem : MonoBehaviour
@@ -40,10 +40,6 @@ namespace Bagel
 
         public bool loose => !m_Body.isKinematic;
         public Vector3 homePosition => transform.parent != null ? transform.parent.TransformPoint(m_HomePosition) : m_HomePosition;
-
-        // Swept off, or pushed or turned away from where it belongs.
-        public bool outOfPlace => m_Disturbed || !gameObject.activeSelf ||
-            Vector3.Distance(transform.localPosition, m_HomePosition) > 0.05f || Quaternion.Angle(transform.localRotation, m_HomeRotation) > 2f;
 
         void Awake()
         {

@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: a7d4e2a64a1bbb1408a3b6f3a6aa0133
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339789369114897
+  preBakeTriangleCollision: 0
+  preBakeConvexCollision: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339789369114897
+      type: {class: LatheMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        profile:
+        - {x: 0, y: 1.64}
+        - {x: 0.22, y: 1.64}
+        - {x: 0.23, y: 1.68}
+        - {x: 0.22, y: 1.75}
+        - {x: 0, y: 1.76}
+        segments: 32
+        sharpAngle: 60

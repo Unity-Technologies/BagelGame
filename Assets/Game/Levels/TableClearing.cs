@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace Bagel
 {
-    // Sets the table again for a new game: whatever the last run pushed out of place (TableItem), and whatever's
-    // loose with it, is swept off towards the blackboard's wall, then comes back up out of the table where it
-    // belongs, as good as new. What stayed put stays put.
+    // Sets the table again for a new game: everything on it (TableItem), moved or not, is shoved off to either
+    // side, away from the bagel's lane, then comes back up out of the table where it belongs, as good as new.
     public class TableClearing : MonoBehaviour
     {
-        [Tooltip("Which way things fly off: towards the wall with the blackboard.")]
-        [SerializeField] Vector3 m_Away = new(-1f, 0f, 0f);
         [SerializeField] float m_SweepSpeed = 14f;
         [SerializeField] float m_SweepLift = 4f;
         [Tooltip("How long things fly before the table is set again.")]
@@ -43,28 +40,18 @@ namespace Bagel
             if (state != PlayManagerState.State.Playing || m_Clearing != null)
                 return;
 
-            // What's out of place goes, and so does whatever's loose: sweeping one sugar cube knocks the others.
-            var anyOutOfPlace = false;
-            foreach (var item in TableItem.items)
-                anyOutOfPlace |= item.outOfPlace;
-            if (!anyOutOfPlace)
-                return;
-
-            var items = new List<TableItem>();
-            foreach (var item in TableItem.items)
-            {
-                if (item.outOfPlace || item.loose)
-                    items.Add(item);
-            }
-            m_Clearing = StartCoroutine(Clear(items));
+            // Everything goes, every game, the first too: a table swept clean with both arms is funnier.
+            m_Clearing = StartCoroutine(Clear(new List<TableItem>(TableItem.items)));
         }
 
         IEnumerator Clear(List<TableItem> items)
         {
-            var away = m_Away.normalized;
             for (int i = 0; i < items.Count; i++)
             {
-                // A little different for each, the same every time.
+                // Off the nearer side, so nothing flies across the bagel's lane. A little different for each, the
+                // same every time.
+                var side = transform.InverseTransformPoint(items[i].transform.position).x < 0f ? -1f : 1f;
+                var away = transform.TransformDirection(new Vector3(side, 0f, 0f));
                 var wobble = Mathf.Sin(i * 12.9898f) * 0.5f + 0.5f;
                 var push = away * m_SweepSpeed * (0.85f + 0.3f * wobble) + Vector3.up * m_SweepLift * (0.7f + 0.6f * wobble);
                 var spin = new Vector3(wobble - 0.5f, 1f - wobble, 0.5f) * 8f;

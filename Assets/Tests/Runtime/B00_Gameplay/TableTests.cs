@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 namespace Bagel.B00_Gameplay
 {
     // The table at game over and after, in the real level: the bagel goes in the toaster, sliced, and a new game
-    // sweeps off what the last run pushed out of place and sets it again.
+    // shoves everything off the table and sets it again.
     public class TableTests
     {
         PlayManager m_PlayManager;
@@ -24,6 +24,14 @@ namespace Bagel.B00_Gameplay
             state.GoToBagelSelection();
             state.GoToPlay();
             yield return null;
+        }
+
+        // Every game starts with the table shoved off and set again: wait for it.
+        IEnumerator TableSet()
+        {
+            var clearing = Object.FindAnyObjectByType<TableClearing>();
+            while (clearing.clearing)
+                yield return null;
         }
 
         static IEnumerator Seconds(float seconds)
@@ -66,39 +74,39 @@ namespace Bagel.B00_Gameplay
                 Assert.IsTrue(renderer.enabled);
         }
 
-        // The table set again is the table as the first game had it, once its loose things settled (one sugar
-        // cube tumbles off the others, the same way every time). What's held still and wasn't moved stays put.
+        // Every new game shoves everything off, moved or not, out to the nearer side, and sets it all again: the table
+        // as the first game had it once its loose things settled (one sugar cube tumbles off the others, the same way
+        // every time).
         [UnityTest]
-        public IEnumerator ANewGameSetsAgainWhatWasPushedOutOfPlace()
+        public IEnumerator ANewGameShovesEverythingOffAndSetsItAgain()
         {
+            yield return TableSet();
             yield return Seconds(1.5f);
             var settled = new System.Collections.Generic.Dictionary<TableItem, Vector3>();
             foreach (var item in TableItem.items)
                 settled[item] = item.transform.position;
+            Assert.Greater(settled.Count, 12, "a table full of things");
 
-            // The bagel rolled into the sugar cubes and pushed them about.
-            TableItem pushed = null;
-            foreach (var item in TableItem.items)
-            {
-                if (item.loose && pushed == null)
-                    pushed = item;
-            }
-            Assert.IsNotNull(pushed, "something on the table is loose");
-            pushed.transform.position += new Vector3(1.5f, 0f, -1f);
-            pushed.transform.rotation *= Quaternion.Euler(0f, 40f, 0f);
+            // The bagel rolled into the jam and pushed it about.
+            var jam = GameObject.Find("JamJar").GetComponent<TableItem>();
+            Assert.IsTrue(jam.loose, "the jam can be knocked about");
+            jam.transform.position += new Vector3(-1f, 0f, -1f);
 
             state.FinishRun();
             yield return Seconds(1f);
             state.GoToPlay();
             yield return Seconds(0.3f);
-            Assert.IsTrue(pushed.outOfPlace && pushed.loose, $"{pushed.name} is swept off");
+            var level = Object.FindAnyObjectByType<TableClearing>().transform;
             foreach (var item in TableItem.items)
             {
-                if (!item.loose)
-                    Assert.Less(Vector3.Distance(item.transform.position, settled[item]), 0.05f, $"{item.name} stays put");
+                Assert.IsTrue(item.loose, $"{item.name} is shoved off");
+                var from = level.InverseTransformPoint(settled[item]).x;
+                var now = level.InverseTransformPoint(item.transform.position).x;
+                Assert.Greater(Mathf.Abs(now) - Mathf.Abs(from), 1f, $"{item.name} flies off its own side");
             }
 
-            yield return Seconds(4f);
+            yield return TableSet();
+            yield return Seconds(1.5f);
             Assert.IsFalse(TableItem.disturbed, "the table is set again");
             foreach (var item in TableItem.items)
                 Assert.Less(Vector3.Distance(item.transform.position, settled[item]), 0.05f, $"{item.name} is back");
