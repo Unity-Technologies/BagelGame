@@ -99,7 +99,7 @@ namespace Bagel
                         m_MainMenuScreenManager.mainMenuPaneManager.playButton?.Focus();
                         break;
                     case PlayManagerState.MainMenuPane.Settings:
-                        m_MainMenuScreenManager.settingsBackButton?.Focus();
+                        m_MainMenuScreenManager.settingsPaneManager?.FocusTabs();
                         break;
                 }
             });

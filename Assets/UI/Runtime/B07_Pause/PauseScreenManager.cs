@@ -111,7 +111,7 @@ namespace Bagel
                 if (pane == PlayManagerState.PausePane.Pause)
                     pausePaneManager.resumeButton.Focus();
                 else
-                    settingsPaneManager.backButton.Focus();
+                    settingsPaneManager.FocusTabs();
             });
 
             if (BagelAccessibility.screen == this)

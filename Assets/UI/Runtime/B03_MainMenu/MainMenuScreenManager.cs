@@ -14,6 +14,7 @@ namespace Bagel
         VisualElement m_Specials;
         VisualElement m_SettingsPane;
 
+        SettingsPaneManager m_SettingsPaneManager;
         Button m_SettingsBackButton;
 
         bool m_SideShown;
@@ -25,6 +26,7 @@ namespace Bagel
         public VisualElement specials => m_Specials ??= this.Q<VisualElement>("board-specials");
         public VisualElement settingsPane => m_SettingsPane ??= this.Q<VisualElement>("settings-pane");
 
+        public SettingsPaneManager settingsPaneManager => m_SettingsPaneManager ??= settingsPane.Q<SettingsPaneManager>();
         public Button settingsBackButton => m_SettingsBackButton ??= settingsPane.Q<Button>("back-button");
 
         bool m_Bound;
