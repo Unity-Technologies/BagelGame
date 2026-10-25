@@ -4,10 +4,14 @@ namespace Bagel
 {
     // The blackboard: the main menu on its left, and on its right today's bagels or, once asked for, Settings. Going
     // to Settings wipes today's bagels off and writes Settings in, and back again (ChalkWipe). The leaderboard is on
-    // the television: its button sends the camera there, and the menu waits for it to come back.
+    // the television: its button sends the camera there, and the menu waits for it to come back. Away from the menu
+    // (choosing a bagel, playing), the board is only something on the wall: nothing on it can be clicked, and it
+    // isn't faded as it is while Settings are open.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class MainMenuScreenManager : BagelPane
     {
+        public static readonly string awayUssClassName = "b-main-menu--away";
+
         VisualElement m_MainMenuPane;
         MainMenuPaneManager m_MainMenuPaneManager;
         VisualElement m_SecondaryPanes;
@@ -59,7 +63,7 @@ namespace Bagel
 
         protected override void OnStatePropertyChanged(in BindingId property)
         {
-            if (property == PlayManagerState.mainMenuPanePath)
+            if (property == PlayManagerState.mainMenuPanePath || property == PlayManagerState.currentStatePath)
                 ShowPane(state.mainMenuPane);
         }
 
@@ -72,8 +76,10 @@ namespace Bagel
         void ShowPane(PlayManagerState.MainMenuPane pane)
         {
             var showSettings = pane == PlayManagerState.MainMenuPane.Settings;
-            mainMenuPane.SetEnabled(pane == PlayManagerState.MainMenuPane.Main);
-            settingsPane.SetEnabled(showSettings);
+            var inMenu = state == null || state.isMainMenu;
+            EnableInClassList(awayUssClassName, !inMenu);
+            mainMenuPane.SetEnabled(inMenu && pane == PlayManagerState.MainMenuPane.Main);
+            settingsPane.SetEnabled(inMenu && showSettings);
 
             // The board's right side only changes when Settings come or go. The first time, it's just there.
             if (m_SideShown && m_SettingsShown == showSettings)

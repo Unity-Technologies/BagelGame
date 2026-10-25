@@ -159,6 +159,12 @@
     opacity: 0.4;
 }
 
+/* Away from the menu, the board is just chalk on the wall: as it was, nothing to click. */
+.b-main-menu--away #main-menu-pane:disabled,
+.b-main-menu--away .unity-button:disabled {
+    opacity: 1;
+}
+
 .b-title.b-main-title {
     align-self: center;
     padding: 0;

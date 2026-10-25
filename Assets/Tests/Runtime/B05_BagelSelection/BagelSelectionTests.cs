@@ -80,6 +80,32 @@ namespace Bagel.B05_BagelSelection
             simulate.FrameUpdate();
         }
 
+        // The register's face keeps the focus: its keys don't take it when clicked, a click elsewhere gives it back,
+        // and a key sent to the panel itself (when a click on nothing left no panel in focus) still turns the bagels.
+        [Test]
+        public void TheRegisterKeepsTheFocus()
+        {
+            var pane = ShowControls();
+            var state = pane.state;
+            pane.Focus();
+            simulate.FrameUpdate();
+            Assert.IsFalse(pane.rightButton.focusable, "keys don't take the focus");
+
+            simulate.Click(pane.rightButton);
+            simulate.FrameUpdate();
+            Assert.AreEqual(1, state.selectedBagelIndex);
+            Assert.AreEqual(pane, pane.focusController.focusedElement, "clicking a key keeps the face in focus");
+
+            pane.Blur();
+            simulate.FrameUpdate();
+            simulate.FrameUpdate();
+            Assert.AreEqual(pane, pane.focusController.focusedElement, "the focus comes back");
+
+            var root = pane.panel.visualTree;
+            Send(root, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Left));
+            Assert.AreEqual(0, state.selectedBagelIndex, "a key sent to the panel itself turns the bagels");
+        }
+
         [Test]
         public void SelectPlaysAndBackLeaves()
         {

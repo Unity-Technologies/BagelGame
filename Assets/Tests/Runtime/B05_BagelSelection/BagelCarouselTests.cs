@@ -136,5 +136,19 @@ namespace Bagel.B05_BagelSelection
             yield return Seconds(2f);
             Assert.IsFalse(register.ringing, "and goes back in");
         }
+
+        // A click on the register's keys reaches them: nothing of the register is in front of its face.
+        [UnityTest]
+        public IEnumerator TheRegistersKeysCanBeClicked()
+        {
+            yield return null;
+            var face = GameObject.Find("BagelSelectionControlsPanelUI");
+            var camera = Camera.main;
+            var hits = Physics.RaycastAll(camera.transform.position, face.transform.position - camera.transform.position,
+                Vector3.Distance(camera.transform.position, face.transform.position) + 1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            Assert.Greater(hits.Length, 0);
+            Assert.AreEqual(face, hits[0].collider.gameObject, $"the face is hit first, not {hits[0].collider.name}");
+        }
     }
 }

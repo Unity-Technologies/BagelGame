@@ -76,5 +76,35 @@ namespace Bagel.B03_MainMenu
                 }
             }
         }
+
+        // Away from the menu (choosing a bagel, playing), the board is only chalk on the wall: nothing on it can be
+        // clicked, and it isn't faded as it is while Settings are open.
+        [Test]
+        public void TheBoardIsOnlyChalkAwayFromTheMenu()
+        {
+            m_BagelTestAssetList.mainMenuScreenUxml.CloneTree(rootVisualElement);
+            var screen = rootVisualElement.Q<MainMenuScreenManager>();
+            var state = screen.state;
+            state.GoToMainMenu();
+            simulate.FrameUpdate();
+            Assert.IsTrue(screen.mainMenuPane.enabledInHierarchy);
+
+            try
+            {
+                state.GoToBagelSelection();
+                simulate.FrameUpdate();
+                Assert.IsFalse(screen.mainMenuPane.enabledInHierarchy, "nothing to click while choosing a bagel");
+                Assert.IsFalse(screen.settingsPane.enabledInHierarchy);
+                Assert.IsTrue(screen.ClassListContains(MainMenuScreenManager.awayUssClassName));
+                Assert.AreEqual(1f, screen.mainMenuPane.resolvedStyle.opacity, "not faded");
+            }
+            finally
+            {
+                state.GoToMainMenu();
+            }
+            simulate.FrameUpdate();
+            Assert.IsTrue(screen.mainMenuPane.enabledInHierarchy, "back at the menu, it works again");
+            Assert.IsFalse(screen.ClassListContains(MainMenuScreenManager.awayUssClassName));
+        }
     }
 }

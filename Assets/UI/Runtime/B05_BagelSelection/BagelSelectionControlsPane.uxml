@@ -5,19 +5,19 @@
             <ui:Label text="Sesame" name="display-name" picking-mode="Ignore" class="b-register__name"/>
         </ui:VisualElement>
         <ui:VisualElement name="keys" class="b-register__keys">
-            <ui:Button text="&lt;" name="left-button" language-direction="LTR" class="b-register__key b-register__key--arrow">
+            <ui:Button text="&lt;" name="left-button" focusable="false" language-direction="LTR" class="b-register__key b-register__key--arrow">
                 <Bagel.PressSquish/>
             </ui:Button>
-            <ui:Button text="&gt;" name="right-button" language-direction="LTR" class="b-register__key b-register__key--arrow">
+            <ui:Button text="&gt;" name="right-button" focusable="false" language-direction="LTR" class="b-register__key b-register__key--arrow">
                 <Bagel.PressSquish/>
             </ui:Button>
-            <ui:Button text="Back" name="back-button" class="b-register__key b-register__key--back">
+            <ui:Button text="Back" name="back-button" focusable="false" class="b-register__key b-register__key--back">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="common.back"/>
                 </Bindings>
                 <Bagel.PressSquish/>
             </ui:Button>
-            <ui:Button text="Order" name="select-button" class="b-register__key b-register__key--order b-primary">
+            <ui:Button text="Order" name="select-button" focusable="false" class="b-register__key b-register__key--order b-primary">
                 <Bindings>
                     <loc:LocalizedString property="text" table="BagelStrings" entry="selection.order"/>
                 </Bindings>
