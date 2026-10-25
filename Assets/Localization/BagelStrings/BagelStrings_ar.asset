@@ -37,7 +37,6 @@ MonoBehaviour:
   - rid: 6326339764369490101
   - rid: 6326339764369490102
   - rid: 6326339764369490103
-  - rid: 6326339764369490104
   - rid: 6326339764369490105
   - rid: 6326339764369490106
   - rid: 6326339764369490107
@@ -109,6 +108,7 @@ MonoBehaviour:
   - rid: 6326339789369114961
   - rid: 6326339789369114962
   - rid: 6326339789369114963
+  - rid: 6326339789369115061
   references:
     version: 2
     RefIds:
@@ -252,13 +252,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u0627\u0644\u0625\u0636\u0627\u0641\u0627\u062A \u0627\u0644\u0645\u062A\u0628\u0642\u064A\u0629"
-    - rid: 6326339764369490104
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575315
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u0627\u062E\u062A\u0631"
     - rid: 6326339764369490105
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -756,3 +749,10 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u0633\u0627\u062E\u0646 \u0645\u0646 \u0627\u0644\u0645\u062D\u0645\u0635\u0629"
+    - rid: 6326339789369115061
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 701090825568256
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u0637\u0644\u0628"

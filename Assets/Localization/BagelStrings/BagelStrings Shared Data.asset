@@ -117,11 +117,6 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
-  - m_Id: 1419575315
-    m_Key: selection.select
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
   - m_Id: 1419575316
     m_Key: bagel.sesame
     m_Flags: 0
@@ -474,6 +469,11 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 532817064558611
     m_Key: specials.note
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 701090825568256
+    m_Key: selection.order
     m_Flags: 0
     m_Metadata:
       m_Items: []

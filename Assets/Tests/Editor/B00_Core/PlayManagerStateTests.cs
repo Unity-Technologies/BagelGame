@@ -126,21 +126,30 @@ namespace Bagel.B00_Core
             }, modes);
         }
 
+        // The bagels go round, both ways; picking one by number stays in range.
         [Test]
-        public void BagelSelectionStaysInRange()
+        public void BagelSelectionGoesRound()
         {
             var count = m_State.bagelTypeCount;
             Assert.Greater(count, 1);
+            Assert.AreEqual(0, m_State.selectedBagelIndex);
+            Assert.IsTrue(m_State.canSelectPreviousBagel);
+            Assert.IsTrue(m_State.canSelectNextBagel);
 
             m_State.SelectPreviousBagel();
-            Assert.AreEqual(0, m_State.selectedBagelIndex);
-            Assert.IsFalse(m_State.canSelectPreviousBagel);
-
-            for (int i = 0; i < count + 2; ++i)
-                m_State.SelectNextBagel();
-            Assert.AreEqual(count - 1, m_State.selectedBagelIndex);
-            Assert.IsFalse(m_State.canSelectNextBagel);
+            Assert.AreEqual(count - 1, m_State.selectedBagelIndex, "before the first is the last");
             Assert.AreEqual(m_State.bagelTypes.collection[count - 1], m_State.selectedBagelType);
+
+            for (int i = 0; i < count; ++i)
+                m_State.SelectNextBagel();
+            Assert.AreEqual(count - 1, m_State.selectedBagelIndex, "all the way round");
+            m_State.SelectNextBagel();
+            Assert.AreEqual(0, m_State.selectedBagelIndex, "after the last is the first");
+
+            m_State.SelectBagel(count + 5);
+            Assert.AreEqual(count - 1, m_State.selectedBagelIndex);
+            m_State.SelectBagel(-3);
+            Assert.AreEqual(0, m_State.selectedBagelIndex);
         }
 
         [Test]

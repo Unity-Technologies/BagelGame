@@ -37,7 +37,6 @@ MonoBehaviour:
   - rid: 6326339759238545546
   - rid: 6326339759238545547
   - rid: 6326339759238545548
-  - rid: 6326339759238545549
   - rid: 6326339759238545550
   - rid: 6326339759238545551
   - rid: 6326339759238545552
@@ -109,6 +108,7 @@ MonoBehaviour:
   - rid: 6326339789369114933
   - rid: 6326339789369114934
   - rid: 6326339789369114935
+  - rid: 6326339789369115060
   references:
     version: 2
     RefIds:
@@ -252,13 +252,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Toppings Left
-    - rid: 6326339759238545549
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575315
-        m_Metadata:
-          m_Items: []
-        m_Value: Select
     - rid: 6326339759238545550
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -756,3 +749,10 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Hot from the toaster
+    - rid: 6326339789369115060
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 701090825568256
+        m_Metadata:
+          m_Items: []
+        m_Value: Order

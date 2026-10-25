@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // Settings › Graphics, on the screen: the camera's post-processing and anti-aliasing, the game over shot's
-    // depth of field, the sun's shadows and the frame rate. Nothing here changes an asset: the camera, the light
+    // Settings › Graphics, on the screen: the camera's post-processing and anti-aliasing, the depth of field of the
+    // game over shot and of the bagels to choose from, the sun's shadows and the frame rate. Nothing here changes an asset: the camera, the light
     // and the volume are the scene's, and the frame rate is the player's.
     public class GraphicsQuality : MonoBehaviour
     {
@@ -15,6 +15,8 @@ namespace Bagel
         [SerializeField] Light m_Sun;
         [Tooltip("The game over camera's depth of field, on or off.")]
         [SerializeField] CinemachineVolumeSettings m_GameOverFocus;
+        [Tooltip("The bagel selection camera's depth of field, on or off.")]
+        [SerializeField] CinemachineVolumeSettings m_SelectionFocus;
 
         PlayManagerState m_State;
         LightShadows m_SunShadows;
@@ -54,6 +56,8 @@ namespace Bagel
             }
             if (m_GameOverFocus != null)
                 m_GameOverFocus.enabled = settings.depthOfField;
+            if (m_SelectionFocus != null)
+                m_SelectionFocus.enabled = settings.depthOfField;
             if (m_Sun != null)
                 m_Sun.shadows = settings.shadows ? m_SunShadows : LightShadows.None;
             Application.targetFrameRate = settings.frameRate > 0 ? settings.frameRate : -1;

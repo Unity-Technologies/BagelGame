@@ -1,55 +1,70 @@
-/* A bagel's price tag, standing on the counter by its bagel: a paper card with a deli label across the
-   top, and its stats as rows of pips in a grid (icon, name, pips). */
+/* A bagel's card, standing on the lazy Susan behind its bagel: a big paper card with a deli label across the top,
+   the bagel's name, and its stats as rows of pips in a grid (icon, name, pips), big enough to read from the camera.
+   The chosen bagel's label is in the paper's accent; the others' are ink. */
 
-.b-tag {
-    padding: 0 0 8px 0;
-    border-width: 2px;
+/* Over the panes' own width. */
+.b-pane.b-tag {
+    width: 400px;
+    height: 500px;
+    padding: 0 0 14px 0;
+    border-width: 4px;
     border-color: var(--b-line-color);
+    border-radius: var(--b-pane-radius);
     overflow: hidden;
     /* A little sheen in the paper's top corner. */
     background-image: radial-gradient(ellipse farthest-corner at 20% 0%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 60%);
 }
 
-/* The deli label: the bagel's name, in the paper's accent. */
+/* The deli label: the bagel's name. */
 .b-tag__header {
-    background-color: var(--b-accent-fill);
-    border-bottom-width: 2px;
+    height: 110px;
+    justify-content: center;
+    background-color: var(--b-line-color);
+    border-bottom-width: 4px;
     border-bottom-color: var(--b-line-color);
-    padding: 2px 6px 0 6px;
-    margin-bottom: 6px;
+    padding: 4px 14px 0 14px;
+    margin-bottom: 22px;
+}
+
+.b-tag--chosen .b-tag__header {
+    background-color: var(--b-accent-fill);
 }
 
 .b-tag__name {
     color: var(--b-accent-text-color);
+    font-size: 50px;
     -unity-text-align: middle-center;
+    -unity-text-auto-size: best-fit 24px 50px;
+    white-space: nowrap;
     margin: 0;
     padding: 0;
 }
 
 /* Grid layout: the icons, names and pips line up in three columns, whatever the language. */
 .b-tag__stats {
+    flex-grow: 1;
     display: grid;
-    grid-template-columns: 30px 1fr 64px;
-    row-gap: 4px;
-    column-gap: 6px;
+    grid-template-columns: 52px 1fr 128px;
+    row-gap: 14px;
+    column-gap: 12px;
     align-items: center;
-    padding: 0 8px;
+    padding: 0 20px;
 }
 
 .b-tag__icon {
-    width: 30px;
-    height: 30px;
+    width: 52px;
+    height: 52px;
 }
 
 .b-tag__label {
-    font-size: 13px;
+    font-size: 26px;
     padding: 0;
     margin: 0;
     white-space: normal;
 }
 
 .b-tag__meter {
-    height: 14px;
+    height: 26px;
     color: var(--b-line-color);
     --b-meter-color: var(--b-accent-color);
 }
@@ -57,7 +72,7 @@
 /* Right to left: the columns turn around (dense, so each row fills from its first cell), and the pips fill from
    the right. */
 .b-rtl .b-tag__stats {
-    grid-template-columns: 64px 1fr 30px;
+    grid-template-columns: 128px 1fr 52px;
     grid-auto-flow: row-dense;
 }
 

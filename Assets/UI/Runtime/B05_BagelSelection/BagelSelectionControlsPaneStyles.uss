@@ -1,25 +1,100 @@
-/* The order ticket on the counter in front of the bagels: < and > to look along them, Select to take
-   one, Back to the menu. Paper, like the bagels' tags. */
+/* The cash register's face, on the slope of its top: the display with the chosen bagel's name, then its keys,
+   < and > to turn the lazy Susan, Back to the menu, and Order to take the bagel. Chunky keys that sit up off the
+   face and go down when pressed. */
 
-.b-ticket {
+/* Over the panes' own width. */
+.b-pane.b-register {
+    width: 470px;
+    padding: 14px;
+    background-color: rgb(244, 234, 212);
+    border-width: 4px;
+    border-color: rgb(59, 31, 20);
+    border-radius: var(--b-pane-radius);
+}
+
+/* The display: dark glass, the name in amber, like the old registers. */
+.b-register__display {
+    height: 64px;
+    margin-bottom: 14px;
+    padding: 0 16px;
+    justify-content: center;
+    background-color: rgb(28, 26, 22);
+    border-width: 3px;
+    border-color: rgb(59, 31, 20);
+    border-radius: var(--b-inner-radius);
+}
+
+.b-register__name {
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 184, 64);
+    font-size: 34px;
+    -unity-text-align: middle-right;
+    -unity-text-auto-size: best-fit 16px 34px;
+    white-space: nowrap;
+    text-shadow: 0 0 6px rgba(255, 150, 40, 0.7);
+}
+
+.b-rtl .b-register__name {
+    -unity-text-align: middle-left;
+}
+
+.b-register__keys {
     flex-direction: row;
     justify-content: space-between;
-    border-width: 2px;
-    border-color: var(--b-line-color);
-    /* A little shine across the paper. */
-    background-image: linear-gradient(170deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%);
 }
 
-/* The narrow < and > buttons: rounded no more than half their width. */
-#left-button,
-#right-button {
-    border-top-left-radius: var(--b-inner-radius);
-    border-top-right-radius: var(--b-inner-radius);
-    border-bottom-right-radius: var(--b-inner-radius);
-    border-bottom-left-radius: var(--b-inner-radius);
+/* A key: it stands up off the face (its thick bottom edge), and goes down when pressed. */
+.b-register .b-register__key {
+    height: 84px;
+    min-width: 84px;
+    margin: 0;
+    padding: 0 12px;
+    font-size: 26px;
+    color: rgb(59, 31, 20);
+    background-color: rgb(255, 250, 240);
+    border-width: 3px 3px 9px 3px;
+    border-color: rgb(59, 31, 20);
+    border-radius: var(--b-element-radius);
+    justify-content: center;
+    align-items: center;
+    transition-property: translate, border-bottom-width, background-color;
+    transition-duration: 0.08s;
 }
 
-.b-button-bar {
-    flex-grow: 1;
-    margin: 0 6px;
+.b-register .b-register__key:hover {
+    background-color: rgb(255, 238, 205);
+}
+
+.b-register .b-register__key:active,
+.b-register .b-register__key.b-register__key--pressed {
+    translate: 0 6px;
+    border-bottom-width: 3px;
+}
+
+.b-register .b-register__key:disabled {
+    opacity: 0.5;
+}
+
+/* < and >: big, like the keys' own arrows. */
+.b-register .b-register__key--arrow {
+    font-size: 50px;
+    -unity-font-style: bold;
+    padding-bottom: 6px;
+}
+
+/* Order: the big red key. */
+.b-register .b-register__key--order {
+    min-width: 150px;
+    color: rgb(255, 248, 234);
+    background-color: rgb(222, 72, 44);
+}
+
+.b-register .b-register__key--order:hover {
+    background-color: rgb(236, 92, 60);
+}
+
+/* The keys keep their order whatever the language: < stays left, > right. */
+.b-rtl .b-register__keys {
+    flex-direction: row;
 }

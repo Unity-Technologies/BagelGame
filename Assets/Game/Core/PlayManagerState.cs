@@ -112,8 +112,9 @@ namespace Bagel
         public BagelType selectedBagelType =>
             bagelTypeCount > 0 ? m_BagelTypes.collection[Mathf.Clamp(m_SelectedBagelIndex, 0, bagelTypeCount - 1)] : null;
 
-        [CreateProperty] public bool canSelectPreviousBagel => m_SelectedBagelIndex > 0;
-        [CreateProperty] public bool canSelectNextBagel => m_SelectedBagelIndex < bagelTypeCount - 1;
+        // The bagels go round: before the first is the last.
+        [CreateProperty] public bool canSelectPreviousBagel => bagelTypeCount > 1;
+        [CreateProperty] public bool canSelectNextBagel => bagelTypeCount > 1;
 
         [CreateProperty] public BagelTrackerData tracker => m_Tracker;
         [CreateProperty] public RunResult lastRun => m_LastRun;
@@ -187,9 +188,9 @@ namespace Bagel
             onSetBagelType?.Invoke(this, selectedBagelType);
         }
 
-        public void SelectPreviousBagel() => SelectBagel(m_SelectedBagelIndex - 1);
+        public void SelectPreviousBagel() => SelectBagel(bagelTypeCount > 0 ? (m_SelectedBagelIndex - 1 + bagelTypeCount) % bagelTypeCount : 0);
 
-        public void SelectNextBagel() => SelectBagel(m_SelectedBagelIndex + 1);
+        public void SelectNextBagel() => SelectBagel(bagelTypeCount > 0 ? (m_SelectedBagelIndex + 1) % bagelTypeCount : 0);
 
         public void SubmitToLeaderboard(string playerName)
         {

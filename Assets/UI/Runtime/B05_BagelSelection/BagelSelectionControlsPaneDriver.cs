@@ -3,13 +3,11 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
+    // The cash register's face (BagelSelectionControlsPaneManager), on the register by the lazy Susan.
     [RequireComponent(typeof(PanelRenderer))]
     public class BagelSelectionControlsPaneDriver : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
-        [SerializeField] BagelSelectionRoom m_BagelSelectionRoom;
-        [SerializeField] Transform m_Camera;
-        [SerializeField] Transform m_BagelSelectionCameraTraget;
 
         PlayManagerState m_State;
         BagelSelectionControlsPaneManager m_Pane;
@@ -23,8 +21,6 @@ namespace Bagel
             m_State.onSetBagelType += State_OnSetBagelType;
 
             GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
-
-            SetXOffset(m_State.selectedBagelIndex);
         }
 
         void OnDisable()
@@ -75,36 +71,8 @@ namespace Bagel
 
         void State_OnSetBagelType(object sender, BagelType bagelType)
         {
-            SetXOffset(m_State.selectedBagelIndex);
-
             if (m_State.isBagelSelection && bagelType != null)
                 BagelAccessibility.Announce(BagelLocalization.Get(bagelType.nameKey, bagelType.displayName));
-        }
-
-        void Update()
-        {
-            if (!m_State.isBagelSelection)
-                return;
-
-            var p = transform.position;
-            p.z = m_Camera.position.z;
-            transform.position = p;
-        }
-
-        void SetXOffset(int index)
-        {
-            var offset = m_BagelSelectionRoom.GetOffsetFromIndex(index);
-
-            var p = m_BagelSelectionCameraTraget.localPosition;
-            p.x = offset;
-            m_BagelSelectionCameraTraget.localPosition = p;
-
-            if (!m_State.isBagelSelection)
-            {
-                p = transform.localPosition;
-                p.x = offset;
-                transform.localPosition = p;
-            }
         }
     }
 }

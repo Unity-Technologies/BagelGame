@@ -37,7 +37,6 @@ MonoBehaviour:
   - rid: 6326339759238545586
   - rid: 6326339759238545587
   - rid: 6326339759238545588
-  - rid: 6326339759238545589
   - rid: 6326339759238545590
   - rid: 6326339759238545591
   - rid: 6326339759238545592
@@ -109,6 +108,7 @@ MonoBehaviour:
   - rid: 6326339789369114989
   - rid: 6326339789369114990
   - rid: 6326339789369114991
+  - rid: 6326339789369115062
   references:
     version: 2
     RefIds:
@@ -252,13 +252,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Garnitures
-    - rid: 6326339759238545589
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 1419575315
-        m_Metadata:
-          m_Items: []
-        m_Value: Choisir
     - rid: 6326339759238545590
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -756,3 +749,10 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Tout chaud du grille-pain
+    - rid: 6326339789369115062
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 701090825568256
+        m_Metadata:
+          m_Items: []
+        m_Value: Commander

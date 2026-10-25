@@ -37,26 +37,47 @@ namespace Bagel.B05_BagelSelection
             evt.Dispose();
         }
 
+        // The bagels go round: after the last is the first, and before the first the last.
         [Test]
-        public void ArrowsPickTheBagelAndStopAtTheEnds()
+        public void ArrowsGoRoundTheBagels()
         {
             var pane = ShowControls();
             var state = pane.state;
             Assert.AreEqual(0, state.selectedBagelIndex);
-            Assert.IsFalse(pane.leftButton.enabledSelf);
+            Assert.IsTrue(pane.leftButton.enabledSelf);
+            Assert.IsTrue(pane.rightButton.enabledSelf);
 
-            for (int i = 1; i < state.bagelTypeCount; ++i)
+            for (int i = 1; i <= state.bagelTypeCount; ++i)
             {
                 simulate.Click(pane.rightButton);
                 simulate.FrameUpdate();
-                Assert.AreEqual(i, state.selectedBagelIndex);
+                Assert.AreEqual(i % state.bagelTypeCount, state.selectedBagelIndex);
             }
-            Assert.IsFalse(pane.rightButton.enabledSelf);
-            Assert.IsTrue(pane.leftButton.enabledSelf);
 
             simulate.Click(pane.leftButton);
             simulate.FrameUpdate();
-            Assert.AreEqual(state.bagelTypeCount - 2, state.selectedBagelIndex);
+            Assert.AreEqual(state.bagelTypeCount - 1, state.selectedBagelIndex);
+            simulate.Click(pane.rightButton);
+            simulate.FrameUpdate();
+        }
+
+        // The register's display shows the chosen bagel, in the language.
+        [Test]
+        public void TheRegisterShowsTheChosenBagel()
+        {
+            var pane = ShowControls();
+            var state = pane.state;
+            var first = state.selectedBagelType;
+            Assert.AreEqual(BagelLocalization.Get(first.nameKey, first.displayName), pane.displayName.text);
+
+            simulate.Click(pane.rightButton);
+            simulate.FrameUpdate();
+            var second = state.selectedBagelType;
+            Assert.AreNotEqual(first, second);
+            Assert.AreEqual(BagelLocalization.Get(second.nameKey, second.displayName), pane.displayName.text);
+
+            simulate.Click(pane.leftButton);
+            simulate.FrameUpdate();
         }
 
         [Test]
@@ -79,6 +100,7 @@ namespace Bagel.B05_BagelSelection
 
             Send(pane, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Right));
             Assert.AreEqual(1, state.selectedBagelIndex);
+            Assert.IsTrue(pane.rightButton.ClassListContains(BagelSelectionControlsPaneManager.keyPressedUssClassName), "the key goes down");
             Send(pane, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Left));
             Assert.AreEqual(0, state.selectedBagelIndex);
 

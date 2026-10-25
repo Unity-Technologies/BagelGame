@@ -54,7 +54,7 @@ namespace Bagel.B10_EditorTools
                 foreach (var path in spec.uxmlPaths)
                     shown.Add(AssetDatabase.AssetPathToGUID("Assets/UI/Runtime/" + path));
 
-            var sources = new[] { "Assets/Scenes/Main.unity", "Assets/Game/Bagels/Tracker/BagelTracker.prefab", "Assets/Game/States/B05_BagelSelection/BagelSelectionPodium.prefab", "Assets/Game/Levels/Breakfast/Breakfast.prefab" };
+            var sources = new[] { "Assets/Scenes/Main.unity", "Assets/Game/Bagels/Tracker/BagelTracker.prefab", "Assets/Game/States/B05_BagelSelection/BagelCarouselStation.prefab", "Assets/Game/Levels/Breakfast/Breakfast.prefab" };
             foreach (var source in sources)
             {
                 foreach (Match match in Regex.Matches(File.ReadAllText(source), @"sourceAsset: \{fileID: \d+, guid: (\w+)"))
