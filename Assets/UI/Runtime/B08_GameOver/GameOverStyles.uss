@@ -236,7 +236,7 @@
     opacity: 0.85;
 }
 
-/* Lost (crumbled or stale): stamped in plain ink. */
+/* Lost (crumbled): stamped in plain ink. */
 .b-stamp--lost {
     color: var(--b-paper-text);
     border-color: var(--b-paper-text);

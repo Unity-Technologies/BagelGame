@@ -16,7 +16,6 @@ namespace Bagel
         static readonly BindingId k_ForcePath = Path(nameof(force));
         static readonly BindingId k_SpinPath = Path(nameof(spin));
         static readonly BindingId k_ElapsedPath = Path(nameof(elapsed));
-        public static readonly BindingId freshnessPath = Path(nameof(freshness));
 
         static BindingId Path(string property) => new BindingId(nameof(PlayManagerState.tracker) + "." + property);
 
@@ -28,7 +27,6 @@ namespace Bagel
         [SerializeField] float m_Force;
         [SerializeField] float m_Spin;
         [SerializeField] float m_Elapsed;
-        [SerializeField, Range(0f, 1f)] float m_Freshness = 1f;
 
         [NonSerialized] PlayManagerState m_Owner;
 
@@ -81,30 +79,12 @@ namespace Bagel
             set { if (m_Spin == value) return; m_Spin = value; Notify(k_SpinPath); }
         }
 
-        // Seconds since the run started (paused time doesn't count).
+        // Seconds since the run started (paused time doesn't count): what the run took, against the toppings it kept.
         [CreateProperty]
         public float elapsed
         {
             get => m_Elapsed;
             set { if (m_Elapsed == value) return; m_Elapsed = value; Notify(k_ElapsedPath); }
-        }
-
-        // 1 out of the toaster's bag, 0 stale: the run is lost.
-        [CreateProperty]
-        public float freshness
-        {
-            get => m_Freshness;
-            set { value = Mathf.Clamp01(value); if (m_Freshness == value) return; m_Freshness = value; Notify(freshnessPath); }
-        }
-
-        public bool isStale => m_Freshness <= 0f;
-
-        // Time goes by: the bagel gets a little less fresh, all the way to stale after constants.freshTime.
-        public void Age(float deltaTime)
-        {
-            elapsed += deltaTime;
-            var freshTime = m_Constants != null ? m_Constants.freshTime : 0f;
-            freshness = freshTime > 0f ? 1f - m_Elapsed / freshTime : 1f;
         }
 
         internal void Bind(PlayManagerState owner) => m_Owner = owner;
@@ -118,7 +98,6 @@ namespace Bagel
             force = 0f;
             spin = 0f;
             elapsed = 0f;
-            freshness = 1f;
         }
 
         void Notify(in BindingId path) => m_Owner?.Notify(path);

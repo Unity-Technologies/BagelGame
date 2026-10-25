@@ -27,7 +27,6 @@ MonoBehaviour:
     m_Force: 0
     m_Spin: 0
     m_Elapsed: 0
-    m_Freshness: 1
   m_LastRun:
     m_BagelName: 
     m_Toppings: 0
@@ -42,47 +41,70 @@ MonoBehaviour:
     m_Entries:
     - playerName: UIToolkitPro
       toppings: 2345
+      time: 29.6
     - playerName: UI_Toolkid
       toppings: 2848
+      time: 24.4
     - playerName: UIToolk1t
       toppings: 345
+      time: 59.2
     - playerName: ToolkitMaster
       toppings: 128
+      time: 52.9
     - playerName: MiniUITool
       toppings: 565
+      time: 47.7
     - playerName: UI_Elites
       toppings: 4566
+      time: 42.5
     - playerName: ElementsOP
       toppings: 6749
+      time: 36.1
     - playerName: UIElemCore
       toppings: 788
+      time: 30.9
     - playerName: Visu4lElement
       toppings: 355
+      time: 25.7
     - playerName: VElement99
       toppings: 7467
+      time: 19.4
     - playerName: VisElem_
       toppings: 345
+      time: 54.2
     - playerName: PanelSetGo
       toppings: 359
+      time: 49.0
     - playerName: SettingsPane
       toppings: 235
+      time: 42.6
     - playerName: ButtonMasher
       toppings: 6776
+      time: 37.4
     - playerName: Hold2Confirm
       toppings: 43535
+      time: 32.2
     - playerName: BagelLord
       toppings: 124
+      time: 25.9
     - playerName: ToastedBagel12
       toppings: 31
+      time: 20.7
     - playerName: BagelCore
       toppings: 456
+      time: 55.5
     - playerName: SesameSeeded
       toppings: 3546
+      time: 49.2
     - playerName: Sesamix
       toppings: 2454
+      time: 43.9
     - playerName: OpenSesame_
       toppings: 3858
+      time: 38.7
     - playerName: SesameByte
       toppings: 8395
+      time: 32.4
     - playerName: DarkToast
       toppings: 147
+      time: 27.2

@@ -8,19 +8,5 @@
             </Bindings>
             <ui:Label text="1,000" name="toppings-count" class="b-hud__count"/>
         </Bagel.BagelGauge>
-        <ui:VisualElement name="knocks" class="b-hud__knocks">
-            <Bagel.BagelGauge kind="Spin" name="spin-gauge" class="b-hud__gauge b-hud__gauge--small">
-                <Bindings>
-                    <ui:DataBinding property="value" data-source-path="spin" binding-mode="ToTarget"/>
-                    <ui:DataBinding property="maxValue" data-source-path="constants.spinMax" binding-mode="ToTarget"/>
-                </Bindings>
-            </Bagel.BagelGauge>
-            <Bagel.BagelGauge kind="Pain" name="pain-gauge" class="b-hud__gauge b-hud__gauge--small">
-                <Bindings>
-                    <ui:DataBinding property="value" data-source-path="force" binding-mode="ToTarget"/>
-                    <ui:DataBinding property="maxValue" data-source-path="constants.forceMax" binding-mode="ToTarget"/>
-                </Bindings>
-            </Bagel.BagelGauge>
-        </ui:VisualElement>
     </Bagel.BagelTrackerPaneManager>
 </ui:UXML>

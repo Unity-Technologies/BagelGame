@@ -35,5 +35,12 @@ namespace Bagel
         }
 
         public static string FormatNumber(int value) => BagelLocalization.LocalizeDigits(value.ToString("N0", BagelLocalization.culture));
+
+        // A run's time, in minutes and seconds to the tenth: 1:04.2.
+        public static string FormatTime(float seconds)
+        {
+            var minutes = Mathf.FloorToInt(seconds / 60f);
+            return BagelLocalization.LocalizeDigits(string.Format(BagelLocalization.culture, "{0}:{1:00.0}", minutes, seconds - minutes * 60f));
+        }
     }
 }

@@ -146,7 +146,7 @@ namespace Bagel
         {
             var bagelType = selectedBagelType;
             m_LastRun.Set(bagelType != null ? bagelType.displayName : "", bagelType != null ? bagelType.nameKey : "",
-                m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount, m_Tracker.elapsed, m_Tracker.freshness);
+                m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount, m_Tracker.elapsed);
             GoToGameOver();
         }
 
@@ -196,7 +196,7 @@ namespace Bagel
             if (!m_LastRun.canSubmit)
                 return;
 
-            m_Leaderboard.Add(playerName, m_LastRun.toppings);
+            m_Leaderboard.Add(playerName, m_LastRun.toppings, m_LastRun.time);
             m_LastRun.submitted = true;
         }
 

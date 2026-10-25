@@ -94,7 +94,6 @@
     --b-gauge-text: rgb(59, 31, 20);
     --b-gauge-line: rgb(59, 31, 20);
     --b-gauge-accent: rgb(222, 72, 44);
-    --b-gauge-good: rgb(108, 168, 84);
     --b-gauge-warn: rgb(232, 168, 56);
     --b-gauge-seed: rgb(251, 243, 226);
 

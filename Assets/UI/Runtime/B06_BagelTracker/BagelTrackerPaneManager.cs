@@ -10,14 +10,12 @@ namespace Bagel
     public partial class BagelTrackerPaneManager : BagelPane
     {
         BagelGauge m_ToppingsGauge;
-        BagelGauge m_FreshnessGauge;
         BagelGauge m_SpeedGauge;
         Label m_ToppingsCount;
         BagelGauge m_SpinGauge;
         BagelGauge m_PainGauge;
 
         public BagelGauge toppingsGauge => m_ToppingsGauge ??= this.Q<BagelGauge>("toppings-gauge");
-        public BagelGauge freshnessGauge => m_FreshnessGauge ??= this.Q<BagelGauge>("freshness-gauge");
         public BagelGauge speedGauge => m_SpeedGauge ??= this.Q<BagelGauge>("speed-gauge");
         public Label toppingsCount => m_ToppingsCount ??= this.Q<Label>("toppings-count");
         public BagelGauge spinGauge => m_SpinGauge ??= this.Q<BagelGauge>("spin-gauge");

@@ -1,12 +1,11 @@
 using System;
 using Unity.Localization;
 using Unity.SmartStrings.PersistentVariables;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // The last run's receipt: the result, what the bagel kept, its time and freshness, the leaderboard form, and
+    // The last run's receipt: the result, what the bagel kept, its time, the leaderboard form, and
     // the result stamped across it (a UIAnimationClip slams the stamp down each time it shows). Before the
     // first run it only says there's been none yet.
     [UxmlElement(libraryPath = "Bagel/Managers")]
@@ -19,7 +18,6 @@ namespace Bagel
         VisualElement m_Receipt;
         Label m_Title;
         Label m_TimeLabel;
-        Label m_FreshnessLabel;
         Label m_Stamp;
         Label m_Summary;
         Label m_ToppingsKeptLabel;
@@ -33,7 +31,6 @@ namespace Bagel
         public Label title => m_Title ??= this.Q<Label>("page-title");
         public Label summary => m_Summary ??= this.Q<Label>("summary-label");
         public Label timeLabel => m_TimeLabel ??= this.Q<Label>("time-label");
-        public Label freshnessLabel => m_FreshnessLabel ??= this.Q<Label>("freshness-label");
         public Label stamp => m_Stamp ??= this.Q<Label>("stamp");
         public Label toppingsKeptLabel => m_ToppingsKeptLabel ??= this.Q<Label>("toppings-kept-label");
         public VisualElement leaderboardForm => m_LeaderboardForm ??= this.Q<VisualElement>("leaderboard-form");
@@ -131,17 +128,14 @@ namespace Bagel
                 return;
 
             var lastRun = state.lastRun;
-            var culture = BagelLocalization.culture;
-            var minutes = Mathf.FloorToInt(lastRun.time / 60f);
             toppingsKeptLabel?.SetText(BagelConverters.FormatNumber(lastRun.toppings));
-            timeLabel?.SetText(BagelLocalization.LocalizeDigits(string.Format(culture, "{0}:{1:00.0}", minutes, lastRun.time - minutes * 60f)));
-            freshnessLabel?.SetText(BagelLocalization.LocalizeDigits(string.Format(culture, "{0:0}%", lastRun.freshness * 100f)));
+            timeLabel?.SetText(BagelConverters.FormatTime(lastRun.time));
 
             // Changing a variable doesn't re-render the strings that use it.
             m_Count.Value = BagelConverters.FormatNumber(lastRun.toppings);
             m_SummaryString.RefreshString();
 
-            m_StampString.SetReference(BagelLocalization.table, lastRun.stale ? "stamp.stale" : lastRun.won ? "stamp.win" : "stamp.lose");
+            m_StampString.SetReference(BagelLocalization.table, lastRun.won ? "stamp.win" : "stamp.lose");
             stamp?.EnableInClassList(stampLostUssClassName, !lastRun.won);
         }
 

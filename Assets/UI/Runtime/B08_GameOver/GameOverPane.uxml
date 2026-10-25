@@ -25,12 +25,6 @@
                         </Bindings>
                     </ui:Label>
                     <ui:Label text="0:00.0" name="time-label" class="b-receipt__price"/>
-                    <ui:Label text="Freshness" name="freshness-title-label" class="b-receipt__item">
-                        <Bindings>
-                            <loc:LocalizedString property="text" table="BagelStrings" entry="receipt.freshness"/>
-                        </Bindings>
-                    </ui:Label>
-                    <ui:Label text="100%" name="freshness-label" class="b-receipt__price"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="leaderboard-form" class="b-sub-pane b-receipt__form">
                     <ui:TextField label="Name for Leaderboard" name="leaderboard-name-field">

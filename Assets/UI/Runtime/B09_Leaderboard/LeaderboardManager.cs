@@ -37,16 +37,29 @@ namespace Bagel
 
             leaderboardTable.columns["name"].makeCell = () => new Label();
             leaderboardTable.columns["toppings"].makeCell = () => new Label();
+            leaderboardTable.columns["time"].makeCell = () => new Label();
 
             leaderboardTable.columns["name"].bindCell = (VisualElement element, int index) =>
                 (element as Label).text = leaderboardData.entries[index].playerName;
             leaderboardTable.columns["toppings"].bindCell = (VisualElement element, int index) =>
                 (element as Label).text = BagelConverters.FormatNumber(leaderboardData.entries[index].toppings);
+            leaderboardTable.columns["time"].bindCell = (VisualElement element, int index) =>
+                (element as Label).text = BagelConverters.FormatTime(leaderboardData.entries[index].time);
 
             leaderboardTable.columns["name"].comparison = (a, b) =>
                 string.Compare(leaderboardData.entries[a].playerName, leaderboardData.entries[b].playerName, StringComparison.Ordinal);
+            // The most toppings first and, between runs that kept as many, the faster one. Sorted by time, the
+            // fastest first and, between runs as fast, the one that kept more.
             leaderboardTable.columns["toppings"].comparison = (a, b) =>
-                (leaderboardData.entries[a].toppings).CompareTo(leaderboardData.entries[b].toppings);
+            {
+                var order = leaderboardData.entries[a].toppings.CompareTo(leaderboardData.entries[b].toppings);
+                return order != 0 ? order : leaderboardData.entries[b].time.CompareTo(leaderboardData.entries[a].time);
+            };
+            leaderboardTable.columns["time"].comparison = (a, b) =>
+            {
+                var order = leaderboardData.entries[a].time.CompareTo(leaderboardData.entries[b].time);
+                return order != 0 ? order : leaderboardData.entries[b].toppings.CompareTo(leaderboardData.entries[a].toppings);
+            };
         }
 
         // Columns aren't elements, so their titles can't be bound: set them for each language. The counts are
@@ -64,6 +77,7 @@ namespace Bagel
 
             leaderboardTable.columns["name"].title = BagelLocalization.Get("leaderboard.name", "Name");
             leaderboardTable.columns["toppings"].title = BagelLocalization.Get("leaderboard.toppings", "Toppings Left");
+            leaderboardTable.columns["time"].title = BagelLocalization.Get("receipt.time", "Time");
         }
 
         protected override void OnStateChanged(PlayManagerState oldState, PlayManagerState newState)

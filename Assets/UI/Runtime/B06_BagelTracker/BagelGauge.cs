@@ -7,8 +7,6 @@ namespace Bagel
     // A kitchen gauge riding along with the bagel, drawn with Painter2D on a face styled in USS (its
     // enamel, rim and sheen are the element's background, border and gradient). Each says what it shows
     // without a word:
-    // - Timer: a kitchen timer, its colored wedge running out from green to red, around a bagel that
-    //   steams while it's fresh and goes grey-green as it goes stale.
     // - Speedometer: ticks and a red zone, and a needle that's its own element, turned with a style
     //   rotation: the needle moves every frame without drawing the gauge again.
     // - Seeds: a ring of seeds, one going out for every few toppings lost; the count in the middle.
@@ -16,13 +14,12 @@ namespace Bagel
     //   that spins along (its own element, turned with a style rotation like the needle).
     // - Pain: a comic "pow" burst that grows bigger, spikier and redder the harder the last knock was.
     // value and maxValue bind (<DataBinding property="value" data-source-path="speed"/>). Its colors are
-    // USS custom properties: --b-gauge-line, --b-gauge-accent, --b-gauge-good, --b-gauge-warn, --b-gauge-seed.
+    // USS custom properties: --b-gauge-line, --b-gauge-accent, --b-gauge-warn, --b-gauge-seed.
     [UxmlElement(libraryPath = "Bagel/Tracker")]
     public partial class BagelGauge : VisualElement
     {
         public enum Kind
         {
-            Timer,
             Speedometer,
             Seeds,
             Spin,
@@ -36,7 +33,6 @@ namespace Bagel
 
         static readonly CustomStyleProperty<Color> s_LineProperty = new("--b-gauge-line");
         static readonly CustomStyleProperty<Color> s_AccentProperty = new("--b-gauge-accent");
-        static readonly CustomStyleProperty<Color> s_GoodProperty = new("--b-gauge-good");
         static readonly CustomStyleProperty<Color> s_WarnProperty = new("--b-gauge-warn");
         static readonly CustomStyleProperty<Color> s_SeedProperty = new("--b-gauge-seed");
 
@@ -53,7 +49,6 @@ namespace Bagel
 
         Color m_Line = new(0.23f, 0.12f, 0.08f);
         Color m_Accent = new(0.87f, 0.28f, 0.17f);
-        Color m_Good = new(0.42f, 0.66f, 0.33f);
         Color m_Warn = new(0.91f, 0.66f, 0.22f);
         Color m_Seed = new(0.98f, 0.95f, 0.87f);
 
@@ -121,7 +116,7 @@ namespace Bagel
             m_Spinner.AddToClassList(spinnerUssClassName);
             m_Spinner.generateVisualContent += DrawSpinner;
             Add(m_Spinner);
-            kind = Kind.Timer;
+            kind = Kind.Speedometer;
 
             RegisterCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved);
             schedule.Execute(TurnSpinner).Every(0);
@@ -143,8 +138,6 @@ namespace Bagel
                 m_Line = line;
             if (style.TryGetValue(s_AccentProperty, out var accent))
                 m_Accent = accent;
-            if (style.TryGetValue(s_GoodProperty, out var good))
-                m_Good = good;
             if (style.TryGetValue(s_WarnProperty, out var warn))
                 m_Warn = warn;
             if (style.TryGetValue(s_SeedProperty, out var seed))
@@ -153,8 +146,8 @@ namespace Bagel
             m_Spinner.MarkDirtyRepaint();
         }
 
-        // The needle turns; the drawing is only made again when it would look different: the timer in
-        // steps of 1%, the ring when a seed goes out.
+        // The needle turns; the drawing is only made again when it would look different: the ring when a seed
+        // goes out, the spin's arrow and the pain's burst in steps.
         void Refresh(bool force = false)
         {
             var f = fraction;
@@ -163,7 +156,6 @@ namespace Bagel
 
             var step = m_Kind switch
             {
-                Kind.Timer => Mathf.CeilToInt(f * 100f),
                 Kind.Seeds => Mathf.CeilToInt(f * k_SeedCount),
                 Kind.Spin => Mathf.CeilToInt(f * 60f),
                 Kind.Pain => Mathf.CeilToInt(f * 30f),
@@ -187,9 +179,6 @@ namespace Bagel
             var radius = Mathf.Min(rect.width, rect.height) * 0.5f;
             switch (m_Kind)
             {
-                case Kind.Timer:
-                    DrawTimer(painter, center, radius);
-                    break;
                 case Kind.Speedometer:
                     DrawSpeedometer(painter, center, radius);
                     break;
@@ -226,46 +215,6 @@ namespace Bagel
                 painter.LineTo(Polar(center, isMajor ? inner : (inner + outer) * 0.5f, angle));
             }
             painter.Stroke();
-        }
-
-        void DrawTimer(Painter2D painter, Vector2 center, float radius)
-        {
-            var f = fraction;
-            var color = f > 0.5f ? Color.Lerp(m_Warn, m_Good, (f - 0.5f) * 2f) : Color.Lerp(m_Accent, m_Warn, f * 2f);
-
-            // The time left: a wedge from the top, shrinking clockwise as the bagel gets older.
-            if (f > 0f)
-            {
-                painter.fillColor = color;
-                painter.BeginPath();
-                painter.MoveTo(center);
-                painter.Arc(center, radius * 0.72f, -90f, -90f + 360f * f);
-                painter.ClosePath();
-                painter.Fill();
-            }
-
-            Ticks(painter, center, radius * 0.94f, radius * 0.78f, 0f, 330f, 12, Mathf.Max(1.2f, radius * 0.05f));
-
-            // The bagel itself, golden while fresh and grey-green when stale, steaming while there's time left.
-            var crust = Color.Lerp(new Color(0.55f, 0.6f, 0.45f), new Color(0.86f, 0.6f, 0.27f), f);
-            var bagel = center + new Vector2(0f, radius * 0.08f);
-            Bagel(painter, bagel, radius * 0.3f, crust);
-            if (f > 0.4f)
-            {
-                var alpha = Mathf.InverseLerp(0.4f, 1f, f);
-                painter.strokeColor = new Color(m_Seed.r, m_Seed.g, m_Seed.b, alpha);
-                painter.lineWidth = Mathf.Max(1f, radius * 0.06f);
-                painter.lineCap = LineCap.Round;
-                for (int i = -1; i <= 1; i += 2)
-                {
-                    var x = bagel.x + i * radius * 0.1f;
-                    var bottom = bagel.y - radius * 0.3f;
-                    painter.BeginPath();
-                    painter.MoveTo(new Vector2(x, bottom));
-                    painter.BezierCurveTo(new Vector2(x - radius * 0.1f, bottom - radius * 0.12f), new Vector2(x + radius * 0.1f, bottom - radius * 0.2f), new Vector2(x, bottom - radius * 0.32f));
-                    painter.Stroke();
-                }
-            }
         }
 
         // A bagel seen from above: a ring of crust around its hole, the gauge's face showing through the hole.

@@ -302,7 +302,7 @@ namespace Bagel
                 callout.stays = true;
                 callout.style.left = 110f;
                 callout.style.top = 70f;
-                callout.RegisterCallback<AttachToPanelEvent>(_ => callout.Show(BagelLocalization.Get("toast.go", "Go!"), false));
+                callout.RegisterCallback<AttachToPanelEvent>(_ => callout.Show(BagelLocalization.Get("toast.go", "Go!")));
             }
 
             // The window themes its own screens, so a toolbar preview doesn't stack on top.

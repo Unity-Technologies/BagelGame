@@ -68,20 +68,15 @@ MonoBehaviour:
   - rid: 6326339764369490063
   - rid: 6326339764369490064
   - rid: 6326339764369490065
-  - rid: 6326339764369490068
   - rid: 6326339764369490069
   - rid: 6326339764369490070
   - rid: 6326339764369490071
   - rid: 6326339764369490072
-  - rid: 6326339764369490073
   - rid: 6326339764369490074
   - rid: 6326339764369490075
   - rid: 6326339764369490076
-  - rid: 6326339764369490077
   - rid: 6326339764369490078
   - rid: 6326339764369490079
-  - rid: 6326339764369490080
-  - rid: 6326339764369490081
   - rid: 6326339764369490082
   - rid: 6326339764369490083
   - rid: 6326339789369114852
@@ -446,13 +441,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u97F3\u91CF"
-    - rid: 6326339764369490068
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639489
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u653E\u4E45\u53D8\u786C\u4E86\uFF01"
     - rid: 6326339764369490069
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -481,13 +469,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u7528\u65F6"
-    - rid: 6326339764369490073
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639494
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u65B0\u9C9C\u5EA6"
     - rid: 6326339764369490074
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -509,13 +490,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u788E\u4E86"
-    - rid: 6326339764369490077
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639498
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u53D8\u786C\u4E86"
     - rid: 6326339764369490078
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -530,20 +504,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u51FA\u53D1\uFF01"
-    - rid: 6326339764369490080
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348608
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u5FEB\u53D8\u786C\u4E86\uFF01"
-    - rid: 6326339764369490081
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348609
-        m_Metadata:
-          m_Items: []
-        m_Value: "\u914D\u6599 {0}\uFF01"
     - rid: 6326339764369490082
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

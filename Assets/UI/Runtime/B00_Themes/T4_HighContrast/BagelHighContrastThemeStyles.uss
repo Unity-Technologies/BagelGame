@@ -69,7 +69,6 @@
     --b-gauge-text: rgb(255, 255, 255);
     --b-gauge-line: rgb(255, 255, 255);
     --b-gauge-accent: rgb(255, 214, 0);
-    --b-gauge-good: rgb(255, 255, 255);
     --b-gauge-warn: rgb(255, 214, 0);
 
     --b-tv-screen-top: rgb(0, 0, 0);

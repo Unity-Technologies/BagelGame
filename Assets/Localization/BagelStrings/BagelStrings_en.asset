@@ -68,20 +68,15 @@ MonoBehaviour:
   - rid: 6326339759238545635
   - rid: 6326339760839721046
   - rid: 6326339760839721047
-  - rid: 6326339763072663659
   - rid: 6326339763072663660
   - rid: 6326339763072663661
   - rid: 6326339763072663662
   - rid: 6326339763072663663
-  - rid: 6326339763072663664
   - rid: 6326339763072663665
   - rid: 6326339763072663666
   - rid: 6326339763072663667
-  - rid: 6326339763072663668
   - rid: 6326339763072663669
   - rid: 6326339763072663670
-  - rid: 6326339763072663693
-  - rid: 6326339763072663694
   - rid: 6326339763072663752
   - rid: 6326339763072663753
   - rid: 6326339789369114846
@@ -446,13 +441,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Volume
-    - rid: 6326339763072663659
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639489
-        m_Metadata:
-          m_Items: []
-        m_Value: Gone Stale!
     - rid: 6326339763072663660
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -481,13 +469,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Time
-    - rid: 6326339763072663664
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639494
-        m_Metadata:
-          m_Items: []
-        m_Value: Freshness
     - rid: 6326339763072663665
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -509,13 +490,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Crumbled
-    - rid: 6326339763072663668
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639498
-        m_Metadata:
-          m_Items: []
-        m_Value: Stale
     - rid: 6326339763072663669
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -530,20 +504,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Go!
-    - rid: 6326339763072663693
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348608
-        m_Metadata:
-          m_Items: []
-        m_Value: Going stale!
-    - rid: 6326339763072663694
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348609
-        m_Metadata:
-          m_Items: []
-        m_Value: '{0} toppings!'
     - rid: 6326339763072663752
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

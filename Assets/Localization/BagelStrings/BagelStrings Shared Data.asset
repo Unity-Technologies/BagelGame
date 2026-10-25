@@ -272,11 +272,6 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
-  - m_Id: 63707960639489
-    m_Key: gameover.stale
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
   - m_Id: 63707960639490
     m_Key: receipt.shop
     m_Flags: 0
@@ -297,11 +292,6 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
-  - m_Id: 63707960639494
-    m_Key: receipt.freshness
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
   - m_Id: 63707960639495
     m_Key: receipt.thanks
     m_Flags: 0
@@ -317,11 +307,6 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
-  - m_Id: 63707960639498
-    m_Key: stamp.stale
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
   - m_Id: 63707960639499
     m_Key: toast.ready
     m_Flags: 0
@@ -329,16 +314,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 63707960639500
     m_Key: toast.go
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 65810481348608
-    m_Key: toast.stale-soon
-    m_Flags: 0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 65810481348609
-    m_Key: toast.lost
     m_Flags: 0
     m_Metadata:
       m_Items: []

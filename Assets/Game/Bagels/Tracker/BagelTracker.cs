@@ -55,13 +55,11 @@ namespace Bagel
             tracker.force = Mathf.Ceil(m_BagelController.currentForce);
             tracker.spin = Mathf.Ceil(m_BagelController.currentSpin);
 
-            // Pausing stops time, so a paused bagel stays as fresh as it was.
-            tracker.Age(Time.deltaTime);
-            if (tracker.isStale)
-                m_State.FinishRun();
+            // Pausing stops time, so the clock stops with it.
+            tracker.elapsed += Time.deltaTime;
         }
 
-        // The run ends at the toaster, off the edge with no toppings left, or stale (above).
+        // The run ends at the toaster, or off the edge with no toppings left.
         void BagelController_OnRunEnded(object sender, EventArgs e)
         {
             if (!m_State.isPlaying)

@@ -1,4 +1,4 @@
-/* A callout over the bagel: "Ready...", "Go!", toppings lost, going stale. It's a screen-space panel
+/* A callout over the bagel: "Ready..." and "Go!". It's a screen-space panel
    that follows the bagel (PanelRenderer.trackScreenSpacePosition), so it stays sharp and the same size
    on screen wherever the bagel is, unlike the gauges around it, which are in the world. Being in screen
    space, it can be frosted glass (backdrop-filter). */
@@ -27,13 +27,4 @@
     color: var(--b-title-color);
     padding: 0;
     margin: 0;
-}
-
-/* Bad news is in the accent color. */
-.b-callout--warning {
-    border-color: var(--b-accent-color);
-}
-
-.b-callout--warning > .b-callout__label {
-    color: var(--b-accent-color);
 }

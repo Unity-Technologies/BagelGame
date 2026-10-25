@@ -144,31 +144,25 @@ namespace Bagel.B00_Core
         }
 
         [Test]
-        public void ABagelGoesStaleWithTimeAndTheRunIsLost()
+        public void ARunTakesItsTimeAndTheLeaderboardKeepsIt()
         {
             m_State.GoToPlay();
             var tracker = m_State.tracker;
-            var freshTime = tracker.constants.freshTime;
-            Assert.Greater(freshTime, 10f);
-            Assert.AreEqual(1f, tracker.freshness);
 
-            tracker.Age(freshTime * 0.5f);
-            Assert.AreEqual(0.5f, tracker.freshness, 1e-4f);
-            Assert.IsFalse(tracker.isStale);
-
-            tracker.Age(freshTime);
-            Assert.AreEqual(0f, tracker.freshness);
-            Assert.IsTrue(tracker.isStale);
-
+            // However long it takes, a run with toppings left is won: it's time against the toppings lost.
+            tracker.elapsed = 600f;
             m_State.FinishRun();
-            Assert.IsTrue(m_State.lastRun.stale);
-            Assert.IsFalse(m_State.lastRun.won, "toppings left, but stale");
-            Assert.AreEqual("gameover.stale", m_State.lastRun.titleKey);
-            Assert.AreEqual(freshTime * 1.5f, m_State.lastRun.time, 1e-3f);
+            Assert.IsTrue(m_State.lastRun.won);
+            Assert.AreEqual("gameover.win", m_State.lastRun.titleKey);
+            Assert.AreEqual(600f, m_State.lastRun.time, 1e-3f);
 
-            // A new run starts fresh.
+            m_State.SubmitToLeaderboard("Slowpoke");
+            var entry = m_State.leaderboard.entries[m_State.leaderboard.lastAddedIndex];
+            Assert.AreEqual(m_State.lastRun.toppings, entry.toppings);
+            Assert.AreEqual(600f, entry.time, 1e-3f);
+
+            // A new run's clock starts again.
             m_State.GoToPlay();
-            Assert.AreEqual(1f, m_State.tracker.freshness);
             Assert.AreEqual(0f, m_State.tracker.elapsed);
         }
 

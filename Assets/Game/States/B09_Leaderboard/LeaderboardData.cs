@@ -13,6 +13,8 @@ namespace Bagel
         {
             public string playerName;
             public int toppings;
+            // Seconds the run took: the other half of the score, against the toppings it kept.
+            public float time;
         }
 
         [SerializeField] List<LeaderboardEntry> m_Entries = new List<LeaderboardEntry>();
@@ -28,12 +30,12 @@ namespace Bagel
 
         internal void Bind(PlayManagerState owner) => m_Owner = owner;
 
-        public int Add(string playerName, int toppings)
+        public int Add(string playerName, int toppings, float time = 0f)
         {
             if (string.IsNullOrWhiteSpace(playerName))
                 playerName = "Bagel";
 
-            m_Entries.Add(new LeaderboardEntry { playerName = playerName.Trim(), toppings = toppings });
+            m_Entries.Add(new LeaderboardEntry { playerName = playerName.Trim(), toppings = toppings, time = time });
             m_LastAddedIndex = m_Entries.Count - 1;
             m_Owner?.Notify(nameof(PlayManagerState.leaderboard));
             onEntryAdded?.Invoke(m_LastAddedIndex);

@@ -68,20 +68,15 @@ MonoBehaviour:
   - rid: 6326339759238545644
   - rid: 6326339760839721048
   - rid: 6326339760839721049
-  - rid: 6326339763072663673
   - rid: 6326339763072663674
   - rid: 6326339763072663675
   - rid: 6326339763072663676
   - rid: 6326339763072663677
-  - rid: 6326339763072663678
   - rid: 6326339763072663679
   - rid: 6326339763072663680
   - rid: 6326339763072663681
-  - rid: 6326339763072663682
   - rid: 6326339763072663683
   - rid: 6326339763072663684
-  - rid: 6326339763072663695
-  - rid: 6326339763072663696
   - rid: 6326339763072663754
   - rid: 6326339763072663755
   - rid: 6326339789369114850
@@ -446,13 +441,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Volume
-    - rid: 6326339763072663673
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639489
-        m_Metadata:
-          m_Items: []
-        m_Value: Tout rassis !
     - rid: 6326339763072663674
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -481,13 +469,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Temps
-    - rid: 6326339763072663678
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639494
-        m_Metadata:
-          m_Items: []
-        m_Value: "Fra\xEEcheur"
     - rid: 6326339763072663679
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -509,13 +490,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\xC9miett\xE9"
-    - rid: 6326339763072663682
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 63707960639498
-        m_Metadata:
-          m_Items: []
-        m_Value: Rassis
     - rid: 6326339763072663683
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:
@@ -530,20 +504,6 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: C'est parti !
-    - rid: 6326339763072663695
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348608
-        m_Metadata:
-          m_Items: []
-        m_Value: "\xC7a rassit !"
-    - rid: 6326339763072663696
-      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
-      data:
-        m_KeyId: 65810481348609
-        m_Metadata:
-          m_Items: []
-        m_Value: '{0} garnitures !'
     - rid: 6326339763072663754
       type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
       data:

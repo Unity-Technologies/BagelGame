@@ -11,6 +11,7 @@
                 <ui:Columns reorderable="false" primary-column-name="name">
                     <ui:Column name="name" title="Name" stretchable="true" optional="false"/>
                     <ui:Column name="toppings" title="Toppings Left" stretchable="true" optional="false"/>
+                    <ui:Column name="time" title="Time" stretchable="true" optional="false"/>
                 </ui:Columns>
             </ui:MultiColumnListView>
             <ui:Button text="Back" name="back-button">

@@ -1,5 +1,5 @@
-/* The kitchen gauges riding along with the bagel, on two wings: freshness and speed on the left, the
-   toppings and the knocks (spin and pain) on the right. No words: each gauge's face says what it shows
+/* The kitchen gauges riding along with the bagel, on two wings: the speed on the left, with the knocks (spin
+   and pain) smaller under it, and the toppings on the right. No words: each gauge's face says what it shows
    (BagelGauge). Each wing curves towards the camera like a cockpit's screen (Curved UI: it only shows on
    world-space panels) and folds back when the bagel gets close to a wall (BagelHud). */
 
@@ -16,6 +16,10 @@
 .b-hud--left,
 .b-hud--right {
     -unity-curvature: 0deg 24deg;
+}
+
+.b-hud--left {
+    align-items: flex-end;
 }
 
 /* Folded against a wall: the details step back. */
@@ -44,15 +48,17 @@
 }
 
 .b-hud__gauge--small {
-    width: 46px;
-    height: 46px;
-    border-radius: 23px;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
     border-width: 3px;
-    margin: 0 3px;
+    margin: 0 0 0 4px;
 }
 
+/* Under the speed, lined up on the wing's inner edge, next to the bagel. */
 .b-hud__knocks {
     flex-direction: row;
+    align-self: flex-end;
 }
 
 /* The spin gauge's little bagel, turning in the middle. */

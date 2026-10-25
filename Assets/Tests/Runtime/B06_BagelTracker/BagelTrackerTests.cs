@@ -80,16 +80,19 @@ namespace Bagel.B06_BagelTracker
         [Test]
         public void SpinAndPainBindings()
         {
-            Assert.AreEqual(BagelGauge.Kind.Spin, m_RightDisplay.spinGauge.kind);
-            Assert.AreEqual(BagelGauge.Kind.Pain, m_RightDisplay.painGauge.kind);
-            Assert.AreEqual(15f, m_RightDisplay.spinGauge.maxValue);
-            Assert.AreEqual(20f, m_RightDisplay.painGauge.maxValue);
+            // The knocks are under the speed, on the left wing; the right wing is the toppings' alone.
+            Assert.IsNull(m_RightDisplay.spinGauge);
+            Assert.IsNull(m_RightDisplay.painGauge);
+            Assert.AreEqual(BagelGauge.Kind.Spin, m_LeftDisplay.spinGauge.kind);
+            Assert.AreEqual(BagelGauge.Kind.Pain, m_LeftDisplay.painGauge.kind);
+            Assert.AreEqual(15f, m_LeftDisplay.spinGauge.maxValue);
+            Assert.AreEqual(20f, m_LeftDisplay.painGauge.maxValue);
 
             m_State.tracker.spin = 7;
             m_State.tracker.force = 5;
             simulate.FrameUpdate();
-            Assert.AreEqual(7f, m_RightDisplay.spinGauge.value);
-            Assert.AreEqual(0.25f, m_RightDisplay.painGauge.fraction, 1e-5f);
+            Assert.AreEqual(7f, m_LeftDisplay.spinGauge.value);
+            Assert.AreEqual(0.25f, m_LeftDisplay.painGauge.fraction, 1e-5f);
         }
 
         // No words on the gauges: their faces say what they show.
@@ -101,15 +104,11 @@ namespace Bagel.B06_BagelTracker
         }
 
         [Test]
-        public void TheGaugesShowFreshnessAndSpeed()
+        public void TheGaugesShowSpeed()
         {
-            Assert.AreEqual(1f, m_LeftDisplay.freshnessGauge.fraction);
-
-            m_State.tracker.freshness = 0.25f;
             m_State.tracker.speed = -3f;
             simulate.FrameUpdate();
 
-            Assert.AreEqual(0.25f, m_LeftDisplay.freshnessGauge.fraction, 1e-5f);
             // Backwards is as fast as forwards: half of speedMax (6).
             Assert.AreEqual(0.5f, m_LeftDisplay.speedGauge.fraction, 1e-5f);
             var needle = m_LeftDisplay.speedGauge.Q(className: BagelGauge.needleUssClassName);

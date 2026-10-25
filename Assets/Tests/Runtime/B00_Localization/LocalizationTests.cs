@@ -118,12 +118,15 @@ namespace Bagel.B00_Localization
             m_BagelTestAssetList.leaderboardPaneUxml.CloneTree(rootVisualElement);
             simulate.FrameUpdate();
             var table = rootVisualElement.Q<MultiColumnListView>();
-            Label Count() => table.GetRootElementForIndex(0).Query<Label>().Last();
+            Label Count() => table.GetRootElementForIndex(0).Query<Label>().AtIndex(1);
+            Label Time() => table.GetRootElementForIndex(0).Query<Label>().Last();
             StringAssert.IsMatch("^[0-9,]+$", Count().text);
+            StringAssert.IsMatch("^[0-9]+:[0-9]{2}[.][0-9]$", Time().text);
 
             BagelLocalization.SetLocale("ar");
             simulate.FrameUpdate();
             StringAssert.IsMatch("^[٠-٩٬]+$", Count().text);
+            StringAssert.IsMatch("^[٠-٩]+:[٠-٩]{2}.[٠-٩]$", Time().text);
         }
 
         [Test]
