@@ -1877,7 +1877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d9fe5ef93b31d1489b1a75c71d09bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BagelGame::Bagel.TableClearing
-  m_SweepSpeed: 10
+  m_SweepSpeed: 16
   m_SweepLift: 5
   m_RiseDepth: 1.4
   m_RiseTime: 1

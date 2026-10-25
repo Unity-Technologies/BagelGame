@@ -1,11 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bagel
 {
     // A copy of something on the table, shoved off for a new game (TableClearing) while the thing itself comes back up
-    // where it belongs. It flies, with a body of its own, until it gets down to the floor, then shrinks away. Caught on
-    // something on the way (a platform on the course), it's shoved again, until it's off.
+    // where it belongs. It flies, with a light body of its own (all the copies weigh the same, the big ones as little
+    // as the small: nothing holds the others back), until it gets down to the floor, then shrinks away. Caught on
+    // something on the way, it's shoved again, until it's off.
     public class TableLeftover : MonoBehaviour
     {
         const float k_MinAge = 0.2f;
@@ -13,7 +15,8 @@ namespace Bagel
         const float k_ShrinkTime = 0.25f;
         const float k_OnTheFloor = 0.25f;
         const float k_StuckSpeed = 0.5f;
-        const float k_StuckTime = 0.4f;
+        const float k_StuckTime = 0.3f;
+        const float k_Mass = 0.2f;
 
         float m_FloorHeight;
         Vector3 m_Push;
@@ -41,31 +44,21 @@ namespace Bagel
             leftover.m_FloorHeight = floorHeight;
             leftover.body = copy.GetComponent<Rigidbody>();
             leftover.body.isKinematic = false;
+            leftover.body.mass = k_Mass;
             leftover.body.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             leftover.m_Colliders = copy.GetComponentsInChildren<Collider>();
-            leftover.IgnoreWhatItLeansOn();
             leftover.m_Push = push;
             leftover.body.AddForce(push, ForceMode.VelocityChange);
             leftover.body.AddTorque(spin, ForceMode.VelocityChange);
             return leftover;
         }
 
-        // Something standing against the course's ramps and platforms, or right by them, would be held back by them: it
-        // goes over them. What it stands on still holds it up.
-        void IgnoreWhatItLeansOn()
+        public void IgnoreCollisions(IReadOnlyList<Collider> others)
         {
-            const float nearby = 0.3f;
-            const float under = 0.1f;
-            foreach (var collider in m_Colliders)
+            foreach (var other in others)
             {
-                var bounds = collider.bounds;
-                foreach (var other in Physics.OverlapBox(bounds.center, bounds.extents + Vector3.one * nearby))
-                {
-                    if (other.attachedRigidbody == body)
-                        continue;
-                    if (other.bounds.max.y > bounds.min.y + under)
-                        Physics.IgnoreCollision(collider, other);
-                }
+                foreach (var collider in m_Colliders)
+                    Physics.IgnoreCollision(collider, other);
             }
         }
 
@@ -92,7 +85,7 @@ namespace Bagel
             m_StuckFor = body.linearVelocity.magnitude < k_StuckSpeed ? m_StuckFor + Time.fixedDeltaTime : 0f;
             if (m_StuckFor > k_StuckTime)
             {
-                body.AddForce(m_Push * 0.6f, ForceMode.VelocityChange);
+                body.AddForce(m_Push, ForceMode.VelocityChange);
                 m_StuckFor = 0f;
             }
         }

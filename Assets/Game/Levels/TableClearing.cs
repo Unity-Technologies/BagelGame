@@ -5,12 +5,14 @@ using UnityEngine;
 namespace Bagel
 {
     // Sets the table again for a new game: everything on it (TableItem), moved or not, is shoved off to the right (as
-    // the bagel sees it from the start), out toward the alley, where nothing bounces back onto the table. What flies
-    // is a copy of each thing as it was (TableLeftover), gone once it gets down to the floor; the things themselves
-    // come back up out of the table at the same time, where they belong, as good as new.
+    // the bagel sees it from the start), hard, out toward the alley, where nothing bounces back onto the table. What
+    // flies is a copy of each thing as it was (TableLeftover), gone once it gets down to the floor; the things
+    // themselves come back up out of the table at the same time, where they belong, as good as new. The copies go
+    // through whatever else stands on the table (the course's ramps and platforms, the toaster, the bagel waiting to
+    // roll): nothing holds them back, and they don't knock the bagel.
     public class TableClearing : MonoBehaviour
     {
-        [SerializeField] float m_SweepSpeed = 10f;
+        [SerializeField] float m_SweepSpeed = 16f;
         [SerializeField] float m_SweepLift = 5f;
         [Tooltip("How far below the table things come up from, and how long they take.")]
         [SerializeField] float m_RiseDepth = 1.4f;
@@ -79,7 +81,8 @@ namespace Bagel
                 m_Leftovers.Add(TableLeftover.Make(items[i], m_FloorHeight, push, spin));
             }
 
-            // What flies off doesn't knock what's coming back.
+            // What flies off doesn't knock what's coming back, or anything else standing on the table.
+            var standing = StandingOnTheTable(items);
             foreach (var leftover in m_Leftovers)
             {
                 foreach (var item in items)
@@ -87,7 +90,36 @@ namespace Bagel
                     if (item != null)
                         leftover.IgnoreCollisions(item.gameObject);
                 }
+                leftover.IgnoreCollisions(standing);
             }
+        }
+
+        // What stands on the table round its things, that isn't one of them: what rises above it further than a
+        // tablecloth does (the course's ramps and platforms are sunk into it).
+        List<Collider> StandingOnTheTable(List<TableItem> items)
+        {
+            const float margin = 0.3f;
+            var top = transform.position.y;
+            var bounds = new Bounds(transform.position, Vector3.zero);
+            foreach (var item in items)
+            {
+                if (item != null)
+                    bounds.Encapsulate(item.homePosition);
+            }
+            bounds.Expand(new Vector3(16f, 0f, 8f));
+            var center = new Vector3(bounds.center.x, top + 4f, bounds.center.z);
+            var extents = new Vector3(bounds.extents.x, 4f, bounds.extents.z);
+
+            var standing = new List<Collider>();
+            foreach (var collider in Physics.OverlapBox(center, extents, Quaternion.identity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            {
+                var body = collider.attachedRigidbody;
+                if (body != null && (body.GetComponent<TableItem>() != null || body.GetComponent<TableLeftover>() != null))
+                    continue;
+                if (collider.bounds.max.y > top + margin)
+                    standing.Add(collider);
+            }
+            return standing;
         }
     }
 }
