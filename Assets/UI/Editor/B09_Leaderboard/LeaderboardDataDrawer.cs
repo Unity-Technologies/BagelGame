@@ -41,9 +41,17 @@ namespace Bagel
                 bindingPath = "toppings",
                 stretchable = true
             });
+            table.columns.Add(new Column
+            {
+                name = "time",
+                title = "Time (s)",
+                bindingPath = "time",
+                stretchable = true
+            });
 
             table.columns["name"].makeCell = () => new TextField() { bindingPath = "playerName" };
             table.columns["toppings"].makeCell = () => new IntegerField() { bindingPath = "toppings" };
+            table.columns["time"].makeCell = () => new FloatField() { bindingPath = "time" };
 
             table.BindProperty(property.FindPropertyRelative("m_Entries"));
 
