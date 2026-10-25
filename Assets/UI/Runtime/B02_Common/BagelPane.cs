@@ -13,6 +13,9 @@ namespace Bagel
         // Set on the top pane from the settings; the common styles turn things off under them.
         public static readonly UniqueStyleString reduceMotionUssClassName = new UniqueStyleString("b-reduce-motion");
         public static readonly UniqueStyleString noVisualEffectsUssClassName = new UniqueStyleString("b-no-visual-effects");
+        // On an element that takes the gamepad and the keyboard for the controls in it, which don't take the focus
+        // themselves (the cash register's face, for its keys).
+        public static readonly UniqueStyleString focusGroupUssClassName = new UniqueStyleString("b-focus-group");
 
         PlayManagerState m_State;
         PlayManagerState m_GivenState;

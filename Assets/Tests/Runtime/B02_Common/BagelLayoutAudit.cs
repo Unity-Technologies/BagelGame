@@ -82,8 +82,20 @@ namespace Bagel
         {
             if (string.IsNullOrWhiteSpace(text))
                 problems.Add($"{Describe(control)} has no text or label");
-            if (!control.focusable)
+            if (!control.focusable && !InAFocusGroup(control))
                 problems.Add($"{Describe(control)} can't be focused with a gamepad or keyboard");
+        }
+
+        // A control that doesn't take the focus itself is reached through an element that takes the gamepad and the
+        // keyboard for it.
+        static bool InAFocusGroup(VisualElement control)
+        {
+            for (var element = control.parent; element != null; element = element.parent)
+            {
+                if (element.focusable && element.ClassListContains(BagelPane.focusGroupUssClassName))
+                    return true;
+            }
+            return false;
         }
 
         static void CheckRadii(VisualElement element, List<string> problems)
