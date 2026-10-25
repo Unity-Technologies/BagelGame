@@ -16,7 +16,7 @@ namespace Bagel
         [SerializeField] float m_FlyTime = 1.6f;
         [Tooltip("How far below the table things come up from, and how long they take.")]
         [SerializeField] float m_RiseDepth = 1.4f;
-        [SerializeField] float m_RiseTime = 2.4f;
+        [SerializeField] float m_RiseTime = 1f;
 
         PlayManager m_PlayManager;
         Coroutine m_Clearing;

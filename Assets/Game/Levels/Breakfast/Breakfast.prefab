@@ -1146,7 +1146,7 @@ MonoBehaviour:
   m_SweepLift: 4
   m_FlyTime: 1.6
   m_RiseDepth: 1.4
-  m_RiseTime: 2.4
+  m_RiseTime: 1
 --- !u!1 &4263586001404385474
 GameObject:
   m_ObjectHideFlags: 0
