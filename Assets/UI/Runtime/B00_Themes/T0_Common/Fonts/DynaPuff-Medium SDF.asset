@@ -76,7 +76,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _FaceDilate: 0
-    - _GradientScale: 7
+    - _GradientScale: 10
     - _OutlineSoftness: 0
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
@@ -87,8 +87,8 @@ Material:
     - _ScaleY: 1
     - _ShaderFlags: 0
     - _Sharpness: 0
-    - _TextureHeight: 2048
-    - _TextureWidth: 2048
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
     - _UnderlayDilate: 0
     - _UnderlayOffsetX: 0
     - _UnderlayOffsetY: 0
@@ -146,24 +146,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: DynaPuff
     m_StyleName: Medium
-    m_PointSize: 64
+    m_PointSize: 90
     m_Scale: 1
     m_UnitsPerEM: 1000
-    m_LineHeight: 76.8
-    m_AscentLine: 61.76
-    m_CapLine: 48
-    m_MeanLine: 41
+    m_LineHeight: 108.00001
+    m_AscentLine: 86.850006
+    m_CapLine: 67
+    m_MeanLine: 57
     m_Baseline: 0
-    m_DescentLine: -15.04
-    m_SuperscriptOffset: 61.76
+    m_DescentLine: -21.150002
+    m_SuperscriptOffset: 86.850006
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -15.04
+    m_SubscriptOffset: -21.150002
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -8
-    m_UnderlineThickness: 3.2
-    m_StrikethroughOffset: 16.4
-    m_StrikethroughThickness: 3.2
-    m_TabWidth: 13
+    m_UnderlineOffset: -11.25
+    m_UnderlineThickness: 4.5
+    m_StrikethroughOffset: 22.8
+    m_StrikethroughThickness: 4.5
+    m_TabWidth: 18
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
@@ -172,17 +172,17 @@ MonoBehaviour:
   m_IsMultiAtlasTexturesEnabled: 1
   m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 1
-  m_DynamicDataPersistence: 1
-  m_AtlasWidth: 2048
-  m_AtlasHeight: 2048
-  m_AtlasPadding: 6
+  m_DynamicDataPersistence: 0
+  m_AtlasWidth: 1024
+  m_AtlasHeight: 1024
+  m_AtlasPadding: 9
   m_AtlasRenderMode: 4165
   m_UsedGlyphRects: []
   m_FreeGlyphRects:
   - m_X: 0
     m_Y: 0
-    m_Width: 2047
-    m_Height: 2047
+    m_Width: 1023
+    m_Height: 1023
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords: []
