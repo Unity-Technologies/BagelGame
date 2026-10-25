@@ -64,19 +64,19 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Color_Variation: 0.2
+    - _Color_Variation: 0.18
     - _Mortar_Width: 0
     - _OcclusionStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ScreenSpaceReflections: 1
     - _ScreenSpaceReflectionsContributeTransparent: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.42
     - _Stagger: 0.32
     m_Colors:
     - _BaseColor: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
-    - _Brick_Color_A: {r: 0.9058824, g: 0.7803922, b: 0.61960787, a: 1}
-    - _Brick_Color_B: {r: 0.7803922, g: 0.6431373, b: 0.48627454, a: 1}
+    - _Brick_Color_A: {r: 0.8, g: 0.62, b: 0.43, a: 1}
+    - _Brick_Color_B: {r: 0.68, g: 0.5, b: 0.34, a: 1}
     - _Mortar_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Tiling: {r: -2.4, g: 41.32, b: 0, a: 0}
   m_BuildTextureStacks: []

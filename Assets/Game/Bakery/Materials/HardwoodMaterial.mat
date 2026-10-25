@@ -71,12 +71,12 @@ Material:
     - _QueueOffset: 0
     - _ScreenSpaceReflections: 1
     - _ScreenSpaceReflectionsContributeTransparent: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.35
     - _Stagger: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Brick_Color_A: {r: 0.9058824, g: 0.7803922, b: 0.61960787, a: 1}
-    - _Brick_Color_B: {r: 0.7803922, g: 0.6431373, b: 0.48627454, a: 1}
+    - _Brick_Color_A: {r: 0.5, g: 0.33, b: 0.2, a: 1}
+    - _Brick_Color_B: {r: 0.42, g: 0.27, b: 0.16, a: 1}
     - _Mortar_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Tiling: {r: 2.4, g: 31.92, b: 0, a: 0}
   m_BuildTextureStacks: []
