@@ -74,9 +74,10 @@ namespace Bagel.B00_Gameplay
                 Assert.IsTrue(renderer.enabled);
         }
 
-        // Every new game shoves everything off, moved or not, out to the nearer side, and sets it all again: the table
-        // as the first game had it once its loose things settled (one sugar cube tumbles off the others, the same way
-        // every time).
+        // Every new game shoves everything off, moved or not, out to the right, toward the alley: copies of it fly, and
+        // go once they're down on the floor. The things themselves come back up out of the table at once, as the
+        // first game had them once its loose things settled (one sugar cube tumbles off the others, the same way every
+        // time).
         [UnityTest]
         public IEnumerator ANewGameShovesEverythingOffAndSetsItAgain()
         {
@@ -94,20 +95,47 @@ namespace Bagel.B00_Gameplay
 
             state.FinishRun();
             yield return Seconds(1f);
+            var clearing = Object.FindAnyObjectByType<TableClearing>();
+            var level = clearing.transform;
             state.GoToPlay();
-            yield return Seconds(0.3f);
-            var level = Object.FindAnyObjectByType<TableClearing>().transform;
+            yield return null;
+
+            // Everything is coming back up already, from under where it belongs.
             foreach (var item in TableItem.items)
             {
-                Assert.IsTrue(item.loose, $"{item.name} is shoved off");
-                var from = level.InverseTransformPoint(settled[item]).x;
-                var now = level.InverseTransformPoint(item.transform.position).x;
-                Assert.Greater(Mathf.Abs(now) - Mathf.Abs(from), 1f, $"{item.name} flies off its own side");
+                var home = level.InverseTransformPoint(item.homePosition);
+                var now = level.InverseTransformPoint(item.transform.position);
+                Assert.Less(now.y, home.y, $"{item.name} comes up out of the table");
+                Assert.Less(new Vector2(now.x - home.x, now.z - home.z).magnitude, 0.01f, $"{item.name} comes up where it belongs");
             }
+
+            // A copy of each thing as it was flies off to the right, the moved jam from where it was moved to.
+            var leftovers = new System.Collections.Generic.List<TableLeftover>(clearing.leftovers);
+            Assert.AreEqual(settled.Count, leftovers.Count, "everything is shoved off");
+            var starts = new System.Collections.Generic.List<float>();
+            foreach (var leftover in leftovers)
+            {
+                Assert.IsNull(leftover.GetComponent<TableItem>(), "a copy isn't one of the table's things");
+                starts.Add(level.InverseTransformPoint(leftover.transform.position).x);
+            }
+            Assert.AreEqual(settled.Count, TableItem.items.Count, "the copies aren't counted");
+            yield return Seconds(0.3f);
+            for (int i = 0; i < leftovers.Count; i++)
+            {
+                Assert.IsTrue(leftovers[i] != null, $"{leftovers[i].name} is still flying");
+                var now = level.InverseTransformPoint(leftovers[i].transform.position).x;
+                Assert.Greater(now - starts[i], 0.5f, $"{leftovers[i].name} flies off to the right");
+            }
+
+            // Down on the floor, and gone, all of it, soon.
+            var end = Time.time + 9f;
+            while (Time.time < end && leftovers.Exists(leftover => leftover != null))
+                yield return null;
+            foreach (var leftover in leftovers)
+                Assert.IsTrue(leftover == null, leftover != null ? $"{leftover.name} is gone, not at {leftover.transform.position}" : "");
 
             yield return TableSet();
             yield return Seconds(1.5f);
-            Assert.IsFalse(TableItem.disturbed, "the table is set again");
             // Loose things settle again where physics puts them, within a hair of the last time.
             foreach (var item in TableItem.items)
                 Assert.Less(Vector3.Distance(item.transform.position, settled[item]), 0.15f, $"{item.name} is back");
