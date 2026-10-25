@@ -2832,7 +2832,7 @@ Transform:
   m_GameObject: {fileID: 1385801809}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2917926, y: -0, z: -0, w: 0.9564817}
-  m_LocalPosition: {x: 0, y: 0.39599705, z: -2.154}
+  m_LocalPosition: {x: 0, y: 0.15, z: -2.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3603,7 +3603,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 5}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 5.35
+  Radius: 3.5
   Orbits:
     Top:
       Radius: 2
