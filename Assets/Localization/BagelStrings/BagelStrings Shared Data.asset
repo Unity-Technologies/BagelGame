@@ -477,6 +477,191 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
+  - m_Id: 811103564922880
+    m_Key: levels.title
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922881
+    m_Key: levels.new
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922882
+    m_Key: levels.edit
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922883
+    m_Key: levels.play
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922884
+    m_Key: levels.yours
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922885
+    m_Key: levels.length
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922886
+    m_Key: levels.pieces
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922887
+    m_Key: levels.new-name
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922888
+    m_Key: levels.name
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922889
+    m_Key: levels.delete
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922890
+    m_Key: levels.done
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922891
+    m_Key: levels.turn
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922892
+    m_Key: levels.remove
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922893
+    m_Key: levels.hint.choose
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922894
+    m_Key: levels.hint.place
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922895
+    m_Key: level.breakfast
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922896
+    m_Key: level.brunch
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922897
+    m_Key: level.banquet
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922898
+    m_Key: piece.ramp
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922899
+    m_Key: piece.platform
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922900
+    m_Key: piece.block
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922901
+    m_Key: piece.spilledMilk
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922902
+    m_Key: piece.milkPuddle
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922903
+    m_Key: piece.baguetteShort
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922904
+    m_Key: piece.baguetteLong
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922905
+    m_Key: piece.butterDish
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922906
+    m_Key: piece.cookbooks
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922907
+    m_Key: piece.mug
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922908
+    m_Key: piece.jamJar
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922909
+    m_Key: piece.sugarCubes
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922910
+    m_Key: piece.saltShaker
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922911
+    m_Key: piece.pepperShaker
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922912
+    m_Key: piece.orange
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922913
+    m_Key: piece.milkBottle
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922914
+    m_Key: piece.honeyPot
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922915
+    m_Key: piece.eggCup
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 811103564922916
+    m_Key: piece.apricotJam
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

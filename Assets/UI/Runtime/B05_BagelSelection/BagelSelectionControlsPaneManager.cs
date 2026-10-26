@@ -3,7 +3,8 @@ using UnityEngine.UIElements;
 namespace Bagel
 {
     // The cash register's face by the lazy Susan: its display shows the chosen bagel, < and > turn the lazy Susan
-    // to the bagel before or after (round and round), Back goes to the menu, and Order takes the bagel. Buttons and
+    // to the bagel before or after (round and round), Back goes to the menu, and Order takes the bagel to the payment
+    // tablet, where the level's chosen (LevelSelectionScreenManager). Buttons and
     // gamepad/keyboard navigation both go straight to the state's bagel selection; a key pressed with the gamepad or
     // the keyboard goes down too. The face keeps the focus while the bagels are chosen: its keys don't take it when
     // clicked, and a click anywhere else gives it back, so the keyboard and gamepad always work.
@@ -84,7 +85,7 @@ namespace Bagel
 
         protected override void OnLocaleChanged() => UpdateRegister();
 
-        public void Select() => state?.GoToPlay();
+        public void Select() => state?.GoToLevelSelection();
 
         public void Back() => state?.GoToMainMenu();
 

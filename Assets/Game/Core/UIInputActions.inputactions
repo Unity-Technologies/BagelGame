@@ -61,6 +61,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RemovePiece",
+                    "type": "Button",
+                    "id": "eb9edddf-d0e9-4e61-a806-6fae74f44663",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Point",
                     "type": "PassThrough",
                     "id": "c97a9502-44a1-4aa5-9d4c-d8ac932d2f78",
@@ -463,6 +472,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "NextTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89934cf7-44b5-4085-95b8-27b9a3e0f1bc",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RemovePiece",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

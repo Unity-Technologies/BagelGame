@@ -15,6 +15,9 @@ namespace Bagel
         [SerializeField] CinemachineCamera m_MainMenuCamera;
         [SerializeField] CinemachineCamera m_MainMenuSecondaryCamera;
         [SerializeField] CinemachineCamera m_BagelSelectionCamera;
+        [Tooltip("Over the payment tablet and down the counter, as the level's chosen; and close up on its screen, square, for the level editor.")]
+        [SerializeField] CinemachineCamera m_LevelSelectionCamera;
+        [SerializeField] CinemachineCamera m_LevelEditorCamera;
         [SerializeField] CinemachineCamera m_PlayCamera;
         [Tooltip("Looks past the toaster at the television: at game over, and for the main menu's leaderboard.")]
         [SerializeField] CinemachineCamera m_GameOverCamera;
@@ -60,7 +63,7 @@ namespace Bagel
         {
             if (args.propertyName.Equals(SettingsData.fieldOfViewPath))
                 UpdateFieldOfView(m_State.settings.fieldOfView);
-            else if (args.propertyName.Equals(PlayManagerState.mainMenuPanePath))
+            else if (args.propertyName.Equals(PlayManagerState.mainMenuPanePath) || args.propertyName.Equals(PlayManagerState.isEditingLevelPath))
                 UpdateCamera();
         }
 
@@ -89,6 +92,10 @@ namespace Bagel
             m_MainMenuCamera.enabled = mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Main;
             m_MainMenuSecondaryCamera.enabled = mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Settings;
             m_BagelSelectionCamera.enabled = m_State.currentState == PlayManagerState.State.BagelSelection;
+            if (m_LevelSelectionCamera != null)
+                m_LevelSelectionCamera.enabled = m_State.isLevelSelection && !m_State.isEditingLevel;
+            if (m_LevelEditorCamera != null)
+                m_LevelEditorCamera.enabled = m_State.isLevelSelection && m_State.isEditingLevel;
             m_PlayCamera.enabled = m_State.currentState == PlayManagerState.State.Playing;
             m_GameOverCamera.enabled = m_State.currentState == PlayManagerState.State.GameOver ||
                 (mainMenu && m_State.mainMenuPane == PlayManagerState.MainMenuPane.Leaderboard);

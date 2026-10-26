@@ -34,6 +34,7 @@ namespace Bagel
             new CardSpec { title = "Main Menu", uxmlPaths = new[] { "B03_MainMenu/MainMenuScreen.uxml" } },
             new CardSpec { title = "Bagel Selection", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionControlsPane.uxml" } },
             new CardSpec { title = "Bagel Cards", uxmlPaths = new[] { "B05_BagelSelection/BagelSelectionTypeInfoPane.uxml" } },
+            new CardSpec { title = "Payment Tablet", uxmlPaths = new[] { "B14_LevelSelection/LevelSelectionScreen.uxml" } },
             new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" } },
             new CardSpec { title = "Callout (Screen Space)", uxmlPaths = new[] { "B06_BagelTracker/BagelCallout.uxml" }, size = new Vector2(220f, 90f) },
             new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, size = new Vector2(640f, 400f) },
@@ -407,6 +408,8 @@ namespace Bagel
             "Main Menu/Main Pane",
             "Main Menu/Settings",
             "Main Menu/Leaderboard",
+            "Payment Tablet/Levels",
+            "Payment Tablet/Level Editor",
             "Pause/Pause Pane",
             "Pause/Settings",
             "Game Over/Win",
@@ -431,6 +434,19 @@ namespace Bagel
                 case "Main Menu/Leaderboard":
                     m_State.GoToMainMenu();
                     m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+                    break;
+                case "Payment Tablet/Levels":
+                    m_State.GoToLevelSelection();
+                    break;
+                case "Payment Tablet/Level Editor":
+                    m_State.GoToLevelSelection();
+                    if (!m_State.canEditLevel)
+                    {
+                        var level = m_State.AddLevel("My Table");
+                        foreach (var piece in m_State.levels[0].pieces)
+                            level.Add(piece);
+                    }
+                    m_State.EditLevel(true);
                     break;
                 case "Pause/Pause Pane":
                 case "Pause/Settings":

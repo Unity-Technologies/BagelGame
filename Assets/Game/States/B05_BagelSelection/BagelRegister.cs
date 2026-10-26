@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Bagel
 {
     // The cash register by the lazy Susan, with the keys to choose a bagel on its top (BagelSelectionControlsPane). An
-    // order rings it up: the drawer shoots out, and slides back in.
+    // order rings it up, on the way to the payment tablet: the drawer shoots out, and slides back in.
     public class BagelRegister : MonoBehaviour
     {
         [SerializeField] PlayManager m_PlayManager;
@@ -41,7 +41,8 @@ namespace Bagel
 
         void State_OnStateChange(object sender, PlayManagerState.State state)
         {
-            var ordered = m_LastState == PlayManagerState.State.BagelSelection && state == PlayManagerState.State.Playing;
+            var ordered = m_LastState == PlayManagerState.State.BagelSelection &&
+                (state == PlayManagerState.State.LevelSelection || state == PlayManagerState.State.Playing);
             m_LastState = state;
             if (!ordered)
                 return;

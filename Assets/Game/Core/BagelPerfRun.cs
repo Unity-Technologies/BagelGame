@@ -63,6 +63,10 @@ namespace Bagel
             yield return Measure("Leaderboard");
             state.GoToBagelSelection();
             yield return Measure("Bagel Selection");
+            state.GoToLevelSelection();
+            yield return Measure("Level Selection");
+            state.SelectLevel(state.levelCount - 1);
+            yield return Measure("Longest Level");
 
             var gamepad = InputSystem.AddDevice<Gamepad>("Bagel Perf Gamepad");
             state.GoToPlay();

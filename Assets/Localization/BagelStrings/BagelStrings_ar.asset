@@ -109,6 +109,43 @@ MonoBehaviour:
   - rid: 6326339789369114962
   - rid: 6326339789369114963
   - rid: 6326339789369115061
+  - rid: 6326339789369115158
+  - rid: 6326339789369115159
+  - rid: 6326339789369115160
+  - rid: 6326339789369115161
+  - rid: 6326339789369115162
+  - rid: 6326339789369115163
+  - rid: 6326339789369115164
+  - rid: 6326339789369115165
+  - rid: 6326339789369115166
+  - rid: 6326339789369115167
+  - rid: 6326339789369115168
+  - rid: 6326339789369115169
+  - rid: 6326339789369115170
+  - rid: 6326339789369115171
+  - rid: 6326339789369115172
+  - rid: 6326339789369115173
+  - rid: 6326339789369115174
+  - rid: 6326339789369115175
+  - rid: 6326339789369115176
+  - rid: 6326339789369115177
+  - rid: 6326339789369115178
+  - rid: 6326339789369115179
+  - rid: 6326339789369115180
+  - rid: 6326339789369115181
+  - rid: 6326339789369115182
+  - rid: 6326339789369115183
+  - rid: 6326339789369115184
+  - rid: 6326339789369115185
+  - rid: 6326339789369115186
+  - rid: 6326339789369115187
+  - rid: 6326339789369115188
+  - rid: 6326339789369115189
+  - rid: 6326339789369115190
+  - rid: 6326339789369115191
+  - rid: 6326339789369115192
+  - rid: 6326339789369115193
+  - rid: 6326339789369115194
   references:
     version: 2
     RefIds:
@@ -756,3 +793,262 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: "\u0627\u0637\u0644\u0628"
+    - rid: 6326339789369115158
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922880
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u062E\u062A\u0631 \u0637\u0627\u0648\u0644\u0629"
+    - rid: 6326339789369115159
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922881
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0637\u0627\u0648\u0644\u0629 \u062C\u062F\u064A\u062F\u0629"
+    - rid: 6326339789369115160
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922882
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u062A\u0639\u062F\u064A\u0644"
+    - rid: 6326339789369115161
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922883
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u062F\u0641\u0639 \u0648\u0627\u0644\u0639\u0628"
+    - rid: 6326339789369115162
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922884
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0646 \u0635\u0646\u0639\u0643"
+    - rid: 6326339789369115163
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922885
+        m_Metadata:
+          m_Items: []
+        m_Value: "{0} \u0645"
+    - rid: 6326339789369115164
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922886
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u0644\u0642\u0637\u0639: {0}"
+    - rid: 6326339789369115165
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922887
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0637\u0627\u0648\u0644\u062A\u064A {0}"
+    - rid: 6326339789369115166
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922888
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u0644\u0627\u0633\u0645"
+    - rid: 6326339789369115167
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922889
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u062D\u0630\u0641 \u0627\u0644\u0637\u0627\u0648\u0644\u0629"
+    - rid: 6326339789369115168
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922890
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u062A\u0645"
+    - rid: 6326339789369115169
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922891
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u062A\u062F\u0648\u064A\u0631"
+    - rid: 6326339789369115170
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922892
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0625\u0632\u0627\u0644\u0629"
+    - rid: 6326339789369115171
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922893
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u062E\u062A\u0631 \u0634\u064A\u0626\u064B\u0627 \u0645\u0646 \u0627\u0644\u0623\u0633\u0641\u0644\u060C \u0623\u0648 \u0627\u0633\u062D\u0628\u0647 \u0625\u0644\u0649 \u0627\u0644\u0645\u0646\u0636\u062F\u0629"
+    - rid: 6326339789369115172
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922894
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0627\u0646\u0642\u0631 \u0639\u0644\u0649 \u0627\u0644\u0645\u0646\u0636\u062F\u0629 \u0644\u0648\u0636\u0639: {0}"
+    - rid: 6326339789369115173
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922895
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0641\u0637\u0648\u0631"
+    - rid: 6326339789369115174
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922896
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0631\u0627\u0646\u0634"
+    - rid: 6326339789369115175
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922897
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0623\u062F\u0628\u0629"
+    - rid: 6326339789369115176
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922898
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0646\u062D\u062F\u0631"
+    - rid: 6326339789369115177
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922899
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0646\u0635\u0629"
+    - rid: 6326339789369115178
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922900
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0643\u0639\u0628 \u062E\u0634\u0628\u064A"
+    - rid: 6326339789369115179
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922901
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u062D\u0644\u064A\u0628 \u0645\u0633\u0643\u0648\u0628"
+    - rid: 6326339789369115180
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922902
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0631\u0643\u0629 \u062D\u0644\u064A\u0628"
+    - rid: 6326339789369115181
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922903
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0627\u063A\u064A\u062A"
+    - rid: 6326339789369115182
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922904
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0627\u063A\u064A\u062A \u0637\u0648\u064A\u0644"
+    - rid: 6326339789369115183
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922905
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0635\u062D\u0646 \u0627\u0644\u0632\u0628\u062F\u0629"
+    - rid: 6326339789369115184
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922906
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0643\u062A\u0628 \u0627\u0644\u0637\u0628\u062E"
+    - rid: 6326339789369115185
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922907
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0643\u0648\u0628"
+    - rid: 6326339789369115186
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922908
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0631\u0637\u0645\u0627\u0646 \u0645\u0631\u0628\u0649"
+    - rid: 6326339789369115187
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922909
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0643\u0639\u0628\u0627\u062A \u0633\u0643\u0631"
+    - rid: 6326339789369115188
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922910
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0644\u062D"
+    - rid: 6326339789369115189
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922911
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0641\u0644\u0641\u0644"
+    - rid: 6326339789369115190
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922912
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0628\u0631\u062A\u0642\u0627\u0644\u0629"
+    - rid: 6326339789369115191
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922913
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0632\u062C\u0627\u062C\u0629 \u062D\u0644\u064A\u0628"
+    - rid: 6326339789369115192
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922914
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u062C\u0631\u0629 \u0639\u0633\u0644"
+    - rid: 6326339789369115193
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922915
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0643\u0623\u0633 \u0628\u064A\u0636"
+    - rid: 6326339789369115194
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922916
+        m_Metadata:
+          m_Items: []
+        m_Value: "\u0645\u0631\u0628\u0649 \u0627\u0644\u0645\u0634\u0645\u0634"

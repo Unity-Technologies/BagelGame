@@ -30,7 +30,8 @@ namespace Bagel.B00_Layout
         public static readonly string[] screens =
         {
             "Main Menu", "Main Menu: Settings: Game", "Main Menu: Settings: Look", "Main Menu: Settings: Graphics",
-            "Main Menu: Settings: Controls", "Main Menu: Settings: About", "Bagel Selection", "Bagel Card", "Tracker",
+            "Main Menu: Settings: Controls", "Main Menu: Settings: About", "Bagel Selection", "Bagel Card",
+            "Level Selection", "Level Selection: Editor", "Tracker",
             "Pause", "Pause: Settings: Game", "Pause: Settings: Look",
             "Television", "Television: Leaderboard", "Television: Game Over"
         };
@@ -43,6 +44,7 @@ namespace Bagel.B00_Layout
                 "Main Menu" => assets.mainMenuScreenUxml,
                 "Bagel Selection" => assets.bagelSelectionControlsUxml,
                 "Bagel Card" => assets.bagelSelectionTypeInfoUxml,
+                "Level Selection" => assets.levelSelectionScreenUxml,
                 "Tracker" => assets.bagelTrackerRightDisplayUxml,
                 "Pause" => assets.pauseScreenUxml,
                 _ => assets.gameOverScreenUxml,
@@ -66,6 +68,18 @@ namespace Bagel.B00_Layout
                 state.Pause();
                 if (screenName.Contains("Settings"))
                     state.pausePane = PlayManagerState.PausePane.Settings;
+            }
+            else if (screenName.StartsWith("Level Selection"))
+            {
+                state.GoToLevelSelection();
+                if (screenName.EndsWith("Editor"))
+                {
+                    var level = state.AddLevel("My Table");
+                    foreach (var piece in state.levels[1].pieces)
+                        level.Add(piece);
+                    state.EditLevel(true);
+                    screen.Q<BagelLevelEditor>().ChooseBrush("Orange");
+                }
             }
             else if (screenName == "Television: Game Over")
             {

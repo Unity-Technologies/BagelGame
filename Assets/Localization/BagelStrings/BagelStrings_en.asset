@@ -109,6 +109,43 @@ MonoBehaviour:
   - rid: 6326339789369114934
   - rid: 6326339789369114935
   - rid: 6326339789369115060
+  - rid: 6326339789369115121
+  - rid: 6326339789369115122
+  - rid: 6326339789369115123
+  - rid: 6326339789369115124
+  - rid: 6326339789369115125
+  - rid: 6326339789369115126
+  - rid: 6326339789369115127
+  - rid: 6326339789369115128
+  - rid: 6326339789369115129
+  - rid: 6326339789369115130
+  - rid: 6326339789369115131
+  - rid: 6326339789369115132
+  - rid: 6326339789369115133
+  - rid: 6326339789369115134
+  - rid: 6326339789369115135
+  - rid: 6326339789369115136
+  - rid: 6326339789369115137
+  - rid: 6326339789369115138
+  - rid: 6326339789369115139
+  - rid: 6326339789369115140
+  - rid: 6326339789369115141
+  - rid: 6326339789369115142
+  - rid: 6326339789369115143
+  - rid: 6326339789369115144
+  - rid: 6326339789369115145
+  - rid: 6326339789369115146
+  - rid: 6326339789369115147
+  - rid: 6326339789369115148
+  - rid: 6326339789369115149
+  - rid: 6326339789369115150
+  - rid: 6326339789369115151
+  - rid: 6326339789369115152
+  - rid: 6326339789369115153
+  - rid: 6326339789369115154
+  - rid: 6326339789369115155
+  - rid: 6326339789369115156
+  - rid: 6326339789369115157
   references:
     version: 2
     RefIds:
@@ -756,3 +793,262 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Order
+    - rid: 6326339789369115121
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922880
+        m_Metadata:
+          m_Items: []
+        m_Value: Choose a table
+    - rid: 6326339789369115122
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922881
+        m_Metadata:
+          m_Items: []
+        m_Value: New Table
+    - rid: 6326339789369115123
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922882
+        m_Metadata:
+          m_Items: []
+        m_Value: Edit
+    - rid: 6326339789369115124
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922883
+        m_Metadata:
+          m_Items: []
+        m_Value: Pay & Play
+    - rid: 6326339789369115125
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922884
+        m_Metadata:
+          m_Items: []
+        m_Value: Yours
+    - rid: 6326339789369115126
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922885
+        m_Metadata:
+          m_Items: []
+        m_Value: '{0} m'
+    - rid: 6326339789369115127
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922886
+        m_Metadata:
+          m_Items: []
+        m_Value: 'Pieces: {0}'
+    - rid: 6326339789369115128
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922887
+        m_Metadata:
+          m_Items: []
+        m_Value: My Table {0}
+    - rid: 6326339789369115129
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922888
+        m_Metadata:
+          m_Items: []
+        m_Value: Name
+    - rid: 6326339789369115130
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922889
+        m_Metadata:
+          m_Items: []
+        m_Value: Delete table
+    - rid: 6326339789369115131
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922890
+        m_Metadata:
+          m_Items: []
+        m_Value: Done
+    - rid: 6326339789369115132
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922891
+        m_Metadata:
+          m_Items: []
+        m_Value: Turn
+    - rid: 6326339789369115133
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922892
+        m_Metadata:
+          m_Items: []
+        m_Value: Remove
+    - rid: 6326339789369115134
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922893
+        m_Metadata:
+          m_Items: []
+        m_Value: Choose a thing below, or drag one onto the counter
+    - rid: 6326339789369115135
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922894
+        m_Metadata:
+          m_Items: []
+        m_Value: 'Click the counter to put down: {0}'
+    - rid: 6326339789369115136
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922895
+        m_Metadata:
+          m_Items: []
+        m_Value: Breakfast
+    - rid: 6326339789369115137
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922896
+        m_Metadata:
+          m_Items: []
+        m_Value: Brunch
+    - rid: 6326339789369115138
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922897
+        m_Metadata:
+          m_Items: []
+        m_Value: Banquet
+    - rid: 6326339789369115139
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922898
+        m_Metadata:
+          m_Items: []
+        m_Value: Ramp
+    - rid: 6326339789369115140
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922899
+        m_Metadata:
+          m_Items: []
+        m_Value: Platform
+    - rid: 6326339789369115141
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922900
+        m_Metadata:
+          m_Items: []
+        m_Value: Block
+    - rid: 6326339789369115142
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922901
+        m_Metadata:
+          m_Items: []
+        m_Value: Spilled milk
+    - rid: 6326339789369115143
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922902
+        m_Metadata:
+          m_Items: []
+        m_Value: Milk puddle
+    - rid: 6326339789369115144
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922903
+        m_Metadata:
+          m_Items: []
+        m_Value: Baguette
+    - rid: 6326339789369115145
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922904
+        m_Metadata:
+          m_Items: []
+        m_Value: Long baguette
+    - rid: 6326339789369115146
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922905
+        m_Metadata:
+          m_Items: []
+        m_Value: Butter dish
+    - rid: 6326339789369115147
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922906
+        m_Metadata:
+          m_Items: []
+        m_Value: Cookbooks
+    - rid: 6326339789369115148
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922907
+        m_Metadata:
+          m_Items: []
+        m_Value: Mug
+    - rid: 6326339789369115149
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922908
+        m_Metadata:
+          m_Items: []
+        m_Value: Jam jar
+    - rid: 6326339789369115150
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922909
+        m_Metadata:
+          m_Items: []
+        m_Value: Sugar cubes
+    - rid: 6326339789369115151
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922910
+        m_Metadata:
+          m_Items: []
+        m_Value: Salt
+    - rid: 6326339789369115152
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922911
+        m_Metadata:
+          m_Items: []
+        m_Value: Pepper
+    - rid: 6326339789369115153
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922912
+        m_Metadata:
+          m_Items: []
+        m_Value: Orange
+    - rid: 6326339789369115154
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922913
+        m_Metadata:
+          m_Items: []
+        m_Value: Milk bottle
+    - rid: 6326339789369115155
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922914
+        m_Metadata:
+          m_Items: []
+        m_Value: Honey pot
+    - rid: 6326339789369115156
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922915
+        m_Metadata:
+          m_Items: []
+        m_Value: Egg cup
+    - rid: 6326339789369115157
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 811103564922916
+        m_Metadata:
+          m_Items: []
+        m_Value: Apricot jam

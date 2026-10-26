@@ -19,7 +19,7 @@ MonoBehaviour:
     prefab: {fileID: 885747214326615080, guid: 973d18ca8f40af84d98052a26dabfbfd, type: 3}
     size: {x: 1, y: 2.9}
     round: 0
-    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    color: {r: 0.84, g: 0.62, b: 0.36, a: 1}
     course: 1
   - id: Platform
     nameKey: piece.platform
@@ -27,7 +27,7 @@ MonoBehaviour:
     prefab: {fileID: 7370446863963659236, guid: 4dfc3d7ca1d75274dbbe47878d881cf1, type: 3}
     size: {x: 1, y: 5}
     round: 0
-    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    color: {r: 0.84, g: 0.62, b: 0.36, a: 1}
     course: 1
   - id: Block
     nameKey: piece.block
@@ -35,7 +35,7 @@ MonoBehaviour:
     prefab: {fileID: 5931292302479290061, guid: c68e24f8766e87b4783db8719676b4e9, type: 3}
     size: {x: 1, y: 1}
     round: 0
-    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    color: {r: 0.6, g: 0.4, b: 0.22, a: 1}
     course: 1
   - id: SpilledMilk
     nameKey: piece.spilledMilk
@@ -43,7 +43,7 @@ MonoBehaviour:
     prefab: {fileID: 6998242090734250964, guid: e23a59b385cfeb748b417a43ddc1424b, type: 3}
     size: {x: 3.63, y: 10.21}
     round: 0
-    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    color: {r: 0.86, g: 0.93, b: 1, a: 1}
     course: 1
   - id: MilkPuddle
     nameKey: piece.milkPuddle
@@ -51,7 +51,7 @@ MonoBehaviour:
     prefab: {fileID: 550175876701688025, guid: 17c7a6bc93923cb40aed6bf07e0ce266, type: 3}
     size: {x: 3, y: 3}
     round: 0
-    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    color: {r: 0.86, g: 0.93, b: 1, a: 1}
     course: 1
   - id: BaguetteShort
     nameKey: piece.baguetteShort
@@ -139,7 +139,7 @@ MonoBehaviour:
     prefab: {fileID: 6163100043952936045, guid: 44e46377b761e624fad34079f0589b9a, type: 3}
     size: {x: 0.8, y: 0.8}
     round: 1
-    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    color: {r: 0.9, g: 0.95, b: 1, a: 1}
     course: 0
   - id: HoneyPot
     nameKey: piece.honeyPot

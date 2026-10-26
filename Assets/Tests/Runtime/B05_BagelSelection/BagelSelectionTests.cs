@@ -107,11 +107,11 @@ namespace Bagel.B05_BagelSelection
         }
 
         [Test]
-        public void SelectPlaysAndBackLeaves()
+        public void OrderGoesToTheTabletAndBackLeaves()
         {
             var pane = ShowControls();
             simulate.Click(pane.selectButton);
-            Assert.IsTrue(pane.state.isPlaying);
+            Assert.IsTrue(pane.state.isLevelSelection, "on to the payment tablet");
 
             pane.state.GoToBagelSelection();
             simulate.Click(pane.backButton);
@@ -135,7 +135,7 @@ namespace Bagel.B05_BagelSelection
 
             state.GoToBagelSelection();
             Send(pane, NavigationSubmitEvent.GetPooled());
-            Assert.IsTrue(state.isPlaying);
+            Assert.IsTrue(state.isLevelSelection);
         }
 
         [Test]

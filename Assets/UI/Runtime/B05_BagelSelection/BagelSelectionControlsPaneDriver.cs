@@ -67,6 +67,7 @@ namespace Bagel
             {
                 BagelAccessibility.ShowScreen(null);
             }
+            // On to the payment tablet, which takes the screen reader (LevelSelectionScreenDriver).
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)

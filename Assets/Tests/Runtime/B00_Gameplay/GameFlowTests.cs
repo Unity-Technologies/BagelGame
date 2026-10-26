@@ -74,7 +74,7 @@ namespace Bagel.B00_Gameplay
             yield return null;
             Assert.IsTrue(state.isBagelSelection);
 
-            // Bagel selection: next bagel, then Select.
+            // Bagel selection: next bagel, then Order.
             SetPanelRenderer(Renderer<BagelSelectionControlsPaneDriver>());
             yield return WaitForTheCamera();
             simulate.Click(rootVisualElement.Q<Button>("right-button"));
@@ -82,7 +82,18 @@ namespace Bagel.B00_Gameplay
             Assert.AreEqual(1, state.selectedBagelIndex);
             simulate.Click(rootVisualElement.Q<Button>("select-button"));
             yield return null;
+            Assert.IsTrue(state.isLevelSelection);
+
+            // The payment tablet: the second level, then Pay & Play.
+            SetPanelRenderer(Renderer<LevelSelectionScreenDriver>());
+            yield return WaitForTheCamera();
+            simulate.Click(rootVisualElement.Q("level-brunch"));
+            yield return null;
+            Assert.AreEqual(1, state.selectedLevelIndex);
+            simulate.Click(rootVisualElement.Q<Button>("play-button"));
+            yield return null;
             Assert.IsTrue(state.isPlaying);
+            Assert.AreEqual("brunch", Object.FindAnyObjectByType<BagelLevelTable>().level.id);
 
             // The run ends (the roll itself is BagelRollTests' job).
             state.FinishRun();

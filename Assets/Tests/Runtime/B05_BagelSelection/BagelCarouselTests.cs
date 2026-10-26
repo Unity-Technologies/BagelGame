@@ -130,7 +130,7 @@ namespace Bagel.B05_BagelSelection
         {
             var register = Object.FindAnyObjectByType<BagelRegister>();
             Assert.IsFalse(register.ringing);
-            state.GoToPlay();
+            state.GoToLevelSelection();
             yield return null;
             Assert.IsTrue(register.ringing, "the drawer shoots out");
             yield return Seconds(2f);

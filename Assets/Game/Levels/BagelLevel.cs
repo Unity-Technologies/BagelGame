@@ -118,6 +118,21 @@ namespace Bagel
         public static Vector2 Snap(Vector2 position) =>
             new(Mathf.Round(position.x / cellSize) * cellSize, Mathf.Round(position.y / cellSize) * cellSize);
 
+        // The nearest point on the grid inside an area (where a piece can be), from a point anywhere.
+        public static Vector2 SnapInside(Vector2 position, Rect area) =>
+            new(SnapInside(position.x, area.xMin, area.xMax), SnapInside(position.y, area.yMin, area.yMax));
+
+        static float SnapInside(float value, float min, float max)
+        {
+            const float slack = 0.001f;
+            var snapped = Mathf.Round(Mathf.Clamp(value, min, max) / cellSize) * cellSize;
+            if (snapped > max + slack)
+                snapped -= cellSize;
+            if (snapped < min - slack)
+                snapped += cellSize;
+            return snapped;
+        }
+
         // Where a piece's middle can be, for it to be on the cloth.
         public Rect PlaceableArea(Vector2 halfSize) =>
             Rect.MinMaxRect(-halfWidth + halfSize.x, clothStart + halfSize.y, halfWidth - halfSize.x, m_Length + clothBeyond - halfSize.y);

@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 10b35694afdecea4c8310c2d6defbefe
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3246858ce0659ea4399ecb77a42cc89f, type: 3}
+  generator:
+    rid: 6326339789369115295
+  preBakeTriangleCollision: 0
+  preBakeConvexCollision: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6326339789369115295
+      type: {class: CylinderMeshGenerator, ns: Bagel, asm: BagelGame}
+      data:
+        radius: 0.055
+        height: 2.3
+        segments: 20
+        caps: 1

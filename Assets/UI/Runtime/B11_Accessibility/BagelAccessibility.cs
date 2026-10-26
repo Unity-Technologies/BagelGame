@@ -14,6 +14,10 @@ namespace Bagel
     [NoAutoStaticsCleanup] // ResetStatics starts every Play session with no screen
     public static class BagelAccessibility
     {
+        // On a focusable element that's chosen like a button (a level's row on the payment tablet, a thing in the level
+        // editor's library): its tooltip is what the screen reader says.
+        public static readonly string itemUssClassName = "b-accessible-item";
+
         static readonly Dictionary<AccessibilityNode, VisualElement> s_Elements = new();
         static readonly Dictionary<AccessibilityNode, Actions> s_Actions = new();
 
@@ -216,6 +220,9 @@ namespace Bagel
                     case MultiColumnListView listView:
                         AddList(listView, parent);
                         return;
+                    case var item when item.focusable && item.ClassListContains(itemUssClassName):
+                        AddButton(item, item.tooltip, parent, () => Submit(item));
+                        return;
                     case Label label:
                         if (!string.IsNullOrWhiteSpace(label.text))
                             AddText(label, label.text, parent, role: label.ClassListContains("b-title") ? AccessibilityRole.Header : AccessibilityRole.StaticText);
@@ -392,7 +399,7 @@ namespace Bagel
                 }
             }
 
-            static void Submit(Button button)
+            static void Submit(VisualElement button)
             {
                 using var evt = NavigationSubmitEvent.GetPooled();
                 evt.target = button;

@@ -1,0 +1,72 @@
+/* The Bagel Levels window: the Editor's own toolbar and level list, and the game's level editor on a tablet-dark
+   screen, its counter bigger than on the tablet. */
+
+.b-levels-window {
+    flex-grow: 1;
+    background-color: rgb(40, 34, 30);
+}
+
+.b-levels-window__toolbar {
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    min-height: 30px;
+    padding: 4px 8px;
+    background-color: var(--unity-colors-toolbar-background);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-toolbar-border);
+}
+
+.b-levels-window__title {
+    -unity-font-definition: url("/Assets/UI/Runtime/B00_Themes/T0_Common/Fonts/DynaPuff-SemiBold.ttf");
+    font-size: 15px;
+    color: rgb(255, 196, 120);
+    margin: 0 12px 0 0;
+    padding: 0;
+}
+
+.b-levels-window__body {
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.b-levels-window__list {
+    width: 210px;
+    flex-shrink: 0;
+    background-color: var(--unity-colors-window-background);
+    border-right-width: 1px;
+    border-right-color: var(--unity-colors-toolbar-border);
+}
+
+.b-levels-window__stage {
+    flex-grow: 1;
+    padding: 12px;
+}
+
+.b-levels-window__screen {
+    flex-grow: 1;
+    padding: 14px 16px;
+    background-color: rgb(26, 19, 14);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.b-levels-window .b-level-editor__board {
+    height: 384px;
+}
+
+.b-levels-window .b-level-map.b-level-editor__map {
+    height: 344px;
+}
+
+.b-levels-window .b-level-editor__item {
+    width: 116px;
+    height: 150px;
+}
+
+.b-levels-window .b-level-editor__thumbnail {
+    width: 104px;
+    height: 104px;
+}

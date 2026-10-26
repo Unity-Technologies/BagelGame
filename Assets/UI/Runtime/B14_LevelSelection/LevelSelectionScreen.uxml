@@ -1,0 +1,42 @@
+<ui:UXML xmlns:loc="Unity.Localization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/B14_LevelSelection/LevelSelectionStyles.uss"/>
+    <Bagel.LevelSelectionScreenManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="tablet" class="b-pane b-glass b-tablet">
+        <ui:VisualElement name="levels-page" class="b-tablet__page b-tablet__levels">
+            <ui:VisualElement name="tablet-header" class="b-tablet__header">
+                <ui:Label text="Choose a table" name="title" class="b-title b-tablet__title">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="levels.title"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:VisualElement name="order-ticket" picking-mode="Ignore" class="b-tablet__ticket">
+                    <Bagel.ChalkDoodle kind="Bagel" seed="5" picking-mode="Ignore" class="b-tablet__ticket-icon"/>
+                    <ui:Label text="Sesame" name="order" picking-mode="Ignore" class="b-tablet__ticket-name"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:ScrollView name="level-list" class="b-tablet__list"/>
+            <ui:VisualElement name="actions" class="b-tablet__actions">
+                <ui:Button text="Back" name="back-button" class="b-tablet__action b-tablet__action--back">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="common.back"/>
+                    </Bindings>
+                </ui:Button>
+                <ui:Button text="New Table" name="new-button" class="b-tablet__action b-tablet__action--new">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="levels.new"/>
+                    </Bindings>
+                </ui:Button>
+                <ui:Button text="Edit" name="edit-button" class="b-tablet__action">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="levels.edit"/>
+                    </Bindings>
+                </ui:Button>
+                <ui:Button text="Pay &amp; Play" name="play-button" class="b-tablet__action b-tablet__action--play b-primary">
+                    <Bindings>
+                        <loc:LocalizedString property="text" table="BagelStrings" entry="levels.play"/>
+                    </Bindings>
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <Bagel.BagelLevelEditor name="editor" class="b-tablet__page b-tablet__editor"/>
+    </Bagel.LevelSelectionScreenManager>
+</ui:UXML>

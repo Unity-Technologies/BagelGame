@@ -45,5 +45,8 @@ namespace Bagel
 
         [Header("13 - Kitchen")]
         public VisualTreeAsset steamUxml;
+
+        [Header("14 - Level Selection")]
+        public VisualTreeAsset levelSelectionScreenUxml;
     }
 }
