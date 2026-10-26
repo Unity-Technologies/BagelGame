@@ -662,6 +662,16 @@ MonoBehaviour:
     m_Flags: 0
     m_Metadata:
       m_Items: []
+  - m_Id: 946442661068800
+    m_Key: receipt.table
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 948329108013056
+    m_Key: leaderboard.empty
+    m_Flags: 0
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

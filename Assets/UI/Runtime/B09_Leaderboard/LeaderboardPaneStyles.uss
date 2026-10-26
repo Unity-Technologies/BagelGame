@@ -11,3 +11,43 @@
     min-width: 0;
     -unity-text-auto-size: best-fit 8px var(--b-text-size);
 }
+
+/* Each level has its own board: its name, and < and > for the levels before and after it (they stay put in any
+   language, like the register's keys). */
+.b-leaderboard__levels {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 0 4px 4px 4px;
+}
+
+.b-leaderboard__level-name {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    margin: 0 6px;
+    padding: 0;
+    color: var(--b-title-color);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    white-space: nowrap;
+    -unity-text-auto-size: best-fit 8px var(--b-text-size);
+}
+
+.b-rtl .b-leaderboard__level-name {
+    -unity-text-align: middle-center;
+}
+
+.unity-button.b-leaderboard__level-button {
+    min-width: 28px;
+    margin-top: 0;
+    -unity-font-style: bold;
+}
+
+.b-leaderboard__empty {
+    margin: 12px 8px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    -unity-font-style: italic;
+    opacity: 0.75;
+}

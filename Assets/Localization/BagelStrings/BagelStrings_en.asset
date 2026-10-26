@@ -146,6 +146,8 @@ MonoBehaviour:
   - rid: 6326339789369115155
   - rid: 6326339789369115156
   - rid: 6326339789369115157
+  - rid: 6326339789369115321
+  - rid: 6326339789369115334
   references:
     version: 2
     RefIds:
@@ -1052,3 +1054,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Apricot jam
+    - rid: 6326339789369115321
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 946442661068800
+        m_Metadata:
+          m_Items: []
+        m_Value: Table
+    - rid: 6326339789369115334
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 948329108013056
+        m_Metadata:
+          m_Items: []
+        m_Value: Nobody's played this table yet

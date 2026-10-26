@@ -15,6 +15,9 @@ namespace Bagel
         [SerializeField] int m_ToppingsMax;
         [SerializeField] bool m_Submitted;
         [SerializeField] float m_Time;
+        [SerializeField] string m_LevelId;
+        [SerializeField] string m_LevelName;
+        [SerializeField] string m_LevelNameKey;
 
         [NonSerialized] PlayManagerState m_Owner;
 
@@ -25,6 +28,10 @@ namespace Bagel
         [CreateProperty] public int toppings => m_Toppings;
         [CreateProperty] public int toppingsMax => m_ToppingsMax;
         [CreateProperty] public float time => m_Time;
+        // The level it was played on: its leaderboard is the one it goes on.
+        [CreateProperty] public string levelId => m_LevelId;
+        [CreateProperty] public string levelName => m_LevelName;
+        [CreateProperty] public string levelNameKey => m_LevelNameKey;
         [CreateProperty] public bool won => m_Toppings > 0;
         [CreateProperty] public string titleKey => won ? "gameover.win" : "gameover.lose";
         [CreateProperty] public bool canSubmit => won && !m_Submitted;
@@ -44,7 +51,7 @@ namespace Bagel
 
         internal void Bind(PlayManagerState owner) => m_Owner = owner;
 
-        internal void Set(string bagelName, string bagelNameKey, int toppings, int toppingsMax, float time = 0f)
+        internal void Set(string bagelName, string bagelNameKey, int toppings, int toppingsMax, float time = 0f, BagelLevel level = null)
         {
             m_HasRun = true;
             m_BagelName = bagelName;
@@ -52,6 +59,9 @@ namespace Bagel
             m_Toppings = Mathf.Max(0, toppings);
             m_ToppingsMax = toppingsMax;
             m_Time = time;
+            m_LevelId = level != null ? level.id : null;
+            m_LevelName = level != null ? level.displayName : null;
+            m_LevelNameKey = level != null ? level.nameKey : null;
             m_Submitted = false;
             m_Owner?.Notify(nameof(PlayManagerState.lastRun));
         }
@@ -67,6 +77,9 @@ namespace Bagel
             m_Toppings = saved.m_Toppings;
             m_ToppingsMax = saved.m_ToppingsMax;
             m_Time = saved.m_Time;
+            m_LevelId = saved.m_LevelId;
+            m_LevelName = saved.m_LevelName;
+            m_LevelNameKey = saved.m_LevelNameKey;
             m_Submitted = true;
             m_Owner?.Notify(nameof(PlayManagerState.lastRun));
         }

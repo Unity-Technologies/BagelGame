@@ -4,6 +4,11 @@
     <Bagel.LeaderboardManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" name="leaderboard-manager" style="flex-grow: 1;">
         <ui:Instance template="Page" name="leaderboard-page">
             <AttributeOverrides element-name="page-title" text="Leaderboard"/>
+            <ui:VisualElement name="level-switcher" class="b-leaderboard__levels">
+                <ui:Button text="&lt;" name="previous-level-button" language-direction="LTR" class="b-leaderboard__level-button"/>
+                <ui:Label text="Breakfast" name="level-name" class="b-leaderboard__level-name"/>
+                <ui:Button text="&gt;" name="next-level-button" language-direction="LTR" class="b-leaderboard__level-button"/>
+            </ui:VisualElement>
             <ui:MultiColumnListView columns="" sort-column-descriptions="" name="leaderboard-table" allow-add="false" allow-remove="false" show-bound-collection-size="false" show-alternating-row-backgrounds="ContentOnly" virtualization-method="DynamicHeight" sorting-mode="Default" selection-type="None" class="b-details-view">
                 <ui:SortColumnDescriptions>
                     <ui:SortColumnDescription column-name="toppings" direction="Descending"/>

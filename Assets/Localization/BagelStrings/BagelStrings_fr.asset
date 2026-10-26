@@ -146,6 +146,8 @@ MonoBehaviour:
   - rid: 6326339789369115229
   - rid: 6326339789369115230
   - rid: 6326339789369115231
+  - rid: 6326339789369115323
+  - rid: 6326339789369115336
   references:
     version: 2
     RefIds:
@@ -1052,3 +1054,17 @@ MonoBehaviour:
         m_Metadata:
           m_Items: []
         m_Value: Confiture d'abricot
+    - rid: 6326339789369115323
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 946442661068800
+        m_Metadata:
+          m_Items: []
+        m_Value: Table
+    - rid: 6326339789369115336
+      type: {class: StringEntry, ns: Unity.Localization, asm: UnityEngine.LocalizationRuntimeModule}
+      data:
+        m_KeyId: 948329108013056
+        m_Metadata:
+          m_Items: []
+        m_Value: "Personne n'a encore jou\xE9 \xE0 cette table"

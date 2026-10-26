@@ -13,6 +13,12 @@
                 <ui:Label text="Toasted!" name="stamp" picking-mode="Ignore" class="b-stamp"/>
                 <ui:Label name="summary-label" class="b-summary"/>
                 <ui:VisualElement name="receipt-lines" class="b-receipt__lines">
+                    <ui:Label text="Table" name="level-title-label" class="b-receipt__item">
+                        <Bindings>
+                            <loc:LocalizedString property="text" table="BagelStrings" entry="receipt.table"/>
+                        </Bindings>
+                    </ui:Label>
+                    <ui:Label text="Breakfast" name="level-label" class="b-receipt__price"/>
                     <ui:Label text="Toppings kept" name="toppings-title-label" class="b-receipt__item">
                         <Bindings>
                             <loc:LocalizedString property="text" table="BagelStrings" entry="receipt.toppings"/>

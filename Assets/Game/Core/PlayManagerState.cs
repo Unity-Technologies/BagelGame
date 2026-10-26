@@ -195,7 +195,10 @@ namespace Bagel
         {
             var bagelType = selectedBagelType;
             m_LastRun.Set(bagelType != null ? bagelType.displayName : "", bagelType != null ? bagelType.nameKey : "",
-                m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount, m_Tracker.elapsed);
+                m_Tracker.toppingsCount, m_Tracker.toppingsMaxCount, m_Tracker.elapsed, selectedLevel);
+            // The television shows this level's board.
+            if (selectedLevel != null)
+                m_Leaderboard.shownLevel = selectedLevel.id;
             GoToGameOver();
         }
 
@@ -211,6 +214,10 @@ namespace Bagel
                 return;
             if (pane == m_MainMenuPane)
                 return;
+
+            // From the main menu, the leaderboard opens on the chosen level's board.
+            if (pane == MainMenuPane.Leaderboard && selectedLevel != null)
+                m_Leaderboard.shownLevel = selectedLevel.id;
 
             var oldMode = currentMainMenuPaneMode;
             m_MainMenuPane = pane;
@@ -288,6 +295,9 @@ namespace Bagel
                 EditLevel(false);
             m_CustomLevels.Remove(level);
             level.changed -= CustomLevel_OnChanged;
+            m_Leaderboard.RemoveLevel(level.id);
+            if (m_Leaderboard.shownLevel == level.id)
+                m_Leaderboard.shownLevel = null;
             RefreshLevels();
             var selectionMoved = index <= m_SelectedLevelIndex && m_SelectedLevelIndex > 0;
             if (selectionMoved)
@@ -329,6 +339,8 @@ namespace Bagel
                 }
             }
             m_AllLevels.AddRange(m_CustomLevels);
+            if (m_Leaderboard != null)
+                m_Leaderboard.defaultLevel = m_AllLevels.Count > 0 ? m_AllLevels[0].id : null;
         }
 
         void NotifyLevels()
@@ -374,8 +386,21 @@ namespace Bagel
             if (!m_LastRun.canSubmit)
                 return;
 
-            m_Leaderboard.Add(playerName, m_LastRun.toppings, m_LastRun.time);
+            m_Leaderboard.Add(playerName, m_LastRun.toppings, m_LastRun.time, m_LastRun.levelId);
             m_LastRun.submitted = true;
+        }
+
+        // The level whose board the leaderboard shows, and the one before or after it.
+        public BagelLevel leaderboardLevel => m_AllLevels.Find(level => level.id == m_Leaderboard.shownLevel) ?? (levelCount > 0 ? m_AllLevels[0] : null);
+
+        public bool canShowPreviousLeaderboardLevel => m_AllLevels.IndexOf(leaderboardLevel) > 0;
+        public bool canShowNextLeaderboardLevel => m_AllLevels.IndexOf(leaderboardLevel) < levelCount - 1;
+
+        public void ShowLeaderboardLevel(int step)
+        {
+            var index = Mathf.Clamp(m_AllLevels.IndexOf(leaderboardLevel) + step, 0, Mathf.Max(0, levelCount - 1));
+            if (index < levelCount)
+                m_Leaderboard.shownLevel = m_AllLevels[index].id;
         }
 
         public void Pause()

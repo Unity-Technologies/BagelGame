@@ -239,6 +239,80 @@ namespace Bagel.B14_LevelSelection
         }
 
         [Test]
+        public void ARunGoesOnItsLevelsLeaderboard()
+        {
+            var tutorialRuns = m_State.leaderboard.IndicesFor("breakfast").Count;
+            Assert.AreEqual(m_State.leaderboard.count, tutorialRuns, "runs from before levels were on the tutorial's counter");
+
+            m_State.GoToBagelSelection();
+            m_State.GoToLevelSelection();
+            m_State.SelectLevel(1);
+            m_State.GoToPlay();
+            m_State.tracker.toppingsCount = 77;
+            m_State.FinishRun();
+            Assert.AreEqual("brunch", m_State.lastRun.levelId);
+            Assert.AreEqual("level.brunch", m_State.lastRun.levelNameKey);
+            Assert.AreEqual("brunch", m_State.leaderboard.shownLevel, "the television shows the level just played");
+
+            m_State.SubmitToLeaderboard("Bruncher");
+            var entry = m_State.leaderboard.entries[m_State.leaderboard.lastAddedIndex];
+            Assert.AreEqual("brunch", entry.level);
+            CollectionAssert.AreEqual(new[] { m_State.leaderboard.lastAddedIndex }, m_State.leaderboard.IndicesFor("brunch"));
+            Assert.AreEqual(tutorialRuns, m_State.leaderboard.IndicesFor("breakfast").Count, "not on the tutorial's board");
+
+            // From the main menu, the leaderboard opens on the chosen level's board, and goes through them.
+            m_State.SelectLevel(2);
+            m_State.GoToMainMenu();
+            m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+            Assert.AreEqual("banquet", m_State.leaderboard.shownLevel);
+            Assert.IsFalse(m_State.canShowNextLeaderboardLevel);
+            m_State.ShowLeaderboardLevel(-1);
+            Assert.AreEqual(m_State.levels[1], m_State.leaderboardLevel);
+            m_State.ShowLeaderboardLevel(-5);
+            Assert.AreEqual(m_State.levels[0], m_State.leaderboardLevel, "no further than the first");
+        }
+
+        [Test]
+        public void APlayersLevelsBoardGoesWithIt()
+        {
+            var level = m_State.AddLevel("Mine");
+            m_State.leaderboard.Add("Me", 100, 30f, level.id);
+            m_State.leaderboard.Add("Me again", 120, 28f, level.id);
+            var count = m_State.leaderboard.count;
+            m_State.leaderboard.shownLevel = level.id;
+
+            m_State.DeleteLevel(level);
+            Assert.AreEqual(count - 2, m_State.leaderboard.count);
+            Assert.AreEqual("breakfast", m_State.leaderboard.shownLevel, "back to the first level's board");
+        }
+
+        [Test]
+        public void EveryRunsLevelIsSaved()
+        {
+            var level = m_State.AddLevel("Mine");
+            m_State.GoToBagelSelection();
+            m_State.GoToLevelSelection();
+            m_State.GoToPlay();
+            m_State.tracker.toppingsCount = 5;
+            m_State.FinishRun();
+            m_State.SubmitToLeaderboard("Saver");
+
+            var json = JsonUtility.ToJson(m_State.ToSaved());
+            var loaded = PlayManagerState.CreateRuntimeCopy(m_BagelTestAssetList.startState);
+            try
+            {
+                loaded.Load(JsonUtility.FromJson<PlayManagerState.Saved>(json));
+                Assert.AreEqual(level.id, loaded.lastRun.levelId);
+                Assert.AreEqual("Mine", loaded.lastRun.levelName);
+                Assert.AreEqual(1, loaded.leaderboard.IndicesFor(level.id).Count);
+            }
+            finally
+            {
+                PlayManagerState.DestroyRuntimeCopy(loaded);
+            }
+        }
+
+        [Test]
         public void ALevelMadeShorterLosesWhatsOffTheClothOrOnTheToaster()
         {
             var level = m_State.AddLevel("Short");

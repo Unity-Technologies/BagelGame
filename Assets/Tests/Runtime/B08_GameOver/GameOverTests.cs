@@ -53,6 +53,25 @@ namespace Bagel.B08_GameOver
             Assert.AreEqual("Player1", gameOverPaneManager.addToLeaderboardNameField.value);
         }
 
+        // The receipt says which level it was, and the television shows that level's board.
+        [Test]
+        public void TheReceiptSaysWhichLevel()
+        {
+            m_BagelTestAssetList.gameOverPaneUxml.CloneTree(rootVisualElement);
+            var gameOverPaneManager = rootVisualElement.Q<GameOverPaneManager>();
+            var state = gameOverPaneManager.state;
+            state.GoToLevelSelection();
+            state.SelectLevel(2);
+            state.GoToPlay();
+            state.tracker.toppingsCount = 10;
+            state.FinishRun();
+            simulate.FrameUpdate();
+
+            Assert.AreEqual("Banquet", gameOverPaneManager.levelLabel.text);
+            Assert.AreEqual("banquet", state.lastRun.levelId);
+            Assert.AreEqual("banquet", state.leaderboard.shownLevel);
+        }
+
         [Test]
         public void WinShowsToppingsLeft()
         {

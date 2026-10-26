@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace Bagel
 {
-    // The last run's receipt: the result, what the bagel kept, its time, the leaderboard form, and
+    // The last run's receipt: the result, the level it was on, what the bagel kept, its time, the leaderboard form, and
     // the result stamped across it (a UIAnimationClip slams the stamp down each time it shows). Before the
     // first run it only says there's been none yet.
     [UxmlElement(libraryPath = "Bagel/Managers")]
@@ -21,6 +21,7 @@ namespace Bagel
         Label m_Stamp;
         Label m_Summary;
         Label m_ToppingsKeptLabel;
+        Label m_LevelLabel;
         VisualElement m_LeaderboardForm;
         TextField m_AddToLeaderboardNameField;
         Button m_AddToLeaderboardButton;
@@ -33,6 +34,7 @@ namespace Bagel
         public Label timeLabel => m_TimeLabel ??= this.Q<Label>("time-label");
         public Label stamp => m_Stamp ??= this.Q<Label>("stamp");
         public Label toppingsKeptLabel => m_ToppingsKeptLabel ??= this.Q<Label>("toppings-kept-label");
+        public Label levelLabel => m_LevelLabel ??= this.Q<Label>("level-label");
         public VisualElement leaderboardForm => m_LeaderboardForm ??= this.Q<VisualElement>("leaderboard-form");
         public TextField addToLeaderboardNameField => m_AddToLeaderboardNameField ??= this.Q<TextField>("leaderboard-name-field");
         public Button addToLeaderboardButton => m_AddToLeaderboardButton ??= this.Q<Button>("add-to-leaderboard-button");
@@ -129,6 +131,11 @@ namespace Bagel
 
             var lastRun = state.lastRun;
             toppingsKeptLabel?.SetText(BagelConverters.FormatNumber(lastRun.toppings));
+            // A run from before there were levels was on the tutorial's counter.
+            var levelName = string.IsNullOrEmpty(lastRun.levelId)
+                ? LevelSelectionScreenManager.LevelName(state.levelCount > 0 ? state.levels[0] : null)
+                : string.IsNullOrEmpty(lastRun.levelNameKey) ? lastRun.levelName : BagelLocalization.Get(lastRun.levelNameKey, lastRun.levelName);
+            levelLabel?.SetText(levelName);
             timeLabel?.SetText(BagelConverters.FormatTime(lastRun.time));
 
             // Changing a variable doesn't re-render the strings that use it.

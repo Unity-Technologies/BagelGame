@@ -37,7 +37,8 @@ namespace Bagel.B09_Leaderboard
         public void TheBestScoresComeFirst()
         {
             var leaderboard = ShowLeaderboard();
-            var entries = leaderboard.leaderboardData.entries;
+            var entries = leaderboard.shownEntries;
+            Assert.Greater(entries.Count, 0);
             Assert.AreEqual(entries.Count, leaderboard.leaderboardTable.itemsSource.Count);
 
             // Rows are recycled, so ask the list which entry it shows first.
@@ -54,8 +55,39 @@ namespace Bagel.B09_Leaderboard
             simulate.FrameUpdate();
 
             var table = leaderboard.leaderboardTable;
-            Assert.AreEqual(index, table.viewController.GetIdForIndex(table.selectedIndex));
-            Assert.AreEqual("Newcomer", leaderboard.leaderboardData.entries[index].playerName);
+            Assert.AreEqual(leaderboard.ShownIndexOf(index), table.viewController.GetIdForIndex(table.selectedIndex));
+            Assert.AreEqual("Newcomer", leaderboard.shownEntries[table.viewController.GetIdForIndex(table.selectedIndex)].playerName);
+        }
+
+        // Each level has its own board: the runs from before there were levels are the tutorial's; < and > go
+        // through the levels.
+        [Test]
+        public void EachLevelHasItsOwnBoard()
+        {
+            var leaderboard = ShowLeaderboard();
+            var state = leaderboard.state;
+            var tutorialCount = leaderboard.shownEntries.Count;
+            Assert.AreEqual(state.leaderboard.count, tutorialCount, "the runs from before levels are the tutorial's");
+            Assert.AreEqual("Breakfast", leaderboard.levelName.text);
+            Assert.IsFalse(leaderboard.previousLevelButton.enabledSelf);
+
+            state.leaderboard.Add("Bruncher", 321, 61f, "brunch");
+            simulate.FrameUpdate();
+            Assert.AreEqual(tutorialCount, leaderboard.shownEntries.Count, "another level's run isn't on this board");
+
+            simulate.Click(leaderboard.nextLevelButton);
+            simulate.FrameUpdate();
+            Assert.AreEqual("brunch", state.leaderboard.shownLevel);
+            Assert.AreEqual("Brunch", leaderboard.levelName.text);
+            Assert.AreEqual(1, leaderboard.shownEntries.Count);
+            Assert.AreEqual("Bruncher", leaderboard.shownEntries[0].playerName);
+            Assert.AreEqual(1, leaderboard.leaderboardTable.itemsSource.Count);
+            Assert.IsTrue(leaderboard.previousLevelButton.enabledSelf);
+
+            simulate.Click(leaderboard.nextLevelButton);
+            simulate.FrameUpdate();
+            Assert.AreEqual(0, leaderboard.shownEntries.Count, "nobody's played the banquet yet");
+            Assert.IsFalse(leaderboard.nextLevelButton.enabledSelf, "the last level");
         }
     }
 }
