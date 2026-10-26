@@ -146,6 +146,28 @@ namespace Bagel.B00_Gameplay
             Assert.AreEqual(state.tracker.toppingsMaxCount, state.tracker.toppingsCount);
         }
 
+        // A knock at the end of one game isn't felt at the start of the next.
+        [UnityTest]
+        public IEnumerator ANewGameForgetsTheLastOnesKnocks()
+        {
+            Place(m_Start + Vector3.up * 3f);
+            m_Body.WakeUp();
+            var knock = 0f;
+            for (int i = 0; i < 120; i++)
+            {
+                yield return null;
+                knock = Mathf.Max(knock, m_Bagel.currentForce);
+            }
+            Assert.Greater(knock, 1f, "dropped on the table");
+            state.FinishRun();
+            yield return null;
+
+            state.GoToPlay();
+            Assert.AreEqual(0f, m_Bagel.currentForce, "forgotten");
+            yield return Frames(60);
+            Assert.AreEqual(state.tracker.toppingsMaxCount, state.tracker.toppingsCount);
+        }
+
         [UnityTest]
         public IEnumerator PausingFreezesTheBagel()
         {

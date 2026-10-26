@@ -124,6 +124,9 @@ namespace Bagel
                 m_RigidBody.linearVelocity = Vector3.zero;
                 m_RigidBody.angularVelocity = Vector3.zero;
                 m_RigidBody.Sleep();
+                // A new bagel: no knock from before (the last one's crash, things set round it while it waited).
+                m_CurrentForce = 0f;
+                m_CurrentSpin = 0f;
                 enabled = true;
             }
             else
