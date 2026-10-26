@@ -103,6 +103,7 @@ namespace Bagel
             if (m_State.selectedBagelType != null)
                 m_BagelType = m_State.selectedBagelType;
             enabled = false;
+            Hold();
         }
 
         void OnDestroy()
@@ -115,6 +116,7 @@ namespace Bagel
         {
             if (state == PlayManagerState.State.Playing)
             {
+                m_RigidBody.isKinematic = false;
                 transform.position = m_StartingLocation.position;
                 transform.rotation = m_StartingLocation.rotation;
                 m_RigidBody.position = transform.position;
@@ -127,7 +129,24 @@ namespace Bagel
             else
             {
                 enabled = false;
+                // Waiting at the start for the next game while its level's chosen, as things come and go round it.
+                if (state == PlayManagerState.State.LevelSelection)
+                    Hold();
             }
+        }
+
+        // At the start, standing on its edge, held still until it rolls.
+        void Hold()
+        {
+            if (!m_RigidBody.isKinematic)
+            {
+                m_RigidBody.linearVelocity = Vector3.zero;
+                m_RigidBody.angularVelocity = Vector3.zero;
+            }
+            m_RigidBody.isKinematic = true;
+            transform.SetPositionAndRotation(m_StartingLocation.position, m_StartingLocation.rotation);
+            m_RigidBody.position = transform.position;
+            m_RigidBody.rotation = transform.rotation;
         }
 
         void State_OnSetBagelType(object sender, BagelType bagelType)

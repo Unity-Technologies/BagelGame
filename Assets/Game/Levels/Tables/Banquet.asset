@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d21660b8fe41e48bfc72ec81f657f5, type: 3}
+  m_Name: Banquet
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelLevel
+  m_Id: banquet
+  m_NameKey: level.banquet
+  m_DisplayName: Banquet
+  m_Length: 65
+  m_Pieces:
+  - kind: BaguetteShort
+    x: 0
+    z: -5.5
+    angle: 0
+  - kind: SaltShaker
+    x: 1.6
+    z: 2
+    angle: 20
+  - kind: PepperShaker
+    x: -1.6
+    z: 2
+    angle: 75
+  - kind: BaguetteShort
+    x: -2.2
+    z: 6.5
+    angle: 0
+  - kind: SugarCubes
+    x: 3.4
+    z: 6.5
+    angle: 0
+  - kind: BaguetteShort
+    x: 2.2
+    z: 10.5
+    angle: 0
+  - kind: Orange
+    x: -3.6
+    z: 10.5
+    angle: 0
+  - kind: BaguetteShort
+    x: -2.2
+    z: 14.5
+    angle: 0
+  - kind: Ramp
+    x: 0
+    z: 18
+    angle: 0
+  - kind: Platform
+    x: 0
+    z: 21.21
+    angle: 0
+  - kind: Platform
+    x: 0
+    z: 26.05
+    angle: 0
+  - kind: Ramp
+    x: 0
+    z: 29.25
+    angle: 180
+  - kind: SpilledMilk
+    x: -2.6
+    z: 23.7
+    angle: 0
+  - kind: SpilledMilk
+    x: 2.6
+    z: 23.7
+    angle: 0
+  - kind: Block
+    x: -2
+    z: 33
+    angle: 0
+  - kind: Block
+    x: 2
+    z: 33
+    angle: 0
+  - kind: Block
+    x: -2
+    z: 35
+    angle: 0
+  - kind: Block
+    x: 2
+    z: 35
+    angle: 0
+  - kind: Block
+    x: -2
+    z: 37
+    angle: 0
+  - kind: Block
+    x: 2
+    z: 37
+    angle: 0
+  - kind: Cookbooks
+    x: -3.9
+    z: 41
+    angle: 0
+  - kind: ButterDish
+    x: 3.6
+    z: 42
+    angle: 0
+  - kind: Orange
+    x: 0
+    z: 44.5
+    angle: 0
+  - kind: BaguetteLong
+    x: 4.9
+    z: 50
+    angle: 0
+  - kind: MilkPuddle
+    x: -2
+    z: 48
+    angle: 45
+  - kind: MilkPuddle
+    x: 1.5
+    z: 51.5
+    angle: 45
+  - kind: JamJar
+    x: -3.5
+    z: 54
+    angle: 30
+  - kind: ApricotJam
+    x: 0
+    z: 55.5
+    angle: 335
+  - kind: JamJar
+    x: 3.4
+    z: 55
+    angle: 120
+  - kind: SugarCubes
+    x: -1.5
+    z: 58.5
+    angle: 15
+  - kind: HoneyPot
+    x: -3.8
+    z: 59
+    angle: 140
+  - kind: EggCup
+    x: 2.2
+    z: 58.5
+    angle: 0
+  - kind: Mug
+    x: -4.2
+    z: 61.5
+    angle: 200
+  - kind: MilkBottle
+    x: 4.3
+    z: 61.5
+    angle: 0
+  - kind: SugarCubes
+    x: 1.2
+    z: 62
+    angle: 60

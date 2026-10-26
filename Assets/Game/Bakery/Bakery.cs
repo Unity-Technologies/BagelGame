@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bagel
 {
+    // The room: its floor, ceiling and walls, the long counter, and the blackboard, laid out from their measurements
+    // as they're edited. In play the room's made as long as the level's counter needs (Stretch): the far wall goes
+    // further away or comes nearer, and what goes with it follows (BakeryFollower).
     [ExecuteInEditMode]
     public class Bakery : MonoBehaviour
     {
-#if UNITY_EDITOR
         [Header("Room Measurements")]
         [SerializeField] float m_WestSide;
         [SerializeField] float m_EastSide;
@@ -81,6 +84,28 @@ namespace Bagel
         const float k_SurfaceOffset = 0.05f;
         const float k_WallThickness = 0.2f;
 
+        // The room's near and far sides along the counter (z), where the walls' inner faces are.
+        public float southSide => -Mathf.Abs(m_SouthSide);
+        public float northSide => Mathf.Abs(m_NorthSide);
+        public Rect counterRect => m_CounterRect;
+
+        // The room's been made longer or shorter.
+        public event Action resized;
+
+        // The far wall at north (z), the counter's far end at counterNorth, its near end where it is.
+        public void Stretch(float north, float counterNorth)
+        {
+            var counterSouth = m_CounterRect.y - m_CounterRect.height * 0.5f;
+            m_NorthSide = north;
+            m_CounterRect.y = (counterSouth + counterNorth) * 0.5f;
+            m_CounterRect.height = counterNorth - counterSouth;
+            UpdateMetrics();
+            UpdateInside();
+            UpdateOutside();
+            UpdateCounter();
+            resized?.Invoke();
+        }
+
         void Clear()
         {
             var childrenToDestroy = new List<GameObject>();
@@ -130,6 +155,9 @@ namespace Bagel
 
         void Update()
         {
+            // Out of play, measurements change as they're edited; in play only Stretch changes them.
+            if (Application.isPlaying)
+                return;
             UpdateMetrics();
             UpdateInside();
             UpdateCounter();
@@ -294,6 +322,5 @@ namespace Bagel
                 m_GameOver.localPosition = p;
             }
         }
-#endif // UNITY_EDITOR
     }
 }

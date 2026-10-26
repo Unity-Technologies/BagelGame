@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d21660b8fe41e48bfc72ec81f657f5, type: 3}
+  m_Name: Breakfast
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelLevel
+  m_Id: breakfast
+  m_NameKey: level.breakfast
+  m_DisplayName: Breakfast
+  m_Length: 27.5
+  m_Pieces:
+  - kind: Platform
+    x: 0
+    z: 7.05
+    angle: 0
+  - kind: Platform
+    x: 0
+    z: 11.89
+    angle: 0
+  - kind: SpilledMilk
+    x: 2.22
+    z: 8.32
+    angle: 0
+  - kind: Ramp
+    x: 0
+    z: 3.84
+    angle: 0
+  - kind: Ramp
+    x: 0
+    z: 15.04
+    angle: 181.94
+  - kind: BaguetteShort
+    x: 0
+    z: -5.37
+    angle: 0
+  - kind: BaguetteLong
+    x: 3.45
+    z: 17.49
+    angle: 0
+  - kind: ButterDish
+    x: -3.58
+    z: 8.52
+    angle: 0
+  - kind: Cookbooks
+    x: -2.02
+    z: 16.62
+    angle: 0
+  - kind: Mug
+    x: -3.4
+    z: 25.6
+    angle: 200
+  - kind: JamJar
+    x: 3.4
+    z: 25.2
+    angle: 30
+  - kind: SugarCubes
+    x: -1.7
+    z: 21.8
+    angle: 0
+  - kind: SaltShaker
+    x: 1.9
+    z: 1.7
+    angle: 20
+  - kind: PepperShaker
+    x: 2.55
+    z: 2.2
+    angle: 75
+  - kind: Orange
+    x: -2.3
+    z: 2.6
+    angle: 0
+  - kind: MilkBottle
+    x: 4.5
+    z: 5.2
+    angle: 0
+  - kind: HoneyPot
+    x: -4.5
+    z: 14.4
+    angle: 140
+  - kind: EggCup
+    x: 4.4
+    z: 19.2
+    angle: 0
+  - kind: ApricotJam
+    x: 1.7
+    z: 22.4
+    angle: 335

@@ -39,7 +39,10 @@ namespace Bagel
         {
             transform.position = m_BagelController.transform.position;
 
+            // A bagel lying flat has no forward: it keeps the last one.
             var forward = m_BagelController.GetAbsoluteForward();
+            if (forward.sqrMagnitude < 0.5f)
+                return;
             transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
 
             var tiltedUp = m_BagelController.GetNonRotatedRelativeUp();

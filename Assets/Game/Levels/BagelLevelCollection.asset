@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a50fda2b40482943b60e986b6363081, type: 3}
+  m_Name: BagelLevelCollection
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelLevelCollection
+  collection:
+  - {fileID: 11400000, guid: 3d66cafc213ca784dbf93068b032edb9, type: 2}
+  - {fileID: 11400000, guid: 1bf2abde5529a8440aff071f8f7eba6e, type: 2}
+  - {fileID: 11400000, guid: f401f6e2fbe778c42adb5c832cf42ca4, type: 2}
+  library: {fileID: 11400000, guid: 3ffdc276c8c456346b7eeac74f345a58, type: 2}

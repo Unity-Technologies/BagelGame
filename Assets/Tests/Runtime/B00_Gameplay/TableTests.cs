@@ -89,7 +89,7 @@ namespace Bagel.B00_Gameplay
             Assert.Greater(settled.Count, 12, "a table full of things");
 
             // The bagel rolled into the jam and pushed it about.
-            var jam = GameObject.Find("JamJar").GetComponent<TableItem>();
+            var jam = GameObject.Find("JamJar").GetComponentInChildren<TableItem>();
             Assert.IsTrue(jam.loose, "the jam can be knocked about");
             jam.transform.position += new Vector3(-1f, 0f, -1f);
 

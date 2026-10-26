@@ -1,0 +1,168 @@
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+namespace Bagel.B14_LevelSelection
+{
+    // The counter set for the chosen level, in the real scene: the tutorial as it always was, a longer level
+    // stretching the room with the far wall and the television going with it, only what changes coming and going,
+    // and a new game starting with the whole level there.
+    public class BagelLevelTableTests
+    {
+        PlayManager m_PlayManager;
+        BagelLevelTable m_Table;
+        Bakery m_Bakery;
+
+        PlayManagerState state => m_PlayManager.state;
+
+        [UnitySetUp]
+        public IEnumerator SetUp()
+        {
+            var assets = Resources.Load<BagelTestAssetList>("BagelTestAssetList");
+            yield return SceneManager.LoadSceneAsync(assets.mainSceneName, LoadSceneMode.Single);
+            yield return null;
+            m_PlayManager = Object.FindAnyObjectByType<PlayManager>();
+            m_Table = Object.FindAnyObjectByType<BagelLevelTable>();
+            m_Bakery = Object.FindAnyObjectByType<Bakery>();
+        }
+
+        IEnumerator Changed(float timeout = 5f)
+        {
+            yield return null;
+            for (var end = Time.time + timeout; m_Table.changing && Time.time < end;)
+                yield return null;
+            Assert.IsFalse(m_Table.changing, "done changing");
+            // What sank is gone a moment later.
+            yield return new WaitForSeconds(0.6f);
+        }
+
+        // Every piece the level has is on the table where the level puts it, and nothing else.
+        void AssertSetFor(BagelLevel level)
+        {
+            var placed = new List<GameObject>(m_Table.pieces);
+            Assert.AreEqual(level.pieceCount, placed.Count, $"{level.id}'s pieces");
+            foreach (var piece in level.pieces)
+            {
+                var at = m_Table.transform.TransformPoint(piece.x, 0f, piece.z);
+                var found = placed.Find(instance => instance.name == piece.kind && Vector3.Distance(instance.transform.position, at) < 0.01f);
+                Assert.IsNotNull(found, $"{piece} is there");
+                Assert.AreEqual(piece.angle, found.transform.eulerAngles.y, 0.1f, $"{piece} is turned");
+                placed.Remove(found);
+            }
+            var built = 0;
+            foreach (Transform child in m_Table.transform)
+            {
+                if (child.name != "Cloth" && child != m_Table.toaster)
+                    built++;
+            }
+            Assert.AreEqual(level.pieceCount, built, "nothing else is on the table");
+            Assert.AreEqual(level.length, m_Table.toaster.localPosition.z, 1e-3f, "the toaster's at the end");
+        }
+
+        static BakeryFollower Follower(string name)
+        {
+            foreach (var follower in Object.FindObjectsByType<BakeryFollower>())
+            {
+                if (follower.name == name)
+                    return follower;
+            }
+            return null;
+        }
+
+        [UnityTest]
+        public IEnumerator TheTutorialIsSetAsItAlwaysWas()
+        {
+            yield return null;
+            Assert.AreEqual("breakfast", m_Table.level.id);
+            AssertSetFor(m_Table.level);
+            Assert.AreEqual(27.5f, m_Table.toaster.position.z, 0.01f);
+            Assert.AreEqual(41f, m_Bakery.northSide, 1e-3f, "the room as it always was");
+            Assert.AreEqual(49.8f, m_Bakery.counterRect.height, 1e-3f);
+            Assert.IsTrue(Follower("Beam4").shown);
+            Assert.IsFalse(Follower("Beam5").shown, "past the far wall");
+        }
+
+        [UnityTest]
+        public IEnumerator ALongerLevelStretchesTheRoomAndTheTelevisionGoesWithTheWall()
+        {
+            state.GoToBagelSelection();
+            state.GoToLevelSelection();
+            yield return null;
+            var television = GameObject.Find("GameOverScreenUI").transform;
+            var televisionFromWall = television.position.z - m_Bakery.northSide;
+            var banquet = state.levels[2];
+
+            state.SelectLevel(2);
+            yield return new WaitForSeconds(1f);
+            Assert.IsTrue(m_Table.changing);
+            Assert.Greater(m_Table.length, 27.5f, "on its way");
+            Assert.Less(m_Table.length, banquet.length);
+            Assert.AreEqual(m_Table.length + 13.5f, m_Bakery.northSide, 1e-3f, "the room stretches with it");
+
+            yield return Changed();
+            AssertSetFor(banquet);
+            Assert.AreEqual(banquet.length + 13.5f, m_Bakery.northSide, 1e-3f);
+            Assert.AreEqual(televisionFromWall, television.position.z - m_Bakery.northSide, 1e-3f, "the television's on the wall");
+            Assert.IsTrue(Follower("Beam5").shown, "a beam that was past the wall is in the room");
+            Assert.IsFalse(Follower("Beam8").shown);
+
+            state.SelectLevel(0);
+            yield return Changed();
+            AssertSetFor(state.levels[0]);
+            Assert.AreEqual(41f, m_Bakery.northSide, 1e-3f, "and back");
+            Assert.IsFalse(Follower("Beam5").shown);
+        }
+
+        [UnityTest]
+        public IEnumerator OnlyWhatChangesComesAndGoes()
+        {
+            state.GoToBagelSelection();
+            state.GoToLevelSelection();
+            var level = state.AddLevel("Mine");
+            level.Add(new BagelLevelPiece("Platform", 2f, 10f));
+            level.Add(new BagelLevelPiece("Orange", -2f, 12f));
+            yield return Changed();
+            AssertSetFor(level);
+            var before = new List<GameObject>(m_Table.pieces);
+
+            level.Add(new BagelLevelPiece("JamJar", 3f, 20f, 45f));
+            yield return null;
+            var jam = new List<GameObject>(m_Table.pieces).Find(instance => instance.name == "JamJar");
+            Assert.IsNotNull(jam, "the jam's there at once");
+            Assert.Less(jam.GetComponentInChildren<TableItem>().transform.position.y, m_Table.transform.position.y, "coming up out of the table");
+            foreach (var instance in before)
+                Assert.IsTrue(instance != null && new List<GameObject>(m_Table.pieces).Contains(instance), $"{instance.name} stays as it was");
+
+            var platform = before.Find(instance => instance.name == "Platform");
+            level.RemoveAt(0);
+            yield return null;
+            Assert.IsTrue(platform != null, "still sinking");
+            Assert.Less(platform.transform.localPosition.y, 0.01f);
+            yield return Changed();
+            Assert.IsTrue(platform == null, "gone");
+            AssertSetFor(level);
+        }
+
+        [UnityTest]
+        public IEnumerator ANewGameStartsWithTheWholeLevelThere()
+        {
+            state.GoToBagelSelection();
+            state.GoToLevelSelection();
+            var bagel = Object.FindAnyObjectByType<BagelController>();
+            Assert.IsTrue(bagel.GetComponent<Rigidbody>().isKinematic, "the bagel waits at the start");
+            Assert.Less(Vector3.Angle(bagel.transform.right, Vector3.right), 1f, "standing up");
+
+            state.SelectLevel(2);
+            yield return null;
+            state.GoToPlay();
+            Assert.IsFalse(m_Table.changing, "done at once");
+            AssertSetFor(state.levels[2]);
+            Assert.IsTrue(Object.FindAnyObjectByType<TableClearing>().clearing, "then the table's shoved off and set again");
+            Assert.IsFalse(bagel.GetComponent<Rigidbody>().isKinematic, "and the bagel rolls");
+            yield return null;
+        }
+    }
+}

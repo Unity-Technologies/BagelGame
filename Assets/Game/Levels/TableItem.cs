@@ -38,6 +38,9 @@ namespace Bagel
 
         void OnDestroy() => s_Items.Remove(this);
 
+        // Coming up out of the table, or going down into it.
+        public bool moving => m_Rise != null;
+
         // Back where it belongs, coming up out of the table over duration seconds.
         public void Restock(float depth, float duration)
         {
@@ -71,6 +74,36 @@ namespace Bagel
             }
             transform.SetLocalPositionAndRotation(m_HomePosition, m_HomeRotation);
             m_Body.isKinematic = m_StartsKinematic;
+            m_Rise = null;
+        }
+
+        // Down into the table, for good: the level doesn't have it any more. It's no longer one of the table's things
+        // straight away, so a new game doesn't set it again.
+        public void Sink(float depth, float duration)
+        {
+            StopRise();
+            s_Items.Remove(this);
+            if (!m_Body.isKinematic)
+            {
+                m_Body.linearVelocity = Vector3.zero;
+                m_Body.angularVelocity = Vector3.zero;
+            }
+            m_Body.isKinematic = true;
+            if (isActiveAndEnabled)
+                m_Rise = StartCoroutine(Lower(depth, duration));
+        }
+
+        IEnumerator Lower(float depth, float duration)
+        {
+            var from = transform.position;
+            for (var time = 0f; time < duration; time += Time.deltaTime)
+            {
+                // Slowly at first, then faster, as if pulled in.
+                var t = time / duration;
+                m_Body.MovePosition(from - Vector3.up * (depth * t * t));
+                yield return null;
+            }
+            gameObject.SetActive(false);
             m_Rise = null;
         }
 

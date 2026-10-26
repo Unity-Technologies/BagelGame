@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Properties;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Bagel
         public enum State {
             MainMenu,
             BagelSelection,
+            LevelSelection,
             Playing,
             GameOver
         }
@@ -40,6 +42,10 @@ namespace Bagel
         public static readonly BindingId pausePanePath = nameof(pausePane);
         public static readonly BindingId isPausedPath = nameof(isPaused);
         public static readonly BindingId selectedBagelIndexPath = nameof(selectedBagelIndex);
+        public static readonly BindingId selectedLevelIndexPath = nameof(selectedLevelIndex);
+        // The levels to choose from: one added, one gone, one of the player's own changed.
+        public static readonly BindingId levelsPath = nameof(levels);
+        public static readonly BindingId isEditingLevelPath = nameof(isEditingLevel);
         public static readonly BindingId lastRunPath = nameof(lastRun);
         public static readonly BindingId leaderboardPath = nameof(leaderboard);
 
@@ -53,6 +59,10 @@ namespace Bagel
         [SerializeField] int m_SelectedBagelIndex;
 
         [Space]
+        [SerializeField] BagelLevelCollection m_Levels;
+        [SerializeField] int m_SelectedLevelIndex;
+
+        [Space]
         [SerializeField] BagelTrackerData m_Tracker = new BagelTrackerData();
         [SerializeField] RunResult m_LastRun = new RunResult();
         [SerializeField] SettingsData m_Settings = new SettingsData();
@@ -60,16 +70,23 @@ namespace Bagel
 
         long m_Version;
 
+        // The player's own levels, after the game's, and all of them in that order.
+        readonly List<BagelLevel> m_CustomLevels = new();
+        readonly List<BagelLevel> m_AllLevels = new();
+        bool m_IsEditingLevel;
+
         public event EventHandler<BindablePropertyChangedEventArgs> propertyChanged;
 
         public event EventHandler<State> onStateChange;
         public event EventHandler<bool> onPauseStateChanged;
         public event EventHandler<BagelType> onSetBagelType;
         public event EventHandler<MainMenuPaneMode> onMainMenuPaneModeChange;
+        public event EventHandler<BagelLevel> onSetLevel;
 
         [CreateProperty] public State currentState => m_State;
         [CreateProperty] public bool isMainMenu => m_State == State.MainMenu;
         [CreateProperty] public bool isBagelSelection => m_State == State.BagelSelection;
+        [CreateProperty] public bool isLevelSelection => m_State == State.LevelSelection;
         [CreateProperty] public bool isPlaying => m_State == State.Playing;
         [CreateProperty] public bool isPaused => m_IsPaused;
         [CreateProperty] public bool isGameOver => m_State == State.GameOver;
@@ -116,6 +133,31 @@ namespace Bagel
         [CreateProperty] public bool canSelectPreviousBagel => bagelTypeCount > 1;
         [CreateProperty] public bool canSelectNextBagel => bagelTypeCount > 1;
 
+        // The game's own levels, then the player's.
+        [CreateProperty] public IReadOnlyList<BagelLevel> levels => m_AllLevels;
+        [CreateProperty] public int levelCount => m_AllLevels.Count;
+        public BagelLevelCollection levelCollection => m_Levels;
+        public BagelLevelLibrary levelLibrary => m_Levels != null ? m_Levels.library : null;
+
+        [CreateProperty]
+        public int selectedLevelIndex
+        {
+            get => m_SelectedLevelIndex;
+            set => SelectLevel(value);
+        }
+
+        [CreateProperty]
+        public BagelLevel selectedLevel =>
+            levelCount > 0 ? m_AllLevels[Mathf.Clamp(m_SelectedLevelIndex, 0, levelCount - 1)] : null;
+
+        // Levels go up and down a list: no going round.
+        [CreateProperty] public bool canSelectPreviousLevel => m_SelectedLevelIndex > 0;
+        [CreateProperty] public bool canSelectNextLevel => m_SelectedLevelIndex < levelCount - 1;
+
+        // Only the player's own levels are changed in the game.
+        [CreateProperty] public bool canEditLevel => selectedLevel != null && selectedLevel.custom;
+        [CreateProperty] public bool isEditingLevel => m_IsEditingLevel;
+
         [CreateProperty] public BagelTrackerData tracker => m_Tracker;
         [CreateProperty] public RunResult lastRun => m_LastRun;
         [CreateProperty] public SettingsData settings => m_Settings;
@@ -132,6 +174,12 @@ namespace Bagel
         {
             Resume();
             SetState(State.BagelSelection);
+        }
+
+        public void GoToLevelSelection()
+        {
+            Resume();
+            SetState(State.LevelSelection);
         }
 
         public void GoToPlay()
@@ -192,6 +240,135 @@ namespace Bagel
 
         public void SelectNextBagel() => SelectBagel(bagelTypeCount > 0 ? (m_SelectedBagelIndex + 1) % bagelTypeCount : 0);
 
+        public void SelectLevel(int index)
+        {
+            index = Mathf.Clamp(index, 0, Mathf.Max(0, levelCount - 1));
+            if (index == m_SelectedLevelIndex)
+                return;
+
+            m_SelectedLevelIndex = index;
+            if (m_IsEditingLevel && !canEditLevel)
+                EditLevel(false);
+            NotifyLevelSelection();
+        }
+
+        public void SelectPreviousLevel() => SelectLevel(m_SelectedLevelIndex - 1);
+
+        public void SelectNextLevel() => SelectLevel(m_SelectedLevelIndex + 1);
+
+        public const string customLevelPrefix = "custom-";
+
+        // A new level of the player's own, after the others, chosen: empty but for the toaster at the end.
+        public BagelLevel AddLevel(string name)
+        {
+            var number = 1;
+            foreach (var level in m_CustomLevels)
+            {
+                if (level.id.StartsWith(customLevelPrefix, StringComparison.Ordinal) &&
+                    int.TryParse(level.id.Substring(customLevelPrefix.Length), out var taken))
+                    number = Mathf.Max(number, taken + 1);
+            }
+            var added = BagelLevel.CreateCustom(customLevelPrefix + number, name);
+            AddCustomLevel(added);
+            m_SelectedLevelIndex = m_AllLevels.IndexOf(added);
+            NotifyLevels();
+            NotifyLevelSelection();
+            return added;
+        }
+
+        // Only the player's own go; the one before it is chosen.
+        public void DeleteLevel(BagelLevel level)
+        {
+            if (level == null || !level.custom || !m_CustomLevels.Contains(level))
+                return;
+
+            var index = m_AllLevels.IndexOf(level);
+            var wasSelected = level == selectedLevel;
+            if (wasSelected)
+                EditLevel(false);
+            m_CustomLevels.Remove(level);
+            level.changed -= CustomLevel_OnChanged;
+            RefreshLevels();
+            var selectionMoved = index <= m_SelectedLevelIndex && m_SelectedLevelIndex > 0;
+            if (selectionMoved)
+                m_SelectedLevelIndex--;
+            NotifyLevels();
+            if (wasSelected || selectionMoved)
+                NotifyLevelSelection();
+            DestroyLevel(level);
+        }
+
+        // The tablet's editor, open on the chosen level: only for the player's own, while levels are chosen.
+        public void EditLevel(bool editing)
+        {
+            editing &= isLevelSelection && canEditLevel;
+            if (m_IsEditingLevel == editing)
+                return;
+            m_IsEditingLevel = editing;
+            Notify(nameof(isEditingLevel));
+        }
+
+        void AddCustomLevel(BagelLevel level)
+        {
+            m_CustomLevels.Add(level);
+            level.changed += CustomLevel_OnChanged;
+            RefreshLevels();
+        }
+
+        void CustomLevel_OnChanged(BagelLevel level) => Notify(nameof(levels));
+
+        void RefreshLevels()
+        {
+            m_AllLevels.Clear();
+            if (m_Levels != null)
+            {
+                foreach (var level in m_Levels.collection)
+                {
+                    if (level != null)
+                        m_AllLevels.Add(level);
+                }
+            }
+            m_AllLevels.AddRange(m_CustomLevels);
+        }
+
+        void NotifyLevels()
+        {
+            Notify(nameof(levels));
+            Notify(nameof(levelCount));
+            Notify(nameof(canSelectNextLevel));
+        }
+
+        void NotifyLevelSelection()
+        {
+            Notify(nameof(selectedLevelIndex));
+            Notify(nameof(selectedLevel));
+            Notify(nameof(canSelectPreviousLevel));
+            Notify(nameof(canSelectNextLevel));
+            Notify(nameof(canEditLevel));
+            onSetLevel?.Invoke(this, selectedLevel);
+        }
+
+        void ClearCustomLevels()
+        {
+            foreach (var level in m_CustomLevels)
+            {
+                if (level == null)
+                    continue;
+                level.changed -= CustomLevel_OnChanged;
+                DestroyLevel(level);
+            }
+            m_CustomLevels.Clear();
+            RefreshLevels();
+        }
+
+        static void DestroyLevel(BagelLevel level)
+        {
+            if (Application.isPlaying)
+                Destroy(level);
+            else
+                DestroyImmediate(level);
+        }
+
         public void SubmitToLeaderboard(string playerName)
         {
             if (!m_LastRun.canSubmit)
@@ -236,9 +413,12 @@ namespace Bagel
         void SetState(State state)
         {
             m_State = state;
+            if (state != State.LevelSelection)
+                EditLevel(false);
             Notify(nameof(currentState));
             Notify(nameof(isMainMenu));
             Notify(nameof(isBagelSelection));
+            Notify(nameof(isLevelSelection));
             Notify(nameof(isPlaying));
             Notify(nameof(isGameOver));
             onStateChange?.Invoke(this, state);
@@ -262,6 +442,8 @@ namespace Bagel
             public int frameRate;
             public System.Collections.Generic.List<LeaderboardData.LeaderboardEntry> leaderboard = new();
             public RunResult lastRun = new();
+            public string selectedLevel;
+            public System.Collections.Generic.List<BagelLevel.Saved> customLevels = new();
         }
 
         public Saved ToSaved()
@@ -282,6 +464,9 @@ namespace Bagel
             };
             saved.leaderboard.AddRange(m_Leaderboard.entries);
             saved.lastRun = m_LastRun;
+            saved.selectedLevel = selectedLevel != null ? selectedLevel.id : null;
+            foreach (var level in m_CustomLevels)
+                saved.customLevels.Add(level.ToSaved());
             return saved;
         }
 
@@ -303,6 +488,25 @@ namespace Bagel
             m_Settings.frameRate = saved.frameRate;
             m_Leaderboard.Load(saved.leaderboard);
             m_LastRun.Load(saved.lastRun);
+
+            // The player's own levels, each once, and the level they chose last.
+            ClearCustomLevels();
+            if (saved.customLevels != null)
+            {
+                foreach (var savedLevel in saved.customLevels)
+                {
+                    var level = BagelLevel.FromSaved(savedLevel);
+                    if (level == null)
+                        continue;
+                    if (m_AllLevels.Find(other => other.id == level.id) == null)
+                        AddCustomLevel(level);
+                    else
+                        DestroyLevel(level);
+                }
+            }
+            m_SelectedLevelIndex = Mathf.Max(0, m_AllLevels.FindIndex(level => level.id == saved.selectedLevel));
+            NotifyLevels();
+            NotifyLevelSelection();
         }
 
         // Clone a template (the start state, or a preview state) into a throwaway runtime instance.
@@ -320,6 +524,7 @@ namespace Bagel
             if (copy == null)
                 return;
 
+            copy.ClearCustomLevels();
             if (Application.isPlaying)
                 Destroy(copy);
             else
@@ -341,6 +546,7 @@ namespace Bagel
             m_LastRun ??= new RunResult();
             m_Settings ??= new SettingsData();
             m_Leaderboard ??= new LeaderboardData();
+            RefreshLevels();
 
             m_Tracker.Bind(this);
             m_LastRun.Bind(this);
@@ -359,9 +565,11 @@ namespace Bagel
         static readonly string[] s_AllProperties =
         {
             nameof(currentState), nameof(isMainMenu), nameof(isBagelSelection), nameof(isPlaying), nameof(isPaused),
-            nameof(isGameOver), nameof(mainMenuPane), nameof(currentMainMenuPaneMode), nameof(pausePane),
+            nameof(isGameOver), nameof(isLevelSelection), nameof(mainMenuPane), nameof(currentMainMenuPaneMode), nameof(pausePane),
             nameof(bagelTypes), nameof(bagelTypeCount), nameof(selectedBagelIndex), nameof(selectedBagelType),
-            nameof(canSelectPreviousBagel), nameof(canSelectNextBagel), nameof(tracker), nameof(lastRun),
+            nameof(canSelectPreviousBagel), nameof(canSelectNextBagel), nameof(levels), nameof(levelCount),
+            nameof(selectedLevelIndex), nameof(selectedLevel), nameof(canSelectPreviousLevel), nameof(canSelectNextLevel),
+            nameof(canEditLevel), nameof(isEditingLevel), nameof(tracker), nameof(lastRun),
             nameof(settings), nameof(leaderboard)
         };
 

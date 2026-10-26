@@ -20,7 +20,6 @@ namespace Bagel
         [Tooltip("The floor's height (world space): what's shoved off goes once it gets down there.")]
         [SerializeField] float m_FloorHeight;
 
-        PlayManager m_PlayManager;
         Coroutine m_Clearing;
         readonly List<TableLeftover> m_Leftovers = new();
 
@@ -29,26 +28,14 @@ namespace Bagel
         // What the last clearing shoved off, still flying until it's gone (destroyed).
         public IReadOnlyList<TableLeftover> leftovers => m_Leftovers;
 
-        void OnEnable()
-        {
-            m_PlayManager = FindAnyObjectByType<PlayManager>();
-            if (m_PlayManager != null)
-                m_PlayManager.state.onStateChange += State_OnStateChange;
-        }
+        void OnDisable() => m_Clearing = null;
 
-        void OnDisable()
+        // A new game: everything goes, every game, the first too (a table swept clean with one arm is funnier). The
+        // level's table (BagelLevelTable) calls it, once all the level's things are there.
+        public void ClearForANewGame()
         {
-            if (m_PlayManager != null)
-                m_PlayManager.state.onStateChange -= State_OnStateChange;
-            m_Clearing = null;
-        }
-
-        void State_OnStateChange(object sender, PlayManagerState.State state)
-        {
-            if (state != PlayManagerState.State.Playing || m_Clearing != null)
+            if (m_Clearing != null || !isActiveAndEnabled)
                 return;
-
-            // Everything goes, every game, the first too: a table swept clean with one arm is funnier.
             m_Clearing = StartCoroutine(Clear(new List<TableItem>(TableItem.items)));
         }
 

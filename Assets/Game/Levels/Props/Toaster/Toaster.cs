@@ -67,6 +67,11 @@ namespace Bagel
                     m_Toast.gameObject.SetActive(false);
                 ShowRollingBagel(true);
             }
+            else if (state == PlayManagerState.State.LevelSelection)
+            {
+                // The new bagel waits at the start; the last one stays toast until it rolls.
+                ShowRollingBagel(true);
+            }
             else if (state == PlayManagerState.State.GameOver && IsNearestToTheBagel())
             {
                 if (m_Toasting != null)

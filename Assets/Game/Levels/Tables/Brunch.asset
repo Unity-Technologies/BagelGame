@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d21660b8fe41e48bfc72ec81f657f5, type: 3}
+  m_Name: Brunch
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelLevel
+  m_Id: brunch
+  m_NameKey: level.brunch
+  m_DisplayName: Brunch
+  m_Length: 45
+  m_Pieces:
+  - kind: BaguetteShort
+    x: 0
+    z: -5.5
+    angle: 0
+  - kind: SaltShaker
+    x: -1.6
+    z: 2.6
+    angle: 20
+  - kind: PepperShaker
+    x: -2.3
+    z: 3.1
+    angle: 75
+  - kind: Orange
+    x: 2.6
+    z: 3
+    angle: 0
+  - kind: MilkBottle
+    x: 4.6
+    z: 1.2
+    angle: 0
+  - kind: JamJar
+    x: -1.5
+    z: 7.5
+    angle: 30
+  - kind: ApricotJam
+    x: 1.5
+    z: 7.5
+    angle: 335
+  - kind: MilkPuddle
+    x: 0
+    z: 11.2
+    angle: 45
+  - kind: Cookbooks
+    x: -3.9
+    z: 10.5
+    angle: 0
+  - kind: EggCup
+    x: 3.6
+    z: 11
+    angle: 0
+  - kind: Ramp
+    x: 2.5
+    z: 15
+    angle: 0
+  - kind: Platform
+    x: 2.5
+    z: 18.21
+    angle: 0
+  - kind: Platform
+    x: 2.5
+    z: 23.05
+    angle: 0
+  - kind: Ramp
+    x: 2.5
+    z: 26.25
+    angle: 180
+  - kind: SpilledMilk
+    x: -2.2
+    z: 21
+    angle: 0
+  - kind: BaguetteLong
+    x: -4.9
+    z: 31.5
+    angle: 0
+  - kind: EggCup
+    x: -2.2
+    z: 29.5
+    angle: 0
+  - kind: HoneyPot
+    x: 1.6
+    z: 31.5
+    angle: 140
+  - kind: Mug
+    x: -1.6
+    z: 34
+    angle: 200
+  - kind: SugarCubes
+    x: 3.1
+    z: 35.5
+    angle: 0
+  - kind: SugarCubes
+    x: -2.4
+    z: 38
+    angle: 30
+  - kind: ButterDish
+    x: 0
+    z: 40
+    angle: 0
+  - kind: JamJar
+    x: -4.2
+    z: 41.5
+    angle: 10
+  - kind: MilkBottle
+    x: 4.3
+    z: 41
+    angle: 0

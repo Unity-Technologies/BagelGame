@@ -18,6 +18,8 @@ MonoBehaviour:
   m_IsPaused: 0
   m_BagelTypes: {fileID: 11400000, guid: f58b82c12a627284294e778219a14bf8, type: 2}
   m_SelectedBagelIndex: 0
+  m_Levels: {fileID: 11400000, guid: 8bef394956aacbe41bead612c7b990e8, type: 2}
+  m_SelectedLevelIndex: 0
   m_Tracker:
     m_Constants: {fileID: 11400000, guid: 94f407183290c744582d86eb256be43b, type: 2}
     m_ToppingsCount: 1000
@@ -28,15 +30,27 @@ MonoBehaviour:
     m_Spin: 0
     m_Elapsed: 0
   m_LastRun:
+    m_HasRun: 0
     m_BagelName: 
+    m_BagelNameKey: 
     m_Toppings: 0
     m_ToppingsMax: 0
     m_Submitted: 0
+    m_Time: 0
   m_Settings:
     m_FieldOfViewMin: 50
     m_FieldOfViewMax: 80
     m_FieldOfView: 60
     m_ThemeIndex: 0
+    m_ReduceMotion: 0
+    m_VisualEffects: 1
+    m_Sound: 1
+    m_SoundVolume: 0.8
+    m_PostProcessing: 1
+    m_AntiAliasing: 0
+    m_DepthOfField: 1
+    m_Shadows: 1
+    m_FrameRate: 0
   m_Leaderboard:
     m_Entries:
     - playerName: UIToolkitPro
@@ -74,7 +88,7 @@ MonoBehaviour:
       time: 54.2
     - playerName: PanelSetGo
       toppings: 359
-      time: 49.0
+      time: 49
     - playerName: SettingsPane
       toppings: 235
       time: 42.6

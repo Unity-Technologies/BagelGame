@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b866d6b8f8978d541acf208235198626, type: 3}
+  m_Name: BagelLevelLibrary
+  m_EditorClassIdentifier: BagelGame::Bagel.BagelLevelLibrary
+  m_Entries:
+  - id: Ramp
+    nameKey: piece.ramp
+    displayName: Ramp
+    prefab: {fileID: 885747214326615080, guid: 973d18ca8f40af84d98052a26dabfbfd, type: 3}
+    size: {x: 1, y: 2.9}
+    round: 0
+    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    course: 1
+  - id: Platform
+    nameKey: piece.platform
+    displayName: Platform
+    prefab: {fileID: 7370446863963659236, guid: 4dfc3d7ca1d75274dbbe47878d881cf1, type: 3}
+    size: {x: 1, y: 5}
+    round: 0
+    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    course: 1
+  - id: Block
+    nameKey: piece.block
+    displayName: Block
+    prefab: {fileID: 5931292302479290061, guid: c68e24f8766e87b4783db8719676b4e9, type: 3}
+    size: {x: 1, y: 1}
+    round: 0
+    color: {r: 1, g: 0.8288879, b: 0.7012578, a: 1}
+    course: 1
+  - id: SpilledMilk
+    nameKey: piece.spilledMilk
+    displayName: Spilled milk
+    prefab: {fileID: 6998242090734250964, guid: e23a59b385cfeb748b417a43ddc1424b, type: 3}
+    size: {x: 3.63, y: 10.21}
+    round: 0
+    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    course: 1
+  - id: MilkPuddle
+    nameKey: piece.milkPuddle
+    displayName: Milk puddle
+    prefab: {fileID: 550175876701688025, guid: 17c7a6bc93923cb40aed6bf07e0ce266, type: 3}
+    size: {x: 3, y: 3}
+    round: 0
+    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    course: 1
+  - id: BaguetteShort
+    nameKey: piece.baguetteShort
+    displayName: Baguette
+    prefab: {fileID: 929288812341294431, guid: d51f210a525c014439cc4cb8043c6056, type: 3}
+    size: {x: 6.6, y: 0.94}
+    round: 0
+    color: {r: 0.8, g: 0.52, b: 0.24, a: 1}
+    course: 0
+  - id: BaguetteLong
+    nameKey: piece.baguetteLong
+    displayName: Long baguette
+    prefab: {fileID: 7182056330965934696, guid: 2d9b9ff6c5966f2479f04e4c643a3697, type: 3}
+    size: {x: 0.94, y: 9}
+    round: 0
+    color: {r: 0.8, g: 0.52, b: 0.24, a: 1}
+    course: 0
+  - id: ButterDish
+    nameKey: piece.butterDish
+    displayName: Butter dish
+    prefab: {fileID: 392304891730076519, guid: 98a93b5798b4ed647bd8885be32f6eab, type: 3}
+    size: {x: 3.68, y: 5.14}
+    round: 0
+    color: {r: 0.72, g: 0.83, b: 0.88, a: 1}
+    course: 0
+  - id: Cookbooks
+    nameKey: piece.cookbooks
+    displayName: Cookbooks
+    prefab: {fileID: 873996640147853895, guid: 030ffead861a04d4986a03f0d46b5854, type: 3}
+    size: {x: 3.1, y: 5.1}
+    round: 0
+    color: {r: 0.6, g: 0.17, b: 0.14, a: 1}
+    course: 0
+  - id: Mug
+    nameKey: piece.mug
+    displayName: Mug
+    prefab: {fileID: 8155608948807835953, guid: 0a3fcc8381b62f741b6f4dbcf63bd838, type: 3}
+    size: {x: 0.94, y: 0.94}
+    round: 1
+    color: {r: 0.2, g: 0.45, b: 0.5, a: 1}
+    course: 0
+  - id: JamJar
+    nameKey: piece.jamJar
+    displayName: Jam jar
+    prefab: {fileID: 3544304325818193205, guid: e0d43ddae070eda41b8146d39a832294, type: 3}
+    size: {x: 1.06, y: 1.06}
+    round: 1
+    color: {r: 0.55, g: 0.06, b: 0.12, a: 1}
+    course: 0
+  - id: SugarCubes
+    nameKey: piece.sugarCubes
+    displayName: Sugar cubes
+    prefab: {fileID: 3049005636193315533, guid: 7145a1169e5c7814ba034b1bd53e1be8, type: 3}
+    size: {x: 1.42, y: 1.4}
+    round: 0
+    color: {r: 0.98, g: 0.98, b: 0.97, a: 1}
+    course: 0
+  - id: SaltShaker
+    nameKey: piece.saltShaker
+    displayName: Salt
+    prefab: {fileID: 5415692836140804560, guid: c3a491c90dca2fa4e908dd72b082a0c4, type: 3}
+    size: {x: 0.58, y: 0.58}
+    round: 1
+    color: {r: 0.95, g: 0.94, b: 0.9, a: 1}
+    course: 0
+  - id: PepperShaker
+    nameKey: piece.pepperShaker
+    displayName: Pepper
+    prefab: {fileID: 4684986969896258772, guid: d75d6bc93a7bab84abb28bb4a323e506, type: 3}
+    size: {x: 0.58, y: 0.58}
+    round: 1
+    color: {r: 0.16, g: 0.15, b: 0.15, a: 1}
+    course: 0
+  - id: Orange
+    nameKey: piece.orange
+    displayName: Orange
+    prefab: {fileID: 1263606322629884927, guid: 1d2fbe9f17906b748bb59cd78798ddf5, type: 3}
+    size: {x: 0.96, y: 0.96}
+    round: 1
+    color: {r: 0.97, g: 0.5, b: 0.08, a: 1}
+    course: 0
+  - id: MilkBottle
+    nameKey: piece.milkBottle
+    displayName: Milk bottle
+    prefab: {fileID: 6163100043952936045, guid: 44e46377b761e624fad34079f0589b9a, type: 3}
+    size: {x: 0.8, y: 0.8}
+    round: 1
+    color: {r: 0.97, g: 0.97, b: 0.95, a: 1}
+    course: 0
+  - id: HoneyPot
+    nameKey: piece.honeyPot
+    displayName: Honey pot
+    prefab: {fileID: 4946164017907069001, guid: 110fae0330af7db4aa57c9a7ade622b6, type: 3}
+    size: {x: 1.16, y: 1.16}
+    round: 1
+    color: {r: 0.95, g: 0.7, b: 0.22, a: 1}
+    course: 0
+  - id: EggCup
+    nameKey: piece.eggCup
+    displayName: Egg cup
+    prefab: {fileID: 7333904291258477380, guid: a9d4f56a63f01a34b895f8aca1d25dd3, type: 3}
+    size: {x: 0.72, y: 0.72}
+    round: 1
+    color: {r: 0.33, g: 0.55, b: 0.86, a: 1}
+    course: 0
+  - id: ApricotJam
+    nameKey: piece.apricotJam
+    displayName: Apricot jam
+    prefab: {fileID: 3838582078233719403, guid: 35d3b7f5a3934d7408ccfe8671546e09, type: 3}
+    size: {x: 1.06, y: 1.06}
+    round: 1
+    color: {r: 0.93, g: 0.47, b: 0.08, a: 1}
+    course: 0
