@@ -11,6 +11,8 @@ namespace Bagel
         [SerializeField] LayerMask m_ToastersLayerMask;
         [SerializeField] Transform m_StartingLocation;
         [SerializeField] float m_FallLimit = 10.0f;
+        [Tooltip("How long it takes to reach its turn speed, or to stop turning, in seconds.")]
+        [SerializeField] float m_TurnResponse = 0.1f;
 
         PlayManagerState m_State;
         Rigidbody m_RigidBody;
@@ -27,6 +29,11 @@ namespace Bagel
 
         // A rolling bagel hops off the ground for a moment now and then: it's still rolling.
         const float k_GroundedGrace = 0.1f;
+
+        // It's backing up with the stick this far back (so a stick pushed only a little low of the side still turns
+        // it that way), or with it to the side while it rolls back this fast (meters a second).
+        const float k_BackingInput = 0.25f;
+        const float k_BackingSpeed = 0.5f;
 
         public BagelType bagelType => m_BagelType;
         public int currentToppingCount => Mathf.CeilToInt(m_CurrentToppingCount);
@@ -204,15 +211,37 @@ namespace Bagel
         {
             var inputVector = m_PlayManager.playInputBindings.GetMovementVectorNormalized();
             var rollTorque = transform.right * m_BagelType.rollTorque * inputVector.y;
-            var turnTorque = GetNonRotatedRelativeUp() * m_BagelType.turnTorque * inputVector.x;
 
             m_RigidBody.AddTorque(rollTorque, ForceMode.Force);
-            m_RigidBody.AddTorque(turnTorque, ForceMode.Force);
+            Steer(inputVector);
 
             m_CurrentInput = inputVector.y;
             m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
             m_CurrentForce = Mathf.Max(0, m_CurrentForce - m_BagelType.impactAmortizationRate);
             m_CurrentSpin = m_RigidBody.angularVelocity.magnitude;
+        }
+
+        // With the stick over to a side it turns at its bagel's turn speed, rolling or standing still, and it stops
+        // turning once the stick's let go: its turn (about its up, however it leans) is brought to that within the
+        // turn response, whatever its grip on the ground. The stick's as far over as it goes that way (the keys'
+        // diagonals too, which the input normalizes), so forward and right turns as fast as right alone. Backing up,
+        // it steers like a car in reverse: back and right goes back and to the right, so it turns the other way.
+        void Steer(Vector2 input)
+        {
+            var most = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
+            var steer = most > 0f ? input.x / most : 0f;
+            var backing = input.y < -k_BackingInput || (input.y <= 0f && m_CurrentSpeed < -k_BackingSpeed);
+            if (backing)
+                steer = -steer;
+
+            var up = GetNonRotatedRelativeUp();
+            var turnSpeed = m_BagelType.turnSpeed * Mathf.Deg2Rad;
+            var turn = Vector3.Dot(m_RigidBody.angularVelocity, up);
+            var turned = Mathf.MoveTowards(turn, steer * turnSpeed, turnSpeed / m_TurnResponse * Time.fixedDeltaTime);
+
+            // A little more, for what the body's damping takes off it this step.
+            var kept = Mathf.Max(0.1f, 1f - m_RigidBody.angularDamping * Time.fixedDeltaTime);
+            m_RigidBody.AddTorque(up * (turned / kept - turn), ForceMode.VelocityChange);
         }
 
         void HandleToppingLoss()

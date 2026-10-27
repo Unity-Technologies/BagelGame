@@ -18,7 +18,8 @@ namespace Bagel
         [Space]
         public float tiltRecoverySpeed = 10.0f;
         public float rollTorque = 40.0f;
-        public float turnTorque = 1.0f;
+        [Tooltip("How fast it turns with the stick all the way over, in degrees a second: rolling or standing still.")]
+        public float turnSpeed = 150.0f;
         public float mass = 4.0f;
 
         [Space]
@@ -35,7 +36,7 @@ namespace Bagel
         // Cummulative Stats
         public float toppings => maxToppingCount;
         public float toppingLoss => spinToppingLossFactor + impactToppingLossFactor + impactAmortizationRate;
-        public float control => tiltRecoverySpeed + turnTorque;
+        public float control => turnSpeed;
         public float speed => rollTorque;
         public float grip => dynamicFriction + staticFriction;
 

@@ -90,6 +90,79 @@ namespace Bagel.B00_Gameplay
             Assert.Greater(Vector3.Angle(forward, m_Bagel.GetAbsoluteForward()), 5f);
         }
 
+        // How far it's turned (right, clockwise from above), and how far it's gone forward and right, since the start.
+        float Turned(Vector3 forward) => Vector3.SignedAngle(forward, m_Bagel.GetAbsoluteForward(), Vector3.up);
+        static float Along(Vector3 moved, Vector3 direction) => Vector3.Dot(moved, direction);
+
+        // Most of the way to its turn speed, over half a second (a little of it's taken getting there, and by the
+        // ground's grip).
+        float HalfASecondsTurn => m_Bagel.bagelType.turnSpeed * 0.5f * 0.7f;
+
+        [UnityTest]
+        public IEnumerator StandingStillItTurnsOnTheSpot()
+        {
+            var forward = m_Bagel.GetAbsoluteForward();
+            Stick(Vector2.right);
+            yield return Frames(25);
+
+            Assert.Greater(Turned(forward), HalfASecondsTurn);
+            Assert.Less(Vector3.Distance(m_Start, m_Bagel.transform.position), 0.2f, "where it was");
+        }
+
+        // Holding forward and right turns it as fast as right alone, though the input's a diagonal.
+        [UnityTest]
+        public IEnumerator RollingItTurnsJustAsFast()
+        {
+            var forward = m_Bagel.GetAbsoluteForward();
+            Stick(new Vector2(1f, 1f));
+            yield return Frames(25);
+
+            Assert.Greater(Turned(forward), HalfASecondsTurn);
+        }
+
+        [UnityTest]
+        public IEnumerator LettingGoStopsTheTurn()
+        {
+            var forward = m_Bagel.GetAbsoluteForward();
+            Stick(Vector2.right);
+            yield return Frames(25);
+            Stick(Vector2.zero);
+            yield return Frames(10);
+            var turned = Turned(forward);
+            yield return Frames(25);
+
+            Assert.Less(Mathf.Abs(Turned(forward) - turned), 3f);
+        }
+
+        // Back and right goes back and to the right, like a car in reverse: it turns left to get there.
+        [UnityTest]
+        public IEnumerator BackAndRightGoesBackAndRight()
+        {
+            var forward = m_Bagel.GetAbsoluteForward();
+            var right = Vector3.Cross(Vector3.up, forward);
+            Stick(new Vector2(1f, -1f));
+            yield return Frames(30);
+
+            var moved = m_Bagel.transform.position - m_Start;
+            Assert.Less(Along(moved, forward), -0.3f, "back");
+            Assert.Greater(Along(moved, right), 0.3f, "and right");
+            Assert.Less(Turned(forward), -20f, "turned left");
+        }
+
+        [UnityTest]
+        public IEnumerator ForwardAndRightGoesForwardAndRight()
+        {
+            var forward = m_Bagel.GetAbsoluteForward();
+            var right = Vector3.Cross(Vector3.up, forward);
+            Stick(new Vector2(1f, 1f));
+            yield return Frames(30);
+
+            var moved = m_Bagel.transform.position - m_Start;
+            Assert.Greater(Along(moved, forward), 0.3f, "forward");
+            Assert.Greater(Along(moved, right), 0.3f, "and right");
+            Assert.Greater(Turned(forward), 20f, "turned right");
+        }
+
         [UnityTest]
         public IEnumerator ABagelAtRestKeepsItsToppings()
         {
