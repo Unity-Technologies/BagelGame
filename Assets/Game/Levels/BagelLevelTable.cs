@@ -6,11 +6,11 @@ namespace Bagel
 {
     // The counter, set for the chosen level: the gingham cloth, the course and the breakfast things on it (from the
     // level's table of pieces, BagelLevelLibrary prefabs), and the toaster at the end, with the room as long as the
-    // counter needs (Bakery). Choosing another level, or changing this one, changes only what differs: what the level
-    // no longer has sinks into the table, the toaster slides to the new end with the room stretching or shrinking
-    // behind it, and what's new comes up out of the table as the cloth gets to it. A new game shoves the table off
-    // (TableClearing) once the level's all there. In the Editor, out of play, the chosen level is only shown, never
-    // saved with the scene, and the room is left as it is.
+    // counter needs (Bakery). Choosing another level shoves everything off the table (TableClearing), and the toaster
+    // slides to the new end with the room stretching or shrinking behind it, the new level coming up out of the table
+    // as the cloth gets to it. Changing this one changes only what differs: what the level no longer has sinks into
+    // the table, and what's new comes up out of it. A new game shoves the table off once the level's all there. In the
+    // Editor, out of play, the chosen level is only shown, never saved with the scene, and the room is left as it is.
     [ExecuteAlways]
     [RequireComponent(typeof(TableClearing))]
     public class BagelLevelTable : MonoBehaviour
@@ -142,15 +142,28 @@ namespace Bagel
         // The table as this level has it: changed bit by bit as it's watched, or all at once.
         public void Show(BagelLevel level, bool animate)
         {
+            var another = level != m_Level;
             Watch(level);
             m_LevelVersion = level != null ? level.version : -1;
             var wanted = new List<BagelLevelPiece>();
             if (level != null)
                 wanted.AddRange(level.pieces);
 
-            // What's there already stays; what isn't wanted any more goes.
+            // Another level: everything's shoved off the table, and the new level's set from scratch.
             m_Waiting.Clear();
             var going = false;
+            if (animate && another && m_Placed.Count > 0 && Application.isPlaying && m_Clearing != null)
+            {
+                var pieces = new List<GameObject>(this.pieces);
+                m_Placed.Clear();
+                FinishSinking();
+                m_Clearing.ClearForAnotherLevel(pieces);
+                foreach (var piece in pieces)
+                    Destroy(piece);
+                going = true;
+            }
+
+            // What's there already stays; what isn't wanted any more goes.
             for (int i = m_Placed.Count - 1; i >= 0; i--)
             {
                 var placed = m_Placed[i];
@@ -245,6 +258,10 @@ namespace Bagel
             m_Placed.Add(new Placed { piece = piece, instance = instance });
             if (!rise)
                 return;
+
+            // What's still flying off the table goes through it.
+            if (m_Clearing != null)
+                m_Clearing.IgnoreLeftovers(instance);
 
             var items = instance.GetComponentsInChildren<TableItem>();
             if (items.Length > 0)

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Bagel
 {
-    // A copy of something on the table, shoved off for a new game (TableClearing) while the thing itself comes back up
-    // where it belongs. It flies, with a light body of its own (all the copies weigh the same, the big ones as little
-    // as the small: nothing holds the others back), until it gets down to the floor, then shrinks away. Caught on
-    // something on the way, it's shoved again, until it's off.
+    // A copy of something on the table, shoved off (TableClearing): for a new game, while the thing itself comes back up
+    // where it belongs, or for another level, while the thing's gone. It flies, with a light body of its own (all the
+    // copies weigh the same, the big ones as little as the small: nothing holds the others back), until it gets down to
+    // the floor, then shrinks away. Caught on something on the way, it's shoved again, until it's off.
     public class TableLeftover : MonoBehaviour
     {
         const float k_MinAge = 0.2f;
@@ -27,26 +27,39 @@ namespace Bagel
 
         public Rigidbody body { get; private set; }
 
-        // Off it goes, at push (meters a second, whatever it weighs), tumbling.
-        public static TableLeftover Make(TableItem item, float floorHeight, Vector3 push, Vector3 spin)
+        // Off it goes, at push (meters a second, whatever it weighs), tumbling: a table item, or a piece of the course,
+        // which gets a body of its own and goes through what it's sunk into (the cloth, the counter).
+        public static TableLeftover Make(GameObject thing, Transform parent, float floorHeight, Vector3 push, Vector3 spin)
         {
+            var sunkInto = new List<Collider>();
+            if (!thing.TryGetComponent<Rigidbody>(out _))
+            {
+                foreach (var collider in thing.GetComponentsInChildren<Collider>())
+                {
+                    var bounds = collider.bounds;
+                    sunkInto.AddRange(Physics.OverlapBox(bounds.center, bounds.extents, Quaternion.identity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore));
+                }
+            }
+
             // Copied under a hidden parent, so nothing on it wakes up before it's no longer a table item: the table
             // doesn't count it.
             var holder = new GameObject(nameof(TableLeftover));
             holder.SetActive(false);
-            var copy = Instantiate(item.gameObject, holder.transform, true);
-            DestroyImmediate(copy.GetComponent<TableItem>());
-            copy.name = item.name;
-            copy.transform.SetParent(item.transform.parent, true);
+            var copy = Instantiate(thing, holder.transform, true);
+            if (copy.TryGetComponent<TableItem>(out var item))
+                DestroyImmediate(item);
+            copy.name = thing.name;
+            copy.transform.SetParent(parent, true);
             Destroy(holder);
 
             var leftover = copy.AddComponent<TableLeftover>();
             leftover.m_FloorHeight = floorHeight;
-            leftover.body = copy.GetComponent<Rigidbody>();
+            leftover.body = copy.TryGetComponent<Rigidbody>(out var body) ? body : copy.AddComponent<Rigidbody>();
             leftover.body.isKinematic = false;
             leftover.body.mass = k_Mass;
             leftover.body.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             leftover.m_Colliders = copy.GetComponentsInChildren<Collider>();
+            leftover.IgnoreCollisions(sunkInto);
             leftover.m_Push = push;
             leftover.body.AddForce(push, ForceMode.VelocityChange);
             leftover.body.AddTorque(spin, ForceMode.VelocityChange);

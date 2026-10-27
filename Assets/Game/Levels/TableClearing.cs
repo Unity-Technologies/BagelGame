@@ -9,7 +9,8 @@ namespace Bagel
     // flies is a copy of each thing as it was (TableLeftover), gone once it gets down to the floor; the things
     // themselves come back up out of the table at the same time, where they belong, as good as new. The copies go
     // through whatever else stands on the table (the course's ramps and platforms, the toaster, the bagel waiting to
-    // roll): nothing holds them back, and they don't knock the bagel.
+    // roll): nothing holds them back, and they don't knock the bagel. Another level clears it the same way, the course
+    // too, and nothing comes back: the level's table (BagelLevelTable) sets the new level.
     public class TableClearing : MonoBehaviour
     {
         [SerializeField] float m_SweepSpeed = 16f;
@@ -41,7 +42,26 @@ namespace Bagel
 
         IEnumerator Clear(List<TableItem> items)
         {
-            ShoveOff(items);
+            var things = new List<GameObject>();
+            var homes = new List<Vector3>();
+            foreach (var item in items)
+            {
+                if (item != null && item.isActiveAndEnabled)
+                {
+                    things.Add(item.gameObject);
+                    homes.Add(item.homePosition);
+                }
+            }
+            ShoveOff(things, null, homes);
+            foreach (var leftover in m_Leftovers)
+            {
+                // What flies off doesn't knock what's coming back.
+                foreach (var item in items)
+                {
+                    if (item != null)
+                        leftover.IgnoreCollisions(item.gameObject);
+                }
+            }
 
             foreach (var item in items)
             {
@@ -52,47 +72,77 @@ namespace Bagel
             m_Clearing = null;
         }
 
-        // A copy of each thing where it is now, thrown to the right. A little different for each, the same every time.
-        void ShoveOff(List<TableItem> items)
+        // Another level: the old level's pieces go at once, and what was on them (or the piece itself, a piece of the
+        // course) is shoved off as for a new game, the copies flying in the table's parent.
+        public void ClearForAnotherLevel(IReadOnlyList<GameObject> pieces)
         {
-            m_Leftovers.Clear();
-            var right = transform.right;
-            for (int i = 0; i < items.Count; i++)
+            if (!isActiveAndEnabled)
+                return;
+            var things = new List<GameObject>();
+            foreach (var piece in pieces)
             {
-                if (items[i] == null || !items[i].isActiveAndEnabled)
+                if (piece == null)
                     continue;
-
-                var wobble = Mathf.Sin(i * 12.9898f) * 0.5f + 0.5f;
-                var push = right * m_SweepSpeed * (0.85f + 0.3f * wobble) + Vector3.up * m_SweepLift * (0.7f + 0.6f * wobble);
-                var spin = new Vector3(wobble - 0.5f, 1f - wobble, -0.5f) * 8f;
-                m_Leftovers.Add(TableLeftover.Make(items[i], m_FloorHeight, push, spin));
-            }
-
-            // What flies off doesn't knock what's coming back, or anything else standing on the table.
-            var standing = StandingOnTheTable(items);
-            foreach (var leftover in m_Leftovers)
-            {
+                var items = piece.GetComponentsInChildren<TableItem>();
+                if (items.Length == 0)
+                    things.Add(piece);
                 foreach (var item in items)
                 {
-                    if (item != null)
-                        leftover.IgnoreCollisions(item.gameObject);
+                    if (item.isActiveAndEnabled)
+                        things.Add(item.gameObject);
                 }
-                leftover.IgnoreCollisions(standing);
+            }
+            var where = new List<Vector3>();
+            foreach (var thing in things)
+                where.Add(thing.transform.position);
+            ShoveOff(things, transform.parent, where);
+            foreach (var leftover in m_Leftovers)
+            {
+                foreach (var thing in things)
+                    leftover.IgnoreCollisions(thing);
             }
         }
 
-        // What stands on the table round its things, that isn't one of them: what rises above it further than a
-        // tablecloth does (the course's ramps and platforms are sunk into it).
-        List<Collider> StandingOnTheTable(List<TableItem> items)
+        // What's on the table now, then, doesn't knock what's still flying off it.
+        public void IgnoreLeftovers(GameObject piece)
+        {
+            foreach (var leftover in m_Leftovers)
+            {
+                if (leftover != null)
+                    leftover.IgnoreCollisions(piece);
+            }
+        }
+
+        // A copy of each thing where it is now, thrown to the right, in parent (or with the thing, without one). A little
+        // different for each, the same every time.
+        void ShoveOff(List<GameObject> things, Transform parent, List<Vector3> homes)
+        {
+            m_Leftovers.Clear();
+            var right = transform.right;
+            for (int i = 0; i < things.Count; i++)
+            {
+                var wobble = Mathf.Sin(i * 12.9898f) * 0.5f + 0.5f;
+                var push = right * m_SweepSpeed * (0.85f + 0.3f * wobble) + Vector3.up * m_SweepLift * (0.7f + 0.6f * wobble);
+                var spin = new Vector3(wobble - 0.5f, 1f - wobble, -0.5f) * 8f;
+                var into = parent != null ? parent : things[i].transform.parent;
+                m_Leftovers.Add(TableLeftover.Make(things[i], into, m_FloorHeight, push, spin));
+            }
+
+            // What flies off doesn't knock anything else standing on the table.
+            var standing = StandingOnTheTable(homes);
+            foreach (var leftover in m_Leftovers)
+                leftover.IgnoreCollisions(standing);
+        }
+
+        // What stands on the table round its things (where they belong), that isn't one of them: what rises above it
+        // further than a tablecloth does (the course's ramps and platforms are sunk into it).
+        List<Collider> StandingOnTheTable(List<Vector3> homes)
         {
             const float margin = 0.3f;
             var top = transform.position.y;
             var bounds = new Bounds(transform.position, Vector3.zero);
-            foreach (var item in items)
-            {
-                if (item != null)
-                    bounds.Encapsulate(item.homePosition);
-            }
+            foreach (var home in homes)
+                bounds.Encapsulate(home);
             bounds.Expand(new Vector3(16f, 0f, 8f));
             var center = new Vector3(bounds.center.x, top + 4f, bounds.center.z);
             var extents = new Vector3(bounds.extents.x, 4f, bounds.extents.z);

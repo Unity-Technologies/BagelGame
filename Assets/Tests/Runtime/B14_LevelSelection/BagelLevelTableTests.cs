@@ -8,8 +8,8 @@ using UnityEngine.TestTools;
 namespace Bagel.B14_LevelSelection
 {
     // The counter set for the chosen level, in the real scene: the tutorial as it always was, a longer level
-    // stretching the room with the far wall and the television going with it, only what changes coming and going,
-    // and a new game starting with the whole level there.
+    // stretching the room with the far wall and the television going with it, only what changes in a level coming and
+    // going, another level shoving everything off the table, and a new game starting with the whole level there.
     public class BagelLevelTableTests
     {
         PlayManager m_PlayManager;
@@ -144,6 +144,41 @@ namespace Bagel.B14_LevelSelection
             yield return Changed();
             Assert.IsTrue(platform == null, "gone");
             AssertSetFor(level);
+        }
+
+        [UnityTest]
+        public IEnumerator AnotherLevelShovesEverythingOffTheTable()
+        {
+            state.GoToBagelSelection();
+            state.GoToLevelSelection();
+            yield return null;
+            var clearing = m_Table.GetComponent<TableClearing>();
+            var before = new List<GameObject>(m_Table.pieces);
+            var things = 0;
+            foreach (var piece in before)
+                things += Mathf.Max(1, piece.GetComponentsInChildren<TableItem>().Length);
+
+            state.SelectLevel(1);
+            yield return null;
+            Assert.IsTrue(before.TrueForAll(piece => piece == null), "the old level's gone at once");
+            var leftovers = new List<TableLeftover>(clearing.leftovers);
+            Assert.AreEqual(things, leftovers.Count, "everything's shoved off, the course too");
+            var starts = new List<float>();
+            foreach (var leftover in leftovers)
+            {
+                Assert.AreNotEqual(m_Table.transform, leftover.transform.parent, "a copy isn't on the table");
+                starts.Add(m_Table.transform.InverseTransformPoint(leftover.transform.position).x);
+            }
+            yield return new WaitForSeconds(0.3f);
+            for (int i = 0; i < leftovers.Count; i++)
+            {
+                Assert.IsTrue(leftovers[i] != null, "still flying");
+                var now = m_Table.transform.InverseTransformPoint(leftovers[i].transform.position).x;
+                Assert.Greater(now - starts[i], 0.5f, $"{leftovers[i].name} flies off to the right");
+            }
+
+            yield return Changed();
+            AssertSetFor(state.levels[1]);
         }
 
         [UnityTest]
