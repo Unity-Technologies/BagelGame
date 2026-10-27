@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -34,9 +33,7 @@ namespace Bagel
         double m_LastFrame;
 
         // The editor theme stays on the toolbar and the list; the level editor gets the game's.
-        readonly List<StyleSheet> m_EditorSheets = new();
-        readonly List<(VisualElement owner, StyleSheet sheet)> m_BorrowedSheets = new();
-        readonly List<VisualElement> m_EditorStyledParts = new();
+        BagelEditorTheme m_EditorTheme;
 
         public BagelLevelCollection collection => m_Collection;
         public BagelLevelEditor levelEditor => m_Editor;
@@ -64,10 +61,8 @@ namespace Bagel
             }
 
             // Take the editor theme off; it would leak editor looks into the game's editor.
-            m_EditorSheets.Clear();
-            for (int i = 0; i < rootVisualElement.styleSheets.count; i++)
-                m_EditorSheets.Add(rootVisualElement.styleSheets[i]);
-            rootVisualElement.styleSheets.Clear();
+            m_EditorTheme?.Restore();
+            m_EditorTheme = new BagelEditorTheme(rootVisualElement);
             var windowStyles = AssetDatabase.LoadAssetAtPath<StyleSheet>(k_WindowStylesPath);
             if (windowStyles != null)
                 rootVisualElement.styleSheets.Add(windowStyles);
@@ -134,15 +129,8 @@ namespace Bagel
             body.Add(stage);
             rootVisualElement.Add(body);
 
-            m_EditorStyledParts.Clear();
-            m_EditorStyledParts.Add(toolbar);
-            m_EditorStyledParts.Add(m_List);
-            rootVisualElement.RegisterCallback<AttachToPanelEvent>(_ => LiftEditorTheme());
-            rootVisualElement.RegisterCallback<DetachFromPanelEvent>(_ => RestoreEditorTheme());
-            if (rootVisualElement.panel != null)
-                LiftEditorTheme();
-            else
-                ShareEditorTheme();
+            m_EditorTheme.Share(toolbar);
+            m_EditorTheme.Share(m_List);
 
             OpenStudio();
             Select(Mathf.Clamp(m_SelectedIndex, 0, Mathf.Max(0, m_Collection.collection.Count - 1)));
@@ -159,7 +147,7 @@ namespace Bagel
         {
             Undo.undoRedoPerformed -= OnUndoRedo;
             EditorApplication.update -= Tick;
-            RestoreEditorTheme();
+            m_EditorTheme?.Restore();
             CloseStudio();
         }
 
@@ -293,49 +281,6 @@ namespace Bagel
             m_LastFrame = now;
             m_Studio.Render();
             Repaint();
-        }
-
-        // Newer editors keep their theme on an ancestor of the window's root: borrow it while the window is attached,
-        // and give it back when it detaches.
-        void LiftEditorTheme()
-        {
-            if (m_BorrowedSheets.Count == 0)
-            {
-                for (var ancestor = rootVisualElement.hierarchy.parent; ancestor != null; ancestor = ancestor.hierarchy.parent)
-                {
-                    for (int i = 0; i < ancestor.styleSheets.count; i++)
-                    {
-                        var sheet = ancestor.styleSheets[i];
-                        m_BorrowedSheets.Add((ancestor, sheet));
-                        if (!m_EditorSheets.Contains(sheet))
-                            m_EditorSheets.Add(sheet);
-                    }
-                    ancestor.styleSheets.Clear();
-                }
-            }
-            ShareEditorTheme();
-        }
-
-        void ShareEditorTheme()
-        {
-            foreach (var part in m_EditorStyledParts)
-            {
-                foreach (var sheet in m_EditorSheets)
-                {
-                    if (!part.styleSheets.Contains(sheet))
-                        part.styleSheets.Add(sheet);
-                }
-            }
-        }
-
-        void RestoreEditorTheme()
-        {
-            foreach (var (owner, sheet) in m_BorrowedSheets)
-            {
-                if (owner != null && !owner.styleSheets.Contains(sheet))
-                    owner.styleSheets.Add(sheet);
-            }
-            m_BorrowedSheets.Clear();
         }
     }
 }

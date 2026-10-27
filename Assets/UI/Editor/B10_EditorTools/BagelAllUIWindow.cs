@@ -71,9 +71,7 @@ namespace Bagel
         readonly List<string> m_LocaleCodes = new();
 
         // The editor theme stays on the toolbar and the inspector; the screens get the game's.
-        readonly List<StyleSheet> m_EditorSheets = new();
-        readonly List<(VisualElement owner, StyleSheet sheet)> m_BorrowedSheets = new();
-        readonly List<VisualElement> m_EditorStyledParts = new();
+        BagelEditorTheme m_EditorTheme;
 
         public PlayManagerState state => m_State;
         public IReadOnlyList<Card> cards => m_Cards;
@@ -108,25 +106,16 @@ namespace Bagel
             }
 
             // Take the editor theme off; it would leak editor looks into the game's screens.
-            m_EditorSheets.Clear();
-            for (int i = 0; i < rootVisualElement.styleSheets.count; i++)
-                m_EditorSheets.Add(rootVisualElement.styleSheets[i]);
-            rootVisualElement.styleSheets.Clear();
+            m_EditorTheme?.Restore();
+            m_EditorTheme = new BagelEditorTheme(rootVisualElement);
 
             windowTree.CloneTree(rootVisualElement);
 
             var stage = rootVisualElement.Q<ScrollView>("stage");
-            m_EditorStyledParts.Clear();
-            m_EditorStyledParts.Add(rootVisualElement.Q("toolbar"));
-            m_EditorStyledParts.Add(rootVisualElement.Q("inspector-dock"));
-            m_EditorStyledParts.Add(stage.horizontalScroller);
-            m_EditorStyledParts.Add(stage.verticalScroller);
-            rootVisualElement.RegisterCallback<AttachToPanelEvent>(_ => LiftEditorTheme());
-            rootVisualElement.RegisterCallback<DetachFromPanelEvent>(_ => RestoreEditorTheme());
-            if (rootVisualElement.panel != null)
-                LiftEditorTheme();
-            else
-                ShareEditorTheme();
+            m_EditorTheme.Share(rootVisualElement.Q("toolbar"));
+            m_EditorTheme.Share(rootVisualElement.Q("inspector-dock"));
+            m_EditorTheme.Share(stage.horizontalScroller);
+            m_EditorTheme.Share(stage.verticalScroller);
 
             rootVisualElement.RegisterCallback<AttachToPanelEvent>(e => AddSteamChannels(e.destinationPanel));
             AddSteamChannels(rootVisualElement.panel);
@@ -146,7 +135,7 @@ namespace Bagel
         {
             BagelLocalization.localeChanged -= UpdateLanguageStrip;
             m_Roll?.Pause();
-            RestoreEditorTheme();
+            m_EditorTheme?.Restore();
             m_Cards.Clear();
             DestroyState();
         }
@@ -166,51 +155,6 @@ namespace Bagel
         {
             if (panel != null)
                 panel.extraVertexChannels |= SteamPuffs.vertexChannels;
-        }
-
-        // Newer editors keep their theme on an ancestor of the window's root: borrow it while
-        // the window is attached and give it back when it detaches (closed, docked elsewhere).
-        void LiftEditorTheme()
-        {
-            if (m_BorrowedSheets.Count == 0)
-            {
-                for (var ancestor = rootVisualElement.hierarchy.parent; ancestor != null; ancestor = ancestor.hierarchy.parent)
-                {
-                    for (int i = 0; i < ancestor.styleSheets.count; i++)
-                    {
-                        var sheet = ancestor.styleSheets[i];
-                        m_BorrowedSheets.Add((ancestor, sheet));
-                        if (!m_EditorSheets.Contains(sheet))
-                            m_EditorSheets.Add(sheet);
-                    }
-                    ancestor.styleSheets.Clear();
-                }
-            }
-            ShareEditorTheme();
-        }
-
-        void ShareEditorTheme()
-        {
-            foreach (var part in m_EditorStyledParts)
-            {
-                if (part == null)
-                    continue;
-                foreach (var sheet in m_EditorSheets)
-                {
-                    if (!part.styleSheets.Contains(sheet))
-                        part.styleSheets.Add(sheet);
-                }
-            }
-        }
-
-        void RestoreEditorTheme()
-        {
-            foreach (var (owner, sheet) in m_BorrowedSheets)
-            {
-                if (owner != null && !owner.styleSheets.Contains(sheet))
-                    owner.styleSheets.Add(sheet);
-            }
-            m_BorrowedSheets.Clear();
         }
 
         void BuildCards()
