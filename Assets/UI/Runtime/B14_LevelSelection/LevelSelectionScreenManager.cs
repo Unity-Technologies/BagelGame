@@ -54,6 +54,7 @@ namespace Bagel
                 return;
             m_Bound = true;
 
+            ScrollBars.KeepOutOfTheFocus(levelList);
             backButton.clicked += Back;
             newButton.clicked += NewLevel;
             editButton.clicked += Edit;

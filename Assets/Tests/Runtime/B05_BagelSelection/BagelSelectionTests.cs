@@ -138,6 +138,25 @@ namespace Bagel.B05_BagelSelection
             Assert.IsTrue(state.isLevelSelection);
         }
 
+        // The face is the register's one stop for Tab: Tab and Shift+Tab turn to the bagel after and before, as right
+        // and left do, and the face keeps the focus.
+        [Test]
+        public void TabTurnsToTheNextBagel()
+        {
+            var pane = ShowControls();
+            var state = pane.state;
+            pane.Focus();
+
+            Send(pane, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Next));
+            Assert.AreEqual(1, state.selectedBagelIndex);
+            Assert.IsTrue(pane.rightButton.ClassListContains(BagelSelectionControlsPaneManager.keyPressedUssClassName), "> goes down");
+            Send(pane, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Previous));
+            Send(pane, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Previous));
+            Assert.AreEqual(state.bagelTypeCount - 1, state.selectedBagelIndex, "round to the last");
+            simulate.FrameUpdate();
+            Assert.AreEqual(pane, rootVisualElement.focusController.focusedElement);
+        }
+
         [Test]
         public void TheCardShowsTheBagelsStats()
         {

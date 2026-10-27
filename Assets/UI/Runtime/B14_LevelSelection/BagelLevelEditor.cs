@@ -221,6 +221,8 @@ namespace Bagel
             m_LibraryView = new ScrollView(ScrollViewMode.Horizontal) { name = "library", verticalScrollerVisibility = ScrollerVisibility.Hidden };
             m_LibraryView.AddToClassList(libraryUssClassName);
             footer.Add(m_LibraryView);
+            ScrollBars.KeepOutOfTheFocus(m_Board);
+            ScrollBars.KeepOutOfTheFocus(m_LibraryView);
             var tools = new VisualElement { name = "tools" };
             tools.AddToClassList(toolsUssClassName);
             m_TurnButton = new Button(() => Turn(1)) { name = "turn-button", text = "Turn" };

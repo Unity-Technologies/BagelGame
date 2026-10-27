@@ -102,6 +102,9 @@ namespace Bagel
 
             pausePane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Pause);
             settingsPane.EnableInClassList(inactivePaneClassName, pane != PlayManagerState.PausePane.Settings);
+            // Hidden isn't enough for Tab: what's in a hidden pane can still take the focus, so it's disabled too.
+            pausePane.SetEnabled(pane == PlayManagerState.PausePane.Pause);
+            settingsPane.SetEnabled(pane == PlayManagerState.PausePane.Settings);
 
             // Keep gamepad and keyboard focus on the pane that's showing, once it's shown.
             if (state == null || !state.isPaused)

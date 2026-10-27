@@ -127,12 +127,13 @@ namespace Bagel
             if (!IsForTheFace(evt) || !isSelecting)
                 return;
 
-            if (evt.direction == NavigationMoveEvent.Direction.Left)
+            // Tab and Shift+Tab turn it too, the bagel after and before: the face is the register's one stop.
+            if (evt.direction is NavigationMoveEvent.Direction.Left or NavigationMoveEvent.Direction.Previous)
             {
                 Press(leftButton);
                 Previous();
             }
-            else if (evt.direction == NavigationMoveEvent.Direction.Right)
+            else if (evt.direction is NavigationMoveEvent.Direction.Right or NavigationMoveEvent.Direction.Next)
             {
                 Press(rightButton);
                 Next();

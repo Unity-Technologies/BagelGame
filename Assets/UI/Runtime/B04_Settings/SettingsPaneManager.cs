@@ -14,7 +14,8 @@ namespace Bagel
     // with Back under them. Across from the tabs (right, or left in a right-to-left language) is the chosen tab's page,
     // where the arrows go from setting to setting and never out of the window, and back across to the tab; left and
     // right move a slider. Cancel goes from a setting back to its tab, and from the tabs out of Settings. The shoulder
-    // buttons, or Q and E, change tab from anywhere in the window.
+    // buttons, or Q and E, change tab from anywhere in the window. Tab and Shift+Tab go through all of it in reading
+    // order: each tab's name and then its settings, Back last, and round again.
     [UxmlElement(libraryPath = "Bagel/Managers")]
     public partial class SettingsPaneManager : BagelPane
     {
@@ -168,12 +169,19 @@ namespace Bagel
                 last.Focus();
                 return true;
             }
-            var settings = Navigables(tab.contentContainer);
+            var settings = Settings(tab);
             if (settings.Count == 0)
                 return false;
-            settings.Sort((a, b) => ReadingOrder(Bounds(a), Bounds(b)));
             settings[0].Focus();
             return true;
+        }
+
+        // A tab's settings, in reading order: a row of choices one by one.
+        List<VisualElement> Settings(Tab tab)
+        {
+            var settings = Navigables(tab.contentContainer);
+            settings.Sort((a, b) => ReadingOrder(Bounds(a), Bounds(b)));
+            return settings;
         }
 
         void OnFocusIn(FocusInEvent evt)
@@ -199,7 +207,11 @@ namespace Bagel
             var headerIndex = m_Tabs.FindIndex(tab => tab.tabHeader == from);
             VisualElement to = null;
 
-            if (headerIndex >= 0)
+            if (direction == NavigationMoveEvent.Direction.Next || direction == NavigationMoveEvent.Direction.Previous)
+            {
+                Step(from, headerIndex, direction == NavigationMoveEvent.Direction.Next);
+            }
+            else if (headerIndex >= 0)
             {
                 if (direction == NavigationMoveEvent.Direction.Up && headerIndex > 0)
                     to = m_Tabs[headerIndex - 1].tabHeader;
@@ -240,6 +252,70 @@ namespace Bagel
             // screen, or to another tab's name across the page.
             focusController.IgnoreEvent(evt);
             evt.StopPropagation();
+        }
+
+        // Tab and Shift+Tab: through the whole window in reading order, a tab's name and then its page's settings, tab
+        // after tab, Back last, and round again. A tab shows as its name takes the focus, so going back into a tab's
+        // page from the next tab's name waits for it to be laid out.
+        void Step(VisualElement from, int headerIndex, bool forward)
+        {
+            if (m_Tabs.Count == 0)
+                return;
+
+            if (from == backButton)
+            {
+                if (forward)
+                    m_Tabs[0].tabHeader.Focus();
+                else
+                    FocusLastSetting(m_Tabs.Count - 1);
+            }
+            else if (headerIndex >= 0)
+            {
+                var settings = Settings(m_Tabs[headerIndex]);
+                if (forward && settings.Count > 0)
+                    settings[0].Focus();
+                else if (forward)
+                    FocusTabAfter(headerIndex);
+                else if (headerIndex > 0)
+                    FocusLastSetting(headerIndex - 1);
+                else
+                    backButton?.Focus();
+            }
+            else if (focusedPage is { } page)
+            {
+                var settings = Settings(page);
+                var index = settings.FindIndex(setting => setting == from || setting.Contains(from) || from.Contains(setting));
+                var next = index + (forward ? 1 : -1);
+                if (index >= 0 && next >= 0 && next < settings.Count)
+                    settings[next].Focus();
+                else if (forward)
+                    FocusTabAfter(m_Tabs.IndexOf(page));
+                else
+                    page.tabHeader.Focus();
+            }
+        }
+
+        void FocusTabAfter(int index)
+        {
+            if (index + 1 < m_Tabs.Count)
+                m_Tabs[index + 1].tabHeader.Focus();
+            else
+                backButton?.Focus();
+        }
+
+        // A tab's name, and its last setting once its page is laid out.
+        void FocusLastSetting(int index)
+        {
+            var tab = m_Tabs[index];
+            tab.tabHeader.Focus();
+            schedule.Execute(() =>
+            {
+                if (tabView.activeTab != tab || focused != tab.tabHeader)
+                    return;
+                var settings = Settings(tab);
+                if (settings.Count > 0)
+                    settings[^1].Focus();
+            }).StartingIn(1);
         }
 
         // From a setting, back to its tab; from the tabs, on out of Settings (whoever opened them).

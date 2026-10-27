@@ -45,6 +45,8 @@ namespace Bagel
             BagelLocalization.Bind(this.Q<Label>("page-title"), "text", "leaderboard.title");
             UpdateColumnTitles();
             SetUpColumns();
+            // The arrows scroll the table: Tab doesn't stop on its scroll bar.
+            ScrollBars.KeepOutOfTheFocus(leaderboardTable);
             if (previousLevelButton != null)
                 previousLevelButton.clicked += () => state?.ShowLeaderboardLevel(-1);
             if (nextLevelButton != null)

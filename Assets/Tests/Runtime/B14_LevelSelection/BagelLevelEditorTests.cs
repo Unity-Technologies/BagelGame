@@ -247,5 +247,43 @@ namespace Bagel.B14_LevelSelection
             simulate.FrameUpdate();
             Assert.AreEqual(m_Level.length + BagelLevel.clothBeyond - BagelLevel.clothStart, m_Editor.map.resolvedStyle.width / m_Editor.map.pixelsPerMeter, 0.5f, "the counter's as long as the level");
         }
+
+        // Tab goes round the editor, and only what it shows: never the level list hidden behind it, or a scroll bar.
+        [Test]
+        public void TabGoesRoundTheEditor()
+        {
+            VisualElement focused = null;
+            rootVisualElement.RegisterCallback<FocusInEvent>(evt => focused = evt.target as VisualElement, TrickleDown.TrickleDown);
+            m_Editor.map.Focus();
+            simulate.FrameUpdate();
+            // It may have had the focus already, as the editor opened.
+            focused ??= rootVisualElement.focusController.focusedElement as VisualElement;
+            Assert.AreEqual(m_Editor.map, focused);
+
+            var visited = new List<VisualElement>();
+            for (int i = 0; i < 200; i++)
+            {
+                // A text field takes the Tab key itself, not the navigation event (its text could need the arrows).
+                if (focused.GetFirstAncestorOfType<TextField>() != null)
+                    Send(focused, KeyDownEvent.GetPooled('\t', KeyCode.Tab, EventModifiers.None));
+                else
+                    Send(focused, NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Next));
+                simulate.FrameUpdate();
+                if (focused == m_Editor.map)
+                    break;
+                visited.Add(focused);
+            }
+            Assert.AreEqual(m_Editor.map, focused, "round to the counter");
+
+            foreach (var element in visited)
+            {
+                Assert.IsTrue(m_Editor.Contains(element), $"{element.name} is in the editor");
+                Assert.IsNull(element.GetFirstAncestorOfType<Scroller>(), $"{element.name} isn't a scroll bar");
+                for (var shown = element; shown != null; shown = shown.parent)
+                    Assert.AreNotEqual(DisplayStyle.None, shown.resolvedStyle.display, $"{element.name} is shown");
+            }
+            CollectionAssert.Contains(visited, m_Editor.doneButton);
+            CollectionAssert.IsSubsetOf(m_Editor.items, visited, "every thing in the library");
+        }
     }
 }

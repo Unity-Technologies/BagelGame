@@ -138,8 +138,30 @@ namespace Bagel.B00_Gameplay
 
             SetPanelRenderer(Renderer<GameOverScreenDriver>());
             yield return WaitForTheCamera();
-            var back = rootVisualElement.Q("leaderboard").Q<Button>("back-button");
+            var leaderboard = rootVisualElement.Q("leaderboard");
+            var back = leaderboard.Q<Button>("back-button");
             Assert.AreEqual(DisplayStyle.Flex, back.resolvedStyle.display);
+            Assert.AreEqual(back, back.focusController.focusedElement, "Back has the focus, for the keys and the gamepad");
+
+            // Tab goes round what the leaderboard shows: never into the receipt's hidden form, or onto the table's
+            // scroll bar.
+            VisualElement focused = back;
+            EventCallback<FocusInEvent> track = evt => focused = evt.target as VisualElement;
+            rootVisualElement.RegisterCallback(track, TrickleDown.TrickleDown);
+            for (int i = 0; i < 6 && (i == 0 || focused != back); i++)
+            {
+                using (var evt = NavigationMoveEvent.GetPooled(NavigationMoveEvent.Direction.Next))
+                {
+                    evt.target = focused;
+                    focused.SendEvent(evt);
+                }
+                yield return null;
+                Assert.IsTrue(leaderboard.Contains(focused), $"{focused.name} is on the leaderboard");
+                Assert.IsNull(focused.GetFirstAncestorOfType<Scroller>(), "not the scroll bar");
+            }
+            rootVisualElement.UnregisterCallback(track, TrickleDown.TrickleDown);
+            Assert.AreEqual(back, focused, "round to Back");
+
             simulate.Click(back);
             yield return null;
             Assert.AreEqual(PlayManagerState.MainMenuPane.Main, state.mainMenuPane);

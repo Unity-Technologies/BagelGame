@@ -68,7 +68,7 @@ namespace Bagel
             if (m_GameOverScreenManager == null)
                 return;
 
-            Focusable focus = null;
+            VisualElement focus = null;
             if (m_State.isGameOver)
                 focus = m_GameOverScreenManager.gameOverPaneManager.mainMenuButton;
             else if (m_GameOverScreenManager.isLeaderboardOpen)
@@ -76,9 +76,22 @@ namespace Bagel
             if (focus == null)
                 return;
 
-            // Wait for the buttons to show: hidden elements can't take focus.
-            m_GameOverScreenManager.schedule.Execute(() => focus.Focus());
+            // Wait for the buttons to show: hidden elements can't take focus, and a button the screen's mode shows
+            // only shows once the panel's styles are updated, which can be after the next scheduled update. So it's
+            // tried each update until something on the screen has the focus, or the screen's no longer in use.
+            var screen = m_GameOverScreenManager;
+            screen.schedule.Execute(() =>
+                {
+                    if (focus.canGrabFocus)
+                        focus.Focus();
+                })
+                .Every(0)
+                .Until(() => HasTheFocus(screen) || !InUse());
             BagelAccessibility.ShowScreen(m_GameOverScreenManager);
         }
+
+        bool InUse() => m_State.isGameOver || m_GameOverScreenManager.isLeaderboardOpen;
+
+        static bool HasTheFocus(VisualElement screen) => screen.focusController?.focusedElement is VisualElement focused && screen.Contains(focused);
     }
 }

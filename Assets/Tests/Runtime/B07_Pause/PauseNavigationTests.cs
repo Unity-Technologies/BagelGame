@@ -53,5 +53,47 @@ namespace Bagel.B07_Pause
             simulate.FrameUpdate();
             Assert.IsFalse(state.isPaused);
         }
+
+        // Tab goes down the pause buttons and round again, never into the Settings hidden behind them; and back into
+        // the pause buttons once Settings close.
+        [Test]
+        public void TabGoesRoundThePauseButtons()
+        {
+            m_BagelTestAssetList.pauseScreenUxml.CloneTree(rootVisualElement);
+            var screen = rootVisualElement.Q<PauseScreenManager>();
+            var state = screen.state;
+            state.GoToPlay();
+            state.Pause();
+            simulate.FrameUpdate();
+            var pause = screen.pausePaneManager;
+            var buttons = new VisualElement[] { pause.resumeButton, pause.settingsButton, pause.restartButton, pause.mainMenuButton };
+
+            void Tab(VisualElement from, bool forward)
+            {
+                using var evt = NavigationMoveEvent.GetPooled(forward ? NavigationMoveEvent.Direction.Next : NavigationMoveEvent.Direction.Previous);
+                evt.target = from;
+                from.SendEvent(evt);
+                simulate.FrameUpdate();
+            }
+
+            VisualElement focused() => rootVisualElement.focusController.focusedElement as VisualElement;
+
+            pause.resumeButton.Focus();
+            simulate.FrameUpdate();
+            for (int i = 1; i <= buttons.Length; i++)
+            {
+                Tab(focused(), true);
+                Assert.AreEqual(buttons[i % buttons.Length], focused(), $"Tab {i}");
+            }
+            Tab(focused(), false);
+            Assert.AreEqual(pause.mainMenuButton, focused(), "Shift+Tab from the first is the last");
+
+            simulate.Click(pause.settingsButton);
+            simulate.FrameUpdate();
+            SendCancel(screen.settingsPaneManager.tabs[0].tabHeader);
+            simulate.FrameUpdate();
+            Tab(focused(), true);
+            Assert.IsTrue(screen.pausePane.Contains(focused()), "Settings closed, Tab's in the pause buttons");
+        }
     }
 }

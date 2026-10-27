@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -167,6 +169,70 @@ namespace Bagel.B04_Settings
             Assert.AreEqual(ui.GetThemeCard(1), m_Focused);
             Move(NavigationMoveEvent.Direction.Down);
             Assert.IsTrue(ui.Q<Toggle>("reduce-motion-toggle").Contains(m_Focused));
+        }
+
+        // Tab and Shift+Tab, with a frame for a tab to be laid out once it shows.
+        void PressTab(bool forward = true)
+        {
+            Move(forward ? NavigationMoveEvent.Direction.Next : NavigationMoveEvent.Direction.Previous);
+            simulate.FrameUpdate();
+        }
+
+        List<VisualElement> TabRound(bool forward)
+        {
+            var visited = new List<VisualElement>();
+            var start = m_Focused;
+            for (int i = 0; i < 100; i++)
+            {
+                PressTab(forward);
+                if (m_Focused == start)
+                    return visited;
+                visited.Add(m_Focused);
+            }
+            Assert.Fail($"Tab never came back round to {start.name}: stuck at {m_Focused?.name}");
+            return visited;
+        }
+
+        // Tab goes through all of the window in reading order: a tab's name, its settings (a row of choices one by one),
+        // the next tab's name, and so on, then Back, and round again.
+        [Test]
+        public void TabGoesThroughTheWholeWindow()
+        {
+            var tabs = m_Settings.tabs;
+            var round = TabRound(true);
+
+            var game = m_Settings.forGame;
+            var expected = new VisualElement[]
+            {
+                game.Q<Slider>("fov-slider"), game.Q<Toggle>("sound-toggle"), game.Q<Slider>("volume-slider"),
+                game.Q<Button>("language-en"), game.Q<Button>("language-fr"), game.Q<Button>("language-zh-Hans"), game.Q<Button>("language-ar")
+            };
+            for (int i = 0; i < expected.Length; i++)
+                Assert.IsTrue(expected[i] == round[i] || expected[i].Contains(round[i]), $"Game's setting {i}: {round[i]?.name}, not {expected[i].name}");
+
+            var headers = round.FindAll(element => element.ClassListContains(Tab.tabHeaderUssClassName));
+            CollectionAssert.AreEqual(tabs.Skip(1).Select(tab => tab.tabHeader).ToList(), headers, "every tab's name, in order");
+            Assert.AreEqual(m_Settings.backButton, round[^1], "Back last");
+
+            // Each setting's in the tab whose name came before it, and that tab's showing.
+            var inTab = tabs[0];
+            foreach (var element in round)
+            {
+                if (element.ClassListContains(Tab.tabHeaderUssClassName))
+                    inTab = tabs.First(t => t.tabHeader == element);
+                else if (element != m_Settings.backButton)
+                    Assert.IsTrue(inTab.contentContainer.Contains(element), $"{element.name} is in {inTab.name}");
+            }
+        }
+
+        [Test]
+        public void ShiftTabGoesBackTheSameWay()
+        {
+            var forward = TabRound(true);
+            var back = TabRound(false);
+
+            forward.Reverse();
+            CollectionAssert.AreEqual(forward, back);
         }
 
         // The shoulder buttons, or Q and E: the tab before or after, round the ends, from anywhere in the window.
