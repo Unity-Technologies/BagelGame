@@ -313,7 +313,7 @@ MonoBehaviour:
     BindingMode: 2
     PositionDamping: {x: 2, y: 1, z: 0.5}
     AngularDampingMode: 0
-    RotationDamping: {x: 1, y: 1, z: 5}
+    RotationDamping: {x: 1, y: 0.5, z: 5}
     QuaternionDamping: 1
   OrbitStyle: 0
   Radius: 5
