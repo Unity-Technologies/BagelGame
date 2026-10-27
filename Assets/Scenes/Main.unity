@@ -316,7 +316,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 5}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 6
+  Radius: 5
   Orbits:
     Top:
       Radius: 2
