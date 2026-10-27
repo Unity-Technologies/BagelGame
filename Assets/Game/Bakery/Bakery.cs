@@ -1,15 +1,27 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bagel
 {
     // The room: its floor, ceiling and walls, the long counter, and the blackboard, laid out from their measurements
-    // as they're edited. In play the room's made as long as the level's counter needs (Stretch): the far wall goes
-    // further away or comes nearer, and what goes with it follows (BakeryFollower).
+    // as they're edited, and where the television and the clock hang on the far wall. What's put in the room (its
+    // children, the dressing: trims, beams, lamps, shelves, the television...) and what goes with it (the game over
+    // screen on the television) is anchored to its parts (BakeryAnchor), and moves with them as the measurements
+    // change. In play the room's made as long as the level's counter needs (Stretch): the far wall goes further away
+    // or comes nearer, and what's anchored to it with it.
     [ExecuteInEditMode]
     public class Bakery : MonoBehaviour
     {
+        // The room's parts what's in it can be anchored to (GetBounds).
+        public enum Part
+        {
+            Room,
+            Counter,
+            Blackboard,
+            Television,
+            Clock
+        }
+
         [Header("Room Measurements")]
         [SerializeField] float m_WestSide;
         [SerializeField] float m_EastSide;
@@ -29,6 +41,13 @@ namespace Bagel
         [SerializeField] float m_BlackboardHeight;
         [SerializeField] float m_BlackboardThickness;
         [SerializeField] Vector2 m_BlackboardWallXY;
+
+        [Space]
+        [Header("Far Wall Measurements")]
+        [Tooltip("Where the television's middle is on the far wall: across the room (x) and up from the floor (y).")]
+        [SerializeField] Vector2 m_TelevisionWallXY;
+        [Tooltip("Where the clock's middle is on the far wall: across the room (x) and up from the floor (y).")]
+        [SerializeField] Vector2 m_ClockWallXY;
 
         [Space]
         [Header("Play States")]
@@ -84,13 +103,46 @@ namespace Bagel
         const float k_SurfaceOffset = 0.05f;
         const float k_WallThickness = 0.2f;
 
+        static readonly string[] k_Built =
+        {
+            nameof(m_Floor), nameof(m_Ceiling), nameof(m_WestWall), nameof(m_SouthWall), nameof(m_NorthWall),
+            nameof(m_Sidewalk), nameof(m_Hedge), nameof(m_Counter), nameof(m_CounterTop), nameof(m_Blackboard)
+        };
+
         // The room's near and far sides along the counter (z), where the walls' inner faces are.
         public float southSide => -Mathf.Abs(m_SouthSide);
         public float northSide => Mathf.Abs(m_NorthSide);
         public Rect counterRect => m_CounterRect;
 
-        // The room's been made longer or shorter.
-        public event Action resized;
+        // Its measurements have changed: as they're edited, or in play as it's stretched. What's anchored to it follows.
+        public event Action changed;
+
+        // A part of the room as a box, in the bakery's space: the room's inside (west to east, floor to ceiling, near
+        // wall to far wall), the counter up to its top, the blackboard, and the television's and the clock's middles
+        // on the far wall.
+        public Bounds GetBounds(Part part)
+        {
+            switch (part)
+            {
+                case Part.Counter:
+                    var counterTop = k_FloorY + m_CounterHeight + m_CounterTopThickness;
+                    return new Bounds(
+                        new Vector3(m_CounterRect.x, (k_FloorY + counterTop) * 0.5f, m_CounterRect.y),
+                        new Vector3(m_CounterRect.width, counterTop - k_FloorY, m_CounterRect.height));
+                case Part.Blackboard:
+                    return new Bounds(
+                        new Vector3(m_Left + m_BlackboardThickness * 0.5f, m_BlackboardWallXY.y, m_BlackboardWallXY.x),
+                        new Vector3(m_BlackboardThickness, m_BlackboardHeight, m_BlackboardWidth));
+                case Part.Television:
+                    return new Bounds(new Vector3(m_TelevisionWallXY.x, m_TelevisionWallXY.y, m_Top), Vector3.zero);
+                case Part.Clock:
+                    return new Bounds(new Vector3(m_ClockWallXY.x, m_ClockWallXY.y, m_Top), Vector3.zero);
+                default:
+                    return new Bounds(
+                        new Vector3(m_Center.x, k_FloorY + m_Height * 0.5f, m_Center.y),
+                        new Vector3(m_Width, m_Height, m_Depth));
+            }
+        }
 
         // The far wall at north (z), the counter's far end at counterNorth, its near end where it is.
         public void Stretch(float north, float counterNorth)
@@ -103,17 +155,18 @@ namespace Bagel
             UpdateInside();
             UpdateOutside();
             UpdateCounter();
-            resized?.Invoke();
+            changed?.Invoke();
         }
 
+        // Only what it builds: what's been put in the room stays.
         void Clear()
         {
-            var childrenToDestroy = new List<GameObject>();
-            foreach (Transform child in transform)
-                childrenToDestroy.Add(child.gameObject);
-
-            foreach (var child in childrenToDestroy)
-                DestroyImmediate(child);
+            foreach (var name in k_Built)
+            {
+                var child = transform.Find(name);
+                if (child != null)
+                    DestroyImmediate(child.gameObject);
+            }
         }
 
         void Build()
@@ -138,6 +191,12 @@ namespace Bagel
         {
             Clear();
             Build();
+            for (int i = 0; i < k_Built.Length; i++)
+            {
+                var built = transform.Find(k_Built[i]);
+                if (built != null)
+                    built.SetSiblingIndex(i);
+            }
             UpdateMeshes();
         }
 
@@ -151,17 +210,20 @@ namespace Bagel
             UpdateCounter();
 
             UpdateDependents();
+            changed?.Invoke();
         }
 
         void Update()
         {
-            // Out of play, measurements change as they're edited; in play only Stretch changes them.
+            // Out of play, measurements change as they're edited (or are put back, undone); in play only Stretch
+            // changes them.
             if (Application.isPlaying)
                 return;
             UpdateMetrics();
             UpdateInside();
             UpdateCounter();
             UpdateDependents();
+            changed?.Invoke();
         }
 
         Transform GetOrCreate(Transform prefab, Quaternion rotate, string name, Material material)

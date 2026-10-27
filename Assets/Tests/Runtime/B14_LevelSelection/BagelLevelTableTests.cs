@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 namespace Bagel.B14_LevelSelection
 {
     // The counter set for the chosen level, in the real scene: the tutorial as it always was, a longer level
-    // stretching the room with the far wall and the television going with it, only what changes in a level coming and
+    // stretching the room with what hangs on the far wall going with it, only what changes in a level coming and
     // going, another level shoving everything off the table, and a new game starting with the whole level there.
     public class BagelLevelTableTests
     {
@@ -62,12 +62,12 @@ namespace Bagel.B14_LevelSelection
             Assert.AreEqual(level.length, m_Table.toaster.localPosition.z, 1e-3f, "the toaster's at the end");
         }
 
-        static BakeryFollower Follower(string name)
+        static BakeryAnchor Anchor(string name)
         {
-            foreach (var follower in Object.FindObjectsByType<BakeryFollower>())
+            foreach (var anchor in Object.FindObjectsByType<BakeryAnchor>())
             {
-                if (follower.name == name)
-                    return follower;
+                if (anchor.name == name)
+                    return anchor;
             }
             return null;
         }
@@ -81,18 +81,21 @@ namespace Bagel.B14_LevelSelection
             Assert.AreEqual(27.5f, m_Table.toaster.position.z, 0.01f);
             Assert.AreEqual(41f, m_Bakery.northSide, 1e-3f, "the room as it always was");
             Assert.AreEqual(49.8f, m_Bakery.counterRect.height, 1e-3f);
-            Assert.IsTrue(Follower("Beam4").shown);
-            Assert.IsFalse(Follower("Beam5").shown, "past the far wall");
+            Assert.IsTrue(Anchor("Beam4").shown);
+            Assert.IsFalse(Anchor("Beam5").shown, "past the far wall");
         }
 
         [UnityTest]
-        public IEnumerator ALongerLevelStretchesTheRoomAndTheTelevisionGoesWithTheWall()
+        public IEnumerator ALongerLevelStretchesTheRoomAndWhatsOnTheFarWallGoesWithIt()
         {
             state.GoToBagelSelection();
             state.GoToLevelSelection();
             yield return null;
-            var television = GameObject.Find("GameOverScreenUI").transform;
-            var televisionFromWall = television.position.z - m_Bakery.northSide;
+            // The game over screen, and what hangs on or by the far wall.
+            var onTheWall = new List<Transform> { GameObject.Find("GameOverScreenUI").transform };
+            foreach (var name in new[] { "Television", "Clock", "BagelFrame", "NorthCrown" })
+                onTheWall.Add(Anchor(name).transform);
+            var fromTheWall = onTheWall.ConvertAll(thing => thing.position.z - m_Bakery.northSide);
             var banquet = state.levels[2];
 
             state.SelectLevel(2);
@@ -105,15 +108,16 @@ namespace Bagel.B14_LevelSelection
             yield return Changed();
             AssertSetFor(banquet);
             Assert.AreEqual(banquet.length + 13.5f, m_Bakery.northSide, 1e-3f);
-            Assert.AreEqual(televisionFromWall, television.position.z - m_Bakery.northSide, 1e-3f, "the television's on the wall");
-            Assert.IsTrue(Follower("Beam5").shown, "a beam that was past the wall is in the room");
-            Assert.IsFalse(Follower("Beam8").shown);
+            for (int i = 0; i < onTheWall.Count; i++)
+                Assert.AreEqual(fromTheWall[i], onTheWall[i].position.z - m_Bakery.northSide, 1e-3f, $"{onTheWall[i].name} goes with the wall");
+            Assert.IsTrue(Anchor("Beam5").shown, "a beam that was past the wall is in the room");
+            Assert.IsFalse(Anchor("Beam8").shown);
 
             state.SelectLevel(0);
             yield return Changed();
             AssertSetFor(state.levels[0]);
             Assert.AreEqual(41f, m_Bakery.northSide, 1e-3f, "and back");
-            Assert.IsFalse(Follower("Beam5").shown);
+            Assert.IsFalse(Anchor("Beam5").shown);
         }
 
         [UnityTest]
