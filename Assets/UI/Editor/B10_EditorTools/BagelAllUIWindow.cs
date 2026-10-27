@@ -17,9 +17,9 @@ namespace Bagel
     public class BagelAllUIWindow : EditorWindow
     {
         const string k_WindowUxmlPath = "Assets/UI/Editor/B10_EditorTools/BagelAllUIWindow.uxml";
-        const string k_StartStatePath = "Assets/Game/Core/PlayManagerState.asset";
-        const string k_ThemeCollectionPath = "Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset";
-        const string k_UIPath = "Assets/UI/Runtime/";
+        public const string startStatePath = "Assets/Game/Core/PlayManagerState.asset";
+        public const string themeCollectionPath = "Assets/UI/Runtime/B00_Themes/T0_Common/BagelThemeCollection.asset";
+        public const string uiPath = "Assets/UI/Runtime/";
 
         // One card per screen, all of them shown at once.
         public struct CardSpec
@@ -94,9 +94,9 @@ namespace Bagel
             titleContent = new GUIContent("Bagel All UI");
 
             DestroyState();
-            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
+            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(startStatePath));
             m_State.propertyChanged += State_OnPropertyChanged;
-            m_Themes = AssetDatabase.LoadAssetAtPath<BagelThemeCollection>(k_ThemeCollectionPath);
+            m_Themes = AssetDatabase.LoadAssetAtPath<BagelThemeCollection>(themeCollectionPath);
 
             var windowTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(k_WindowUxmlPath);
             if (windowTree == null)
@@ -151,7 +151,7 @@ namespace Bagel
         }
 
         // The steam's material moves its puffs with extra vertex channels: the window's panel draws them.
-        static void AddSteamChannels(IPanel panel)
+        internal static void AddSteamChannels(IPanel panel)
         {
             if (panel != null)
                 panel.extraVertexChannels |= SteamPuffs.vertexChannels;
@@ -190,17 +190,30 @@ namespace Bagel
             card.content.RegisterCallback<GeometryChangedEvent>(_ => FitSlot(card));
             card.content.style.scale = new Scale(new Vector3(m_Zoom, m_Zoom, 1f));
 
+            foreach (var screen in CreateScreens(spec, m_State, m_Theme))
+            {
+                card.screens.Add(screen);
+                card.content.Add(screen);
+            }
+            return card;
+        }
+
+        // A card's screens, in a theme, playing on a state: each of its UXML files once, the bagel cards
+        // once for every bagel. The Bagel Features window shows them too, one card at a time.
+        internal static List<TemplateContainer> CreateScreens(CardSpec spec, PlayManagerState state, ThemeStyleSheet theme)
+        {
+            var screens = new List<TemplateContainer>();
             foreach (var path in spec.uxmlPaths)
             {
-                var tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(k_UIPath + path);
+                var tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uiPath + path);
                 if (tree == null)
                 {
-                    card.content.Add(new Label($"Missing {path}"));
+                    Debug.LogWarning($"[Bagel] Missing {uiPath + path}");
                     continue;
                 }
 
                 // The bagel cards show every bagel; the other screens show once.
-                var count = path.Contains("TypeInfo") ? m_State.bagelTypeCount : 1;
+                var count = path.Contains("TypeInfo") ? state.bagelTypeCount : 1;
                 for (int i = 0; i < count; i++)
                 {
                     var screen = tree.Instantiate();
@@ -211,30 +224,29 @@ namespace Bagel
                         screen.style.width = spec.size.x;
                         screen.style.height = spec.size.y;
                     }
-                    if (m_Theme != null)
-                        screen.styleSheets.Add(m_Theme);
+                    if (theme != null)
+                        screen.styleSheets.Add(theme);
 
-                    PrepareScreen(screen, path, i);
-                    card.screens.Add(screen);
-                    card.content.Add(screen);
+                    PrepareScreen(screen, path, i, state);
+                    screens.Add(screen);
                 }
             }
-            return card;
+            return screens;
         }
 
-        void PrepareScreen(VisualElement screen, string path, int index)
+        static void PrepareScreen(VisualElement screen, string path, int index, PlayManagerState state)
         {
             // Every pane plays on the shared state.
             screen.Query<BagelPane>().ForEach(pane =>
             {
                 if (pane.GetFirstAncestorOfType<BagelPane>() == null)
-                    pane.SetState(m_State);
+                    pane.SetState(state);
             });
 
             // The bagel cards show the bagel types, like the podiums do.
             if (path.Contains("TypeInfo"))
             {
-                var bagelType = m_State.bagelTypes.collection[index];
+                var bagelType = state.bagelTypes.collection[index];
                 var pane = screen.Q("pane");
                 pane.dataSource = bagelType;
                 if (!string.IsNullOrEmpty(bagelType.nameKey))
@@ -363,52 +375,56 @@ namespace Bagel
             "Tracker/Wrecked",
         };
 
-        public void ApplySetup(string setup)
+        public void ApplySetup(string setup) => ApplySetup(m_State, setup);
+
+        // A setup on any state: the Bagel Features window stages its examples with them too.
+        internal static void ApplySetup(PlayManagerState state, string setup)
         {
-            var tracker = m_State.tracker;
+            var tracker = state.tracker;
             switch (setup)
             {
                 case "Main Menu/Main Pane":
-                    m_State.GoToMainMenu();
+                    state.GoToMainMenu();
                     break;
                 case "Main Menu/Settings":
-                    m_State.GoToMainMenu();
-                    m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
+                    state.GoToMainMenu();
+                    state.SetMainMenuPane(PlayManagerState.MainMenuPane.Settings);
                     break;
                 case "Main Menu/Leaderboard":
-                    m_State.GoToMainMenu();
-                    m_State.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
+                    state.GoToMainMenu();
+                    state.SetMainMenuPane(PlayManagerState.MainMenuPane.Leaderboard);
                     break;
                 case "Payment Tablet/Levels":
-                    m_State.GoToLevelSelection();
+                    state.GoToLevelSelection();
+                    state.EditLevel(false);
                     break;
                 case "Payment Tablet/Level Editor":
-                    m_State.GoToLevelSelection();
-                    if (!m_State.canEditLevel)
+                    state.GoToLevelSelection();
+                    if (!state.canEditLevel)
                     {
-                        var level = m_State.AddLevel("My Table");
-                        foreach (var piece in m_State.levels[0].pieces)
+                        var level = state.AddLevel("My Table");
+                        foreach (var piece in state.levels[0].pieces)
                             level.Add(piece);
                     }
-                    m_State.EditLevel(true);
+                    state.EditLevel(true);
                     break;
                 case "Pause/Pause Pane":
                 case "Pause/Settings":
-                    if (!m_State.isPlaying)
-                        m_State.GoToPlay();
-                    m_State.Pause();
-                    m_State.pausePane = setup == "Pause/Settings" ? PlayManagerState.PausePane.Settings : PlayManagerState.PausePane.Pause;
+                    if (!state.isPlaying)
+                        state.GoToPlay();
+                    state.Pause();
+                    state.pausePane = setup == "Pause/Settings" ? PlayManagerState.PausePane.Settings : PlayManagerState.PausePane.Pause;
                     break;
                 case "Game Over/Win":
                 case "Game Over/Lose":
-                    m_State.GoToPlay();
+                    state.GoToPlay();
                     tracker.toppingsCount = setup == "Game Over/Win" ? Mathf.RoundToInt(tracker.toppingsMaxCount * 0.42f) : 0;
-                    m_State.FinishRun();
+                    state.FinishRun();
                     break;
                 case "Tracker/Full":
                 case "Tracker/Halfway":
                 case "Tracker/Wrecked":
-                    m_State.GoToPlay();
+                    state.GoToPlay();
                     var fraction = setup == "Tracker/Full" ? 1f : setup == "Tracker/Halfway" ? 0.5f : 0.05f;
                     tracker.toppingsCount = Mathf.RoundToInt(tracker.toppingsMaxCount * fraction);
                     tracker.spin = tracker.constants != null ? tracker.constants.spinMax * (1f - fraction) : 0f;
@@ -468,7 +484,7 @@ namespace Bagel
             m_Roll?.Pause();
             BagelOptionStrip.SetOnWithoutNotify(m_RollToggle, false);
             DestroyState();
-            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(k_StartStatePath));
+            m_State = PlayManagerState.CreateRuntimeCopy(AssetDatabase.LoadAssetAtPath<PlayManagerState>(startStatePath));
             m_State.propertyChanged += State_OnPropertyChanged;
 
             foreach (var card in m_Cards)

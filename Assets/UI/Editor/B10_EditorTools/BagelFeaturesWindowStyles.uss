@@ -1,0 +1,279 @@
+/* Bagel Features: the features on the left, by category; the chosen one on the right. On top, what it is
+   and how the game uses it; in the middle, the stage: the game's own UI that uses it, live, in the game's
+   theme, its parts outlined; below, what to try and where it is in the project and in the Editor.
+   Everything but the stage is in the Editor's theme. The toolbar and the brand are the Bagel All UI
+   window's. */
+
+.b-features__search {
+    width: 200px;
+    flex-shrink: 1;
+    margin: 0 8px 0 0;
+}
+
+/* ------------------------------------------------------------------ The list */
+
+.b-features__list {
+    width: 250px;
+    flex-shrink: 0;
+    background-color: var(--unity-colors-window-background);
+    border-right-width: 1px;
+    border-right-color: var(--unity-colors-default-border);
+}
+
+.b-features__list .unity-scroll-view__content-container {
+    padding: 4px 0 10px 0;
+}
+
+.b-features__group {
+    -unity-font-style: bold;
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    padding: 0;
+    margin: 12px 10px 3px 10px;
+}
+
+.b-features__row {
+    padding: 3px 10px 3px 14px;
+    margin: 0;
+    border-left-width: 3px;
+    border-left-color: rgba(0, 0, 0, 0);
+}
+
+.b-features__row:hover {
+    background-color: var(--unity-colors-highlight-background-hover);
+}
+
+.b-features__row--selected,
+.b-features__row--selected:hover {
+    background-color: var(--unity-colors-highlight-background-inactive);
+    border-left-color: rgb(214, 140, 69);
+}
+
+.b-features__list:focus .b-features__row--selected {
+    background-color: var(--unity-colors-highlight-background);
+}
+
+.b-features__nothing {
+    white-space: normal;
+    opacity: 0.6;
+    margin: 12px 10px;
+}
+
+/* ------------------------------------------------------------------ The chosen feature */
+
+.b-features__feature {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.b-features__header {
+    flex-shrink: 0;
+    padding: 10px 14px 8px 14px;
+    background-color: var(--unity-colors-window-background);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-default-border);
+}
+
+.b-features__title-row {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.b-features__title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+.b-features__category {
+    font-size: 10px;
+    padding: 1px 7px;
+    margin: 0;
+    border-radius: 8px;
+    background-color: var(--unity-colors-inspector_titlebar-background);
+}
+
+.b-features__about,
+.b-features__usage {
+    white-space: normal;
+    padding: 0;
+    margin: 6px 0 0 0;
+}
+
+.b-features__about {
+    font-size: 13px;
+}
+
+.b-features__usage {
+    opacity: 0.8;
+}
+
+/* The stage: the example scaled down to fit and centered, never up. */
+.b-features__stage {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 180px;
+    overflow: hidden;
+    background-color: rgb(40, 34, 30);
+}
+
+.b-features__stage--none {
+    display: none;
+}
+
+.b-features__example {
+    position: absolute;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    transform-origin: left top;
+}
+
+/* A state's Inspector, for a feature of the Editor's: the whole stage, scrolled. */
+.b-features__stage--inspector > .b-features__example {
+    position: relative;
+    flex-grow: 1;
+    transform-origin: center;
+    background-color: var(--unity-colors-window-background);
+}
+
+.b-features__example > .b-card__screen {
+    margin: 0 12px 12px 0;
+}
+
+.b-features__outlines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* A part that uses the feature: a bagel-gold line around it, its name on the first of its kind. */
+.b-features__outline {
+    position: absolute;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color: rgb(255, 196, 120);
+    background-color: rgba(255, 196, 120, 0.08);
+}
+
+.b-features__outline-label {
+    position: absolute;
+    left: -2px;
+    bottom: 100%;
+    padding: 1px 5px;
+    margin: 0;
+    font-size: 11px;
+    -unity-font-style: bold;
+    color: rgb(59, 31, 20);
+    background-color: rgb(255, 196, 120);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    white-space: nowrap;
+}
+
+/* Too near the stage's top for a label above: inside, at the top. */
+.b-features__outline-label--inside {
+    bottom: auto;
+    top: 0;
+    border-radius: 0 0 3px 0;
+}
+
+.b-features__details {
+    flex-shrink: 0;
+    max-height: 45%;
+    background-color: var(--unity-colors-window-background);
+    border-top-width: 1px;
+    border-top-color: var(--unity-colors-default-border);
+}
+
+/* Nothing on the stage: the details take its place. */
+.b-features__details--full {
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-height: none;
+}
+
+.b-features__details .unity-scroll-view__content-container {
+    padding: 6px 14px 12px 14px;
+}
+
+.b-features__tries {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.b-features__tries > .unity-button {
+    margin: 4px 6px 0 0;
+}
+
+.b-features__tries-label {
+    -unity-font-style: bold;
+    padding: 0;
+    margin: 4px 8px 0 0;
+}
+
+.b-features__note {
+    display: none;
+    white-space: pre;
+    padding: 6px 8px;
+    margin: 6px 0 0 0;
+    border-radius: 3px;
+    background-color: var(--unity-colors-alternated_rows-background);
+}
+
+.b-features__note--shown {
+    display: flex;
+}
+
+.b-features__section {
+    -unity-font-style: bold;
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    padding: 0;
+    margin: 12px 0 4px 0;
+}
+
+.b-features__source {
+    flex-direction: row;
+    align-items: center;
+    margin: 1px 0;
+}
+
+.b-features__file {
+    min-width: 230px;
+    padding: 0;
+    margin: 0 10px 0 0;
+    color: rgb(76, 126, 255);
+}
+
+.b-features__file:hover {
+    -unity-font-style: bold;
+}
+
+.b-features__file--missing {
+    color: rgb(230, 90, 70);
+}
+
+.b-features__what {
+    flex-shrink: 1;
+    white-space: normal;
+    padding: 0;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.b-features__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.b-features__links > .unity-button {
+    margin: 0 6px 4px 0;
+}

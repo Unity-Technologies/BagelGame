@@ -52,8 +52,9 @@ namespace Bagel
             ResetLayout(ResetProjectStates);
         }
 
-        // The Bagel All UI window's Reset (a fresh state, the zoom at 100%, no Inspector), no theme
-        // preview and the project's language. No window opens or closes.
+        // The Bagel All UI and Bagel Features windows' Resets (a fresh state, the zoom at 100%, no
+        // Inspector, the first feature), no theme preview and the project's language. No window opens
+        // or closes.
         [MenuItem(resetStatesMenuPath, priority = 43, editorModes = new[] { BagelMenu.defaultMode, BagelMenu.uiToolkitAuthoringMode })]
         public static void ResetProjectStates()
         {
@@ -62,6 +63,8 @@ namespace Bagel
             if (locale != null && BagelLocalization.localeCode != locale.Identifier.Code)
                 BagelToolbar.SelectLanguage(locale.Identifier.Code);
             foreach (var window in Resources.FindObjectsOfTypeAll<BagelAllUIWindow>())
+                window.ResetWindow();
+            foreach (var window in Resources.FindObjectsOfTypeAll<BagelFeaturesWindow>())
                 window.ResetWindow();
         }
 

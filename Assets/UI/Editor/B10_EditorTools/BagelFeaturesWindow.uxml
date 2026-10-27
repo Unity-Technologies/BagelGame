@@ -1,0 +1,44 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="BagelAllUIWindowStyles.uss"/>
+    <Style src="BagelFeaturesWindowStyles.uss"/>
+    <ui:VisualElement name="window" class="b-window b-features">
+        <ui:VisualElement name="toolbar" class="b-toolbar">
+            <ui:VisualElement name="brand" picking-mode="Ignore" class="b-brand">
+                <ui:VisualElement picking-mode="Ignore" class="b-brand__bagel"/>
+                <ui:Label text="Bagel Game" picking-mode="Ignore" class="b-brand__name"/>
+                <ui:Label text="Features" picking-mode="Ignore" class="b-brand__sub"/>
+            </ui:VisualElement>
+            <Bagel.BagelOptionStrip name="reset-strip" tooltip="Start again: a fresh copy of the start state and its theme, the first feature, no search" class="b-toolbar__strip b-toolbar__strip--reset"/>
+            <ui:VisualElement name="toolbar-end" class="b-toolbar__end">
+                <uie:ToolbarSearchField name="search" tooltip="Find a feature: its name, what it is, how the game uses it, its files. Every word must match." class="b-features__search"/>
+                <Bagel.BagelOptionStrip name="theme-strip" tooltip="The examples in this theme (the state's settings, as the in-game Settings pick it)" class="b-toolbar__strip"/>
+                <Bagel.BagelOptionStrip name="language-strip" tooltip="The examples in this language (sets the locale)" class="b-toolbar__strip"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="body" class="b-body">
+            <ui:ScrollView name="list" focusable="true" class="b-features__list"/>
+            <ui:VisualElement name="feature" class="b-features__feature">
+                <ui:VisualElement name="header" class="b-features__header">
+                    <ui:VisualElement class="b-features__title-row">
+                        <ui:Label name="title" class="b-features__title"/>
+                        <ui:Label name="category" class="b-features__category"/>
+                    </ui:VisualElement>
+                    <ui:Label name="about" class="b-features__about"/>
+                    <ui:Label name="usage" class="b-features__usage"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="stage" class="b-features__stage">
+                    <ui:VisualElement name="example" class="b-features__example"/>
+                    <ui:VisualElement name="outlines" picking-mode="Ignore" class="b-features__outlines"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="details" class="b-features__details">
+                    <ui:VisualElement name="tries" class="b-features__tries"/>
+                    <ui:Label name="note" class="b-features__note"/>
+                    <ui:Label text="In the project" class="b-features__section"/>
+                    <ui:VisualElement name="sources" class="b-features__sources"/>
+                    <ui:Label text="In the Editor" name="links-section" class="b-features__section"/>
+                    <ui:VisualElement name="links" class="b-features__links"/>
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
