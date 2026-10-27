@@ -38,13 +38,23 @@ namespace Bagel
             {
                 if (bagelType == null)
                     continue;
+                var before = Percentiles(bagelType);
                 bagelType.toppingsPercentile = bagelType.toppings / maxToppings;
                 bagelType.toppingLossPercentile = lossRange > 0f ? (maxToppingLoss - bagelType.toppingLoss) / lossRange : 1f;
                 bagelType.controlPercentile = bagelType.control / maxControl;
                 bagelType.speedPercentile = bagelType.speed / maxSpeed;
                 bagelType.gripPercentile = bagelType.grip / maxGrip;
+
+#if UNITY_EDITOR
+                // Saved with the bagel next time: a player only has what's in its asset.
+                if (Percentiles(bagelType) != before)
+                    UnityEditor.EditorUtility.SetDirty(bagelType);
+#endif
             }
         }
+
+        static (float, float, float, float, float) Percentiles(BagelType bagelType) =>
+            (bagelType.toppingsPercentile, bagelType.toppingLossPercentile, bagelType.controlPercentile, bagelType.speedPercentile, bagelType.gripPercentile);
 
         void OnValidate() => UpdatePercentiles();
     }

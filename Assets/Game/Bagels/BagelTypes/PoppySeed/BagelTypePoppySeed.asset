@@ -14,9 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bagel.BagelType
   displayName: Poppy Seed
   nameKey: bagel.poppy-seed
+  maxToppingCount: 1000
+  spinToppingLossFactor: 0.005
+  impactToppingLossFactor: 0.1
+  impactAmortizationRate: 0.5
+  tiltRecoverySpeed: 10
   rollTorque: 35
   turnSpeed: 120
   mass: 3
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
   modelPrefab: {fileID: 2633031486731055519, guid: aaf14d87116f8ad47a30087db85bb86c, type: 3}
   topHalfMesh: {fileID: -8670151273213183110, guid: a8d2bbc6dabc791488c5b7e67f2326f5, type: 3}
   bottomHalfMesh: {fileID: -8670151273213183110, guid: 698623be95c8d42498d773effd06dad6, type: 3}
+  toppingsPercentile: 1
+  toppingLossPercentile: 1
+  controlPercentile: 0.8
+  speedPercentile: 0.4375
+  gripPercentile: 0.3
