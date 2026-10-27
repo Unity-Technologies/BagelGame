@@ -95,6 +95,20 @@ namespace Bagel.B06_BagelTracker
             Assert.AreEqual(0.25f, m_LeftDisplay.painGauge.fraction, 1e-5f);
         }
 
+        // On the left wing, the speed, then the spin under it, then the pain under that, on the wing's inner edge.
+        [Test]
+        public void ThePainIsUnderTheSpinUnderTheSpeed()
+        {
+            var speed = m_LeftDisplay.speedGauge.worldBound;
+            var spin = m_LeftDisplay.spinGauge.worldBound;
+            var pain = m_LeftDisplay.painGauge.worldBound;
+
+            Assert.LessOrEqual(speed.yMax, spin.yMin, "the spin's under the speed");
+            Assert.LessOrEqual(spin.yMax, pain.yMin, "the pain's under the spin");
+            Assert.AreEqual(spin.xMax, pain.xMax, 1e-3f, "in one column");
+            Assert.AreEqual(speed.xMax, spin.xMax, 1e-3f, "on the inner edge");
+        }
+
         // No words on the gauges: their faces say what they show.
         [Test]
         public void TheGaugesHaveNoCaptions()
