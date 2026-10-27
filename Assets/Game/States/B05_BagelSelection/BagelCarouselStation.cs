@@ -27,9 +27,9 @@ namespace Bagel
 
         [Header("Card")]
         [Tooltip("How strongly the card stands up (a spring, oscillations a second), how much it's damped (1 doesn't sway back), and how far it can lean (degrees).")]
-        [SerializeField] float m_CardStandFrequency = 1.8f;
-        [SerializeField] float m_CardStandDamping = 0.3f;
-        [SerializeField] float m_CardSwayLimit = 35f;
+        [SerializeField] float m_CardStandFrequency = 2.6f;
+        [SerializeField] float m_CardStandDamping = 0.6f;
+        [SerializeField] float m_CardSwayLimit = 20f;
         [Tooltip("What it takes to knock the card off its foot.")]
         [SerializeField] float m_CardBreakForce = 250f;
 
