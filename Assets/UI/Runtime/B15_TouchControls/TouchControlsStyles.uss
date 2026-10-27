@@ -1,0 +1,80 @@
+/* On a touch screen, while the bagel rolls: a pause button at the top right and a thumb stick at the bottom left,
+   in the pause screen's frosted glass (backdrop-filter, which only screen-space panels have) with gold leaf. */
+
+.b-touch-controls {
+    justify-content: space-between;
+}
+
+/* Pause: two bars of gold leaf on a round pane of glass. */
+.b-touch-controls__pause-button {
+    align-self: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 12px;
+    padding: 0;
+    border-width: 2px;
+    border-radius: 22px;
+    background-color: var(--b-surface-color);
+    backdrop-filter: blur(18);
+}
+
+.b-touch-controls__pause-bar {
+    width: 5px;
+    height: 16px;
+    margin: 0 3px;
+    border-radius: 2px;
+    background-color: var(--b-accent-color);
+}
+
+/* The thumb stick: a round pane of glass, its knob a gold disc. */
+.b-touch-stick {
+    width: 120px;
+    height: 120px;
+    border-width: 2px;
+    border-color: var(--b-line-color);
+    border-radius: 60px;
+    background-color: var(--b-surface-color);
+    backdrop-filter: blur(18);
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.b-touch-controls__move-stick {
+    align-self: flex-start;
+    margin: 20px;
+}
+
+.b-touch-stick--held {
+    background-color: var(--b-hover-color);
+}
+
+.b-touch-stick__knob {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    margin-left: -26px;
+    margin-top: -26px;
+    border-width: 2px;
+    border-color: var(--b-accent-color);
+    border-radius: 26px;
+    background-color: var(--b-accent-fill);
+    /* Let go, it springs back to the middle. */
+    transition-property: translate;
+    transition-duration: 0.18s;
+    transition-timing-function: ease-out-back;
+}
+
+.b-touch-stick--held .b-touch-stick__knob,
+.b-reduce-motion .b-touch-stick__knob {
+    transition-duration: 0s;
+}
+
+.b-no-visual-effects .b-touch-stick,
+.b-no-visual-effects .b-touch-controls__pause-button {
+    backdrop-filter: none;
+}

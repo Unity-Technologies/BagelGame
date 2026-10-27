@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Runtime/B15_TouchControls/TouchControlsStyles.uss?fileID=7433441132597879392&amp;guid=7d80f515598c6da4cacefbb86373f2f7&amp;type=3#TouchControlsStyles"/>
+    <Bagel.TouchControlsManager start-state="project://database/Assets/Game/Core/PlayManagerState.asset?fileID=11400000&amp;guid=f0183f196e1622f4aa5ff36423fe939f&amp;type=2#PlayManagerState" picking-mode="Ignore" class="b-screen b-touch-controls">
+        <ui:Button name="pause-button" class="b-glass b-touch-controls__pause-button">
+            <ui:VisualElement picking-mode="Ignore" class="b-touch-controls__pause-bar"/>
+            <ui:VisualElement picking-mode="Ignore" class="b-touch-controls__pause-bar"/>
+            <Bagel.PressSquish/>
+        </ui:Button>
+        <Bagel.BagelTouchStick name="move-stick" class="b-glass b-touch-controls__move-stick"/>
+    </Bagel.TouchControlsManager>
+</ui:UXML>

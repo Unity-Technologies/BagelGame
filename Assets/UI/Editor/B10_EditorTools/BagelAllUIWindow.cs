@@ -38,6 +38,7 @@ namespace Bagel
             new CardSpec { title = "Tracker", uxmlPaths = new[] { "B06_BagelTracker/BagelTrackerLeftDisplay.uxml", "B06_BagelTracker/BagelTrackerRightDisplay.uxml" } },
             new CardSpec { title = "Callout (Screen Space)", uxmlPaths = new[] { "B06_BagelTracker/BagelCallout.uxml" }, size = new Vector2(220f, 90f) },
             new CardSpec { title = "Pause (Screen Space)", uxmlPaths = new[] { "B07_Pause/PauseScreen.uxml" }, size = new Vector2(640f, 400f) },
+            new CardSpec { title = "Touch Controls (Screen Space)", uxmlPaths = new[] { "B15_TouchControls/TouchControls.uxml" }, size = new Vector2(640f, 360f) },
             new CardSpec { title = "Television", uxmlPaths = new[] { "B08_GameOver/GameOverScreen.uxml" } },
             new CardSpec { title = "Leaderboard", uxmlPaths = new[] { "B09_Leaderboard/LeaderboardPane.uxml" } },
             new CardSpec { title = "Settings", uxmlPaths = new[] { "B04_Settings/SettingsPane.uxml" } },

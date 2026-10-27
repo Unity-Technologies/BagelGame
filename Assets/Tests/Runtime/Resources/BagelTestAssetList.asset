@@ -33,3 +33,4 @@ MonoBehaviour:
   leaderboardPaneUxml: {fileID: 9197481963319205126, guid: 0d1c6591da2016444b4b1be3f56d668a, type: 3}
   steamUxml: {fileID: 9197481963319205126, guid: 4554792f4702ba0409ff5c6735b3d6bc, type: 3}
   levelSelectionScreenUxml: {fileID: 9197481963319205126, guid: 7f6b0ab32a7ac2148aa51c86b1edb450, type: 3}
+  touchControlsUxml: {fileID: 9197481963319205126, guid: 056b726cc19fe644c945ba07f0295cf6, type: 3}

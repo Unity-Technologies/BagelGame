@@ -61,8 +61,16 @@ namespace Bagel
             onPauseAction?.Invoke(this, EventArgs.Empty);
         }
 
+        // A touch screen's thumb stick, while it's held (the touch controls set it): it moves the bagel like the keys and
+        // the gamepad's stick, and as they do (the Move action normalizes them), says only which way.
+        public Vector2 touchMove { get; set; }
+
+        const float k_TouchDeadZone = 0.2f;
+
         public Vector2 GetMovementVectorNormalized()
         {
+            if (touchMove.sqrMagnitude > k_TouchDeadZone * k_TouchDeadZone)
+                return touchMove.normalized;
             return actions.Player.Move.ReadValue<Vector2>();
         }
 

@@ -221,10 +221,11 @@ namespace Bagel
 
             F("backdrop-filter", Category.Effects, "Backdrop filter",
                 about: "backdrop-filter filters what's behind an element, a blur for frosted glass. It works on screen-space panels.",
-                usage: "The Pause screen and the callouts are frosted glass over the game going on behind them.",
+                usage: "The Pause screen, the callouts and the touch controls are frosted glass over the game going on behind them.",
                 Show("Pause (Screen Space)", "Pause/Pause Pane", Name("pause-pane")),
                 Src(k_UI + "B07_Pause/PauseScreenStyles.uss", "backdrop-filter: blur(18);", "Frosted glass, over the paused game"),
                 Src(k_UI + "B06_BagelTracker/BagelCalloutStyles.uss", "backdrop-filter: blur(8);", "A callout's glass"),
+                Src(k_UI + "B15_TouchControls/TouchControlsStyles.uss", "backdrop-filter: blur(18);", "The thumb stick's glass"),
                 Src(k_Common, "backdrop-filter: none;", "Visual effects off"),
                 Try("Visual effects on or off", "The state's Visual Effects setting, as in Settings", window =>
                     window.state.settings.visualEffects = !window.state.settings.visualEffects)),
@@ -329,18 +330,19 @@ namespace Bagel
 
             F("pointer-capture", Category.Controls, "Pointer events and capture",
                 about: "Pointer events come from the mouse, touch and pens alike. An element that captures the pointer keeps getting its events after it leaves.",
-                usage: "In the level editor a piece follows the pointer across the counter until it's let go. A long-press button keeps its pointer while it fills.",
+                usage: "In the level editor a piece follows the pointer across the counter until it's let go. A long-press button keeps its pointer while it fills. On a touch screen the thumb stick keeps the finger that pressed it, while another presses pause.",
                 Show("Payment Tablet", "Payment Tablet/Level Editor", Is<BagelLevelMap>(), Is<LongPressButton>()),
                 Src(k_UI + "B14_LevelSelection/BagelLevelEditor.cs", "m_Map.RegisterCallback<PointerDownEvent>(OnMapPointerDown);", "A press on the map"),
                 Src(k_UI + "B14_LevelSelection/BagelLevelEditor.cs", "m_Map.CapturePointer(evt.pointerId);", "The pointer, captured"),
                 Src(k_UI + "B02_Common/LongPressButton.cs", "PointerCaptureHelper.CapturePointer(this, 0);", "A long press, held"),
-                Src(k_UI + "B02_Common/LongPressButton.cs", "m_HoldScheduledItem = schedule.Execute(AnimateHoldProgress).Every(16);", "Filling, on a schedule")),
+                Src(k_UI + "B02_Common/LongPressButton.cs", "m_HoldScheduledItem = schedule.Execute(AnimateHoldProgress).Every(16);", "Filling, on a schedule"),
+                Src(k_UI + "B15_TouchControls/BagelTouchStick.cs", "this.CapturePointer(m_PointerId);", "One finger of several, kept")),
 
             // ------------------------------------------------------------------ Panels
 
             F("world-space-panels", Category.Panels, "World-space panels",
                 about: "A PanelRenderer draws a panel in the 3D scene, with a world-space PanelSettings and a size in the world. It takes clicks through the scene's colliders.",
-                usage: "Almost all of the game's UI is in the bakery: the blackboard, the cash register, the payment tablet, the TV and the gauges over the bagel. Only Pause and the callouts are on the screen.",
+                usage: "Almost all of the game's UI is in the bakery: the blackboard, the cash register, the payment tablet, the TV and the gauges over the bagel. Only Pause, the callouts and the touch controls are on the screen.",
                 Show("Payment Tablet", "Payment Tablet/Levels", Is<LevelSelectionScreenManager>()),
                 Src(k_UI + "B01_PanelSettings/TabletPanelSettings.asset", "m_RenderMode: 1", "World space"),
                 Src("Assets/Scenes/Main.unity", "m_Name: LevelSelectionScreenUI", "The tablet's PanelRenderer"),

@@ -48,5 +48,8 @@ namespace Bagel
 
         [Header("14 - Level Selection")]
         public VisualTreeAsset levelSelectionScreenUxml;
+
+        [Header("15 - Touch Controls")]
+        public VisualTreeAsset touchControlsUxml;
     }
 }
