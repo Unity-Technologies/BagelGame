@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 namespace Bagel.B00_Gameplay
 {
-    // The table at game over and after, in the real level: the bagel goes in the toaster, sliced, and a new game
+    // The table at game over and after, in the real level: the bagel goes in the toaster, sliced, and the next game
     // shoves everything off the table and sets it again.
     public class TableTests
     {
@@ -26,7 +26,7 @@ namespace Bagel.B00_Gameplay
             yield return null;
         }
 
-        // Every game starts with the table shoved off and set again: wait for it.
+        // A game after one's been played starts with the table shoved off and set again: wait for it.
         IEnumerator TableSet()
         {
             var clearing = Object.FindAnyObjectByType<TableClearing>();
@@ -74,13 +74,15 @@ namespace Bagel.B00_Gameplay
                 Assert.IsTrue(renderer.enabled);
         }
 
-        // Every new game shoves everything off, moved or not, out to the right, toward the alley: copies of it fly, and
-        // go once they're down on the floor. The things themselves come back up out of the table at once, as the
-        // first game had them once its loose things settled (one sugar cube tumbles off the others, the same way every
-        // time).
+        // The first game starts on the table as it was set; every game after it shoves everything off, moved or not, out
+        // to the right, toward the alley: copies of it fly, and go once they're down on the floor. The things themselves
+        // come back up out of the table at once, as the first game had them once its loose things settled (one sugar
+        // cube tumbles off the others, the same way every time).
         [UnityTest]
         public IEnumerator ANewGameShovesEverythingOffAndSetsItAgain()
         {
+            var clearing = Object.FindAnyObjectByType<TableClearing>();
+            Assert.IsFalse(clearing.clearing, "the first game's table is as it was set");
             yield return TableSet();
             yield return Seconds(1.5f);
             var settled = new System.Collections.Generic.Dictionary<TableItem, Vector3>();
@@ -95,7 +97,6 @@ namespace Bagel.B00_Gameplay
 
             state.FinishRun();
             yield return Seconds(1f);
-            var clearing = Object.FindAnyObjectByType<TableClearing>();
             var level = clearing.transform;
             state.GoToPlay();
             yield return null;

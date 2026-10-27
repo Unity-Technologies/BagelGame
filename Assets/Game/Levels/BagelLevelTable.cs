@@ -9,8 +9,9 @@ namespace Bagel
     // counter needs (Bakery). Choosing another level shoves everything off the table (TableClearing), and the toaster
     // slides to the new end with the room stretching or shrinking behind it, the new level coming up out of the table
     // as the cloth gets to it. Changing this one changes only what differs: what the level no longer has sinks into
-    // the table, and what's new comes up out of it. A new game shoves the table off once the level's all there. In the
-    // Editor, out of play, the chosen level is only shown, never saved with the scene, and the room is left as it is.
+    // the table, and what's new comes up out of it. A new game starts once the level's all there, on the table as it
+    // was set, or, played on since, shoved off and set again. In the Editor, out of play, the chosen level is only
+    // shown, never saved with the scene, and the room is left as it is.
     [ExecuteAlways]
     [RequireComponent(typeof(TableClearing))]
     public class BagelLevelTable : MonoBehaviour
@@ -57,6 +58,8 @@ namespace Bagel
         float m_StretchTime01 = 1f;
         float m_ComeAfter;
         Coroutine m_Changing;
+        // A game's been played on the table since it was set.
+        bool m_PlayedOn;
         Mesh m_ClothMesh;
         readonly List<Vector3> m_ClothVertices = new();
         readonly List<Vector3> m_ClothNormals = new();
@@ -120,10 +123,11 @@ namespace Bagel
             if (state != PlayManagerState.State.Playing || !Application.isPlaying)
                 return;
 
-            // The whole level's there for the new game, before the table's shoved off and set again.
+            // The whole level's there for the new game, as it was set; played on since, it's shoved off and set again.
             Finish();
-            if (m_Clearing != null)
+            if (m_PlayedOn && m_Clearing != null)
                 m_Clearing.ClearForANewGame();
+            m_PlayedOn = true;
         }
 
         void Level_OnChanged(BagelLevel level) => Show(level, Application.isPlaying);
@@ -161,6 +165,7 @@ namespace Bagel
                 foreach (var piece in pieces)
                     Destroy(piece);
                 going = true;
+                m_PlayedOn = false;
             }
 
             // What's there already stays; what isn't wanted any more goes.
@@ -352,6 +357,7 @@ namespace Bagel
             }
             m_Sinking.Clear();
             m_Length = -1f;
+            m_PlayedOn = false;
         }
 
         // The toaster this far from the start, the cloth to just past it, and (in play) the room as long as it needs.

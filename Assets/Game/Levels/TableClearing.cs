@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Bagel
 {
-    // Sets the table again for a new game: everything on it (TableItem), moved or not, is shoved off to the right (as
-    // the bagel sees it from the start), hard, out toward the alley, where nothing bounces back onto the table. What
-    // flies is a copy of each thing as it was (TableLeftover), gone once it gets down to the floor; the things
-    // themselves come back up out of the table at the same time, where they belong, as good as new. The copies go
-    // through whatever else stands on the table (the course's ramps and platforms, the toaster, the bagel waiting to
-    // roll): nothing holds them back, and they don't knock the bagel. Another level clears it the same way, the course
-    // too, and nothing comes back: the level's table (BagelLevelTable) sets the new level.
+    // Sets the table again for a new game once it's been played on: everything on it (TableItem), moved or not, is
+    // shoved off to the right (as the bagel sees it from the start), hard, out toward the alley, where nothing bounces
+    // back onto the table. What flies is a copy of each thing as it was (TableLeftover), gone once it gets down to the
+    // floor; the things themselves come back up out of the table at the same time, where they belong, as good as new.
+    // The copies go through whatever else stands on the table (the course's ramps and platforms, the toaster, the bagel
+    // waiting to roll): nothing holds them back, and they don't knock the bagel. Another level clears it the same way,
+    // the course too, and nothing comes back: the level's table (BagelLevelTable) sets the new level.
     public class TableClearing : MonoBehaviour
     {
         [SerializeField] float m_SweepSpeed = 16f;
@@ -31,8 +31,8 @@ namespace Bagel
 
         void OnDisable() => m_Clearing = null;
 
-        // A new game: everything goes, every game, the first too (a table swept clean with one arm is funnier). The
-        // level's table (BagelLevelTable) calls it, once all the level's things are there.
+        // A new game on a table that's been played on: everything goes, moved or not. The level's table
+        // (BagelLevelTable) calls it, once all the level's things are there.
         public void ClearForANewGame()
         {
             if (m_Clearing != null || !isActiveAndEnabled)

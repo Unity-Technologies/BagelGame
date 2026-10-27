@@ -9,7 +9,8 @@ namespace Bagel.B14_LevelSelection
 {
     // The counter set for the chosen level, in the real scene: the tutorial as it always was, a longer level
     // stretching the room with what hangs on the far wall going with it, only what changes in a level coming and
-    // going, another level shoving everything off the table, and a new game starting with the whole level there.
+    // going, another level shoving everything off the table, and a new game starting with the whole level there, as it
+    // was set, or, played on, shoved off and set again.
     public class BagelLevelTableTests
     {
         PlayManager m_PlayManager;
@@ -199,9 +200,17 @@ namespace Bagel.B14_LevelSelection
             state.GoToPlay();
             Assert.IsFalse(m_Table.changing, "done at once");
             AssertSetFor(state.levels[2]);
-            Assert.IsTrue(Object.FindAnyObjectByType<TableClearing>().clearing, "then the table's shoved off and set again");
+            var clearing = Object.FindAnyObjectByType<TableClearing>();
+            Assert.IsFalse(clearing.clearing, "just set: it's not shoved off again");
             Assert.IsFalse(bagel.GetComponent<Rigidbody>().isKinematic, "and the bagel rolls");
             yield return null;
+
+            // Played on, it's shoved off and set again for the next game.
+            state.FinishRun();
+            yield return null;
+            state.GoToPlay();
+            Assert.IsTrue(clearing.clearing, "played on: shoved off and set again");
+            AssertSetFor(state.levels[2]);
         }
     }
 }
