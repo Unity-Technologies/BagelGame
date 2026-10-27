@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Poppy Seed
   nameKey: bagel.poppy-seed
   rollTorque: 35
-  turnSpeed: 150
+  turnSpeed: 120
   mass: 3
   modelPrefab: {fileID: 2633031486731055519, guid: aaf14d87116f8ad47a30087db85bb86c, type: 3}
   topHalfMesh: {fileID: -8670151273213183110, guid: a8d2bbc6dabc791488c5b7e67f2326f5, type: 3}

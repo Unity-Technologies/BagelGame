@@ -19,7 +19,7 @@ MonoBehaviour:
   impactAmortizationRate: 0.5
   tiltRecoverySpeed: 10
   rollTorque: 40
-  turnSpeed: 150
+  turnSpeed: 120
   mass: 4
   dynamicFriction: 0.6
   staticFriction: 0.6
