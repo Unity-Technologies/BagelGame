@@ -29,6 +29,7 @@ namespace Bagel
         PlayManagerState m_State;
         CinemachineOrbitalFollow m_SettingsOrbit;
         Camera m_OutputCamera;
+        int m_StartAgainFrame = -1;
 
         public float fieldOfView
         {
@@ -55,7 +56,29 @@ namespace Bagel
             m_State.propertyChanged -= State_OnPropertyChanged;
         }
 
-        void State_OnStateChange(object sender, PlayManagerState.State state) => UpdateCamera();
+        void State_OnStateChange(object sender, PlayManagerState.State state)
+        {
+            UpdateCamera();
+            if (state == PlayManagerState.State.Playing)
+                StartBehindTheBagel();
+        }
+
+        // A new game starts behind the bagel, looking straight at it. The camera keeps updating while another one's
+        // live, and keeps what it last saw: as the bagel jumps back to the start it would follow it there with its
+        // damping, and look wherever that left it (its dead zone doesn't turn it while the bagel's anywhere near the
+        // middle of the screen) until the bagel rolled out of it. So it forgets, now and once more next frame, once
+        // the bagel's tracker has caught up with the bagel.
+        void StartBehindTheBagel()
+        {
+            m_PlayCamera.PreviousStateIsValid = false;
+            m_StartAgainFrame = Time.frameCount + 1;
+        }
+
+        void Update()
+        {
+            if (Time.frameCount == m_StartAgainFrame)
+                m_PlayCamera.PreviousStateIsValid = false;
+        }
 
         void State_OnMainMenuPaneModeChange(object sender, PlayManagerState.MainMenuPaneMode mode) => UpdateCamera();
 
