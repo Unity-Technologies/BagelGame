@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Bagel.B00_Core
 {
-    // The maths that turn spin and impacts into lost toppings.
+    // The maths that turn spin and impacts into lost toppings, and speed into how fast it turns.
     public class BagelPhysicsTests
     {
         BagelType m_BagelType;
@@ -54,6 +54,30 @@ namespace Bagel.B00_Core
             var impulse = (Vector3.left * 4f * mass * gravity + Vector3.forward * 100f) * dt;
 
             Assert.AreEqual(3f, BagelController.ShockGs(impulse, Vector3.right * 2f, dt, mass, gravity), 1e-3f);
+        }
+
+        // Like a car: standing still it turns at its turn speed, and rolling at the falloff speed, forward or back,
+        // half as fast.
+        [Test]
+        public void TheFasterItRollsTheLessItTurns()
+        {
+            Assert.AreEqual(100f, BagelController.TurnSpeed(100f, 0f, 8f), 1e-4f);
+            Assert.AreEqual(50f, BagelController.TurnSpeed(100f, 8f, 8f), 1e-4f);
+            Assert.AreEqual(50f, BagelController.TurnSpeed(100f, -8f, 8f), 1e-4f, "backing up");
+            Assert.Less(BagelController.TurnSpeed(100f, 12f, 8f), BagelController.TurnSpeed(100f, 6f, 8f));
+            Assert.AreEqual(100f, BagelController.TurnSpeed(100f, 12f, 0f), "no falloff");
+        }
+
+        // A turn pulls it sideways by its speed times how fast it turns, and past the falloff speed that hardly
+        // grows, however fast it rolls: it only grips the ground so hard.
+        [Test]
+        public void AFastTurnPullsNoHarderThanItGrips()
+        {
+            float Pull(float speed) => speed * BagelController.TurnSpeed(100f, speed, 8f);
+
+            Assert.AreEqual(Pull(8f) * 2f, 100f * 8f, 1e-3f, "half its grip at the falloff speed");
+            Assert.Less(Pull(100f), 100f * 8f);
+            Assert.Greater(Pull(100f), Pull(16f));
         }
     }
 }

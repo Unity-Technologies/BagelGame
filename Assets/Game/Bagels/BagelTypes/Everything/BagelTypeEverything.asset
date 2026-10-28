@@ -20,7 +20,7 @@ MonoBehaviour:
   impactAmortizationRate: 0.7
   tiltRecoverySpeed: 10
   rollTorque: 70
-  turnSpeed: 135
+  turnSpeed: 110
   mass: 6
   dynamicFriction: 0.6
   staticFriction: 0.6
@@ -30,6 +30,6 @@ MonoBehaviour:
   bottomHalfMesh: {fileID: -8670151273213183110, guid: 3376e0609f0122346919e109d399d738, type: 3}
   toppingsPercentile: 0.2
   toppingLossPercentile: 0
-  controlPercentile: 0.9
+  controlPercentile: 0.88
   speedPercentile: 0.875
   gripPercentile: 0.3

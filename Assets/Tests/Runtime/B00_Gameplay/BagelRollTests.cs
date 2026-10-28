@@ -109,15 +109,69 @@ namespace Bagel.B00_Gameplay
             Assert.Less(Vector3.Distance(m_Start, m_Bagel.transform.position), 0.2f, "where it was");
         }
 
-        // Holding forward and right turns it as fast as right alone, though the input's a diagonal.
+        // How fast it's turning (right, in degrees a second), over the next few frames: which way it's heading, not
+        // its spin, which leans with it.
+        IEnumerator MeasureTheTurn(System.Action<float> turning)
+        {
+            const int frames = 5;
+            var forward = m_Bagel.GetAbsoluteForward();
+            yield return Frames(frames);
+            turning(Turned(forward) / (frames * Time.fixedDeltaTime));
+        }
+
+        // Holding forward and right turns it as fast as right alone would at the speed it's rolling, though the
+        // input's a diagonal.
         [UnityTest]
         public IEnumerator RollingItTurnsJustAsFast()
         {
-            var forward = m_Bagel.GetAbsoluteForward();
             Stick(new Vector2(1f, 1f));
-            yield return Frames(25);
+            yield return Frames(20);
+            var turnSpeed = m_Bagel.currentTurnSpeed;
+            var turning = 0f;
+            yield return MeasureTheTurn(t => turning = t);
 
-            Assert.Greater(Turned(forward), HalfASecondsTurn);
+            Assert.Greater(m_Bagel.currentSpeed, 1f, "rolling");
+            Assert.Greater(turning, turnSpeed * 0.8f);
+        }
+
+        // Like a car, rolling fast it turns less than it does standing still: a wider turn, but still a turn. On an
+        // open floor as high as the table, well away from it, with nothing in the way.
+        [UnityTest]
+        public IEnumerator RollingFastItTurnsLess()
+        {
+            var floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            try
+            {
+                var tableTop = m_Bagel.GetComponent<Collider>().bounds.min.y;
+                floor.transform.localScale = new Vector3(100f, 1f, 100f);
+                floor.transform.position = new Vector3(200f, tableTop - 0.5f, 0f);
+                Place(new Vector3(200f, m_Start.y, -40f));
+                yield return Frames(10);
+
+                var standingStill = 0f;
+                Stick(Vector2.right);
+                yield return Frames(10);
+                yield return MeasureTheTurn(t => standingStill = t);
+                Stick(Vector2.zero);
+                yield return Frames(10);
+
+                Stick(Vector2.up);
+                for (int i = 0; i < 200 && m_Bagel.currentSpeed < 6f; i++)
+                    yield return null;
+                Stick(new Vector2(1f, 1f));
+                yield return Frames(5);
+                var rollingFast = 0f;
+                yield return MeasureTheTurn(t => rollingFast = t);
+
+                Assert.Greater(m_Bagel.currentSpeed, 5f, "rolling fast");
+                Assert.Greater(standingStill, m_Bagel.bagelType.turnSpeed * 0.5f, "standing still, it turns");
+                Assert.Less(rollingFast, standingStill * 0.75f, "rolling fast, it turns less");
+                Assert.Greater(rollingFast, standingStill * 0.3f, "but still turns");
+            }
+            finally
+            {
+                Object.Destroy(floor);
+            }
         }
 
         [UnityTest]

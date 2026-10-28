@@ -13,6 +13,8 @@ namespace Bagel
         [SerializeField] float m_FallLimit = 10.0f;
         [Tooltip("How long it takes to reach its turn speed, or to stop turning, in seconds.")]
         [SerializeField] float m_TurnResponse = 0.1f;
+        [Tooltip("How fast it rolls when it turns half as fast as standing still, in meters a second: like a car, the faster it goes, the less it turns. 0 turns as fast at any speed.")]
+        [SerializeField] float m_TurnFalloffSpeed = 6.0f;
 
         PlayManagerState m_State;
         Rigidbody m_RigidBody;
@@ -41,6 +43,8 @@ namespace Bagel
         public float currentSpeed => m_CurrentSpeed;
         public float currentForce => m_CurrentForce;
         public float currentSpin => m_CurrentSpin;
+        // How fast it turns with the stick all the way over, at the speed it's rolling (degrees a second).
+        public float currentTurnSpeed => TurnSpeed(m_BagelType.turnSpeed, m_CurrentSpeed, m_TurnFalloffSpeed);
 
         // Whether it's touching something, and how rough that is: 0 for ice, 1 for ground with the bagel's
         // own grip.
@@ -212,20 +216,22 @@ namespace Bagel
             var inputVector = m_PlayManager.playInputBindings.GetMovementVectorNormalized();
             var rollTorque = transform.right * m_BagelType.rollTorque * inputVector.y;
 
+            m_CurrentInput = inputVector.y;
+            m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
+
             m_RigidBody.AddTorque(rollTorque, ForceMode.Force);
             Steer(inputVector);
 
-            m_CurrentInput = inputVector.y;
-            m_CurrentSpeed = Vector3.Dot(m_RigidBody.linearVelocity, GetAbsoluteForward());
             m_CurrentForce = Mathf.Max(0, m_CurrentForce - m_BagelType.impactAmortizationRate);
             m_CurrentSpin = m_RigidBody.angularVelocity.magnitude;
         }
 
-        // With the stick over to a side it turns at its bagel's turn speed, rolling or standing still, and it stops
-        // turning once the stick's let go: its turn (about its up, however it leans) is brought to that within the
-        // turn response, whatever its grip on the ground. The stick's as far over as it goes that way (the keys'
-        // diagonals too, which the input normalizes), so forward and right turns as fast as right alone. Backing up,
-        // it steers like a car in reverse: back and right goes back and to the right, so it turns the other way.
+        // With the stick over to a side it turns at its bagel's turn speed standing still, and less the faster it
+        // rolls, like a car (TurnSpeed), so a turn at speed is wider. It stops turning once the stick's let go: its
+        // turn (about its up, however it leans) is brought to that within the turn response, whatever its grip on
+        // the ground. The stick's as far over as it goes that way (the keys' diagonals too, which the input
+        // normalizes), so forward and right turns as fast as right alone. Backing up, it steers like a car in
+        // reverse: back and right goes back and to the right, so it turns the other way.
         void Steer(Vector2 input)
         {
             var most = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
@@ -235,13 +241,24 @@ namespace Bagel
                 steer = -steer;
 
             var up = GetNonRotatedRelativeUp();
-            var turnSpeed = m_BagelType.turnSpeed * Mathf.Deg2Rad;
+            var turnSpeed = currentTurnSpeed * Mathf.Deg2Rad;
             var turn = Vector3.Dot(m_RigidBody.angularVelocity, up);
             var turned = Mathf.MoveTowards(turn, steer * turnSpeed, turnSpeed / m_TurnResponse * Time.fixedDeltaTime);
 
             // A little more, for what the body's damping takes off it this step.
             var kept = Mathf.Max(0.1f, 1f - m_RigidBody.angularDamping * Time.fixedDeltaTime);
             m_RigidBody.AddTorque(up * (turned / kept - turn), ForceMode.VelocityChange);
+        }
+
+        // How fast it turns with the stick all the way over (degrees a second), rolling forward or back at a speed
+        // (meters a second): its turn speed standing still, and half that at the falloff speed (a falloff speed of 0
+        // keeps it at its turn speed). The sideways pull a turn takes is its speed times how fast it turns, so past
+        // the falloff speed that hardly grows: like a car's tires, it only grips the ground so hard.
+        public static float TurnSpeed(float turnSpeed, float speed, float falloffSpeed)
+        {
+            if (falloffSpeed <= 0f)
+                return turnSpeed;
+            return turnSpeed * falloffSpeed / (falloffSpeed + Mathf.Abs(speed));
         }
 
         void HandleToppingLoss()

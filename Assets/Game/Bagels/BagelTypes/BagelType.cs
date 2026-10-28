@@ -18,7 +18,7 @@ namespace Bagel
         [Space]
         public float tiltRecoverySpeed = 10.0f;
         public float rollTorque = 40.0f;
-        [Tooltip("How fast it turns with the stick all the way over, in degrees a second: rolling or standing still.")]
+        [Tooltip("How fast it turns with the stick all the way over, in degrees a second, standing still: the faster it rolls, the less it turns (the controller's turn falloff speed).")]
         public float turnSpeed = 150.0f;
         public float mass = 4.0f;
 
